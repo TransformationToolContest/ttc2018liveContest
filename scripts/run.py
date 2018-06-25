@@ -56,7 +56,7 @@ def benchmark(conf):
             set_working_directory("solutions", tool)
             os.environ['Tool'] = tool
             for change_set in conf.ChangeSets:
-                full_change_path = os.path.abspath(os.path.join(BASE_DIRECTORY, "changes", change_set))
+                full_change_path = os.path.abspath(os.path.join(BASE_DIRECTORY, "models", change_set))
                 os.environ['ChangeSet'] = change_set
                 os.environ['ChangePath'] = full_change_path
                 for query in conf.Queries:
