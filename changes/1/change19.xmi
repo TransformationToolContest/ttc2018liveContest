@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<changes:ModelChangeSet xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xmi="http://www.omg.org/XMI" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Post #//@changes.1/@addedElement" affectedElement="social:User initial.xmi#3705" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
+  <changes xsi:type="changes:CompositionListInsertion" index="559" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="404290" timestamp="2010-03-03T13:18:59" content="" submitter="initial.xmi#3705">
+      <comments post="#//@changes.1/@addedElement" id="407314" timestamp="2010-03-03T13:19:12" content="thx" submitter="initial.xmi#2608" />
+      <comments post="#//@changes.1/@addedElement" id="407322" timestamp="2010-03-03T13:19:21" content="yes" submitter="initial.xmi#2886" />
+    </addedElement>
+  </changes>
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@addedElement/407314" affectedElement="social:User initial.xmi#2608" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
+  <changes xsi:type="changes:ChangeTransaction">
+    <sourceChange xsi:type="changes:CompositionListInsertion" affectedElement="social:Post #//@changes.1/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="#//@changes.1/@addedElement" id="407314" timestamp="2010-03-03T13:19:12" content="thx" submitter="initial.xmi#2608" />
+    </sourceChange>
+    <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Post #//@changes.1/@addedElement" affectedElement="social:Comment #//@changes.1/@addedElement/407314" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
+  </changes>
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@addedElement/407322" affectedElement="social:User initial.xmi#2886" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
+  <changes xsi:type="changes:ChangeTransaction">
+    <sourceChange xsi:type="changes:CompositionListInsertion" index="1" affectedElement="social:Post #//@changes.1/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="#//@changes.1/@addedElement" id="407322" timestamp="2010-03-03T13:19:21" content="yes" submitter="initial.xmi#2886" />
+    </sourceChange>
+    <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Post #//@changes.1/@addedElement" affectedElement="social:Comment #//@changes.1/@addedElement/407322" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
+  </changes>
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.7/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#2608" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
+  <changes xsi:type="changes:ChangeTransaction">
+    <sourceChange xsi:type="changes:CompositionListInsertion" affectedElement="social:Comment initial.xmi#406245" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#404190" id="406249" timestamp="2010-03-03T13:20:18" content="About James Joyce, an. About Amy Winehouse, . About Al Green, born . About The Sidewind." submitter="initial.xmi#2608" />
+    </sourceChange>
+    <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment initial.xmi#406245" affectedElement="social:Comment #//@changes.7/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
+  </changes>
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.9/@addedElement" affectedElement="social:User initial.xmi#150" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
+  <changes xsi:type="changes:CompositionListInsertion" index="1" affectedElement="social:Comment initial.xmi#1378983" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#1378654" id="1378988" timestamp="2010-03-03T13:23:37" content="no" submitter="initial.xmi#150" />
+  </changes>
+</changes:ModelChangeSet>

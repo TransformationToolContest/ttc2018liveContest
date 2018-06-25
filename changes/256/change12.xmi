@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<changes:ModelChangeSet xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xmi="http://www.omg.org/XMI" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@addedElement" affectedElement="social:User initial.xmi#5497558142590" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
+  <changes xsi:type="changes:CompositionListInsertion" index="1" affectedElement="social:Post initial.xmi#51540908981" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#51540908981" id="51540909746" timestamp="2011-03-07T13:32:42" content="About Napoleon, in Germany and Italy that . About Martin Scorsese, to the cinema, and." submitter="initial.xmi#5497558142590" />
+  </changes>
+</changes:ModelChangeSet>

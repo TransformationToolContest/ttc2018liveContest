@@ -1,0 +1,21 @@
+{
+  "Dimensions": {
+    "X_Dimensions": {
+      "ChangeSet": true,
+      "Iteration": true
+    },
+    "Groups": {
+      "View": true,
+      "Tool": true
+    }
+  },
+  "Summarize_Functions": [
+    {
+      "Name": "Updates",
+      "Phases": [
+        "Update"
+      ]
+    }
+  ],
+  "Extension": ["png", "pdf"]
+}

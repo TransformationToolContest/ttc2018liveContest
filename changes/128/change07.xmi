@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<changes:ModelChangeSet xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xmi="http://www.omg.org/XMI" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#4398046514874" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
+  <changes xsi:type="changes:ChangeTransaction">
+    <sourceChange xsi:type="changes:CompositionListInsertion" index="3" affectedElement="social:Comment initial.xmi#34361021174" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#34361021039" id="34361021180" timestamp="2010-11-05T16:54:49" content="About J. K. Rowling, 2008 Sunday Times Rich List estimated Rowling's fortune at £560 ." submitter="initial.xmi#4398046514874" />
+    </sourceChange>
+    <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment initial.xmi#34361021174" affectedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
+  </changes>
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.3/@addedElement" affectedElement="social:User initial.xmi#987" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
+  <changes xsi:type="changes:CompositionListInsertion" index="2" affectedElement="social:Post initial.xmi#34360058006" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#34360058006" id="34360059323" timestamp="2010-11-05T16:55:05" content="About Wolfgang Amad. About Léopold Sédar. About Benjamin Harr. About Aaron Copl." submitter="initial.xmi#987" />
+  </changes>
+</changes:ModelChangeSet>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<changes:ModelChangeSet xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xmi="http://www.omg.org/XMI" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <changes xsi:type="changes:ChangeTransaction">
+    <sourceChange xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment initial.xmi#406915" affectedElement="social:User initial.xmi#1259" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/likes" />
+    <nestedChanges xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#1259" affectedElement="social:Comment initial.xmi#406915" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/likedBy" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="119" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/users">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:User" id="3722" name="Marietta Garbi" submissions="#//@changes.2/@addedElement #//@changes.3/@addedElement #//@changes.4/@addedElement #//@changes.5/@addedElement #//@changes.6/@addedElement #//@changes.7/@addedElement #//@changes.8/@addedElement #//@changes.9/@addedElement #//@changes.10/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="903" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="365661" timestamp="2010-03-10T16:24:11" content="photo365661.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="904" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="365662" timestamp="2010-03-10T16:24:12" content="photo365662.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="905" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="365663" timestamp="2010-03-10T16:24:13" content="photo365663.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="906" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="365664" timestamp="2010-03-10T16:24:14" content="photo365664.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="907" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="365665" timestamp="2010-03-10T16:24:15" content="photo365665.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="908" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="365666" timestamp="2010-03-10T16:24:16" content="photo365666.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="909" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="365667" timestamp="2010-03-10T16:24:17" content="photo365667.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="910" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="365668" timestamp="2010-03-10T16:24:18" content="photo365668.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="911" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="365669" timestamp="2010-03-10T16:24:19" content="photo365669.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+</changes:ModelChangeSet>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<changes:ModelChangeSet xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xmi="http://www.omg.org/XMI" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <changes xsi:type="changes:ChangeTransaction">
+    <sourceChange xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment initial.xmi#407343" affectedElement="social:User initial.xmi#3412" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/likes" />
+    <nestedChanges xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#3412" affectedElement="social:Comment initial.xmi#407343" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/likedBy" />
+  </changes>
+</changes:ModelChangeSet>

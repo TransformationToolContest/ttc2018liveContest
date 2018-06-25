@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "NMF": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "RunIndex": "Debug",
+        "Sequences": "20",
+        "ChangePath": "D:\\Projekte\\ttc2018liveContest\\changes\\1",
+        "Query": "Q1",
+        "Tool": "NMF",
+        "ChangeSet": "1"
+      }
+    }
+  }
+}

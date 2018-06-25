@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<changes:ModelChangeSet xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xmi="http://www.omg.org/XMI" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <changes xsi:type="changes:AttributePropertyChange" newValue="P. Banda" affectedElement="social:User initial.xmi#1099511631947" feature="nmeta:Attribute https://www.transformation-tool-contest.eu/2018/social_media#//User/name" />
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.2/@addedElement" affectedElement="social:User initial.xmi#1099511631947" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
+  <changes xsi:type="changes:CompositionListInsertion" affectedElement="social:Comment initial.xmi#8590659259" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#8590657711" id="8590659266" timestamp="2010-05-13T09:43:43" content="no way!" submitter="initial.xmi#1099511631947" />
+  </changes>
+</changes:ModelChangeSet>

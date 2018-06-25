@@ -1,0 +1,13 @@
+{
+  "Queries": [
+    "Q1",
+    "Q2"
+  ],
+  "Tools": ["NMF"],
+  "ChangeSets": [
+    "1"
+  ],
+  "Sequences": 20,
+  "Runs": 5,
+  "Timeout": 6000
+}
