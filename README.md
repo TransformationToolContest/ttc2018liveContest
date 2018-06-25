@@ -1,8 +1,8 @@
-# The TTC 2017 Smart Grid Case
+# The TTC 2018 Social Media Case
 
 ## Case description
 
-The `docs/2017_TTC_SmartGrid.pdf` file contains the [case description](https://georghinkel.github.io/ttc2017smartGrids/2017_TTC_SmartGrid.pdf).
+The `docs/2018_TTC_Live.pdf` file contains the [case description](https://github.com/TransformationToolContest/ttc2018liveContest/raw/master/docs/2018_TTC_Live.pdf).
 
 ## Prerequisites
 
@@ -12,8 +12,7 @@ The `docs/2017_TTC_SmartGrid.pdf` file contains the [case description](https://g
 
 ## Solution Prerequisites
 
-* ModelJoin: Java 1.8
-* NMF: .NET Framework 4.5.1 and MSBuild on the path
+Add your prerequisites here!
 
 ## Using the framework
 
@@ -37,21 +36,6 @@ The benchmark results are stored in a CSV file. The header for the CSV file is s
 ## Reporting and visualization
 
 Make sure you read the `README.md` file in the `reporting` directory and install all the requirements for R.
-
-## Running the example solution
-
-1. Start with Eclipse Modeling or Eclipse for DSL Developers.
-1. Add the <http://download.eclipse.org/mmt/qvto/updates/releases> update site and install the **QVT Operational SDK**, version **3.6.0.v20160606-1156**.
-1. Import the `solutions/ModelJoin` project.
-1. If you get compile errors related to character encoding, change the encoding of the project to **ISO-8859-1**.
-
-Run the `de.fzi.ttc2017.smartGrids.App` class as a Java Application with the required settings. For example:
-
-* Arguments
-  * `-view outageDetection`
-* Environment
-  * `ChangePath`: `../../changes/changeSequence1`
-  * `Sequences`: `1`
 
 ## Implementing the benchmark for a new tool
 
