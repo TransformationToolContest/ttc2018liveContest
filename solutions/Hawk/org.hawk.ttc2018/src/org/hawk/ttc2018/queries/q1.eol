@@ -1,5 +1,5 @@
 return Post.all
-  .collect(p|Sequence {p, p.score()})
+  .collect(p|Sequence {p.id, p.score()})
   .sortBy(ps|-ps.second)
   .subList(0, 3);
 

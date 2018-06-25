@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="libs/epsilon-1.5-core-src.jar"/>
+	<classpathentry kind="lib" path="libs/epsilon-1.5-emf-src.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.emf.common-2.12.0.v20160420-0247.jar"/>
+	<classpathentry kind="lib" path="libs/org.eclipse.emf.ecore-2.12.0.v20160420-0247.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.core.dependencies"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.emf"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.epsilon"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.graph"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.localfolder"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.neo4j-v2"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.neo4j-v2.dependencies"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
