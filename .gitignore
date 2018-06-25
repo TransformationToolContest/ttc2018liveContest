@@ -1,5 +1,6 @@
 **/plugin.xml_gen
 **/bin/
+**/obj/
 **/target/
 **/tmp/
 **/.settings/
@@ -20,3 +21,6 @@ deps/
 diagrams/
 results/
 __pycache__/
+solutions/NMF.sln
+solutions/.vs/
+changes/1024/
