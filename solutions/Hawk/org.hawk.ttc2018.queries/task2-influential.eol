@@ -1,0 +1,29 @@
+return Comment.all
+  .collect(c | Sequence { c.id, c.score() })
+  .sortBy(cs | -cs.second)
+  .subList(0, 3);
+
+operation Comment score(): Integer {
+  var components = divideIntoComponents(self.likedBy);
+  return components.collect(component | component.size * component.size).sum();
+}
+
+operation divideIntoComponents(users) {
+  var components = Sequence {};
+
+  for (user in users) {
+    var added = false;
+    for (component in components) {
+      if (component.exists(member | member.friends.includes(user) and user.friends.includes(member))) {
+        component.add(user);
+        added = true;
+        break; 
+      }
+    }
+    if (not added) {
+      components.add(Sequence { user });
+    }
+  }
+  
+  return components;
+}

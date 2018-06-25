@@ -1,0 +1,11 @@
+return Post.all
+  .collect(p|Sequence {p, p.score()})
+  .sortBy(ps|-ps.second)
+  .subList(0, 3);
+
+operation Submission score() : Integer {
+  return self.closure(p|p.comments)
+    .flatten
+    .collect(p | 10 + p.likedBy.size)
+    .sum();
+}
