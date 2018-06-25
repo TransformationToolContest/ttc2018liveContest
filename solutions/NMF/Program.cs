@@ -27,7 +27,6 @@ namespace TTC2018.LiveContest
 
         static void Main(string[] args)
         {
-            var test = typeof(ModelRepository).Assembly.CodeBase;
             Initialize();
             Load();
             Initial();
@@ -54,7 +53,7 @@ namespace TTC2018.LiveContest
             RunIndex = Environment.GetEnvironmentVariable(nameof(RunIndex));
             Sequences = int.Parse(Environment.GetEnvironmentVariable(nameof(Sequences)));
             Tool = Environment.GetEnvironmentVariable(nameof(Tool));
-            ChangeSet = Environment.GetEnvironmentVariable(nameof(Tool));
+            ChangeSet = Environment.GetEnvironmentVariable(nameof(ChangeSet));
             Query = Environment.GetEnvironmentVariable(nameof(Query)).ToUpperInvariant();
             if (Query == "Q1")
             {

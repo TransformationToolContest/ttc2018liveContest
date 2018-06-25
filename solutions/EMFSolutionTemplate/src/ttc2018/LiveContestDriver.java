@@ -71,7 +71,7 @@ public class LiveContestDriver {
         RunIndex = System.getenv("RunIndex");
         Sequences = Integer.parseInt(System.getenv("Sequences"));
         Tool = System.getenv("Tool");
-        ChangeSet = System.getenv("Tool");
+        ChangeSet = System.getenv("ChangeSet");
         Query = System.getenv("Query").toUpperCase();
         if (Query.contentEquals("Q1"))
         {
@@ -111,12 +111,18 @@ public class LiveContestDriver {
     {
     	String iterationStr;
     	if (iteration == -1) {
-    		iterationStr = "";
+    		iterationStr = "0";
     	} else {
     		iterationStr = Integer.toString(iteration);
     	}
         System.out.println(String.format("%s;%s;%s;%s;%s;%s;Time;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(stopwatch)));
-        //Console.WriteLine($"%s;%s;%s;%s;%s;%s;Memory;{Environment.WorkingSet}");
+        Runtime.getRuntime().gc();
+        Runtime.getRuntime().gc();
+        Runtime.getRuntime().gc();
+        Runtime.getRuntime().gc();
+        Runtime.getRuntime().gc();
+        long memoryUsed = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        System.out.println(String.format("%s;%s;%s;%s;%s;%s;Memory;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(memoryUsed)));
         if (result != null)
         {
             System.out.println(String.format("%s;%s;%s;%s;%s;%s;Elements;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), result));
