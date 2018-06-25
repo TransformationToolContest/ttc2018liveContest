@@ -3,11 +3,11 @@
     "Q1",
     "Q2"
   ],
-  "Tools": ["NMF"],
+  "Tools": ["NMF", "EMFSolutionTemplate"],
   "ChangeSets": [
     "1"
   ],
-  "Sequences": 20,
+  "Sequences": 9,
   "Runs": 5,
   "Timeout": 6000
 }
