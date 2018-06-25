@@ -6,7 +6,7 @@
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#4178" affectedElement="social:User initial.xmi#4018" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#4018" affectedElement="social:User initial.xmi#4178" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
-  <changes xsi:type="changes:AttributePropertyChange" newValue="Alejandro Sumac" affectedElement="social:User initial.xmi#939" feature="nmeta:Attribute https://www.transformation-tool-contest.eu/2018/social_media#//User/name" />
+  <changes xsi:type="changes:AttributePropertyChange" newValue="Alejandro Sumac" affectedElement="social:User initial.xmi#939" feature="ecore:EAttribute https://www.transformation-tool-contest.eu/2018/social_media#//User/name" />
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Post #//@changes.5/@addedElement" affectedElement="social:User initial.xmi#939" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:CompositionListInsertion" index="2291" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="765121" timestamp="2010-04-02T10:08:57" content="photo765121.jpg" submitter="initial.xmi#939" />

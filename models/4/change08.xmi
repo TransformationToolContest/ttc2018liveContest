@@ -34,5 +34,5 @@
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Post initial.xmi#404168" affectedElement="social:Comment #//@changes.9/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
-  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@addedElement/432249" affectedElement="social:User initial.xmi#1274" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment 432249" affectedElement="social:User initial.xmi#1274" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
 </changes:ModelChangeSet>

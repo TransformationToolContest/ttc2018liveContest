@@ -15,5 +15,5 @@
       <comments post="#//@changes.5/@addedElement" id="85900327405" timestamp="2011-10-09T00:42:01" content="great" submitter="initial.xmi#9895604651390" />
     </addedElement>
   </changes>
-  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.5/@addedElement/85900327405" affectedElement="social:User initial.xmi#9895604651390" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment 85900327405" affectedElement="social:User initial.xmi#9895604651390" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
 </changes:ModelChangeSet>

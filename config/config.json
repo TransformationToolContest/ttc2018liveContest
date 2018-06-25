@@ -5,9 +5,9 @@
   ],
   "Tools": ["NMF", "EMFSolutionTemplate"],
   "ChangeSets": [
-    "1"
+    "1", "2", "4", "8", "16", "32"
   ],
-  "Sequences": 9,
+  "Sequences": 20,
   "Runs": 5,
   "Timeout": 6000
 }
