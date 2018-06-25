@@ -45,7 +45,7 @@ public class LiveContestDriver {
     private static Solution solution;
 
     private static Object loadFile(String path) {
-    	Resource mRes = repository.getResource(URI.createFileURI(ChangePath + path), true);
+    	Resource mRes = repository.getResource(URI.createFileURI(ChangePath + "/" + path), true);
     	return mRes.getContents().get(0);
     }
 
@@ -64,8 +64,8 @@ public class LiveContestDriver {
     	repository = new ResourceSetImpl();
 		repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
-		repository.getPackageRegistry().put(SocialNetworkPackage.eINSTANCE.getNsURI(), SocialNetworkFactory.eINSTANCE);
-		repository.getPackageRegistry().put(ChangesPackage.eINSTANCE.getNsURI(), ChangesFactory.eINSTANCE);
+		repository.getPackageRegistry().put(SocialNetworkPackage.eINSTANCE.getNsURI(), SocialNetworkPackage.eINSTANCE);
+		repository.getPackageRegistry().put(ChangesPackage.eINSTANCE.getNsURI(), ChangesPackage.eINSTANCE);
 
         ChangePath = System.getenv("ChangePath");
         RunIndex = System.getenv("RunIndex");
