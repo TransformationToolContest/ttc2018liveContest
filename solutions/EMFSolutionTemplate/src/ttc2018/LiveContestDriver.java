@@ -26,7 +26,7 @@ public class LiveContestDriver {
 	            Update(i);
 	        }	
 		} catch(Exception e) {
-			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
@@ -60,13 +60,12 @@ public class LiveContestDriver {
     static void Initialize() throws Exception
     {
     	stopwatch = System.nanoTime();
-        repository = new ResourceSetImpl();
-        
-        EPackage.Registry.INSTANCE.put(SocialNetworkPackage.eINSTANCE.getNsURI(), SocialNetworkFactory.eINSTANCE);
-        EPackage.Registry.INSTANCE.put(ChangesPackage.eINSTANCE.getNsURI(), ChangesFactory.eINSTANCE);
-        
+
+    	repository = new ResourceSetImpl();
 		repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
+		repository.getPackageRegistry().put(SocialNetworkPackage.eINSTANCE.getNsURI(), SocialNetworkFactory.eINSTANCE);
+		repository.getPackageRegistry().put(ChangesPackage.eINSTANCE.getNsURI(), ChangesFactory.eINSTANCE);
 
         ChangePath = System.getenv("ChangePath");
         RunIndex = System.getenv("RunIndex");
@@ -101,7 +100,7 @@ public class LiveContestDriver {
 
     static void Update(int iteration)
     {
-        ModelChangeSet changes = (ModelChangeSet)loadFile(String.format("change{0:00}.xmi", new Integer(iteration)));
+        ModelChangeSet changes = (ModelChangeSet)loadFile(String.format("change%02d.xmi", iteration));
         stopwatch = System.nanoTime();
         String result = solution.Update(changes);
         stopwatch = System.nanoTime() - stopwatch;
