@@ -27,7 +27,7 @@ namespace TTC2018.LiveContest
 
         static void Main(string[] args)
         {
-
+            var test = typeof(ModelRepository).Assembly.CodeBase;
             Initialize();
             Load();
             Initial();
