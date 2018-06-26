@@ -14,7 +14,7 @@
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Post initial.xmi#644541" affectedElement="social:Comment #//@changes.3/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
-  <changes xsi:type="changes:AttributePropertyChange" newValue="Kemal Yasar" affectedElement="social:User initial.xmi#2266" feature="nmeta:Attribute https://www.transformation-tool-contest.eu/2018/social_media#//User/name" />
+  <changes xsi:type="changes:AttributePropertyChange" newValue="Kemal Yasar" affectedElement="social:User initial.xmi#2266" feature="ecore:EAttribute https://www.transformation-tool-contest.eu/2018/social_media#//User/name" />
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Post #//@changes.6/@addedElement" affectedElement="social:User initial.xmi#2266" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:CompositionListInsertion" index="1847" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="297724" timestamp="2010-03-28T16:10:26" content="" submitter="initial.xmi#2266" />

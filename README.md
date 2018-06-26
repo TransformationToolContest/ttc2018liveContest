@@ -12,6 +12,8 @@ The `docs/2018_TTC_Live.pdf` file contains the [case description](https://github
 
 ## Solution Prerequisites
 
+* NMF: You need to install [.NET Core 2.0](https://www.microsoft.com/net/download/linux-package-manager/ubuntu16-04/sdk-current)
+
 Add your prerequisites here!
 
 ## Using the framework

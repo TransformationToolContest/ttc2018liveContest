@@ -11,12 +11,12 @@
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#4755" affectedElement="social:User initial.xmi#2317" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#2317" affectedElement="social:User initial.xmi#4755" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
-  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@sourceChange/@addedElement/630826" affectedElement="social:User initial.xmi#683" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment 630826" affectedElement="social:User initial.xmi#683" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" affectedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
       <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#630412" id="630826" timestamp="2010-03-11T08:32:33" content="About Pope Pius X, Giovanni Pacelli (2 March 1876 – 9 October 1958), reigned as Pope, ." submitter="initial.xmi#683" />
     </sourceChange>
-    <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment #//@changes.1/@sourceChange/@addedElement" affectedElement="social:Comment #//@changes.1/@sourceChange/@addedElement/630826" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
+    <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment #//@changes.1/@sourceChange/@addedElement" affectedElement="social:Comment 630826" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.7/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#683" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
