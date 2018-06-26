@@ -1,7 +1,7 @@
-return Comment.all
+var sorted = Comment.all
   .collect(c | Sequence { c.id, c.score() })
-  .sortBy(cs | -cs.second)
-  .subList(0, 3);
+  .sortBy(cs | -cs.second);
+return sorted.subList(0, sorted.size.min(3));
 
 operation Comment score(): Integer {
   var components = divideIntoComponents(self.likedBy);

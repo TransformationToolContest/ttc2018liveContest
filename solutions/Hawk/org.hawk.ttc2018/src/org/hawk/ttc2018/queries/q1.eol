@@ -1,7 +1,7 @@
-return Post.all
+var sorted = Post.all
   .collect(p|Sequence {p.id, p.score()})
-  .sortBy(ps|-ps.second)
-  .subList(0, 3);
+  .sortBy(ps|-ps.second);
+return sorted.subList(0, sorted.size.min(3));
 
 operation Submission score() : Integer {
   return self.closure(p|p.comments)
