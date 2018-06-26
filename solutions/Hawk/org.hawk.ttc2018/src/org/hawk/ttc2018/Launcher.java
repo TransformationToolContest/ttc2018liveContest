@@ -100,8 +100,9 @@ public class Launcher {
 			final long elapsedTime = System.nanoTime() - startNanos;
 			final long availableBytes = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
-			new Snapshot(iteration, phase, Metric.Memory, availableBytes).print(System.out);
 			new Snapshot(iteration, phase, Metric.Time, elapsedTime).print(System.out);
+			System.gc();
+			new Snapshot(iteration, phase, Metric.Memory, availableBytes).print(System.out);
 		}
 	}
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/org.hawk.ttc2018/src/org/hawk/ttc2018/Launcher.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<mapAttribute key="org.eclipse.debug.core.environmentVariables">
+<mapEntry key="ChangePath" value="/home/antonio/src/ttc2018liveContest/models/512"/>
+<mapEntry key="ChangeSet" value="512"/>
+<mapEntry key="Query" value="Q1"/>
+<mapEntry key="RunIndex" value="1"/>
+<mapEntry key="Sequences" value="20"/>
+</mapAttribute>
+<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.hawk.ttc2018.Launcher"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.hawk.ttc2018"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx8g -Xms8g"/>
+</launchConfiguration>
