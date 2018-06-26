@@ -1,3 +1,19 @@
+/*******************************************************************************
+ * Copyright (c) 2018 Aston University.
+ * 
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0.
+ *
+ * This Source Code may also be made available under the following Secondary
+ * Licenses when the conditions for such availability set forth in the Eclipse
+ * Public License, v. 2.0 are satisfied: GNU General Public License, version 3.
+ *
+ * SPDX-License-Identifier: EPL-2.0 OR GPL-3.0
+ *
+ * Contributors:
+ *     Antonio Garcia-Dominguez - initial API and implementation
+ ******************************************************************************/
 package org.hawk.ttc2018;
 
 import java.io.BufferedReader;
@@ -28,7 +44,7 @@ import org.hawk.emf.model.EMFModelResourceFactory;
 import org.hawk.epsilon.emc.EOLQueryEngine;
 import org.hawk.graph.updater.GraphMetaModelUpdater;
 import org.hawk.graph.updater.GraphModelUpdater;
-import org.hawk.localfolder.LocalFolder;
+import org.hawk.localfolder.LocalFile;
 import org.hawk.neo4j_v2.Neo4JDatabase;
 
 /**
@@ -84,9 +100,9 @@ public class StandaloneHawk {
 		tmpFile.toFile().delete();
 	}
 
-	public void requestFolderIndex(final File folder) throws Exception {
-		final LocalFolder vcs = new LocalFolder();
-		vcs.init(folder.getAbsolutePath(), indexer);
+	public void requestFileIndex(final File file) throws Exception {
+		final LocalFile vcs = new LocalFile();
+		vcs.init(file.getAbsolutePath(), indexer);
 		vcs.run();
 		indexer.addVCSManager(vcs, true);
 	}

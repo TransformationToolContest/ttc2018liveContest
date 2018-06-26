@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015-2017 The University of York, Aston University.
+ * Copyright (c) 2015-2018 The University of York, Aston University.
  * 
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
