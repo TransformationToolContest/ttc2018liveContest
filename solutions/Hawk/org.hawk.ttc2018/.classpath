@@ -14,5 +14,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.localfolder"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.neo4j-v2"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.neo4j-v2.dependencies"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/EMFSolutionTemplate"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
