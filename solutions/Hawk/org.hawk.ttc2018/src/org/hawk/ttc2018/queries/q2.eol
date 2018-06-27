@@ -3,14 +3,9 @@ Native('java.util.Collections').sort(scored, new Native('org.hawk.ttc2018.querie
 return scored.subList(0, scored.size.min(3));
 
 operation Comment score(): Integer {
-  var components = divideIntoComponents(self.likedBy);
-  return components.collect(component | component.size * component.size).sum();
-}
-
-operation divideIntoComponents(users) {
   var components = Sequence {};
 
-  for (user in users) {
+  for (user in self.likedBy) {
     var added = false;
     for (component in components) {
       if (component.exists(member | member.friends.includes(user) and user.friends.includes(member))) {
@@ -24,5 +19,5 @@ operation divideIntoComponents(users) {
     }
   }
   
-  return components;
+  return components.collect(component | component.size * component.size).sum();
 }
