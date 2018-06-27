@@ -98,7 +98,7 @@ def extract_results():
     """
     clean_dir("results")
     set_working_directory("reporting")
-    subprocess.call(["Rscript", "extract_results.R"])
+    subprocess.call(["Rscript", "check_results.R"])
 
 
 if __name__ == "__main__":

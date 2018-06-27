@@ -1,13 +1,12 @@
 {
   "Queries": [
-    "Q1",
-    "Q2"
+    "Q1"
   ],
-  "Tools": ["NMF", "EMFSolutionTemplate"],
+  "Tools": ["EMFSolutionTemplate"],
   "ChangeSets": [
-    "1", "2", "4", "8", "16", "32"
+    "1", "2", "4", "8", "16", "32", "64", "128", "256", "512"
   ],
   "Sequences": 20,
-  "Runs": 5,
+  "Runs": 1,
   "Timeout": 6000
 }

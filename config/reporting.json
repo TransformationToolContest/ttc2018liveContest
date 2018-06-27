@@ -2,10 +2,10 @@
   "Dimensions": {
     "X_Dimensions": {
       "ChangeSet": true,
-      "Iteration": true
+      "Iteration": false
     },
     "Groups": {
-      "View": true,
+      "View": false,
       "Tool": true
     }
   },
@@ -15,7 +15,19 @@
       "Phases": [
         "Update"
       ]
-    }
+    },
+	{
+	  "Name": "Batch",
+	  "Phases": [
+		"Initial"
+	  ]
+	},
+	{
+	  "Name": "Load",
+	  "Phases": [
+	    "Load"
+	  ]
+	}
   ],
   "Extension": ["png", "pdf"]
 }

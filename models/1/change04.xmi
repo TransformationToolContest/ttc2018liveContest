@@ -11,4 +11,7 @@
   <changes xsi:type="changes:CompositionListInsertion" index="2" affectedElement="social:Comment initial.xmi#1077498" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#1076833" id="1077511" timestamp="2010-03-03T09:58:52" content="About Nicolaus. About Jarmila . About H. G. We. About Woody Al. About 50 Cent,. About Weird Al. About Spike Le. A." submitter="initial.xmi#1564" />
   </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="0" affectedElement="social:Post initial.xmi#167197" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#167197" id="999991" timestamp="2018-06-27T09:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
+  </changes>
 </changes:ModelChangeSet>
