@@ -30,6 +30,9 @@ import org.hawk.ttc2018.queries.EOLQueries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import Changes.ChangesPackage;
+import SocialNetwork.SocialNetworkPackage;
+
 
 /**
  * Runs an instance of the TTC 2018 benchmark for a solution based on Hawk. Uses
@@ -45,7 +48,7 @@ public class BatchLauncher extends AbstractLauncher {
 	}
 
 	@Override
-	protected void applyChanges(File fInitial, File fChanges) throws Exception {
+	protected void applyChanges(File fInitial, int iChangeSequence, File fChanges) throws Exception {
 		final EolModule eolm = new EolModule();
 
 		final StringBuilder sb = new StringBuilder();
@@ -61,7 +64,7 @@ public class BatchLauncher extends AbstractLauncher {
 
 		final ModelRepository repo = eolm.getContext().getModelRepository();
 		final EmfModel emfChanges = new EmfModel();
-		emfChanges.setMetamodelUris(Arrays.asList(SOCIAL_MMURI, CHANGES_MMURI));
+		emfChanges.setMetamodelUris(Arrays.asList(SocialNetworkPackage.eNS_URI, ChangesPackage.eNS_URI));
 		emfChanges.setModelFile(fChanges.getCanonicalPath());
 		emfChanges.setName("Changes");
 		emfChanges.setReadOnLoad(true);
@@ -81,6 +84,12 @@ public class BatchLauncher extends AbstractLauncher {
 
 		eolm.getContext().getModelRepository().dispose();
 		eolm.getContext().dispose();
+	}
+
+	@Override
+	protected void modelLoading(final StandaloneHawk hawk) throws Throwable {
+		hawk.requestFileIndex(new File(changePath, INITIAL_MODEL_FILENAME));
+		hawk.waitForSync();
 	}
 
 	public static void main(String[] args) {

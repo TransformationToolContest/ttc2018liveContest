@@ -9,9 +9,13 @@ import java.util.Map;
 
 import org.hawk.core.query.InvalidQueryException;
 import org.hawk.core.query.QueryExecutionException;
+import org.hawk.graph.updater.GraphModelUpdater;
 import org.hawk.ttc2018.metamodels.Metamodels;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import Changes.ChangesPackage;
+import SocialNetwork.SocialNetworkPackage;
 
 /**
  * Base class for the various Hawk-based solutions for TTC18.
@@ -19,10 +23,8 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractLauncher {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(BatchLauncher.class);
+	public static final String INITIAL_MODEL_FILENAME = "initial.xmi";
 
-	protected static final String INITIAL_MODEL_FILENAME = "initial.xmi";
-	protected static final String SOCIAL_MMURI = "https://www.transformation-tool-contest.eu/2018/social_media";
-	protected static final String CHANGES_MMURI = "http://nmf.codeplex.com/changes";
 	protected final File changePath;
 	protected final String changeSet;
 	protected final Query query;
@@ -93,7 +95,11 @@ public abstract class AbstractLauncher {
 	}
 
 	public void run() throws Throwable {
-		final StandaloneHawk hawk = new StandaloneHawk();
+		// Make sure the static metamodels are in the global EMF registry
+		ChangesPackage.eINSTANCE.getName();
+		SocialNetworkPackage.eINSTANCE.getName();
+
+		final StandaloneHawk hawk = createHawk();
 		try {
 			printHeader(System.out);
 
@@ -118,21 +124,9 @@ public abstract class AbstractLauncher {
 		}
 	}
 
-	protected void applyChanges(int iChangeSequence, final StandaloneHawk hawk)
-			throws Throwable, IOException, InvalidQueryException, QueryExecutionException {
-		final File fChange = new File(changePath, String.format("change%02d.xmi", iChangeSequence));
-		final File fInitial = new File(changePath, INITIAL_MODEL_FILENAME);
-		applyChanges(fInitial, fChange);
-
-		hawk.requestSync();
-		hawk.waitForSync();
-
-		@SuppressWarnings("unchecked")
-		List<List<Integer>> results = (List<List<Integer>>) hawk.eol(query.getQuery());
-		new Snapshot(iChangeSequence, Phase.Updates, Metric.Elements, '"' + results.toString() + '"').print(System.out);
+	protected StandaloneHawk createHawk() throws IOException {
+		return new StandaloneHawk(new GraphModelUpdater());
 	}
-
-	protected abstract void applyChanges(File fInitial, File fChanges) throws Exception;
 
 	protected void initialView(final StandaloneHawk hawk)
 			throws IOException, InvalidQueryException, QueryExecutionException {
@@ -141,10 +135,7 @@ public abstract class AbstractLauncher {
 		new Snapshot(0, Phase.Initial, Metric.Elements, '"' + results.toString() + '"').print(System.out);
 	}
 
-	protected void modelLoading(final StandaloneHawk hawk) throws Exception, Throwable {
-		hawk.requestFileIndex(new File(changePath, INITIAL_MODEL_FILENAME));
-		hawk.waitForSync();
-	}
+	protected abstract void modelLoading(final StandaloneHawk hawk) throws Throwable;
 
 	protected void initialization(final StandaloneHawk hawk) throws Exception {
 		hawk.run();
@@ -152,5 +143,21 @@ public abstract class AbstractLauncher {
 		hawk.registerMetamodel(Metamodels.getSocialMediaMetamodel());
 		hawk.registerMetamodel(Metamodels.getChangeSequenceMetamodel());
 	}
+
+	protected void applyChanges(int iChangeSequence, final StandaloneHawk hawk)
+			throws Throwable, IOException, InvalidQueryException, QueryExecutionException {
+		final File fChange = new File(changePath, String.format("change%02d.xmi", iChangeSequence));
+		final File fInitial = new File(changePath, INITIAL_MODEL_FILENAME);
+		applyChanges(fInitial, iChangeSequence, fChange);
+	
+		hawk.requestSync();
+		hawk.waitForSync();
+	
+		@SuppressWarnings("unchecked")
+		List<List<Integer>> results = (List<List<Integer>>) hawk.eol(query.getQuery());
+		new Snapshot(iChangeSequence, Phase.Updates, Metric.Elements, '"' + results.toString() + '"').print(System.out);
+	}
+
+	protected abstract void applyChanges(File fInitial, int iChangeSequence, File fChanges) throws Exception;
 
 }

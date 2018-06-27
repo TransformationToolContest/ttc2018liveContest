@@ -32,6 +32,7 @@ import java.util.concurrent.TimeoutException;
 import org.hawk.core.IConsole;
 import org.hawk.core.IModelIndexer;
 import org.hawk.core.IModelIndexer.ShutdownRequestType;
+import org.hawk.core.IModelUpdater;
 import org.hawk.core.graph.IGraphDatabase;
 import org.hawk.core.query.IQueryEngine;
 import org.hawk.core.query.InvalidQueryException;
@@ -43,8 +44,8 @@ import org.hawk.emf.metamodel.EMFMetaModelResourceFactory;
 import org.hawk.emf.model.EMFModelResourceFactory;
 import org.hawk.epsilon.emc.EOLQueryEngine;
 import org.hawk.graph.updater.GraphMetaModelUpdater;
-import org.hawk.graph.updater.GraphModelUpdater;
 import org.hawk.localfolder.LocalFile;
+import org.hawk.localfolder.LocalFolder;
 import org.hawk.neo4j_v2.Neo4JDatabase;
 
 /**
@@ -59,9 +60,11 @@ public class StandaloneHawk {
 	private IGraphDatabase db;
 	private IModelIndexer indexer;
 	private IQueryEngine queryEngine;
+	private IModelUpdater updater;
 
-	public StandaloneHawk() throws IOException {
+	public StandaloneHawk(IModelUpdater updater) throws IOException {
 		this.indexFolder = Files.createTempDirectory("hawkttc18").toFile();
+		this.updater = updater;
 	}
 
 	public void run() throws Exception {
@@ -79,10 +82,7 @@ public class StandaloneHawk {
 		queryEngine = new EOLQueryEngine();
 		indexer.addQueryEngine(queryEngine);
 		indexer.setMetaModelUpdater(new GraphMetaModelUpdater());
-
-		// TODO: change sequence-aware updater?
-		indexer.addModelUpdater(new GraphModelUpdater());
-
+		indexer.addModelUpdater(updater);
 		indexer.setDB(db, true);
 		indexer.init(0, 0);
 	}
@@ -100,11 +100,20 @@ public class StandaloneHawk {
 		tmpFile.toFile().delete();
 	}
 
-	public void requestFileIndex(final File file) throws Exception {
+	public LocalFile requestFileIndex(final File file) throws Exception {
 		final LocalFile vcs = new LocalFile();
 		vcs.init(file.getAbsolutePath(), indexer);
 		vcs.run();
 		indexer.addVCSManager(vcs, true);
+		return vcs;
+	}
+
+	public LocalFolder requestFolderIndex(File folder) throws Exception {
+		final LocalFolder vcs = new LocalFolder();
+		vcs.init(folder.getAbsolutePath(), indexer);
+		vcs.run();
+		indexer.addVCSManager(vcs, true);
+		return vcs;
 	}
 
 	public Object eol(final String eolQuery) throws InvalidQueryException, QueryExecutionException {
@@ -149,5 +158,9 @@ public class StandaloneHawk {
 
 	public void requestSync() throws Throwable {
 		indexer.requestImmediateSync();
+	}
+
+	public void addIndexedAttribute(String nsUri, String type, String attribute) {
+		indexer.addIndexedAttribute(nsUri, type, attribute);
 	}
 }
