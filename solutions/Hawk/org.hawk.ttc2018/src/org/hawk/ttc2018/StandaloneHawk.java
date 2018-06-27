@@ -156,11 +156,8 @@ public class StandaloneHawk {
 		return eol(query);
 	}
 
-	public void requestSync() throws Throwable {
-		indexer.requestImmediateSync();
+	public IModelIndexer getIndexer() {
+		return indexer;
 	}
 
-	public void addIndexedAttribute(String nsUri, String type, String attribute) {
-		indexer.addIndexedAttribute(nsUri, type, attribute);
-	}
 }

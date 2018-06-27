@@ -1,12 +1,16 @@
 package org.hawk.ttc2018;
 
+import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.epsilon.eol.EolModule;
 import org.hawk.core.query.InvalidQueryException;
 import org.hawk.core.query.QueryExecutionException;
 import org.hawk.graph.updater.GraphModelUpdater;
@@ -22,7 +26,7 @@ import SocialNetwork.SocialNetworkPackage;
  */
 public abstract class AbstractLauncher {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(BatchLauncher.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLauncher.class);
 	public static final String INITIAL_MODEL_FILENAME = "initial.xmi";
 
 	protected final File changePath;
@@ -130,9 +134,33 @@ public abstract class AbstractLauncher {
 
 	protected void initialView(final StandaloneHawk hawk)
 			throws IOException, InvalidQueryException, QueryExecutionException {
-		@SuppressWarnings("unchecked")
-		List<List<Integer>> results = (List<List<Integer>>) hawk.eol(query.getQuery());
-		new Snapshot(0, Phase.Initial, Metric.Elements, '"' + results.toString() + '"').print(System.out);
+
+		final List<List<Integer>> results = runQuery(hawk);
+		final String elementsString = formatResults(results);
+
+		LOGGER.info("Produced results: {}", results);
+		new Snapshot(0, Phase.Initial, Metric.Elements, elementsString).print(System.out);
+	}
+
+	protected String formatResults(final List<List<Integer>> results) {
+		final StringBuilder sb = new StringBuilder();
+		boolean first = true;
+		for (List<Integer> result : results) {
+			if (first) {
+				first = false;
+			} else {
+				sb.append('|');
+			}
+			sb.append(result.get(0));
+		}
+		final String elementString = sb.toString();
+		return elementString;
+	}
+
+	@SuppressWarnings("unchecked")
+	protected List<List<Integer>> runQuery(final StandaloneHawk hawk)
+			throws IOException, InvalidQueryException, QueryExecutionException {
+		return (List<List<Integer>>) hawk.eol(query.getQuery());
 	}
 
 	protected abstract void modelLoading(final StandaloneHawk hawk) throws Throwable;
@@ -150,14 +178,30 @@ public abstract class AbstractLauncher {
 		final File fInitial = new File(changePath, INITIAL_MODEL_FILENAME);
 		applyChanges(fInitial, iChangeSequence, fChange);
 	
-		hawk.requestSync();
+		hawk.getIndexer().requestImmediateSync();
 		hawk.waitForSync();
 	
-		@SuppressWarnings("unchecked")
-		List<List<Integer>> results = (List<List<Integer>>) hawk.eol(query.getQuery());
-		new Snapshot(iChangeSequence, Phase.Updates, Metric.Elements, '"' + results.toString() + '"').print(System.out);
+		final List<List<Integer>> results = runQuery(hawk);
+		final String elementsString = formatResults(results);
+		LOGGER.info("Produced results: {}", results);
+		new Snapshot(iChangeSequence, Phase.Updates, Metric.Elements, elementsString).print(System.out);
 	}
 
 	protected abstract void applyChanges(File fInitial, int iChangeSequence, File fChanges) throws Exception;
+
+	protected EolModule parseEOLModule(final InputStream is) throws IOException, Exception {
+		final EolModule eolm = new EolModule();
+		final StringBuilder sb = new StringBuilder();
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+				sb.append(System.lineSeparator());
+			}
+		}
+		final String applyChangesQuery = sb.toString();
+		eolm.parse(applyChangesQuery);
+		return eolm;
+	}
 
 }

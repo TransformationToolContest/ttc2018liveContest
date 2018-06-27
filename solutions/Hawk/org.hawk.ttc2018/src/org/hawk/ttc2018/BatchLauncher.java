@@ -18,6 +18,8 @@ package org.hawk.ttc2018;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Map;
@@ -49,18 +51,7 @@ public class BatchLauncher extends AbstractLauncher {
 
 	@Override
 	protected void applyChanges(File fInitial, int iChangeSequence, File fChanges) throws Exception {
-		final EolModule eolm = new EolModule();
-
-		final StringBuilder sb = new StringBuilder();
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(EOLQueries.getApplyChangesQuery()))) {
-			String line;
-			while ((line = br.readLine()) != null) {
-				sb.append(line);
-				sb.append(System.lineSeparator());
-			}
-		}
-		final String applyChangesQuery = sb.toString();
-		eolm.parse(applyChangesQuery);
+		final EolModule eolm = parseEOLModule(EOLQueries.getApplyChangesQuery());
 
 		final ModelRepository repo = eolm.getContext().getModelRepository();
 		final EmfModel emfChanges = new EmfModel();

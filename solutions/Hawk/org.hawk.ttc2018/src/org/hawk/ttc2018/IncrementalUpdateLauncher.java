@@ -23,6 +23,7 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.hawk.core.IModelIndexer;
 import org.hawk.localfolder.LocalFolder;
 import org.hawk.ttc2018.updaters.ChangeSequenceAwareUpdater;
 import org.slf4j.Logger;
@@ -36,14 +37,14 @@ import SocialNetwork.SocialNetworkPackage;
  * update the graph directly, understanding a specific change sequence model
  * format.
  */
-public class DirectUpdateLauncher extends AbstractLauncher {
+public class IncrementalUpdateLauncher extends AbstractLauncher {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(DirectUpdateLauncher.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(IncrementalUpdateLauncher.class);
 	private static final Pattern CHANGES_FNAME = Pattern.compile("change0*([0-9]+).xmi");
 
 	private LocalFolder localFolder;
 
-	public DirectUpdateLauncher(Map<String, String> env) {
+	public IncrementalUpdateLauncher(Map<String, String> env) {
 		super(env);
 	}
 
@@ -75,9 +76,10 @@ public class DirectUpdateLauncher extends AbstractLauncher {
 		hawk.waitForSync();
 
 		// Need these for quickly finding by ID
-		hawk.addIndexedAttribute(SocialNetworkPackage.eNS_URI, "Post", "id");
-		hawk.addIndexedAttribute(SocialNetworkPackage.eNS_URI, "Comment", "id");
-		hawk.addIndexedAttribute(SocialNetworkPackage.eNS_URI, "User", "id");
+		final IModelIndexer indexer = hawk.getIndexer();
+		indexer.addIndexedAttribute(SocialNetworkPackage.eNS_URI, "Post", "id");
+		indexer.addIndexedAttribute(SocialNetworkPackage.eNS_URI, "Comment", "id");
+		indexer.addIndexedAttribute(SocialNetworkPackage.eNS_URI, "User", "id");
 	}
 
 	@Override
@@ -88,7 +90,7 @@ public class DirectUpdateLauncher extends AbstractLauncher {
 	public static void main(String[] args) {
 		Map<String, String> env = System.getenv();
 		try {
-			new DirectUpdateLauncher(env).run();
+			new IncrementalUpdateLauncher(env).run();
 		} catch (Throwable e) {
 			LOGGER.error(e.getMessage(), e);
 		}
