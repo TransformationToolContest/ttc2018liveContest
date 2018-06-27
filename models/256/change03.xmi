@@ -4,4 +4,6 @@
   <changes xsi:type="changes:CompositionListInsertion" index="2" affectedElement="social:Post initial.xmi#51540859495" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#51540859495" id="51540859937" timestamp="2011-03-07T13:18:14" content="About Tom Gehrels, . About Ron Paul, U.S. About England, worl. About Ingrid ." submitter="initial.xmi#1099511631578" />
   </changes>
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#3298534884947" affectedElement="social:User initial.xmi#3298534886689" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#3298534886689" affectedElement="social:User initial.xmi#3298534884947" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
 </changes:ModelChangeSet>

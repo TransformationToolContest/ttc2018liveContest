@@ -4,4 +4,7 @@
   <changes xsi:type="changes:CompositionListInsertion" index="2" affectedElement="social:Post initial.xmi#8590529251" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#8590529251" id="8590529657" timestamp="2010-05-13T15:33:05" content="About Jay-Z, most number one. About Made in Heaven, that M. About German Confederatio." submitter="initial.xmi#1925" />
   </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="0" affectedElement="social:Post initial.xmi#864565" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#864565" id="999993" timestamp="2018-06-27T21:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
+  </changes>
 </changes:ModelChangeSet>

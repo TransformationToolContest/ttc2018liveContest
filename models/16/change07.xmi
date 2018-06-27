@@ -5,4 +5,8 @@
   <changes xsi:type="changes:CompositionListInsertion" affectedElement="social:Comment initial.xmi#8590659259" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#8590657711" id="8590659266" timestamp="2010-05-13T09:43:43" content="no way!" submitter="initial.xmi#1099511631947" />
   </changes>
+  <changes xsi:type="changes:ChangeTransaction">
+    <sourceChange xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment initial.xmi#968658" affectedElement="social:User initial.xmi#2886" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/likes" />
+    <nestedChanges xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#2886" affectedElement="social:Comment initial.xmi#968658" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/likedBy" />
+  </changes>
 </changes:ModelChangeSet>

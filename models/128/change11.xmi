@@ -11,4 +11,9 @@
   <changes xsi:type="changes:CompositionListInsertion" affectedElement="social:Comment initial.xmi#34360758848" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#34360758220" id="34360758849" timestamp="2010-11-05T17:03:05" content="no" submitter="initial.xmi#2199023260033" />
   </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="0" affectedElement="social:Post initial.xmi#34360603167" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#34360603167" id="999994" timestamp="2018-06-27T22:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
+  </changes>
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#238" affectedElement="social:User initial.xmi#1925" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#1925" affectedElement="social:User initial.xmi#238" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
 </changes:ModelChangeSet>

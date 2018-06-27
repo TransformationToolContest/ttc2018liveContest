@@ -14,5 +14,9 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Post #//@changes.4/@addedElement" affectedElement="social:User initial.xmi#1099511632392" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:CompositionListInsertion" index="10945" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="17180795794" timestamp="2010-06-27T22:49:36" content="" submitter="initial.xmi#1099511632392" />
+  </changes>  
+  <changes xsi:type="changes:ChangeTransaction">
+    <sourceChange xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment initial.xmi#17180737438" affectedElement="social:User initial.xmi#555" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/likes" />
+    <nestedChanges xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#555" affectedElement="social:Comment initial.xmi#17180737438" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/likedBy" />
   </changes>
 </changes:ModelChangeSet>

@@ -29,4 +29,8 @@
   <changes xsi:type="changes:CompositionListInsertion" index="2" affectedElement="social:Comment initial.xmi#644740" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#644540" id="644746" timestamp="2010-03-28T16:59:03" content="About Cli. About Bar. About Lou. About Dor. About Pau. About Jer. About Jam. About Con.." submitter="initial.xmi#1925" />
   </changes>
+  <changes xsi:type="changes:ChangeTransaction">
+    <sourceChange xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment initial.xmi#406503" affectedElement="social:User initial.xmi#1925" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/likes" />
+    <nestedChanges xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#1925" affectedElement="social:Comment initial.xmi#406503" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/likedBy" />
+  </changes>
 </changes:ModelChangeSet>
