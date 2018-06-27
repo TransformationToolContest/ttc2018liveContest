@@ -1,10 +1,11 @@
 {
   "Queries": [
-    "Q1"
+    "Q1",
+	"Q2"
   ],
-  "Tools": ["EMFSolutionTemplate"],
+  "Tools": ["NMF", "NMF-Incremental", "NMF-Transactions"],
   "ChangeSets": [
-    "1", "2", "4", "8", "16", "32", "64", "128", "256", "512"
+    "1", "2", "4", "8", "16", "32"
   ],
   "Sequences": 20,
   "Runs": 1,
