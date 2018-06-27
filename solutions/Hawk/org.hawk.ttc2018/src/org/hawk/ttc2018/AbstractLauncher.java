@@ -96,6 +96,14 @@ public abstract class AbstractLauncher {
 		this.query = Query.fromQuery(env.get("Query"));
 		this.runIndex = Integer.valueOf(env.get("RunIndex"));
 		this.sequences = Integer.valueOf(env.get("Sequences"));
+
+		// Reset the input model just in case
+		final File fInitial = new File(changePath, INITIAL_MODEL_FILENAME);
+		try {
+			Runtime.getRuntime().exec(new String[] { "git", "checkout", fInitial.getAbsolutePath() });
+		} catch (IOException e) {
+			LOGGER.error(e.getMessage(), e);
+		}
 	}
 
 	public void run() throws Throwable {
