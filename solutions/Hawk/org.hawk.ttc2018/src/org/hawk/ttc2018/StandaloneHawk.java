@@ -88,8 +88,12 @@ public class StandaloneHawk {
 	}
 
 	public void shutdown() throws Exception {
-		indexer.shutdown(ShutdownRequestType.ALWAYS);
-		db.delete();
+		if (indexer != null) {
+			indexer.shutdown(ShutdownRequestType.ALWAYS);
+		}
+		if (db != null) {
+			db.delete();
+		}
 	}
 
 	public void registerMetamodel(InputStream is) throws Exception {

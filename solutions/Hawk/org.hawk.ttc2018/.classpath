@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src-gen"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libs/epsilon-1.5-core-src.jar"/>
 	<classpathentry kind="lib" path="libs/epsilon-1.5-emf-src.jar"/>
@@ -15,6 +16,5 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.localfolder"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.neo4j-v2"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.hawk.neo4j-v2.dependencies"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/EMFSolutionTemplate"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

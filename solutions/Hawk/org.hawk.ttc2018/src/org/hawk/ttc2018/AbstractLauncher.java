@@ -97,6 +97,8 @@ public abstract class AbstractLauncher {
 		this.runIndex = Integer.valueOf(env.get("RunIndex"));
 		this.sequences = Integer.valueOf(env.get("Sequences"));
 
+		LOGGER.info("Running in JVM {}", System.getProperty("java.version"));
+
 		// Reset the input model just in case
 		final File fInitial = new File(changePath, INITIAL_MODEL_FILENAME);
 		try {
