@@ -135,17 +135,17 @@ public abstract class AbstractLauncher {
 	protected void initialView(final StandaloneHawk hawk)
 			throws IOException, InvalidQueryException, QueryExecutionException {
 
-		final List<List<Integer>> results = runQuery(hawk);
+		final List<List<Object>> results = runQuery(hawk);
 		final String elementsString = formatResults(results);
 
 		LOGGER.info("Produced results: {}", results);
 		new Snapshot(0, Phase.Initial, Metric.Elements, elementsString).print(System.out);
 	}
 
-	protected String formatResults(final List<List<Integer>> results) {
+	protected String formatResults(final List<List<Object>> results) {
 		final StringBuilder sb = new StringBuilder();
 		boolean first = true;
-		for (List<Integer> result : results) {
+		for (List<Object> result : results) {
 			if (first) {
 				first = false;
 			} else {
@@ -158,9 +158,9 @@ public abstract class AbstractLauncher {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected List<List<Integer>> runQuery(final StandaloneHawk hawk)
+	protected List<List<Object>> runQuery(final StandaloneHawk hawk)
 			throws IOException, InvalidQueryException, QueryExecutionException {
-		return (List<List<Integer>>) hawk.eol(query.getQuery());
+		return (List<List<Object>>) hawk.eol(query.getQuery());
 	}
 
 	protected abstract void modelLoading(final StandaloneHawk hawk) throws Throwable;
@@ -181,7 +181,7 @@ public abstract class AbstractLauncher {
 		hawk.getIndexer().requestImmediateSync();
 		hawk.waitForSync();
 	
-		final List<List<Integer>> results = runQuery(hawk);
+		final List<List<Object>> results = runQuery(hawk);
 		final String elementsString = formatResults(results);
 		LOGGER.info("Produced results: {}", results);
 		new Snapshot(iChangeSequence, Phase.Updates, Metric.Elements, elementsString).print(System.out);

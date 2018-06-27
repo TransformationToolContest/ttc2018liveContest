@@ -1,7 +1,6 @@
-var sorted = Comment.all
-  .collect(c | Sequence { c.id, c.score() })
-  .sortBy(cs | -cs.second);
-return sorted.subList(0, sorted.size.min(3));
+var scored = Comment.all.collect(c | Sequence { c.id, c.score(), c.timestamp }).asSequence;
+Native('java.util.Collections').sort(scored, new Native('org.hawk.ttc2018.queries.ResultComparator'));
+return scored.subList(0, scored.size.min(3));
 
 operation Comment score(): Integer {
   var components = divideIntoComponents(self.likedBy);
@@ -17,7 +16,7 @@ operation divideIntoComponents(users) {
       if (component.exists(member | member.friends.includes(user) and user.friends.includes(member))) {
         component.add(user);
         added = true;
-        break; 
+        break;
       }
     }
     if (not added) {

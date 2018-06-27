@@ -18,11 +18,13 @@ package org.hawk.ttc2018;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.epsilon.eol.EolModule;
@@ -39,6 +41,7 @@ import org.hawk.core.util.GraphChangeAdapter;
 import org.hawk.epsilon.emc.EOLQueryEngine;
 import org.hawk.epsilon.emc.wrappers.GraphNodeWrapper;
 import org.hawk.graph.ModelElementNode;
+import org.hawk.ttc2018.queries.ResultComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -103,7 +106,7 @@ public class IncrementalUpdateQueryLauncher extends IncrementalUpdateLauncher {
 	}
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(IncrementalUpdateQueryLauncher.class);
-	private List<List<Integer>> prevResults;
+	private List<List<Object>> prevResults;
 	private QueryUpdateListener listener;
 	private EolModule eolRescoreModule;
 	private EOLQueryEngine hawkModel;
@@ -113,7 +116,7 @@ public class IncrementalUpdateQueryLauncher extends IncrementalUpdateLauncher {
 	}
 
 	@Override
-	protected List<List<Integer>> runQuery(StandaloneHawk hawk)
+	protected List<List<Object>> runQuery(StandaloneHawk hawk)
 			throws IOException, InvalidQueryException, QueryExecutionException {
 		if (prevResults == null) {
 			prevResults = super.runQuery(hawk);
@@ -144,12 +147,10 @@ public class IncrementalUpdateQueryLauncher extends IncrementalUpdateLauncher {
 		return prevResults;
 	}
 
-	protected void updateResults(StandaloneHawk hawk, Operation scoreOp, final Set<Object> ids)
-			throws QueryExecutionException {
-
-		Set<List<Integer>> allScores = new HashSet<>();
-		for (List<Integer> oldResult : prevResults) {
-			allScores.add(oldResult);
+	protected void updateResults(StandaloneHawk hawk, Operation scoreOp, final Set<Object> ids) throws QueryExecutionException {
+		final Map<String, List<Object>> allResults = new HashMap<>();
+		for (List<Object> oldResult : prevResults) {
+			allResults.put(oldResult.get(0) + "", oldResult.subList(1, 3));
 		}
 
 		for (Object postID : ids) {
@@ -162,19 +163,18 @@ public class IncrementalUpdateQueryLauncher extends IncrementalUpdateLauncher {
 				throw new QueryExecutionException(e);
 			}
 
-			List<Integer> lResult = new ArrayList<>();
-			lResult.add(Integer.parseInt(node.getProperty("id") + ""));
+			final String sIdentifier = node.getProperty("id") + "";
+			final List<Object> lResult = new ArrayList<>();
 			lResult.add(score);
-			allScores.add(lResult);
+			lResult.add(node.getProperty("timestamp"));
+			allResults.put(sIdentifier, lResult);
 		}
 
-		List<List<Integer>> lAllResults = new ArrayList<>(allScores);
-		Collections.sort(lAllResults, new Comparator<List<Integer>>() {
-			@Override
-			public int compare(List<Integer> o1, List<Integer> o2) {
-				return -Integer.compare(o1.get(1), o2.get(1));
-			}
-		});
+		List<List<Object>> lAllResults = new ArrayList<>(allResults.size());
+		for (Entry<String, List<Object>> entry : allResults.entrySet()) {
+			lAllResults.add(Arrays.asList(entry.getKey(), entry.getValue().get(0), entry.getValue().get(1)));
+		}
+		Collections.sort(lAllResults, new ResultComparator());
 		prevResults = lAllResults.subList(0, Math.min(3, lAllResults.size()));
 	}
 
