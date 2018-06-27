@@ -87,4 +87,9 @@ public class BatchLauncher extends AbstractLauncher {
 			LOGGER.error(e.getMessage(), e);
 		}
 	}
+
+	@Override
+	protected String getTool() {
+		return "Hawk";
+	}
 }

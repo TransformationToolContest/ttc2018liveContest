@@ -206,4 +206,10 @@ public class IncrementalUpdateQueryLauncher extends IncrementalUpdateLauncher {
 			LOGGER.error(e.getMessage(), e);
 		}
 	}
+
+	@Override
+	protected String getTool() {
+		return "HawkIncUpdateQuery";
+	}
+
 }

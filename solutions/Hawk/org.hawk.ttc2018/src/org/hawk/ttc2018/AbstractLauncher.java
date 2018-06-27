@@ -36,7 +36,6 @@ public abstract class AbstractLauncher {
 	protected final int sequences;
 
 	public class Snapshot {
-		public final String tool = "Hawk";
 		public int iteration;
 		public final Phase phase;
 		public final Metric metric;
@@ -50,7 +49,7 @@ public abstract class AbstractLauncher {
 		}
 
 		public void print(PrintStream out) {
-			final String msg = String.format("%s,%s,%s,%d,%d,%s,%s,%s", tool, query.getIdentifier(),
+			final String msg = String.format("%s,%s,%s,%d,%d,%s,%s,%s", getTool(), query.getIdentifier(),
 					changeSet == null ? "" : changeSet, runIndex, iteration, phase.toString(), metric.toString(),
 					metricValue + "");
 
@@ -198,6 +197,8 @@ public abstract class AbstractLauncher {
 	}
 
 	protected abstract void applyChanges(File fInitial, int iChangeSequence, File fChanges) throws Exception;
+
+	protected abstract String getTool();
 
 	protected EolModule parseEOLModule(final InputStream is) throws IOException, Exception {
 		final EolModule eolm = new EolModule();

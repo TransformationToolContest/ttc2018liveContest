@@ -95,4 +95,10 @@ public class IncrementalUpdateLauncher extends AbstractLauncher {
 			LOGGER.error(e.getMessage(), e);
 		}
 	}
+
+	@Override
+	protected String getTool() {
+		return "HawkIncUpdate";
+	}
+	
 }
