@@ -62,10 +62,17 @@ import SocialNetwork.SocialNetworkRoot;
 import SocialNetwork.Submission;
 import SocialNetwork.User;
 
+/**
+ * Experimental updater that changes the graph directly from a graph sequence,
+ * rather than saving to XMI then reindexing.
+ *
+ * This class is not thread-safe.
+ */
 public class ChangeSequenceAwareUpdater extends GraphModelUpdater {
 
 	private GraphModelBatchInjector injector;
 	private IGraphNode fileNode;
+	private VcsCommitItem commitItem;
 
 	@Override
 	public boolean updateStore(VcsCommitItem f, IHawkModelResource res) {
@@ -77,6 +84,8 @@ public class ChangeSequenceAwareUpdater extends GraphModelUpdater {
 	}
 
 	protected boolean applyChangeSequenceToGraph(VcsCommitItem f) {
+		commitItem = f;
+
 		final IVcsManager vcs = f.getCommit().getDelta().getManager();
 		final String revision = f.getCommit().getRevision();
 		final File changeFile = vcs.importFile(revision, f.getPath(), null);
@@ -96,7 +105,7 @@ public class ChangeSequenceAwareUpdater extends GraphModelUpdater {
 				injector = new GraphModelBatchInjector(graph, new TypeCache(), f, indexer.getCompositeGraphChangeListener());
 				fileNode = graph.getFileIndex().get("id", vcs.getLocation() + GraphModelUpdater.FILEINDEX_REPO_SEPARATOR + "/" + AbstractLauncher.INITIAL_MODEL_FILENAME).getSingle();
 
-				applyChangeSequenceToGraph(f, changeSet);
+				applyChangeSequenceToGraph(changeSet);
 				tx.success();
 			} catch (Exception e) {
 				console.printerrln(e);
@@ -111,28 +120,28 @@ public class ChangeSequenceAwareUpdater extends GraphModelUpdater {
 		return true;
 	}
 
-	private void applyChangeSequenceToGraph(VcsCommitItem f, ModelChangeSet changeSet) throws Exception {
+	private void applyChangeSequenceToGraph(ModelChangeSet changeSet) throws Exception {
 		for (Iterator<EObject> itEObject = changeSet.eAllContents(); itEObject.hasNext(); ) {
 			EObject eob = itEObject.next();
 			if (eob instanceof AssociationCollectionInsertion) {
-				applyChangeSequenceToGraph(f, (AssociationCollectionInsertion) eob);
+				applyChangeSequenceToGraph((AssociationCollectionInsertion) eob);
 			} else if (eob instanceof AssociationPropertyChange) {
-				applyChangeSequenceToGraph(f, (AssociationPropertyChange) eob);
+				applyChangeSequenceToGraph((AssociationPropertyChange) eob);
 			}  else if (eob instanceof AttributePropertyChange) {
-				applyChangeSequenceToGraph(f, (AttributePropertyChange) eob);
+				applyChangeSequenceToGraph((AttributePropertyChange) eob);
 			}  else if (eob instanceof CompositionListInsertion) {
-				applyChangeSequenceToGraph(f, (CompositionListInsertion) eob);
+				applyChangeSequenceToGraph((CompositionListInsertion) eob);
 			} else if (eob instanceof ElementaryChange) {
 				throw new IllegalArgumentException("Unknown elementary change " + eob);
 			}
 		}
 	}
 
-	private void applyChangeSequenceToGraph(VcsCommitItem f, CompositionListInsertion change) throws Exception {
-		addReference(f, (EReference) change.getFeature(), change.getAffectedElement(), change.getAddedElement());
+	private void applyChangeSequenceToGraph(CompositionListInsertion change) throws Exception {
+		addReference((EReference) change.getFeature(), change.getAffectedElement(), change.getAddedElement());
 	}
 
-	private void addReference(VcsCommitItem f, final EReference eref, final EObject sourceEObject,
+	private void addReference(final EReference eref, final EObject sourceEObject,
 			final EObject targetEObject) throws Exception {
 		final IGraphDatabase graph = indexer.getGraph();
 		final IGraphNode sourceNode = findNodeByID(sourceEObject);
@@ -147,7 +156,7 @@ public class ChangeSequenceAwareUpdater extends GraphModelUpdater {
 		}
 
 		graph.createRelationship(sourceNode, targetNode, eref.getName(), props);
-		indexer.getCompositeGraphChangeListener().referenceAddition(f, sourceNode, targetNode, eref.getName(), false);
+		indexer.getCompositeGraphChangeListener().referenceAddition(commitItem, sourceNode, targetNode, eref.getName(), false);
 	}
 
 	private IGraphNode findNodeByID(EObject eob) throws Exception {
@@ -165,6 +174,7 @@ public class ChangeSequenceAwareUpdater extends GraphModelUpdater {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private IGraphNode findNodeByID(final String id, final EObject eob) throws Exception {
 		final IGraphNodeIndex idx = indexer.getGraph()
 			.getOrCreateNodeIndex(String.format("%s##%s##%s",
@@ -176,26 +186,43 @@ public class ChangeSequenceAwareUpdater extends GraphModelUpdater {
 			return itNode.next();
 		}
 
-		// Node not found: new object
+		// Node not found: new object. Use Hawk injector to handle indexed attributes.
 		final EMFObject hawkEObject = new EMFObject(eob, new EMFWrapperFactory());
 		final IGraphNode newNode = injector.addEObject(fileNode, hawkEObject, false);
-		injector.addEReferences(hawkEObject, false);
+
+		/*
+		 * Since we do not update the initial.xmi file, references from the change
+		 * sequences to elements in previous change sequences would be unresolveable
+		 * proxies with the normal process. We take advantage of our custom indexed
+		 * attributes.
+		 */
+		for (EReference ref : eob.eClass().getEAllReferences()) {
+			Object value = eob.eGet(ref);
+			if (value instanceof EObject) {
+				final EObject target = (EObject)value;
+				addReference(ref, eob, target);
+			} else if (value instanceof Iterable) {
+				for (EObject target : (Iterable<EObject>)value) {
+					addReference(ref, eob, target);
+				}
+			}
+		}
 
 		return newNode;
 	}
 
-	private void applyChangeSequenceToGraph(VcsCommitItem f, AttributePropertyChange change) throws Exception {
+	private void applyChangeSequenceToGraph(AttributePropertyChange change) throws Exception {
 		IGraphNode node = findNodeByID(change.getAffectedElement());
 		node.setProperty(change.getFeature().getName(), change.getNewValue());
 	}
 
-	private void applyChangeSequenceToGraph(VcsCommitItem f, AssociationPropertyChange change) throws Exception {
+	private void applyChangeSequenceToGraph(AssociationPropertyChange change) throws Exception {
 		final EReference eref = (EReference) change.getFeature();
-		clearReferencesFrom(f, eref, change.getAffectedElement());
-		addReference(f, eref, change.getAffectedElement(), change.getNewValue());
+		clearReferencesFrom(eref, change.getAffectedElement());
+		addReference(eref, change.getAffectedElement(), change.getNewValue());
 	}
 
-	protected void clearReferencesFrom(VcsCommitItem f, final EStructuralFeature eref, final EObject sourceEObject) throws Exception {
+	protected void clearReferencesFrom(final EStructuralFeature eref, final EObject sourceEObject) throws Exception {
 		final IGraphNode sourceNode = findNodeByID(sourceEObject);
 		final String name = eref.getName();
 
@@ -207,12 +234,12 @@ public class ChangeSequenceAwareUpdater extends GraphModelUpdater {
 		for (IGraphEdge edge : edges) {
 			final IGraphNode oldTarget = edge.getEndNode();
 			edge.delete();
-			indexer.getCompositeGraphChangeListener().referenceRemoval(f, sourceNode, oldTarget, name, false);
+			indexer.getCompositeGraphChangeListener().referenceRemoval(commitItem, sourceNode, oldTarget, name, false);
 		}
 	}
 
-	private void applyChangeSequenceToGraph(VcsCommitItem f, AssociationCollectionInsertion change) throws Exception {
-		addReference(f, (EReference) change.getFeature(), change.getAffectedElement(), change.getAddedElement());
+	private void applyChangeSequenceToGraph(AssociationCollectionInsertion change) throws Exception {
+		addReference((EReference) change.getFeature(), change.getAffectedElement(), change.getAddedElement());
 	}
 
 }

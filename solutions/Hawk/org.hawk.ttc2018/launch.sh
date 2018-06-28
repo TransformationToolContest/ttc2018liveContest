@@ -15,4 +15,4 @@ export Query="$QUERY"
 export RunIndex=0
 export Sequences=20
 
-mvn -quiet -P"$PROFILE" exec:exec
+mvn -quiet -P"$PROFILE" compile exec:exec
