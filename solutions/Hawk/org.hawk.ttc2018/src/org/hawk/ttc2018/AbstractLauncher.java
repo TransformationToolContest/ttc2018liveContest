@@ -98,14 +98,6 @@ public abstract class AbstractLauncher {
 		this.sequences = Integer.valueOf(env.get("Sequences"));
 
 		LOGGER.info("Running in JVM {}", System.getProperty("java.version"));
-
-		// Reset the input model just in case
-		final File fInitial = new File(changePath, INITIAL_MODEL_FILENAME);
-		try {
-			Runtime.getRuntime().exec(new String[] { "git", "checkout", fInitial.getAbsolutePath() });
-		} catch (IOException e) {
-			LOGGER.error(e.getMessage(), e);
-		}
 	}
 
 	public void run() throws Throwable {
@@ -135,6 +127,15 @@ public abstract class AbstractLauncher {
 
 		} finally {
 			hawk.shutdown();
+
+			// Reset the input model after we are done (originally at the beginning,
+			// change requested by Georg to avoid interfering with other solutions)
+			final File fInitial = new File(changePath, INITIAL_MODEL_FILENAME);
+			try {
+				Runtime.getRuntime().exec(new String[] { "git", "checkout", fInitial.getAbsolutePath() });
+			} catch (IOException e) {
+				LOGGER.error(e.getMessage(), e);
+			}
 		}
 	}
 
