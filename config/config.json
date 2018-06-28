@@ -3,7 +3,7 @@
     "Q1",
 	"Q2"
   ],
-  "Tools": ["NMF", "NMF-Incremental", "NMF-Transactions"],
+  "Tools": ["jastadd-ttc18", "NMF", "NMF-Incremental", "NMF-Transactions"],
   "ChangeSets": [
     "1", "2", "4", "8", "16", "32"
   ],
