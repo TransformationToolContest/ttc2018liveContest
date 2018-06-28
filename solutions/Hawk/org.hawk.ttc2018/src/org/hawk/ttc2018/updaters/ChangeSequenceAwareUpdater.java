@@ -19,6 +19,7 @@ package org.hawk.ttc2018.updaters;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -29,9 +30,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.hawk.core.IVcsManager;
 import org.hawk.core.VcsCommitItem;
 import org.hawk.core.graph.IGraphDatabase;
@@ -94,10 +96,11 @@ public class ChangeSequenceAwareUpdater extends GraphModelUpdater {
 		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		rs.getPackageRegistry().put(ChangesPackage.eNS_URI, ChangesPackage.eINSTANCE);
 		rs.getPackageRegistry().put(SocialNetworkPackage.eNS_URI, SocialNetworkPackage.eINSTANCE);
-		Resource r = rs.createResource(URI.createFileURI(changeFile.getAbsolutePath()));
+		XMIResourceImpl r = (XMIResourceImpl) rs.createResource(URI.createFileURI(changeFile.getAbsolutePath()));
+		r.setIntrinsicIDToEObjectMap(new HashMap<>());
 
 		try {
-			r.load(null);
+			r.load(Collections.singletonMap(XMIResource.OPTION_DEFER_IDREF_RESOLUTION, true));
 
 			final ModelChangeSet changeSet = (ModelChangeSet) r.getContents().get(0);
 			try (IGraphTransaction tx = indexer.getGraph().beginTransaction()) {

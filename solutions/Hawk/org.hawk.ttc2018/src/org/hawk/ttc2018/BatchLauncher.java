@@ -17,11 +17,16 @@
 package org.hawk.ttc2018;
 
 import java.io.File;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.epsilon.emc.emf.EmfModel;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.epsilon.emc.emf.InMemoryEmfModel;
 import org.eclipse.epsilon.eol.EolModule;
 import org.eclipse.epsilon.eol.models.ModelRepository;
 import org.hawk.ttc2018.queries.EOLQueries;
@@ -50,24 +55,31 @@ public class BatchLauncher extends AbstractLauncher {
 		final EolModule eolm = parseEOLModule(EOLQueries.getApplyChangesQuery());
 
 		final ModelRepository repo = eolm.getContext().getModelRepository();
-		final EmfModel emfChanges = new EmfModel();
-		emfChanges.setMetamodelUris(Arrays.asList(SocialNetworkPackage.eNS_URI, ChangesPackage.eNS_URI));
-		emfChanges.setModelFile(fChanges.getCanonicalPath());
-		emfChanges.setName("Changes");
-		emfChanges.setReadOnLoad(true);
-		emfChanges.setStoredOnDisposal(false);
-		emfChanges.setExpand(true);
-		emfChanges.load();
-		repo.addModel(emfChanges);
+
+		// Epsilon's EmfModel doesn't have a way to provide custom EMF load options
+		final ResourceSet rs = new ResourceSetImpl();
+		rs.getPackageRegistry().put(ChangesPackage.eNS_URI, ChangesPackage.eINSTANCE);
+		rs.getPackageRegistry().put(SocialNetworkPackage.eNS_URI, SocialNetworkPackage.eINSTANCE);
+		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new IntrinsicIDXMIResourceFactoryImpl());
+
+		final Map<String, Boolean> loadOptions = Collections.singletonMap(XMIResource.OPTION_DEFER_IDREF_RESOLUTION, true);
+		final XMIResourceImpl emfInitialModel = (XMIResourceImpl) rs.createResource(URI.createFileURI(fInitial.getAbsolutePath()));
+		emfInitialModel.load(loadOptions);
+		final XMIResourceImpl emfChangesModel = (XMIResourceImpl) rs.createResource(URI.createFileURI(fChanges.getAbsolutePath()));
+		emfChangesModel.load(loadOptions);
+
+		final InMemoryEmfModel epsilonEMFInitialModel = new InMemoryEmfModel(emfInitialModel);
+		epsilonEMFInitialModel.setName("Model");
+		repo.addModel(epsilonEMFInitialModel);
+		final InMemoryEmfModel epsilonEMFChangesModel = new InMemoryEmfModel(emfChangesModel);
+		epsilonEMFChangesModel.setName("Changes");
+		repo.addModel(epsilonEMFChangesModel);
 
 		eolm.execute();
-
-		// Save the changed model, but not the change sequence!
-		for (Resource r : emfChanges.getResource().getResourceSet().getResources()) {
-			if (r.getURI().path().endsWith("/" + INITIAL_MODEL_FILENAME)) {
-				r.save(null);
-			}
-		}
+		
+		emfInitialModel.save(null);
+		emfInitialModel.unload();
+		emfChangesModel.unload();
 
 		eolm.getContext().getModelRepository().dispose();
 		eolm.getContext().dispose();
