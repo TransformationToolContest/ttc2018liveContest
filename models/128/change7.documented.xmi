@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34361021174"/>
+    <value featureName="comments">
+      <listChanges index="3" referenceValues="34361021180"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360058006"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="34360059323"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="34361021180" timestamp="2010-11-05T16:54:49.000+0000" content="About J. K. Rowling, 2008 Sunday Times Rich List estimated Rowling's fortune at £560 .">
+    <submitter href="../../models/128/initial.xmi#4398046514874"/>
+    <post href="../../models/128/initial.xmi#34361021039"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34360059323" timestamp="2010-11-05T16:55:05.000+0000" content="About Wolfgang Amad. About Léopold Sédar. About Benjamin Harr. About Aaron Copl.">
+    <submitter href="../../models/128/initial.xmi#987"/>
+    <post href="../../models/128/initial.xmi#34360058006"/>
+  </objectsToAttach>
+</change:ChangeDescription>

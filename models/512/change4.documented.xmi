@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#8796093026435"/>
+    <value featureName="friends">
+      <listChanges index="25">
+        <referenceValues href="../../models/512/initial.xmi#9895604654039"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604654039"/>
+    <value featureName="friends">
+      <listChanges index="54">
+        <referenceValues href="../../models/512/initial.xmi#8796093026435"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#51539679390"/>
+    <value featureName="likedBy">
+      <listChanges index="201">
+        <referenceValues href="../../models/512/initial.xmi#9895604653139"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604653139"/>
+    <value featureName="likes">
+      <listChanges index="30">
+        <referenceValues href="../../models/512/initial.xmi#51539679390"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#34360668579"/>
+    <value featureName="likedBy">
+      <listChanges index="347">
+        <referenceValues href="../../models/512/initial.xmi#9895604650523"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604650523"/>
+    <value featureName="likes">
+      <listChanges index="12">
+        <referenceValues href="../../models/512/initial.xmi#34360668579"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#85900326838"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="85900327403"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#6597069769794"/>
+    <value featureName="friends">
+      <listChanges index="40">
+        <referenceValues href="../../models/512/initial.xmi#2194"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#2194"/>
+    <value featureName="friends">
+      <listChanges index="338">
+        <referenceValues href="../../models/512/initial.xmi#6597069769794"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="85900327403" timestamp="2011-10-09T00:56:16.000+0100" content="About Plato, is that it consists of a ser. About Martin Scorsese, and in 2007 he f.">
+    <submitter href="../../models/512/initial.xmi#3298534887819"/>
+    <post href="../../models/512/initial.xmi#85900326838"/>
+  </objectsToAttach>
+</change:ChangeDescription>

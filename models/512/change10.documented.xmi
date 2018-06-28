@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#8796093024185"/>
+    <value featureName="friends">
+      <listChanges index="15">
+        <referenceValues href="../../models/512/initial.xmi#9895604653453"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604653453"/>
+    <value featureName="friends">
+      <listChanges index="9">
+        <referenceValues href="../../models/512/initial.xmi#8796093024185"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#85900197074"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="85900197075"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="167305" referenceValues="85900164435"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#85899959041"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="85899959044"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#34360608757"/>
+    <value featureName="likedBy">
+      <listChanges index="207">
+        <referenceValues href="../../models/512/initial.xmi#9895604650074"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604650074"/>
+    <value featureName="likes">
+      <listChanges index="26">
+        <referenceValues href="../../models/512/initial.xmi#34360608757"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="85900197075" timestamp="2011-10-09T01:22:21.000+0100" content="thanks">
+    <submitter href="../../models/512/initial.xmi#1099511630761"/>
+    <post href="../../models/512/initial.xmi#77310262201"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="85900164435" timestamp="2011-10-09T01:25:11.000+0100" content="">
+    <submitter href="../../models/512/initial.xmi#9895604654186"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="85899959044" timestamp="2011-10-09T01:25:17.000+0100" content="good">
+    <submitter href="../../models/512/initial.xmi#2199023256352"/>
+    <post href="../../models/512/initial.xmi#77310024305"/>
+  </objectsToAttach>
+</change:ChangeDescription>

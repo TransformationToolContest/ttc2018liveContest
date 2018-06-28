@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/256/initial.xmi#51539629531"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="51539629533"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/256/initial.xmi#51540179913"/>
+    <value featureName="comments">
+      <listChanges index="6" referenceValues="51540179930"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="51539629533" timestamp="2011-03-07T13:47:50.000+0000" content="maybe">
+    <submitter href="../../models/256/initial.xmi#2199023257779"/>
+    <post href="../../models/256/initial.xmi#51539629350"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="51540179930" timestamp="2011-03-07T13:48:06.000+0000" content="About Robert Burns, organic chemist of the twentieth century, having made ma.">
+    <submitter href="../../models/256/initial.xmi#3627"/>
+    <post href="../../models/256/initial.xmi#51540179090"/>
+  </objectsToAttach>
+</change:ChangeDescription>

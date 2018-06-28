@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#8591276477"/>
+    <value featureName="likedBy">
+      <listChanges index="93">
+        <referenceValues href="../../models/512/initial.xmi#9895604653077"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604653077"/>
+    <value featureName="likes">
+      <listChanges index="53">
+        <referenceValues href="../../models/512/initial.xmi#8591276477"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77310269567"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="85900204161"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77309489651"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="85899424245"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77310262201"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="85900197074"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#85900566316"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="85900566321"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77309752200"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="85899686793"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="167300" referenceValues="85899923577"/>
+      <listChanges index="167300" referenceValues="85899923576"/>
+      <listChanges index="167300" referenceValues="85899923575"/>
+      <listChanges index="167300" referenceValues="85899923574"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="85900204161" timestamp="2011-10-09T01:00:06.000+0100" content="yes">
+    <submitter href="../../models/512/initial.xmi#2199023259041"/>
+    <post href="../../models/512/initial.xmi#77310269418"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="85899424245" timestamp="2011-10-09T01:00:15.000+0100" content="duh">
+    <submitter href="../../models/512/initial.xmi#1564"/>
+    <post href="../../models/512/initial.xmi#77309489520"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="85900197074" timestamp="2011-10-09T01:00:51.000+0100" content="About Weird Al Yankovic, albums. Weird Al Yankovic in 3-D was met with mostly positive reviews and .">
+    <submitter href="../../models/512/initial.xmi#2199023258386"/>
+    <post href="../../models/512/initial.xmi#77310262201"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="85900566321" timestamp="2011-10-09T01:00:56.000+0100" content="About Augustine of Hippo, on 15 June.. He. About Republic of Ireland, in 1973. Econ.">
+    <submitter href="../../models/512/initial.xmi#7696581396044"/>
+    <post href="../../models/512/initial.xmi#77310630909"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="85899686793" timestamp="2011-10-09T01:01:36.000+0100" content="thx">
+    <submitter href="../../models/512/initial.xmi#5497558141974"/>
+    <post href="../../models/512/initial.xmi#77309752162"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="85899923574" timestamp="2011-10-09T01:02:01.000+0100" content="photo85899923574.jpg">
+    <submitter href="../../models/512/initial.xmi#5497558143665"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="85899923575" timestamp="2011-10-09T01:02:02.000+0100" content="photo85899923575.jpg">
+    <submitter href="../../models/512/initial.xmi#5497558143665"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="85899923576" timestamp="2011-10-09T01:02:03.000+0100" content="photo85899923576.jpg">
+    <submitter href="../../models/512/initial.xmi#5497558143665"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="85899923577" timestamp="2011-10-09T01:02:04.000+0100" content="photo85899923577.jpg">
+    <submitter href="../../models/512/initial.xmi#5497558143665"/>
+  </objectsToAttach>
+</change:ChangeDescription>

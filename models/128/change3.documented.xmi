@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360100665"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="34360100671"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360758748"/>
+    <value featureName="comments">
+      <listChanges index="3" referenceValues="34360758756"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34361021300"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="34361021305"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34359858549"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="34359858554"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34359858445"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="34359858448"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360300040"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="34360300408"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="34360100671" timestamp="2010-11-05T16:44:13.000+0000" content="About Ala. About Léo. About Geo. About Har. About Mic. About Jac. About Le.">
+    <submitter href="../../models/128/initial.xmi#1099511629287"/>
+    <post href="../../models/128/initial.xmi#34360100607"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34360758756" timestamp="2010-11-05T16:44:24.000+0000" content="About Sarah McLachlan, a. About Federico Fellini, . About Give Peace a Cha.">
+    <submitter href="../../models/128/initial.xmi#3298534887610"/>
+    <post href="../../models/128/initial.xmi#34360758211"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34361021305" timestamp="2010-11-05T16:45:02.000+0000" content="About Henry Ki. About Sean Con. About T. S. El. About Randy Ne. About Charles . Abou.">
+    <submitter href="../../models/128/initial.xmi#3298534886150"/>
+    <post href="../../models/128/initial.xmi#34361021053"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34359858554" timestamp="2010-11-05T16:45:30.000+0000" content="yes">
+    <submitter href="../../models/128/initial.xmi#2199023260439"/>
+    <post href="../../models/128/initial.xmi#34359858342"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34359858448" timestamp="2010-11-05T16:46:07.000+0000" content="thanks">
+    <submitter href="../../models/128/initial.xmi#2199023260439"/>
+    <post href="../../models/128/initial.xmi#34359858334"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34360300408" timestamp="2010-11-05T16:46:36.000+0000" content="cool">
+    <submitter href="../../models/128/initial.xmi#1099511630504"/>
+    <post href="../../models/128/initial.xmi#34360300040"/>
+  </objectsToAttach>
+</change:ChangeDescription>

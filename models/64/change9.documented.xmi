@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/64/initial.xmi#25769837796"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="25769837798"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/64/initial.xmi#25771065595"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="25771065651"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/64/initial.xmi#25770361323"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="25770361325"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/64/initial.xmi#25770816021"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="25770816022"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="25769837798" timestamp="2010-08-07T15:19:53.000+0100" content="About Leonardo da. About Rory Gallag. About Isaac Newto. About Rod Stewart. About Philip .">
+    <submitter href="../../models/64/initial.xmi#1099511630976"/>
+    <post href="../../models/64/initial.xmi#25769837421"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="25771065651" timestamp="2010-08-07T15:21:09.000+0100" content="About Charles de Gaulle, arm. About Henry IV of France, an. About Henry VIII of Englan.">
+    <submitter href="../../models/64/initial.xmi#1099511628176"/>
+    <post href="../../models/64/initial.xmi#25771065595"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="25770361325" timestamp="2010-08-07T15:23:47.000+0100" content="duh">
+    <submitter href="../../models/64/initial.xmi#4528"/>
+    <post href="../../models/64/initial.xmi#25770361075"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="25770816022" timestamp="2010-08-07T15:26:15.000+0100" content="About Avril Lavigne. About John F. Kenne. About Weird Al Yank. About The Diar.">
+    <submitter href="../../models/64/initial.xmi#998"/>
+    <post href="../../models/64/initial.xmi#25770815833"/>
+  </objectsToAttach>
+</change:ChangeDescription>
