@@ -77,7 +77,7 @@ public class StandaloneHawk {
 
 		indexer = new ModelIndexerImpl("ttc18", indexFolder, credStore, console);
 		indexer.addMetaModelResourceFactory(new EMFMetaModelResourceFactory());
-		indexer.addModelResourceFactory(new EMFModelResourceFactory());
+		indexer.addModelResourceFactory(new IntrinsicIDEMFModelResourceFactory());
 
 		queryEngine = new EOLQueryEngine();
 		indexer.addQueryEngine(queryEngine);

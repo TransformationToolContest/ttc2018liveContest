@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-  <classpathentry kind="src" path="src" including="**/*.java"/>
+  <classpathentry kind="src" path="src"/>
   <classpathentry kind="src" path="src-gen" including="**/*.java"/>
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
@@ -45,4 +45,6 @@
   <classpathentry kind="var" path="M2_REPO/org/neo4j/neo4j-jmx/2.2.6/neo4j-jmx-2.2.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/neo4j/neo4j-consistency-check/2.2.6/neo4j-consistency-check-2.2.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/epsilon/epsilon-emf/1.5.0-SNAPSHOT/epsilon-emf-1.5.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar"/>
 </classpath>
