@@ -123,13 +123,14 @@ namespace TTC2018.LiveContest
 
             public override IEnumerator<IEnumerable<T>> GetEnumerator()
             {
-                return components.Values.GetEnumerator();
+                return components.Values.Distinct().GetEnumerator();
             }
 
             public override INotificationResult Notify(IList<INotificationResult> sources)
             {
                 if (ShouldRecompute(sources))
                 {
+                    Recompute();
                     return CollectionChangedNotificationResult<IEnumerable<T>>.Create(this, isReset: true);
                 }
                 else

@@ -65,7 +65,7 @@ namespace TTC2018.LiveContest
 
         public override string Initial()
         {
-            Func<IComment, Func<IUser, IEnumerableExpression<IUser>>> friendsBuilder = c => (u => u.Friends.Where(f => f.Likes.Contains(c)));
+            Func<IComment, Func<IUser, IEnumerableExpression<IUser>>> friendsBuilder = c => (u => u.Friends.Intersect(c.LikedBy));
             query = Observable.Expression(() =>
                 SocialNetwork.Descendants().OfType<IComment>().TopX(3, comment => ValueTuple.Create(
                     ConnectedComponents<IUser>.Create(comment.LikedBy, friendsBuilder(comment))

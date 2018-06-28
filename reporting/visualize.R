@@ -9,6 +9,7 @@ args <- commandArgs(trailingOnly = TRUE)
 configPath <- args[1]
 
 results <-read.csv2(resultsPath, header=TRUE, row.names = NULL)
+results$ChangeSet = as.factor(results$ChangeSet)
 
 config <- fromJSON(configPath)
 
