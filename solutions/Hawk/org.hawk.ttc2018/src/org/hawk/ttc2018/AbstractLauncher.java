@@ -49,7 +49,7 @@ public abstract class AbstractLauncher {
 		}
 
 		public void print(PrintStream out) {
-			final String msg = String.format("%s,%s,%s,%d,%d,%s,%s,%s", getTool(), query.getIdentifier(),
+			final String msg = String.format("%s;%s;%s;%d;%d;%s;%s;%s", getTool(), query.getIdentifier(),
 					changeSet == null ? "" : changeSet, runIndex, iteration, phase.toString(), metric.toString(),
 					metricValue + "");
 
