@@ -4,22 +4,22 @@
   <classpathentry kind="src" path="src-gen" including="**/*.java"/>
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-  <classpathentry kind="var" path="M2_REPO/org/hawk/org.hawk.core/1.2.0-SNAPSHOT/org.hawk.core-1.2.0-SNAPSHOT.jar" sourcepath="M2_REPO/org/hawk/org.hawk.core/1.2.0-SNAPSHOT/org.hawk.core-1.2.0-SNAPSHOT-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hawk/org.hawk.core/1.2.0-SNAPSHOT/org.hawk.core-1.2.0-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.10/commons-codec-1.10.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/thoughtworks/xstream/xstream/1.4.8/xstream-1.4.8.jar"/>
   <classpathentry kind="var" path="M2_REPO/xmlpull/xmlpull/1.1.3.1/xmlpull-1.1.3.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/xpp3/xpp3_min/1.1.4c/xpp3_min-1.1.4c.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/hawk/org.hawk.emf/1.2.0-SNAPSHOT/org.hawk.emf-1.2.0-SNAPSHOT.jar" sourcepath="M2_REPO/org/hawk/org.hawk.emf/1.2.0-SNAPSHOT/org.hawk.emf-1.2.0-SNAPSHOT-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/hawk/org.hawk.epsilon/1.2.0-SNAPSHOT/org.hawk.epsilon-1.2.0-SNAPSHOT.jar" sourcepath="M2_REPO/org/hawk/org.hawk.epsilon/1.2.0-SNAPSHOT/org.hawk.epsilon-1.2.0-SNAPSHOT-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/hawk/org.hawk.graph/1.2.0-SNAPSHOT/org.hawk.graph-1.2.0-SNAPSHOT.jar" sourcepath="M2_REPO/org/hawk/org.hawk.graph/1.2.0-SNAPSHOT/org.hawk.graph-1.2.0-SNAPSHOT-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hawk/org.hawk.emf/1.2.0-SNAPSHOT/org.hawk.emf-1.2.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hawk/org.hawk.epsilon/1.2.0-SNAPSHOT/org.hawk.epsilon-1.2.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hawk/org.hawk.graph/1.2.0-SNAPSHOT/org.hawk.graph-1.2.0-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/epsilon/epsilon-core/1.5.0-SNAPSHOT/epsilon-core-1.5.0-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore/2.10.2-v20150123-0348/org.eclipse.emf.ecore-2.10.2-v20150123-0348.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.common/2.10.1-v20150123-0348/org.eclipse.emf.common-2.10.1-v20150123-0348.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.10.2-v20150123-0348/org.eclipse.emf.ecore.xmi-2.10.2-v20150123-0348.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/hawk/org.hawk.localfolder/1.2.0-SNAPSHOT/org.hawk.localfolder-1.2.0-SNAPSHOT.jar" sourcepath="M2_REPO/org/hawk/org.hawk.localfolder/1.2.0-SNAPSHOT/org.hawk.localfolder-1.2.0-SNAPSHOT-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hawk/org.hawk.localfolder/1.2.0-SNAPSHOT/org.hawk.localfolder-1.2.0-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/mapdb/mapdb/1.0.9/mapdb-1.0.9.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/hawk/org.hawk.neo4j-v2/1.2.0-SNAPSHOT/org.hawk.neo4j-v2-1.2.0-SNAPSHOT.jar" sourcepath="M2_REPO/org/hawk/org.hawk.neo4j-v2/1.2.0-SNAPSHOT/org.hawk.neo4j-v2-1.2.0-SNAPSHOT-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hawk/org.hawk.neo4j-v2/1.2.0-SNAPSHOT/org.hawk.neo4j-v2-1.2.0-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/neo4j/neo4j/2.2.6/neo4j-2.2.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/neo4j/neo4j-kernel/2.2.6/neo4j-kernel-2.2.6.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/neo4j/neo4j-primitive-collections/2.2.6/neo4j-primitive-collections-2.2.6.jar"/>
