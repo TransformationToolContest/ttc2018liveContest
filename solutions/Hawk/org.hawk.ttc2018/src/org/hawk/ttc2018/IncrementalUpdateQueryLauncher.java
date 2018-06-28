@@ -32,6 +32,7 @@ import org.eclipse.epsilon.eol.dom.Operation;
 import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
 import org.eclipse.epsilon.eol.models.ModelRepository;
 import org.hawk.core.VcsCommitItem;
+import org.hawk.core.graph.IGraphEdge;
 import org.hawk.core.graph.IGraphNode;
 import org.hawk.core.graph.IGraphTransaction;
 import org.hawk.core.model.IHawkObject;
@@ -68,10 +69,10 @@ public class IncrementalUpdateQueryLauncher extends IncrementalUpdateLauncher {
 
 		@Override
 		public void modelElementAddition(VcsCommitItem s, IHawkObject element, IGraphNode elementNode, boolean isTransient) {
-			markUpdated(element.getType().getName(), elementNode);
+			markUpdatedByType(element.getType().getName(), elementNode);
 		}
 
-		protected void markUpdated(String typeName, IGraphNode elementNode) {
+		protected void markUpdatedByType(String typeName, IGraphNode elementNode) {
 			switch (typeName) {
 			case "Post":
 				updatedPostIdentifiers.add(elementNode.getId());
@@ -84,24 +85,40 @@ public class IncrementalUpdateQueryLauncher extends IncrementalUpdateLauncher {
 
 		@Override
 		public void modelElementAttributeUpdate(VcsCommitItem s, IHawkObject eObject, String attrName, Object oldValue, Object newValue, IGraphNode elementNode, boolean isTransient) {
-			markUpdated(eObject.getType().getName(), elementNode);
+			markUpdatedByType(eObject.getType().getName(), elementNode);
 		}
 
 		@Override
 		public void modelElementAttributeRemoval(VcsCommitItem s, IHawkObject eObject, String attrName, IGraphNode elementNode, boolean isTransient) {
-			markUpdated(eObject.getType().getName(), elementNode);
+			markUpdatedByType(eObject.getType().getName(), elementNode);
 		}
 
 		@Override
 		public void referenceAddition(VcsCommitItem s, IGraphNode source, IGraphNode destination, String edgelabel, boolean isTransient) {
-			markUpdated(new ModelElementNode(source).getTypeNode().getTypeName(), source);
-			markUpdated(new ModelElementNode(destination).getTypeNode().getTypeName(), destination);
+			markUpdatedByType(new ModelElementNode(source).getTypeNode().getTypeName(), source);
+			markUpdatedByType(new ModelElementNode(destination).getTypeNode().getTypeName(), destination);
+			markUpdatedByBefriending(source, destination, edgelabel);
 		}
 
 		@Override
 		public void referenceRemoval(VcsCommitItem s, IGraphNode source, IGraphNode destination, String edgelabel, boolean isTransient) {
-			markUpdated(new ModelElementNode(source).getTypeNode().getTypeName(), source);
-			markUpdated(new ModelElementNode(destination).getTypeNode().getTypeName(), destination);
+			markUpdatedByType(new ModelElementNode(source).getTypeNode().getTypeName(), source);
+			markUpdatedByType(new ModelElementNode(destination).getTypeNode().getTypeName(), destination);
+			markUpdatedByBefriending(source, destination, edgelabel);
+		}
+
+		protected void markUpdatedByBefriending(IGraphNode source, IGraphNode destination, String edgelabel) {
+			// Two friends (un)friending each other - revise all the posts they liked (connected components will have changed)
+			if ("friends".equals(edgelabel)) {
+				markUpdatedByLiked(source);
+				markUpdatedByLiked(destination);
+			}
+		}
+
+		protected void markUpdatedByLiked(IGraphNode n) {
+			for (IGraphEdge edge : n.getIncomingWithType("likedBy")) {
+				markUpdatedByType(new ModelElementNode(edge.getStartNode()).getTypeNode().getTypeName(), edge.getStartNode());
+			}
 		}
 	}
 
