@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8590640653"/>
+    <value featureName="comments">
+      <listChanges index="5" referenceValues="8590640660"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8590529251"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="8590529651"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="5546" referenceValues="8590218678"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#725662"/>
+    <value featureName="likedBy">
+      <listChanges index="41">
+        <referenceValues href="../../models/16/initial.xmi#1099511628858"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#1099511628858"/>
+    <value featureName="likes">
+      <listChanges index="2">
+        <referenceValues href="../../models/16/initial.xmi#725662"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#1338696"/>
+    <value featureName="likedBy">
+      <listChanges index="13">
+        <referenceValues href="../../models/16/initial.xmi#1099511627984"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#1099511627984"/>
+    <value featureName="likes">
+      <listChanges index="6">
+        <referenceValues href="../../models/16/initial.xmi#1338696"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="8590640660" timestamp="2010-05-13T17:45:44.000+0100" content="About Plato, of general ideas scattered thr. About Robin Williams, role as the alien Mo.">
+    <submitter href="../../models/16/initial.xmi#3412"/>
+    <post href="../../models/16/initial.xmi#8590639721"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="8590529651" timestamp="2010-05-13T17:46:55.000+0100" content="no">
+    <submitter href="../../models/16/initial.xmi#1644"/>
+    <post href="../../models/16/initial.xmi#8590529251"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="8590218678" timestamp="2010-05-13T17:53:52.000+0100" content="">
+    <submitter href="../../models/16/initial.xmi#1242"/>
+  </objectsToAttach>
+</change:ChangeDescription>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8590529251"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="8590529661 8590529663"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="8590529661" timestamp="2010-05-13T15:08:54.000+0100" content="duh">
+    <submitter href="../../models/16/initial.xmi#1644"/>
+    <post href="../../models/16/initial.xmi#8590529251"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="8590529663" timestamp="2010-05-13T15:10:30.000+0100" content="duh">
+    <submitter href="../../models/16/initial.xmi#4555"/>
+    <post href="../../models/16/initial.xmi#8590529251"/>
+  </objectsToAttach>
+</change:ChangeDescription>

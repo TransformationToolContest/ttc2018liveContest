@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#1099511631947"/>
+    <value featureName="name" dataValue="P. Banda"/>
+    <value featureName="submissions">
+      <listChanges index="0" referenceValues="8590659266"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8590659259"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="8590659266"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#968658"/>
+    <value featureName="likedBy">
+      <listChanges index="18">
+        <referenceValues href="../../models/16/initial.xmi#2886"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#2886"/>
+    <value featureName="likes">
+      <listChanges index="6">
+        <referenceValues href="../../models/16/initial.xmi#968658"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="8590659266" timestamp="2010-05-13T09:43:43.000+0100" content="no way!">
+    <post href="../../models/16/initial.xmi#8590657711"/>
+  </objectsToAttach>
+</change:ChangeDescription>

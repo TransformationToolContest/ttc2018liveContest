@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/2/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="935" referenceValues="1466725"/>
+      <listChanges index="935" referenceValues="1466724"/>
+      <listChanges index="935" referenceValues="1466723"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/2/initial.xmi#1949"/>
+    <value featureName="submissions">
+      <listChanges index="4" referenceValues="298815"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/2/initial.xmi#298813"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="298815"/>
+    </value>
+  </objectChanges>
+  <objectChanges key="298815">
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="298817"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/2/initial.xmi#723156"/>
+    <value featureName="comments">
+      <listChanges index="5" referenceValues="725043"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Post" id="1466723" timestamp="2010-03-10T19:50:35.000+0000" content="photo1466723.jpg">
+    <submitter href="../../models/2/initial.xmi#3730"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="1466724" timestamp="2010-03-10T19:50:36.000+0000" content="photo1466724.jpg">
+    <submitter href="../../models/2/initial.xmi#3730"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="1466725" timestamp="2010-03-10T19:50:37.000+0000" content="photo1466725.jpg">
+    <submitter href="../../models/2/initial.xmi#3730"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="298815" timestamp="2010-03-10T21:20:49.000+0000" content="About Davi. About Huss. About Kate. About Roy . About Éamo. About Bett. Ab.">
+    <comments id="298817" timestamp="2010-03-10T21:34:48.000+0000" content="About Ludwi. About Husse. About Kate . About B.B. . About Beck,. About Bette. About Red .">
+      <submitter href="../../models/2/initial.xmi#1949"/>
+      <post href="../../models/2/initial.xmi#298566"/>
+    </comments>
+    <post href="../../models/2/initial.xmi#298566"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="298817" timestamp="2010-03-10T21:34:48.000+0000" content="About Ludwi. About Husse. About Kate . About B.B. . About Beck,. About Bette. About Red .">
+    <submitter href="../../models/2/initial.xmi#1949"/>
+    <post href="../../models/2/initial.xmi#298566"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="725043" timestamp="2010-03-10T21:41:00.000+0000" content="duh">
+    <submitter href="../../models/2/initial.xmi#1103"/>
+    <post href="../../models/2/initial.xmi#723156"/>
+  </objectsToAttach>
+</change:ChangeDescription>

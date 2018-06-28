@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#215401"/>
+    <value featureName="comments">
+      <listChanges index="8" referenceValues="215482"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#406615"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="406617"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#723297"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="726644"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#406881"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="406882"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#1076821"/>
+    <value featureName="comments">
+      <listChanges index="8" referenceValues="1077379"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#405975"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="405982"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="215482" timestamp="2010-03-03T13:04:51.000+0000" content="About Vincent van. About Robin Willi. About Adam Sandle. About Matt Groeni. About First .">
+    <submitter href="../../models/1/initial.xmi#407"/>
+    <post href="../../models/1/initial.xmi#215401"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="406617" timestamp="2010-03-03T13:06:36.000+0000" content="About The Amazing Jeckel Brothers, The Jerk. About Best of You, highest chart peaks in.">
+    <submitter href="../../models/1/initial.xmi#1259"/>
+    <post href="../../models/1/initial.xmi#404223"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="726644" timestamp="2010-03-03T13:07:39.000+0000" content="About William Randolph Hearst, California, on a hill. About Anthony Hopkins, films have spanned a wide v.">
+    <submitter href="../../models/1/initial.xmi#4555"/>
+    <post href="../../models/1/initial.xmi#723297"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="406882" timestamp="2010-03-03T13:07:45.000+0000" content="duh">
+    <submitter href="../../models/1/initial.xmi#2886"/>
+    <post href="../../models/1/initial.xmi#404250"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="1077379" timestamp="2010-03-03T13:08:20.000+0000" content="great">
+    <submitter href="../../models/1/initial.xmi#1564"/>
+    <post href="../../models/1/initial.xmi#1076821"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="405982" timestamp="2010-03-03T13:11:18.000+0000" content="About Leon Trot. About James II . About Lyndon B.. About John Kerr. About Canadian . About.">
+    <submitter href="../../models/1/initial.xmi#974"/>
+    <post href="../../models/1/initial.xmi#404162"/>
+  </objectsToAttach>
+</change:ChangeDescription>

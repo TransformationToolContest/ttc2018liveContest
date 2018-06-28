@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#258470"/>
+    <value featureName="likedBy">
+      <listChanges index="6">
+        <referenceValues href="../../models/8/initial.xmi#345"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#345"/>
+    <value featureName="likes">
+      <listChanges index="0">
+        <referenceValues href="../../models/8/initial.xmi#258470"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#/"/>
+    <value featureName="users">
+      <listChanges index="206" referenceValues="2343"/>
+    </value>
+    <value featureName="posts">
+      <listChanges index="2303" referenceValues="619854"/>
+      <listChanges index="2303" referenceValues="619853"/>
+      <listChanges index="2303" referenceValues="619852"/>
+      <listChanges index="2303" referenceValues="619851"/>
+      <listChanges index="2303" referenceValues="619850"/>
+      <listChanges index="2303" referenceValues="619849"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:User" id="2343" name="Babar Qureshi" submissions="619849 619850 619851 619852 619853 619854"/>
+  <objectsToAttach xsi:type="social:Post" id="619849" timestamp="2010-04-02T14:08:46.000+0100" content="photo619849.jpg" submitter="2343"/>
+  <objectsToAttach xsi:type="social:Post" id="619850" timestamp="2010-04-02T14:08:47.000+0100" content="photo619850.jpg" submitter="2343"/>
+  <objectsToAttach xsi:type="social:Post" id="619851" timestamp="2010-04-02T14:08:48.000+0100" content="photo619851.jpg" submitter="2343"/>
+  <objectsToAttach xsi:type="social:Post" id="619852" timestamp="2010-04-02T14:08:49.000+0100" content="photo619852.jpg" submitter="2343"/>
+  <objectsToAttach xsi:type="social:Post" id="619853" timestamp="2010-04-02T14:08:50.000+0100" content="photo619853.jpg" submitter="2343"/>
+  <objectsToAttach xsi:type="social:Post" id="619854" timestamp="2010-04-02T14:08:51.000+0100" content="photo619854.jpg" submitter="2343"/>
+</change:ChangeDescription>

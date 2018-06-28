@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#2317"/>
+    <value featureName="friends">
+      <listChanges index="13">
+        <referenceValues href="../../models/32/initial.xmi#2199023256332"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#2199023256332"/>
+    <value featureName="friends">
+      <listChanges index="3">
+        <referenceValues href="../../models/32/initial.xmi#2317"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180601648"/>
+    <value featureName="comments">
+      <listChanges index="6" referenceValues="17180601907"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180002694"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="17180002696"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180601972"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="17180601982"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180649078"/>
+    <value featureName="comments">
+      <listChanges index="8" referenceValues="17180649478"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="17180601907" timestamp="2010-06-27T22:35:32.000+0100" content="good">
+    <submitter href="../../models/32/initial.xmi#998"/>
+    <post href="../../models/32/initial.xmi#17180601648"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17180002696" timestamp="2010-06-27T22:36:35.000+0100" content="About David Beckha. About Herbert Kitc. About Kid Rock, Of. About If Your Girl. About Erit.">
+    <submitter href="../../models/32/initial.xmi#4534"/>
+    <post href="../../models/32/initial.xmi#17180002558"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17180601982" timestamp="2010-06-27T22:37:14.000+0100" content="good">
+    <submitter href="../../models/32/initial.xmi#998"/>
+    <post href="../../models/32/initial.xmi#17180601655"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17180649478" timestamp="2010-06-27T22:37:27.000+0100" content="thx">
+    <submitter href="../../models/32/initial.xmi#1847"/>
+    <post href="../../models/32/initial.xmi#17180649078"/>
+  </objectsToAttach>
+</change:ChangeDescription>

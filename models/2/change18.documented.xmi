@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/2/initial.xmi#630412"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="630823"/>
+      <listChanges index="2" referenceValues="630813"/>
+      <listChanges index="2" referenceValues="630820"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/2/initial.xmi#2317"/>
+    <value featureName="friends">
+      <listChanges index="3">
+        <referenceValues href="../../models/2/initial.xmi#4755"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/2/initial.xmi#4755"/>
+    <value featureName="friends">
+      <listChanges index="2">
+        <referenceValues href="../../models/2/initial.xmi#2317"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges key="630820">
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="630826"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/2/initial.xmi#725041"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="725046"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/2/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="966" referenceValues="404060"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/2/initial.xmi#404837"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="404840"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="630820" timestamp="2010-03-11T08:16:07.000+0000" content="About Kingdom of Bohemia, until its dissolution in 1806, whereupon it became part of .">
+    <submitter href="../../models/2/initial.xmi#683"/>
+    <comments id="630826" timestamp="2010-03-11T08:32:33.000+0000" content="About Pope Pius X, Giovanni Pacelli (2 March 1876 &#x2013; 9 October 1958), reigned as Pope, .">
+      <submitter href="../../models/2/initial.xmi#683"/>
+      <post href="../../models/2/initial.xmi#630412"/>
+    </comments>
+    <post href="../../models/2/initial.xmi#630412"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="630813" timestamp="2010-03-11T08:57:27.000+0000" content="fine">
+    <submitter href="../../models/2/initial.xmi#683"/>
+    <post href="../../models/2/initial.xmi#630412"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="630823" timestamp="2010-03-11T09:05:19.000+0000" content="thanks">
+    <submitter href="../../models/2/initial.xmi#683"/>
+    <post href="../../models/2/initial.xmi#630412"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="630826" timestamp="2010-03-11T08:32:33.000+0000" content="About Pope Pius X, Giovanni Pacelli (2 March 1876 &#x2013; 9 October 1958), reigned as Pope, .">
+    <submitter href="../../models/2/initial.xmi#683"/>
+    <post href="../../models/2/initial.xmi#630412"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="725046" timestamp="2010-03-11T09:27:19.000+0000" content="About Frédéric Chopin, some songs to Pol. About Confederate States of America, an.">
+    <submitter href="../../models/2/initial.xmi#1050"/>
+    <post href="../../models/2/initial.xmi#723156"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="404060" timestamp="2010-03-11T09:33:35.000+0000" content="">
+    <submitter href="../../models/2/initial.xmi#3705"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="404840" timestamp="2010-03-11T09:35:41.000+0000" content="About Shak. About Glor. About Fréd. About Robi. About Nazi. About Morg. About Gimm. .">
+    <submitter href="../../models/2/initial.xmi#974"/>
+    <post href="../../models/2/initial.xmi#404048"/>
+  </objectsToAttach>
+</change:ChangeDescription>

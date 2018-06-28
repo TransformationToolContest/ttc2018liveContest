@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/2/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="932" referenceValues="189328"/>
+      <listChanges index="932" referenceValues="189327"/>
+      <listChanges index="932" referenceValues="189326"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/2/initial.xmi#2886"/>
+    <value featureName="friends">
+      <listChanges index="6">
+        <referenceValues href="../../models/2/initial.xmi#3412"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/2/initial.xmi#3412"/>
+    <value featureName="friends">
+      <listChanges index="9">
+        <referenceValues href="../../models/2/initial.xmi#2886"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Post" id="189326" timestamp="2010-03-10T17:12:32.000+0000" content="photo189326.jpg">
+    <submitter href="../../models/2/initial.xmi#3944"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="189327" timestamp="2010-03-10T17:12:33.000+0000" content="photo189327.jpg">
+    <submitter href="../../models/2/initial.xmi#3944"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="189328" timestamp="2010-03-10T17:12:34.000+0000" content="photo189328.jpg">
+    <submitter href="../../models/2/initial.xmi#3944"/>
+  </objectsToAttach>
+</change:ChangeDescription>

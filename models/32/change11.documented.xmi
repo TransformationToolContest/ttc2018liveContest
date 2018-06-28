@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180344976"/>
+    <value featureName="comments">
+      <listChanges index="3" referenceValues="17180345397"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180277656"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="17180277667"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180059011"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="17180059143"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="17180345397" timestamp="2010-06-27T22:37:59.000+0100" content="About Eric Clapto. About Mary J. Bli. About Tom Waits, . About Paula Abdul. About The Ro.">
+    <submitter href="../../models/32/initial.xmi#4528"/>
+    <post href="../../models/32/initial.xmi#17180344976"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17180277667" timestamp="2010-06-27T22:38:00.000+0100" content="no way!">
+    <submitter href="../../models/32/initial.xmi#4233"/>
+    <post href="../../models/32/initial.xmi#17180276924"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17180059143" timestamp="2010-06-27T22:39:07.000+0100" content="About Meat Loaf, Into Hell a. About Leonardo DiCaprio, Act. About Psyence Fiction, the.">
+    <submitter href="../../models/32/initial.xmi#1564"/>
+    <post href="../../models/32/initial.xmi#17180059011"/>
+  </objectsToAttach>
+</change:ChangeDescription>
