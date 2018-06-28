@@ -1,0 +1,27 @@
+for (change in Changes!ElementaryChange.all) {
+  change.apply();
+}
+
+operation Changes!AssociationCollectionInsertion apply() {
+  if (self.feature.isChangeable) {
+    self.affectedElement.eGet(self.feature).add(self.addedElement);
+  }
+}
+
+operation Changes!AssociationPropertyChange apply() {
+  if (self.feature.isChangeable) {
+    self.affectedElement.eSet(self.feature, self.newValue);
+  }
+}
+
+operation Changes!AttributePropertyChange apply() {
+  if (self.feature.isChangeable) {
+    self.affectedElement.eSet(self.feature, self.newValue);
+  }
+}
+
+operation Changes!CompositionListInsertion apply() {
+  if (self.feature.isChangeable) {
+    self.affectedElement.eGet(self.feature).add(self.index, self.addedElement);
+  }
+}
