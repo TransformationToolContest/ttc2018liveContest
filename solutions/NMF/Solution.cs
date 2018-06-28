@@ -23,7 +23,8 @@ namespace TTC2018.LiveContest
         private string QueryResult()
         {
             return string.Join('|', (from post in SocialNetwork.Posts
-                                     orderby (post.Descendants().OfType<Comment>().Sum(c => 10 + c.LikedBy.Count), post.Timestamp) descending
+                                     let score = post.Descendants().OfType<Comment>().Sum(c => 10 + c.LikedBy.Count)
+                                     orderby (score, post.Timestamp) descending
                                      select post.Id).Take(3));
                                     
         }
@@ -57,8 +58,9 @@ namespace TTC2018.LiveContest
         private string QueryResult()
         {
             return string.Join('|', (from comment in SocialNetwork.Descendants().OfType<Comment>()
-                                     let layering = Layering<IUser>.CreateLayers(comment.LikedBy, u => u.Friends.Where(f => f.Likes.Contains(comment)))
-                                     orderby (layering.Sum(l => Square(l.Count)), comment.Timestamp) descending
+                                     let layering = Layering<IUser>.CreateLayers(comment.LikedBy, u => u.Friends.Intersect(comment.LikedBy))
+                                     let score = layering.Sum(l => Square(l.Count))
+                                     orderby (score, comment.Timestamp) descending
                                      select comment.Id).Take(3));
         }
 
