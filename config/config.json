@@ -3,7 +3,7 @@
     "Q1",
     "Q2"
   ],
-  "Tools": ["YAMTL_Solution_A", "YAMTL_Solution_B"],
+  "Tools": ["jastadd-ttc18", "NMF", "NMF-Incremental", "NMF-Transactions", "YAMTL_Solution_A", "YAMTL_Solution_B"],
   "ChangeSets": [
     "1", "2"
   ],
