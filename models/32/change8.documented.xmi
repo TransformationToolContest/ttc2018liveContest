@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180736795"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="17180736803"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180921685"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="17180921699"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17181336668"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="17181336764"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180500374"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="17180500387"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17179965081"/>
+    <value featureName="comments">
+      <listChanges index="5" referenceValues="17179965186"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180667887"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="17180668176"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="10944" referenceValues="17180499649"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="17180736803" timestamp="2010-06-27T22:23:40.000+0100" content="About Chiang Kai. About David Bowi. About Woodrow Wi. About Joan Crawf. About Pet.">
+    <submitter href="../../models/32/initial.xmi#1099511627912"/>
+    <post href="../../models/32/initial.xmi#17180733760"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17180921699" timestamp="2010-06-27T22:24:09.000+0100" content="About Avril . About Pope P. About Richar. About Jamie . About Adam S. About .">
+    <submitter href="../../models/32/initial.xmi#1099511631980"/>
+    <post href="../../models/32/initial.xmi#17180921685"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17181336764" timestamp="2010-06-27T22:24:15.000+0100" content="right">
+    <submitter href="../../models/32/initial.xmi#3705"/>
+    <post href="../../models/32/initial.xmi#17181336668"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17180500387" timestamp="2010-06-27T22:24:23.000+0100" content="fine">
+    <submitter href="../../models/32/initial.xmi#1099511628310"/>
+    <post href="../../models/32/initial.xmi#17180499637"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17179965186" timestamp="2010-06-27T22:25:10.000+0100" content="duh">
+    <submitter href="../../models/32/initial.xmi#1099511628501"/>
+    <post href="../../models/32/initial.xmi#17179965081"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17180668176" timestamp="2010-06-27T22:26:10.000+0100" content="thanks">
+    <submitter href="../../models/32/initial.xmi#2199023256649"/>
+    <post href="../../models/32/initial.xmi#17180667887"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="17180499649" timestamp="2010-06-27T22:27:06.000+0100" content="">
+    <submitter href="../../models/32/initial.xmi#1274"/>
+  </objectsToAttach>
+</change:ChangeDescription>

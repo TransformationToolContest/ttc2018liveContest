@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180277741"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="17180277751"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#8590232590"/>
+    <value featureName="likedBy">
+      <listChanges index="4">
+        <referenceValues href="../../models/32/initial.xmi#2199023260352"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#2199023260352"/>
+    <value featureName="likes">
+      <listChanges index="8">
+        <referenceValues href="../../models/32/initial.xmi#8590232590"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="10945" referenceValues="17180795794"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180737438"/>
+    <value featureName="likedBy">
+      <listChanges index="75">
+        <referenceValues href="../../models/32/initial.xmi#555"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#555"/>
+    <value featureName="likes">
+      <listChanges index="13">
+        <referenceValues href="../../models/32/initial.xmi#17180737438"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="17180277751" timestamp="2010-06-27T22:46:26.000+0100" content="About Abraham Lincoln, with his powers of oratory. His Gett. About Paula Abdul, dancer, choreographer, actress and tele.">
+    <submitter href="../../models/32/initial.xmi#1099511630504"/>
+    <post href="../../models/32/initial.xmi#17180276931"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="17180795794" timestamp="2010-06-27T22:49:36.000+0100" content="">
+    <submitter href="../../models/32/initial.xmi#1099511632392"/>
+  </objectsToAttach>
+</change:ChangeDescription>

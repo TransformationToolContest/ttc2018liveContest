@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34359849100"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="34359849363"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34361205668"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="34361205671"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360269059"/>
+    <value featureName="comments">
+      <listChanges index="5" referenceValues="34360269650"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34359892337"/>
+    <value featureName="comments">
+      <listChanges index="3" referenceValues="34359892472"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="34359849363" timestamp="2010-11-05T17:11:08.000+0000" content="I see">
+    <submitter href="../../models/128/initial.xmi#1099511628041"/>
+    <post href="../../models/128/initial.xmi#34359849100"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34361205671" timestamp="2010-11-05T17:11:48.000+0000" content="About Emma Goldman, herself . About Weird Al Yankovic, alb. About Éamon de Valera, co.">
+    <submitter href="../../models/128/initial.xmi#1099511630154"/>
+    <post href="../../models/128/initial.xmi#34361205629"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34360269650" timestamp="2010-11-05T17:12:13.000+0000" content="LOL">
+    <submitter href="../../models/128/initial.xmi#2199023257144"/>
+    <post href="../../models/128/initial.xmi#34360269059"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34359892472" timestamp="2010-11-05T17:13:17.000+0000" content="About Max Mirnyi, Nestor, and short-term . About Tommy Robredo, Robredo Garcés is .">
+    <submitter href="../../models/128/initial.xmi#3298534885898"/>
+    <post href="../../models/128/initial.xmi#34359892337"/>
+  </objectsToAttach>
+</change:ChangeDescription>

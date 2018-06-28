@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/64/initial.xmi#25770234875"/>
+    <value featureName="comments">
+      <listChanges index="10" referenceValues="25770235091"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/64/initial.xmi#25769837426"/>
+    <value featureName="comments">
+      <listChanges index="5" referenceValues="25769837830"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/64/initial.xmi#25769852587"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="25769852589"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/64/initial.xmi#25769837831"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="25769837836"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="25770235091" timestamp="2010-08-07T16:04:43.000+0100" content="thx">
+    <submitter href="../../models/64/initial.xmi#2199023260289"/>
+    <post href="../../models/64/initial.xmi#25770234875"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="25769837830" timestamp="2010-08-07T16:05:16.000+0100" content="ok">
+    <submitter href="../../models/64/initial.xmi#1099511631578"/>
+    <post href="../../models/64/initial.xmi#25769837426"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="25769852589" timestamp="2010-08-07T16:07:17.000+0100" content="About The Everly Brothers, and close harm. About Get Right, taken from her fourth .">
+    <submitter href="../../models/64/initial.xmi#1269"/>
+    <post href="../../models/64/initial.xmi#25769851756"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="25769837836" timestamp="2010-08-07T16:07:21.000+0100" content="good">
+    <submitter href="../../models/64/initial.xmi#1099511631578"/>
+    <post href="../../models/64/initial.xmi#25769837426"/>
+  </objectsToAttach>
+</change:ChangeDescription>

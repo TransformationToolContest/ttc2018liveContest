@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="37238" referenceValues="34360253358"/>
+      <listChanges index="37238" referenceValues="34360253357"/>
+      <listChanges index="37238" referenceValues="34360253356"/>
+      <listChanges index="37238" referenceValues="34360253355"/>
+      <listChanges index="37238" referenceValues="34360253354"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360058053"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="34360059774"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Post" id="34360253354" timestamp="2010-11-05T17:06:35.000+0000" content="photo34360253354.jpg">
+    <submitter href="../../models/128/initial.xmi#2199023258973"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="34360253355" timestamp="2010-11-05T17:06:36.000+0000" content="photo34360253355.jpg">
+    <submitter href="../../models/128/initial.xmi#2199023258973"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="34360253356" timestamp="2010-11-05T17:06:37.000+0000" content="photo34360253356.jpg">
+    <submitter href="../../models/128/initial.xmi#2199023258973"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="34360253357" timestamp="2010-11-05T17:06:38.000+0000" content="photo34360253357.jpg">
+    <submitter href="../../models/128/initial.xmi#2199023258973"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="34360253358" timestamp="2010-11-05T17:06:39.000+0000" content="photo34360253358.jpg">
+    <submitter href="../../models/128/initial.xmi#2199023258973"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34360059774" timestamp="2010-11-05T17:07:34.000+0000" content="LOL">
+    <submitter href="../../models/128/initial.xmi#2199023258935"/>
+    <post href="../../models/128/initial.xmi#34360058053"/>
+  </objectsToAttach>
+</change:ChangeDescription>

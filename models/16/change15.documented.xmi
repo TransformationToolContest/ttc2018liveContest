@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8591206849"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="8591207050 8591207051"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8590428144"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="8590428154"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8590640653"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="8590640671"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8590428146"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="8590428149"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="5545" referenceValues="8590529251"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="8591207050" timestamp="2010-05-13T14:11:30.000+0100" content="no">
+    <submitter href="../../models/16/initial.xmi#1099511630415"/>
+    <post href="../../models/16/initial.xmi#8591206849"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="8591207051" timestamp="2010-05-13T14:43:35.000+0100" content="ok">
+    <submitter href="../../models/16/initial.xmi#1099511629672"/>
+    <post href="../../models/16/initial.xmi#8591206849"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="8590428154" timestamp="2010-05-13T14:23:34.000+0100" content="maybe">
+    <submitter href="../../models/16/initial.xmi#2874"/>
+    <post href="../../models/16/initial.xmi#8590427940"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="8590640671" timestamp="2010-05-13T14:25:55.000+0100" content="yes">
+    <submitter href="../../models/16/initial.xmi#2194"/>
+    <post href="../../models/16/initial.xmi#8590639721"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="8590428149" timestamp="2010-05-13T14:57:04.000+0100" content="fine">
+    <submitter href="../../models/16/initial.xmi#2874"/>
+    <post href="../../models/16/initial.xmi#8590427940"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="8590529251" timestamp="2010-05-13T15:07:31.000+0100" content="">
+    <submitter href="../../models/16/initial.xmi#1490"/>
+  </objectsToAttach>
+</change:ChangeDescription>

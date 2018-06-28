@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="10936" referenceValues="17180186316"/>
+      <listChanges index="10936" referenceValues="17180186315"/>
+      <listChanges index="10936" referenceValues="17180186314"/>
+      <listChanges index="10936" referenceValues="17180186313"/>
+      <listChanges index="10936" referenceValues="17180186312"/>
+      <listChanges index="10936" referenceValues="17180186311"/>
+      <listChanges index="10936" referenceValues="17180186310"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180795976"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="17180795983"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Post" id="17180186310" timestamp="2010-06-27T22:04:48.000+0100" content="photo17180186310.jpg">
+    <submitter href="../../models/32/initial.xmi#2199023257989"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="17180186311" timestamp="2010-06-27T22:04:49.000+0100" content="photo17180186311.jpg">
+    <submitter href="../../models/32/initial.xmi#2199023257989"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="17180186312" timestamp="2010-06-27T22:04:50.000+0100" content="photo17180186312.jpg">
+    <submitter href="../../models/32/initial.xmi#2199023257989"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="17180186313" timestamp="2010-06-27T22:04:51.000+0100" content="photo17180186313.jpg">
+    <submitter href="../../models/32/initial.xmi#2199023257989"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="17180186314" timestamp="2010-06-27T22:04:52.000+0100" content="photo17180186314.jpg">
+    <submitter href="../../models/32/initial.xmi#2199023257989"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="17180186315" timestamp="2010-06-27T22:04:53.000+0100" content="photo17180186315.jpg">
+    <submitter href="../../models/32/initial.xmi#2199023257989"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="17180186316" timestamp="2010-06-27T22:04:54.000+0100" content="photo17180186316.jpg">
+    <submitter href="../../models/32/initial.xmi#2199023257989"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17180795983" timestamp="2010-06-27T22:05:54.000+0100" content="About Ice Cube, A in December. About Absolutely Free, The UK. About The Wall &#x2013; Live in Berl. About Want It, Need It,.">
+    <submitter href="../../models/32/initial.xmi#1099511632098"/>
+    <post href="../../models/32/initial.xmi#17180795793"/>
+  </objectsToAttach>
+</change:ChangeDescription>

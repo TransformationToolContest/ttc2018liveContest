@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#1076815"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="1077320"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#406944"/>
+    <value featureName="likedBy">
+      <listChanges index="1">
+        <referenceValues href="../../models/1/initial.xmi#2886"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#2886"/>
+    <value featureName="likes">
+      <listChanges index="0">
+        <referenceValues href="../../models/1/initial.xmi#406944"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#404255"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="406917"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="557" referenceValues="723297"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="1077320" timestamp="2010-03-03T12:17:45.000+0000" content="duh">
+    <submitter href="../../models/1/initial.xmi#1564"/>
+    <post href="../../models/1/initial.xmi#1076815"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="406917" timestamp="2010-03-03T12:24:42.000+0000" content="About Louis XV. About Charles . About Dionne W. About Sean Pen. About It Might. About Sha.">
+    <submitter href="../../models/1/initial.xmi#2608"/>
+    <post href="../../models/1/initial.xmi#404255"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="723297" timestamp="2010-03-03T12:26:25.000+0000" content="">
+    <submitter href="../../models/1/initial.xmi#2783"/>
+  </objectsToAttach>
+</change:ChangeDescription>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="5534" referenceValues="8591222315"/>
+      <listChanges index="5534" referenceValues="8591222314"/>
+      <listChanges index="5534" referenceValues="8591222313"/>
+      <listChanges index="5534" referenceValues="8591222312"/>
+      <listChanges index="5534" referenceValues="8591222311"/>
+      <listChanges index="5534" referenceValues="8591222310"/>
+      <listChanges index="5534" referenceValues="8591222309"/>
+      <listChanges index="5534" referenceValues="8591222308"/>
+      <listChanges index="5534" referenceValues="8591222307"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8590273875"/>
+    <value featureName="likedBy">
+      <listChanges index="6">
+        <referenceValues href="../../models/16/initial.xmi#143"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#143"/>
+    <value featureName="likes">
+      <listChanges index="2">
+        <referenceValues href="../../models/16/initial.xmi#8590273875"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Post" id="8591222307" timestamp="2010-05-13T11:32:13.000+0100" content="photo8591222307.jpg">
+    <submitter href="../../models/16/initial.xmi#3897"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="8591222308" timestamp="2010-05-13T11:32:14.000+0100" content="photo8591222308.jpg">
+    <submitter href="../../models/16/initial.xmi#3897"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="8591222309" timestamp="2010-05-13T11:32:15.000+0100" content="photo8591222309.jpg">
+    <submitter href="../../models/16/initial.xmi#3897"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="8591222310" timestamp="2010-05-13T11:32:16.000+0100" content="photo8591222310.jpg">
+    <submitter href="../../models/16/initial.xmi#3897"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="8591222311" timestamp="2010-05-13T11:32:17.000+0100" content="photo8591222311.jpg">
+    <submitter href="../../models/16/initial.xmi#3897"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="8591222312" timestamp="2010-05-13T11:32:18.000+0100" content="photo8591222312.jpg">
+    <submitter href="../../models/16/initial.xmi#3897"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="8591222313" timestamp="2010-05-13T11:32:19.000+0100" content="photo8591222313.jpg">
+    <submitter href="../../models/16/initial.xmi#3897"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="8591222314" timestamp="2010-05-13T11:32:20.000+0100" content="photo8591222314.jpg">
+    <submitter href="../../models/16/initial.xmi#3897"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="8591222315" timestamp="2010-05-13T11:32:21.000+0100" content="photo8591222315.jpg">
+    <submitter href="../../models/16/initial.xmi#3897"/>
+  </objectsToAttach>
+</change:ChangeDescription>

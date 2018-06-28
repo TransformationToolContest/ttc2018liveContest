@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77309537725"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="85899472446"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77309437385"/>
+    <value featureName="likedBy">
+      <listChanges index="6">
+        <referenceValues href="../../models/512/initial.xmi#9895604651268"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604651268"/>
+    <value featureName="likes">
+      <listChanges index="206">
+        <referenceValues href="../../models/512/initial.xmi#77309437385"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604651148"/>
+    <value featureName="submissions">
+      <listChanges index="4" referenceValues="85899984480"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77310049876"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="85899984480"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#85899544115"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="85899544116"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="85899472446" timestamp="2011-10-09T00:29:52.000+0100" content="About Adolf Hitler, German expansioni. About The Humpty Dance, being Digita.">
+    <submitter href="../../models/512/initial.xmi#7696581398073"/>
+    <post href="../../models/512/initial.xmi#77309537725"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="85899984480" timestamp="2011-10-09T00:31:56.000+0100" content="thanks">
+    <post href="../../models/512/initial.xmi#77310049820"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="85899544116" timestamp="2011-10-09T00:33:02.000+0100" content="About Michael Jackson, as beer, and his . About Stillmatic, success that helped r.">
+    <submitter href="../../models/512/initial.xmi#7696581399275"/>
+    <post href="../../models/512/initial.xmi#77309609452"/>
+  </objectsToAttach>
+</change:ChangeDescription>

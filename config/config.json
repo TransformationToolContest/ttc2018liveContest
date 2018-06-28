@@ -1,11 +1,11 @@
 {
   "Queries": [
     "Q1",
-	"Q2"
+    "Q2"
   ],
-  "Tools": ["jastadd-ttc18", "NMF", "NMF-Incremental", "NMF-Transactions"],
+  "Tools": ["jastadd-ttc18", "NMF", "NMF-Incremental", "NMF-Transactions", "YAMTL_Solution_A", "YAMTL_Solution_B"],
   "ChangeSets": [
-    "1", "2", "4", "8", "16", "32"
+    "1", "2"
   ],
   "Sequences": 20,
   "Runs": 1,

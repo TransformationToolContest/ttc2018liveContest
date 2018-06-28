@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#256801"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="256808"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#644541"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="644765"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#2266"/>
+    <value featureName="name" dataValue="Kemal Yasar"/>
+    <value featureName="submissions">
+      <listChanges index="0" referenceValues="297724"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="1847" referenceValues="1244660"/>
+      <listChanges index="1847" referenceValues="256555"/>
+      <listChanges index="1847" referenceValues="297724"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#4598"/>
+    <value featureName="submissions">
+      <listChanges index="3" referenceValues="866498"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#864466"/>
+    <value featureName="comments">
+      <listChanges index="3" referenceValues="866498"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="256808" timestamp="2010-03-28T16:02:42.000+0100" content="About Pablo Picass. About Paradorn Sri. About Meat Loaf, B. About Human Touch,. About Lay .">
+    <submitter href="../../models/4/initial.xmi#2194"/>
+    <post href="../../models/4/initial.xmi#256549"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="644765" timestamp="2010-03-28T16:10:00.000+0100" content="ok">
+    <submitter href="../../models/4/initial.xmi#150"/>
+    <post href="../../models/4/initial.xmi#644541"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="297724" timestamp="2010-03-28T16:10:26.000+0100" content=""/>
+  <objectsToAttach xsi:type="social:Post" id="256555" timestamp="2010-03-28T16:10:36.000+0100" content="">
+    <submitter href="../../models/4/initial.xmi#2862"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="1244660" timestamp="2010-03-28T16:12:06.000+0100" content="">
+    <submitter href="../../models/4/initial.xmi#296"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="866498" timestamp="2010-03-28T16:11:36.000+0100" content="About Hector Berlioz, for. About Jesus, musical is b. About Namibia, to the .">
+    <post href="../../models/4/initial.xmi#864466"/>
+  </objectsToAttach>
+</change:ChangeDescription>
