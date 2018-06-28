@@ -23,7 +23,7 @@ import org.hawk.ttc2018.queries.EOLQueries;
 public enum Query {
 	Controversial {
 		@Override
-		public InputStream getQuery() {
+		public InputStream getFullQuery() {
 			return EOLQueries.getControversialPostsQuery();
 		}
 
@@ -31,9 +31,24 @@ public enum Query {
 		public String getIdentifier() {
 			return CONTROVERSIAL_ID;
 		}
+
+		@Override
+		public String getExtendedType() {
+			return "Post";
+		}
+
+		@Override
+		public InputStream getDerivedAttribute() {
+			return EOLQueries.getControversialPostsDerivedAttribute();
+		}
+
+		@Override
+		public InputStream getDerivedQuery() {
+			return EOLQueries.getControversialPostsDerivedQuery();
+		}
 	}, Influential {
 		@Override
-		public InputStream getQuery() {
+		public InputStream getFullQuery() {
 			return EOLQueries.getInfluentialCommentsQuery();
 		}
 
@@ -41,12 +56,32 @@ public enum Query {
 		public String getIdentifier() {
 			return INFLUENTIAL_ID;
 		}
+
+		@Override
+		public String getExtendedType() {
+			return "Comment";
+		}
+
+		@Override
+		public InputStream getDerivedAttribute() {
+			return EOLQueries.getInfluentialCommentsDerivedAttribute();
+		}
+
+		@Override
+		public InputStream getDerivedQuery() {
+			return EOLQueries.getInfluentialCommentsDerivedQuery();
+		}
 	};
 
 	public static final String INFLUENTIAL_ID = "Q2";
 	public static final String CONTROVERSIAL_ID = "Q1";
 
-	public abstract InputStream getQuery();
+	public abstract InputStream getFullQuery();
+
+	public abstract String getExtendedType();
+	public abstract InputStream getDerivedAttribute();
+	public abstract InputStream getDerivedQuery();
+
 	public abstract String getIdentifier();
 
 	public static Query fromQuery(String id) {

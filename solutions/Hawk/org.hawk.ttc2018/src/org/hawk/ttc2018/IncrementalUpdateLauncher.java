@@ -16,20 +16,14 @@
  ******************************************************************************/
 package org.hawk.ttc2018;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import org.hawk.core.IModelIndexer;
-import org.hawk.localfolder.LocalFolder;
-import org.hawk.ttc2018.updaters.ChangeSequenceAwareUpdater;
+import org.hawk.core.query.InvalidQueryException;
+import org.hawk.core.query.QueryExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import SocialNetwork.SocialNetworkPackage;
 
 
 /**
@@ -37,54 +31,25 @@ import SocialNetwork.SocialNetworkPackage;
  * update the graph directly, understanding a specific change sequence model
  * format.
  */
-public class IncrementalUpdateLauncher extends AbstractLauncher {
+public class IncrementalUpdateLauncher extends AbstractIncrementalUpdateLauncher {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(IncrementalUpdateLauncher.class);
-	private static final Pattern CHANGES_FNAME = Pattern.compile("change0*([0-9]+).xmi");
-
-	private LocalFolder localFolder;
 
 	public IncrementalUpdateLauncher(Map<String, String> env) {
 		super(env);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	protected void applyChanges(File fInitial, int changeSequenceLimit, File fChanges) throws Exception {
-		localFolder.setFileFilter(filterByChangeSequenceLimit(changeSequenceLimit));
-	}
-
-	protected Function<File, Boolean> filterByChangeSequenceLimit(int changeSequenceLimit) {
-		return (f) -> {
-			if (AbstractLauncher.INITIAL_MODEL_FILENAME.equals(f.getName())) {
-				return true;
-			} else {
-				Matcher matcher = CHANGES_FNAME.matcher(f.getName());
-				if (matcher.matches()) {
-					final int iChangeSequence = Integer.valueOf(matcher.group(1));
-					return iChangeSequence <= changeSequenceLimit;
-				} else {
-					return true;
-				}
-			}
-		};
+	protected List<List<Object>> runQuery(StandaloneHawk hawk)
+			throws IOException, InvalidQueryException, QueryExecutionException {
+		return (List<List<Object>>) hawk.eol(query.getDerivedQuery());
 	}
 
 	@Override
-	protected void modelLoading(final StandaloneHawk hawk) throws Throwable {
-		localFolder = hawk.requestFolderIndex(changePath);
-		localFolder.setFileFilter(filterByChangeSequenceLimit(0));
-		hawk.waitForSync();
-
-		// Need these for quickly finding by ID
-		final IModelIndexer indexer = hawk.getIndexer();
-		indexer.addIndexedAttribute(SocialNetworkPackage.eNS_URI, "Post", "id");
-		indexer.addIndexedAttribute(SocialNetworkPackage.eNS_URI, "Comment", "id");
-		indexer.addIndexedAttribute(SocialNetworkPackage.eNS_URI, "User", "id");
-	}
-
-	@Override
-	protected StandaloneHawk createHawk() throws IOException {
-		return new StandaloneHawk(new ChangeSequenceAwareUpdater());
+	protected void initialization(StandaloneHawk hawk) throws Exception {
+		super.initialization(hawk);
+		registerDerivedAttribute(hawk);
 	}
 
 	public static void main(String[] args) {
@@ -96,9 +61,10 @@ public class IncrementalUpdateLauncher extends AbstractLauncher {
 		}
 	}
 
+
 	@Override
 	protected String getTool() {
 		return "HawkIncUpdate";
 	}
-	
+
 }

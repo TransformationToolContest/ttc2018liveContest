@@ -17,11 +17,12 @@
 package org.hawk.ttc2018;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
@@ -29,6 +30,8 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.epsilon.emc.emf.InMemoryEmfModel;
 import org.eclipse.epsilon.eol.EolModule;
 import org.eclipse.epsilon.eol.models.ModelRepository;
+import org.hawk.core.query.InvalidQueryException;
+import org.hawk.core.query.QueryExecutionException;
 import org.hawk.ttc2018.queries.EOLQueries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +43,7 @@ import SocialNetwork.SocialNetworkPackage;
 /**
  * Runs an instance of the TTC 2018 benchmark for a solution based on Hawk. Uses
  * a naive implementation that reindexes the file after every change sequence
- * and reruns the query.
+ * and reruns the query, which uses derived attributes.
  */
 public class BatchLauncher extends AbstractLauncher {
 
@@ -86,9 +89,22 @@ public class BatchLauncher extends AbstractLauncher {
 	}
 
 	@Override
+	protected void initialization(StandaloneHawk hawk) throws Exception {
+		super.initialization(hawk);
+		registerDerivedAttribute(hawk);
+	}
+
+	@Override
 	protected void modelLoading(final StandaloneHawk hawk) throws Throwable {
 		hawk.requestFileIndex(new File(changePath, INITIAL_MODEL_FILENAME));
 		hawk.waitForSync();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected List<List<Object>> runQuery(StandaloneHawk hawk)
+			throws IOException, InvalidQueryException, QueryExecutionException {
+		return (List<List<Object>>) hawk.eol(query.getDerivedQuery());
 	}
 
 	public static void main(String[] args) {

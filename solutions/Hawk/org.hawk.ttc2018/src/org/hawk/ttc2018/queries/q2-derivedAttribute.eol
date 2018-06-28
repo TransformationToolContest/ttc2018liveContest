@@ -1,0 +1,18 @@
+// operation Comment score(): Integer {
+  var components = Sequence {};
+
+  for (user in self.likedBy) {
+    var added = false;
+    for (component in components) {
+      if (component.exists(member | member.friends.includes(user) and user.friends.includes(member))) {
+        component.add(user);
+        added = true;
+        break;
+      }
+    }
+    if (not added) {
+      components.add(Sequence { user });
+    }
+  }
+  
+  return components.collect(component | component.size * component.size).sum();

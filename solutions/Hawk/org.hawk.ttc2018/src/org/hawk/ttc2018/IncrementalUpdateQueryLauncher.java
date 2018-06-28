@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
  * Only the changed posts/comments are re-scored through the context operation
  * in EOL.
  */
-public class IncrementalUpdateQueryLauncher extends IncrementalUpdateLauncher {
+public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLauncher {
 
 	protected class QueryUpdateListener extends GraphChangeAdapter {
 
@@ -132,11 +132,12 @@ public class IncrementalUpdateQueryLauncher extends IncrementalUpdateLauncher {
 		super(env);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected List<List<Object>> runQuery(StandaloneHawk hawk)
 			throws IOException, InvalidQueryException, QueryExecutionException {
 		if (prevResults == null) {
-			prevResults = super.runQuery(hawk);
+			prevResults = (List<List<Object>>) hawk.eol(query.getFullQuery());
 			hawk.getIndexer().addGraphChangeListener(listener);
 		} else {
 			// Rescore updated posts
@@ -197,7 +198,7 @@ public class IncrementalUpdateQueryLauncher extends IncrementalUpdateLauncher {
 
 	protected EolModule getRescoreEOLModule(StandaloneHawk hawk) throws Exception {
 		if (eolRescoreModule == null) {
-			eolRescoreModule = parseEOLModule(query.getQuery());
+			eolRescoreModule = parseEOLModule(query.getFullQuery());
 
 			ModelRepository repo = eolRescoreModule.getContext().getModelRepository();
 			hawkModel = new EOLQueryEngine();

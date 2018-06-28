@@ -30,8 +30,24 @@ public final class EOLQueries {
 		return EOLQueries.class.getResourceAsStream("q1.eol");
 	}
 
+	public static InputStream getControversialPostsDerivedAttribute() {
+		return EOLQueries.class.getResourceAsStream("q1-derivedAttribute.eol");
+	}
+
+	public static InputStream getControversialPostsDerivedQuery() {
+		return EOLQueries.class.getResourceAsStream("q1-derivedAttributeQuery.eol");
+	}
+
 	public static InputStream getInfluentialCommentsQuery() {
 		return EOLQueries.class.getResourceAsStream("q2.eol");
+	}
+
+	public static InputStream getInfluentialCommentsDerivedAttribute() {
+		return EOLQueries.class.getResourceAsStream("q2-derivedAttribute.eol");
+	}
+
+	public static InputStream getInfluentialCommentsDerivedQuery() {
+		return EOLQueries.class.getResourceAsStream("q2-derivedAttributeQuery.eol");
 	}
 
 }

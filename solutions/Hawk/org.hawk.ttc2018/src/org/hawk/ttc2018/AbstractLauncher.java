@@ -13,6 +13,7 @@ import java.util.Map;
 import org.eclipse.epsilon.eol.EolModule;
 import org.hawk.core.query.InvalidQueryException;
 import org.hawk.core.query.QueryExecutionException;
+import org.hawk.epsilon.emc.EOLQueryEngine;
 import org.hawk.graph.updater.GraphModelUpdater;
 import org.hawk.ttc2018.metamodels.Metamodels;
 import org.slf4j.Logger;
@@ -166,11 +167,8 @@ public abstract class AbstractLauncher {
 		return elementString;
 	}
 
-	@SuppressWarnings("unchecked")
-	protected List<List<Object>> runQuery(final StandaloneHawk hawk)
-			throws IOException, InvalidQueryException, QueryExecutionException {
-		return (List<List<Object>>) hawk.eol(query.getQuery());
-	}
+	protected abstract List<List<Object>> runQuery(final StandaloneHawk hawk)
+			throws IOException, InvalidQueryException, QueryExecutionException;
 
 	protected abstract void modelLoading(final StandaloneHawk hawk) throws Throwable;
 
@@ -202,6 +200,12 @@ public abstract class AbstractLauncher {
 
 	protected EolModule parseEOLModule(final InputStream is) throws IOException, Exception {
 		final EolModule eolm = new EolModule();
+		final String applyChangesQuery = streamToString(is);
+		eolm.parse(applyChangesQuery);
+		return eolm;
+	}
+
+	protected String streamToString(final InputStream is) throws IOException {
 		final StringBuilder sb = new StringBuilder();
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
 			String line;
@@ -211,8 +215,12 @@ public abstract class AbstractLauncher {
 			}
 		}
 		final String applyChangesQuery = sb.toString();
-		eolm.parse(applyChangesQuery);
-		return eolm;
+		return applyChangesQuery;
+	}
+
+	protected void registerDerivedAttribute(StandaloneHawk hawk) throws IOException {
+		hawk.getIndexer().addDerivedAttribute(SocialNetworkPackage.eNS_URI, query.getExtendedType(), "score",
+			"Integer", false, false, false, EOLQueryEngine.TYPE, streamToString(query.getDerivedAttribute()));
 	}
 
 }
