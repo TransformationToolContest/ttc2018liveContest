@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17179933907"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="17179934062"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180002694"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="17180002698"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#8591277452"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="999991"/>
+      <listChanges index="0" referenceValues="999992"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#867518"/>
+    <value featureName="likedBy">
+      <listChanges index="75">
+        <referenceValues href="../../models/32/initial.xmi#555"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#555"/>
+    <value featureName="likes">
+      <listChanges index="12">
+        <referenceValues href="../../models/32/initial.xmi#867518"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="17179934062" timestamp="2010-06-27T22:06:25.000+0100" content="About Albert Eins. About William Sha. About Darfur, is . About Nikolai Che. About Nanz.">
+    <submitter href="../../models/32/initial.xmi#3055"/>
+    <post href="../../models/32/initial.xmi#17179933907"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17180002698" timestamp="2010-06-27T22:06:50.000+0100" content="About Herbert Kitchener, . About Devil Woman, album . About Blue in Green, .">
+    <submitter href="../../models/32/initial.xmi#1099511630189"/>
+    <post href="../../models/32/initial.xmi#17180002558"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="999992" timestamp="2018-06-27T19:59:00.000+0100" content="Added for TTC Live contest">
+    <submitter href="../../models/32/initial.xmi#1564"/>
+    <post href="../../models/32/initial.xmi#8591277452"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="999991" timestamp="2018-06-27T09:59:00.000+0100" content="Added for TTC Live contest">
+    <submitter href="../../models/32/initial.xmi#1564"/>
+    <post href="../../models/32/initial.xmi#8591277452"/>
+  </objectsToAttach>
+</change:ChangeDescription>

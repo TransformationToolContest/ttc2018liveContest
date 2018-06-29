@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#42950540386"/>
+    <value featureName="likedBy">
+      <listChanges index="329">
+        <referenceValues href="../../models/512/initial.xmi#9895604653507"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604653507"/>
+    <value featureName="likes">
+      <listChanges index="233">
+        <referenceValues href="../../models/512/initial.xmi#42950540386"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#85900334856"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="85900334865"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#51539682700"/>
+    <value featureName="likedBy">
+      <listChanges index="50">
+        <referenceValues href="../../models/512/initial.xmi#9895604653834"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604653834"/>
+    <value featureName="likes">
+      <listChanges index="6">
+        <referenceValues href="../../models/512/initial.xmi#51539682700"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77310861595"/>
+    <value featureName="comments">
+      <listChanges index="7" referenceValues="85900796213"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="85900334865" timestamp="2011-10-09T02:18:00.000+0100" content="About Jean-Baptiste La. About Shirley Bassey, . About Marvin Gaye, dis. About Sinatra &amp; Co.">
+    <submitter href="../../models/512/initial.xmi#7696581399357"/>
+    <post href="../../models/512/initial.xmi#77310400150"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="85900796213" timestamp="2011-10-09T02:19:59.000+0100" content="right">
+    <submitter href="../../models/512/initial.xmi#2199023259227"/>
+    <post href="../../models/512/initial.xmi#77310861595"/>
+  </objectsToAttach>
+</change:ChangeDescription>

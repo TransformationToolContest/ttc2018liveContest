@@ -18,4 +18,7 @@
   <changes xsi:type="changes:CompositionListInsertion" index="9" affectedElement="social:Post initial.xmi#17180276917" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#17180276917" id="17180277572" timestamp="2010-06-27T23:18:29" content="About Weird Al Yankovic, to simply as In 3-D. About Francoist Spain, to ally with the Uni." submitter="initial.xmi#1099511632600" />
   </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="0" affectedElement="social:Post initial.xmi#864565" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#864565" id="999993" timestamp="2018-06-27T21:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
+  </changes>
 </changes:ModelChangeSet>

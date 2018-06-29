@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:change="http://www.eclipse.org/emf/2003/Change">
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#406503"/>
+    <value featureName="likedBy">
+      <listChanges index="8">
+        <referenceValues href="../../models/8/initial.xmi#1925"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#1925"/>
+    <value featureName="likes">
+      <listChanges index="0">
+        <referenceValues href="../../models/8/initial.xmi#406503"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+</change:ChangeDescription>

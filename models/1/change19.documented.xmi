@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="559" referenceValues="404290"/>
+    </value>
+  </objectChanges>
+  <objectChanges key="404290">
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="407322"/>
+      <listChanges index="0" referenceValues="407314"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#406245"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="406249"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#150"/>
+    <value featureName="submissions">
+      <listChanges index="1" referenceValues="1378988"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#1378983"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="1378988"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Post" id="404290" timestamp="2010-03-03T13:18:59.000+0000" content="">
+    <submitter href="../../models/1/initial.xmi#3705"/>
+    <comments id="407314" timestamp="2010-03-03T13:19:12.000+0000" content="thx" post="404290">
+      <submitter href="../../models/1/initial.xmi#2608"/>
+    </comments>
+    <comments id="407322" timestamp="2010-03-03T13:19:21.000+0000" content="yes" post="404290">
+      <submitter href="../../models/1/initial.xmi#2886"/>
+    </comments>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="407314" timestamp="2010-03-03T13:19:12.000+0000" content="thx" post="404290">
+    <submitter href="../../models/1/initial.xmi#2608"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="407322" timestamp="2010-03-03T13:19:21.000+0000" content="yes" post="404290">
+    <submitter href="../../models/1/initial.xmi#2886"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="406249" timestamp="2010-03-03T13:20:18.000+0000" content="About James Joyce, an. About Amy Winehouse, . About Al Green, born . About The Sidewind.">
+    <submitter href="../../models/1/initial.xmi#2608"/>
+    <post href="../../models/1/initial.xmi#404190"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="1378988" timestamp="2010-03-03T13:23:37.000+0000" content="no">
+    <post href="../../models/1/initial.xmi#1378654"/>
+  </objectsToAttach>
+</change:ChangeDescription>

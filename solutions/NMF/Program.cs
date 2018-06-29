@@ -20,6 +20,7 @@ namespace TTC2018.LiveContest
         private static string Tool;
         private static string ChangeSet;
         private static string Query;
+        private static string Mode;
 
         private static Stopwatch stopwatch = new Stopwatch();
 
@@ -27,6 +28,14 @@ namespace TTC2018.LiveContest
 
         static void Main(string[] args)
         {
+            if (args.Length == 0)
+            {
+                Mode = "Batch".ToUpperInvariant();
+            }
+            else
+            {
+                Mode = args[0].ToUpperInvariant();
+            }
             Initialize();
             Load();
             Initial();
@@ -57,13 +66,45 @@ namespace TTC2018.LiveContest
             Query = Environment.GetEnvironmentVariable(nameof(Query)).ToUpperInvariant();
             if (Query == "Q1")
             {
-                solution = new BatchSolutionQ1();
+                switch (Mode)
+                {
+                    case "BATCH":
+                        solution = new BatchSolutionQ1();
+                        break;
+                    case "INCREMENTAL":
+                        solution = new IncrementalSolutionQ1();
+                        break;
+                    case "TRANSACTIONS":
+                        solution = new TransactionalSolutionQ1();
+                        break;
+                    case "PARALLEL":
+                        solution = new ParallelSolutionQ1();
+                        break;
+                    default:
+                        break;
+                }
             }
             else if (Query == "Q2")
             {
-                solution = new BatchSolutionQ2();
+                switch (Mode)
+                {
+                    case "BATCH":
+                        solution = new BatchSolutionQ2();
+                        break;
+                    case "INCREMENTAL":
+                        solution = new IncrementalSolutionQ2();
+                        break;
+                    case "TRANSACTIONS":
+                        solution = new TransactionalSolutionQ2();
+                        break;
+                    case "PARALLEL":
+                        solution = new ParallelSolutionQ2();
+                        break;
+                    default:
+                        break;
+                }
             }
-            else
+            if (solution == null)
             {
                 throw new ApplicationException("Query is unknown");
             }

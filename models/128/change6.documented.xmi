@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360059580"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="34360059583"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#1099511629769"/>
+    <value featureName="friends">
+      <listChanges index="5">
+        <referenceValues href="../../models/128/initial.xmi#4398046513403"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#4398046513403"/>
+    <value featureName="friends">
+      <listChanges index="9">
+        <referenceValues href="../../models/128/initial.xmi#1099511629769"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="34360059583" timestamp="2010-11-05T16:53:22.000+0000" content="great">
+    <submitter href="../../models/128/initial.xmi#2266"/>
+    <post href="../../models/128/initial.xmi#34360058033"/>
+  </objectsToAttach>
+</change:ChangeDescription>

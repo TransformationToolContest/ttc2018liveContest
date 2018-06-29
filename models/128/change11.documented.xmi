@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34361086478"/>
+    <value featureName="comments">
+      <listChanges index="3" referenceValues="34361086479"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360758848"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="34360758849"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360603167"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="999994"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#1925"/>
+    <value featureName="friends">
+      <listChanges index="8">
+        <referenceValues href="../../models/128/initial.xmi#238"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#238"/>
+    <value featureName="friends">
+      <listChanges index="16">
+        <referenceValues href="../../models/128/initial.xmi#1925"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="34361086479" timestamp="2010-11-05T17:02:36.000+0000" content="About John Milt. About Sheryl Cr. About Fred Asta. About Songs for. About E-.">
+    <submitter href="../../models/128/initial.xmi#3298534885452"/>
+    <post href="../../models/128/initial.xmi#34361086066"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34360758849" timestamp="2010-11-05T17:03:05.000+0000" content="no">
+    <submitter href="../../models/128/initial.xmi#2199023260033"/>
+    <post href="../../models/128/initial.xmi#34360758220"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="999994" timestamp="2018-06-27T22:59:00.000+0100" content="Added for TTC Live contest">
+    <submitter href="../../models/128/initial.xmi#1564"/>
+    <post href="../../models/128/initial.xmi#34360603167"/>
+  </objectsToAttach>
+</change:ChangeDescription>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="5526" referenceValues="8590122485"/>
+      <listChanges index="5526" referenceValues="8590893701"/>
+      <listChanges index="5526" referenceValues="8590893700"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#1099511630967"/>
+    <value featureName="submissions">
+      <listChanges index="3" referenceValues="8590659253"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8590657711"/>
+    <value featureName="comments">
+      <listChanges index="6" referenceValues="8590659259"/>
+      <listChanges index="6" referenceValues="8590659257"/>
+      <listChanges index="6" referenceValues="8590659253"/>
+    </value>
+  </objectChanges>
+  <objectChanges key="8590659253">
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="8590659261"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Post" id="8590893700" timestamp="2010-05-13T07:26:16.000+0100" content="photo8590893700.jpg">
+    <submitter href="../../models/16/initial.xmi#1099511629851"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="8590893701" timestamp="2010-05-13T07:26:17.000+0100" content="photo8590893701.jpg">
+    <submitter href="../../models/16/initial.xmi#1099511629851"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="8590122485" timestamp="2010-05-13T07:55:33.000+0100" content="">
+    <submitter href="../../models/16/initial.xmi#3219"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="8590659253" timestamp="2010-05-13T07:45:06.000+0100" content="About Wolfgang Amadeus Mozart, as a co. About Brilliant Corners, track requi.">
+    <comments id="8590659261" timestamp="2010-05-13T07:46:38.000+0100" content="thanks">
+      <submitter href="../../models/16/initial.xmi#4281"/>
+      <post href="../../models/16/initial.xmi#8590657711"/>
+    </comments>
+    <post href="../../models/16/initial.xmi#8590657711"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="8590659257" timestamp="2010-05-13T07:51:21.000+0100" content="great">
+    <submitter href="../../models/16/initial.xmi#1099511630189"/>
+    <post href="../../models/16/initial.xmi#8590657711"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="8590659259" timestamp="2010-05-13T07:52:28.000+0100" content="About Wolfgang Amadeus Mozart, 1791), was a. About Pandyan Dynasty, Antioch knew of th.">
+    <submitter href="../../models/16/initial.xmi#1099511630189"/>
+    <post href="../../models/16/initial.xmi#8590657711"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="8590659261" timestamp="2010-05-13T07:46:38.000+0100" content="thanks">
+    <submitter href="../../models/16/initial.xmi#4281"/>
+    <post href="../../models/16/initial.xmi#8590657711"/>
+  </objectsToAttach>
+</change:ChangeDescription>

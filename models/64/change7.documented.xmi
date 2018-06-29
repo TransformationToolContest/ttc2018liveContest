@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:change="http://www.eclipse.org/emf/2003/Change">
+  <objectChanges>
+    <key href="../../models/64/initial.xmi#1099511629960"/>
+    <value featureName="friends">
+      <listChanges index="11">
+        <referenceValues href="../../models/64/initial.xmi#1099511628545"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/64/initial.xmi#1099511628545"/>
+    <value featureName="friends">
+      <listChanges index="4">
+        <referenceValues href="../../models/64/initial.xmi#1099511629960"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+</change:ChangeDescription>

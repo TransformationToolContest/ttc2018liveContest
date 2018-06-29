@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#256552"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="256815"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#2788"/>
+    <value featureName="submissions">
+      <listChanges index="2" referenceValues="799479"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="1845" referenceValues="1244646"/>
+      <listChanges index="1845" referenceValues="799479"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#459103"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="459104"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#404236"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="999992"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="256815" timestamp="2010-03-28T15:52:54.000+0100" content="right">
+    <submitter href="../../models/4/initial.xmi#2194"/>
+    <post href="../../models/4/initial.xmi#256552"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="799479" timestamp="2010-03-28T15:53:49.000+0100" content="photo799479.jpg"/>
+  <objectsToAttach xsi:type="social:Post" id="1244646" timestamp="2010-03-28T15:54:51.000+0100" content="">
+    <submitter href="../../models/4/initial.xmi#296"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="459104" timestamp="2010-03-28T15:55:05.000+0100" content="About Adolf . About Lauren. About Al Gor. About Norah . About Le Fre. About Roman . About.">
+    <submitter href="../../models/4/initial.xmi#4139"/>
+    <post href="../../models/4/initial.xmi#458950"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="999992" timestamp="2018-06-27T10:59:00.000+0100" content="Added for TTC Live contest">
+    <submitter href="../../models/4/initial.xmi#1564"/>
+    <post href="../../models/4/initial.xmi#404236"/>
+  </objectsToAttach>
+</change:ChangeDescription>

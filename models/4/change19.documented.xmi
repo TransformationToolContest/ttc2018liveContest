@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#404215"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="406529"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#3924"/>
+    <value featureName="friends">
+      <listChanges index="8">
+        <referenceValues href="../../models/4/initial.xmi#4290"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#4290"/>
+    <value featureName="friends">
+      <listChanges index="9">
+        <referenceValues href="../../models/4/initial.xmi#3924"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#330473"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="330628"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#406154"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="406155"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#46793"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="47051"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#1979"/>
+    <value featureName="submissions">
+      <listChanges index="4" referenceValues="728678"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#728677"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="728678"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#331323"/>
+    <value featureName="comments">
+      <listChanges index="5" referenceValues="331411"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="406529" timestamp="2010-03-28T17:44:38.000+0100" content="About Pliny the Elder, missing work on the. About Jean-Jacques Rousseau, the Panthéon . About Louis Armstrong, presence and voice . About Weird Al Yankovic, released on F.">
+    <submitter href="../../models/4/initial.xmi#555"/>
+    <post href="../../models/4/initial.xmi#404215"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="330628" timestamp="2010-03-28T17:45:08.000+0100" content="About Lou. About Par. About Ali. About Wei. About Pha. About Bel. About Sl.">
+    <submitter href="../../models/4/initial.xmi#4139"/>
+    <post href="../../models/4/initial.xmi#330473"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="406155" timestamp="2010-03-28T17:47:01.000+0100" content="no">
+    <submitter href="../../models/4/initial.xmi#2886"/>
+    <post href="../../models/4/initial.xmi#404177"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="47051" timestamp="2010-03-28T17:51:49.000+0100" content="duh">
+    <submitter href="../../models/4/initial.xmi#1269"/>
+    <post href="../../models/4/initial.xmi#46793"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="728678" timestamp="2010-03-28T17:53:44.000+0100" content="I see">
+    <post href="../../models/4/initial.xmi#723508"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="331411" timestamp="2010-03-28T17:54:33.000+0100" content="no">
+    <submitter href="../../models/4/initial.xmi#238"/>
+    <post href="../../models/4/initial.xmi#331323"/>
+  </objectsToAttach>
+</change:ChangeDescription>

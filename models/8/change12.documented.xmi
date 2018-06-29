@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:change="http://www.eclipse.org/emf/2003/Change">
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#1274"/>
+    <value featureName="friends">
+      <listChanges index="6">
+        <referenceValues href="../../models/8/initial.xmi#1925"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#1925"/>
+    <value featureName="friends">
+      <listChanges index="3">
+        <referenceValues href="../../models/8/initial.xmi#1274"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#1245003"/>
+    <value featureName="likedBy">
+      <listChanges index="0">
+        <referenceValues href="../../models/8/initial.xmi#4848"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#4848"/>
+    <value featureName="likes">
+      <listChanges index="0">
+        <referenceValues href="../../models/8/initial.xmi#1245003"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#2698"/>
+    <value featureName="friends">
+      <listChanges index="4">
+        <referenceValues href="../../models/8/initial.xmi#4139"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#4139"/>
+    <value featureName="friends">
+      <listChanges index="15">
+        <referenceValues href="../../models/8/initial.xmi#2698"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#728947"/>
+    <value featureName="likedBy">
+      <listChanges index="4">
+        <referenceValues href="../../models/8/initial.xmi#3120"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#3120"/>
+    <value featureName="likes">
+      <listChanges index="2">
+        <referenceValues href="../../models/8/initial.xmi#728947"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+</change:ChangeDescription>

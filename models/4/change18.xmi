@@ -36,4 +36,6 @@
   <changes xsi:type="changes:CompositionListInsertion" affectedElement="social:Comment initial.xmi#256808" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#256549" id="256811" timestamp="2010-03-28T17:43:22" content="About Pablo P. About Joe Bid. About Meat Lo. About Human T. About Slowly . Abou." submitter="initial.xmi#2194" />
   </changes>
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#1925" affectedElement="social:User initial.xmi#555" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#555" affectedElement="social:User initial.xmi#1925" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
 </changes:ModelChangeSet>

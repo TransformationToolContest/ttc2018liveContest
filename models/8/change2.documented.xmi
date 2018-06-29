@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="2270" referenceValues="556486"/>
+      <listChanges index="2270" referenceValues="556485"/>
+      <listChanges index="2270" referenceValues="556484"/>
+      <listChanges index="2270" referenceValues="1355781"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#2519"/>
+    <value featureName="name" dataValue="Pisith Chau"/>
+    <value featureName="submissions">
+      <listChanges index="0" referenceValues="1356229"/>
+    </value>
+  </objectChanges>
+  <objectChanges key="1355781">
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="1356229"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Post" id="1355781" timestamp="2010-04-01T21:14:18.000+0100" content="">
+    <submitter href="../../models/8/initial.xmi#4848"/>
+    <comments id="1356229" timestamp="2010-04-01T21:15:19.000+0100" content="maybe" post="1355781">
+      <submitter href="../../models/8/initial.xmi#2519"/>
+    </comments>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="556484" timestamp="2010-04-01T22:04:11.000+0100" content="photo556484.jpg">
+    <submitter href="../../models/8/initial.xmi#2330"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="556485" timestamp="2010-04-01T22:04:12.000+0100" content="photo556485.jpg">
+    <submitter href="../../models/8/initial.xmi#2330"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="556486" timestamp="2010-04-01T22:04:13.000+0100" content="photo556486.jpg">
+    <submitter href="../../models/8/initial.xmi#2330"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="1356229" timestamp="2010-04-01T21:15:19.000+0100" content="maybe" post="1355781"/>
+</change:ChangeDescription>

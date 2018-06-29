@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#215407"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="215538"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#406652"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="406654"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#404272"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="407099"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="215538" timestamp="2010-03-03T11:18:52.000+0000" content="About Napoleon. About Jarmila . About Virginia. About Weird Al. About Clark Ga. About .">
+    <submitter href="../../models/1/initial.xmi#407"/>
+    <post href="../../models/1/initial.xmi#215407"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="406654" timestamp="2010-03-03T11:20:44.000+0000" content="About Jarmil. About Weird . About LL Coo. About Eleano. About Al Gre. About Hirohi. Ab.">
+    <submitter href="../../models/1/initial.xmi#1259"/>
+    <post href="../../models/1/initial.xmi#404227"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="407099" timestamp="2010-03-03T11:24:04.000+0000" content="About Sigmu. About Franç. About Jarmi. About Nas. About T.I.. About Marie. About Im.">
+    <submitter href="../../models/1/initial.xmi#1259"/>
+    <post href="../../models/1/initial.xmi#404272"/>
+  </objectsToAttach>
+</change:ChangeDescription>

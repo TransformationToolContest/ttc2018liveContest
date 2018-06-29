@@ -17,4 +17,6 @@
   <changes xsi:type="changes:CompositionListInsertion" affectedElement="social:Comment initial.xmi#85900327403" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#85900326838" id="85900327406" timestamp="2011-10-09T01:53:55" content="About Plato, philosophy, logic, ethics. About Estonia, /toto/, /toˑto/ and /toːto/ a. Abo." submitter="initial.xmi#9895604654680" />
   </changes>
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#2194" affectedElement="social:User initial.xmi#7696581398601" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
+  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#7696581398601" affectedElement="social:User initial.xmi#2194" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
 </changes:ModelChangeSet>
