@@ -17,5 +17,5 @@
 package org.hawk.ttc2018;
 
 public enum Phase {
-	Load, Initial, Updates;
+	Load, Initial, Update;
 }

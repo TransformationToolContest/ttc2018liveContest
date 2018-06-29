@@ -110,7 +110,7 @@ public abstract class AbstractLauncher {
 			}
 
 			for (int iChangeSequence = 1; iChangeSequence <= sequences; ++iChangeSequence) {
-				try (PhaseWrapper w = new PhaseWrapper(iChangeSequence, Phase.Updates)) {
+				try (PhaseWrapper w = new PhaseWrapper(iChangeSequence, Phase.Update)) {
 					applyChanges(iChangeSequence, hawk);
 				}
 			}
@@ -182,7 +182,7 @@ public abstract class AbstractLauncher {
 		final List<List<Object>> results = runQuery(hawk);
 		final String elementsString = formatResults(results);
 		LOGGER.info("Produced results: {}", results);
-		new Snapshot(iChangeSequence, Phase.Updates, Metric.Elements, elementsString).print(System.out);
+		new Snapshot(iChangeSequence, Phase.Update, Metric.Elements, elementsString).print(System.out);
 	}
 
 	protected abstract void applyChanges(File fInitial, int iChangeSequence, File fChanges) throws Exception;
