@@ -29,7 +29,7 @@ for(row in 1:nrow(config$Summarize_Functions)){
   for(scenario in uniqueScenarios){
     metric <- "Time"
     subData1 <- subset(results, ChangeSet==scenario & MetricName == metric)
-    subData1$MetricValue <- as.integer(subData1$MetricValue) * (10**-6)
+    subData1$MetricValue <- as.numeric(as.character(subData1$MetricValue)) * (10**-6)
     
     if (config$Dimensions$Groups$View){
       uniqueTools <- unique(subData1$Tool)
@@ -75,7 +75,7 @@ for(row in 1:nrow(config$Summarize_Functions)){
   if (config$Dimensions$Groups$Tool){
     metric <- "Time"
     subData1 <- subset(results, MetricName == metric)
-    subData1$MetricValue <- as.integer(subData1$MetricValue) * (10**-6)
+    subData1$MetricValue <- as.numeric(as.character(subData1$MetricValue)) * (10**-6)
     
     uniqueViews <- unique(subData1$View)
     settings <- setGroup(settings, "Tool")

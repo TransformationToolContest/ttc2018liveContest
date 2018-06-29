@@ -3,11 +3,11 @@
     "Q1",
     "Q2"
   ],
-  "Tools": ["jastadd-ttc18", "NMF", "NMF-Incremental", "NMF-Transactions", "YAMTL_Solution_A", "YAMTL_Solution_B"],
+  "Tools": ["jastadd-ttc18"],
   "ChangeSets": [
-    "1", "2"
+    "1", "2", "4", "8", "16", "32", "64"
   ],
   "Sequences": 20,
-  "Runs": 1,
+  "Runs": 5,
   "Timeout": 6000
 }
