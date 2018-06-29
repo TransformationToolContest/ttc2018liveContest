@@ -79,15 +79,9 @@ public abstract class AbstractLauncher {
 			final long availableBytes = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
 			new Snapshot(iteration, phase, Metric.Time, elapsedTime).print(System.out);
-			System.gc();
+			//System.gc();
 			new Snapshot(iteration, phase, Metric.Memory, availableBytes).print(System.out);
 		}
-	}
-
-	public static void printHeader(PrintStream out) {
-		final String header = "Tool,View,ChangeSet,RunIndex,Iteration,PhaseName,MetricName,MetricValue";
-		out.println(header);
-		LOGGER.info(header);
 	}
 
 	public AbstractLauncher(Map<String, String> env) {
@@ -107,12 +101,8 @@ public abstract class AbstractLauncher {
 
 		final StandaloneHawk hawk = createHawk();
 		try {
-			printHeader(System.out);
-
-			try (PhaseWrapper w = new PhaseWrapper(0, Phase.Initialization)) {
-				initialization(hawk);
-			}
-			try (PhaseWrapper w = new PhaseWrapper(0, Phase.Loading)) {
+			initialization(hawk);
+			try (PhaseWrapper w = new PhaseWrapper(0, Phase.Load)) {
 				modelLoading(hawk);
 			}
 			try (PhaseWrapper w = new PhaseWrapper(0, Phase.Initial)) {
