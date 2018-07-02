@@ -14,7 +14,6 @@ public class FriendsComponents extends GraphComponents {
     	super(list.size)
     	userList = list
     }
-
    
    	def static public computeComponents(List<User> list) {
    		val FriendsComponents fc = new FriendsComponents(list)
@@ -40,5 +39,5 @@ public class FriendsComponents extends GraphComponents {
 		||
 		userList.get(q).friends.contains(userList.get(p))
     }
-  
 }
+

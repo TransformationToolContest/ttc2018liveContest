@@ -18,34 +18,24 @@ class Q1_yamtl_batch extends YAMTLModule {
 	
 	new () {
 		header().in('sn', SN).out('out', SN)
-		
 		ruleStore( newArrayList(
-			
 			new Rule('CountPosts')
 				.in('post', SN.post).build()
 				.out('postAux', SN.post, [ 
-
 					val post = 'post'.fetch as Post
-					
 					val commentList = EcoreUtil2.getAllContentsOfType(post, Comment)
 					var int score = 0
 					if (commentList.size > 0)
 						score = commentList.map[c | 10 + c.likedBy.size].sum
-
 					postToScore.put(post,score)
-
 				]).build()
 				.build()
-	
 		))
-		
 	}
 	
-	/**
-	 * HELPERS
-	 */
+	// HELPERS
 	def private sum(List<Integer> list) {
 		list.reduce[v1, v2 | v1+v2]
 	}
-
 }
+

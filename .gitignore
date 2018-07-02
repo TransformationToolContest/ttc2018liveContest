@@ -24,3 +24,6 @@ solutions/NMF.sln
 solutions/.vs/
 changes/1024/
 /.project
+/output-benchmark_2018-06-29/
+/diagrams-nmf/
+/diagrams-run1/

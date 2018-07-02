@@ -35,7 +35,6 @@ public class LiveContestDriver {
     private static Solution solution;
 
     def private static Object loadFile(String path) {
-//    	val Resource mRes = repository.getResource(URI.createFileURI(ChangePath + "/" + path), true);
 		val modelPath = '''«ChangePath»/«path»'''
 		println("model path: " + modelPath)
 		solution.xform.loadInputModels(#{'sn' -> modelPath})

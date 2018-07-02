@@ -5,9 +5,9 @@
   ],
   "Tools": ["YAMTL_Solution_A", "YAMTL_Solution_B"],
   "ChangeSets": [
-    "1", "2"
+    "1", "2", "4", "8", "16", "32", "64", "128", "256", "512"
   ],
   "Sequences": 20,
-  "Runs": 1,
+  "Runs": 5,
   "Timeout": 6000
 }
