@@ -121,6 +121,9 @@ if __name__ == "__main__":
     parser.add_argument("-t", "--test",
                         help="run test",
                         action="store_true")
+    parser.add_argument("-d", "--debug",
+                        help="set debug to true",
+                        action="store_true")
     args = parser.parse_args()
 
 
@@ -128,6 +131,8 @@ if __name__ == "__main__":
     with open("config.json", "r") as config_file:
         config = json.load(config_file, object_hook = JSONObject)
 
+    if args.debug:
+        os.environ['Debug'] = 'true'
     if args.build:
         build(config, args.skip_tests)
     if args.measure:
