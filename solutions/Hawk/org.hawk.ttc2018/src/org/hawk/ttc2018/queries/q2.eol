@@ -4,7 +4,6 @@ return scored.subList(0, scored.size.min(3));
 
 operation Comment score(): Integer {
   var components = Sequence {};
-
   for (user in self.likedBy) {
     var added = false;
     for (component in components) {
@@ -14,10 +13,7 @@ operation Comment score(): Integer {
         break;
       }
     }
-    if (not added) {
-      components.add(Sequence { user });
-    }
+    if (not added) { components.add(Sequence { user }); }
   }
-  
   return components.collect(component | component.size * component.size).sum();
 }

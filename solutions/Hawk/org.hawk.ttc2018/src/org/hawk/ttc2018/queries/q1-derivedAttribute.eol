@@ -1,5 +1,1 @@
-// operation Submission score() : Integer {
-  return self.closure(p|p.comments)
-    .flatten
-    .collect(p | 10 + p.likedBy.size)
-    .sum();
+return self.closure(p|p.comments).flatten.collect(p | 10 + p.likedBy.size).sum();

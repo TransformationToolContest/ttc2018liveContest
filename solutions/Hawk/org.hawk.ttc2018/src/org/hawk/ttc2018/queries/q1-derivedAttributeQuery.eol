@@ -1,7 +1,3 @@
-var scored = Post.all.collect(p|
-  Sequence {p.id, p.score, p.timestamp}
-).asSequence;
-Native('java.util.Collections').sort(
-  scored,
-  new Native('org.hawk.ttc2018.queries.ResultComparator'));
+var scored = Post.all.collect(p | Sequence {p.id, p.score, p.timestamp}).asSequence;
+Native('java.util.Collections').sort(scored, new Native('org.hawk.ttc2018.queries.ResultComparator'));
 return scored.subList(0, scored.size.min(3));

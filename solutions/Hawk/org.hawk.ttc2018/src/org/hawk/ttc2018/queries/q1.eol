@@ -3,8 +3,5 @@ Native('java.util.Collections').sort(scored, new Native('org.hawk.ttc2018.querie
 return scored.subList(0, scored.size.min(3));
 
 operation Submission score() : Integer {
-  return self.closure(p|p.comments)
-    .flatten
-    .collect(p | 10 + p.likedBy.size)
-    .sum();
+  return self.closure(p|p.comments).flatten.collect(p | 10 + p.likedBy.size).sum();
 }
