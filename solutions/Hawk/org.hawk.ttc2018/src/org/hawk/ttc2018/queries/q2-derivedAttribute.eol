@@ -1,18 +1,57 @@
-// operation Comment score(): Integer {
-  var components = Sequence {};
+var index = 0;
+var components = Sequence {};
+var stack = Sequence {};
 
+-- Cannot use EOL extended props here, as we use identity-based keys in
+-- the ExtendedProperties object.
+var indexes : Map;
+var lowlinks : Map;
+var onStack : Map;
+
+//operation Comment score(): Integer {
   for (user in self.likedBy) {
-    var added = false;
-    for (component in components) {
-      if (component.exists(member | member.friends.includes(user) and user.friends.includes(member))) {
-        component.add(user);
-        added = true;
-        break;
-      }
-    }
-    if (not added) {
-      components.add(Sequence { user });
+    if (not indexes.containsKey(user.id)) {
+      user.strongconnect(self);
     }
   }
-  
   return components.collect(component | component.size * component.size).sum();
+//}
+
+-- Tarjan's strongly connected components algorithm
+operation User strongconnect(comment: Comment) {
+  indexes.put(self.id, index);
+  lowlinks.put(self.id, index);
+  index += 1;
+  stack.add(0, self);
+  onStack.put(self.id, true);
+  
+  for (friend in self.friends.select(f | comment.likedBy.contains(f))) {
+    if (not indexes.containsKey(friend.id)) {
+      friend.strongconnect(comment);
+
+      var friendLL = lowlinks.get(friend.id);
+      var selfLL = lowlinks.get(self.id);
+      if (friendLL < selfLL) {
+        lowlinks.put(self.id, friendLL);
+      }
+    } else if (onStack.get(friend.id) = true) {
+      var friendIndex = indexes.get(friend.id);
+      var selfLL = lowlinks.get(self.id);
+      if (friendIndex < selfLL) {
+        lowlinks.put(self.id, friendIndex);
+      }
+    }
+  }
+
+  -- If this is a root node, pop stack and generate component
+  if (lowlinks.get(self.id) = indexes.get(self.id)) {
+    var component : Sequence;
+    var other;
+    while (not other.isDefined() or other.id <> self.id) {
+      other = stack.removeAt(0);
+      onStack.put(other.id, false);
+      component.add(other);
+    }
+    components.add(component);
+  }
+}
