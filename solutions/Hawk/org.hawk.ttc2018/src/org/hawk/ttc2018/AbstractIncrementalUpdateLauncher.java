@@ -37,7 +37,7 @@ public abstract class AbstractIncrementalUpdateLauncher extends AbstractLauncher
 					final int iChangeSequence = Integer.valueOf(matcher.group(1));
 					return iChangeSequence <= changeSequenceLimit;
 				} else {
-					return true;
+					return f.isDirectory();
 				}
 			}
 		};
@@ -45,10 +45,9 @@ public abstract class AbstractIncrementalUpdateLauncher extends AbstractLauncher
 
 	@Override
 	protected void modelLoading(final StandaloneHawk hawk) throws Throwable {
-		localFolder = hawk.requestFolderIndex(changePath);
-		localFolder.setFileFilter(filterByChangeSequenceLimit(0));
+		localFolder = hawk.requestFolderIndex(changePath, filterByChangeSequenceLimit(0));
 		hawk.waitForSync();
-	
+
 		// Need these for quickly finding by ID
 		final IModelIndexer indexer = hawk.getIndexer();
 		indexer.addIndexedAttribute(SocialNetworkPackage.eNS_URI, "Post", "id");

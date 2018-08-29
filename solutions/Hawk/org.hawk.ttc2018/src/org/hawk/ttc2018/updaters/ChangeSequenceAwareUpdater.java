@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.hawk.core.IVcsManager;
 import org.hawk.core.VcsCommitItem;
@@ -53,12 +52,11 @@ import org.hawk.graph.updater.GraphModelBatchInjector;
 import org.hawk.graph.updater.GraphModelUpdater;
 import org.hawk.graph.updater.TypeCache;
 import org.hawk.ttc2018.AbstractLauncher;
+import org.hawk.ttc2018.IntrinsicIDXMIResourceFactoryImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import Changes.AssociationCollectionInsertion;
-import Changes.AssociationPropertyChange;
-import Changes.AttributePropertyChange;
 import Changes.ChangesPackage;
-import Changes.CompositionListInsertion;
 import Changes.ElementaryChange;
 import Changes.ModelChangeSet;
 import Changes.impl.AssociationCollectionInsertionImpl;
@@ -78,6 +76,7 @@ import SocialNetwork.User;
  */
 public class ChangeSequenceAwareUpdater extends GraphModelUpdater {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(ChangeSequenceAwareUpdater.class);
 	private GraphModelBatchInjector injector;
 	private IGraphNode fileNode;
 	private VcsCommitItem commitItem;
@@ -111,14 +110,16 @@ public class ChangeSequenceAwareUpdater extends GraphModelUpdater {
 		final File changeFile = vcs.importFile(revision, f.getPath(), null);
 
 		ResourceSetImpl rs = new ResourceSetImpl();
-		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
 		rs.getPackageRegistry().put(ChangesPackage.eNS_URI, ChangesPackage.eINSTANCE);
 		rs.getPackageRegistry().put(SocialNetworkPackage.eNS_URI, SocialNetworkPackage.eINSTANCE);
-		XMIResourceImpl r = (XMIResourceImpl) rs.createResource(URI.createFileURI(changeFile.getAbsolutePath()));
-		r.setIntrinsicIDToEObjectMap(new HashMap<>());
+		rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new IntrinsicIDXMIResourceFactoryImpl());
 
 		try {
-			r.load(Collections.singletonMap(XMIResource.OPTION_DEFER_IDREF_RESOLUTION, true));
+			final Map<String, Boolean> loadOptions = Collections.singletonMap(XMIResource.OPTION_DEFER_IDREF_RESOLUTION, true);
+			final XMIResourceImpl r = (XMIResourceImpl) rs.createResource(URI.createFileURI(changeFile.getAbsolutePath()));
+			final long startLoadMillis = System.currentTimeMillis();
+			r.load(loadOptions);
+			LOGGER.debug("Change model loaded in {}ms", System.currentTimeMillis() - startLoadMillis);
 
 			final ModelChangeSet changeSet = (ModelChangeSet) r.getContents().get(0);
 			try (IGraphTransaction tx = indexer.getGraph().beginTransaction()) {

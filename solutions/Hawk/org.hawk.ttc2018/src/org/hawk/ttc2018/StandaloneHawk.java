@@ -28,6 +28,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.function.Function;
 
 import org.hawk.core.IConsole;
 import org.hawk.core.IModelIndexer;
@@ -112,9 +113,10 @@ public class StandaloneHawk {
 		return vcs;
 	}
 
-	public LocalFolder requestFolderIndex(File folder) throws Exception {
+	public LocalFolder requestFolderIndex(File folder, Function<File, Boolean> fileFilter) throws Exception {
 		final LocalFolder vcs = new LocalFolder();
 		vcs.init(folder.getAbsolutePath(), indexer);
+		vcs.setFileFilter(fileFilter);
 		vcs.run();
 		indexer.addVCSManager(vcs, true);
 		return vcs;

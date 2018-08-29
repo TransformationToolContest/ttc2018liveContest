@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
-class IntrinsicIDXMIResourceFactoryImpl extends XMIResourceFactoryImpl {
+public class IntrinsicIDXMIResourceFactoryImpl extends XMIResourceFactoryImpl {
 	@Override
 	public Resource createResource(URI uri) {
 		final XMIResourceImpl r = new XMIResourceImpl(uri);

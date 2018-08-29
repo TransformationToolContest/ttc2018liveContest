@@ -3,7 +3,7 @@
     "Q1",
     "Q2"
   ],
-  "Tools": ["jastadd-ttc18"],
+  "Tools": ["Hawk", "HawkIncUpdate", "HawkIncUpdateQuery"],
   "ChangeSets": [
     "1", "2", "4", "8", "16", "32", "64"
   ],
