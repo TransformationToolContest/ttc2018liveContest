@@ -193,6 +193,7 @@ public abstract class AbstractLauncher {
 		final EolModule eolm = new EolModule();
 		final String applyChangesQuery = streamToString(is);
 		eolm.parse(applyChangesQuery);
+		eolm.getContext().setModule(eolm);
 		return eolm;
 	}
 

@@ -1,35 +1,30 @@
-var index;
-var components;
-var stack;
-
--- Cannot use EOL extended props here, as we use identity-based keys in
--- the ExtendedProperties object.
-var indexes : Map;
-var lowlinks : Map;
-var onStack : Map;
-
 var scored = Comment.all.collect(c | Sequence { c.id, c.score(), c.timestamp }).asSequence;
 Native('java.util.Collections').sort(scored, new Native('org.hawk.ttc2018.queries.ResultComparator'));
 return scored.subList(0, scored.size.min(3));
 
 operation Comment score(): Integer {
-  index = 0;
-  components = Sequence {};
-  stack = Sequence {};
-  indexes.clear();
-  lowlinks.clear();
-  onStack.clear();
+  -- Cannot use global variables: doesn't work for IncUpdateQuery, which
+  -- simply runs score() without any context.
+  var index = 0;
+  var components : Sequence;
+  var stack : Sequence;
+  var indexes : Map;
+  var lowlinks : Map;
+  var onStack : Map;
 
   for (user in self.likedBy) {
     if (not indexes.containsKey(user.id)) {
-      user.strongconnect(self);
+      user.strongconnect(self, index, components, stack, indexes, lowlinks, onStack);
     }
   }
   return components.collect(component | component.size * component.size).sum();
 }
 
 -- Tarjan's strongly connected components algorithm
-operation User strongconnect(comment: Comment) {
+operation User strongconnect(comment: Comment,
+    index: Integer, components: Sequence, stack: Sequence,
+    indexes: Map, lowlinks: Map, onStack: Map
+) {
   indexes.put(self.id, index);
   lowlinks.put(self.id, index);
   index += 1;
@@ -38,7 +33,7 @@ operation User strongconnect(comment: Comment) {
   
   for (friend in self.friends.select(f | comment.likedBy.contains(f))) {
     if (not indexes.containsKey(friend.id)) {
-      friend.strongconnect(comment);
+      friend.strongconnect(comment, index, components, stack, indexes, lowlinks, onStack);
 
       var friendLL = lowlinks.get(friend.id);
       var selfLL = lowlinks.get(self.id);

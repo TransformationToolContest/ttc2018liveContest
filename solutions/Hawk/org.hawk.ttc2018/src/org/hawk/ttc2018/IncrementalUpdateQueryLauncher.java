@@ -176,7 +176,7 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 			final GraphNodeWrapper gw = new GraphNodeWrapper(node, hawkModel);
 			int score;
 			try {
-				score = (Integer) scoreOp.execute(gw, Collections.emptyList(), eolRescoreModule.getContext());
+				score = (Integer) scoreOp.execute(gw, Collections.emptyList(), ((EolModule) scoreOp.getModule()).getContext());
 			} catch (EolRuntimeException e) {
 				throw new QueryExecutionException(e);
 			}
@@ -199,13 +199,15 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 	protected EolModule getRescoreEOLModule(StandaloneHawk hawk) throws Exception {
 		if (eolRescoreModule == null) {
 			eolRescoreModule = parseEOLModule(query.getFullQuery());
-
-			ModelRepository repo = eolRescoreModule.getContext().getModelRepository();
-			hawkModel = new EOLQueryEngine();
-			hawkModel.setName("Changes");
-			hawkModel.load(hawk.getIndexer());
-			repo.addModel(hawkModel);
+		} else {
+			final ModelRepository modelRepository = eolRescoreModule.getContext().getModelRepository();
+			modelRepository.removeModel(modelRepository.getModelByName("Changes"));
 		}
+
+		hawkModel = new EOLQueryEngine();
+		hawkModel.setName("Changes");
+		hawkModel.load(hawk.getIndexer());
+		eolRescoreModule.getContext().getModelRepository().addModel(hawkModel);
 
 		return eolRescoreModule;
 	}
