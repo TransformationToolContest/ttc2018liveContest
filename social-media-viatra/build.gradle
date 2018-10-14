@@ -1,0 +1,34 @@
+apply plugin: 'java'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+task packageSources(type: Jar) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+
+artifacts.archives packageSources
+repositories {
+	mavenCentral()
+	maven { url "https://repo.eclipse.org/content/groups/acceleo" }
+	maven { url "https://repo.eclipse.org/content/groups/viatra2" }
+	maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+}
+
+ext {
+	viatraVersion = '2.0.2'
+}
+
+dependencies {
+	//compile group: 'log4j', name: 'log4j', version: '1.2.17'
+	compile group: 'org.eclipse.viatra', name: 'viatra-query-runtime', version: viatraVersion
+	//compile group: 'org.eclipse.xtext', name: 'org.eclipse.xtext.xbase.lib', version: '2.10.0'
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src', 'src-gen']
+		}
+	}
+}
