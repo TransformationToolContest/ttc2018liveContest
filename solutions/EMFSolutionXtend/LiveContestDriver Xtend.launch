@@ -12,7 +12,7 @@
 <mapEntry key="Query" value="Q1"/>
 <mapEntry key="RunIndex" value="Debug"/>
 <mapEntry key="Sequences" value="20"/>
-<mapEntry key="Tool" value="EMFSolutionTemplate"/>
+<mapEntry key="Tool" value="EMFSolutionXtend"/>
 </mapAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="ttc2018.LiveContestDriver"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="EMFSolutionXtend"/>
