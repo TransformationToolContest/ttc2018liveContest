@@ -1,5 +1,8 @@
 package ttc2018;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -44,12 +47,12 @@ public class LiveContestDriver {
 
     private static Solution solution;
 
-    private static Object loadFile(String path) {
-    	Resource mRes = repository.getResource(URI.createFileURI(ChangePath + "/" + path), true);
+    private static Object loadFile(String path) throws IOException {
+    	Resource mRes = repository.getResource(URI.createFileURI(new File(ChangePath + "/" + path).getCanonicalPath()), true);
     	return mRes.getContents().get(0);
     }
 
-    static void Load()
+    static void Load() throws IOException
     {
     	stopwatch = System.nanoTime();
         solution.setSocialNetwork((SocialNetworkRoot)loadFile("initial.xmi"));
@@ -98,7 +101,7 @@ public class LiveContestDriver {
         Report(BenchmarkPhase.Initial, -1, result);
     }
 
-    static void Update(int iteration)
+    static void Update(int iteration) throws IOException
     {
         ModelChangeSet changes = (ModelChangeSet)loadFile(String.format("change%02d.xmi", iteration));
         stopwatch = System.nanoTime();
