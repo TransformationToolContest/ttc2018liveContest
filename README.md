@@ -24,6 +24,9 @@ The `scripts` directory contains the `run.py` script which is used for the follo
 * `run.py -g` -- generates the instance models
 * `run.py -m` -- runs the benchmark
 * `run.py -v` -- visualizes the results of the latest benchmark
+* `run.py -m -e` -- extract results
+* `run.py -m -t` -- run tests
+
 
 The `config` directory contains the configuration for the scripts:
 * `config.json` -- configuration for the model generation and the benchmark
