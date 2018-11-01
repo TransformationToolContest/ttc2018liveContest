@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "NMF": {
+      "commandName": "Project",
+      "commandLineArgs": "parallel",
+      "environmentVariables": {
+        "RunIndex": "Debug",
+        "Sequences": "20",
+        "ChangePath": "D:\\Projekte\\ttc2018liveContest\\models\\2",
+        "Query": "Q2",
+        "Tool": "NMF",
+        "ChangeSet": "2"
+      }
+    }
+  }
+}
