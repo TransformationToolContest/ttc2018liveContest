@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NMF", "..\NMF\NMF.csproj", "{2749AB1B-79F8-4BC0-B6AA-6D28E2CD802A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NaiadSolution", "NaiadSolution\NaiadSolution.csproj", "{2FEE6B20-C085-47B7-9320-D0D6F3EB2AD4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2749AB1B-79F8-4BC0-B6AA-6D28E2CD802A} = {2749AB1B-79F8-4BC0-B6AA-6D28E2CD802A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
