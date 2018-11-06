@@ -1,14 +1,12 @@
-﻿using NMF.Models;
-using NMF.Models.Changes;
+﻿using NMF.Models.Changes;
 using NMF.Models.Repository;
 using System;
 using System.Diagnostics;
 using System.IO;
+using TTC2018.LiveContest;
 using TTC2018.LiveContest.SocialNetwork;
 
-[assembly: ModelMetadata("https://www.transformation-tool-contest.eu/2018/social_media", "TTC2018.LiveContest.social_network.nmeta")]
-
-namespace TTC2018.LiveContest
+namespace NaiadSolution
 {
     class Program
     {
@@ -66,43 +64,11 @@ namespace TTC2018.LiveContest
             Query = Environment.GetEnvironmentVariable(nameof(Query)).ToUpperInvariant();
             if (Query == "Q1")
             {
-                switch (Mode)
-                {
-                    case "BATCH":
-                        solution = new BatchSolutionQ1();
-                        break;
-                    case "INCREMENTAL":
-                        solution = new IncrementalSolutionQ1();
-                        break;
-                    case "TRANSACTIONS":
-                        solution = new TransactionalSolutionQ1();
-                        break;
-                    case "PARALLEL":
-                        solution = new ParallelSolutionQ1();
-                        break;
-                    default:
-                        break;
-                }
+                solution = new NaiadSolutionQ1();
             }
             else if (Query == "Q2")
             {
-                switch (Mode)
-                {
-                    case "BATCH":
-                        solution = new BatchSolutionQ2();
-                        break;
-                    case "INCREMENTAL":
-                        solution = new IncrementalSolutionQ2();
-                        break;
-                    case "TRANSACTIONS":
-                        solution = new TransactionalSolutionQ2();
-                        break;
-                    case "PARALLEL":
-                        solution = new ParallelSolutionQ2();
-                        break;
-                    default:
-                        break;
-                }
+                solution = new NaiadSolutionQ2();
             }
             if (solution == null)
             {
