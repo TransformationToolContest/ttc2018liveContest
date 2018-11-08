@@ -64,7 +64,7 @@
       <HintPath>..\packages\NMF-Utilities.2.0.126\lib\net45\NMF.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="NMFSolution, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NMFSolution.1.0.0\lib\net471\NMFSolution.exe</HintPath>
+      <HintPath>..\packages\NMFSolution.1.0.0\lib\netstandard2.0\NMFSolution.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
