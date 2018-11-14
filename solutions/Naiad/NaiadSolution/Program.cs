@@ -1,4 +1,5 @@
-﻿using NMF.Models.Changes;
+﻿using NMF.Models;
+using NMF.Models.Changes;
 using NMF.Models.Repository;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TTC2018.LiveContest;
 using TTC2018.LiveContest.SocialNetwork;
+
+//[assembly: ModelMetadata("https://www.transformation-tool-contest.eu/2018/social_media", "Naiad.social_network.nmeta")]
 
 namespace Naiad
 {
@@ -60,12 +63,12 @@ namespace Naiad
             stopwatch.Restart();
             repository = new ModelRepository();
 
-            ChangePath = Environment.GetEnvironmentVariable(nameof(ChangePath));
-            RunIndex = Environment.GetEnvironmentVariable(nameof(RunIndex));
-            Sequences = int.Parse(Environment.GetEnvironmentVariable(nameof(Sequences)));
-            Tool = Environment.GetEnvironmentVariable(nameof(Tool));
-            ChangeSet = Environment.GetEnvironmentVariable(nameof(ChangeSet));
-            Query = Environment.GetEnvironmentVariable(nameof(Query)).ToUpperInvariant();
+            ChangePath = "C:\\Repos\\ttc2018liveContest\\models\\2";
+            RunIndex = "Debug";
+            Sequences = 20;
+            Tool = "NMF";
+            ChangeSet = "2";
+            Query = "Q2";
             if (Query == "Q1")
             {
                 solution = new NaiadSolutionQ1();
@@ -93,7 +96,9 @@ namespace Naiad
 
         static void Update(int iteration)
         {
-            var changes = repository.Resolve(Path.Combine(ChangePath, $"change{iteration:00}.xmi")).RootElements[0] as ModelChangeSet;
+            var path = Path.Combine(ChangePath, $"change{iteration:00}.xmi");
+            var modelRepos = repository.Resolve(path);
+            var changes = modelRepos.RootElements[0] as ModelChangeSet;
             stopwatch.Restart();
             var result = solution.Update(changes);
             stopwatch.Stop();

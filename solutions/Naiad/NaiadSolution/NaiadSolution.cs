@@ -23,12 +23,15 @@ namespace Naiad
     {
         public override string Initial()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("InitialCalled");
+            return "Initial";
         }
 
         public override string Update(ModelChangeSet changes)
         {
-            throw new NotImplementedException();
+            changes.Apply();
+            Console.WriteLine("UpdateCalled");
+            return "Update";
         }
     }
 }
