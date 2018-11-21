@@ -55,6 +55,9 @@
     <Reference Include="Microsoft.Research.Naiad.DifferentialDataflow, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Research.Naiad.DifferentialDataflow.0.5.0-beta\lib\net40-Client\Microsoft.Research.Naiad.DifferentialDataflow.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Research.Naiad.GraphLINQ, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Research.Naiad.GraphLINQ.0.5.0-beta\lib\net40-Client\Microsoft.Research.Naiad.GraphLINQ.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Research.Naiad.Lindi, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Research.Naiad.Lindi.0.5.0-beta\lib\net40-Client\Microsoft.Research.Naiad.Lindi.dll</HintPath>
     </Reference>
@@ -96,19 +99,10 @@
     <Compile Include="NaiadSolution.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <EmbeddedResource Include="social_network.nmeta" />
   </ItemGroup>
   <ItemGroup>

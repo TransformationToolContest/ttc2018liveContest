@@ -68,7 +68,7 @@ namespace Naiad
             Sequences = 20;
             Tool = "NMF";
             ChangeSet = "2";
-            Query = "Q2";
+            Query = "Q1";
             if (Query == "Q1")
             {
                 solution = new NaiadSolutionQ1();

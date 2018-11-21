@@ -10,7 +10,7 @@ using TTC2018.LiveContest.SocialNetwork;
 
 namespace TTC2018.LiveContest
 {
-    public class IncrementalSolutionQ1 : Solution
+    public class IncrementalSolutionQ1 : Solution, IDisposable
     {
         private INotifyValue<KeyValuePair<IPost, (int, DateTime)>[]> query;
 
@@ -31,6 +31,11 @@ namespace TTC2018.LiveContest
         {
             changes.Apply();
             return QueryResult();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 
