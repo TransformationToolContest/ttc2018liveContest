@@ -254,15 +254,21 @@ namespace Naiad
                 }
             }
         }
+
+        protected void ProcessSubmission(ISubmission submission)
+        {
+            rawSubmitterEdges.Add(new SubmitterEdge(submission.Id, submission.Submitter.Id));
+            foreach (var c in submission.Comments)
+            {
+                rawCommentedEdges.Add(new CommentedEdge(submission.Id, c.Id));
+                ProcessComment(c);
+            }
+
+        }
         protected void ProcessPost(IPost post)
         {
             rawPosts.Add(new Post(post.Id, post.Timestamp, post.Content));
-            rawSubmitterEdges.Add(new SubmitterEdge(post.Id, post.Submitter.Id));
-            foreach (var c in post.Comments)
-            {
-                rawCommentedEdges.Add(new CommentedEdge(post.Id, c.Id));
-                ProcessComment(c);
-            }
+            ProcessSubmission(post);
 
         }
         protected void ProcessComment(IComment comment)
@@ -275,11 +281,7 @@ namespace Naiad
                 rawLikesEdges.Add(new LikesEdge(user.Id, comment.Id));
 
             }
-            foreach (var c in comment.Comments)
-            {
-                rawCommentedEdges.Add(new CommentedEdge(comment.Id, c.Id));
-                ProcessComment(c);
-            }
+            ProcessSubmission(comment);
 
         }
         private void CallOnNext()
