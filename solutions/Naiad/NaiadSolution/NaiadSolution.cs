@@ -215,6 +215,8 @@ namespace Naiad
 
         protected int actualEpoch;
 
+        protected bool isDisposed;
+
         public NaiadSolution()
         {
             rawUsers = new List<User>();
@@ -238,10 +240,25 @@ namespace Naiad
             friendEdges = computation.NewInputCollection<FriendEdge>();
 
             actualEpoch = -1;
+
+            isDisposed = false;
         }
-        public void Dispose()
+        public virtual void Dispose()
         {
+            if (isDisposed)
+            {
+                return;
+            }
+            users.OnCompleted();
+            posts.OnCompleted();
+            comments.OnCompleted();
+            commentedEdges.OnCompleted();
+            likesEdges.OnCompleted();
+            postEdges.OnCompleted();
+            submitterEdges.OnCompleted();
+            friendEdges.OnCompleted();
             computation.Dispose();
+            isDisposed = true;
         }
 
         protected void ProcessUser(IUser user)
@@ -449,22 +466,24 @@ namespace Naiad
             }
 
         }
+
         protected void UpdateInputs(ModelChangeSet changes)
         {
-            rawUsers.Clear();
-            rawPosts.Clear();
-            rawComments.Clear();
-            rawCommentedEdges.Clear();
-            rawLikesEdges.Clear();
-            rawPostEdges.Clear();
-            rawSubmitterEdges.Clear();
-            rawFriendEdges.Clear();
+            //rawUsers.Clear();
+            //rawPosts.Clear();
+            //rawComments.Clear();
+            //rawCommentedEdges.Clear();
+            //rawLikesEdges.Clear();
+            //rawPostEdges.Clear();
+            //rawSubmitterEdges.Clear();
+            //rawFriendEdges.Clear();
 
             foreach (var change in changes.Changes)
             {
                 ProcessChange(change);
             }
             CallOnNext();
+            changes.Apply();
         }
 
         protected void Sync()
@@ -532,10 +551,14 @@ namespace Naiad
                {
                    foreach (var r in x.OrderByDescending(r => r.record.Third).OrderByDescending(r => r.record.Second).Take(3))
                    {
-                       resultString += r.record.First + "|";
-                       Console.Error.WriteLine(r.weight + " " + r.record.First + " point: " + r.record.Second);
+                       //resultString += r.record.First + "|";
+                       resultString += r.record.First + " " + r.record.Second + "|";
+                       //Console.Error.WriteLine(r.weight + " " + r.record.First + " point: " + r.record.Second);
                    }
-                   //resultString = resultString.Substring(0, resultString.Length - 1);
+                   if (resultString.Length > 2)
+                   {
+                       resultString = resultString.Substring(0, resultString.Length - 1);
+                   }
                });
 
             LoadModel(SocialNetwork);
@@ -547,18 +570,22 @@ namespace Naiad
         public override string Update(ModelChangeSet changes)
         {
             resultString = "";
-            subcription = result.Subscribe(x =>
-            {
-                foreach (var r in x.OrderByDescending(r => r.record.Third).OrderByDescending(r => r.record.Second).Take(3))
-                {
-                    resultString += r.record.First + "|";
-                    Console.Error.WriteLine(r.weight + " " + r.record.First + " point: " + r.record.Second);
-                }
-                //resultString = resultString.Substring(0, resultString.Length - 1);
-            });
             UpdateInputs(changes);
             Sync();
             return resultString;
+        }
+        override public void Dispose()
+        {
+            if (isDisposed)
+            {
+                return;
+            }
+            subcription.Dispose();
+            base.Dispose();
+        }
+        ~NaiadSolutionQ1()
+        {
+            Dispose();
         }
     }
     class NaiadSolutionQ2 : NaiadSolution
@@ -571,8 +598,22 @@ namespace Naiad
 
         public override string Update(ModelChangeSet changes)
         {
+            changes.Apply();
             Console.WriteLine("UpdateCalled");
             return "Update";
+        }
+        override public void Dispose()
+        {
+            if (isDisposed)
+            {
+                return;
+            }
+            // subcription.Dispose();
+            base.Dispose();
+        }
+        ~NaiadSolutionQ2()
+        {
+            Dispose();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Naiad
 
         private static Stopwatch stopwatch = new Stopwatch();
 
-        private static Solution solution;
+        private static NaiadSolution solution;
 
         static void Main(string[] args)
         {
@@ -48,6 +48,7 @@ namespace Naiad
             {
                 Update(i);
             }
+            solution.Dispose();
         }
 
         static void Load()
@@ -90,6 +91,7 @@ namespace Naiad
         {
             stopwatch.Restart();
             var result = solution.Initial();
+            //var result = "";
             stopwatch.Stop();
             Report(BenchmarkPhase.Initial, null, result);
         }
@@ -101,6 +103,8 @@ namespace Naiad
             var changes = modelRepos.RootElements[0] as ModelChangeSet;
             stopwatch.Restart();
             var result = solution.Update(changes);
+            //var result = "";
+            //changes.Apply();
             stopwatch.Stop();
             Report(BenchmarkPhase.Update, iteration, result);
         }
