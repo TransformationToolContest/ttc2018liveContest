@@ -410,7 +410,9 @@ namespace Naiad
                         }
                         return new List<Pair<string, int>> { new Pair<string, int>(pId, count) };
                     })
-                .Join(posts, s => s.First, p => p.Id, s => s.Second, p => p.Timestamp, (pId, count, timestamp) => new EquatableTriple<string, int, DateTime>(pId, count, timestamp));
+                .Join(posts, s => s.First, p => p.Id, s => s.Second, p => p.Timestamp, (pId, count, timestamp) => new EquatableTriple<string, int, DateTime>(pId, count, timestamp))
+                .Concat(posts.Select(x => new EquatableTriple<string, int, DateTime>(x.Id, 0, x.Timestamp)))
+                .Max(triple => triple.First, triple => triple.Second);
 
             resultString = "";
             subcription = result.Subscribe(x =>
