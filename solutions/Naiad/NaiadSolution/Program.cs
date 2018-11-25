@@ -66,7 +66,7 @@ namespace Naiad
             ChangePath = "C:\\Repos\\ttc2018liveContest\\models\\2";
             RunIndex = "Debug";
             Sequences = 20;
-            Tool = "NMF";
+            Tool = "Naiad";
             ChangeSet = "2";
             Query = "Q1";
             if (Query == "Q1")
