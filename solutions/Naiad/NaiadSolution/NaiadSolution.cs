@@ -462,25 +462,7 @@ namespace Naiad
 
             foreach (var change in changes.Changes)
             {
-                if (change is AssociationCollectionInsertion)
-                {
-                    var aci = change as AssociationCollectionInsertion;
-                    if (aci.AddedElement is IComment)
-                    {
-                        var comment = aci.AddedElement as IComment;
-                        ProcessComment(comment);
-                    }
-                    else if (aci.AddedElement is IPost)
-                    {
-                        var post = aci.AddedElement as IPost;
-                        ProcessPost(post);
-                    }
-                    else if (aci.AddedElement is IUser)
-                    {
-                        var user = aci.AddedElement as IUser;
-                        ProcessUser(user);
-                    }
-                }
+                ProcessChange(change);
             }
             CallOnNext();
         }
