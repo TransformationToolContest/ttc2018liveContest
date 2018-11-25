@@ -10,6 +10,7 @@ using Microsoft.Research.Naiad.Frameworks.DifferentialDataflow;
 using NMF.Models.Changes;
 using TTC2018.LiveContest;
 using TTC2018.LiveContest.SocialNetwork;
+using Microsoft.Research.Naiad.Dataflow;
 
 namespace Naiad
 {
@@ -48,38 +49,53 @@ namespace Naiad
 
         override public int GetHashCode()
         {
-            try { 
             return From.GetHashCode() ^ To.GetHashCode();
-            } catch (Exception e)
-            {
-                Console.WriteLine(GetType().ToString());
-                return 0;
-            }
         }
     }
 
     class User : ObjectWithId, IEquatable<User>
     {
-        public User(string id) : base(id) { }
+        public string Name;
+        public User(string id, string name) : base(id)
+        {
+            Name = name;
+        }
         public bool Equals(User other)
         {
             return Equals(this, other);
         }
     }
-    class Post : ObjectWithId, IEquatable<Post>
+
+    class Submission : ObjectWithId, IEquatable<Submission>
     {
         public DateTime Timestamp;
-        public Post(string id, DateTime timestamp) : base(id) {
+        public string Content;
+
+        public Submission(string id, DateTime timestamp, string content) : base(id)
+        {
             Timestamp = timestamp;
+            Content = content;
+        }
+        public bool Equals(Submission other)
+        {
+            return Equals(this, other);
+        }
+    }
+    class Post : Submission, IEquatable<Post>
+    {
+        public Post(string id, DateTime timestamp, string content) : base(id, timestamp, content)
+        {
         }
         public bool Equals(Post other)
         {
             return Equals(this, other);
         }
     }
-    class Comment : ObjectWithId, IEquatable<Comment>
+    class Comment : Submission, IEquatable<Comment>
     {
-        public Comment(string id) : base(id) { }
+        public Comment(string id, DateTime timestamp, string content) : base(id, timestamp, content)
+        {
+        }
         public bool Equals(Comment other)
         {
             return Equals(this, other);
@@ -109,10 +125,38 @@ namespace Naiad
             return Equals(this, other);
         }
     }
-    class FriendsEdge : Edge, IEquatable<FriendsEdge>
+
+    /*
+     * comment -> rootPost
+     */
+    class PostEdge : Edge, IEquatable<PostEdge>
     {
-        FriendsEdge(string from, string to) : base(from, to) { }
-        public bool Equals(FriendsEdge other)
+        public PostEdge(string from, string to) : base(from, to) { }
+        public bool Equals(PostEdge other)
+        {
+            return Equals(this, other);
+        }
+    }
+
+    /*
+     * submission -> user
+     */
+    class SubmitterEdge : Edge, IEquatable<SubmitterEdge>
+    {
+        public SubmitterEdge(string from, string to) : base(from, to) { }
+        public bool Equals(SubmitterEdge other)
+        {
+            return Equals(this, other);
+        }
+    }
+
+    /*
+     * If a friend of b, then b friend of a. Despite of that, only one of the two edges will be exist.
+     */
+    class FriendEdge : Edge, IEquatable<FriendEdge>
+    {
+        public FriendEdge(string from, string to) : base(from, to) { }
+        public bool Equals(FriendEdge other)
         {
             return Equals(this, other);
         }
@@ -148,39 +192,171 @@ namespace Naiad
     abstract class NaiadSolution : Solution, IDisposable
     {
 
+        private ICollection<User> rawUsers;
+        private ICollection<Post> rawPosts;
+        private ICollection<Comment> rawComments;
+        private ICollection<CommentedEdge> rawCommentedEdges;
+        private ICollection<LikesEdge> rawLikesEdges;
+        private ICollection<PostEdge> rawPostEdges;
+        private ICollection<SubmitterEdge> rawSubmitterEdges;
+        private ICollection<FriendEdge> rawFriendEdges;
+
+        protected OneOffComputation computation;
+
+        protected InputCollection<User> users;
         protected InputCollection<Post> posts;
         protected InputCollection<Comment> comments;
         protected InputCollection<CommentedEdge> commentedEdges;
         protected InputCollection<LikesEdge> likesEdges;
-        protected OneOffComputation computation;
+        protected InputCollection<PostEdge> postEdges;
+        protected InputCollection<SubmitterEdge> submitterEdges;
+        protected InputCollection<FriendEdge> friendEdges;
+
+        protected int actualEpoch;
+
+        public NaiadSolution()
+        {
+            rawUsers = new List<User>();
+            rawPosts = new List<Post>();
+            rawComments = new List<Comment>();
+            rawCommentedEdges = new List<CommentedEdge>();
+            rawLikesEdges = new List<LikesEdge>();
+            rawPostEdges = new List<PostEdge>();
+            rawSubmitterEdges = new List<SubmitterEdge>();
+            rawFriendEdges = new List<FriendEdge>();
+
+            computation = NewComputation.FromConfig(new Configuration());
+
+            users = computation.NewInputCollection<User>();
+            posts = computation.NewInputCollection<Post>();
+            comments = computation.NewInputCollection<Comment>();
+            commentedEdges = computation.NewInputCollection<CommentedEdge>();
+            likesEdges = computation.NewInputCollection<LikesEdge>();
+            postEdges = computation.NewInputCollection<PostEdge>();
+            submitterEdges = computation.NewInputCollection<SubmitterEdge>();
+            friendEdges = computation.NewInputCollection<FriendEdge>();
+
+            actualEpoch = -1;
+        }
         public void Dispose()
         {
             computation.Dispose();
         }
 
-        protected static void AddCommentedsAndLikesFromPost(IPost post, ICollection<Comment> comments, ICollection<CommentedEdge> commenteds, ICollection<LikesEdge> likes)
+        protected void ProcessUser(IUser user)
         {
+            rawUsers.Add(new User(user.Id, user.Name));
+            foreach (var f in user.Friends)
+            {
+                if (f.Id.CompareTo(user.Id) < 0)
+                {
+                    rawFriendEdges.Add(new FriendEdge(user.Id, f.Id));
+                }
+            }
+        }
+        protected void ProcessPost(IPost post)
+        {
+            rawPosts.Add(new Post(post.Id, post.Timestamp, post.Content));
+            rawSubmitterEdges.Add(new SubmitterEdge(post.Id, post.Submitter.Id));
             foreach (var c in post.Comments)
             {
-                commenteds.Add(new CommentedEdge(post.Id, c.Id));
-                AddCommentedsAndLikesFromComment(c, comments, commenteds, likes);
+                rawCommentedEdges.Add(new CommentedEdge(post.Id, c.Id));
+                ProcessComment(c);
             }
 
         }
-        protected static void AddCommentedsAndLikesFromComment(IComment comment, ICollection<Comment> comments, ICollection<CommentedEdge> commenteds, ICollection<LikesEdge> likes)
+        protected void ProcessComment(IComment comment)
         {
 
-            comments.Add(new Comment(comment.Id));
+            rawComments.Add(new Comment(comment.Id, comment.Timestamp, comment.Content));
+            rawPostEdges.Add(new PostEdge(comment.Id, comment.Post.Id));
             foreach (var user in comment.LikedBy)
             {
-                likes.Add(new LikesEdge(user.Id, comment.Id));
+                rawLikesEdges.Add(new LikesEdge(user.Id, comment.Id));
 
             }
             foreach (var c in comment.Comments)
             {
-                commenteds.Add(new CommentedEdge(comment.Id, c.Id));
-                AddCommentedsAndLikesFromComment(c, comments, commenteds, likes);
+                rawCommentedEdges.Add(new CommentedEdge(comment.Id, c.Id));
+                ProcessComment(c);
             }
+
+        }
+        private void CallOnNext()
+        {
+            users.OnNext(rawUsers);
+            // users.OnCompleted();
+            posts.OnNext(rawPosts);
+            //posts.OnCompleted();
+            comments.OnNext(rawComments);
+            //comments.OnCompleted();
+            commentedEdges.OnNext(rawCommentedEdges);
+            //commentedEdges.OnCompleted();
+            likesEdges.OnNext(rawLikesEdges);
+            //likesEdges.OnCompleted();
+            postEdges.OnNext(rawPostEdges);
+            //postEdges.OnCompleted();
+            submitterEdges.OnNext(rawSubmitterEdges);
+            //submitterEdges.OnCompleted();
+            friendEdges.OnNext(rawFriendEdges);
+            //friendEdges.OnCompleted();
+
+            ++actualEpoch;
+        }
+        protected void LoadModel(SocialNetworkRoot model)
+        {
+            foreach (var u in model.Users)
+            {
+                ProcessUser(u);
+            }
+            foreach (var p in model.Posts)
+            {
+                ProcessPost(p);
+            }
+
+            computation.Activate();
+            CallOnNext();
+        }
+
+        protected void UpdateInputs(ModelChangeSet changes)
+        {
+            rawUsers.Clear();
+            rawPosts.Clear();
+            rawComments.Clear();
+            rawCommentedEdges.Clear();
+            rawLikesEdges.Clear();
+            rawPostEdges.Clear();
+            rawSubmitterEdges.Clear();
+            rawFriendEdges.Clear();
+
+            foreach (var change in changes.Changes)
+            {
+                if (change is AssociationCollectionInsertion)
+                {
+                    var aci = change as AssociationCollectionInsertion;
+                    if (aci.AddedElement is IComment)
+                    {
+                        var comment = aci.AddedElement as IComment;
+                        ProcessComment(comment);
+                    }
+                    else if (aci.AddedElement is IPost)
+                    {
+                        var post = aci.AddedElement as IPost;
+                        ProcessPost(post);
+                    }
+                    else if (aci.AddedElement is IUser)
+                    {
+                        var user = aci.AddedElement as IUser;
+                        ProcessUser(user);
+                    }
+                }
+            }
+            CallOnNext();
+        }
+
+        protected void Sync()
+        {
+            computation.Sync(actualEpoch);
 
         }
         ~NaiadSolution()
@@ -192,39 +368,39 @@ namespace Naiad
     class NaiadSolutionQ1 : NaiadSolution
     {
         //protected Collection<CommentedEdge> startigCommentedEdges;
-
+        private string resultString;
+        private Collection<Edge, Epoch> startigCommentedEdges;
+        private Collection<Edge, Epoch> reachedComments;
+        private Collection<Pair<string, int>, Epoch> commentLikes;
+        private Collection<EquatableTriple<string, int, DateTime>, Epoch> result;
+        private Subscription subcription;
         public override string Initial()
         {
-            computation = NewComputation.FromConfig(new Configuration());
-            posts = computation.NewInputCollection<Post>();
-            comments = computation.NewInputCollection<Comment>();
-            commentedEdges = computation.NewInputCollection<CommentedEdge>();
-            likesEdges = computation.NewInputCollection<LikesEdge>();
-
             /* initial   post -> comment   edges */
-            var startigCommentedEdges = posts.Join(commentedEdges, p => p.Id, e => e.From, p => p.Id, e => e.To, (pId, from, to) => new Edge(from, to));
+            /* DoNotUse can be null sometimes, should be investigated...*/
+            startigCommentedEdges = posts.Join(commentedEdges, p => p.Id, e => e.From, p => p.Id, e => e.To, (pId, DoNotUse, to) => new Edge(pId, to));
 
             /* pair ->1..* comment   edges*/
-            var reachedComments = startigCommentedEdges.FixedPoint((lc, x) => x.Join(commentedEdges.EnterLoop(lc),
+            reachedComments = startigCommentedEdges.FixedPoint((lc, x) => x.Join(commentedEdges.EnterLoop(lc),
                                                                edge => edge.To,
                                                                edge => edge.From,
                                                                (e1, e2) => new Edge(e1.From, e2.To))
                                                            .Concat(x)
                                                            .Distinct());
             /* comment, likeCount pairs */
-            var commentLikes = comments.CoGroupBy(
+            commentLikes = comments.CoGroupBy(
                 likesEdges,
                 c => c.Id,
                 l => l.To,
                 (cId, cs, ls) => new List<Pair<string, int>> { new Pair<string, int>(cId, ls.Count()) });
 
-            var result = reachedComments
+            result = reachedComments
                 .Join(commentLikes,
                     e => e.To,
                     l => l.First,
                     (e, l) => new EquatableTriple<string, string, int>(e.From, e.To, l.Second))
                 .GroupBy(
-                    t => t.First, 
+                    t => t.First,
                     (pId, ls) =>
                     {
                         var count = 0;
@@ -234,46 +410,40 @@ namespace Naiad
                         }
                         return new List<Pair<string, int>> { new Pair<string, int>(pId, count) };
                     })
-                .Join(posts, s => s.First, p => p.Id, s=> s.Second, p => p.Timestamp, (pId, count, timestamp) => new EquatableTriple<string, int, DateTime>(pId, count, timestamp));
+                .Join(posts, s => s.First, p => p.Id, s => s.Second, p => p.Timestamp, (pId, count, timestamp) => new EquatableTriple<string, int, DateTime>(pId, count, timestamp));
 
-            result.Subscribe(x =>
-                {
-                    Console.Error.WriteLine("AAAASD");
-                    foreach (var r in x.OrderByDescending(r => r.record.Third).OrderByDescending(r => r.record.Second).Take(3))
-                        Console.Error.WriteLine(r.weight + " " + r.record.First + " point: " + r.record.Second);
-                });
+            resultString = "";
+            subcription = result.Subscribe(x =>
+               {
+                   foreach (var r in x.OrderByDescending(r => r.record.Third).OrderByDescending(r => r.record.Second).Take(3))
+                   {
+                       resultString += r.record.First + "|";
+                       Console.Error.WriteLine(r.weight + " " + r.record.First + " point: " + r.record.Second);
+                   }
+                   //resultString = resultString.Substring(0, resultString.Length - 1);
+               });
 
-
-            var rawPosts = new List<Post>();
-            var rawComments = new List<Comment>();
-            var rawLikes = new List<LikesEdge>();
-            var rawCommenteds = new List<CommentedEdge>();
-            foreach (var p in SocialNetwork.Posts)
-            {
-                rawPosts.Add(new Post(p.Id, p.Timestamp));
-                AddCommentedsAndLikesFromPost(p, rawComments, rawCommenteds, rawLikes);
-            }
-
-            computation.Activate();
-            posts.OnNext(rawPosts);
-            posts.OnCompleted();
-            comments.OnNext(rawComments);
-            comments.OnCompleted();
-            commentedEdges.OnNext(rawCommenteds);
-            commentedEdges.OnCompleted();
-            likesEdges.OnNext(rawLikes);
-            likesEdges.OnCompleted();
-            computation.Sync(1);
-            computation.Join();
-
-            //throw new NotImplementedException();
-            return "";
+            LoadModel(SocialNetwork);
+            Sync();
+            return resultString;
 
         }
 
         public override string Update(ModelChangeSet changes)
         {
-            throw new NotImplementedException();
+            resultString = "";
+            subcription = result.Subscribe(x =>
+            {
+                foreach (var r in x.OrderByDescending(r => r.record.Third).OrderByDescending(r => r.record.Second).Take(3))
+                {
+                    resultString += r.record.First + "|";
+                    Console.Error.WriteLine(r.weight + " " + r.record.First + " point: " + r.record.Second);
+                }
+                //resultString = resultString.Substring(0, resultString.Length - 1);
+            });
+            UpdateInputs(changes);
+            Sync();
+            return resultString;
         }
     }
     class NaiadSolutionQ2 : NaiadSolution
