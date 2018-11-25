@@ -11,6 +11,7 @@ using NMF.Models.Changes;
 using TTC2018.LiveContest;
 using TTC2018.LiveContest.SocialNetwork;
 using Microsoft.Research.Naiad.Dataflow;
+using NMF.Models;
 
 namespace Naiad
 {
@@ -320,6 +321,134 @@ namespace Naiad
             CallOnNext();
         }
 
+        protected void ProcessChange(IModelChange change)
+        {
+            if (change is IAssociationCollectionInsertion)
+            {
+                var aci = change as IAssociationCollectionInsertion;
+                switch (aci.Feature.Name)
+                {
+                    case "likedBy":
+                        {
+                            var comment = aci.AffectedElement as IComment;
+                            var user = aci.AddedElement as IUser;
+                            rawLikesEdges.Add(new LikesEdge(user.Id, comment.Id));
+                            break;
+                        }
+                    case "likes":
+                        {
+                            // E.g.:
+                            // <changes xsi:type="changes:ChangeTransaction">
+                            //   <sourceChange xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment initial.xmi#406915" affectedElement="social:User initial.xmi#1259" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/likes" />
+                            //   <nestedChanges xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#1259" affectedElement="social:Comment initial.xmi#406915" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/likedBy" />
+                            // </changes>
+                            // We handle the opposite direction in above statement
+                            break;
+                        }
+                    case "submissions":
+                        {
+                            // E.g.:
+                            // <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Post #//@changes.3/@addedElement" affectedElement="social:User initial.xmi#1269" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
+                            // <changes xsi:type="changes:CompositionListInsertion" index="889" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+                            //   <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="255833" timestamp="2010-03-10T15:43:59" content="photo255833.jpg" submitter="initial.xmi#1269" />
+                            // </changes>
+                            // We handle the opposite direction in ICompositionListInsertion->posts and comments 
+                            break;
+                        }
+                    case "friends":
+                        {
+                            var user1 = aci.AffectedElement as IUser;
+                            var user2 = aci.AddedElement as IUser;
+                            if (user1.Id.CompareTo(user2.Id) < 0)
+                            {
+                                rawFriendEdges.Add(new FriendEdge(user1.Id, user2.Id));
+                            }
+                            break;
+                        }
+                    default:
+                        throw new Exception(aci.Feature.Name);
+                }
+            }
+            else if (change is IAssociationPropertyChange)
+            {
+                var apc = change as IAssociationPropertyChange;
+                switch (apc.Feature.Name)
+                {
+                    case "commented":
+                        { 
+                            // E.g.:
+                            //< changes xsi: type = "changes:ChangeTransaction" >
+                            //    < sourceChange xsi: type = "changes:CompositionListInsertion" index = "1" affectedElement = "social:Comment initial.xmi#725040" feature = "ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments" >
+                            //        < addedElement xmlns: social = "https://www.transformation-tool-contest.eu/2018/social_media" xsi: type = "social:Comment" post = "initial.xmi#723156" id = "725041" timestamp = "2010-03-10T15:31:35" content = "About Joseph Haydn, Michael Haydn, himself . About Frédéric Chopin, are for solo piano,." submitter = "initial.xmi#4281" />
+                            //    </ sourceChange >
+                            //    < nestedChanges xsi: type = "changes:AssociationPropertyChange" newValue = "social:Comment initial.xmi#725040" affectedElement = "social:Comment #//@changes.1/@sourceChange/@addedElement" feature = "ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
+                            //</ changes >
+                            // We handle the opposite direction in ICompositionListInsertion->comments 
+                            break;
+                        }
+                    default:
+                        throw new Exception(apc.Feature.Name);
+                }
+            }
+            else if (change is IChangeTransaction)
+            {
+                var ct = change as IChangeTransaction;
+                ProcessChange(ct.SourceChange);
+                foreach (var nestedChange in ct.NestedChanges)
+                {
+                    ProcessChange(nestedChange);
+                }
+            }
+            else if (change is ICompositionListInsertion)
+            {
+                var clt = change as ICompositionListInsertion;
+                switch (clt.Feature.Name)
+                {
+                    case "posts":
+                        {
+                            var post = clt.AddedElement as IPost;
+                            rawPosts.Add(new Post(post.Id, post.Timestamp, post.Content));
+                            break;
+                        }
+                    case "comments":
+                        {
+                            var submission = clt.AffectedElement as ISubmission;
+                            var comment = clt.AddedElement as IComment;
+                            rawCommentedEdges.Add(new CommentedEdge(comment.Id, submission.Id));
+                            break;
+                        }
+                    case "users":
+                        {
+                            var user = clt.AddedElement as IUser;
+                            rawUsers.Add(new User(user.Id, user.Name));
+                            break;
+                        }
+                    default:
+                        throw new Exception(clt.Feature.Name);
+                }
+            }
+            else if (change is IAttributePropertyChange)
+            {
+                var apc = change as IAttributePropertyChange;
+                switch (apc.Feature.Name)
+                {
+                    // TODO check it, this is an update not a new insert....
+                    case "name":
+                        {
+                            var user = apc.AffectedElement as IUser;
+                            rawUsers.Add(new User(user.Id, user.Name));
+                            break;
+                        }
+                    default:
+                        throw new Exception(apc.Feature.Name);
+                }
+            }
+            else
+            {
+                throw new Exception(change.GetType().ToString());
+            }
+
+        }
         protected void UpdateInputs(ModelChangeSet changes)
         {
             rawUsers.Clear();
