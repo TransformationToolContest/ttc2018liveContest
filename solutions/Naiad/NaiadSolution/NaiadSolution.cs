@@ -338,6 +338,26 @@ namespace Naiad
             CallOnNext();
         }
 
+        protected void AddNewComment(ISubmission original, IComment comment)
+        {
+            rawComments.Add(new Comment(comment.Id, comment.Timestamp, comment.Content));
+            rawCommentedEdges.Add(new CommentedEdge(original.Id, comment.Id));
+            rawPostEdges.Add(new PostEdge(comment.Id, comment.Post.Id));
+            rawSubmitterEdges.Add(new SubmitterEdge(comment.Id, comment.Submitter.Id));
+            foreach (var childComment in comment.Comments)
+            {
+                AddNewComment(comment, childComment);
+            }
+        }
+        protected void AddNewPost(IPost post)
+        {
+            rawPosts.Add(new Post(post.Id, post.Timestamp, post.Content));
+            rawSubmitterEdges.Add(new SubmitterEdge(post.Id, post.Submitter.Id));
+            foreach (var comment in post.Comments)
+            {
+                AddNewComment(post, comment);
+            }
+        }
         protected void ProcessChange(IModelChange change)
         {
             if (change is IAssociationCollectionInsertion)
@@ -392,7 +412,7 @@ namespace Naiad
                 switch (apc.Feature.Name)
                 {
                     case "commented":
-                        { 
+                        {
                             // E.g.:
                             //< changes xsi: type = "changes:ChangeTransaction" >
                             //    < sourceChange xsi: type = "changes:CompositionListInsertion" index = "1" affectedElement = "social:Comment initial.xmi#725040" feature = "ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments" >
@@ -424,14 +444,14 @@ namespace Naiad
                     case "posts":
                         {
                             var post = clt.AddedElement as IPost;
-                            rawPosts.Add(new Post(post.Id, post.Timestamp, post.Content));
+                            AddNewPost(post);
                             break;
                         }
                     case "comments":
                         {
                             var submission = clt.AffectedElement as ISubmission;
                             var comment = clt.AddedElement as IComment;
-                            rawCommentedEdges.Add(new CommentedEdge(comment.Id, submission.Id));
+                            AddNewComment(submission, comment);
                             break;
                         }
                     case "users":
