@@ -261,6 +261,7 @@ namespace Naiad
             postEdges.OnCompleted();
             submitterEdges.OnCompleted();
             friendEdges.OnCompleted();
+            computation.Join();
             computation.Dispose();
             isDisposed = true;
         }
@@ -605,7 +606,7 @@ namespace Naiad
             resultString = "";
 
 #if (ONNEXT_CALL_AS_PARAM)
-            bool callOnChanged = Int32.Parse(changes.AbsoluteUri.AbsolutePath.Substring(43, 2)) > 10;
+            bool callOnChanged = Int32.Parse(changes.AbsoluteUri.AbsolutePath.Substring(changes.AbsoluteUri.AbsolutePath.Length - 6, 2)) > 19;
 #else
             bool callOnChanged = true;
 #endif
