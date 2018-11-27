@@ -48,6 +48,7 @@ namespace Naiad
             {
                 Update(i);
             }
+            repository.Save(solution.SocialNetwork, "a.xml");
             solution.Dispose();
         }
 
@@ -64,11 +65,11 @@ namespace Naiad
             stopwatch.Restart();
             repository = new ModelRepository();
 
-            ChangePath = "C:\\Repos\\ttc2018liveContest\\models\\2";
+            ChangeSet = "4";
+            ChangePath = "C:\\Repos\\ttc2018liveContest\\models\\" + ChangeSet;
             RunIndex = "Debug";
             Sequences = 20;
             Tool = "Naiad";
-            ChangeSet = "2";
             Query = "Q1";
             if (Query == "Q1")
             {
