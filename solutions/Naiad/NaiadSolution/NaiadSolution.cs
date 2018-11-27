@@ -1,4 +1,8 @@
-﻿using System;
+﻿#define ONNEXT_CALL_AS_PARAM
+#undef ONNEXT_CALL_AS_PARAM
+#define CLEAR_AT_EVERY_UPDATE
+#undef CLEAR_AT_EVERY_UPDATE
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -335,7 +339,9 @@ namespace Naiad
             }
 
             computation.Activate();
+#if (!ONNEXT_CALL_AS_PARAM)
             CallOnNext();
+#endif
         }
 
         protected void AddNewComment(ISubmission original, IComment comment)
@@ -487,22 +493,27 @@ namespace Naiad
 
         }
 
-        protected void UpdateInputs(ModelChangeSet changes)
+        protected void UpdateInputs(ModelChangeSet changes, bool callOnNext)
         {
-            //rawUsers.Clear();
-            //rawPosts.Clear();
-            //rawComments.Clear();
-            //rawCommentedEdges.Clear();
-            //rawLikesEdges.Clear();
-            //rawPostEdges.Clear();
-            //rawSubmitterEdges.Clear();
-            //rawFriendEdges.Clear();
+#if (CLEAR_AT_EVERY_UPDATE)
+            rawUsers.Clear();
+            rawPosts.Clear();
+            rawComments.Clear();
+            rawCommentedEdges.Clear();
+            rawLikesEdges.Clear();
+            rawPostEdges.Clear();
+            rawSubmitterEdges.Clear();
+            rawFriendEdges.Clear();
+#endif
 
             foreach (var change in changes.Changes)
             {
                 ProcessChange(change);
             }
-            CallOnNext();
+            if (callOnNext)
+            {
+                CallOnNext();
+            }
             changes.Apply();
         }
 
@@ -582,7 +593,9 @@ namespace Naiad
                });
 
             LoadModel(SocialNetwork);
+#if (!ONNEXT_CALL_AS_PARAM)
             Sync();
+#endif
             return resultString;
 
         }
@@ -590,8 +603,17 @@ namespace Naiad
         public override string Update(ModelChangeSet changes)
         {
             resultString = "";
-            UpdateInputs(changes);
-            Sync();
+
+#if (ONNEXT_CALL_AS_PARAM)
+            bool callOnChanged = Int32.Parse(changes.AbsoluteUri.AbsolutePath.Substring(43, 2)) > 10;
+#else
+            bool callOnChanged = true;
+#endif
+            UpdateInputs(changes, callOnChanged);
+            if (callOnChanged)
+            {
+                Sync();
+            }
             return resultString;
         }
         override public void Dispose()
