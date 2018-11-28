@@ -1,7 +1,7 @@
 ﻿#define ONNEXT_CALL_AS_PARAM
 #undef ONNEXT_CALL_AS_PARAM
 #define CLEAR_AT_EVERY_UPDATE
-#undef CLEAR_AT_EVERY_UPDATE
+//#undef CLEAR_AT_EVERY_UPDATE
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +16,7 @@ using TTC2018.LiveContest;
 using TTC2018.LiveContest.SocialNetwork;
 using Microsoft.Research.Naiad.Dataflow;
 using NMF.Models;
+using Microsoft.Research.Naiad.Dataflow.StandardVertices;
 
 namespace Naiad
 {
@@ -191,7 +192,6 @@ namespace Naiad
         {
             return First.GetHashCode() ^ Second.GetHashCode() ^ Third.GetHashCode();
         }
-
     }
 
     abstract class NaiadSolution : Solution, IDisposable
@@ -479,8 +479,8 @@ namespace Naiad
                     // TODO check it, this is an update not a new insert....
                     case "name":
                         {
-                            var user = apc.AffectedElement as IUser;
-                            rawUsers.Add(new User(user.Id, user.Name));
+                            //var user = apc.AffectedElement as IUser;
+                            //rawUsers.Add(new User(user.Id, user.Name));
                             break;
                         }
                     default:
@@ -538,13 +538,15 @@ namespace Naiad
         private Collection<Pair<string, int>, Epoch> commentLikes;
         private Collection<EquatableTriple<string, int, DateTime>, Epoch> result;
         private Subscription subcription;
+        private IDictionary<string, EquatableTriple<string, int, DateTime>> proba;
         public override string Initial()
         {
+            proba = new Dictionary<string, EquatableTriple<string, int, DateTime>>();
             /* initial   post -> comment   edges */
             /* DoNotUse can be null sometimes, should be investigated...*/
             startigCommentedEdges = posts.Join(commentedEdges, p => p.Id, e => e.From, p => p.Id, e => e.To, (pId, DoNotUse, to) => new Edge(pId, to));
 
-            /* pair ->1..* comment   edges*/
+            /* post ->1..* comment   edges*/
             reachedComments = startigCommentedEdges.FixedPoint((lc, x) => x.Join(commentedEdges.EnterLoop(lc),
                                                                edge => edge.To,
                                                                edge => edge.From,
@@ -581,15 +583,16 @@ namespace Naiad
             resultString = "";
             subcription = result.Subscribe(x =>
                {
-                   foreach (var r in x.OrderByDescending(r => r.record.Third).OrderByDescending(r => r.record.Second).Take(3))
+                   foreach (var r in x.OrderBy(r => r.weight))
                    {
-                       //resultString += r.record.First + "|";
-                       resultString += r.record.First + " " + r.record.Second + "|";
-                       //Console.Error.WriteLine(r.weight + " " + r.record.First + " point: " + r.record.Second);
-                   }
-                   if (resultString.Length > 2)
-                   {
-                       resultString = resultString.Substring(0, resultString.Length - 1);
+                       if (r.weight < 0)
+                       {
+                           proba.Remove(r.record.First);
+                       }
+                       if (r.weight > 0)
+                       {
+                           proba.Add(r.record.First, r.record);
+                       }
                    }
                });
 
@@ -614,6 +617,14 @@ namespace Naiad
             if (callOnChanged)
             {
                 Sync();
+                foreach (var r in proba.Values.OrderByDescending(t => t.Third).OrderByDescending(t => t.Second).Take(3))
+                {
+                    resultString += r.First + "|";
+                }
+                if (resultString.Length > 2)
+                {
+                    resultString = resultString.Substring(0, resultString.Length - 1);
+                }
             }
             return resultString;
         }
