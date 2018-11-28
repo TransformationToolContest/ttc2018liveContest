@@ -194,6 +194,37 @@ namespace Naiad
         }
     }
 
+    class Task1PostInfo : IComparable<Task1PostInfo>, IEquatable<Task1PostInfo>
+    {
+        public string PostId;
+        public int Score;
+        public DateTime Timestamp;
+
+        public Task1PostInfo(string postId, int score, DateTime timestamp)
+        {
+            PostId = postId;
+            Score = score;
+            Timestamp = timestamp;
+        }
+
+        // x.CompareTo(y) < 0 ==> x < y
+        // x.CompareTo(y) > 0 ==> x > y
+        public int CompareTo(Task1PostInfo other)
+        {
+            var scoreResult = Score.CompareTo(other.Score);
+            if (scoreResult != 0)
+            {
+                return scoreResult;
+            }
+            return Timestamp.CompareTo(other.Timestamp);
+        }
+
+        public bool Equals(Task1PostInfo other)
+        {
+            return Score == other.Score && Timestamp == other.Timestamp && PostId == other.PostId;
+        }
+    }
+
     abstract class NaiadSolution : Solution, IDisposable
     {
 
@@ -536,15 +567,17 @@ namespace Naiad
         private Collection<Edge, Epoch> startigCommentedEdges;
         private Collection<Edge, Epoch> reachedComments;
         private Collection<Pair<string, int>, Epoch> commentLikes;
-        private Collection<EquatableTriple<string, int, DateTime>, Epoch> result;
+        private Collection<Task1PostInfo, Epoch> result;
         private Subscription subcription;
-        private IDictionary<string, EquatableTriple<string, int, DateTime>> proba;
+        private IList<Task1PostInfo> top3;
+        private Dictionary<string, int> idToPlace;
         public override string Initial()
         {
-            proba = new Dictionary<string, EquatableTriple<string, int, DateTime>>();
+            top3 = new List<Task1PostInfo>();
+            idToPlace = new Dictionary<string, int>();
             /* initial   post -> comment   edges */
             /* DoNotUse can be null sometimes, should be investigated...*/
-            startigCommentedEdges = posts.Join(commentedEdges, p => p.Id, e => e.From, p => p.Id, e => e.To, (pId, DoNotUse, to) => new Edge(pId, to));
+            startigCommentedEdges = posts.Join(commentedEdges, p => p.Id, e => e.From, (p, e) => new Edge(p.Id, e.To));
 
             /* post ->1..* comment   edges*/
             reachedComments = startigCommentedEdges.FixedPoint((lc, x) => x.Join(commentedEdges.EnterLoop(lc),
@@ -560,11 +593,10 @@ namespace Naiad
                 l => l.To,
                 (cId, cs, ls) => new List<Pair<string, int>> { new Pair<string, int>(cId, ls.Count()) });
 
-            result = reachedComments
-                .Join(commentLikes,
-                    e => e.To,
-                    l => l.First,
-                    (e, l) => new EquatableTriple<string, string, int>(e.From, e.To, l.Second))
+            result = reachedComments.Join(commentLikes,
+                   e => e.To,
+                   l => l.First,
+                   (e, l) => new EquatableTriple<string, string, int>(e.From, e.To, l.Second))
                 .GroupBy(
                     t => t.First,
                     (pId, ls) =>
@@ -576,22 +608,55 @@ namespace Naiad
                         }
                         return new List<Pair<string, int>> { new Pair<string, int>(pId, count) };
                     })
-                .Join(posts, s => s.First, p => p.Id, s => s.Second, p => p.Timestamp, (pId, count, timestamp) => new EquatableTriple<string, int, DateTime>(pId, count, timestamp))
-                .Concat(posts.Select(x => new EquatableTriple<string, int, DateTime>(x.Id, 0, x.Timestamp)))
-                .Max(triple => triple.First, triple => triple.Second);
+                .Join(posts, s => s.First, p => p.Id, (l, p) => new Task1PostInfo(p.Id, l.Second, p.Timestamp))
+                .Concat(posts.Select(x => new Task1PostInfo(x.Id, 0, x.Timestamp)))
+                .Max(triple => triple.PostId, triple => triple.Score);
 
-            resultString = "";
+
             subcription = result.Subscribe(x =>
                {
                    foreach (var r in x.OrderBy(r => r.weight))
                    {
                        if (r.weight < 0)
                        {
-                           proba.Remove(r.record.First);
+                           if (idToPlace.ContainsKey(r.record.PostId))
+                           {
+                               int place = idToPlace[r.record.PostId];
+                               idToPlace.Remove(r.record.PostId);
+
+                               for (var i = top3.Count - 1; i > place; i--)
+                               {
+                                   idToPlace[top3.ElementAt(i).PostId] = i - 1;
+                               }
+                               top3.RemoveAt(place);
+                           }
                        }
                        if (r.weight > 0)
                        {
-                           proba.Add(r.record.First, r.record);
+                           if (top3.Count < 3 || r.record.CompareTo(top3.Last()) > 0)
+                           {
+                               var i = top3.Count - 1;
+                               for (; i >= 0; i--)
+                               {
+                                   if (top3.ElementAt(i).CompareTo(r.record) < 0)
+                                   {
+                                       idToPlace[top3.ElementAt(i).PostId] = idToPlace[top3.ElementAt(i).PostId] + 1;
+                                   }
+                                   else
+                                   {
+                                       break;
+                                   }
+                               }
+                               top3.Insert(i + 1, r.record);
+                               idToPlace.Add(r.record.PostId, i + 1);
+
+                               if (top3.Count > 3)
+                               {
+                                   var itemToRemove = top3.Last();
+                                   idToPlace.Remove(itemToRemove.PostId);
+                                   top3.RemoveAt(3);
+                               }
+                           }
                        }
                    }
                });
@@ -617,9 +682,9 @@ namespace Naiad
             if (callOnChanged)
             {
                 Sync();
-                foreach (var r in proba.Values.OrderByDescending(t => t.Third).OrderByDescending(t => t.Second).Take(3))
+                foreach (var r in top3)
                 {
-                    resultString += r.First + "|";
+                    resultString += r.PostId + "|";
                 }
                 if (resultString.Length > 2)
                 {
