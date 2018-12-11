@@ -286,18 +286,25 @@ namespace Naiad
     {
         public string CommentId;
         public int LargestComponentSize;
+        public DateTime Timestamp;
 
-        public Task2CommentInfo(string commentId, int largestComponentSize)
+        public Task2CommentInfo(string commentId, int largestComponentSize, DateTime timestamp)
         {
-            this.CommentId = commentId;
-            this.LargestComponentSize = largestComponentSize;
+            CommentId = commentId;
+            LargestComponentSize = largestComponentSize;
+            Timestamp = timestamp;
         }
 
         // x.CompareTo(y) < 0 ==> x < y
         // x.CompareTo(y) > 0 ==> x > y
         public int CompareTo(Task2CommentInfo other)
         {
-            return LargestComponentSize.CompareTo(other.LargestComponentSize);
+            var scoreResult = LargestComponentSize.CompareTo(other.LargestComponentSize);
+            if (scoreResult != 0)
+            {
+                return scoreResult;
+            }
+            return Timestamp.CompareTo(other.Timestamp);
         }
 
         public bool Equals(Task2CommentInfo other)
@@ -677,7 +684,7 @@ namespace Naiad
             var resultString = "";
             foreach (var r in top3)
             {
-                resultString += r.GetId() + "|";
+                resultString += r.GetId() + " " + r.GetValue() + "|";
             }
             if (resultString.Length > 2)
             {
@@ -862,9 +869,12 @@ namespace Naiad
                     cdlu => new Pair<string, string>(cdlu.CommentId, cdlu.Label),
                     (commentAndLabel, cdlus) =>
                         {
-                            return new List<Task2CommentInfo> { new Task2CommentInfo(commentAndLabel.First, cdlus.Count()) };
+                            return new List<Pair<string, int>> { new Pair<string, int>(commentAndLabel.First, cdlus.Count()) };
                         }
-                ).Max(ci => ci.CommentId, ci => ci.LargestComponentSize);
+                )
+                .Join(comments, cs => cs.First, c => c.Id, (cs, c) => new Task2CommentInfo(c.Id, cs.Second, c.Timestamp))
+                .Concat(comments.Select(c => new Task2CommentInfo(c.Id, 0, c.Timestamp)))
+                .Max(ci => ci.CommentId, ci => ci.LargestComponentSize);
 
             commentComponentSizes.Subscribe(x =>
             {
