@@ -819,17 +819,15 @@ namespace Naiad
             Dispose();
         }
     }
-    static class ConnectedComponentsExtensionMethods
-    {
-
-    }
     class NaiadSolutionQ2 : NaiadSolution<Task2CommentInfo>
     {
         private Collection<CommentDependentKnows, Epoch> commentDependentKnows;
+        private Collection<CommentDependentLabeledUser, Epoch> commentDependentUsers;
         private Collection<CommentDependentLabeledUser, Epoch> commentDependentLabelGraph;
         private Collection<Task2CommentInfo, Epoch> commentComponentSizes;
         private Subscription subcription;
-        public static Collection<CommentDependentLabeledUser, IterationIn<Epoch>> LocalMin(
+        private Subscription subcription1;
+        public Collection<CommentDependentLabeledUser, IterationIn<Epoch>> LocalMin(
                     Collection<CommentDependentLabeledUser, IterationIn<Epoch>> users,
                     Collection<CommentDependentKnows, IterationIn<Epoch>> edges)
         {
@@ -841,23 +839,14 @@ namespace Naiad
         public override string Initial()
         {
             base.Init();
-            var asd = likesEdges.Join(likesEdges, l1 => l1.To, l2 => l2.To, (l1, l2) => new CommentDependentKnows(l1.To, l1.From, l2.From));
 
-            asd.Subscribe(x =>
-            {
-                //Console.WriteLine("Lofasz0");
-            });
+            commentDependentUsers = likesEdges.Select(l => new CommentDependentLabeledUser(l.To, l.From, l.From));
 
-            commentDependentKnows = asd
+            commentDependentKnows = commentDependentUsers
+                .Join(commentDependentUsers, cdu1 => cdu1.CommentId, cdu2 => cdu2.CommentId, (cdu1, cdu2) => new CommentDependentKnows(cdu1.CommentId, cdu1.UserId, cdu2.UserId))
                 .Join(friendEdges, cdk => new FriendEdge(cdk.UserId1, cdk.UserId2), f => f, (cdk, f) => cdk);
-            commentDependentKnows.Subscribe(x =>
-            {
-                //Console.WriteLine("Lofasz1");
-            });
-            commentDependentLabelGraph = commentDependentKnows
-                .Select(cdk => new CommentDependentLabeledUser(cdk.CommentId, cdk.UserId1, cdk.UserId1))
-                .Distinct()
-                .FixedPoint((lc, x) => LocalMin(x, commentDependentKnows.EnterLoop(lc)));
+
+            commentDependentLabelGraph = commentDependentUsers.FixedPoint((lc, x) => LocalMin(x, commentDependentKnows.EnterLoop(lc)));
 
             commentDependentLabelGraph.Subscribe(x =>
             {
@@ -872,13 +861,14 @@ namespace Naiad
                             return new List<Pair<string, int>> { new Pair<string, int>(commentAndLabel.First, cdlus.Count()) };
                         }
                 )
+                .Sum(ci => ci.First, ci => ci.Second, (commentId, sumValue) => new Pair<string, int>(commentId, sumValue))
                 .Join(comments, cs => cs.First, c => c.Id, (cs, c) => new Task2CommentInfo(c.Id, cs.Second, c.Timestamp))
                 .Concat(comments.Select(c => new Task2CommentInfo(c.Id, 0, c.Timestamp)))
-                .Max(ci => ci.CommentId, ci => ci.LargestComponentSize);
+                .Max(ci => ci.CommentId, ci => ci.LargestComponentSize); ;
 
             commentComponentSizes.Subscribe(x =>
             {
-                //Console.WriteLine("Lofasz3");
+                Console.WriteLine("Lofasz3");
             });
 
             subcription = commentComponentSizes.Subscribe((componentSizes) =>
