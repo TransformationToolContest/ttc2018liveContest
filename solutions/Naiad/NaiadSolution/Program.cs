@@ -1,14 +1,10 @@
-﻿using NMF.Models;
+﻿#define DO_NAIAD_STUFF
+//#undef DO_NAIAD_STUFF
 using NMF.Models.Changes;
 using NMF.Models.Repository;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TTC2018.LiveContest;
 using TTC2018.LiveContest.SocialNetwork;
 
 //[assembly: ModelMetadata("https://www.transformation-tool-contest.eu/2018/social_media", "Naiad.social_network.nmeta")]
@@ -29,7 +25,7 @@ namespace Naiad
 
         private static Stopwatch stopwatch = new Stopwatch();
 
-        private static NaiadSolution solution;
+        private static NaiadSolutionBase solution;
 
         static void Main(string[] args)
         {
@@ -65,12 +61,12 @@ namespace Naiad
             stopwatch.Restart();
             repository = new ModelRepository();
 
-            ChangeSet = "4";
+            ChangeSet = "2";
             ChangePath = "C:\\Repos\\ttc2018liveContest\\models\\" + ChangeSet;
             RunIndex = "Debug";
             Sequences = 20;
             Tool = "Naiad";
-            Query = "Q1";
+            Query = "Q2";
             if (Query == "Q1")
             {
                 solution = new NaiadSolutionQ1();
@@ -91,8 +87,11 @@ namespace Naiad
         static void Initial()
         {
             stopwatch.Restart();
+#if DO_NAIAD_STUFF
             var result = solution.Initial();
-            //var result = "";
+#else
+            var result = "";
+#endif
             stopwatch.Stop();
             Report(BenchmarkPhase.Initial, null, result);
         }
@@ -103,10 +102,13 @@ namespace Naiad
             var modelRepos = repository.Resolve(path);
             var changes = modelRepos.RootElements[0] as ModelChangeSet;
             stopwatch.Restart();
+#if DO_NAIAD_STUFF
             var result = solution.Update(changes);
-            //var result = "";
-            //changes.Apply();
+#else
+            var result = "";
+#endif
             stopwatch.Stop();
+            changes.Apply();
             Report(BenchmarkPhase.Update, iteration, result);
         }
 

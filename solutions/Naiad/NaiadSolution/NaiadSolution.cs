@@ -2,6 +2,8 @@
 #undef ONNEXT_CALL_AS_PARAM
 #define CLEAR_AT_EVERY_UPDATE
 //#undef CLEAR_AT_EVERY_UPDATE
+#define SERIALIZE_CSV
+#undef SERIALIZE_CSV
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,13 @@ using Microsoft.Research.Naiad.Dataflow.StandardVertices;
 
 namespace Naiad
 {
+    public abstract class NaiadSolutionBase : Solution, IDisposable
+    {
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+    }
     abstract class ObjectWithId : IEquatable<ObjectWithId>
     {
         public string Id;
@@ -58,7 +67,6 @@ namespace Naiad
             return From.GetHashCode() ^ To.GetHashCode();
         }
     }
-
     class User : ObjectWithId, IEquatable<User>
     {
         public string Name;
@@ -71,7 +79,6 @@ namespace Naiad
             return Equals(this, other);
         }
     }
-
     class Submission : ObjectWithId, IEquatable<Submission>
     {
         public DateTime Timestamp;
@@ -164,7 +171,7 @@ namespace Naiad
         public FriendEdge(string from, string to) : base(from, to) { }
         public bool Equals(FriendEdge other)
         {
-            return Equals(this, other);
+            return base.Equals(other);
         }
     }
 
@@ -193,8 +200,49 @@ namespace Naiad
             return First.GetHashCode() ^ Second.GetHashCode() ^ Third.GetHashCode();
         }
     }
+    class CommentDependentKnows : IEquatable<CommentDependentKnows>
+    {
+        public string CommentId;
+        public string UserId1;
+        public string UserId2;
 
-    class Task1PostInfo : IComparable<Task1PostInfo>, IEquatable<Task1PostInfo>
+        public CommentDependentKnows(string commentId, string userId1, string userId2)
+        {
+            CommentId = commentId;
+            UserId1 = userId1;
+            UserId2 = userId2;
+        }
+
+        public bool Equals(CommentDependentKnows other)
+        {
+            return CommentId == other.CommentId && UserId1 == other.UserId1 && UserId2 == other.UserId2;
+        }
+    }
+    class CommentDependentLabeledUser : IEquatable<CommentDependentLabeledUser>
+    {
+        public string CommentId;
+        public string UserId;
+        public string Label;
+
+        public CommentDependentLabeledUser(string commentId, string userId1, string userId2)
+        {
+            CommentId = commentId;
+            UserId = userId1;
+            Label = userId2;
+        }
+
+        public bool Equals(CommentDependentLabeledUser other)
+        {
+            return CommentId == other.CommentId && UserId == other.UserId;
+        }
+    }
+    interface Identifiable
+    {
+        string GetId();
+
+        int GetValue();
+    }
+    class Task1PostInfo : IComparable<Task1PostInfo>, IEquatable<Task1PostInfo>, Identifiable
     {
         public string PostId;
         public int Score;
@@ -223,11 +271,53 @@ namespace Naiad
         {
             return Score == other.Score && Timestamp == other.Timestamp && PostId == other.PostId;
         }
+
+        public string GetId()
+        {
+            return PostId;
+        }
+
+        public int GetValue()
+        {
+            return Score;
+        }
     }
-
-    abstract class NaiadSolution : Solution, IDisposable
+    class Task2CommentInfo : IComparable<Task2CommentInfo>, IEquatable<Task2CommentInfo>, Identifiable
     {
+        public string CommentId;
+        public int LargestComponentSize;
 
+        public Task2CommentInfo(string commentId, int largestComponentSize)
+        {
+            this.CommentId = commentId;
+            this.LargestComponentSize = largestComponentSize;
+        }
+
+        // x.CompareTo(y) < 0 ==> x < y
+        // x.CompareTo(y) > 0 ==> x > y
+        public int CompareTo(Task2CommentInfo other)
+        {
+            return LargestComponentSize.CompareTo(other.LargestComponentSize);
+        }
+
+        public bool Equals(Task2CommentInfo other)
+        {
+            return CommentId == other.CommentId && LargestComponentSize == other.LargestComponentSize;
+        }
+
+        public string GetId()
+        {
+            return CommentId;
+        }
+
+        public int GetValue()
+        {
+            return LargestComponentSize;
+        }
+    }
+    abstract class NaiadSolution<T> : NaiadSolutionBase, IDisposable
+        where T : IComparable<T>, IEquatable<T>, Identifiable
+    {
         private ICollection<User> rawUsers;
         private ICollection<Post> rawPosts;
         private ICollection<Comment> rawComments;
@@ -236,6 +326,9 @@ namespace Naiad
         private ICollection<PostEdge> rawPostEdges;
         private ICollection<SubmitterEdge> rawSubmitterEdges;
         private ICollection<FriendEdge> rawFriendEdges;
+#if (SERIALIZE_CSV)
+        private int updateCount;
+#endif
 
         protected OneOffComputation computation;
 
@@ -250,6 +343,9 @@ namespace Naiad
 
         protected int actualEpoch;
 
+        protected IList<T> top3;
+        protected Dictionary<string, int> idToPlace;
+
         protected bool isDisposed;
 
         public NaiadSolution()
@@ -263,7 +359,8 @@ namespace Naiad
             rawSubmitterEdges = new List<SubmitterEdge>();
             rawFriendEdges = new List<FriendEdge>();
 
-            computation = NewComputation.FromConfig(new Configuration());
+            string[] args = { "-t", "2" };
+            computation = NewComputation.FromArgs(ref args);
 
             users = computation.NewInputCollection<User>();
             posts = computation.NewInputCollection<Post>();
@@ -375,7 +472,11 @@ namespace Naiad
             CallOnNext();
 #endif
         }
-
+        protected void Init()
+        {
+            top3 = new List<T>();
+            idToPlace = new Dictionary<string, int>();
+        }
         protected void AddNewComment(ISubmission original, IComment comment)
         {
             rawComments.Add(new Comment(comment.Id, comment.Timestamp, comment.Content));
@@ -524,7 +625,66 @@ namespace Naiad
             }
 
         }
+        protected void HandleResultUpdates(Weighted<T>[] resultUpdates)
+        {
+            foreach (var r in resultUpdates.OrderBy(r => r.weight))
+            {
+                if (r.weight < 0)
+                {
+                    if (idToPlace.ContainsKey(r.record.GetId()))
+                    {
+                        int place = idToPlace[r.record.GetId()];
+                        idToPlace.Remove(r.record.GetId());
 
+                        for (var i = top3.Count - 1; i > place; i--)
+                        {
+                            idToPlace[top3.ElementAt(i).GetId()] = i - 1;
+                        }
+                        top3.RemoveAt(place);
+                    }
+                }
+                if (r.weight > 0)
+                {
+                    if (top3.Count < 3 || r.record.CompareTo(top3.Last()) > 0)
+                    {
+                        var i = top3.Count - 1;
+                        for (; i >= 0; i--)
+                        {
+                            if (top3.ElementAt(i).CompareTo(r.record) < 0)
+                            {
+                                idToPlace[top3.ElementAt(i).GetId()] = idToPlace[top3.ElementAt(i).GetId()] + 1;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        top3.Insert(i + 1, r.record);
+                        idToPlace.Add(r.record.GetId(), i + 1);
+
+                        if (top3.Count > 3)
+                        {
+                            var itemToRemove = top3.Last();
+                            idToPlace.Remove(itemToRemove.GetId());
+                            top3.RemoveAt(3);
+                        }
+                    }
+                }
+            }
+        }
+        protected string GetResultString()
+        {
+            var resultString = "";
+            foreach (var r in top3)
+            {
+                resultString += r.GetId() + "|";
+            }
+            if (resultString.Length > 2)
+            {
+                resultString = resultString.Substring(0, resultString.Length - 1);
+            }
+            return resultString;
+        }
         protected void UpdateInputs(ModelChangeSet changes, bool callOnNext)
         {
 #if (CLEAR_AT_EVERY_UPDATE)
@@ -546,7 +706,7 @@ namespace Naiad
             {
                 CallOnNext();
             }
-            changes.Apply();
+            //changes.Apply();
         }
 
         protected void Sync()
@@ -560,32 +720,28 @@ namespace Naiad
         }
     }
 
-    class NaiadSolutionQ1 : NaiadSolution
+    class NaiadSolutionQ1 : NaiadSolution<Task1PostInfo>
     {
         //protected Collection<CommentedEdge> startigCommentedEdges;
-        private string resultString;
-        private Collection<Edge, Epoch> startigCommentedEdges;
+        private Collection<Edge, Epoch> startingCommentedEdges;
         private Collection<Edge, Epoch> reachedComments;
         private Collection<Pair<string, int>, Epoch> commentLikes;
         private Collection<Task1PostInfo, Epoch> result;
         private Subscription subcription;
-        private IList<Task1PostInfo> top3;
-        private Dictionary<string, int> idToPlace;
         public override string Initial()
         {
-            top3 = new List<Task1PostInfo>();
-            idToPlace = new Dictionary<string, int>();
+            base.Init();
             /* initial   post -> comment   edges */
             /* DoNotUse can be null sometimes, should be investigated...*/
-            startigCommentedEdges = posts.Join(commentedEdges, p => p.Id, e => e.From, (p, e) => new Edge(p.Id, e.To));
+            startingCommentedEdges = posts.Join(commentedEdges, p => p.Id, e => e.From, (p, e) => new Edge(p.Id, e.To));
 
             /* post ->1..* comment   edges*/
-            reachedComments = startigCommentedEdges.FixedPoint((lc, x) => x.Join(commentedEdges.EnterLoop(lc),
-                                                               edge => edge.To,
-                                                               edge => edge.From,
-                                                               (e1, e2) => new Edge(e1.From, e2.To))
-                                                           .Concat(x)
-                                                           .Distinct());
+            reachedComments = startingCommentedEdges.FixedPoint((lc, x) => x.Join(commentedEdges.EnterLoop(lc),
+                                                              edge => edge.To,
+                                                              edge => edge.From,
+                                                              (e1, e2) => new Edge(e1.From, e2.To))
+                                                          .Concat(x)
+                                                          .Distinct());
             /* comment, likeCount pairs */
             commentLikes = comments.CoGroupBy(
                 likesEdges,
@@ -593,10 +749,11 @@ namespace Naiad
                 l => l.To,
                 (cId, cs, ls) => new List<Pair<string, int>> { new Pair<string, int>(cId, ls.Count()) });
 
-            result = reachedComments.Join(commentLikes,
+            result = reachedComments.PartitionBy(c => c.To.Last()).Join(commentLikes.PartitionBy(l => l.First.Last()),
                    e => e.To,
                    l => l.First,
                    (e, l) => new EquatableTriple<string, string, int>(e.From, e.To, l.Second))
+                .PartitionBy(t => t.First.Last())
                 .GroupBy(
                     t => t.First,
                     (pId, ls) =>
@@ -615,64 +772,19 @@ namespace Naiad
 
             subcription = result.Subscribe(x =>
                {
-                   foreach (var r in x.OrderBy(r => r.weight))
-                   {
-                       if (r.weight < 0)
-                       {
-                           if (idToPlace.ContainsKey(r.record.PostId))
-                           {
-                               int place = idToPlace[r.record.PostId];
-                               idToPlace.Remove(r.record.PostId);
-
-                               for (var i = top3.Count - 1; i > place; i--)
-                               {
-                                   idToPlace[top3.ElementAt(i).PostId] = i - 1;
-                               }
-                               top3.RemoveAt(place);
-                           }
-                       }
-                       if (r.weight > 0)
-                       {
-                           if (top3.Count < 3 || r.record.CompareTo(top3.Last()) > 0)
-                           {
-                               var i = top3.Count - 1;
-                               for (; i >= 0; i--)
-                               {
-                                   if (top3.ElementAt(i).CompareTo(r.record) < 0)
-                                   {
-                                       idToPlace[top3.ElementAt(i).PostId] = idToPlace[top3.ElementAt(i).PostId] + 1;
-                                   }
-                                   else
-                                   {
-                                       break;
-                                   }
-                               }
-                               top3.Insert(i + 1, r.record);
-                               idToPlace.Add(r.record.PostId, i + 1);
-
-                               if (top3.Count > 3)
-                               {
-                                   var itemToRemove = top3.Last();
-                                   idToPlace.Remove(itemToRemove.PostId);
-                                   top3.RemoveAt(3);
-                               }
-                           }
-                       }
-                   }
+                   HandleResultUpdates(x);
                });
 
             LoadModel(SocialNetwork);
 #if (!ONNEXT_CALL_AS_PARAM)
             Sync();
 #endif
-            return resultString;
+            return GetResultString();
 
         }
 
         public override string Update(ModelChangeSet changes)
         {
-            resultString = "";
-
 #if (ONNEXT_CALL_AS_PARAM)
             bool callOnChanged = Int32.Parse(changes.AbsoluteUri.AbsolutePath.Substring(changes.AbsoluteUri.AbsolutePath.Length - 6, 2)) > 19;
 #else
@@ -682,16 +794,9 @@ namespace Naiad
             if (callOnChanged)
             {
                 Sync();
-                foreach (var r in top3)
-                {
-                    resultString += r.PostId + "|";
-                }
-                if (resultString.Length > 2)
-                {
-                    resultString = resultString.Substring(0, resultString.Length - 1);
-                }
+                return GetResultString();
             }
-            return resultString;
+            return "";
         }
         override public void Dispose()
         {
@@ -707,19 +812,91 @@ namespace Naiad
             Dispose();
         }
     }
-    class NaiadSolutionQ2 : NaiadSolution
+    static class ConnectedComponentsExtensionMethods
     {
+
+    }
+    class NaiadSolutionQ2 : NaiadSolution<Task2CommentInfo>
+    {
+        private Collection<CommentDependentKnows, Epoch> commentDependentKnows;
+        private Collection<CommentDependentLabeledUser, Epoch> commentDependentLabelGraph;
+        private Collection<Task2CommentInfo, Epoch> commentComponentSizes;
+        private Subscription subcription;
+        public static Collection<CommentDependentLabeledUser, IterationIn<Epoch>> LocalMin(
+                    Collection<CommentDependentLabeledUser, IterationIn<Epoch>> users,
+                    Collection<CommentDependentKnows, IterationIn<Epoch>> edges)
+        {
+            return users.Join(edges, u => u.UserId, e => e.UserId1, (u, e) => new CommentDependentLabeledUser(u.CommentId, e.UserId2, u.Label))
+                .Concat(users)
+                .Min(u => u, u => u.Label);
+
+        }
         public override string Initial()
         {
-            Console.WriteLine("InitialCalled");
-            return "Initial";
+            base.Init();
+            var asd = likesEdges.Join(likesEdges, l1 => l1.To, l2 => l2.To, (l1, l2) => new CommentDependentKnows(l1.To, l1.From, l2.From));
+
+            asd.Subscribe(x =>
+            {
+                //Console.WriteLine("Lofasz0");
+            });
+
+            commentDependentKnows = asd
+                .Join(friendEdges, cdk => new FriendEdge(cdk.UserId1, cdk.UserId2), f => f, (cdk, f) => cdk);
+            commentDependentKnows.Subscribe(x =>
+            {
+                //Console.WriteLine("Lofasz1");
+            });
+            commentDependentLabelGraph = commentDependentKnows
+                .Select(cdk => new CommentDependentLabeledUser(cdk.CommentId, cdk.UserId1, cdk.UserId1))
+                .Distinct()
+                .FixedPoint((lc, x) => LocalMin(x, commentDependentKnows.EnterLoop(lc)));
+
+            commentDependentLabelGraph.Subscribe(x =>
+            {
+                //Console.WriteLine("Lofasz2");
+            });
+
+            commentComponentSizes = commentDependentLabelGraph
+                .GroupBy(
+                    cdlu => new Pair<string, string>(cdlu.CommentId, cdlu.Label),
+                    (commentAndLabel, cdlus) =>
+                        {
+                            return new List<Task2CommentInfo> { new Task2CommentInfo(commentAndLabel.First, cdlus.Count()) };
+                        }
+                ).Max(ci => ci.CommentId, ci => ci.LargestComponentSize);
+
+            commentComponentSizes.Subscribe(x =>
+            {
+                //Console.WriteLine("Lofasz3");
+            });
+
+            subcription = commentComponentSizes.Subscribe((componentSizes) =>
+            {
+                HandleResultUpdates(componentSizes);
+            });
+
+            LoadModel(SocialNetwork);
+#if (!ONNEXT_CALL_AS_PARAM)
+            Sync();
+#endif
+            return GetResultString();
         }
 
         public override string Update(ModelChangeSet changes)
         {
-            changes.Apply();
-            Console.WriteLine("UpdateCalled");
-            return "Update";
+#if (ONNEXT_CALL_AS_PARAM)
+            bool callOnChanged = Int32.Parse(changes.AbsoluteUri.AbsolutePath.Substring(changes.AbsoluteUri.AbsolutePath.Length - 6, 2)) > 19;
+#else
+            bool callOnChanged = true;
+#endif
+            UpdateInputs(changes, callOnChanged);
+            if (callOnChanged)
+            {
+                Sync();
+                return GetResultString();
+            }
+            return "";
         }
         override public void Dispose()
         {
@@ -727,7 +904,7 @@ namespace Naiad
             {
                 return;
             }
-            // subcription.Dispose();
+            subcription.Dispose();
             base.Dispose();
         }
         ~NaiadSolutionQ2()
