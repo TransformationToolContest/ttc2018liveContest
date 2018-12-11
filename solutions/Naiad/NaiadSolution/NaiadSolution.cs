@@ -848,11 +848,6 @@ namespace Naiad
 
             commentDependentLabelGraph = commentDependentUsers.FixedPoint((lc, x) => LocalMin(x, commentDependentKnows.EnterLoop(lc)));
 
-            commentDependentLabelGraph.Subscribe(x =>
-            {
-                //Console.WriteLine("Lofasz2");
-            });
-
             commentComponentSizes = commentDependentLabelGraph
                 .GroupBy(
                     cdlu => new Pair<string, string>(cdlu.CommentId, cdlu.Label),
@@ -865,11 +860,6 @@ namespace Naiad
                 .Join(comments, cs => cs.First, c => c.Id, (cs, c) => new Task2CommentInfo(c.Id, cs.Second, c.Timestamp))
                 .Concat(comments.Select(c => new Task2CommentInfo(c.Id, 0, c.Timestamp)))
                 .Max(ci => ci.CommentId, ci => ci.LargestComponentSize); ;
-
-            commentComponentSizes.Subscribe(x =>
-            {
-                Console.WriteLine("Lofasz3");
-            });
 
             subcription = commentComponentSizes.Subscribe((componentSizes) =>
             {
