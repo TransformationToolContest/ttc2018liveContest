@@ -7,11 +7,11 @@
 <listEntry value="1"/>
 </listAttribute>
 <mapAttribute key="org.eclipse.debug.core.environmentVariables">
-<mapEntry key="ChangePath" value="../../models/1"/>
-<mapEntry key="ChangeSet" value="1"/>
+<mapEntry key="ChangePath" value="../../models/2"/>
+<mapEntry key="ChangeSet" value="2"/>
 <mapEntry key="Query" value="Q2"/>
 <mapEntry key="RunIndex" value="Debug"/>
-<mapEntry key="Sequences" value="9"/>
+<mapEntry key="Sequences" value="20"/>
 <mapEntry key="Tool" value="EMFSolutionViatra"/>
 </mapAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="ttc2018.LiveContestDriver"/>
