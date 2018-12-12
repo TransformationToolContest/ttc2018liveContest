@@ -738,7 +738,7 @@ namespace Naiad
             var resultString = "";
             foreach (var r in top3)
             {
-                resultString += r.GetId() + " " + r.GetValue() + "|";
+                resultString += r.GetId() + "|";
             }
             if (resultString.Length > 2)
             {
@@ -895,7 +895,7 @@ namespace Naiad
         public int Aggregate(long a, int b, int c)
         {
             Console.WriteLine(a + " " + b + " " + c);
-            return b + c * c;
+            return (int)a * b * b + c;
         }
         public string Aggregate(long a, string b, string c)
         {
@@ -911,67 +911,33 @@ namespace Naiad
         {
             base.Init();
 
-            commentDependentUsers = likesEdges.Select(l => new CommentDependentLabeledUser(l.To, l.From, l.From));//.Where(cdlu => cdlu.CommentId == "406915");
+            commentDependentUsers = likesEdges.Select(l => new CommentDependentLabeledUser(l.To, l.From, l.From));
             duplicatedFriends = friendEdges.Select(f => new FriendEdge(f.To, f.From)).Concat(friendEdges);
 
-            //var asd = likesEdges.Select(l => new CommentDependentLabeledUser(l.To, l.From, l.From))
-            //    .Join(duplicatedFriends, cdk => cdk.UserId, f => f.From, (cdk, f) => new CommentDependentKnows(cdk.CommentId, cdk.UserId, f.To));
-            //    .Where(cdk => cdk.CommentId == "406503");
-
             commentDependentKnows = likesEdges
-                .Select(l => new CommentDependentLabeledUser(l.To, l.From, l.From))//.Where(cdlu => cdlu.CommentId == "406915")
+                .Select(l => new CommentDependentLabeledUser(l.To, l.From, l.From))
                 .Join(duplicatedFriends, cdk => cdk.UserId, f => f.From, (cdk, f) => new CommentDependentKnows(cdk.CommentId, cdk.UserId, f.To))
                 .Join(likesEdges, cdk => cdk.UserId2, l => l.From, (cdk, l) => new Pair<CommentDependentKnows, LikesEdge>(cdk, l))
                 .Where(p => p.First.CommentId == p.Second.To).Select(p => p.First);
-
-            //var cdk2 = asd.Join(likesEdges, cdk => new LikesEdge(cdk.UserId2, cdk.CommentId), l => l, (cdk, l) => cdk);
-            //commentDependentKnows.Subscribe(x =>
-            //{
-            //    foreach (var r in x)
-            //    {
-            //        Console.WriteLine($"CDK ASD : #{r.record.CommentId}        {r.record.UserId1} ----> {r.record.UserId2}");
-            //    }
-            //});
-
-            //commentDependentKnows.Subscribe(x =>
-            //{
-            //    foreach (var r in x)
-            //    {
-            //        Console.WriteLine($"CDK: #{r.record.CommentId}        {r.record.UserId1} ----> {r.record.UserId2}");
-            //    }
-            //});
-
-            //cdk2.Subscribe(x =>
-            //{
-            //    foreach (var r in x)
-            //    {
-            //        Console.WriteLine($"CDK 2: #{r.record.CommentId}        {r.record.UserId1} ----> {r.record.UserId2}");
-            //    }
-            //});
-
-            //commentDependentKnows = commentDependentUsers
-            //    .Join(commentDependentUsers, cdu1 => cdu1.CommentId, cdu2 => cdu2.CommentId, (cdu1, cdu2) => new CommentDependentKnows(cdu1.CommentId, cdu1.UserId, cdu2.UserId))
-            //    .Join(friendEdges, cdk => new FriendEdge(cdk.UserId1, cdk.UserId2), f => f, (cdk, f) => cdk);
 
             commentDependentLabelGraph = commentDependentUsers.FixedPoint((lc, x) => LocalMin(x, commentDependentKnows.EnterLoop(lc)));
 
             commentComponentSizes = commentDependentLabelGraph
                 .Min(u => new Pair<string, string>(u.CommentId, u.UserId), u => u.Label)
-                .Distinct()//.Where(cdlu => cdlu.CommentId == "406915")
+                .Distinct()
                 .GroupBy(
                     cdlu => new Pair<string, string>(cdlu.CommentId, cdlu.Label),
                     (commentAndLabel, cdlus) =>
                         {
-                            //var ret = new List<Pair<string, int>>();
-                            //for(var i = 0; i < cdlus.Count(); ++i)
-                            //{
-                            //    ret.Add(new Pair<string, int>(commentAndLabel.First, cdlus.Count()));
-                            //}
-                            //return ret;
                             return new List<Pair<string, int>> { new Pair<string, int>(commentAndLabel.First, cdlus.Count()) };
                         }
                 )
-                //.Aggregate(ci => ci.First, ci => ci.Second, (count, value1, value2) => Aggregate(count, value1, value2), value => value == 0, (commentId, sumValue) => new Pair<string, int>(commentId, sumValue))
+                //.Aggregate(
+                //    ci => ci.First, 
+                //    ci => ci.Second * ci.Second, 
+                //    (count, value1, value2) => Aggregate(count, value1, value2),
+                //    value => value == 0, 
+                //    (commentId, sumValue) => new Pair<string, int>(commentId, sumValue))
                 .Sum(ci => ci.First, ci => ci.Second * ci.Second, (commentId, sumValue) => new Pair<string, int>(commentId, sumValue))
                 .Join(comments, cs => cs.First, c => c.Id, (cs, c) => new Task2CommentInfo(c.Id, cs.Second, c.Timestamp))
                 .Concat(comments.Select(c => new Task2CommentInfo(c.Id, 0, c.Timestamp)))
