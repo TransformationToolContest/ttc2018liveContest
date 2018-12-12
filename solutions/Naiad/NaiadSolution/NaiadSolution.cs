@@ -76,7 +76,7 @@ namespace Naiad
         }
         public bool Equals(User other)
         {
-            return Equals(this, other);
+            return base.Equals(other);
         }
     }
     class Submission : ObjectWithId, IEquatable<Submission>
@@ -91,7 +91,7 @@ namespace Naiad
         }
         public bool Equals(Submission other)
         {
-            return Equals(this, other);
+            return base.Equals(other);
         }
     }
     class Post : Submission, IEquatable<Post>
@@ -101,7 +101,7 @@ namespace Naiad
         }
         public bool Equals(Post other)
         {
-            return Equals(this, other);
+            return base.Equals(other);
         }
     }
     class Comment : Submission, IEquatable<Comment>
@@ -123,7 +123,7 @@ namespace Naiad
         public CommentedEdge(string from, string to) : base(from, to) { }
         public bool Equals(CommentedEdge other)
         {
-            return Equals(this, other);
+            return base.Equals(other);
         }
     }
 
@@ -135,7 +135,7 @@ namespace Naiad
         public LikesEdge(string from, string to) : base(from, to) { }
         public bool Equals(LikesEdge other)
         {
-            return Equals(this, other);
+            return base.Equals(other);
         }
     }
 
@@ -147,7 +147,7 @@ namespace Naiad
         public PostEdge(string from, string to) : base(from, to) { }
         public bool Equals(PostEdge other)
         {
-            return Equals(this, other);
+            return base.Equals(other);
         }
     }
 
@@ -159,7 +159,7 @@ namespace Naiad
         public SubmitterEdge(string from, string to) : base(from, to) { }
         public bool Equals(SubmitterEdge other)
         {
-            return Equals(this, other);
+            return base.Equals(other);
         }
     }
 
@@ -879,14 +879,15 @@ namespace Naiad
         private Collection<CommentDependentLabeledUser, Epoch> commentDependentUsers;
         private Collection<CommentDependentLabeledUser, Epoch> commentDependentLabelGraph;
         private Collection<Task2CommentInfo, Epoch> commentComponentSizes;
+        private Collection<FriendEdge, Epoch> duplicatedFriends;
         private Subscription subcription;
         private Subscription subcription1;
         public Collection<CommentDependentLabeledUser, IterationIn<Epoch>> LocalMin(
                     Collection<CommentDependentLabeledUser, IterationIn<Epoch>> users,
                     Collection<CommentDependentKnows, IterationIn<Epoch>> edges)
         {
-            var neighbours = users.Join(edges, u => u.UserId, e => e.UserId1, (u, e) => new CommentDependentLabeledUser(u.CommentId, e.UserId2, u.Label));
-            return neighbours.Concat(neighbours.Select(cdlu => new CommentDependentLabeledUser(cdlu.CommentId, cdlu.Label, cdlu.UserId)))
+            return users
+                .Join(edges, cdlu => new Pair<string, string>(cdlu.CommentId, cdlu.UserId), cdk => new Pair<string, string>(cdk.CommentId, cdk.UserId1), (cdlu, cdk) => new CommentDependentLabeledUser(cdlu.CommentId, cdk.UserId2, cdlu.Label))
                 .Concat(users)
                 .Min(u => new Pair<string, string>(u.CommentId, u.UserId), u => u.Label);
 
@@ -911,14 +912,50 @@ namespace Naiad
             base.Init();
 
             commentDependentUsers = likesEdges.Select(l => new CommentDependentLabeledUser(l.To, l.From, l.From));
+            duplicatedFriends = friendEdges.Select(f => new FriendEdge(f.To, f.From)).Concat(friendEdges);
 
-            commentDependentKnows = commentDependentUsers
-                .Join(commentDependentUsers, cdu1 => cdu1.CommentId, cdu2 => cdu2.CommentId, (cdu1, cdu2) => new CommentDependentKnows(cdu1.CommentId, cdu1.UserId, cdu2.UserId))
-                .Join(friendEdges, cdk => new FriendEdge(cdk.UserId1, cdk.UserId2), f => f, (cdk, f) => cdk);
+            //var asd = likesEdges.Select(l => new CommentDependentLabeledUser(l.To, l.From, l.From))
+            //    .Join(duplicatedFriends, cdk => cdk.UserId, f => f.From, (cdk, f) => new CommentDependentKnows(cdk.CommentId, cdk.UserId, f.To));
+            //    .Where(cdk => cdk.CommentId == "406503");
+
+            commentDependentKnows = likesEdges
+                .Select(l => new CommentDependentLabeledUser(l.To, l.From, l.From))
+                .Join(duplicatedFriends, cdk => cdk.UserId, f => f.From, (cdk, f) => new CommentDependentKnows(cdk.CommentId, cdk.UserId, f.To))
+                .Join(likesEdges, cdk => cdk.UserId2, l => l.From, (cdk, l) => new Pair<CommentDependentKnows, LikesEdge>(cdk, l))
+                .Where(p => p.First.CommentId == p.Second.To).Select(p => p.First);
+
+            //var cdk2 = asd.Join(likesEdges, cdk => new LikesEdge(cdk.UserId2, cdk.CommentId), l => l, (cdk, l) => cdk);
+            //asd.Subscribe(x =>
+            //{
+            //    foreach (var r in x)
+            //    {
+            //        Console.WriteLine($"CDK ASD : #{r.record.CommentId}        {r.record.UserId1} ----> {r.record.UserId2}");
+            //    }
+            //});
+
+            //commentDependentKnows.Subscribe(x =>
+            //{
+            //    foreach (var r in x)
+            //    {
+            //        Console.WriteLine($"CDK: #{r.record.CommentId}        {r.record.UserId1} ----> {r.record.UserId2}");
+            //    }
+            //});
+
+            //cdk2.Subscribe(x =>
+            //{
+            //    foreach (var r in x)
+            //    {
+            //        Console.WriteLine($"CDK 2: #{r.record.CommentId}        {r.record.UserId1} ----> {r.record.UserId2}");
+            //    }
+            //});
+
+            //commentDependentKnows = commentDependentUsers
+            //    .Join(commentDependentUsers, cdu1 => cdu1.CommentId, cdu2 => cdu2.CommentId, (cdu1, cdu2) => new CommentDependentKnows(cdu1.CommentId, cdu1.UserId, cdu2.UserId))
+            //    .Join(friendEdges, cdk => new FriendEdge(cdk.UserId1, cdk.UserId2), f => f, (cdk, f) => cdk);
 
             commentDependentLabelGraph = commentDependentUsers.FixedPoint((lc, x) => LocalMin(x, commentDependentKnows.EnterLoop(lc)));
 
-            commentComponentSizes = commentDependentLabelGraph.Where(cdlu => cdlu.CommentId == "406503").Distinct()
+            commentComponentSizes = commentDependentLabelGraph.Distinct()
                 .GroupBy(
                     cdlu => new Pair<string, string>(cdlu.CommentId, cdlu.Label),
                     (commentAndLabel, cdlus) =>
