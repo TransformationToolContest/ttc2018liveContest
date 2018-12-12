@@ -1,7 +1,7 @@
 ﻿#define ONNEXT_CALL_AS_PARAM
 #undef ONNEXT_CALL_AS_PARAM
 #define CLEAR_AT_EVERY_UPDATE
-//#undef CLEAR_AT_EVERY_UPDATE
+#undef CLEAR_AT_EVERY_UPDATE
 #define SERIALIZE_CSV
 #undef SERIALIZE_CSV
 using System;
@@ -24,10 +24,42 @@ namespace Naiad
 {
     public abstract class NaiadSolutionBase : Solution, IDisposable
     {
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        ~NaiadSolutionBase()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(false);
+        }
+
+        // This code added to correctly implement the disposable pattern.
         public void Dispose()
         {
-            throw new NotImplementedException();
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
         }
+        #endregion
     }
     abstract class ObjectWithId : IEquatable<ObjectWithId>
     {
@@ -387,6 +419,8 @@ namespace Naiad
         private ICollection<PostEdge> rawPostEdges;
         private ICollection<SubmitterEdge> rawSubmitterEdges;
         private ICollection<FriendEdge> rawFriendEdges;
+
+        private readonly int TopCount = 3;
 #if (SERIALIZE_CSV)
         private int updateCount;
 #endif
@@ -404,7 +438,7 @@ namespace Naiad
 
         protected int actualEpoch;
 
-        protected IList<T> top3;
+        protected IList<T> topValues;
         protected Dictionary<string, int> idToPlace;
 
         protected bool isDisposed;
@@ -436,25 +470,21 @@ namespace Naiad
 
             isDisposed = false;
         }
-        public virtual void Dispose()
+        protected int Aggregate(long a, int b, int c)
         {
-            if (isDisposed)
-            {
-                return;
-            }
-            users.OnCompleted();
-            posts.OnCompleted();
-            comments.OnCompleted();
-            commentedEdges.OnCompleted();
-            likesEdges.OnCompleted();
-            postEdges.OnCompleted();
-            submitterEdges.OnCompleted();
-            friendEdges.OnCompleted();
-            computation.Join();
-            computation.Dispose();
-            isDisposed = true;
+            Console.WriteLine(a + " " + b + " " + c);
+            return (int)a * b * b + c;
         }
-
+        protected string Aggregate(long a, string b, string c)
+        {
+            Console.WriteLine(a + " " + b + " " + c);
+            var bcID = b.Split('_')[0];
+            var ccID = c is null ? "lofasz" : c.Split('_')[0];
+            var bNum = int.Parse(b.Split('_')[1]);
+            var cNum = c is null ? 0 : int.Parse(c.Split('_')[1]);
+            Console.WriteLine($"a: {a}    bId:{bcID}    bNum: {bNum}    cID: {ccID}    cNum: {cNum}");
+            return bcID + "_" + (bNum + cNum);
+        }
         protected void ProcessUser(IUser user)
         {
             rawUsers.Add(new User(user.Id, user.Name));
@@ -466,7 +496,6 @@ namespace Naiad
                 }
             }
         }
-
         protected void ProcessSubmission(ISubmission submission)
         {
             rawSubmitterEdges.Add(new SubmitterEdge(submission.Id, submission.Submitter.Id));
@@ -535,7 +564,7 @@ namespace Naiad
         }
         protected void Init()
         {
-            top3 = new List<T>();
+            topValues = new List<T>();
             idToPlace = new Dictionary<string, int>();
         }
         protected void AddNewComment(ISubmission original, IComment comment)
@@ -697,37 +726,37 @@ namespace Naiad
                         int place = idToPlace[r.record.GetId()];
                         idToPlace.Remove(r.record.GetId());
 
-                        for (var i = top3.Count - 1; i > place; i--)
+                        for (var i = topValues.Count - 1; i > place; i--)
                         {
-                            idToPlace[top3.ElementAt(i).GetId()] = i - 1;
+                            idToPlace[topValues.ElementAt(i).GetId()] = i - 1;
                         }
-                        top3.RemoveAt(place);
+                        topValues.RemoveAt(place);
                     }
                 }
                 if (r.weight > 0)
                 {
-                    if (top3.Count < 3 || r.record.CompareTo(top3.Last()) > 0)
+                    if (topValues.Count < 3 || r.record.CompareTo(topValues.Last()) > 0)
                     {
-                        var i = top3.Count - 1;
+                        var i = topValues.Count - 1;
                         for (; i >= 0; i--)
                         {
-                            if (top3.ElementAt(i).CompareTo(r.record) < 0)
+                            if (topValues.ElementAt(i).CompareTo(r.record) < 0)
                             {
-                                idToPlace[top3.ElementAt(i).GetId()] = idToPlace[top3.ElementAt(i).GetId()] + 1;
+                                idToPlace[topValues.ElementAt(i).GetId()] = idToPlace[topValues.ElementAt(i).GetId()] + 1;
                             }
                             else
                             {
                                 break;
                             }
                         }
-                        top3.Insert(i + 1, r.record);
+                        topValues.Insert(i + 1, r.record);
                         idToPlace.Add(r.record.GetId(), i + 1);
 
-                        if (top3.Count > 3)
+                        if (topValues.Count > TopCount)
                         {
-                            var itemToRemove = top3.Last();
+                            var itemToRemove = topValues.Last();
                             idToPlace.Remove(itemToRemove.GetId());
-                            top3.RemoveAt(3);
+                            topValues.RemoveAt(TopCount);
                         }
                     }
                 }
@@ -736,9 +765,9 @@ namespace Naiad
         protected string GetResultString()
         {
             var resultString = "";
-            foreach (var r in top3)
+            foreach (var r in topValues)
             {
-                resultString += r.GetId() + "|";
+                resultString += r.GetId() + " " + r.GetValue() + "|";
             }
             if (resultString.Length > 2)
             {
@@ -748,7 +777,7 @@ namespace Naiad
         }
         protected void UpdateInputs(ModelChangeSet changes, bool callOnNext)
         {
-#if (CLEAR_AT_EVERY_UPDATE)
+#if CLEAR_AT_EVERY_UPDATE
             rawUsers.Clear();
             rawPosts.Clear();
             rawComments.Clear();
@@ -769,16 +798,63 @@ namespace Naiad
             }
             //changes.Apply();
         }
-
         protected void Sync()
         {
             computation.Sync(actualEpoch);
 
         }
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+        protected override void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    users.OnCompleted();
+                    posts.OnCompleted();
+                    comments.OnCompleted();
+                    commentedEdges.OnCompleted();
+                    likesEdges.OnCompleted();
+                    postEdges.OnCompleted();
+                    submitterEdges.OnCompleted();
+                    friendEdges.OnCompleted();
+                    computation.Join();
+                    computation.Dispose();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+                rawUsers.Clear();
+                rawPosts.Clear();
+                rawComments.Clear();
+                rawCommentedEdges.Clear();
+                rawLikesEdges.Clear();
+                rawPostEdges.Clear();
+                rawSubmitterEdges.Clear();
+                rawFriendEdges.Clear();
+
+                disposedValue = true;
+                base.Dispose(disposing);
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
         ~NaiadSolution()
         {
-            Dispose();
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(false);
         }
+
+        // This code added to correctly implement the disposable pattern.
+        public new void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 
     class NaiadSolutionQ1 : NaiadSolution<Task1PostInfo>
@@ -788,7 +864,7 @@ namespace Naiad
         private Collection<Edge, Epoch> reachedComments;
         private Collection<Pair<string, int>, Epoch> commentLikes;
         private Collection<Task1PostInfo, Epoch> result;
-        private Subscription subcription;
+        private Subscription subscription;
         public override string Initial()
         {
             base.Init();
@@ -831,7 +907,7 @@ namespace Naiad
                 .Max(triple => triple.PostId, triple => triple.Score);
 
 
-            subcription = result.Subscribe(x =>
+            subscription = result.Subscribe(x =>
                {
                    HandleResultUpdates(x);
                });
@@ -847,7 +923,7 @@ namespace Naiad
         public override string Update(ModelChangeSet changes)
         {
 #if (ONNEXT_CALL_AS_PARAM)
-            bool callOnChanged = Int32.Parse(changes.AbsoluteUri.AbsolutePath.Substring(changes.AbsoluteUri.AbsolutePath.Length - 6, 2)) > 19;
+            bool callOnChanged = false;//Int32.Parse(changes.AbsoluteUri.AbsolutePath.Substring(changes.AbsoluteUri.AbsolutePath.Length - 6, 2)) > 19;
 #else
             bool callOnChanged = true;
 #endif
@@ -859,19 +935,42 @@ namespace Naiad
             }
             return "";
         }
-        override public void Dispose()
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected override void Dispose(bool disposing)
         {
-            if (isDisposed)
+            if (!disposedValue)
             {
-                return;
+                if (disposing)
+                {
+                    subscription.Dispose();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+                base.Dispose(disposing);
             }
-            subcription.Dispose();
-            base.Dispose();
         }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
         ~NaiadSolutionQ1()
         {
-            Dispose();
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(false);
         }
+
+        // This code added to correctly implement the disposable pattern.
+        public new void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
     class NaiadSolutionQ2 : NaiadSolution<Task2CommentInfo>
     {
@@ -880,8 +979,7 @@ namespace Naiad
         private Collection<CommentDependentLabeledUser, Epoch> commentDependentLabelGraph;
         private Collection<Task2CommentInfo, Epoch> commentComponentSizes;
         private Collection<FriendEdge, Epoch> duplicatedFriends;
-        private Subscription subcription;
-        private Subscription subcription1;
+        private Subscription subscription;
         public Collection<CommentDependentLabeledUser, IterationIn<Epoch>> LocalMin(
                     Collection<CommentDependentLabeledUser, IterationIn<Epoch>> users,
                     Collection<CommentDependentKnows, IterationIn<Epoch>> edges)
@@ -891,21 +989,6 @@ namespace Naiad
                 .Concat(users)
                 .Min(cdlu => new Pair<string, string>(cdlu.CommentId, cdlu.UserId), cdlu => cdlu.Label);
 
-        }
-        public int Aggregate(long a, int b, int c)
-        {
-            Console.WriteLine(a + " " + b + " " + c);
-            return (int)a * b * b + c;
-        }
-        public string Aggregate(long a, string b, string c)
-        {
-            Console.WriteLine(a + " " + b + " " + c);
-            var bcID = b.Split('_')[0];
-            var ccID = c is null ? "lofasz" : c.Split('_')[0];
-            var bNum = int.Parse(b.Split('_')[1]);
-            var cNum = c is null ? 0 : int.Parse(c.Split('_')[1]);
-            Console.WriteLine($"a: {a}    bId:{bcID}    bNum: {bNum}    cID: {ccID}    cNum: {cNum}");
-            return bcID + "_" + (bNum + cNum);
         }
         public override string Initial()
         {
@@ -943,7 +1026,7 @@ namespace Naiad
                 .Concat(comments.Select(c => new Task2CommentInfo(c.Id, 0, c.Timestamp)))
                 .Max(ci => ci.CommentId, ci => ci.LargestComponentSize);
 
-            subcription = commentComponentSizes.Subscribe((componentSizes) =>
+            subscription = commentComponentSizes.Subscribe((componentSizes) =>
             {
                 HandleResultUpdates(componentSizes);
             });
@@ -970,18 +1053,41 @@ namespace Naiad
             }
             return "";
         }
-        override public void Dispose()
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected override void Dispose(bool disposing)
         {
-            if (isDisposed)
+            if (!disposedValue)
             {
-                return;
+                if (disposing)
+                {
+                    subscription.Dispose();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+                base.Dispose(disposing);
             }
-            subcription.Dispose();
-            base.Dispose();
         }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
         ~NaiadSolutionQ2()
         {
-            Dispose();
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(false);
         }
+
+        // This code added to correctly implement the disposable pattern.
+        public new void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }
