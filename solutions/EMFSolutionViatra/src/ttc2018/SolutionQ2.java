@@ -37,7 +37,7 @@ public class SolutionQ2 extends Solution {
 	private String query() {		
 		Collection<Match> matches = matcher.getAllMatches();
 		List<Match> top3Matches = Ordering.from(comparator).reverse().sortedCopy(matches).subList(0, 3);
-		String top3Ids = top3Matches.stream().map(m -> m.getComment().getId()).collect(Collectors.joining("|"));	
+		String top3Ids = top3Matches.stream().map(m -> m.getComment().getId() + "--" + m.getScore()).collect(Collectors.joining("|"));	
 		return top3Ids;
 	}
 	
