@@ -217,6 +217,33 @@ namespace Naiad
         {
             return CommentId == other.CommentId && UserId1 == other.UserId1 && UserId2 == other.UserId2;
         }
+
+        //public override bool Equals(object obj)
+        //{
+        //    if (obj is CommentDependentKnows)
+        //    {
+        //        return Equals(obj as CommentDependentKnows);
+        //    }
+        //    return false;
+        //}
+
+        //public override int GetHashCode()
+        //{
+        //    var hashCode = 1893403812;
+        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CommentId);
+        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UserId1);
+        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UserId2);
+        //    return hashCode;
+        //}
+
+        //public static bool operator ==(CommentDependentKnows lhs, CommentDependentKnows rhs)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        //public static bool operator !=(CommentDependentKnows lhs, CommentDependentKnows rhs)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
     class CommentDependentLabeledUser : IEquatable<CommentDependentLabeledUser>
     {
@@ -233,8 +260,35 @@ namespace Naiad
 
         public bool Equals(CommentDependentLabeledUser other)
         {
-            return CommentId == other.CommentId && UserId == other.UserId;
+            return CommentId == other.CommentId && UserId == other.UserId && Label == other.Label;
         }
+
+        //public override bool Equals(object obj)
+        //{
+        //    if (obj is CommentDependentLabeledUser)
+        //    {
+        //        return Equals(obj as CommentDependentLabeledUser);
+        //    }
+        //    return false;
+        //}
+
+        //public override int GetHashCode()
+        //{
+        //    var hashCode = 353467719;
+        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CommentId);
+        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UserId);
+        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Label);
+        //    return hashCode;
+        //}
+
+        //public static bool operator ==(CommentDependentLabeledUser lhs, CommentDependentLabeledUser rhs)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        //public static bool operator !=(CommentDependentLabeledUser lhs, CommentDependentLabeledUser rhs)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
     interface Identifiable
     {
@@ -831,10 +885,26 @@ namespace Naiad
                     Collection<CommentDependentLabeledUser, IterationIn<Epoch>> users,
                     Collection<CommentDependentKnows, IterationIn<Epoch>> edges)
         {
-            return users.Join(edges, u => u.UserId, e => e.UserId1, (u, e) => new CommentDependentLabeledUser(u.CommentId, e.UserId2, u.Label))
+            var neighbours = users.Join(edges, u => u.UserId, e => e.UserId1, (u, e) => new CommentDependentLabeledUser(u.CommentId, e.UserId2, u.Label));
+            return neighbours.Concat(neighbours.Select(cdlu => new CommentDependentLabeledUser(cdlu.CommentId, cdlu.Label, cdlu.UserId)))
                 .Concat(users)
-                .Min(u => u, u => u.Label);
+                .Min(u => new Pair<string, string>(u.CommentId, u.UserId), u => u.Label);
 
+        }
+        public int Aggregate(long a, int b, int c)
+        {
+            Console.WriteLine(a + " " + b + " " + c);
+            return b + c;
+        }
+        public string Aggregate(long a, string b, string c)
+        {
+            Console.WriteLine(a + " " + b + " " + c);
+            var bcID = b.Split('_')[0];
+            var ccID = c is null ? "lofasz" : c.Split('_')[0];
+            var bNum = int.Parse(b.Split('_')[1]);
+            var cNum = c is null ? 0 : int.Parse(c.Split('_')[1]);
+            Console.WriteLine($"a: {a}    bId:{bcID}    bNum: {bNum}    cID: {ccID}    cNum: {cNum}");
+            return bcID + "_" + (bNum + cNum);
         }
         public override string Initial()
         {
@@ -848,18 +918,25 @@ namespace Naiad
 
             commentDependentLabelGraph = commentDependentUsers.FixedPoint((lc, x) => LocalMin(x, commentDependentKnows.EnterLoop(lc)));
 
-            commentComponentSizes = commentDependentLabelGraph
+            commentComponentSizes = commentDependentLabelGraph.Where(cdlu => cdlu.CommentId == "406503").Distinct()
                 .GroupBy(
                     cdlu => new Pair<string, string>(cdlu.CommentId, cdlu.Label),
                     (commentAndLabel, cdlus) =>
                         {
+                            //var ret = new List<Pair<string, int>>();
+                            //for(var i = 0; i < cdlus.Count(); ++i)
+                            //{
+                            //    ret.Add(new Pair<string, int>(commentAndLabel.First, cdlus.Count()));
+                            //}
+                            //return ret;
                             return new List<Pair<string, int>> { new Pair<string, int>(commentAndLabel.First, cdlus.Count()) };
                         }
                 )
-                .Sum(ci => ci.First, ci => ci.Second, (commentId, sumValue) => new Pair<string, int>(commentId, sumValue))
+                //.Aggregate(ci => ci.First, ci => ci.First + "_" + ci.Second, (count, value1, value2) => Aggregate(count, value1, value2), value => value == "", (commentId, sumValue) => new Pair<string, int>(commentId, sumValue.Length))
+                .Sum(ci => ci.First, ci => ci.Second * ci.Second, (commentId, sumValue) => new Pair<string, int>(commentId, sumValue))
                 .Join(comments, cs => cs.First, c => c.Id, (cs, c) => new Task2CommentInfo(c.Id, cs.Second, c.Timestamp))
                 .Concat(comments.Select(c => new Task2CommentInfo(c.Id, 0, c.Timestamp)))
-                .Max(ci => ci.CommentId, ci => ci.LargestComponentSize); ;
+                .Max(ci => ci.CommentId, ci => ci.LargestComponentSize);
 
             subcription = commentComponentSizes.Subscribe((componentSizes) =>
             {
