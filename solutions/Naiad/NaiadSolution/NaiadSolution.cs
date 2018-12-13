@@ -454,7 +454,7 @@ namespace Naiad
             rawSubmitterEdges = new List<SubmitterEdge>();
             rawFriendEdges = new List<FriendEdge>();
 
-            string[] args = { "-t", "2" };
+            string[] args = { "-t", "1" };
             computation = NewComputation.FromArgs(ref args);
 
             users = computation.NewInputCollection<User>();
@@ -767,7 +767,7 @@ namespace Naiad
             var resultString = "";
             foreach (var r in topValues)
             {
-                resultString += r.GetId() + " " + r.GetValue() + "|";
+                resultString += r.GetId() + "|";
             }
             if (resultString.Length > 2)
             {
@@ -859,8 +859,6 @@ namespace Naiad
 
     class NaiadSolutionQ1 : NaiadSolution<Task1PostInfo>
     {
-        //protected Collection<CommentedEdge> startigCommentedEdges;
-        private Collection<Edge, Epoch> startingCommentedEdges;
         private Collection<Edge, Epoch> reachedComments;
         private Collection<Pair<string, int>, Epoch> commentLikes;
         private Collection<Task1PostInfo, Epoch> result;
@@ -870,10 +868,9 @@ namespace Naiad
             base.Init();
             /* initial   post -> comment   edges */
             /* DoNotUse can be null sometimes, should be investigated...*/
-            startingCommentedEdges = posts.Join(commentedEdges, p => p.Id, e => e.From, (p, e) => new Edge(p.Id, e.To));
 
             /* post ->1..* comment   edges*/
-            reachedComments = startingCommentedEdges.FixedPoint((lc, x) => x.Join(commentedEdges.EnterLoop(lc),
+            reachedComments = commentedEdges.Select(ce => new Edge(ce.From, ce.To)).FixedPoint((lc, x) => x.Join(commentedEdges.EnterLoop(lc),
                                                               edge => edge.To,
                                                               edge => edge.From,
                                                               (e1, e2) => new Edge(e1.From, e2.To))
@@ -886,11 +883,11 @@ namespace Naiad
                 l => l.To,
                 (cId, cs, ls) => new List<Pair<string, int>> { new Pair<string, int>(cId, ls.Count()) });
 
-            result = reachedComments.PartitionBy(c => c.To.Last()).Join(commentLikes.PartitionBy(l => l.First.Last()),
+            result = reachedComments.Join(commentLikes,
                    e => e.To,
                    l => l.First,
+                   // post, comment, likeCount
                    (e, l) => new EquatableTriple<string, string, int>(e.From, e.To, l.Second))
-                .PartitionBy(t => t.First.Last())
                 .GroupBy(
                     t => t.First,
                     (pId, ls) =>
