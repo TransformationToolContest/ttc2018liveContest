@@ -1,5 +1,6 @@
 ﻿#define DO_NAIAD_STUFF
 //#undef DO_NAIAD_STUFF
+using Microsoft.Research.Naiad.Diagnostics;
 using NMF.Models.Changes;
 using NMF.Models.Repository;
 using System;
@@ -21,7 +22,7 @@ namespace Naiad
         private static string Tool;
         private static string ChangeSet;
         private static string Query;
-        private static string Mode;
+        private static bool Debug = false;
 
         private static Stopwatch stopwatch = new Stopwatch();
 
@@ -29,14 +30,6 @@ namespace Naiad
 
         static void Main(string[] args)
         {
-            if (args.Length == 0)
-            {
-                Mode = "Batch".ToUpperInvariant();
-            }
-            else
-            {
-                Mode = args[0].ToUpperInvariant();
-            }
             Initialize();
             Load();
             Initial();
@@ -44,7 +37,7 @@ namespace Naiad
             {
                 Update(i);
             }
-            repository.Save(solution.SocialNetwork, "a.xml");
+            //repository.Save(solution.SocialNetwork, "a.xml");
             solution.Dispose();
         }
 
@@ -61,12 +54,28 @@ namespace Naiad
             stopwatch.Restart();
             repository = new ModelRepository();
 
-            ChangeSet = "2";
-            ChangePath = "C:\\Repos\\ttc2018liveContest\\models\\" + ChangeSet;
-            RunIndex = "Debug";
-            Sequences = 20;
-            Tool = "Naiad";
-            Query = "Q2";
+            ChangePath = Environment.GetEnvironmentVariable(nameof(ChangePath));
+            RunIndex = Environment.GetEnvironmentVariable(nameof(RunIndex));
+            Sequences = int.Parse(Environment.GetEnvironmentVariable(nameof(Sequences)));
+            Tool = Environment.GetEnvironmentVariable(nameof(Tool));
+            ChangeSet = Environment.GetEnvironmentVariable(nameof(ChangeSet));
+            Query = Environment.GetEnvironmentVariable(nameof(Query)).ToUpperInvariant();
+            var debug = Environment.GetEnvironmentVariable(nameof(Debug));
+
+            if (!(debug is null))
+            {
+                Debug = bool.Parse(debug);
+            }
+            if (Debug)
+            {
+                Logging.LogStyle = LoggingStyle.File;
+                Logging.LogLevel = LoggingLevel.Debug;
+            }
+            else
+            {
+                Logging.LogStyle = LoggingStyle.Console;
+                Logging.LogLevel = LoggingLevel.Off;
+            }
             if (Query == "Q1")
             {
                 solution = new NaiadSolutionQ1();
