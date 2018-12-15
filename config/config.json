@@ -3,11 +3,11 @@
     "Q1",
     "Q2"
   ],
-  "Tools": ["Hawk", "HawkIncUpdate", "HawkIncUpdateQuery"],
+  "Tools": ["Naiad-1-Thread", "Naiad-2-Thread", "Naiad-4-Thread", "Naiad-4-Thread", "Naiad-8-Thread", "NMF-Incremental"],
   "ChangeSets": [
-    "1", "2", "4", "8", "16", "32", "64"
+    "1", "2", "4", "8", "16"
   ],
   "Sequences": 20,
-  "Runs": 5,
+  "Runs": 1,
   "Timeout": 6000
 }
