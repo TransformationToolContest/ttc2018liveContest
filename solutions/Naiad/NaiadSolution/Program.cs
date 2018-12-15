@@ -1,5 +1,6 @@
 ﻿#define DO_NAIAD_STUFF
 //#undef DO_NAIAD_STUFF
+using Microsoft.Research.Naiad;
 using Microsoft.Research.Naiad.Diagnostics;
 using NMF.Models.Changes;
 using NMF.Models.Repository;
@@ -30,7 +31,7 @@ namespace Naiad
 
         static void Main(string[] args)
         {
-            Initialize();
+            Initialize(args);
             Load();
             Initial();
             for (int i = 1; i <= Sequences; i++)
@@ -49,7 +50,7 @@ namespace Naiad
             Report(BenchmarkPhase.Load);
         }
 
-        static void Initialize()
+        static void Initialize(string[] args)
         {
             stopwatch.Restart();
             repository = new ModelRepository();
@@ -78,11 +79,11 @@ namespace Naiad
             }
             if (Query == "Q1")
             {
-                solution = new NaiadSolutionQ1();
+                solution = new NaiadSolutionQ1(args);
             }
             else if (Query == "Q2")
             {
-                solution = new NaiadSolutionQ2();
+                solution = new NaiadSolutionQ2(args);
             }
             if (solution == null)
             {

@@ -443,7 +443,7 @@ namespace Naiad
 
         protected bool isDisposed;
 
-        public NaiadSolution()
+        public NaiadSolution(string[] args)
         {
             rawUsers = new List<User>();
             rawPosts = new List<Post>();
@@ -454,7 +454,6 @@ namespace Naiad
             rawSubmitterEdges = new List<SubmitterEdge>();
             rawFriendEdges = new List<FriendEdge>();
 
-            string[] args = { "-t", "1" };
             computation = NewComputation.FromArgs(ref args);
 
             users = computation.NewInputCollection<User>();
@@ -863,6 +862,10 @@ namespace Naiad
         private Collection<Pair<string, int>, Epoch> commentLikes;
         private Collection<Task1PostInfo, Epoch> result;
         private Subscription subscription;
+
+        public NaiadSolutionQ1(string[] args) : base(args)
+        {
+        }
         public override string Initial()
         {
             base.Init();
@@ -977,12 +980,19 @@ namespace Naiad
         private Collection<Task2CommentInfo, Epoch> commentComponentSizes;
         private Collection<FriendEdge, Epoch> duplicatedFriends;
         private Subscription subscription;
+        public NaiadSolutionQ2(string[] args) : base(args)
+        {
+        }
         public Collection<CommentDependentLabeledUser, IterationIn<Epoch>> LocalMin(
                     Collection<CommentDependentLabeledUser, IterationIn<Epoch>> users,
                     Collection<CommentDependentKnows, IterationIn<Epoch>> edges)
         {
             return users
-                .Join(edges, cdlu => new Pair<string, string>(cdlu.CommentId, cdlu.UserId), cdk => new Pair<string, string>(cdk.CommentId, cdk.UserId1), (cdlu, cdk) => new CommentDependentLabeledUser(cdlu.CommentId, cdk.UserId2, cdlu.Label))
+                .Join(
+                    edges,
+                    cdlu => new Pair<string, string>(cdlu.CommentId, cdlu.UserId),
+                    cdk => new Pair<string, string>(cdk.CommentId, cdk.UserId1),
+                    (cdlu, cdk) => new CommentDependentLabeledUser(cdlu.CommentId, cdk.UserId2, cdlu.Label))
                 .Concat(users)
                 .Min(cdlu => new Pair<string, string>(cdlu.CommentId, cdlu.UserId), cdlu => cdlu.Label);
 
