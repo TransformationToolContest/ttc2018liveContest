@@ -17,6 +17,7 @@ import SocialNetwork.Comment;
 import SocialNetwork.Post;
 import SocialNetwork.SocialNetworkPackage;
 import SocialNetwork.SocialNetworkRoot;
+import SocialNetwork.Submission;
 import SocialNetwork.User;
 
 public class ModelConverter {
@@ -47,6 +48,10 @@ public class ModelConverter {
     	List<Comment> comments = new ArrayList<>();
     	
 		root.eAllContents().forEachRemaining(x -> {
+			if (x instanceof Submission) {
+								
+			}			
+			
 			if (x instanceof User) {
 				users.add((User) x);
 			} else if (x instanceof Post) {
@@ -59,6 +64,35 @@ public class ModelConverter {
 		System.out.println(users.size() + " users");
 		System.out.println(posts.size() + " posts");
 		System.out.println(comments.size() + " comments");
+		
+		users.forEach(u -> {
+				System.out.println(u.getId() + "," + u.getName());
+				// friends
+				u.getFriends().forEach(f ->
+					System.out.println(u.getId() + "," + f.getId())
+				);
+				// likes
+				u.getLikes().forEach(l ->
+					System.out.println(u.getId() + "," + l.getId())
+				);
+			}
+		);
+		comments.forEach(c ->
+			System.out.println(
+				c.getId() + "," + 
+				c.getTimestamp() + "," + 
+				c.getContent() +
+				c.getCommented().getId() + "," + 
+				c.getPost().getId()
+			)
+		);
+		posts.forEach(p ->
+			System.out.println(
+				p.getId() + "," + 
+				p.getTimestamp() + "," + 
+				p.getContent()
+			)
+		);
     }
 
 }
