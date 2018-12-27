@@ -2,6 +2,9 @@ package ttc2018;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +24,26 @@ import SocialNetwork.Submission;
 import SocialNetwork.User;
 
 public class ModelConverter {
+	public static final String modelBasePath = "../../models/";
+
+	public enum ResourceType {
+		XMI("xmi"), CSV("csv");
+
+		public final String extension;
+		ResourceType(String extension) {
+			this.extension = extension;
+		}
+	}
+
+	public static File getResourcePath(int size, String resourceName, ResourceType resourceType) {
+		return new File(modelBasePath + size, resourceName + "." + resourceType.extension);
+	}
 
 	public static void main(String[] args) throws IOException {
 		ModelConverter converter = new ModelConverter();
-		
+
+		//int size = new Integer(args[0]);
+
 		converter.load(1);
 	}
 
@@ -36,7 +55,7 @@ public class ModelConverter {
 		repository.getPackageRegistry().put(SocialNetworkPackage.eINSTANCE.getNsURI(), SocialNetworkPackage.eINSTANCE);
 		repository.getPackageRegistry().put(ChangesPackage.eINSTANCE.getNsURI(), ChangesPackage.eINSTANCE);
 
-    	Resource resource = repository.getResource(URI.createFileURI(new File("../../models/" + size + "/initial.xmi").getCanonicalPath()), true);
+    	Resource resource = repository.getResource(URI.createFileURI(getResourcePath(size, "initial", ResourceType.XMI).getCanonicalPath()), true);
     	return (SocialNetworkRoot) resource.getContents().get(0);
     }
 
@@ -46,7 +65,17 @@ public class ModelConverter {
     	List<User> users = new ArrayList<>();
     	List<Post> posts = new ArrayList<>();
     	List<Comment> comments = new ArrayList<>();
-    	
+
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 'Z' should be added (with quotes) is needed
+		// input is parsed as local date, we do so with on the output side
+		//TimeZone tz = TimeZone.getTimeZone("UTC");
+		//df.setTimeZone(tz);
+		PrintWriter usersFile = new PrintWriter(getResourcePath(size, "csv-users-initial", ResourceType.CSV));
+		PrintWriter postsFile = new PrintWriter(getResourcePath(size, "csv-posts-initial", ResourceType.CSV));
+		PrintWriter commentsFile = new PrintWriter(getResourcePath(size, "csv-comments-initial", ResourceType.CSV));
+		PrintWriter friendsFile = new PrintWriter(getResourcePath(size, "csv-friends-initial", ResourceType.CSV));
+		PrintWriter likesFile = new PrintWriter(getResourcePath(size, "csv-likes-initial", ResourceType.CSV));
+
 		root.eAllContents().forEachRemaining(x -> {
 			if (x instanceof Submission) {
 								
@@ -66,33 +95,45 @@ public class ModelConverter {
 		System.out.println(comments.size() + " comments");
 		
 		users.forEach(u -> {
-				System.out.println(u.getId() + "," + u.getName());
+				printCSV(usersFile, u.getId(), u.getName());
 				// friends
 				u.getFriends().forEach(f ->
-					System.out.println(u.getId() + "," + f.getId())
+					printCSV(friendsFile, u.getId(), f.getId())
 				);
 				// likes
 				u.getLikes().forEach(l ->
-					System.out.println(u.getId() + "," + l.getId())
+					printCSV(likesFile, u.getId(), l.getId())
 				);
 			}
 		);
 		comments.forEach(c ->
-			System.out.println(
-				c.getId() + "," + 
-				c.getTimestamp() + "," + 
-				c.getContent() +
-				c.getCommented().getId() + "," + 
-				c.getPost().getId()
+			printCSV(commentsFile,
+				c.getId()
+			,	df.format(c.getTimestamp())
+			,	c.getContent()
+			,	c.getSubmitter().getId()
+			,	c.getCommented().getId()
+			,	c.getPost().getId()
 			)
 		);
 		posts.forEach(p ->
-			System.out.println(
-				p.getId() + "," + 
-				p.getTimestamp() + "," + 
-				p.getContent()
+			printCSV(postsFile,
+				p.getId()
+			,	df.format(p.getTimestamp())
+			,	p.getContent()
+			,	p.getSubmitter().getId()
 			)
 		);
+
+		usersFile.close();
+		postsFile.close();
+		commentsFile.close();
+		friendsFile.close();
+		likesFile.close();
     }
+
+    protected static void printCSV(PrintWriter writer, String... strings) {
+		writer.println(String.join("|", strings));
+	}
 
 }
