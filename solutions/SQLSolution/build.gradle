@@ -30,3 +30,13 @@ sourceSets {
 		}
 	}
 }
+
+task modelConverter(type:JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+
+    if (project.hasProperty("modelSize")) {
+        args modelSize
+    }
+
+    main = "ttc2018.ModelConverter"
+}

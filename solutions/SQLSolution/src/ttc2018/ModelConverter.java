@@ -42,9 +42,9 @@ public class ModelConverter {
 	public static void main(String[] args) throws IOException {
 		ModelConverter converter = new ModelConverter();
 
-		//int size = new Integer(args[0]);
+		int size = args.length>0?new Integer(args[0]):1;
 
-		converter.load(1);
+		converter.load(size);
 	}
 
     private SocialNetworkRoot loadSocialNetworkFile(int size) throws IOException {
