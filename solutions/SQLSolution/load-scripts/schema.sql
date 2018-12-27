@@ -33,3 +33,11 @@ create table likes (
   userid bigint not null
 , commentid bigint not null
 );
+
+-- hold friendships where both parties like that comment
+--drop table if exists comment_friends cascade;
+create table comment_friends (
+  commentid bigint not null
+, user1id bigint not null
+, user2id bigint not null
+);
