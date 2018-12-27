@@ -62,6 +62,7 @@ See above in Sec. *Generate CSV models*.
 To run the load script, go the `load-scripts` directory, set the `PG_` environment variables (optional) and issue the following command:
 
 ```bash
+export MODEL_SIZE=
 export PG_DATA_DIR=
 export PG_DB_NAME=
 export PG_USER=
@@ -69,7 +70,10 @@ export PG_PORT=
 ./load.sh
 ```
 
-The `load.sh` has default options that loads the dataset in the generator's directory to the `ttc2018sf1` database with your current user. If these fit your needs, just run the script as `./load.sh`.
+If `MODEL_SIZE` is set, the model directory is inferred unless overridden by `PG_DATA_DIR`.
+
+The `load.sh` has default options that loads the dataset of size 1 to the `ttc2018sf1` database with your current user. If these fit your needs, just run the script as `./load.sh`.
+
 
 If you get _Permission denied_ errors, change the permissions of your home directory to 755 - but please make sure you understand its implications first:
 

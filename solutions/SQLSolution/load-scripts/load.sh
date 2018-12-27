@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MODEL_SIZE=${1:-1}
+MODEL_SIZE=${MODEL_SIZE:-1}
 
 PG_DATA_DIR=${PG_DATA_DIR:-$(readlink -f $(dirname $0)/../../../models/$MODEL_SIZE)}
 PG_DB_NAME=${PG_DB_NAME:-ttc2018sf1}
