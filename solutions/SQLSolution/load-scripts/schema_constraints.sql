@@ -22,15 +22,8 @@ CREATE INDEX friends_user2id ON friends (user2id);
 CREATE INDEX likes_userid ON likes (userid);
 CREATE INDEX likes_commentid ON likes (commentid);
 
--- populate comment_friends table using a temporary table
--- to make use of the symmetric nature of friendships, i.e. calculate the join only once
-BEGIN;
-
-CREATE TEMPORARY TABLE tmp_comment_friends (
-  LIKE comment_friends INCLUDING ALL
-) ON COMMIT DROP;
-
-INSERT INTO tmp_comment_friends
+-- populate comment_friends table
+INSERT INTO comment_friends (commentid, user1id, user2id)
     SELECT l1.commentid, f.user1id, f.user2id
       FROM likes l1, likes l2
          , friends f
@@ -40,15 +33,5 @@ INSERT INTO tmp_comment_friends
        AND l1.commentid = l2.commentid
 ;
 
-INSERT INTO comment_friends (commentid, user1id, user2id)
-  SELECT commentid, user1id, user2id
-    FROM tmp_comment_friends
-UNION ALL
-  SELECT commentid, user2id, user1id
-    FROM tmp_comment_friends
-;
-
-COMMIT;
-
--- allow index only scan to emulate index.organizes table
+-- allow index only scan to emulate index-organized table
 CREATE INDEX comment_friends_comment_userids ON comment_friends (commentid, user1id, user2id);

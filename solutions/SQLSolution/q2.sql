@@ -24,6 +24,7 @@ WITH RECURSIVE comment_friends_closed(commentid, head_userid, tail_userid, path)
       FROM comment_components cc
      GROUP BY cc.commentid, cc.componentid
 )
+, scoring AS (
 SELECT ccs.commentid, sum(component_size*component_size) AS score
   FROM comment_component_sizes ccs
      , comments c
@@ -32,4 +33,7 @@ SELECT ccs.commentid, sum(component_size*component_size) AS score
    AND ccs.commentid = c.id
  GROUP BY ccs.commentid, c.ts
  ORDER BY sum(component_size*component_size) DESC, c.ts DESC LIMIT 3
+)
+SELECT *
+  FROM scoring
 ;
