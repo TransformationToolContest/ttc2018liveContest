@@ -1,18 +1,18 @@
-ALTER TABLE posts ADD PRIMARY KEY (id);
-ALTER TABLE comments ADD PRIMARY KEY (id);
-ALTER TABLE users ADD PRIMARY KEY (id);
+ALTER TABLE posts ADD PRIMARY KEY (id, status);
+ALTER TABLE comments ADD PRIMARY KEY (id, status);
+ALTER TABLE users ADD PRIMARY KEY (id, status);
 
 -- re-order friends on the storage level by user1id.
 -- This order is not hold after writes to the table.
 CREATE INDEX friends_user1id ON friends (user1id);
-CLUSTER friends USING friends_user1id;
+CLUSTER friends_i USING friends_i_user1id_idx;
 
 vacuum analyze;
 
 -- additional indexes
-CREATE UNIQUE INDEX friends_user1id_user2id ON friends (user1id, user2id);
-CREATE UNIQUE INDEX friends_user2id_user1id ON friends (user2id, user1id);
-CREATE UNIQUE INDEX likes_commentid_userid ON likes (commentid, userid);
+CREATE UNIQUE INDEX friends_user1id_user2id ON friends (user1id, user2id, status);
+CREATE UNIQUE INDEX friends_user2id_user1id ON friends (user2id, user1id, status);
+CREATE UNIQUE INDEX likes_commentid_userid ON likes (commentid, userid, status);
 
 -- create index on foreign keys
 CREATE INDEX posts_submitterid ON posts (submitterid);
@@ -24,8 +24,10 @@ CREATE INDEX likes_userid ON likes (userid);
 CREATE INDEX likes_commentid ON likes (commentid);
 
 -- populate comment_friends table
-INSERT INTO comment_friends (commentid, user1id, user2id)
-    SELECT l1.commentid, f.user1id, f.user2id
+INSERT INTO comment_friends (status, commentid, user1id, user2id)
+    SELECT -- status: differential iff any of the joined input records were differential
+           CASE WHEN 'D' IN (l1.status, l2.status, f.status) THEN 'D' ELSE 'I' END AS status
+         , l1.commentid, f.user1id, f.user2id
       FROM likes l1, likes l2
          , friends f
      WHERE 1=1
