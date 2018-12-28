@@ -12,6 +12,7 @@ vacuum analyze;
 -- additional indexes
 CREATE UNIQUE INDEX friends_user1id_user2id ON friends (user1id, user2id);
 CREATE UNIQUE INDEX friends_user2id_user1id ON friends (user2id, user1id);
+CREATE UNIQUE INDEX likes_commentid_userid ON likes (commentid, userid);
 
 -- create index on foreign keys
 CREATE INDEX posts_submitterid ON posts (submitterid);
@@ -35,3 +36,4 @@ INSERT INTO comment_friends (commentid, user1id, user2id)
 
 -- allow index only scan to emulate index-organized table
 CREATE INDEX comment_friends_comment_userids ON comment_friends (commentid, user1id, user2id);
+CREATE INDEX comment_friends_comment_user1id ON comment_friends (commentid, user1id);
