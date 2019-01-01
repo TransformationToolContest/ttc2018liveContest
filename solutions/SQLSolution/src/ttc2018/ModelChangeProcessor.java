@@ -32,7 +32,7 @@ public class ModelChangeProcessor {
 
     private void load(int size, int sequence) throws IOException {
         ModelChangeSet root = ModelUtils.loadChangeSetFile(size, sequence);
-System.out.println(new Date());
+System.out.println("change seq: "+sequence + " " + new Date());
         for (EObject x: root.getChanges()) {
             if (x instanceof ModelChange) {
                 processChange((ModelChange) x);
