@@ -45,9 +45,9 @@ task modelChangeProcessor(type:JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
 
     if (project.hasProperty("modelSize") && project.hasProperty("sequences")) {
-        args modelSize sequences
+        args(modelSize, sequences)
     } else if (project.hasProperty("modelSize")) {
-        args modelSize
+        args(modelSize)
     }
 
     main = "ttc2018.ModelChangeProcessor"
