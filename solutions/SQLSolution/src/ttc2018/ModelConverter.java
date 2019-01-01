@@ -1,6 +1,7 @@
 package ttc2018;
 
-import java.io.File;
+import SocialNetwork.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -8,37 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
-import Changes.ChangesPackage;
-import SocialNetwork.Comment;
-import SocialNetwork.Post;
-import SocialNetwork.SocialNetworkPackage;
-import SocialNetwork.SocialNetworkRoot;
-import SocialNetwork.Submission;
-import SocialNetwork.User;
-
 public class ModelConverter {
-	public static final String modelBasePath = "../../models/";
-
-	public enum ResourceType {
-		XMI("xmi"), CSV("csv");
-
-		public final String extension;
-		ResourceType(String extension) {
-			this.extension = extension;
-		}
-	}
-
-	public static File getResourcePath(int size, String resourceName, ResourceType resourceType) {
-		return new File(modelBasePath + size, resourceName + "." + resourceType.extension);
-	}
-
 	public static void main(String[] args) throws IOException {
 		ModelConverter converter = new ModelConverter();
 
@@ -47,20 +18,8 @@ public class ModelConverter {
 		converter.load(size);
 	}
 
-    private SocialNetworkRoot loadSocialNetworkFile(int size) throws IOException {
-    	ResourceSet repository;
-    	repository = new ResourceSetImpl();
-		repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
-		repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
-		repository.getPackageRegistry().put(SocialNetworkPackage.eINSTANCE.getNsURI(), SocialNetworkPackage.eINSTANCE);
-		repository.getPackageRegistry().put(ChangesPackage.eINSTANCE.getNsURI(), ChangesPackage.eINSTANCE);
-
-    	Resource resource = repository.getResource(URI.createFileURI(getResourcePath(size, "initial", ResourceType.XMI).getCanonicalPath()), true);
-    	return (SocialNetworkRoot) resource.getContents().get(0);
-    }
-
     private void load(int size) throws IOException {
-    	SocialNetworkRoot root = loadSocialNetworkFile(size);
+    	SocialNetworkRoot root = ModelUtils.loadSocialNetworkFile(size);
     	
     	List<User> users = new ArrayList<>();
     	List<Post> posts = new ArrayList<>();
@@ -70,11 +29,11 @@ public class ModelConverter {
 		// input is parsed as local date, we do so with on the output side
 		//TimeZone tz = TimeZone.getTimeZone("UTC");
 		//df.setTimeZone(tz);
-		PrintWriter usersFile = new PrintWriter(getResourcePath(size, "csv-users-initial", ResourceType.CSV));
-		PrintWriter postsFile = new PrintWriter(getResourcePath(size, "csv-posts-initial", ResourceType.CSV));
-		PrintWriter commentsFile = new PrintWriter(getResourcePath(size, "csv-comments-initial", ResourceType.CSV));
-		PrintWriter friendsFile = new PrintWriter(getResourcePath(size, "csv-friends-initial", ResourceType.CSV));
-		PrintWriter likesFile = new PrintWriter(getResourcePath(size, "csv-likes-initial", ResourceType.CSV));
+		PrintWriter usersFile = new PrintWriter(ModelUtils.getResourcePath(size, "csv-users-initial", ResourceType.CSV));
+		PrintWriter postsFile = new PrintWriter(ModelUtils.getResourcePath(size, "csv-posts-initial", ResourceType.CSV));
+		PrintWriter commentsFile = new PrintWriter(ModelUtils.getResourcePath(size, "csv-comments-initial", ResourceType.CSV));
+		PrintWriter friendsFile = new PrintWriter(ModelUtils.getResourcePath(size, "csv-friends-initial", ResourceType.CSV));
+		PrintWriter likesFile = new PrintWriter(ModelUtils.getResourcePath(size, "csv-likes-initial", ResourceType.CSV));
 
 		root.eAllContents().forEachRemaining(x -> {
 			if (x instanceof Submission) {
