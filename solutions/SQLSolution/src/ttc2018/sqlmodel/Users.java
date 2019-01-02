@@ -7,7 +7,7 @@ public class Users extends SqlCollectionBase {
     ArrayList<String> names = new ArrayList<>();
 
     public void addUser(String id, String name) {
-        addUser(Long.valueOf(id), name);
+        addUser(toNumber(id), name);
     }
 
     public void addUser(long id, String name) {

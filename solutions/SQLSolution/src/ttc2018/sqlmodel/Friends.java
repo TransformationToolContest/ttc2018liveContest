@@ -7,7 +7,7 @@ public class Friends extends SqlCollectionBase {
     ArrayList<Long> user2ids = new ArrayList<>();
 
     public void addFriend(String user1id, String user2id) {
-        addFriend(Long.valueOf(user1id), Long.valueOf(user2id));
+        addFriend(toNumber(user1id), toNumber(user2id));
     }
 
     public void addFriend(long user1id, long user2id) {

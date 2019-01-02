@@ -31,4 +31,11 @@ public abstract class SqlCollectionBase {
         System.out.println(String.join("|", strings));
     }
 
+    Long toNumber(String str) {
+        if (str == null) {
+            return -2L; // workaround missing model references
+        } else {
+            return Long.valueOf(str);
+        }
+    }
 }

@@ -7,7 +7,7 @@ public class Likes extends SqlCollectionBase {
     ArrayList<Long> commentids = new ArrayList<>();
 
     public void addLike(String userid, String commentd) {
-        addLike(Long.valueOf(userid), Long.valueOf(commentd));
+        addLike(toNumber(userid), toNumber(commentd));
     }
 
     public void addLike(long userid, long commentid) {
