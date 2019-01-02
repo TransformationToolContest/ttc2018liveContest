@@ -1,5 +1,7 @@
 package ttc2018;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 import org.apache.log4j.Level;
@@ -20,7 +22,6 @@ import Changes.ModelChangeSet;
 import SocialNetwork.SocialNetworkRoot;
 
 public abstract class Solution {
-	
 	protected SocialNetworkRoot socialNetwork;
 	protected ResourceSet resourceSet;
 	protected EMFScope scope;
@@ -37,18 +38,51 @@ public abstract class Solution {
     public void setSocialNetwork(SocialNetworkRoot network, ResourceSet resourceSet) {
     	socialNetwork = network;
     	this.resourceSet = resourceSet;
-    	scope = new EMFScope(getResourceSet());
-
-    	ViatraQueryLoggingUtil.getDefaultLogger().setLevel(Level.OFF);
-
-		Map<QueryHintOption<?>, Object> optionMap = ImmutableMap.of(ReteHintOptions.deleteRederiveEvaluation, true);
-		QueryEvaluationHint hint = new QueryEvaluationHint(optionMap, ReteBackendFactory.INSTANCE);
-		ViatraQueryEngineOptions options = ViatraQueryEngineOptions.defineOptions().withDefaultHint(hint).build();
-    	engine = ViatraQueryEngine.on(scope, options);
     }
 
     public abstract String Initial();
 
     public abstract String Update(ModelChangeSet changes);
-	
+
+	// some PostgreSQL-specific parameters like database name, connection string
+	private final static String PG_DB_NAME = "ttc2018eval";
+	private final static String PG_PORT = (System.getenv("PG_PORT")!=null)?System.getenv("PG_PORT"):"5432";
+	private final static String PG_USER = "ttcuser";
+	private final static String PG_PASS = "secret";
+	private final static String PG_URL = String.format("jdbc:postgresql://localhost:%1$s/%2$s", PG_PORT, PG_DB_NAME);
+	private final static String PG_LOAD_SCRIPT = "load-scripts/load.sh";
+
+	private String DataPath;
+
+	Solution(String DataPath) throws IOException, InterruptedException {
+		this.DataPath = new File(DataPath).getCanonicalPath();
+
+		loadSchema();
+	}
+
+	void loadSchema() throws IOException, InterruptedException {
+		runLoadSh("schema-only");
+	}
+	void loadData() throws IOException, InterruptedException {
+		runLoadSh("data-only");
+	}
+	void runLoadSh(String option) throws IOException, InterruptedException
+	{
+		ProcessBuilder pb = new ProcessBuilder(PG_LOAD_SCRIPT, option);
+		Map<String, String> env = pb.environment();
+		env.put("PG_DATA_DIR", DataPath);
+		env.put("PG_DB_NAME", PG_DB_NAME);
+		env.put("PG_USER", PG_USER);
+		env.put("PG_PORT", PG_PORT);
+
+		File log = new File("log.txt");
+		pb.redirectErrorStream(true);
+		pb.redirectOutput(ProcessBuilder.Redirect.appendTo(log));
+		Process p = pb.start();
+		p.waitFor();
+	}
+
+	static String formatEnvVar(String name, String value) {
+		return String.format("%1$s=%2$s", name, value);
+	}
 }

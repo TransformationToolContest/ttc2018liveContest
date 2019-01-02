@@ -1,5 +1,6 @@
 package ttc2018;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,10 @@ public class SolutionQ1 extends Solution {
 
 	private Task1.Matcher matcher;
 	private Task1MatchComparator comparator = new Task1MatchComparator();
+
+	public SolutionQ1(String DataPath) throws IOException, InterruptedException {
+		super(DataPath);
+	}
 	
 	@Override
 	public String Initial() {

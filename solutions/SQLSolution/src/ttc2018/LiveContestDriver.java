@@ -32,7 +32,8 @@ public class LiveContestDriver {
 			e.printStackTrace();
 		}
 	}
-	
+
+	private final static boolean REPORT_MEMORY_USAGE = false; // the SQL solution uses PostgreSQL, thus Java memory usage is not meaningful
 
     private static ResourceSet repository;
 
@@ -52,10 +53,11 @@ public class LiveContestDriver {
     	return mRes.getContents().get(0);
     }
 
-    static void Load() throws IOException
+    static void Load() throws IOException, InterruptedException
     {
     	stopwatch = System.nanoTime();
         solution.setSocialNetwork((SocialNetworkRoot)loadFile("initial.xmi"), repository);
+        solution.loadData();
         stopwatch = System.nanoTime() - stopwatch;
         Report(BenchmarkPhase.Load, -1, null);
     }
@@ -78,11 +80,11 @@ public class LiveContestDriver {
         Query = System.getenv("Query").toUpperCase();
         if (Query.contentEquals("Q1"))
         {
-            solution = new SolutionQ1();
+            solution = new SolutionQ1(ChangePath);
         }
         else if (Query.contentEquals("Q2"))
         {
-            solution = new SolutionQ2();
+            solution = new SolutionQ2(ChangePath);
         }
         else
         {
@@ -124,8 +126,10 @@ public class LiveContestDriver {
         Runtime.getRuntime().gc();
         Runtime.getRuntime().gc();
         Runtime.getRuntime().gc();
-        long memoryUsed = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-        System.out.println(String.format("%s;%s;%s;%s;%s;%s;Memory;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(memoryUsed)));
+        if (REPORT_MEMORY_USAGE) {
+            long memoryUsed = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+            System.out.println(String.format("%s;%s;%s;%s;%s;%s;Memory;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(memoryUsed)));
+        }
         if (result != null)
         {
             System.out.println(String.format("%s;%s;%s;%s;%s;%s;Elements;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), result));

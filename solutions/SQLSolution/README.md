@@ -31,24 +31,23 @@ To allow access from JDBC, you have to set a password. For example, to set the d
 ALTER ROLE postgres PASSWORD 'foo';
 ```
 
-If you want to create a separate user `usr` with the password `foo`, use the following commands:
+If you want to create a separate user `ttcuser` with the password `secret`, use the following commands:
 
 ```sql
-CREATE USER usr PASSWORD 'foo';
-ALTER ROLE usr WITH login createdb superuser;
+CREATE USER ttcuser PASSWORD 'secret';
+ALTER ROLE ttcuser WITH login createdb superuser;
 ```
 
-## Allow access from all local users
+## Allow access for ttcuser
 
-Alternatively, you can allow any local users to access the database.
+For the commandline operations, you can allow ttcuser to access the database.
 
 :warning: Warning: never do this on a production system.
 
 Edit the `pg_hba.conf` file and add the following line:
 
 ```
-local all postgres trust
-# local all postgres peer
+local all ttcuser trust
 ```
 
 ## Loading the data set

@@ -1,5 +1,6 @@
 package ttc2018;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +19,11 @@ public class SolutionQ2 extends Solution {
 
 	private Task2.Matcher matcher;
 	private Task2MatchComparator comparator = new Task2MatchComparator();
-	
+
+	public SolutionQ2(String DataPath) throws IOException, InterruptedException {
+		super(DataPath);
+	}
+
 	@Override
 	public String Initial() {
 		matcher = engine.getMatcher(Task2.instance());
