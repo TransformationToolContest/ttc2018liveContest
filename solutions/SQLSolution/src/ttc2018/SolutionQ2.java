@@ -23,10 +23,9 @@ public class SolutionQ2 extends Solution {
 
 	@Override
 	public String Update(ModelChangeSet changes) {
-		beforeUpdate();
+		beforeUpdate(changes);
 
-		modelChangeProcessor.processChangeSet(changes);
-		String result = "NOT IMPLEMENTED";
+		String result = runReadQuery(Query.Q2_INITIAL);
 
 		afterUpdate();
 

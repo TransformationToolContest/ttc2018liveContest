@@ -23,9 +23,8 @@ public class SolutionQ1 extends Solution {
 
 	@Override
 	public String Update(ModelChangeSet changes) {
-		beforeUpdate();
+		beforeUpdate(changes);
 
-		modelChangeProcessor.processChangeSet(changes);
 		String result = runReadQuery(Query.Q1_INITIAL);
 
 		afterUpdate();

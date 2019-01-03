@@ -41,6 +41,9 @@ public class ModelChangeProcessor {
         friends = new Friends();
         likes = new Likes();
     }
+    SqlCollectionBase[] getCollections() {
+        return new SqlCollectionBase[] {posts, comments, users, friends, likes};
+    }
 
     private void load(int size, int sequence) throws IOException {
         ModelChangeSet root = ModelUtils.loadChangeSetFile(size, sequence);

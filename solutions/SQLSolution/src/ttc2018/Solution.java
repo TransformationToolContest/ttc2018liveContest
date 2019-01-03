@@ -13,6 +13,8 @@ import org.eclipse.viatra.query.runtime.emf.EMFScope;
 
 import Changes.ModelChangeSet;
 import SocialNetwork.SocialNetworkRoot;
+import ttc2018.sqlmodel.SqlCollectionBase;
+import ttc2018.sqlmodel.SqlRowBase;
 import ttc2018.sqlmodel.SqlTable;
 
 public abstract class Solution {
@@ -111,8 +113,27 @@ public abstract class Solution {
 		p.waitFor();
 	}
 
-	void beforeUpdate() {
+	void beforeUpdate(ModelChangeSet changes) {
 		modelChangeProcessor.resetCollections();
+		modelChangeProcessor.processChangeSet(changes);
+		for(SqlCollectionBase<SqlRowBase> c: modelChangeProcessor.getCollections()) {
+			PreparedStatement insert = c.getSqlTable().getInsertPreparedStatement();
+			int cnt = 0;
+			try {
+				for (SqlRowBase r : c) {
+					r.setForInsert(insert);
+					insert.addBatch();
+					if (++cnt == 50) {
+						insert.executeBatch();
+					}
+				}
+				if (cnt > 0) {
+					insert.executeBatch();
+				}
+			} catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+		}
 	}
 	void afterUpdate() {
 		for(SqlTable t: SqlTable.values()) {

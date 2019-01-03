@@ -5,10 +5,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
-public abstract class SqlCollectionBase {
+public abstract class SqlCollectionBase<T extends SqlRowBase> implements Iterable<T> {
+    ArrayList<T> elements = new ArrayList<>();
 
-    abstract SqlTable getSqlTable();
+    public Iterator<T> iterator() {
+        return elements.iterator();
+    }
+
+    public abstract SqlTable getSqlTable();
 
     static final boolean DO_PRINT = false;
 

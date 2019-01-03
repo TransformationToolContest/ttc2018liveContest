@@ -40,7 +40,7 @@ public enum SqlTable {
         }
         String valuesList = String.join(",", placeholders);
 
-        return String.format("insert into %1$s (%2$s) values (%3$s)", tableName, columnList, valuesList);
+        return String.format("insert into %1$s_d (%2$s) values (%3$s)", tableName, columnList, valuesList);
     }
 
     protected PreparedStatement D2IPreparedStatement;
