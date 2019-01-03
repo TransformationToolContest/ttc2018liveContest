@@ -57,10 +57,12 @@ task runContestDriver(type: JavaExec) {
 	classpath = sourceSets.main.runtimeClasspath
 	main = "ttc2018.LiveContestDriver"
 
-	environment("ChangePath", ChangePath)
-	environment("RunIndex", "1")
-	environment("Sequences", "20")
-	environment("Tool", "SQLSolution")
-	environment("ChangeSet", "default")
-	environment("Query", Query)
+	if (project.hasProperty("ChangePath") && project.hasProperty("Query")) {
+		environment("ChangePath", ChangePath)
+		environment("RunIndex", "1")
+		environment("Sequences", "20")
+		environment("Tool", "SQLSolution")
+		environment("ChangeSet", "default")
+		environment("Query", Query)
+	}
 }
