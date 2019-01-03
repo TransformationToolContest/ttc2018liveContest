@@ -38,7 +38,7 @@ create table comments_d partition of comments for values in ('D');
 create table users (
   status char(1) not null
 , id bigint not null
-, name varchar not null
+, name varchar
 ) partition by list (status);
 
 create table users_i partition of users for values in ('I');
