@@ -33,12 +33,9 @@ public class ModelChangeProcessor {
     private void load(int size, int sequence) throws IOException {
         ModelChangeSet root = ModelUtils.loadChangeSetFile(size, sequence);
 System.out.println("change seq: "+sequence + " " + new Date());
-        for (EObject x: root.getChanges()) {
-            if (x instanceof ModelChange) {
-                processChange((ModelChange) x);
-            } else {
-                throw new RuntimeException("Unexpected type received: " + x.eClass().toString());
-            }
+        for (ModelChange change: root.getChanges()) {
+            processChange(change);
+            change.apply();
         };
         System.out.println(new Date());
     }
