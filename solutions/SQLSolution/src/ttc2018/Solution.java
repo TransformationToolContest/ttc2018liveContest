@@ -43,7 +43,7 @@ public abstract class Solution {
     public abstract String Update(ModelChangeSet changes);
 
 	// some PostgreSQL-specific parameters like database name, connection string
-	private final static String PG_DB_NAME = "ttc2018eval" + ((System.getenv("MODEL_SIZE")!=null)?System.getenv("MODEL_SIZE"):"");
+	private final static String PG_DB_NAME = (System.getenv("PG_DB_NAME")!=null)?System.getenv("PG_DB_NAME"):"ttc2018eval";
 	private final static String PG_PORT = (System.getenv("PG_PORT")!=null)?System.getenv("PG_PORT"):"5432";
 	private final static String PG_USER = "ttcuser";
 	private final static String PG_PASS = "secret";
