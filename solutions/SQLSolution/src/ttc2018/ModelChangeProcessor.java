@@ -24,20 +24,36 @@ public class ModelChangeProcessor {
         }
     }
 
-    Posts posts = new Posts();
-    Comments comments = new Comments();
-    Users users = new Users();
-    Friends friends = new Friends();
-    Likes likes = new Likes();
+    ModelChangeProcessor() {
+        resetCollections();
+    }
+
+    Posts posts;
+    Comments comments;
+    Users users;
+    Friends friends;
+    Likes likes;
+
+    void resetCollections() {
+        posts = new Posts();
+        comments = new Comments();
+        users = new Users();
+        friends = new Friends();
+        likes = new Likes();
+    }
 
     private void load(int size, int sequence) throws IOException {
         ModelChangeSet root = ModelUtils.loadChangeSetFile(size, sequence);
-System.out.println("change seq: "+sequence + " " + new Date());
-        for (ModelChange change: root.getChanges()) {
+        System.out.println("change seq: "+sequence + " " + new Date());
+        processChangeSet(root);
+        System.out.println(new Date());
+    }
+
+    public void processChangeSet(ModelChangeSet changeSet) {
+        for (ModelChange change: changeSet.getChanges()) {
             processChange(change);
             change.apply();
-        };
-        System.out.println(new Date());
+        }
     }
 
     // the logic here was copied from NaiadSolution by @antaljanosbenjamin

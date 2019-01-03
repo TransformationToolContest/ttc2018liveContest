@@ -21,6 +21,7 @@ dependencies {
 	compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.common', version: emfVersion
 	compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore.xmi', version: emfVersion
 	compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore', version: emfVersion
+	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
 }
 
 sourceSets {
@@ -60,9 +61,13 @@ task runContestDriver(type: JavaExec) {
 	if (project.hasProperty("ChangePath") && project.hasProperty("Query")) {
 		environment("ChangePath", ChangePath)
 		environment("RunIndex", "1")
-		environment("Sequences", "20")
 		environment("Tool", "SQLSolution")
 		environment("ChangeSet", "default")
 		environment("Query", Query)
+	}
+	if (project.hasProperty("Sequences")) {
+		environment("Sequences", Sequences)
+	} else {
+		environment("Sequences", "20")
 	}
 }

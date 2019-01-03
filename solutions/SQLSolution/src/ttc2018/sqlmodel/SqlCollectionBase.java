@@ -1,11 +1,17 @@
 package ttc2018.sqlmodel;
 
+import java.sql.PreparedStatement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class SqlCollectionBase {
+
+    abstract SqlTable getSqlTable();
+
+    static final boolean DO_PRINT = false;
+
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 'Z' should be added (with quotes) is needed
     // input is parsed as local date, we do so with on the output side
     //TimeZone tz = TimeZone.getTimeZone("UTC");
@@ -22,13 +28,17 @@ public abstract class SqlCollectionBase {
                 strings.add(o.toString());
             }
         }
-        System.out.print(this.getClass().getSimpleName()+": ");
-        System.out.println(String.join("|", strings));
+        if (DO_PRINT) {
+            System.out.print(this.getClass().getSimpleName() + ": ");
+            System.out.println(String.join("|", strings));
+        }
     }
 
     public void printCSV(String... strings) {
-        System.out.print(this.getClass().getSimpleName()+": ");
-        System.out.println(String.join("|", strings));
+        if (DO_PRINT) {
+            System.out.print(this.getClass().getSimpleName()+": ");
+            System.out.println(String.join("|", strings));
+        }
     }
 
     Long toNumber(String str) {

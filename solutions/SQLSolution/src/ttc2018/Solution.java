@@ -2,31 +2,27 @@ package ttc2018;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Level;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
-import org.eclipse.viatra.query.runtime.api.ViatraQueryEngineOptions;
 import org.eclipse.viatra.query.runtime.emf.EMFScope;
-import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
-import org.eclipse.viatra.query.runtime.matchers.backend.QueryHintOption;
-import org.eclipse.viatra.query.runtime.rete.matcher.ReteBackendFactory;
-import org.eclipse.viatra.query.runtime.rete.util.ReteHintOptions;
-import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 
 import Changes.ModelChangeSet;
 import SocialNetwork.SocialNetworkRoot;
+import ttc2018.sqlmodel.SqlTable;
 
 public abstract class Solution {
 	protected SocialNetworkRoot socialNetwork;
 	protected ResourceSet resourceSet;
-	protected EMFScope scope;
-	protected ViatraQueryEngine engine;
-	
+	protected ModelChangeProcessor modelChangeProcessor;
+
+	// see: getDbConnection()
+	protected Connection dbConnection;
+
     public SocialNetworkRoot getSocialNetwork() {
     	return socialNetwork;
     }
@@ -45,7 +41,7 @@ public abstract class Solution {
     public abstract String Update(ModelChangeSet changes);
 
 	// some PostgreSQL-specific parameters like database name, connection string
-	private final static String PG_DB_NAME = "ttc2018eval";
+	private final static String PG_DB_NAME = "ttc2018eval" + ((System.getenv("MODEL_SIZE")!=null)?System.getenv("MODEL_SIZE"):"");
 	private final static String PG_PORT = (System.getenv("PG_PORT")!=null)?System.getenv("PG_PORT"):"5432";
 	private final static String PG_USER = "ttcuser";
 	private final static String PG_PASS = "secret";
@@ -57,7 +53,40 @@ public abstract class Solution {
 	Solution(String DataPath) throws IOException, InterruptedException {
 		this.DataPath = new File(DataPath).getCanonicalPath();
 
+		modelChangeProcessor = new ModelChangeProcessor();
+
 		loadSchema();
+
+		Connection conn = getDbConnection();
+		for(SqlTable t: SqlTable.values()) {
+			t.prepareStatements(conn);
+		}
+	}
+
+	public Connection getDbConnection() {
+		try {
+			if (dbConnection == null || dbConnection.isClosed()) {
+				dbConnection = DriverManager.getConnection(PG_URL, PG_USER, PG_PASS);
+			}
+
+			return dbConnection;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	String runReadQuery(Query q) {
+		List<String> result = new ArrayList<>();
+
+		try (ResultSet rs = q.getPreparedStatement().executeQuery()) {
+			while (rs.next()) {
+				result.add(rs.getString(1));
+			}
+
+			return String.join("|", result);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	void loadSchema() throws IOException, InterruptedException {
@@ -82,7 +111,12 @@ public abstract class Solution {
 		p.waitFor();
 	}
 
-	static String formatEnvVar(String name, String value) {
-		return String.format("%1$s=%2$s", name, value);
+	void beforeUpdate() {
+		modelChangeProcessor.resetCollections();
+	}
+	void afterUpdate() {
+		for(SqlTable t: SqlTable.values()) {
+			t.executeD2I();
+		}
 	}
 }

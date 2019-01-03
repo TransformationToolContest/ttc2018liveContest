@@ -13,4 +13,9 @@ public class Posts extends Submissions {
 
         printCSV(id, ts, content, submitterid);
     }
+
+    @Override
+    public SqlTable getSqlTable() {
+        return SqlTable.POSTS;
+    }
 }

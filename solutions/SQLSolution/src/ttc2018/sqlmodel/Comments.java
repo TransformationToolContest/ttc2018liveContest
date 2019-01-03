@@ -19,4 +19,9 @@ public class Comments extends Submissions {
 
         printCSV(id, ts, content, submitterid, previousid, postid);
     }
+
+    @Override
+    public SqlTable getSqlTable() {
+        return SqlTable.COMMENTS;
+    }
 }

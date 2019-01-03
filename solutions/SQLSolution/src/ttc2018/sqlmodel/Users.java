@@ -16,4 +16,9 @@ public class Users extends SqlCollectionBase {
 
         printCSV(id, name);
     }
+
+    @Override
+    public SqlTable getSqlTable() {
+        return SqlTable.USERS;
+    }
 }

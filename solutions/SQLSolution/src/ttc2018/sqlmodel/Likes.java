@@ -16,4 +16,9 @@ public class Likes extends SqlCollectionBase {
 
         printCSV(userid, commentid);
     }
+
+    @Override
+    public SqlTable getSqlTable() {
+        return SqlTable.LIKES;
+    }
 }

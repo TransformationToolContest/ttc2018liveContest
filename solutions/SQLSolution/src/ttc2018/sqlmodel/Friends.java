@@ -16,4 +16,9 @@ public class Friends extends SqlCollectionBase {
 
         printCSV(user1id, user2id);
     }
+
+    @Override
+    public SqlTable getSqlTable() {
+        return SqlTable.FRIENDS;
+    }
 }
