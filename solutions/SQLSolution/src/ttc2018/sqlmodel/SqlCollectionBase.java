@@ -1,11 +1,10 @@
 package ttc2018.sqlmodel;
 
+import java.io.PrintStream;
 import java.sql.PreparedStatement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 
 public abstract class SqlCollectionBase<T extends SqlRowBase> implements Iterable<T> {
     ArrayList<T> elements = new ArrayList<>();
@@ -16,7 +15,13 @@ public abstract class SqlCollectionBase<T extends SqlRowBase> implements Iterabl
 
     public abstract SqlTable getSqlTable();
 
-    static final boolean DO_PRINT = false;
+    public static final boolean DO_PRINT = true;
+    public static final String SEPARATOR = "|";
+
+    PrintStream out = System.out;
+    public void setOut(PrintStream ps) {
+        out = ps;
+    }
 
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 'Z' should be added (with quotes) is needed
     // input is parsed as local date, we do so with on the output side
@@ -34,16 +39,21 @@ public abstract class SqlCollectionBase<T extends SqlRowBase> implements Iterabl
                 strings.add(o.toString());
             }
         }
-        if (DO_PRINT) {
-            System.out.print(this.getClass().getSimpleName() + ": ");
-            System.out.println(String.join("|", strings));
-        }
+        printCSVAux(strings);
     }
 
     public void printCSV(String... strings) {
+        printCSVAux(Arrays.asList(strings));
+    }
+
+    void printCSVAux(Iterable<String> strings) {
         if (DO_PRINT) {
-            System.out.print(this.getClass().getSimpleName()+": ");
-            System.out.println(String.join("|", strings));
+            StringJoiner sj = new StringJoiner(SEPARATOR);
+            sj.add(this.getClass().getSimpleName());
+            for(String s: strings) {
+                sj.add(s);
+            }
+            out.println(sj);
         }
     }
 

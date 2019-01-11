@@ -42,6 +42,12 @@ public class ModelUtils {
         return (ModelChangeSet) resource.getContents().get(0);
     }
 
+    static File getChangesetCSVFile(int size, int sequence) {
+        String resourceName = String.format("change%1$02d", sequence);
+
+        return getResourcePath(size, resourceName, ResourceType.CSV);
+    }
+
     protected static void ensureRepositoryInit() {
         if (repository == null) {
             repository = new ResourceSetImpl();

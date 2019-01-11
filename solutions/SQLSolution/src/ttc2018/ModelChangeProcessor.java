@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import ttc2018.sqlmodel.*;
 
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Date;
 
 public class ModelChangeProcessor {
@@ -19,8 +20,18 @@ public class ModelChangeProcessor {
         int size = args.length>0?new Integer(args[0]):16;
         int sequences = args.length>1?new Integer(args[1]):2;
 
+        PrintStream ps;
         for (int i=1; i<=sequences; i++) {
+            if (SqlCollectionBase.DO_PRINT) {
+                ps = new PrintStream(ModelUtils.getChangesetCSVFile(size, i));
+                converter.resetCollections(ps);
+            }
+
             converter.load(size, i);
+
+            if (SqlCollectionBase.DO_PRINT) {
+                ps.close();
+            }
         }
     }
 
@@ -40,6 +51,12 @@ public class ModelChangeProcessor {
         users = new Users();
         friends = new Friends();
         likes = new Likes();
+    }
+    void resetCollections(PrintStream ps) {
+        resetCollections();
+        for(SqlCollectionBase c: getCollections()) {
+            c.setOut(ps);
+        }
     }
     SqlCollectionBase[] getCollections() {
         return new SqlCollectionBase[] {posts, comments, users, friends, likes};
@@ -165,10 +182,4 @@ public class ModelChangeProcessor {
             throw new RuntimeException("Unexpected change type received: " + change.getClass().getName());
         }
     }
-
-    protected static void printCSV(String typeName, String... strings) {
-        System.out.print(typeName+": ");
-        System.out.println(String.join("|", strings));
-    }
-
 }
