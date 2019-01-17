@@ -58,17 +58,6 @@ public class LiveContestDriver {
     	return mRes.getContents().get(0);
     }
 
-    static void Load() throws IOException, InterruptedException
-    {
-    	stopwatch = System.nanoTime();
-    	if (USE_CHANGES_XMI) {
-            solution.setSocialNetwork((SocialNetworkRoot) loadFile("initial.xmi"), repository);
-        }
-        solution.loadData();
-        stopwatch = System.nanoTime() - stopwatch;
-        Report(BenchmarkPhase.Load, -1, null);
-    }
-
     static void Initialize() throws Exception
     {
     	stopwatch = System.nanoTime();
@@ -102,6 +91,17 @@ public class LiveContestDriver {
 
         stopwatch = System.nanoTime() - stopwatch;
         Report(BenchmarkPhase.Initialization, -1, null);
+    }
+
+    static void Load() throws IOException, InterruptedException
+    {
+        stopwatch = System.nanoTime();
+        if (USE_CHANGES_XMI) {
+            solution.setSocialNetwork((SocialNetworkRoot) loadFile("initial.xmi"), repository);
+        }
+        solution.loadData();
+        stopwatch = System.nanoTime() - stopwatch;
+        Report(BenchmarkPhase.Load, -1, null);
     }
 
     static void Initial()
