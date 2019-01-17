@@ -42,6 +42,11 @@ public abstract class Solution {
 
     public abstract String Update(ModelChangeSet changes);
 
+	/**
+	 * Update reading changes from CSV file
+	 */
+	public abstract String Update(File changes);
+
 	// some PostgreSQL-specific parameters like database name, connection string
 	private final static String PG_DB_NAME = (System.getenv("PG_DB_NAME")!=null)?System.getenv("PG_DB_NAME"):"ttc2018eval";
 	private final static String PG_PORT = (System.getenv("PG_PORT")!=null)?System.getenv("PG_PORT"):"5432";
@@ -116,6 +121,16 @@ public abstract class Solution {
 	void beforeUpdate(ModelChangeSet changes) {
 		modelChangeProcessor.resetCollections();
 		modelChangeProcessor.processChangeSet(changes);
+		beforeUpdateCommon();
+	}
+
+	void beforeUpdate(File changes) {
+		modelChangeProcessor.resetCollections();
+		modelChangeProcessor.processChangeSet(changes);
+		beforeUpdateCommon();
+	}
+
+	void beforeUpdateCommon() {
 		for(SqlCollectionBase<SqlRowBase> c: modelChangeProcessor.getCollections()) {
 			PreparedStatement insert = c.getSqlTable().getInsertPreparedStatement();
 			int cnt = 0;

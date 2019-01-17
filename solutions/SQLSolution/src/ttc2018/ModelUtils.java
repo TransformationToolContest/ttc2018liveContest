@@ -20,7 +20,11 @@ public class ModelUtils {
     protected static ResourceSet repository;
 
     public static File getResourcePath(int size, String resourceName, ResourceType resourceType) {
-        return new File(modelBasePath + size, resourceName + "." + resourceType.extension);
+        return getResourcePath(modelBasePath + size, resourceName, resourceType);
+    }
+
+    public static File getResourcePath(String basePath, String resourceName, ResourceType resourceType) {
+        return new File(basePath, resourceName + "." + resourceType.extension);
     }
 
     static Resource getXMIResource(int size, String resourceName) throws IOException {
@@ -46,6 +50,12 @@ public class ModelUtils {
         String resourceName = String.format("change%1$02d", sequence);
 
         return getResourcePath(size, resourceName, ResourceType.CSV);
+    }
+
+    static File getChangesetCSVFile(String basePath, int sequence) {
+        String resourceName = String.format("change%1$02d", sequence);
+
+        return getResourcePath(basePath, resourceName, ResourceType.CSV);
     }
 
     protected static void ensureRepositoryInit() {

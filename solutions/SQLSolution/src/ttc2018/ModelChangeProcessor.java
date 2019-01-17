@@ -5,12 +5,15 @@ import SocialNetwork.Comment;
 import SocialNetwork.Post;
 import SocialNetwork.Submission;
 import SocialNetwork.User;
-import org.eclipse.emf.ecore.EObject;
 import ttc2018.sqlmodel.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.Files;
 import java.util.Date;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class ModelChangeProcessor {
     public static void main(String[] args) throws IOException {
@@ -67,6 +70,35 @@ public class ModelChangeProcessor {
         System.out.println("change seq: "+sequence + " " + new Date());
         processChangeSet(root);
         System.out.println(new Date());
+    }
+
+    public void processChangeSet(File changeSet) {
+        try (Stream<String> stream = Files.lines(changeSet.toPath())) {
+            stream.forEachOrdered(s -> {
+                String[] line = s.split(Pattern.quote(SqlCollectionBase.SEPARATOR));
+                switch (line[0]) {
+                    case "Comments":
+                        comments.addComment(line[1], line[2], line[3], line[4], line[5], line[6]);
+                        break;
+                    case "Friends":
+                        friends.addFriend(line[1], line[2]);
+                        break;
+                    case "Likes":
+                        likes.addLike(line[1], line[2]);
+                        break;
+                    case "Posts":
+                        posts.addPost(line[1], line[2], line[3], line[4]);
+                        break;
+                    case "Users":
+                        users.addUser(line[1], line[2]);
+                        break;
+                    default:
+                        throw new RuntimeException("Invalid record type received from CSV input: "+line[0]);
+                }
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void processChangeSet(ModelChangeSet changeSet) {

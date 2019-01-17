@@ -3,6 +3,7 @@ package ttc2018.sqlmodel;
 import java.io.PrintStream;
 import java.sql.PreparedStatement;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -15,7 +16,7 @@ public abstract class SqlCollectionBase<T extends SqlRowBase> implements Iterabl
 
     public abstract SqlTable getSqlTable();
 
-    public static final boolean DO_PRINT = true;
+    public static final boolean DO_PRINT = false;
     public static final String SEPARATOR = "|";
 
     PrintStream out = System.out;
@@ -62,6 +63,14 @@ public abstract class SqlCollectionBase<T extends SqlRowBase> implements Iterabl
             return -2L; // workaround missing model references
         } else {
             return Long.valueOf(str);
+        }
+    }
+
+    Date toDate(String str) {
+        try {
+            return df.parse(str);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 }

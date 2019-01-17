@@ -2,6 +2,7 @@ package ttc2018;
 
 import Changes.ModelChangeSet;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 
@@ -23,6 +24,17 @@ public class SolutionQ1 extends Solution {
 
 	@Override
 	public String Update(ModelChangeSet changes) {
+		beforeUpdate(changes);
+
+		String result = runReadQuery(Query.Q1_INITIAL);
+
+		afterUpdate();
+
+		return result;
+	}
+
+	@Override
+	public String Update(File changes) {
 		beforeUpdate(changes);
 
 		String result = runReadQuery(Query.Q1_INITIAL);
