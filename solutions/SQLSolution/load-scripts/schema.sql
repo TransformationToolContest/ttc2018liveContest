@@ -87,4 +87,11 @@ create table q1_result (
   postid bigint not null
 , postts timestamp without time zone not null
 , score bigint not null
-)
+);
+
+-- maintain comment_friends closed here
+create table q2_comment_friends_closed (
+  commentid bigint not null
+, head_userid bigint not null
+, tail_userid bigint not null
+);

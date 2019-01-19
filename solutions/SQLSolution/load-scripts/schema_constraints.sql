@@ -25,6 +25,7 @@ CREATE INDEX friends_user2id ON friends (user2id);
 CREATE INDEX likes_userid ON likes (userid);
 CREATE INDEX likes_commentid ON likes (commentid);
 
+/* -- disabled in favor of programmatic maintenance from the SQLSolution's code
 -- populate comment_friends table
 INSERT INTO comment_friends (status, commentid, user1id, user2id)
     SELECT -- status: differential iff any of the joined input records were differential
@@ -37,6 +38,7 @@ INSERT INTO comment_friends (status, commentid, user1id, user2id)
        AND f.user2id = l2.userid
        AND l1.commentid = l2.commentid
 ;
+*/
 
 -- allow index only scan to emulate index-organized table
 CREATE INDEX comment_friends_comment_userids ON comment_friends (commentid, user1id, user2id);
