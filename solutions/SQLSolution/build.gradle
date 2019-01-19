@@ -70,7 +70,9 @@ task runContestDriver(type: JavaExec) {
 	} else {
 		environment("Sequences", "20")
 	}
-	if (project.hasProperty("RedirectOutput")) {
-		standardOutput new FileOutputStream("${buildDir}/${RedirectOutput}", true)
+	doFirst {
+		if (project.hasProperty("RedirectOutput")) {
+			standardOutput new FileOutputStream("${buildDir}/${RedirectOutput}", true)
+		}
 	}
 }
