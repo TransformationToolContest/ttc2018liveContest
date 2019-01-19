@@ -49,6 +49,9 @@ public class LiveContestDriver {
     private static String ChangeSet;
     private static String Query;
 
+    static final boolean ShowScoresForValidation = "1".equals(System.getenv("SHOW_SCORES"));
+    static final boolean ShowRunningTime = !"1".equals(System.getenv("HIDE_RUNTIME"));
+
     private static long stopwatch;
 
     private static Solution solution;
@@ -138,7 +141,9 @@ public class LiveContestDriver {
     	} else {
     		iterationStr = Integer.toString(iteration);
     	}
-        System.out.println(String.format("%s;%s;%s;%s;%s;%s;Time;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(stopwatch)));
+    	if (ShowRunningTime) {
+            System.out.println(String.format("%s;%s;%s;%s;%s;%s;Time;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(stopwatch)));
+        }
         Runtime.getRuntime().gc();
         Runtime.getRuntime().gc();
         Runtime.getRuntime().gc();

@@ -87,7 +87,11 @@ public abstract class Solution {
 
 		try (ResultSet rs = q.getPreparedStatement().executeQuery()) {
 			while (rs.next()) {
-				result.add(rs.getString(1));
+				if (LiveContestDriver.ShowScoresForValidation) {
+					result.add(String.format("%1$s,%2$s", rs.getString(1), rs.getString(2)));
+				} else {
+					result.add(rs.getString(1));
+				}
 			}
 
 			return String.join("|", result);
