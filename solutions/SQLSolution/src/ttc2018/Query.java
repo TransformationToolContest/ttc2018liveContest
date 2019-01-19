@@ -15,7 +15,11 @@ public enum Query {
     Q1_RETRIEVE(Paths.get("q1-retrieve.sql")),
     Q2_INITIAL(Paths.get("q2.sql")),
     Q2_CF_TRUNCATE("truncate table comment_friends"),
-    Q2_CF_POPULATE(Paths.get("q2-cf-initial.sql"))
+    Q2_CF_INITIAL(Paths.get("q2-cf-initial.sql")),
+    Q2_CF_UPDATE(Paths.get("q2-cf-update.sql")),
+    Q2_CFC_PREPARE(Paths.get("q2-cfc-prepare.sql")),
+    Q2_CFC_UPDATE(Paths.get("q2-cfc-update.sql")),
+    Q2_RETRIEVE(Paths.get("q2-retrieve.sql")),
     ;
 
 

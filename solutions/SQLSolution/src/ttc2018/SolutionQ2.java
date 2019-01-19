@@ -14,13 +14,19 @@ public class SolutionQ2 extends Solution {
 		Connection conn = getDbConnection();
 		Query.Q2_INITIAL.prepareStatement(conn);
 		Query.Q2_CF_TRUNCATE.prepareStatement(conn);
-		Query.Q2_CF_POPULATE.prepareStatement(conn);
+		Query.Q2_CF_INITIAL.prepareStatement(conn);
+		Query.Q2_CF_UPDATE.prepareStatement(conn);
+		Query.Q2_CFC_PREPARE.prepareStatement(conn);
+		Query.Q2_CFC_UPDATE.prepareStatement(conn);
+		Query.Q2_RETRIEVE.prepareStatement(conn);
 	}
 
 	@Override
 	public String Initial() {
-		runVoidQuery(Query.Q2_CF_POPULATE);
-		String result = runReadQuery(Query.Q2_INITIAL);
+		runVoidQuery(Query.Q2_CF_INITIAL);
+		runVoidQuery(Query.Q2_CFC_PREPARE);
+		runVoidQuery(Query.Q2_CFC_UPDATE);
+		String result = runReadQuery(Query.Q2_RETRIEVE);
 
 		return result;
 	}
@@ -29,9 +35,9 @@ public class SolutionQ2 extends Solution {
 	public String Update(ModelChangeSet changes) {
 		beforeUpdate(changes);
 
-		runVoidQuery(Query.Q2_CF_TRUNCATE);
-		runVoidQuery(Query.Q2_CF_POPULATE);
-		String result = runReadQuery(Query.Q2_INITIAL);
+		runVoidQuery(Query.Q2_CF_UPDATE);
+		runVoidQuery(Query.Q2_CFC_UPDATE);
+		String result = runReadQuery(Query.Q2_RETRIEVE);
 
 		afterUpdate();
 
@@ -42,9 +48,9 @@ public class SolutionQ2 extends Solution {
 	public String Update(File changes) {
 		beforeUpdate(changes);
 
-		runVoidQuery(Query.Q2_CF_TRUNCATE);
-		runVoidQuery(Query.Q2_CF_POPULATE);
-		String result = runReadQuery(Query.Q2_INITIAL);
+		runVoidQuery(Query.Q2_CF_UPDATE);
+		runVoidQuery(Query.Q2_CFC_UPDATE);
+		String result = runReadQuery(Query.Q2_RETRIEVE);
 
 		afterUpdate();
 

@@ -1,6 +1,5 @@
 INSERT INTO comment_friends (status, commentid, user1id, user2id)
-    SELECT -- status: differential iff any of the joined input records were differential
-           CASE WHEN 'D' IN (l1.status, l2.status, f.status) THEN 'D' ELSE 'I' END AS status
+    SELECT 'I' AS status
          , l1.commentid, f.user1id, f.user2id
       FROM likes l1, likes l2
          , friends f

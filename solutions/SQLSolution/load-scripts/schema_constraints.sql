@@ -43,3 +43,5 @@ INSERT INTO comment_friends (status, commentid, user1id, user2id)
 -- allow index only scan to emulate index-organized table
 CREATE INDEX comment_friends_comment_userids ON comment_friends (commentid, user1id, user2id);
 CREATE INDEX comment_friends_comment_user1id ON comment_friends (commentid, user1id);
+
+CREATE UNIQUE INDEX q2_comment_friends_closed_all ON q2_comment_friends_closed (commentid, head_userid, tail_userid);
