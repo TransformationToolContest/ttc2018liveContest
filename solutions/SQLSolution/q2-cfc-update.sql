@@ -6,7 +6,7 @@ comment_friends_closed_initial AS (
     -- are the vertices of the projected users graph for a comment
     SELECT commentid, head_userid, tail_userid
       FROM q2_comment_friends_closed
-  UNION
+  UNION ALL
     SELECT l.commentid, l.userid AS head_userid, l.userid AS tail_userid
       FROM likes_d l  
 )
@@ -27,6 +27,7 @@ comment_friends_closed_initial AS (
 )
 INSERT INTO q2_comment_friends_closed(commentid, head_userid, tail_userid)
     select commentid, head_userid, tail_userid
-      from comment_friends_closed
-ON CONFLICT DO NOTHING -- we maintaine set-semantics with this update
+      from comment_friends_closed w
+           left join q2_comment_friends_closed q using (commentid, head_userid, tail_userid)
+     where q.commentid IS NULL
 ;
