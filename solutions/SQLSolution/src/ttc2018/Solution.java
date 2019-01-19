@@ -100,6 +100,14 @@ public abstract class Solution {
 		}
 	}
 
+	void runVoidQuery(Query q) {
+		try {
+			q.getPreparedStatement().executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	void loadSchema() throws IOException, InterruptedException {
 		runLoadSh("schema-only");
 	}

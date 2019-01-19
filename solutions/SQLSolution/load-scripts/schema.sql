@@ -81,3 +81,10 @@ create table comment_friends_i partition of comment_friends for values in ('I');
  alter table comment_friends_i alter status set default 'I';
 create table comment_friends_d partition of comment_friends for values in ('D');
  alter table comment_friends_d alter status set default 'D';
+
+-- maintain result for q1 here
+create table q1_result (
+  postid bigint not null
+, postts timestamp without time zone not null
+, score bigint not null
+)

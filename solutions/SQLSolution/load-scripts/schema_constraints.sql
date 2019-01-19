@@ -2,6 +2,8 @@ ALTER TABLE posts ADD PRIMARY KEY (id, status);
 ALTER TABLE comments ADD PRIMARY KEY (id, status);
 ALTER TABLE users ADD PRIMARY KEY (id, status);
 
+ALTER TABLE q1_result ADD PRIMARY KEY (postid);
+
 -- re-order friends on the storage level by user1id.
 -- This order is not hold after writes to the table.
 CREATE INDEX friends_user1id ON friends (user1id);

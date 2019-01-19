@@ -13,11 +13,14 @@ public class SolutionQ1 extends Solution {
 
 		Connection conn = getDbConnection();
 		Query.Q1_INITIAL.prepareStatement(conn);
+		Query.Q1_UPDATE.prepareStatement(conn);
+		Query.Q1_RETRIEVE.prepareStatement(conn);
 	}
 	
 	@Override
 	public String Initial() {
-		String result = runReadQuery(Query.Q1_INITIAL);
+		runVoidQuery(Query.Q1_INITIAL);
+		String result = runReadQuery(Query.Q1_RETRIEVE);
 
 		return result;
 	}
@@ -26,7 +29,8 @@ public class SolutionQ1 extends Solution {
 	public String Update(ModelChangeSet changes) {
 		beforeUpdate(changes);
 
-		String result = runReadQuery(Query.Q1_INITIAL);
+		runVoidQuery(Query.Q1_UPDATE);
+		String result = runReadQuery(Query.Q1_RETRIEVE);
 
 		afterUpdate();
 
@@ -37,7 +41,8 @@ public class SolutionQ1 extends Solution {
 	public String Update(File changes) {
 		beforeUpdate(changes);
 
-		String result = runReadQuery(Query.Q1_INITIAL);
+		runVoidQuery(Query.Q1_UPDATE);
+		String result = runReadQuery(Query.Q1_RETRIEVE);
 
 		afterUpdate();
 
