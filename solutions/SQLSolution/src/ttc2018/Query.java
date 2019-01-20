@@ -18,7 +18,8 @@ public enum Query {
     Q2_CF_INITIAL(Paths.get("q2-cf-initial.sql")),
     Q2_CF_UPDATE(Paths.get("q2-cf-update.sql")),
     Q2_CFC_PREPARE(Paths.get("q2-cfc-prepare.sql")),
-    Q2_CFC_UPDATE(Paths.get("q2-cfc-update.sql")),
+    Q2_CFC_UPDATE_INIT(Paths.get("q2-cfc-update-during-initial.sql")),
+    Q2_CFC_UPDATE_MAINTAIN(Paths.get("q2-cfc-update-during-update.sql")),
     Q2_RETRIEVE(Paths.get("q2-retrieve.sql")),
     ;
 

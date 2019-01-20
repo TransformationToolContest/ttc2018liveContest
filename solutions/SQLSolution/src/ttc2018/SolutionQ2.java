@@ -17,7 +17,8 @@ public class SolutionQ2 extends Solution {
 		Query.Q2_CF_INITIAL.prepareStatement(conn);
 		Query.Q2_CF_UPDATE.prepareStatement(conn);
 		Query.Q2_CFC_PREPARE.prepareStatement(conn);
-		Query.Q2_CFC_UPDATE.prepareStatement(conn);
+		Query.Q2_CFC_UPDATE_INIT.prepareStatement(conn);
+		Query.Q2_CFC_UPDATE_MAINTAIN.prepareStatement(conn);
 		Query.Q2_RETRIEVE.prepareStatement(conn);
 	}
 
@@ -25,7 +26,7 @@ public class SolutionQ2 extends Solution {
 	public String Initial() {
 		runVoidQuery(Query.Q2_CF_INITIAL);
 		runVoidQuery(Query.Q2_CFC_PREPARE);
-		runVoidQuery(Query.Q2_CFC_UPDATE);
+		runVoidQuery(Query.Q2_CFC_UPDATE_INIT);
 		String result = runReadQuery(Query.Q2_RETRIEVE);
 
 		return result;
@@ -36,7 +37,7 @@ public class SolutionQ2 extends Solution {
 		beforeUpdate(changes);
 
 		runVoidQuery(Query.Q2_CF_UPDATE);
-		runVoidQuery(Query.Q2_CFC_UPDATE);
+		runVoidQuery(Query.Q2_CFC_UPDATE_MAINTAIN);
 		String result = runReadQuery(Query.Q2_RETRIEVE);
 
 		afterUpdate();
@@ -49,7 +50,7 @@ public class SolutionQ2 extends Solution {
 		beforeUpdate(changes);
 
 		runVoidQuery(Query.Q2_CF_UPDATE);
-		runVoidQuery(Query.Q2_CFC_UPDATE);
+		runVoidQuery(Query.Q2_CFC_UPDATE_MAINTAIN);
 		String result = runReadQuery(Query.Q2_RETRIEVE);
 
 		afterUpdate();
