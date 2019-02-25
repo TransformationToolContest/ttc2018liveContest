@@ -21,6 +21,11 @@ public class LiveContestDriver {
 
 	public static void main(String[] args) {
 		try {
+	        if (args.length == 0) {
+	            Mode = SolutionModes.Incremental;
+	        } else {
+	            Mode = SolutionModes.valueOf(args[0]);
+	        }
 	        Initialize();
 	        Load();
 	        Initial();
@@ -48,6 +53,7 @@ public class LiveContestDriver {
     private static String Tool;
     private static String ChangeSet;
     private static String Query;
+    private static SolutionModes Mode;
 
     static final boolean ShowScoresForValidation = "1".equals(System.getenv("SHOW_SCORES"));
     static final boolean ShowRunningTime = !"1".equals(System.getenv("HIDE_RUNTIME"));
@@ -81,11 +87,19 @@ public class LiveContestDriver {
         Query = System.getenv("Query").toUpperCase();
         if (Query.contentEquals("Q1"))
         {
-            solution = new SolutionQ1(ChangePath);
+            if (SolutionModes.Incremental.equals(Mode)) {
+                solution = new SolutionQ1(ChangePath);
+            } else {
+                solution = new SolutionQ1Batch(ChangePath);
+            }
         }
         else if (Query.contentEquals("Q2"))
         {
-            solution = new SolutionQ2(ChangePath);
+            if (SolutionModes.Incremental.equals(Mode)) {
+                solution = new SolutionQ2(ChangePath);
+            } else {
+                solution = new SolutionQ2Batch(ChangePath);
+            }
         }
         else
         {
@@ -164,5 +178,10 @@ public class LiveContestDriver {
         Load,
         Initial,
         Update
+    }
+
+    enum SolutionModes {
+        Batch,
+        Incremental
     }
 }
