@@ -4,8 +4,9 @@ WITH RECURSIVE comment_friends_closed(commentid, head_userid, tail_userid) AS (
 
     -- start with the users that liked a specific comment.
     -- They are the vertices of the projected users graph for a comment
-    SELECT l.commentid, l.userid AS head_userid, l.userid AS tail_userid
-      FROM likes l
+    -- To be precise, we record all comments even those that have no likes at all.
+    SELECT c.id AS commentid, l.userid AS head_userid, l.userid AS tail_userid
+      FROM comments c left join likes l on (c.id = l.commentid)
   UNION
     SELECT cfc.commentid, cfc.head_userid, f.user2id as tail_userid
       FROM comment_friends_closed cfc
@@ -21,7 +22,7 @@ WITH RECURSIVE comment_friends_closed(commentid, head_userid, tail_userid) AS (
      GROUP BY commentid, tail_userid
 )
 , comment_component_sizes AS (
-    SELECT cc.commentid, cc.componentid, count(*) AS component_size
+    SELECT cc.commentid, cc.componentid, count(userid) AS component_size
       FROM comment_components cc
      GROUP BY cc.commentid, cc.componentid
 )
