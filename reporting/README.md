@@ -6,6 +6,7 @@
 
     ```bash
     sudo apt-get install -y r-base r-base-dev
+    sudo apt-get install -y libssl-dev
     ```
 
 1. Install the required R packages by issuing the following command:
