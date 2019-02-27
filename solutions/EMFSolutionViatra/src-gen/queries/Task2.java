@@ -24,14 +24,13 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
-import org.eclipse.viatra.query.runtime.matchers.aggregators.sum;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.context.common.JavaTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.AggregatorConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.PatternMatchCounter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.TypeFilterConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
@@ -40,7 +39,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import queries.CommentComponentSize;
+import queries.TransitiveFriendLikers;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -49,7 +48,7 @@ import queries.CommentComponentSize;
  *         <code><pre>
  *         // task 2
  *         pattern task2(comment: Comment, score: java Integer) {
- *         	score == sum find commentComponentSize(comment, _user, #componentSize);
+ *         	score == count find transitiveFriendLikers(comment, _user, _otherUser);
  *         }
  * </pre></code>
  * 
@@ -253,7 +252,7 @@ public final class Task2 extends BaseGeneratedEMFQuerySpecification<Task2.Matche
    * <code><pre>
    * // task 2
    * pattern task2(comment: Comment, score: java Integer) {
-   * 	score == sum find commentComponentSize(comment, _user, #componentSize);
+   * 	score == count find transitiveFriendLikers(comment, _user, _otherUser);
    * }
    * </pre></code>
    * 
@@ -680,16 +679,16 @@ public final class Task2 extends BaseGeneratedEMFQuerySpecification<Task2.Matche
           PVariable var_comment = body.getOrCreateVariableByName("comment");
           PVariable var_score = body.getOrCreateVariableByName("score");
           PVariable var__user = body.getOrCreateVariableByName("_user");
-          PVariable var__componentSize = body.getOrCreateVariableByName("#componentSize");
+          PVariable var__otherUser = body.getOrCreateVariableByName("_otherUser");
           new TypeConstraint(body, Tuples.flatTupleOf(var_comment), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("https://www.transformation-tool-contest.eu/2018/social_media", "Comment")));
           new TypeFilterConstraint(body, Tuples.flatTupleOf(var_score), new JavaTransitiveInstancesKey(java.lang.Integer.class));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
              new ExportedParameter(body, var_comment, parameter_comment),
              new ExportedParameter(body, var_score, parameter_score)
           ));
-          // 	score == sum find commentComponentSize(comment, _user, #componentSize)
+          // 	score == count find transitiveFriendLikers(comment, _user, _otherUser)
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new AggregatorConstraint(new sum().getAggregatorLogic(Integer.class), body, Tuples.flatTupleOf(var_comment, var__user, var__componentSize), CommentComponentSize.instance().getInternalQueryRepresentation(), var__virtual_0_, 2);
+          new PatternMatchCounter(body, Tuples.flatTupleOf(var_comment, var__user, var__otherUser), TransitiveFriendLikers.instance().getInternalQueryRepresentation(), var__virtual_0_);
           new Equality(body, var_score, var__virtual_0_);
           bodies.add(body);
       }

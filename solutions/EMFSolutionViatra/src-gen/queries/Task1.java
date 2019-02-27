@@ -24,14 +24,12 @@ import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedEMFQuerySpecificat
 import org.eclipse.viatra.query.runtime.api.impl.BaseMatcher;
 import org.eclipse.viatra.query.runtime.api.impl.BasePatternMatch;
 import org.eclipse.viatra.query.runtime.emf.types.EClassTransitiveInstancesKey;
-import org.eclipse.viatra.query.runtime.matchers.aggregators.sum;
 import org.eclipse.viatra.query.runtime.matchers.backend.QueryEvaluationHint;
 import org.eclipse.viatra.query.runtime.matchers.context.common.JavaTransitiveInstancesKey;
 import org.eclipse.viatra.query.runtime.matchers.psystem.IExpressionEvaluator;
 import org.eclipse.viatra.query.runtime.matchers.psystem.IValueProvider;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
-import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.AggregatorConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExpressionEvaluation;
@@ -44,7 +42,8 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
-import queries.TransitivelyCommented;
+import queries.CommentOnPost;
+import queries.LikesOnComments;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
@@ -54,9 +53,9 @@ import queries.TransitivelyCommented;
  *         // task 1
  *         pattern task1(post: Post, score: java Integer) {
  *         	Post(post);
- *         	commCount == count find transitivelyCommented(post, _comment1, _);
- *         	userCount == sum   find transitivelyCommented(post, _comment2, #commentLikeCount);
- *         	score == eval(10commCount + userCount);
+ *         	commCount == count find commentOnPost(_comment, post);
+ *         	likeCount == count find likesOnComments(post, _comment2, _user);
+ *         	score == eval(10commCount + likeCount);
  *         }
  * </pre></code>
  * 
@@ -261,9 +260,9 @@ public final class Task1 extends BaseGeneratedEMFQuerySpecification<Task1.Matche
    * // task 1
    * pattern task1(post: Post, score: java Integer) {
    * 	Post(post);
-   * 	commCount == count find transitivelyCommented(post, _comment1, _);
-   * 	userCount == sum   find transitivelyCommented(post, _comment2, #commentLikeCount);
-   * 	score == eval(10commCount + userCount);
+   * 	commCount == count find commentOnPost(_comment, post);
+   * 	likeCount == count find likesOnComments(post, _comment2, _user);
+   * 	score == eval(10commCount + likeCount);
    * }
    * </pre></code>
    * 
@@ -690,11 +689,10 @@ public final class Task1 extends BaseGeneratedEMFQuerySpecification<Task1.Matche
           PVariable var_post = body.getOrCreateVariableByName("post");
           PVariable var_score = body.getOrCreateVariableByName("score");
           PVariable var_commCount = body.getOrCreateVariableByName("commCount");
-          PVariable var__comment1 = body.getOrCreateVariableByName("_comment1");
-          PVariable var___0_ = body.getOrCreateVariableByName("_<0>");
-          PVariable var_userCount = body.getOrCreateVariableByName("userCount");
+          PVariable var__comment = body.getOrCreateVariableByName("_comment");
+          PVariable var_likeCount = body.getOrCreateVariableByName("likeCount");
           PVariable var__comment2 = body.getOrCreateVariableByName("_comment2");
-          PVariable var__commentLikeCount = body.getOrCreateVariableByName("#commentLikeCount");
+          PVariable var__user = body.getOrCreateVariableByName("_user");
           new TypeConstraint(body, Tuples.flatTupleOf(var_post), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("https://www.transformation-tool-contest.eu/2018/social_media", "Post")));
           new TypeFilterConstraint(body, Tuples.flatTupleOf(var_score), new JavaTransitiveInstancesKey(java.lang.Integer.class));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
@@ -703,15 +701,15 @@ public final class Task1 extends BaseGeneratedEMFQuerySpecification<Task1.Matche
           ));
           // 	Post(post)
           new TypeConstraint(body, Tuples.flatTupleOf(var_post), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("https://www.transformation-tool-contest.eu/2018/social_media", "Post")));
-          // 	commCount == count find transitivelyCommented(post, _comment1, _)
+          // 	commCount == count find commentOnPost(_comment, post)
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new PatternMatchCounter(body, Tuples.flatTupleOf(var_post, var__comment1, var___0_), TransitivelyCommented.instance().getInternalQueryRepresentation(), var__virtual_0_);
+          new PatternMatchCounter(body, Tuples.flatTupleOf(var__comment, var_post), CommentOnPost.instance().getInternalQueryRepresentation(), var__virtual_0_);
           new Equality(body, var_commCount, var__virtual_0_);
-          // 	userCount == sum   find transitivelyCommented(post, _comment2, #commentLikeCount)
+          // 	likeCount == count find likesOnComments(post, _comment2, _user)
           PVariable var__virtual_1_ = body.getOrCreateVariableByName(".virtual{1}");
-          new AggregatorConstraint(new sum().getAggregatorLogic(Integer.class), body, Tuples.flatTupleOf(var_post, var__comment2, var__commentLikeCount), TransitivelyCommented.instance().getInternalQueryRepresentation(), var__virtual_1_, 2);
-          new Equality(body, var_userCount, var__virtual_1_);
-          // 	score == eval(10*commCount + userCount)
+          new PatternMatchCounter(body, Tuples.flatTupleOf(var_post, var__comment2, var__user), LikesOnComments.instance().getInternalQueryRepresentation(), var__virtual_1_);
+          new Equality(body, var_likeCount, var__virtual_1_);
+          // 	score == eval(10*commCount + likeCount)
           PVariable var__virtual_2_ = body.getOrCreateVariableByName(".virtual{2}");
           new ExpressionEvaluation(body, new IExpressionEvaluator() {
           
@@ -722,13 +720,13 @@ public final class Task1 extends BaseGeneratedEMFQuerySpecification<Task1.Matche
               
               @Override
               public Iterable<String> getInputParameterNames() {
-                  return Arrays.asList("commCount", "userCount");}
+                  return Arrays.asList("commCount", "likeCount");}
           
               @Override
               public Object evaluateExpression(IValueProvider provider) throws Exception {
                   Integer commCount = (Integer) provider.getValue("commCount");
-                  Integer userCount = (Integer) provider.getValue("userCount");
-                  return evaluateExpression_1_1(commCount, userCount);
+                  Integer likeCount = (Integer) provider.getValue("likeCount");
+                  return evaluateExpression_1_1(commCount, likeCount);
               }
           },  var__virtual_2_ ); 
           new Equality(body, var_score, var__virtual_2_);
@@ -738,7 +736,7 @@ public final class Task1 extends BaseGeneratedEMFQuerySpecification<Task1.Matche
     }
   }
   
-  private static int evaluateExpression_1_1(final Integer commCount, final Integer userCount) {
-    return ((10 * (commCount).intValue()) + (userCount).intValue());
+  private static int evaluateExpression_1_1(final Integer commCount, final Integer likeCount) {
+    return ((10 * (commCount).intValue()) + (likeCount).intValue());
   }
 }

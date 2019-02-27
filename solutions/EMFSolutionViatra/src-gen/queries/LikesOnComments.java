@@ -4,7 +4,8 @@
 package queries;
 
 import SocialNetwork.Comment;
-import SocialNetwork.Submission;
+import SocialNetwork.Post;
+import SocialNetwork.User;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -31,6 +32,7 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.PBody;
 import org.eclipse.viatra.query.runtime.matchers.psystem.PVariable;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.Equality;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicdeferred.ExportedParameter;
+import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.PositivePatternCall;
 import org.eclipse.viatra.query.runtime.matchers.psystem.basicenumerables.TypeConstraint;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameter;
 import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PParameterDirection;
@@ -38,14 +40,16 @@ import org.eclipse.viatra.query.runtime.matchers.psystem.queries.PVisibility;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuple;
 import org.eclipse.viatra.query.runtime.matchers.tuple.Tuples;
 import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
+import queries.CommentOnPost;
 
 /**
  * A pattern-specific query specification that can instantiate Matcher in a type-safe way.
  * 
  * <p>Original source:
  *         <code><pre>
- *         pattern commented(submission: Submission, comment: Comment) {
- *         	Comment.commented(comment, submission);
+ *         pattern likesOnComments(post: Post, comment: Comment, user: User) {
+ *         	find commentOnPost(comment, post);
+ *         	User.likes(user, comment);
  *         }
  * </pre></code>
  * 
@@ -54,9 +58,9 @@ import org.eclipse.viatra.query.runtime.util.ViatraQueryLoggingUtil;
  * 
  */
 @SuppressWarnings("all")
-public final class Commented extends BaseGeneratedEMFQuerySpecification<Commented.Matcher> {
+public final class LikesOnComments extends BaseGeneratedEMFQuerySpecification<LikesOnComments.Matcher> {
   /**
-   * Pattern-specific match representation of the queries.commented pattern,
+   * Pattern-specific match representation of the queries.likesOnComments pattern,
    * to be used in conjunction with {@link Matcher}.
    * 
    * <p>Class fields correspond to parameters of the pattern. Fields with value null are considered unassigned.
@@ -68,49 +72,61 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
    * 
    */
   public static abstract class Match extends BasePatternMatch {
-    private Submission fSubmission;
+    private Post fPost;
     
     private Comment fComment;
     
-    private static List<String> parameterNames = makeImmutableList("submission", "comment");
+    private User fUser;
     
-    private Match(final Submission pSubmission, final Comment pComment) {
-      this.fSubmission = pSubmission;
+    private static List<String> parameterNames = makeImmutableList("post", "comment", "user");
+    
+    private Match(final Post pPost, final Comment pComment, final User pUser) {
+      this.fPost = pPost;
       this.fComment = pComment;
+      this.fUser = pUser;
     }
     
     @Override
     public Object get(final String parameterName) {
-      if ("submission".equals(parameterName)) return this.fSubmission;
+      if ("post".equals(parameterName)) return this.fPost;
       if ("comment".equals(parameterName)) return this.fComment;
+      if ("user".equals(parameterName)) return this.fUser;
       return null;
     }
     
-    public Submission getSubmission() {
-      return this.fSubmission;
+    public Post getPost() {
+      return this.fPost;
     }
     
     public Comment getComment() {
       return this.fComment;
     }
     
+    public User getUser() {
+      return this.fUser;
+    }
+    
     @Override
     public boolean set(final String parameterName, final Object newValue) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      if ("submission".equals(parameterName) ) {
-          this.fSubmission = (Submission) newValue;
+      if ("post".equals(parameterName) ) {
+          this.fPost = (Post) newValue;
           return true;
       }
       if ("comment".equals(parameterName) ) {
           this.fComment = (Comment) newValue;
           return true;
       }
+      if ("user".equals(parameterName) ) {
+          this.fUser = (User) newValue;
+          return true;
+      }
       return false;
     }
     
-    public void setSubmission(final Submission pSubmission) {
+    public void setPost(final Post pPost) {
       if (!isMutable()) throw new java.lang.UnsupportedOperationException();
-      this.fSubmission = pSubmission;
+      this.fPost = pPost;
     }
     
     public void setComment(final Comment pComment) {
@@ -118,37 +134,43 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
       this.fComment = pComment;
     }
     
+    public void setUser(final User pUser) {
+      if (!isMutable()) throw new java.lang.UnsupportedOperationException();
+      this.fUser = pUser;
+    }
+    
     @Override
     public String patternName() {
-      return "queries.commented";
+      return "queries.likesOnComments";
     }
     
     @Override
     public List<String> parameterNames() {
-      return Commented.Match.parameterNames;
+      return LikesOnComments.Match.parameterNames;
     }
     
     @Override
     public Object[] toArray() {
-      return new Object[]{fSubmission, fComment};
+      return new Object[]{fPost, fComment, fUser};
     }
     
     @Override
-    public Commented.Match toImmutable() {
-      return isMutable() ? newMatch(fSubmission, fComment) : this;
+    public LikesOnComments.Match toImmutable() {
+      return isMutable() ? newMatch(fPost, fComment, fUser) : this;
     }
     
     @Override
     public String prettyPrint() {
       StringBuilder result = new StringBuilder();
-      result.append("\"submission\"=" + prettyPrintValue(fSubmission) + ", ");
-      result.append("\"comment\"=" + prettyPrintValue(fComment));
+      result.append("\"post\"=" + prettyPrintValue(fPost) + ", ");
+      result.append("\"comment\"=" + prettyPrintValue(fComment) + ", ");
+      result.append("\"user\"=" + prettyPrintValue(fUser));
       return result.toString();
     }
     
     @Override
     public int hashCode() {
-      return Objects.hash(fSubmission, fComment);
+      return Objects.hash(fPost, fComment, fUser);
     }
     
     @Override
@@ -158,9 +180,9 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
       if (obj == null) {
           return false;
       }
-      if ((obj instanceof Commented.Match)) {
-          Commented.Match other = (Commented.Match) obj;
-          return Objects.equals(fSubmission, other.fSubmission) && Objects.equals(fComment, other.fComment);
+      if ((obj instanceof LikesOnComments.Match)) {
+          LikesOnComments.Match other = (LikesOnComments.Match) obj;
+          return Objects.equals(fPost, other.fPost) && Objects.equals(fComment, other.fComment) && Objects.equals(fUser, other.fUser);
       } else {
           // this should be infrequent
           if (!(obj instanceof IPatternMatch)) {
@@ -172,8 +194,8 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
     }
     
     @Override
-    public Commented specification() {
-      return Commented.instance();
+    public LikesOnComments specification() {
+      return LikesOnComments.instance();
     }
     
     /**
@@ -183,39 +205,41 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
      * @return the empty match.
      * 
      */
-    public static Commented.Match newEmptyMatch() {
-      return new Mutable(null, null);
+    public static LikesOnComments.Match newEmptyMatch() {
+      return new Mutable(null, null, null);
     }
     
     /**
      * Returns a mutable (partial) match.
      * Fields of the mutable match can be filled to create a partial match, usable as matcher input.
      * 
-     * @param pSubmission the fixed value of pattern parameter submission, or null if not bound.
+     * @param pPost the fixed value of pattern parameter post, or null if not bound.
      * @param pComment the fixed value of pattern parameter comment, or null if not bound.
+     * @param pUser the fixed value of pattern parameter user, or null if not bound.
      * @return the new, mutable (partial) match object.
      * 
      */
-    public static Commented.Match newMutableMatch(final Submission pSubmission, final Comment pComment) {
-      return new Mutable(pSubmission, pComment);
+    public static LikesOnComments.Match newMutableMatch(final Post pPost, final Comment pComment, final User pUser) {
+      return new Mutable(pPost, pComment, pUser);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pSubmission the fixed value of pattern parameter submission, or null if not bound.
+     * @param pPost the fixed value of pattern parameter post, or null if not bound.
      * @param pComment the fixed value of pattern parameter comment, or null if not bound.
+     * @param pUser the fixed value of pattern parameter user, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public static Commented.Match newMatch(final Submission pSubmission, final Comment pComment) {
-      return new Immutable(pSubmission, pComment);
+    public static LikesOnComments.Match newMatch(final Post pPost, final Comment pComment, final User pUser) {
+      return new Immutable(pPost, pComment, pUser);
     }
     
-    private static final class Mutable extends Commented.Match {
-      Mutable(final Submission pSubmission, final Comment pComment) {
-        super(pSubmission, pComment);
+    private static final class Mutable extends LikesOnComments.Match {
+      Mutable(final Post pPost, final Comment pComment, final User pUser) {
+        super(pPost, pComment, pUser);
       }
       
       @Override
@@ -224,9 +248,9 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
       }
     }
     
-    private static final class Immutable extends Commented.Match {
-      Immutable(final Submission pSubmission, final Comment pComment) {
-        super(pSubmission, pComment);
+    private static final class Immutable extends LikesOnComments.Match {
+      Immutable(final Post pPost, final Comment pComment, final User pUser) {
+        super(pPost, pComment, pUser);
       }
       
       @Override
@@ -237,7 +261,7 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
   }
   
   /**
-   * Generated pattern matcher API of the queries.commented pattern,
+   * Generated pattern matcher API of the queries.likesOnComments pattern,
    * providing pattern-specific query methods.
    * 
    * <p>Use the pattern matcher on a given model via {@link #on(ViatraQueryEngine)},
@@ -247,16 +271,17 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
    * 
    * <p>Original source:
    * <code><pre>
-   * pattern commented(submission: Submission, comment: Comment) {
-   * 	Comment.commented(comment, submission);
+   * pattern likesOnComments(post: Post, comment: Comment, user: User) {
+   * 	find commentOnPost(comment, post);
+   * 	User.likes(user, comment);
    * }
    * </pre></code>
    * 
    * @see Match
-   * @see Commented
+   * @see LikesOnComments
    * 
    */
-  public static class Matcher extends BaseMatcher<Commented.Match> {
+  public static class Matcher extends BaseMatcher<LikesOnComments.Match> {
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
      * If the pattern matcher is already constructed in the engine, only a light-weight reference is returned.
@@ -265,7 +290,7 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
      * @throws ViatraQueryRuntimeException if an error occurs during pattern matcher creation
      * 
      */
-    public static Commented.Matcher on(final ViatraQueryEngine engine) {
+    public static LikesOnComments.Matcher on(final ViatraQueryEngine engine) {
       // check if matcher already exists
       Matcher matcher = engine.getExistingMatcher(querySpecification());
       if (matcher == null) {
@@ -280,15 +305,17 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
      * @noreference This method is for internal matcher initialization by the framework, do not call it manually.
      * 
      */
-    public static Commented.Matcher create() {
+    public static LikesOnComments.Matcher create() {
       return new Matcher();
     }
     
-    private final static int POSITION_SUBMISSION = 0;
+    private final static int POSITION_POST = 0;
     
     private final static int POSITION_COMMENT = 1;
     
-    private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(Commented.Matcher.class);
+    private final static int POSITION_USER = 2;
+    
+    private final static Logger LOGGER = ViatraQueryLoggingUtil.getLogger(LikesOnComments.Matcher.class);
     
     /**
      * Initializes the pattern matcher within an existing VIATRA Query engine.
@@ -304,13 +331,14 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
     
     /**
      * Returns the set of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pSubmission the fixed value of pattern parameter submission, or null if not bound.
+     * @param pPost the fixed value of pattern parameter post, or null if not bound.
      * @param pComment the fixed value of pattern parameter comment, or null if not bound.
+     * @param pUser the fixed value of pattern parameter user, or null if not bound.
      * @return matches represented as a Match object.
      * 
      */
-    public Collection<Commented.Match> getAllMatches(final Submission pSubmission, final Comment pComment) {
-      return rawStreamAllMatches(new Object[]{pSubmission, pComment}).collect(Collectors.toSet());
+    public Collection<LikesOnComments.Match> getAllMatches(final Post pPost, final Comment pComment, final User pUser) {
+      return rawStreamAllMatches(new Object[]{pPost, pComment, pUser}).collect(Collectors.toSet());
     }
     
     /**
@@ -319,105 +347,111 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
      * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
-     * @param pSubmission the fixed value of pattern parameter submission, or null if not bound.
+     * @param pPost the fixed value of pattern parameter post, or null if not bound.
      * @param pComment the fixed value of pattern parameter comment, or null if not bound.
+     * @param pUser the fixed value of pattern parameter user, or null if not bound.
      * @return a stream of matches represented as a Match object.
      * 
      */
-    public Stream<Commented.Match> streamAllMatches(final Submission pSubmission, final Comment pComment) {
-      return rawStreamAllMatches(new Object[]{pSubmission, pComment});
+    public Stream<LikesOnComments.Match> streamAllMatches(final Post pPost, final Comment pComment, final User pUser) {
+      return rawStreamAllMatches(new Object[]{pPost, pComment, pUser});
     }
     
     /**
      * Returns an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pSubmission the fixed value of pattern parameter submission, or null if not bound.
+     * @param pPost the fixed value of pattern parameter post, or null if not bound.
      * @param pComment the fixed value of pattern parameter comment, or null if not bound.
+     * @param pUser the fixed value of pattern parameter user, or null if not bound.
      * @return a match represented as a Match object, or null if no match is found.
      * 
      */
-    public Optional<Commented.Match> getOneArbitraryMatch(final Submission pSubmission, final Comment pComment) {
-      return rawGetOneArbitraryMatch(new Object[]{pSubmission, pComment});
+    public Optional<LikesOnComments.Match> getOneArbitraryMatch(final Post pPost, final Comment pComment, final User pUser) {
+      return rawGetOneArbitraryMatch(new Object[]{pPost, pComment, pUser});
     }
     
     /**
      * Indicates whether the given combination of specified pattern parameters constitute a valid pattern match,
      * under any possible substitution of the unspecified parameters (if any).
-     * @param pSubmission the fixed value of pattern parameter submission, or null if not bound.
+     * @param pPost the fixed value of pattern parameter post, or null if not bound.
      * @param pComment the fixed value of pattern parameter comment, or null if not bound.
+     * @param pUser the fixed value of pattern parameter user, or null if not bound.
      * @return true if the input is a valid (partial) match of the pattern.
      * 
      */
-    public boolean hasMatch(final Submission pSubmission, final Comment pComment) {
-      return rawHasMatch(new Object[]{pSubmission, pComment});
+    public boolean hasMatch(final Post pPost, final Comment pComment, final User pUser) {
+      return rawHasMatch(new Object[]{pPost, pComment, pUser});
     }
     
     /**
      * Returns the number of all matches of the pattern that conform to the given fixed values of some parameters.
-     * @param pSubmission the fixed value of pattern parameter submission, or null if not bound.
+     * @param pPost the fixed value of pattern parameter post, or null if not bound.
      * @param pComment the fixed value of pattern parameter comment, or null if not bound.
+     * @param pUser the fixed value of pattern parameter user, or null if not bound.
      * @return the number of pattern matches found.
      * 
      */
-    public int countMatches(final Submission pSubmission, final Comment pComment) {
-      return rawCountMatches(new Object[]{pSubmission, pComment});
+    public int countMatches(final Post pPost, final Comment pComment, final User pUser) {
+      return rawCountMatches(new Object[]{pPost, pComment, pUser});
     }
     
     /**
      * Executes the given processor on an arbitrarily chosen match of the pattern that conforms to the given fixed values of some parameters.
      * Neither determinism nor randomness of selection is guaranteed.
-     * @param pSubmission the fixed value of pattern parameter submission, or null if not bound.
+     * @param pPost the fixed value of pattern parameter post, or null if not bound.
      * @param pComment the fixed value of pattern parameter comment, or null if not bound.
+     * @param pUser the fixed value of pattern parameter user, or null if not bound.
      * @param processor the action that will process the selected match.
      * @return true if the pattern has at least one match with the given parameter values, false if the processor was not invoked
      * 
      */
-    public boolean forOneArbitraryMatch(final Submission pSubmission, final Comment pComment, final Consumer<? super Commented.Match> processor) {
-      return rawForOneArbitraryMatch(new Object[]{pSubmission, pComment}, processor);
+    public boolean forOneArbitraryMatch(final Post pPost, final Comment pComment, final User pUser, final Consumer<? super LikesOnComments.Match> processor) {
+      return rawForOneArbitraryMatch(new Object[]{pPost, pComment, pUser}, processor);
     }
     
     /**
      * Returns a new (partial) match.
      * This can be used e.g. to call the matcher with a partial match.
      * <p>The returned match will be immutable. Use {@link #newEmptyMatch()} to obtain a mutable match object.
-     * @param pSubmission the fixed value of pattern parameter submission, or null if not bound.
+     * @param pPost the fixed value of pattern parameter post, or null if not bound.
      * @param pComment the fixed value of pattern parameter comment, or null if not bound.
+     * @param pUser the fixed value of pattern parameter user, or null if not bound.
      * @return the (partial) match object.
      * 
      */
-    public Commented.Match newMatch(final Submission pSubmission, final Comment pComment) {
-      return Commented.Match.newMatch(pSubmission, pComment);
+    public LikesOnComments.Match newMatch(final Post pPost, final Comment pComment, final User pUser) {
+      return LikesOnComments.Match.newMatch(pPost, pComment, pUser);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for submission.
+     * Retrieve the set of values that occur in matches for post.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    protected Stream<Submission> rawStreamAllValuesOfsubmission(final Object[] parameters) {
-      return rawStreamAllValues(POSITION_SUBMISSION, parameters).map(Submission.class::cast);
+    protected Stream<Post> rawStreamAllValuesOfpost(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_POST, parameters).map(Post.class::cast);
     }
     
     /**
-     * Retrieve the set of values that occur in matches for submission.
+     * Retrieve the set of values that occur in matches for post.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Submission> getAllValuesOfsubmission() {
-      return rawStreamAllValuesOfsubmission(emptyArray()).collect(Collectors.toSet());
+    public Set<Post> getAllValuesOfpost() {
+      return rawStreamAllValuesOfpost(emptyArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for submission.
+     * Retrieve the set of values that occur in matches for post.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Stream<Submission> streamAllValuesOfsubmission() {
-      return rawStreamAllValuesOfsubmission(emptyArray());
+    public Stream<Post> streamAllValuesOfpost() {
+      return rawStreamAllValuesOfpost(emptyArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for submission.
+     * Retrieve the set of values that occur in matches for post.
      * </p>
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
@@ -426,12 +460,12 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Submission> streamAllValuesOfsubmission(final Commented.Match partialMatch) {
-      return rawStreamAllValuesOfsubmission(partialMatch.toArray());
+    public Stream<Post> streamAllValuesOfpost(final LikesOnComments.Match partialMatch) {
+      return rawStreamAllValuesOfpost(partialMatch.toArray());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for submission.
+     * Retrieve the set of values that occur in matches for post.
      * </p>
      * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
      * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
@@ -440,26 +474,26 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Submission> streamAllValuesOfsubmission(final Comment pComment) {
-      return rawStreamAllValuesOfsubmission(new Object[]{null, pComment});
+    public Stream<Post> streamAllValuesOfpost(final Comment pComment, final User pUser) {
+      return rawStreamAllValuesOfpost(new Object[]{null, pComment, pUser});
     }
     
     /**
-     * Retrieve the set of values that occur in matches for submission.
+     * Retrieve the set of values that occur in matches for post.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Submission> getAllValuesOfsubmission(final Commented.Match partialMatch) {
-      return rawStreamAllValuesOfsubmission(partialMatch.toArray()).collect(Collectors.toSet());
+    public Set<Post> getAllValuesOfpost(final LikesOnComments.Match partialMatch) {
+      return rawStreamAllValuesOfpost(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
     /**
-     * Retrieve the set of values that occur in matches for submission.
+     * Retrieve the set of values that occur in matches for post.
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Submission> getAllValuesOfsubmission(final Comment pComment) {
-      return rawStreamAllValuesOfsubmission(new Object[]{null, pComment}).collect(Collectors.toSet());
+    public Set<Post> getAllValuesOfpost(final Comment pComment, final User pUser) {
+      return rawStreamAllValuesOfpost(new Object[]{null, pComment, pUser}).collect(Collectors.toSet());
     }
     
     /**
@@ -499,7 +533,7 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Comment> streamAllValuesOfcomment(final Commented.Match partialMatch) {
+    public Stream<Comment> streamAllValuesOfcomment(final LikesOnComments.Match partialMatch) {
       return rawStreamAllValuesOfcomment(partialMatch.toArray());
     }
     
@@ -513,8 +547,8 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
      * @return the Stream of all values or empty set if there are no matches
      * 
      */
-    public Stream<Comment> streamAllValuesOfcomment(final Submission pSubmission) {
-      return rawStreamAllValuesOfcomment(new Object[]{pSubmission, null});
+    public Stream<Comment> streamAllValuesOfcomment(final Post pPost, final User pUser) {
+      return rawStreamAllValuesOfcomment(new Object[]{pPost, null, pUser});
     }
     
     /**
@@ -522,7 +556,7 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Comment> getAllValuesOfcomment(final Commented.Match partialMatch) {
+    public Set<Comment> getAllValuesOfcomment(final LikesOnComments.Match partialMatch) {
       return rawStreamAllValuesOfcomment(partialMatch.toArray()).collect(Collectors.toSet());
     }
     
@@ -531,14 +565,87 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
      * @return the Set of all values or empty set if there are no matches
      * 
      */
-    public Set<Comment> getAllValuesOfcomment(final Submission pSubmission) {
-      return rawStreamAllValuesOfcomment(new Object[]{pSubmission, null}).collect(Collectors.toSet());
+    public Set<Comment> getAllValuesOfcomment(final Post pPost, final User pUser) {
+      return rawStreamAllValuesOfcomment(new Object[]{pPost, null, pUser}).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for user.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    protected Stream<User> rawStreamAllValuesOfuser(final Object[] parameters) {
+      return rawStreamAllValues(POSITION_USER, parameters).map(User.class::cast);
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for user.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Set<User> getAllValuesOfuser() {
+      return rawStreamAllValuesOfuser(emptyArray()).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for user.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Stream<User> streamAllValuesOfuser() {
+      return rawStreamAllValuesOfuser(emptyArray());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for user.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
+     * 
+     */
+    public Stream<User> streamAllValuesOfuser(final LikesOnComments.Match partialMatch) {
+      return rawStreamAllValuesOfuser(partialMatch.toArray());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for user.
+     * </p>
+     * <strong>NOTE</strong>: It is important not to modify the source model while the stream is being processed.
+     * If the match set of the pattern changes during processing, the contents of the stream is <strong>undefined</strong>.
+     * In such cases, either rely on {@link #getAllMatches()} or collect the results of the stream in end-user code.
+     *      
+     * @return the Stream of all values or empty set if there are no matches
+     * 
+     */
+    public Stream<User> streamAllValuesOfuser(final Post pPost, final Comment pComment) {
+      return rawStreamAllValuesOfuser(new Object[]{pPost, pComment, null});
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for user.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Set<User> getAllValuesOfuser(final LikesOnComments.Match partialMatch) {
+      return rawStreamAllValuesOfuser(partialMatch.toArray()).collect(Collectors.toSet());
+    }
+    
+    /**
+     * Retrieve the set of values that occur in matches for user.
+     * @return the Set of all values or empty set if there are no matches
+     * 
+     */
+    public Set<User> getAllValuesOfuser(final Post pPost, final Comment pComment) {
+      return rawStreamAllValuesOfuser(new Object[]{pPost, pComment, null}).collect(Collectors.toSet());
     }
     
     @Override
-    protected Commented.Match tupleToMatch(final Tuple t) {
+    protected LikesOnComments.Match tupleToMatch(final Tuple t) {
       try {
-          return Commented.Match.newMatch((Submission) t.get(POSITION_SUBMISSION), (Comment) t.get(POSITION_COMMENT));
+          return LikesOnComments.Match.newMatch((Post) t.get(POSITION_POST), (Comment) t.get(POSITION_COMMENT), (User) t.get(POSITION_USER));
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in tuple not properly typed!",e);
           return null;
@@ -546,9 +653,9 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
     }
     
     @Override
-    protected Commented.Match arrayToMatch(final Object[] match) {
+    protected LikesOnComments.Match arrayToMatch(final Object[] match) {
       try {
-          return Commented.Match.newMatch((Submission) match[POSITION_SUBMISSION], (Comment) match[POSITION_COMMENT]);
+          return LikesOnComments.Match.newMatch((Post) match[POSITION_POST], (Comment) match[POSITION_COMMENT], (User) match[POSITION_USER]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -556,9 +663,9 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
     }
     
     @Override
-    protected Commented.Match arrayToMatchMutable(final Object[] match) {
+    protected LikesOnComments.Match arrayToMatchMutable(final Object[] match) {
       try {
-          return Commented.Match.newMutableMatch((Submission) match[POSITION_SUBMISSION], (Comment) match[POSITION_COMMENT]);
+          return LikesOnComments.Match.newMutableMatch((Post) match[POSITION_POST], (Comment) match[POSITION_COMMENT], (User) match[POSITION_USER]);
       } catch(ClassCastException e) {
           LOGGER.error("Element(s) in array not properly typed!",e);
           return null;
@@ -570,12 +677,12 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
      * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
      * 
      */
-    public static IQuerySpecification<Commented.Matcher> querySpecification() {
-      return Commented.instance();
+    public static IQuerySpecification<LikesOnComments.Matcher> querySpecification() {
+      return LikesOnComments.instance();
     }
   }
   
-  private Commented() {
+  private LikesOnComments() {
     super(GeneratedPQuery.INSTANCE);
   }
   
@@ -584,7 +691,7 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
    * @throws ViatraQueryRuntimeException if the pattern definition could not be loaded
    * 
    */
-  public static Commented instance() {
+  public static LikesOnComments instance() {
     try{
         return LazyHolder.INSTANCE;
     } catch (ExceptionInInitializerError err) {
@@ -593,35 +700,35 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
   }
   
   @Override
-  protected Commented.Matcher instantiate(final ViatraQueryEngine engine) {
-    return Commented.Matcher.on(engine);
+  protected LikesOnComments.Matcher instantiate(final ViatraQueryEngine engine) {
+    return LikesOnComments.Matcher.on(engine);
   }
   
   @Override
-  public Commented.Matcher instantiate() {
-    return Commented.Matcher.create();
+  public LikesOnComments.Matcher instantiate() {
+    return LikesOnComments.Matcher.create();
   }
   
   @Override
-  public Commented.Match newEmptyMatch() {
-    return Commented.Match.newEmptyMatch();
+  public LikesOnComments.Match newEmptyMatch() {
+    return LikesOnComments.Match.newEmptyMatch();
   }
   
   @Override
-  public Commented.Match newMatch(final Object... parameters) {
-    return Commented.Match.newMatch((SocialNetwork.Submission) parameters[0], (SocialNetwork.Comment) parameters[1]);
+  public LikesOnComments.Match newMatch(final Object... parameters) {
+    return LikesOnComments.Match.newMatch((SocialNetwork.Post) parameters[0], (SocialNetwork.Comment) parameters[1], (SocialNetwork.User) parameters[2]);
   }
   
   /**
-   * Inner class allowing the singleton instance of {@link JvmGenericType: queries.Commented (visibility: PUBLIC, simpleName: Commented, identifier: queries.Commented, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
+   * Inner class allowing the singleton instance of {@link JvmGenericType: queries.LikesOnComments (visibility: PUBLIC, simpleName: LikesOnComments, identifier: queries.LikesOnComments, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: queries) (interface: false, strictFloatingPoint: false, anonymous: false)} to be created 
    *     <b>not</b> at the class load time of the outer class, 
-   *     but rather at the first call to {@link JvmGenericType: queries.Commented (visibility: PUBLIC, simpleName: Commented, identifier: queries.Commented, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
+   *     but rather at the first call to {@link JvmGenericType: queries.LikesOnComments (visibility: PUBLIC, simpleName: LikesOnComments, identifier: queries.LikesOnComments, deprecated: <unset>) (abstract: false, static: false, final: true, packageName: queries) (interface: false, strictFloatingPoint: false, anonymous: false)#instance()}.
    * 
    * <p> This workaround is required e.g. to support recursion.
    * 
    */
   private static class LazyHolder {
-    private final static Commented INSTANCE = new Commented();
+    private final static LikesOnComments INSTANCE = new LikesOnComments();
     
     /**
      * Statically initializes the query specification <b>after</b> the field {@link #INSTANCE} is assigned.
@@ -639,13 +746,15 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
   }
   
   private static class GeneratedPQuery extends BaseGeneratedEMFPQuery {
-    private final static Commented.GeneratedPQuery INSTANCE = new GeneratedPQuery();
+    private final static LikesOnComments.GeneratedPQuery INSTANCE = new GeneratedPQuery();
     
-    private final PParameter parameter_submission = new PParameter("submission", "SocialNetwork.Submission", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("https://www.transformation-tool-contest.eu/2018/social_media", "Submission")), PParameterDirection.INOUT);
+    private final PParameter parameter_post = new PParameter("post", "SocialNetwork.Post", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("https://www.transformation-tool-contest.eu/2018/social_media", "Post")), PParameterDirection.INOUT);
     
     private final PParameter parameter_comment = new PParameter("comment", "SocialNetwork.Comment", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("https://www.transformation-tool-contest.eu/2018/social_media", "Comment")), PParameterDirection.INOUT);
     
-    private final List<PParameter> parameters = Arrays.asList(parameter_submission, parameter_comment);
+    private final PParameter parameter_user = new PParameter("user", "SocialNetwork.User", new EClassTransitiveInstancesKey((EClass)getClassifierLiteralSafe("https://www.transformation-tool-contest.eu/2018/social_media", "User")), PParameterDirection.INOUT);
+    
+    private final List<PParameter> parameters = Arrays.asList(parameter_post, parameter_comment, parameter_user);
     
     private GeneratedPQuery() {
       super(PVisibility.PUBLIC);
@@ -653,12 +762,12 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
     
     @Override
     public String getFullyQualifiedName() {
-      return "queries.commented";
+      return "queries.likesOnComments";
     }
     
     @Override
     public List<String> getParameterNames() {
-      return Arrays.asList("submission","comment");
+      return Arrays.asList("post","comment","user");
     }
     
     @Override
@@ -672,20 +781,25 @@ public final class Commented extends BaseGeneratedEMFQuerySpecification<Commente
       Set<PBody> bodies = new LinkedHashSet<>();
       {
           PBody body = new PBody(this);
-          PVariable var_submission = body.getOrCreateVariableByName("submission");
+          PVariable var_post = body.getOrCreateVariableByName("post");
           PVariable var_comment = body.getOrCreateVariableByName("comment");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_submission), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("https://www.transformation-tool-contest.eu/2018/social_media", "Submission")));
+          PVariable var_user = body.getOrCreateVariableByName("user");
+          new TypeConstraint(body, Tuples.flatTupleOf(var_post), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("https://www.transformation-tool-contest.eu/2018/social_media", "Post")));
           new TypeConstraint(body, Tuples.flatTupleOf(var_comment), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("https://www.transformation-tool-contest.eu/2018/social_media", "Comment")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var_user), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("https://www.transformation-tool-contest.eu/2018/social_media", "User")));
           body.setSymbolicParameters(Arrays.<ExportedParameter>asList(
-             new ExportedParameter(body, var_submission, parameter_submission),
-             new ExportedParameter(body, var_comment, parameter_comment)
+             new ExportedParameter(body, var_post, parameter_post),
+             new ExportedParameter(body, var_comment, parameter_comment),
+             new ExportedParameter(body, var_user, parameter_user)
           ));
-          // 	Comment.commented(comment, submission)
-          new TypeConstraint(body, Tuples.flatTupleOf(var_comment), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("https://www.transformation-tool-contest.eu/2018/social_media", "Comment")));
+          // 	find commentOnPost(comment, post)
+          new PositivePatternCall(body, Tuples.flatTupleOf(var_comment, var_post), CommentOnPost.instance().getInternalQueryRepresentation());
+          // 	User.likes(user, comment)
+          new TypeConstraint(body, Tuples.flatTupleOf(var_user), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("https://www.transformation-tool-contest.eu/2018/social_media", "User")));
           PVariable var__virtual_0_ = body.getOrCreateVariableByName(".virtual{0}");
-          new TypeConstraint(body, Tuples.flatTupleOf(var_comment, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("https://www.transformation-tool-contest.eu/2018/social_media", "Comment", "commented")));
-          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("https://www.transformation-tool-contest.eu/2018/social_media", "Submission")));
-          new Equality(body, var__virtual_0_, var_submission);
+          new TypeConstraint(body, Tuples.flatTupleOf(var_user, var__virtual_0_), new EStructuralFeatureInstancesKey(getFeatureLiteral("https://www.transformation-tool-contest.eu/2018/social_media", "User", "likes")));
+          new TypeConstraint(body, Tuples.flatTupleOf(var__virtual_0_), new EClassTransitiveInstancesKey((EClass)getClassifierLiteral("https://www.transformation-tool-contest.eu/2018/social_media", "Comment")));
+          new Equality(body, var__virtual_0_, var_comment);
           bodies.add(body);
       }
       return bodies;

@@ -5,32 +5,30 @@ import "https://www.transformation-tool-contest.eu/2018/social_media"
 // task 1
 pattern task1(post: Post, score: java Integer) {
 	Post(post);
-	commCount == count find transitivelyCommented(post, _comment1, _);
-	userCount == sum   find transitivelyCommented(post, _comment2, #commentLikeCount);
-	score == eval(10*commCount + userCount);
+	commCount == count find commentOnPost(_comment, post);
+	likeCount == count find likesOnComments(post, _comment2, _user);
+	score == eval(10*commCount + likeCount);
 }
 
-pattern transitivelyCommented(post: Post, comment: Comment, commentLikeCount: java Integer) {
-	find commented+(post, comment);
-	commentLikeCount == count find likes(_user, comment);
+pattern likesOnComments(post: Post, comment: Comment, user: User) {
+	find commentOnPost(comment, post);
+	User.likes(user, comment);
 }
 
-pattern commented(submission: Submission, comment: Comment) {
-	Comment.commented(comment, submission);
+pattern commentOnPost(comment: Comment, post: Post)
+// use this if Comment.post() is guaranteed to point to the root Post of the Submission tree 
+// Comment.post(comment, post);
+{
+ 	Post.comments(post, comment);
+} or {
+	find commentOnPost(parentComment, post);
+	Submission.comments(parentComment, comment);
 }
 
-pattern likes(user: User, comment: Comment) {
-	User.likes(user, comment); 
-}
- 
+
 // task 2
 pattern task2(comment: Comment, score: java Integer) {
-	score == sum find commentComponentSize(comment, _user, #componentSize);
-}
-
-pattern commentComponentSize(comment: Comment, user: User, size: java Integer) {
-	size == count find transitiveFriendLikers(comment, user, _otherUser);
-	User.likes(user, comment);
+	score == count find transitiveFriendLikers(comment, _user, _otherUser);
 }
 
 pattern transitiveFriendLikers(comment: Comment, user1: User, user2: User) {

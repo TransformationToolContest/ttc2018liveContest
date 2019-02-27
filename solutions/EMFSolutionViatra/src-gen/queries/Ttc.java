@@ -5,14 +5,12 @@ package queries;
 
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
 import org.eclipse.viatra.query.runtime.api.impl.BaseGeneratedPatternGroup;
-import queries.CommentComponentSize;
-import queries.Commented;
-import queries.Likes;
+import queries.CommentOnPost;
+import queries.LikesOnComments;
 import queries.MutuallyLikedComment;
 import queries.Task1;
 import queries.Task2;
 import queries.TransitiveFriendLikers;
-import queries.TransitivelyCommented;
 
 /**
  * A pattern group formed of all public patterns defined in ttc.vql.
@@ -23,11 +21,9 @@ import queries.TransitivelyCommented;
  * 
  * <p> From package queries, the group contains the definition of the following patterns: <ul>
  * <li>task1</li>
- * <li>transitivelyCommented</li>
- * <li>commented</li>
- * <li>likes</li>
+ * <li>likesOnComments</li>
+ * <li>commentOnPost</li>
  * <li>task2</li>
- * <li>commentComponentSize</li>
  * <li>transitiveFriendLikers</li>
  * <li>mutuallyLikedComment</li>
  * </ul>
@@ -55,11 +51,9 @@ public final class Ttc extends BaseGeneratedPatternGroup {
   
   private Ttc() {
     querySpecifications.add(Task1.instance());
-    querySpecifications.add(TransitivelyCommented.instance());
-    querySpecifications.add(Commented.instance());
-    querySpecifications.add(Likes.instance());
+    querySpecifications.add(LikesOnComments.instance());
+    querySpecifications.add(CommentOnPost.instance());
     querySpecifications.add(Task2.instance());
-    querySpecifications.add(CommentComponentSize.instance());
     querySpecifications.add(TransitiveFriendLikers.instance());
     querySpecifications.add(MutuallyLikedComment.instance());
   }
@@ -72,28 +66,20 @@ public final class Ttc extends BaseGeneratedPatternGroup {
     return Task1.Matcher.on(engine);
   }
   
-  public TransitivelyCommented getTransitivelyCommented() {
-    return TransitivelyCommented.instance();
+  public LikesOnComments getLikesOnComments() {
+    return LikesOnComments.instance();
   }
   
-  public TransitivelyCommented.Matcher getTransitivelyCommented(final ViatraQueryEngine engine) {
-    return TransitivelyCommented.Matcher.on(engine);
+  public LikesOnComments.Matcher getLikesOnComments(final ViatraQueryEngine engine) {
+    return LikesOnComments.Matcher.on(engine);
   }
   
-  public Commented getCommented() {
-    return Commented.instance();
+  public CommentOnPost getCommentOnPost() {
+    return CommentOnPost.instance();
   }
   
-  public Commented.Matcher getCommented(final ViatraQueryEngine engine) {
-    return Commented.Matcher.on(engine);
-  }
-  
-  public Likes getLikes() {
-    return Likes.instance();
-  }
-  
-  public Likes.Matcher getLikes(final ViatraQueryEngine engine) {
-    return Likes.Matcher.on(engine);
+  public CommentOnPost.Matcher getCommentOnPost(final ViatraQueryEngine engine) {
+    return CommentOnPost.Matcher.on(engine);
   }
   
   public Task2 getTask2() {
@@ -102,14 +88,6 @@ public final class Ttc extends BaseGeneratedPatternGroup {
   
   public Task2.Matcher getTask2(final ViatraQueryEngine engine) {
     return Task2.Matcher.on(engine);
-  }
-  
-  public CommentComponentSize getCommentComponentSize() {
-    return CommentComponentSize.instance();
-  }
-  
-  public CommentComponentSize.Matcher getCommentComponentSize(final ViatraQueryEngine engine) {
-    return CommentComponentSize.Matcher.on(engine);
   }
   
   public TransitiveFriendLikers getTransitiveFriendLikers() {
