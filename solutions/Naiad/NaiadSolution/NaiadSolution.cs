@@ -2,8 +2,7 @@
 #undef ONNEXT_CALL_AS_PARAM
 #define CLEAR_AT_EVERY_UPDATE
 //#undef CLEAR_AT_EVERY_UPDATE
-#define SERIALIZE_CSV
-#undef SERIALIZE_CSV
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -249,33 +248,6 @@ namespace Naiad
         {
             return CommentId == other.CommentId && UserId1 == other.UserId1 && UserId2 == other.UserId2;
         }
-
-        //public override bool Equals(object obj)
-        //{
-        //    if (obj is CommentDependentKnows)
-        //    {
-        //        return Equals(obj as CommentDependentKnows);
-        //    }
-        //    return false;
-        //}
-
-        //public override int GetHashCode()
-        //{
-        //    var hashCode = 1893403812;
-        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CommentId);
-        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UserId1);
-        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UserId2);
-        //    return hashCode;
-        //}
-
-        //public static bool operator ==(CommentDependentKnows lhs, CommentDependentKnows rhs)
-        //{
-        //    throw new NotImplementedException();
-        //}
-        //public static bool operator !=(CommentDependentKnows lhs, CommentDependentKnows rhs)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
     class CommentDependentLabeledUser : IEquatable<CommentDependentLabeledUser>
     {
@@ -294,33 +266,6 @@ namespace Naiad
         {
             return CommentId == other.CommentId && UserId == other.UserId && Label == other.Label;
         }
-
-        //public override bool Equals(object obj)
-        //{
-        //    if (obj is CommentDependentLabeledUser)
-        //    {
-        //        return Equals(obj as CommentDependentLabeledUser);
-        //    }
-        //    return false;
-        //}
-
-        //public override int GetHashCode()
-        //{
-        //    var hashCode = 353467719;
-        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CommentId);
-        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(UserId);
-        //    hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Label);
-        //    return hashCode;
-        //}
-
-        //public static bool operator ==(CommentDependentLabeledUser lhs, CommentDependentLabeledUser rhs)
-        //{
-        //    throw new NotImplementedException();
-        //}
-        //public static bool operator !=(CommentDependentLabeledUser lhs, CommentDependentLabeledUser rhs)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
     interface Identifiable
     {
@@ -421,9 +366,6 @@ namespace Naiad
         private ICollection<FriendEdge> rawFriendEdges;
 
         private readonly int TopCount = 3;
-#if (SERIALIZE_CSV)
-        private int updateCount;
-#endif
 
         protected OneOffComputation computation;
 
@@ -469,21 +411,6 @@ namespace Naiad
 
             isDisposed = false;
         }
-        protected int Aggregate(long a, int b, int c)
-        {
-            Console.WriteLine(a + " " + b + " " + c);
-            return (int)a * b * b + c;
-        }
-        protected string Aggregate(long a, string b, string c)
-        {
-            Console.WriteLine(a + " " + b + " " + c);
-            var bcID = b.Split('_')[0];
-            var ccID = c is null ? "lofasz" : c.Split('_')[0];
-            var bNum = int.Parse(b.Split('_')[1]);
-            var cNum = c is null ? 0 : int.Parse(c.Split('_')[1]);
-            Console.WriteLine($"a: {a}    bId:{bcID}    bNum: {bNum}    cID: {ccID}    cNum: {cNum}");
-            return bcID + "_" + (bNum + cNum);
-        }
         protected void ProcessUser(IUser user)
         {
             rawUsers.Add(new User(user.Id, user.Name));
@@ -503,7 +430,6 @@ namespace Naiad
                 rawCommentedEdges.Add(new CommentedEdge(submission.Id, c.Id));
                 ProcessComment(c);
             }
-
         }
         protected void ProcessPost(IPost post)
         {
@@ -513,7 +439,6 @@ namespace Naiad
         }
         protected void ProcessComment(IComment comment)
         {
-
             rawComments.Add(new Comment(comment.Id, comment.Timestamp, comment.Content));
             rawPostEdges.Add(new PostEdge(comment.Id, comment.Post.Id));
             foreach (var user in comment.LikedBy)
@@ -522,7 +447,6 @@ namespace Naiad
 
             }
             ProcessSubmission(comment);
-
         }
         private void CallOnNext()
         {
@@ -697,7 +621,6 @@ namespace Naiad
                 var apc = change as IAttributePropertyChange;
                 switch (apc.Feature.Name)
                 {
-                    // TODO check it, this is an update not a new insert....
                     case "name":
                         {
                             //var user = apc.AffectedElement as IUser;
@@ -795,7 +718,6 @@ namespace Naiad
             {
                 CallOnNext();
             }
-            //changes.Apply();
         }
         protected void Sync()
         {
@@ -820,18 +742,18 @@ namespace Naiad
                     friendEdges.OnCompleted();
                     computation.Join();
                     computation.Dispose();
+                    rawUsers.Clear();
+                    rawPosts.Clear();
+                    rawComments.Clear();
+                    rawCommentedEdges.Clear();
+                    rawLikesEdges.Clear();
+                    rawPostEdges.Clear();
+                    rawSubmitterEdges.Clear();
+                    rawFriendEdges.Clear();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
                 // TODO: set large fields to null.
-                rawUsers.Clear();
-                rawPosts.Clear();
-                rawComments.Clear();
-                rawCommentedEdges.Clear();
-                rawLikesEdges.Clear();
-                rawPostEdges.Clear();
-                rawSubmitterEdges.Clear();
-                rawFriendEdges.Clear();
 
                 disposedValue = true;
                 base.Dispose(disposing);
@@ -1022,12 +944,6 @@ namespace Naiad
                             return new List<Pair<string, int>> { new Pair<string, int>(commentAndLabel.First, cdlus.Count()) };
                         }
                 )
-                //.Aggregate(
-                //    ci => ci.First, 
-                //    ci => ci.Second * ci.Second, 
-                //    (count, value1, value2) => Aggregate(count, value1, value2),
-                //    value => value == 0, 
-                //    (commentId, sumValue) => new Pair<string, int>(commentId, sumValue))
                 .Sum(ci => ci.First, ci => ci.Second * ci.Second, (commentId, sumValue) => new Pair<string, int>(commentId, sumValue))
                 .Join(comments, cs => cs.First, c => c.Id, (cs, c) => new Task2CommentInfo(c.Id, cs.Second, c.Timestamp))
                 .Concat(comments.Select(c => new Task2CommentInfo(c.Id, 0, c.Timestamp)))
