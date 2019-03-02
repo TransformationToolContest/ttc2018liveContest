@@ -1,4 +1,15 @@
-WITH RECURSIVE comment_friends_closed(commentid, head_userid, tail_userid) AS (
+WITH RECURSIVE -- recursive stands here regardless of the fact that the 2nd subquery is the recursive one
+  comment_friends (status, commentid, user1id, user2id) AS (
+    SELECT 'I' AS status
+         , l1.commentid, f.user1id, f.user2id
+      FROM likes l1, likes l2
+         , friends f
+     WHERE 1=1
+       AND l1.userid = f.user1id
+       AND f.user2id = l2.userid
+       AND l1.commentid = l2.commentid
+)
+, comment_friends_closed(commentid, head_userid, tail_userid) AS (
 -- transitive closure (reachability-only, no path is recorded)
 -- of friendship-subgraphs defined by comment likes
 
