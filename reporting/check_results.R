@@ -13,8 +13,12 @@ for (tool in tools) {
       query.row = query_data[i,]
       expected.row = subset(expected, ChangeSet==query.row$ChangeSet & View==query & Iteration==query.row$Iteration)
       
-      if (as.character(query.row$MetricValue) != as.character(expected.row$MetricValue)) {
-        print(paste(tool, "is wrong. Was ", query.row$MetricValue, "but expected", expected.row$MetricValue, "for change set", query.row$ChangeSet, "query", query, "iteration", query.row$Iteration))
+      if (length(as.character(expected.row$MetricValue)) > 0) {
+        if (as.character(query.row$MetricValue) != as.character(expected.row$MetricValue)) {
+          print(paste(tool, "is wrong. Was ", query.row$MetricValue, "but expected", expected.row$MetricValue, "for change set", query.row$ChangeSet, "query", query, "iteration", query.row$Iteration))
+        }
+      } else {
+        print(paste("Warning:", tool, "produced the result", query.row$MetricValue, "but expected result is unavailable for change set", query.row$ChangeSet, "query", query, "iteration", query.row$Iteration))
       }
     }
   }
