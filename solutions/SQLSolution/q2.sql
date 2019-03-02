@@ -4,9 +4,8 @@ WITH RECURSIVE comment_friends_closed(commentid, head_userid, tail_userid) AS (
 
     -- start with the users that liked a specific comment.
     -- They are the vertices of the projected users graph for a comment
-    -- To be precise, we record all comments even those that have no likes at all.
-    SELECT c.id AS commentid, l.userid AS head_userid, l.userid AS tail_userid
-      FROM comments c left join likes l on (c.id = l.commentid)
+    SELECT l.commentid, l.userid AS head_userid, l.userid AS tail_userid
+      FROM likes l
   UNION
     SELECT cfc.commentid, cfc.head_userid, f.user2id as tail_userid
       FROM comment_friends_closed cfc
@@ -22,19 +21,17 @@ WITH RECURSIVE comment_friends_closed(commentid, head_userid, tail_userid) AS (
      GROUP BY commentid, tail_userid
 )
 , comment_component_sizes AS (
-    SELECT cc.commentid, cc.componentid, count(userid) AS component_size
+    SELECT cc.commentid, cc.componentid, count(*) AS component_size
       FROM comment_components cc
      GROUP BY cc.commentid, cc.componentid
 )
 , scoring AS (
-SELECT ccs.commentid, sum(component_size*component_size) AS score
-  FROM comment_component_sizes ccs
-     , comments c
+   -- Here we include all comments in order to have also those that have no likes
+SELECT c.id AS commentid, coalesce(sum(ccs.component_size*ccs.component_size), 0) AS score
+  FROM comments c left join comment_component_sizes ccs on (ccs.commentid = c.id)
  WHERE 1=1
-    -- join
-   AND ccs.commentid = c.id
- GROUP BY ccs.commentid, c.ts
- ORDER BY sum(component_size*component_size) DESC, c.ts DESC LIMIT 3
+ GROUP BY c.id, c.ts
+ ORDER BY sum(ccs.component_size*ccs.component_size) DESC NULLS LAST, c.ts DESC LIMIT 3
 )
 SELECT *
   FROM scoring

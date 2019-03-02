@@ -12,7 +12,6 @@ public class SolutionQ2 extends Solution {
 		super(DataPath);
 
 		Connection conn = getDbConnection();
-		Query.Q2_CF_TRUNCATE.prepareStatement(conn);
 		Query.Q2_CF_INITIAL.prepareStatement(conn);
 		Query.Q2_CF_UPDATE.prepareStatement(conn);
 		Query.Q2_CFC_PREPARE.prepareStatement(conn);

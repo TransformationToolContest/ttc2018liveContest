@@ -13,10 +13,13 @@ public class SolutionQ2Batch extends Solution {
 
 		Connection conn = getDbConnection();
 		Query.Q2_BATCH.prepareStatement(conn);
+		Query.Q2_CF_TRUNCATE.prepareStatement(conn);
+		Query.Q2_CF_INITIAL.prepareStatement(conn);
 	}
 
 	@Override
 	public String Initial() {
+		runVoidQuery(Query.Q2_CF_INITIAL);
 		String result = runReadQuery(Query.Q2_BATCH);
 
 		return result;
@@ -26,6 +29,8 @@ public class SolutionQ2Batch extends Solution {
 	public String Update(ModelChangeSet changes) {
 		beforeUpdate(changes);
 
+		runVoidQuery(Query.Q2_CF_TRUNCATE);
+		runVoidQuery(Query.Q2_CF_INITIAL);
 		String result = runReadQuery(Query.Q2_BATCH);
 
 		afterUpdate();
@@ -37,6 +42,8 @@ public class SolutionQ2Batch extends Solution {
 	public String Update(File changes) {
 		beforeUpdate(changes);
 
+		runVoidQuery(Query.Q2_CF_TRUNCATE);
+		runVoidQuery(Query.Q2_CF_INITIAL);
 		String result = runReadQuery(Query.Q2_BATCH);
 
 		afterUpdate();
