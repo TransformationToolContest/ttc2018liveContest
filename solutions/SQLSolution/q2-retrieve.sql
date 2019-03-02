@@ -8,12 +8,10 @@ WITH comment_components AS (
       FROM comment_components cc
      GROUP BY cc.commentid, cc.componentid
 )
-SELECT ccs.commentid, sum(component_size*component_size) AS score
-  FROM comment_component_sizes ccs
-     , comments c
+-- Here we include all comments in order to have also those that have no likes
+SELECT c.id AS commentid, coalesce(sum(ccs.component_size*ccs.component_size), 0) AS score
+  FROM comments c left join comment_component_sizes ccs on (ccs.commentid = c.id)
  WHERE 1=1
-    -- join
-   AND ccs.commentid = c.id
- GROUP BY ccs.commentid, c.ts
- ORDER BY sum(component_size*component_size) DESC, c.ts DESC LIMIT 3
+ GROUP BY c.id, c.ts
+ ORDER BY sum(ccs.component_size*ccs.component_size) DESC NULLS LAST, c.ts DESC LIMIT 3
 ;
