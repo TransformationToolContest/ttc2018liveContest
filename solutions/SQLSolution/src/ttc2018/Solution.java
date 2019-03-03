@@ -1,21 +1,18 @@
 package ttc2018;
 
+import Changes.ModelChangeSet;
+import SocialNetwork.SocialNetworkRoot;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import ttc2018.sqlmodel.SqlCollectionBase;
+import ttc2018.sqlmodel.SqlRowBase;
+import ttc2018.sqlmodel.SqlTable;
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
-import org.eclipse.viatra.query.runtime.emf.EMFScope;
-
-import Changes.ModelChangeSet;
-import SocialNetwork.SocialNetworkRoot;
-import ttc2018.sqlmodel.SqlCollectionBase;
-import ttc2018.sqlmodel.SqlRowBase;
-import ttc2018.sqlmodel.SqlTable;
 
 public abstract class Solution {
 	protected SocialNetworkRoot socialNetwork;

@@ -1,21 +1,18 @@
 package ttc2018;
 
-import java.io.File;
-import java.io.IOException;
-
+import Changes.ChangesPackage;
+import Changes.ModelChangeSet;
+import SocialNetwork.SocialNetworkPackage;
+import SocialNetwork.SocialNetworkRoot;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import Changes.ChangesFactory;
-import Changes.ChangesPackage;
-import Changes.ModelChangeSet;
-import SocialNetwork.SocialNetworkFactory;
-import SocialNetwork.SocialNetworkPackage;
-import SocialNetwork.SocialNetworkRoot;
+
+import java.io.File;
+import java.io.IOException;
 
 public class LiveContestDriver {
 

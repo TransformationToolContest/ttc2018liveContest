@@ -1,7 +1,5 @@
 package ttc2018.sqlmodel;
 
-import java.util.ArrayList;
-
 public class Users extends SqlCollectionBase<User> {
     public void addUser(String id, String name) {
         addUser(toNumber(id), name);

@@ -1,6 +1,5 @@
 package ttc2018.sqlmodel;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Comments extends SqlCollectionBase<Comment> {

@@ -1,7 +1,6 @@
 package ttc2018.sqlmodel;
 
 import java.io.PrintStream;
-import java.sql.PreparedStatement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

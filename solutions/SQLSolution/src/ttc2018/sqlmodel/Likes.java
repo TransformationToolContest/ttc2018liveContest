@@ -1,7 +1,5 @@
 package ttc2018.sqlmodel;
 
-import java.util.ArrayList;
-
 public class Likes extends SqlCollectionBase<Like> {
     public void addLike(String userid, String commentd) {
         addLike(toNumber(userid), toNumber(commentd));
