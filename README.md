@@ -30,7 +30,6 @@ One might fine tune the script for the following purposes:
 * `run.py -m -e` -- run benchmark without building, then extract and compare results to the reference output
 * `run.py -t` -- build the project and run tests (usually unit tests as defined for the given solution)
 
-
 The `config` directory contains the configuration for the scripts:
 * `config.json` -- configuration for the model generation and the benchmark
 * `reporting.json` -- configuration for the visualization

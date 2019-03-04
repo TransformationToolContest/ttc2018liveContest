@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: social-media-viatra
+Bundle-SymbolicName: social-media-viatra;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Require-Bundle: org.eclipse.emf.ecore,
+  org.eclipse.viatra.query.runtime,
+  org.eclipse.viatra.query.runtime.rete,
+  org.eclipse.viatra.query.runtime.localsearch,
+  org.eclipse.xtext.xbase.lib
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

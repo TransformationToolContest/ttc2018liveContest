@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/EMFSolutionViatra/src" modelPluginID="EMFSolutionViatra"
+    modelName="NMetaChanges" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>NMetaChanges.ecore</foreignModel>
+  <genPackages prefix="Changes" disposableProviderFactory="true" ecorePackage="NMetaChanges.ecore#/">
+    <genClasses ecoreClass="NMetaChanges.ecore#//ModelChangeSet">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//ModelChangeSet/changes"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="NMetaChanges.ecore#//ModelChange"/>
+    <genClasses image="false" ecoreClass="NMetaChanges.ecore#//ElementaryChange">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//ElementaryChange/affectedElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//ElementaryChange/feature"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//ChangeTransaction">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//ChangeTransaction/sourceChange"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//ChangeTransaction/nestedChanges"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//CompositionChange"/>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AssociationChange"/>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AttributeChange"/>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AssociationCollectionDeletion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//AssociationCollectionDeletion/deletedElement"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//CompositionCollectionDeletion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//CompositionCollectionDeletion/deletedElement"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AttributeCollectionDeletion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//AttributeCollectionDeletion/deletedValue"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AssociationCollectionInsertion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//AssociationCollectionInsertion/addedElement"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//CompositionCollectionInsertion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//CompositionCollectionInsertion/addedElement"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AttributeCollectionInsertion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//AttributeCollectionInsertion/addedValue"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AssociationCollectionReset"/>
+    <genClasses ecoreClass="NMetaChanges.ecore#//CompositionCollectionReset"/>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AttributeCollectionReset"/>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AssociationListDeletion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//AssociationListDeletion/deletedElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//AssociationListDeletion/index"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//CompositionListDeletion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//CompositionListDeletion/deletedElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//CompositionListDeletion/index"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AttributeListDeletion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//AttributeListDeletion/deletedValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//AttributeListDeletion/index"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AssociationListInsertion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//AssociationListInsertion/addedElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//AssociationListInsertion/index"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//CompositionListInsertion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//CompositionListInsertion/addedElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//CompositionListInsertion/index"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AttributeListInsertion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//AttributeListInsertion/addedValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//AttributeListInsertion/index"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AttributePropertyChange">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//AttributePropertyChange/newValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//AttributePropertyChange/oldValue"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//AssociationPropertyChange">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//AssociationPropertyChange/newValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//AssociationPropertyChange/oldValue"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//CompositionPropertyChange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//CompositionPropertyChange/newValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//CompositionPropertyChange/oldValue"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//CompositionMoveIntoProperty">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//CompositionMoveIntoProperty/newValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//CompositionMoveIntoProperty/oldValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//CompositionMoveIntoProperty/origin"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//CompositionMoveToList">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//CompositionMoveToList/index"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//CompositionMoveToList/movedElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//CompositionMoveToList/origin"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//CompositionMoveToCollection">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//CompositionMoveToCollection/movedElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//CompositionMoveToCollection/origin"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//OperationCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//OperationCall/operation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//OperationCall/targetElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//OperationCall/arguments"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="NMetaChanges.ecore#//OperationArgument">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//OperationArgument/name"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//ValueArgument">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute NMetaChanges.ecore#//ValueArgument/value"/>
+    </genClasses>
+    <genClasses ecoreClass="NMetaChanges.ecore#//ReferenceArgument">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference NMetaChanges.ecore#//ReferenceArgument/value"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

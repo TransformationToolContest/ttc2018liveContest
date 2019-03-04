@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><?eclipse version="3.0"?><!--
+--><plugin>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated NMetaChanges -->
+    <package class="Changes.ChangesPackage" genModel="NMetaChanges.genmodel" uri="http://nmf.codeplex.com/changes"/>
+  </extension>
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <!-- @generated social_network -->
+    <package class="SocialNetwork.SocialNetworkPackage" genModel="social_network.genmodel" uri="https://www.transformation-tool-contest.eu/2018/social_media"/>
+  </extension>
+  <extension id="queries.Ttc" point="org.eclipse.viatra.query.runtime.queryspecification">
+    <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Ttc" id="queries.Ttc">
+      <query-specification fqn="queries.task1"/>
+      <query-specification fqn="queries.likesOnComments"/>
+      <query-specification fqn="queries.commentOnPost"/>
+      <query-specification fqn="queries.task2"/>
+      <query-specification fqn="queries.transitiveFriendLikers"/>
+      <query-specification fqn="queries.mutuallyLikedComment"/>
+    </group>
+  </extension>
+</plugin>
