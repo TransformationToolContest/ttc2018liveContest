@@ -39,6 +39,16 @@ public class ModelToGraphConverter {
 		PrintWriter rootPostFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-root-post-initial", ResourceType.CSV));
 		PrintWriter submitterFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-submitter-initial", ResourceType.CSV));
 
+		printCSV(usersFile, "id:ID", "name:STRING");
+		printCSV(postsFile, "id:ID", "timestamp:STRING", "content:STRING");
+		printCSV(commentsFile, "id:ID", "timestamp:STRING", "content:STRING");
+
+		printCSV(friendsFile,   ":START_ID", ":END_ID");
+		printCSV(likesFile,     ":START_ID", ":END_ID");
+		printCSV(commentToFile, ":START_ID", ":END_ID");
+		printCSV(rootPostFile,  ":START_ID", ":END_ID");
+		printCSV(submitterFile, ":START_ID", ":END_ID");
+
 		root.eAllContents().forEachRemaining(x -> {
 			if (x instanceof Submission) {
 								
