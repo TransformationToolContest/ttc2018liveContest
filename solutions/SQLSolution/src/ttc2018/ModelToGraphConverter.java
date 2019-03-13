@@ -9,9 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModelConverter {
+public class ModelToGraphConverter {
 	public static void main(String[] args) throws IOException {
-		ModelConverter converter = new ModelConverter();
+		ModelToGraphConverter converter = new ModelToGraphConverter();
 
 		int size = args.length>0?new Integer(args[0]):1;
 
@@ -29,11 +29,15 @@ public class ModelConverter {
 		// input is parsed as local date, we do so with on the output side
 		//TimeZone tz = TimeZone.getTimeZone("UTC");
 		//df.setTimeZone(tz);
-		PrintWriter usersFile = new PrintWriter(ModelUtils.getResourcePath(size, "csv-users-initial", ResourceType.CSV));
-		PrintWriter postsFile = new PrintWriter(ModelUtils.getResourcePath(size, "csv-posts-initial", ResourceType.CSV));
-		PrintWriter commentsFile = new PrintWriter(ModelUtils.getResourcePath(size, "csv-comments-initial", ResourceType.CSV));
-		PrintWriter friendsFile = new PrintWriter(ModelUtils.getResourcePath(size, "csv-friends-initial", ResourceType.CSV));
-		PrintWriter likesFile = new PrintWriter(ModelUtils.getResourcePath(size, "csv-likes-initial", ResourceType.CSV));
+		PrintWriter usersFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-users-initial", ResourceType.CSV));
+		PrintWriter postsFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-posts-initial", ResourceType.CSV));
+		PrintWriter commentsFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-comments-initial", ResourceType.CSV));
+
+		PrintWriter friendsFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-friends-initial", ResourceType.CSV));
+		PrintWriter likesFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-likes-initial", ResourceType.CSV));
+		PrintWriter commentToFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-comment-to-initial", ResourceType.CSV));
+		PrintWriter rootPostFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-root-post-initial", ResourceType.CSV));
+		PrintWriter submitterFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-submitter-initial", ResourceType.CSV));
 
 		root.eAllContents().forEachRemaining(x -> {
 			if (x instanceof Submission) {
@@ -65,30 +69,46 @@ public class ModelConverter {
 				);
 			}
 		);
-		comments.forEach(c ->
+		comments.forEach(c -> {
 			printCSV(commentsFile,
 				c.getId()
 			,	df.format(c.getTimestamp())
 			,	c.getContent()
+			);
+			printCSV(submitterFile,
+				c.getId()
 			,	c.getSubmitter().getId()
+			);
+			printCSV(commentToFile,
+				c.getId()
 			,	c.getCommented().getId()
+			);
+			printCSV(rootPostFile,
+				c.getId()
 			,	c.getPost().getId()
-			)
-		);
-		posts.forEach(p ->
+			);
+		});
+		posts.forEach(p -> {
 			printCSV(postsFile,
 				p.getId()
 			,	df.format(p.getTimestamp())
 			,	p.getContent()
+			);
+			printCSV(submitterFile,
+				p.getId()
 			,	p.getSubmitter().getId()
-			)
-		);
+			);
+		});
 
 		usersFile.close();
 		postsFile.close();
 		commentsFile.close();
+
 		friendsFile.close();
 		likesFile.close();
+		commentToFile.close();
+		rootPostFile.close();
+		submitterFile.close();
     }
 
     protected static void printCSV(PrintWriter writer, String... strings) {
