@@ -32,14 +32,24 @@ sourceSets {
 	}
 }
 
-task modelConverter(type:JavaExec) {
+task modelMergeFkConverter(type:JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
 
     if (project.hasProperty("modelSize")) {
         args modelSize
     }
 
-    main = "ttc2018.ModelConverter"
+    main = "ttc2018.ModelMergeFkConverter"
+}
+
+task modelToGraphConverter(type:JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+
+    if (project.hasProperty("modelSize")) {
+        args modelSize
+    }
+
+    main = "ttc2018.ModelToGraphConverter"
 }
 
 task modelChangeProcessor(type:JavaExec) {
