@@ -1,6 +1,7 @@
-plugins {
-    id 'java'
-}
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "ttc2018.LiveContestDriver"
 
 ext {
     neo4jVersion = '3.5.3'
