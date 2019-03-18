@@ -1,8 +1,5 @@
 package ttc2018;
 
-import Changes.ModelChangeSet;
-import SocialNetwork.SocialNetworkRoot;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import ttc2018.sqlmodel.SqlCollectionBase;
 import ttc2018.sqlmodel.SqlRowBase;
 import ttc2018.sqlmodel.SqlTable;
@@ -15,29 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class Solution {
-	protected SocialNetworkRoot socialNetwork;
-	protected ResourceSet resourceSet;
 	protected ModelChangeProcessor modelChangeProcessor;
 
 	// see: getDbConnection()
 	protected Connection dbConnection;
 
-    public SocialNetworkRoot getSocialNetwork() {
-    	return socialNetwork;
-    }
-    
-    public ResourceSet getResourceSet() {
-		return resourceSet;
-	}
-    
-    public void setSocialNetwork(SocialNetworkRoot network, ResourceSet resourceSet) {
-    	socialNetwork = network;
-    	this.resourceSet = resourceSet;
-    }
-
     public abstract String Initial();
-
-    public abstract String Update(ModelChangeSet changes);
 
 	/**
 	 * Update reading changes from CSV file
@@ -125,12 +105,6 @@ public abstract class Solution {
 		pb.redirectOutput(ProcessBuilder.Redirect.appendTo(log));
 		Process p = pb.start();
 		p.waitFor();
-	}
-
-	void beforeUpdate(ModelChangeSet changes) {
-		modelChangeProcessor.resetCollections();
-		modelChangeProcessor.processChangeSet(changes);
-		beforeUpdateCommon();
 	}
 
 	void beforeUpdate(File changes) {

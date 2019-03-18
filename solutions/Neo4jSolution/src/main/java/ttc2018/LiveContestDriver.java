@@ -1,16 +1,5 @@
 package ttc2018;
 
-import Changes.ChangesPackage;
-import Changes.ModelChangeSet;
-import SocialNetwork.SocialNetworkPackage;
-import SocialNetwork.SocialNetworkRoot;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -28,21 +17,14 @@ public class LiveContestDriver {
 	        Initial();
 	        for (int i = 1; i <= Sequences; i++)
 	        {
-	            if (USE_CHANGES_XMI) {
-                    UpdateFromXMI(i);
-                } else {
 	                UpdateFromCSV(i);
-                }
-	        }	
+	        }
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	private final static boolean REPORT_MEMORY_USAGE = false; // the SQL solution uses PostgreSQL, thus Java memory usage is not meaningful
-    private final static boolean USE_CHANGES_XMI = false; // determines whether we use the XMI representation of changes file is to be used. Note: for the initial load, we always use the CSV representation
-
-    private static ResourceSet repository;
 
     private static String ChangePath;
     private static String RunIndex;
@@ -59,22 +41,9 @@ public class LiveContestDriver {
 
     private static Solution solution;
 
-    private static Object loadFile(String path) throws IOException {
-    	Resource mRes = repository.getResource(URI.createFileURI(new File(ChangePath + "/" + path).getCanonicalPath()), true);
-    	return mRes.getContents().get(0);
-    }
-
     static void Initialize() throws Exception
     {
     	stopwatch = System.nanoTime();
-
-    	if (USE_CHANGES_XMI) {
-            repository = new ResourceSetImpl();
-            repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
-            repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
-            repository.getPackageRegistry().put(SocialNetworkPackage.eINSTANCE.getNsURI(), SocialNetworkPackage.eINSTANCE);
-            repository.getPackageRegistry().put(ChangesPackage.eINSTANCE.getNsURI(), ChangesPackage.eINSTANCE);
-        }
 
         ChangePath = System.getenv("ChangePath");
         RunIndex = System.getenv("RunIndex");
@@ -110,9 +79,6 @@ public class LiveContestDriver {
     static void Load() throws IOException, InterruptedException
     {
         stopwatch = System.nanoTime();
-        if (USE_CHANGES_XMI) {
-            solution.setSocialNetwork((SocialNetworkRoot) loadFile("initial.xmi"), repository);
-        }
         solution.loadData();
         stopwatch = System.nanoTime() - stopwatch;
         Report(BenchmarkPhase.Load, -1, null);
@@ -124,15 +90,6 @@ public class LiveContestDriver {
         String result = solution.Initial();
         stopwatch = System.nanoTime() - stopwatch;
         Report(BenchmarkPhase.Initial, -1, result);
-    }
-
-    static void UpdateFromXMI(int iteration) throws IOException
-    {
-        ModelChangeSet changes = (ModelChangeSet)loadFile(String.format("change%02d.xmi", iteration));
-        stopwatch = System.nanoTime();
-        String result = solution.Update(changes);
-        stopwatch = System.nanoTime() - stopwatch;
-        Report(BenchmarkPhase.Update, iteration, result);
     }
 
     static void UpdateFromCSV(int iteration) throws IOException
