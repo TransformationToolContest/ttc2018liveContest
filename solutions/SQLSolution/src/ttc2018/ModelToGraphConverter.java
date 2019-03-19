@@ -70,9 +70,14 @@ public class ModelToGraphConverter {
 		users.forEach(u -> {
 				printCSV(usersFile, u.getId(), u.getName());
 				// friends
-				u.getFriends().forEach(f ->
-					printCSV(friendsFile, u.getId(), f.getId())
-				);
+				u.getFriends().forEach(f -> {
+					String uId = u.getId();
+					String fId = f.getId();
+
+					// only in one direction
+					if (Long.parseLong(uId) <= Long.parseLong(fId))
+						printCSV(friendsFile, uId, fId);
+				});
 				// likes
 				u.getLikes().forEach(l ->
 					printCSV(likesFile, u.getId(), l.getId())
