@@ -9,9 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-
 public class ModelToGraphConverter {
 	public static void main(String[] args) throws IOException {
 		ModelToGraphConverter converter = new ModelToGraphConverter();
@@ -70,16 +67,12 @@ public class ModelToGraphConverter {
 		System.out.println(posts.size() + " posts");
 		System.out.println(comments.size() + " comments");
 		
-		Multimap<String, String> friends = HashMultimap.create();
 		users.forEach(u -> {
 				printCSV(usersFile, u.getId(), u.getName());
 				// friends
-				u.getFriends().forEach(f -> {
-					if (!friends.containsEntry(f.getId(), u.getId())) {
-						friends.put(u.getId(), f.getId());
-						printCSV(friendsFile, u.getId(), f.getId());
-					}
-				});
+				u.getFriends().forEach(f ->
+					printCSV(friendsFile, u.getId(), f.getId())
+				);
 				// likes
 				u.getLikes().forEach(l ->
 					printCSV(likesFile, u.getId(), l.getId())
