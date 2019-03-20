@@ -4,6 +4,7 @@ apply plugin: 'application'
 mainClassName = "ttc2018.LiveContestDriver"
 
 ext {
+    guavaVersion = '22.0'
     neo4jVersion = '3.5.3'
 }
 
@@ -17,6 +18,7 @@ repositories {
 }
 
 dependencies {
+    compile group: 'com.google.guava', name: 'guava', version: guavaVersion
     compile "org.neo4j:neo4j:${neo4jVersion}"
 
     testCompile group: 'junit', name: 'junit', version: '4.12'

@@ -29,3 +29,5 @@ gradle-app.setting
 out/
 
 /log.txt
+
+db-dir

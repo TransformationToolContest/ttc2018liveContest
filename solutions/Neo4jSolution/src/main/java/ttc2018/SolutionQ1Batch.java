@@ -1,5 +1,7 @@
 package ttc2018;
 
+import org.neo4j.graphdb.GraphDatabaseService;
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,8 +11,8 @@ public class SolutionQ1Batch extends Solution {
 	public SolutionQ1Batch(String DataPath) throws IOException, InterruptedException {
 		super(DataPath);
 
-		Connection conn = getDbConnection();
-		Query.Q1_BATCH.prepareStatement(conn);
+		GraphDatabaseService conn = getDbConnection();
+		Query.Q1_BATCH.setGraphDb(conn);
 	}
 	
 	@Override

@@ -1,141 +1,186 @@
 package ttc2018;
 
-import ttc2018.sqlmodel.SqlCollectionBase;
-import ttc2018.sqlmodel.SqlRowBase;
-import ttc2018.sqlmodel.SqlTable;
+import com.google.common.collect.Iterators;
+import org.neo4j.graphdb.*;
+import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.io.fs.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
+
+import static ttc2018.Query.ID_COLUMN_NAME;
+import static ttc2018.Query.SCORE_COLUMN_NAME;
+import static ttc2018.Labels.*;
+import static ttc2018.RelationshipTypes.*;
 
 public abstract class Solution {
-	protected ModelChangeProcessor modelChangeProcessor;
-
-	// see: getDbConnection()
-	protected Connection dbConnection;
+    // see: getDbConnection()
+    GraphDatabaseService graphDb;
 
     public abstract String Initial();
 
-	/**
-	 * Update reading changes from CSV file
-	 */
-	public abstract String Update(File changes);
+    /**
+     * Update reading changes from CSV file
+     */
+    public abstract String Update(File changes);
 
-	// some PostgreSQL-specific parameters like database name, connection string
-	private final static String PG_DB_NAME = (System.getenv("PG_DB_NAME")!=null)?System.getenv("PG_DB_NAME"):"ttc2018eval";
-	private final static String PG_PORT = (System.getenv("PG_PORT")!=null)?System.getenv("PG_PORT"):"5432";
-	private final static String PG_USER = "ttcuser";
-	private final static String PG_PASS = "secret";
-	private final static String PG_URL = String.format("jdbc:postgresql://localhost:%1$s/%2$s", PG_PORT, PG_DB_NAME);
-	private final static String PG_LOAD_SCRIPT = "load-scripts/load.sh";
+    private final static File DB_DIR = new File("db-dir/graph.db");
+    private final static String LOAD_SCRIPT = "load-scripts/load.sh";
 
-	private String DataPath;
+    private String DataPath;
 
-	Solution(String DataPath) throws IOException, InterruptedException {
-		this.DataPath = new File(DataPath).getCanonicalPath();
+    Solution(String DataPath) throws IOException, InterruptedException {
+        this.DataPath = new File(DataPath).getCanonicalPath();
+    }
 
-		modelChangeProcessor = new ModelChangeProcessor();
+    public GraphDatabaseService getDbConnection() {
+        if (graphDb == null) {
+            graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(DB_DIR);
+            Runtime.getRuntime().addShutdownHook(new Thread(graphDb::shutdown));
+        }
 
-		loadSchema();
+        return graphDb;
+    }
 
-		Connection conn = getDbConnection();
-		for(SqlTable t: SqlTable.values()) {
-			t.prepareStatements(conn);
-		}
-	}
+    String runReadQuery(Query q) {
+        List<String> result = new ArrayList<>();
 
-	public Connection getDbConnection() {
-		try {
-			if (dbConnection == null || dbConnection.isClosed()) {
-				dbConnection = DriverManager.getConnection(PG_URL, PG_USER, PG_PASS);
-			}
+        try (Result rs = q.execute()) {
+            for (Map<String, Object> row : org.neo4j.helpers.collection.Iterators.asIterable(rs)) {
+                String id = row.get(ID_COLUMN_NAME).toString();
 
-			return dbConnection;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
+                if (LiveContestDriver.ShowScoresForValidation) {
+                    result.add(String.format("%1$s,%2$s", id, row.get(SCORE_COLUMN_NAME)));
+                } else {
+                    result.add(id);
+                }
+            }
 
-	String runReadQuery(Query q) {
-		List<String> result = new ArrayList<>();
+            return String.join("|", result);
+        }
+    }
 
-		try (ResultSet rs = q.getPreparedStatement().executeQuery()) {
-			while (rs.next()) {
-				if (LiveContestDriver.ShowScoresForValidation) {
-					result.add(String.format("%1$s,%2$s", rs.getString(1), rs.getString(2)));
-				} else {
-					result.add(rs.getString(1));
-				}
-			}
+    void runVoidQuery(Query q) {
+        try (Result rs = q.execute()) {
+            rs.hasNext();
+        }
+    }
 
-			return String.join("|", result);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    void loadData() throws IOException, InterruptedException {
+        if (System.getenv("NEO4J_HOME") == null)
+            throw new RuntimeException("$NEO4J_HOME is not defined.");
 
-	void runVoidQuery(Query q) {
-		try {
-			q.getPreparedStatement().executeUpdate();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
+        // delete previous DB
+        FileUtils.deleteRecursively(DB_DIR);
 
-	void loadSchema() throws IOException, InterruptedException {
-		runLoadSh("schema-only");
-	}
-	void loadData() throws IOException, InterruptedException {
-		runLoadSh("data-only");
-	}
-	void runLoadSh(String option) throws IOException, InterruptedException
-	{
-		ProcessBuilder pb = new ProcessBuilder(PG_LOAD_SCRIPT, option);
-		Map<String, String> env = pb.environment();
-		env.put("PG_DATA_DIR", DataPath);
-		env.put("PG_DB_NAME", PG_DB_NAME);
-		env.put("PG_USER", PG_USER);
-		env.put("PG_PORT", PG_PORT);
+        ProcessBuilder pb = new ProcessBuilder(LOAD_SCRIPT);
+        Map<String, String> env = pb.environment();
+        env.put("NEO4J_DATA_DIR", DataPath);
+        env.put("NEO4J_DB_DIR", DB_DIR.getCanonicalPath());
 
-		File log = new File("log.txt");
-		pb.redirectErrorStream(true);
-		pb.redirectOutput(ProcessBuilder.Redirect.appendTo(log));
-		Process p = pb.start();
-		p.waitFor();
-	}
+        File log = new File("log.txt");
+        pb.redirectErrorStream(true);
+        pb.redirectOutput(ProcessBuilder.Redirect.appendTo(log));
+        Process p = pb.start();
+        p.waitFor();
+    }
 
-	void beforeUpdate(File changes) {
-		modelChangeProcessor.resetCollections();
-		modelChangeProcessor.processChangeSet(changes);
-		beforeUpdateCommon();
-	}
+    void beforeUpdate(File changes) {
+        processChangeSet(changes);
+    }
 
-	void beforeUpdateCommon() {
-		for(SqlCollectionBase<SqlRowBase> c: modelChangeProcessor.getCollections()) {
-			PreparedStatement insert = c.getSqlTable().getInsertPreparedStatement();
-			int cnt = 0;
-			try {
-				for (SqlRowBase r : c) {
-					r.setForInsert(insert);
-					insert.addBatch();
-					if (++cnt == 50) {
-						insert.executeBatch();
-					}
-				}
-				if (cnt > 0) {
-					insert.executeBatch();
-				}
-			} catch (SQLException e) {
-				throw new RuntimeException(e);
-			}
-		}
-	}
-	void afterUpdate() {
-		for(SqlTable t: SqlTable.values()) {
-			t.executeD2I();
-		}
-	}
+    public static final String SEPARATOR = "|";
+    public static final String COMMENTS_CHANGE_TYPE = "Comments";
+    public static final String NODE_ID_PROPERTY = "id";
+    public static final String USER_NAME_PROPERTY = "name";
+    public static final String SUBMISSION_TIMESTAMP_PROPERTY = "timestamp";
+    public static final String SUBMISSION_CONTENT_PROPERTY = "content";
+
+    public void processChangeSet(File changeSet) {
+        try (Stream<String> stream = Files.lines(changeSet.toPath());
+             Transaction tx = graphDb.beginTx()) {
+
+            stream.forEachOrdered(s -> {
+                String[] line = s.split(Pattern.quote(SEPARATOR));
+                switch (line[0]) {
+                    case "Posts":
+                    case COMMENTS_CHANGE_TYPE: {
+                        long id = Long.parseLong(line[1]);
+                        String timestamp = line[2];
+                        String content = line[3];
+                        long submitterId = Long.parseLong(line[4]);
+
+                        Node submitter = findSingleNodeByIdProperty(User, submitterId);
+
+                        Label[] labels = line[0].equals(COMMENTS_CHANGE_TYPE) ? CommentLabelSet : PostLabelSet;
+
+                        Node comment = graphDb.createNode(labels);
+                        comment.setProperty(NODE_ID_PROPERTY, id);
+                        comment.setProperty(SUBMISSION_TIMESTAMP_PROPERTY, timestamp);
+                        comment.setProperty(SUBMISSION_CONTENT_PROPERTY, content);
+
+                        comment.createRelationshipTo(submitter, SUBMITTER);
+
+                        if (line[0].equals(COMMENTS_CHANGE_TYPE)) {
+                            long previousSubmissionId = Long.parseLong(line[5]);
+                            long rootPostId = Long.parseLong(line[6]);
+
+                            Node previousSubmission = findSingleNodeByIdProperty(Submission, previousSubmissionId);
+                            Node rootPost = findSingleNodeByIdProperty(Post, rootPostId);
+
+                            comment.createRelationshipTo(previousSubmission, COMMENT_TO);
+                            comment.createRelationshipTo(rootPost, ROOT_POST);
+                        }
+                        break;
+                    }
+                    case "Friends": {
+                        insertEdge(line, FRIEND, User, User);
+                        break;
+                    }
+                    case "Likes": {
+                        insertEdge(line, LIKES, User, Comment);
+                        break;
+                    }
+                    case "Users": {
+                        long id = Long.parseLong(line[1]);
+                        String name = line[2];
+
+                        Node user = graphDb.createNode(User);
+                        user.setProperty(NODE_ID_PROPERTY, id);
+                        user.setProperty(USER_NAME_PROPERTY, name);
+                        break;
+                    }
+                    default:
+                        throw new RuntimeException("Invalid record type received from CSV input: " + line[0]);
+                }
+            });
+
+            tx.success();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Node findSingleNodeByIdProperty(Labels label, long id) {
+        return Iterators.getOnlyElement(graphDb.findNodes(label, NODE_ID_PROPERTY, id));
+    }
+
+    private void insertEdge(String[] line, RelationshipTypes relationshipType, Labels sourceLabel, Labels targetLabel) {
+        long sourceId = Long.parseLong(line[1]);
+        long targetId = Long.parseLong(line[2]);
+
+        Node source = findSingleNodeByIdProperty(sourceLabel, sourceId);
+        Node target = findSingleNodeByIdProperty(targetLabel, targetId);
+
+        source.createRelationshipTo(target, relationshipType);
+    }
+
+    void afterUpdate() {
+    }
 }
