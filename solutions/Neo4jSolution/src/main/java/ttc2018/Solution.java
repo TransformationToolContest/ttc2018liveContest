@@ -14,9 +14,9 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import static ttc2018.Labels.*;
 import static ttc2018.Query.ID_COLUMN_NAME;
 import static ttc2018.Query.SCORE_COLUMN_NAME;
-import static ttc2018.Labels.*;
 import static ttc2018.RelationshipTypes.*;
 
 public abstract class Solution {
@@ -140,7 +140,9 @@ public abstract class Solution {
                         break;
                     }
                     case "Friends": {
-                        insertEdge(line, FRIEND, User, User);
+                        // add edges only once
+                        if (Long.parseLong(line[1]) <= Long.parseLong(line[2]))
+                            insertEdge(line, FRIEND, User, User);
                         break;
                     }
                     case "Likes": {
