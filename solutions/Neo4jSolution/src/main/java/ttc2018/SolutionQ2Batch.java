@@ -4,15 +4,13 @@ import org.neo4j.graphdb.GraphDatabaseService;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
 
 public class SolutionQ2Batch extends Solution {
 
 	public SolutionQ2Batch(String DataPath) throws IOException, InterruptedException {
 		super(DataPath);
 
-		GraphDatabaseService conn = getDbConnection();
-		Query.Q2_BATCH.setGraphDb(conn);
+		Query.Q2_BATCH.setSolution(this);
 	}
 
 	@Override

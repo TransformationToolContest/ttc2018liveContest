@@ -12,8 +12,13 @@ public class LiveContestDriver {
 	        } else {
 	            Mode = SolutionModes.valueOf(args[0]);
 	        }
+
 	        Initialize();
+
 	        Load();
+	        // TODO: define which phase should contain DB initialization
+	        solution.getDbConnection();
+
 	        Initial();
 	        for (int i = 1; i <= Sequences; i++)
 	        {
@@ -73,7 +78,7 @@ public class LiveContestDriver {
         }
 
         stopwatch = System.nanoTime() - stopwatch;
-        Report(BenchmarkPhase.Initialization, -1, null);
+//        Report(BenchmarkPhase.Initialization, -1, null);
     }
 
     static void Load() throws IOException, InterruptedException

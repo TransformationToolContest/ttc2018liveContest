@@ -49,14 +49,14 @@ public enum Query {
         queryText = s;
     }
 
-    protected GraphDatabaseService graphDb;
+    protected Solution solution;
 
-    public void setGraphDb(GraphDatabaseService graphDb) {
-        this.graphDb = graphDb;
+    public void setSolution(Solution solution) {
+        this.solution = solution;
     }
 
     public Result execute() {
-        return graphDb.execute(queryText);
+        return solution.getDbConnection().execute(queryText);
     }
 }
 
