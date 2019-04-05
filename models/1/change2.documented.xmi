@@ -1,32 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
-  <objectChanges>
-    <key href="../../models/1/initial.xmi#1378977"/>
-    <value featureName="comments">
-      <listChanges index="4" referenceValues="1378980"/>
-    </value>
-  </objectChanges>
-  <objectChanges>
-    <key href="../../models/1/initial.xmi#406996"/>
-    <value featureName="comments">
-      <listChanges index="0" referenceValues="407007"/>
-    </value>
-  </objectChanges>
-  <objectChanges>
-    <key href="../../models/1/initial.xmi#/"/>
-    <value featureName="posts">
-      <listChanges index="554" referenceValues="404255"/>
-    </value>
-  </objectChanges>
-  <objectsToAttach xsi:type="social:Comment" id="1378980" timestamp="2010-03-03T09:17:11.000+0000" content="no way!">
-    <submitter href="../../models/1/initial.xmi#1259"/>
-    <post href="../../models/1/initial.xmi#1378654"/>
-  </objectsToAttach>
-  <objectsToAttach xsi:type="social:Comment" id="407007" timestamp="2010-03-03T09:24:00.000+0000" content="no">
-    <submitter href="../../models/1/initial.xmi#2608"/>
-    <post href="../../models/1/initial.xmi#404263"/>
-  </objectsToAttach>
-  <objectsToAttach xsi:type="social:Post" id="404255" timestamp="2010-03-03T09:28:44.000+0000" content="">
-    <submitter href="../../models/1/initial.xmi#3705"/>
-  </objectsToAttach>
-</change:ChangeDescription>
+<change:ChangeDescription
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:change="http://www.eclipse.org/emf/2003/Change"/>
