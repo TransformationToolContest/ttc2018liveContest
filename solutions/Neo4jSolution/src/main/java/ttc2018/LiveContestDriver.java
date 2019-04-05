@@ -1,7 +1,13 @@
 package ttc2018;
 
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Transaction;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import static ttc2018.Solution.NODE_ID_PROPERTY;
 
 public class LiveContestDriver {
 
@@ -15,9 +21,8 @@ public class LiveContestDriver {
 
 	        Initialize();
 
+	        // TODO: define which phase should contain DB and indexes initialization
 	        Load();
-	        // TODO: define which phase should contain DB initialization
-	        solution.getDbConnection();
 
 	        Initial();
 	        for (int i = 1; i <= Sequences; i++)
@@ -84,7 +89,29 @@ public class LiveContestDriver {
     static void Load() throws IOException, InterruptedException
     {
         stopwatch = System.nanoTime();
+
         solution.loadData();
+
+        // DB initialization
+        GraphDatabaseService dbConnection = solution.getDbConnection();
+
+        // add uniqueness constraints and indexes
+        try (Transaction tx = dbConnection.beginTx()) {
+            for (Labels label : Labels.values()) {
+                dbConnection.schema()
+                        .constraintFor(label)
+                        .assertPropertyIsUnique(NODE_ID_PROPERTY)
+                        .create();
+            }
+
+            tx.success();
+        }
+
+        try (Transaction tx = dbConnection.beginTx()) {
+            // TODO: meaningful timeout
+            dbConnection.schema().awaitIndexesOnline(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        }
+
         stopwatch = System.nanoTime() - stopwatch;
         Report(BenchmarkPhase.Load, -1, null);
     }
