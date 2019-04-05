@@ -112,30 +112,34 @@ public abstract class Solution {
                     case "Posts":
                     case COMMENTS_CHANGE_TYPE: {
                         long id = Long.parseLong(line[1]);
-                        String timestamp = line[2];
-                        String content = line[3];
-                        long submitterId = Long.parseLong(line[4]);
 
-                        Node submitter = findSingleNodeByIdProperty(User, submitterId);
+                        // TODO: remove workaround of duplicate nodes in changeset
+                        if (!nodeByIdPropertyExists(Submission, id)) {
+                            String timestamp = line[2];
+                            String content = line[3];
+                            long submitterId = Long.parseLong(line[4]);
 
-                        Label[] labels = line[0].equals(COMMENTS_CHANGE_TYPE) ? CommentLabelSet : PostLabelSet;
+                            Node submitter = findSingleNodeByIdProperty(User, submitterId);
 
-                        Node comment = graphDb.createNode(labels);
-                        comment.setProperty(NODE_ID_PROPERTY, id);
-                        comment.setProperty(SUBMISSION_TIMESTAMP_PROPERTY, timestamp);
-                        comment.setProperty(SUBMISSION_CONTENT_PROPERTY, content);
+                            Label[] labels = line[0].equals(COMMENTS_CHANGE_TYPE) ? CommentLabelSet : PostLabelSet;
 
-                        comment.createRelationshipTo(submitter, SUBMITTER);
+                            Node submission = graphDb.createNode(labels);
+                            submission.setProperty(NODE_ID_PROPERTY, id);
+                            submission.setProperty(SUBMISSION_TIMESTAMP_PROPERTY, timestamp);
+                            submission.setProperty(SUBMISSION_CONTENT_PROPERTY, content);
 
-                        if (line[0].equals(COMMENTS_CHANGE_TYPE)) {
-                            long previousSubmissionId = Long.parseLong(line[5]);
-                            long rootPostId = Long.parseLong(line[6]);
+                            submission.createRelationshipTo(submitter, SUBMITTER);
 
-                            Node previousSubmission = findSingleNodeByIdProperty(Submission, previousSubmissionId);
-                            Node rootPost = findSingleNodeByIdProperty(Post, rootPostId);
+                            if (line[0].equals(COMMENTS_CHANGE_TYPE)) {
+                                long previousSubmissionId = Long.parseLong(line[5]);
+                                long rootPostId = Long.parseLong(line[6]);
 
-                            comment.createRelationshipTo(previousSubmission, COMMENT_TO);
-                            comment.createRelationshipTo(rootPost, ROOT_POST);
+                                Node previousSubmission = findSingleNodeByIdProperty(Submission, previousSubmissionId);
+                                Node rootPost = findSingleNodeByIdProperty(Post, rootPostId);
+
+                                submission.createRelationshipTo(previousSubmission, COMMENT_TO);
+                                submission.createRelationshipTo(rootPost, ROOT_POST);
+                            }
                         }
                         break;
                     }
@@ -170,7 +174,15 @@ public abstract class Solution {
     }
 
     private Node findSingleNodeByIdProperty(Labels label, long id) {
-        return Iterators.getOnlyElement(graphDb.findNodes(label, NODE_ID_PROPERTY, id));
+        try (ResourceIterator<Node> nodes = graphDb.findNodes(label, NODE_ID_PROPERTY, id)) {
+            return Iterators.getOnlyElement(nodes);
+        }
+    }
+
+    private boolean nodeByIdPropertyExists(Labels label, long id) {
+        try (ResourceIterator<Node> nodes = graphDb.findNodes(label, NODE_ID_PROPERTY, id)) {
+            return nodes.hasNext();
+        }
     }
 
     private void insertEdge(String[] line, RelationshipTypes relationshipType, Labels sourceLabel, Labels targetLabel) {
