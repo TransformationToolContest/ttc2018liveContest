@@ -1,6 +1,5 @@
 package ttc2018;
 
-import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Result;
 
 import java.io.IOException;
@@ -10,7 +9,7 @@ import java.nio.file.Paths;
 
 public enum Query {
     Q1_BATCH(Paths.get("q1.cypher")),
-//    Q1_INITIAL(Paths.get("q1-initial.cypher")),
+    //    Q1_INITIAL(Paths.get("q1-initial.cypher")),
 //    Q1_UPDATE(Paths.get("q1-update.cypher")),
 //    Q1_RETRIEVE(Paths.get("q1-retrieve.cypher")),
     Q1_INITIAL(""),
@@ -18,7 +17,7 @@ public enum Query {
     Q1_RETRIEVE(""),
 
     Q2_BATCH(Paths.get("q2.cypher")),
-//    Q2_CF_INITIAL(Paths.get("q2-cf-initial.cypher")),
+    //    Q2_CF_INITIAL(Paths.get("q2-cf-initial.cypher")),
 //    Q2_CF_UPDATE(Paths.get("q2-cf-update.cypher")),
 //    Q2_CFC_PREPARE(Paths.get("q2-cfc-prepare.cypher")),
 //    Q2_CFC_UPDATE_INIT(Paths.get("q2-cfc-update-during-initial.cypher")),

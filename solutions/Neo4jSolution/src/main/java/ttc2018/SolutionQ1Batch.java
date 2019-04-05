@@ -1,33 +1,31 @@
 package ttc2018;
 
-import org.neo4j.graphdb.GraphDatabaseService;
-
 import java.io.File;
 import java.io.IOException;
 
 public class SolutionQ1Batch extends Solution {
 
-	public SolutionQ1Batch(String DataPath) throws IOException, InterruptedException {
-		super(DataPath);
+    public SolutionQ1Batch(String DataPath) throws IOException, InterruptedException {
+        super(DataPath);
 
-		Query.Q1_BATCH.setSolution(this);
-	}
-	
-	@Override
-	public String Initial() {
-		String result = runReadQuery(Query.Q1_BATCH);
+        Query.Q1_BATCH.setSolution(this);
+    }
 
-		return result;
-	}
+    @Override
+    public String Initial() {
+        String result = runReadQuery(Query.Q1_BATCH);
 
-	@Override
-	public String Update(File changes) {
-		beforeUpdate(changes);
+        return result;
+    }
 
-		String result = runReadQuery(Query.Q1_BATCH);
+    @Override
+    public String Update(File changes) {
+        beforeUpdate(changes);
 
-		afterUpdate();
+        String result = runReadQuery(Query.Q1_BATCH);
 
-		return result;
-	}
+        afterUpdate();
+
+        return result;
+    }
 }

@@ -11,30 +11,29 @@ import static ttc2018.Solution.NODE_ID_PROPERTY;
 
 public class LiveContestDriver {
 
-	public static void main(String[] args) {
-		try {
-	        if (args.length == 0) {
-	            Mode = SolutionModes.Incremental;
-	        } else {
-	            Mode = SolutionModes.valueOf(args[0]);
-	        }
+    public static void main(String[] args) {
+        try {
+            if (args.length == 0) {
+                Mode = SolutionModes.Incremental;
+            } else {
+                Mode = SolutionModes.valueOf(args[0]);
+            }
 
-	        Initialize();
+            Initialize();
 
-	        // TODO: define which phase should contain DB and indexes initialization
-	        Load();
+            // TODO: define which phase should contain DB and indexes initialization
+            Load();
 
-	        Initial();
-	        for (int i = 1; i <= Sequences; i++)
-	        {
-	                UpdateFromCSV(i);
-	        }
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+            Initial();
+            for (int i = 1; i <= Sequences; i++) {
+                UpdateFromCSV(i);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	private final static boolean REPORT_MEMORY_USAGE = false; // the SQL solution uses PostgreSQL, thus Java memory usage is not meaningful
+    private final static boolean REPORT_MEMORY_USAGE = false; // the SQL solution uses PostgreSQL, thus Java memory usage is not meaningful
 
     private static String ChangePath;
     private static String RunIndex;
@@ -51,9 +50,8 @@ public class LiveContestDriver {
 
     private static Solution solution;
 
-    static void Initialize() throws Exception
-    {
-    	stopwatch = System.nanoTime();
+    static void Initialize() throws Exception {
+        stopwatch = System.nanoTime();
 
         ChangePath = System.getenv("ChangePath");
         RunIndex = System.getenv("RunIndex");
@@ -61,24 +59,19 @@ public class LiveContestDriver {
         Tool = System.getenv("Tool");
         ChangeSet = System.getenv("ChangeSet");
         Query = System.getenv("Query").toUpperCase();
-        if (Query.contentEquals("Q1"))
-        {
+        if (Query.contentEquals("Q1")) {
             if (SolutionModes.Incremental.equals(Mode)) {
                 solution = new SolutionQ1(ChangePath);
             } else {
                 solution = new SolutionQ1Batch(ChangePath);
             }
-        }
-        else if (Query.contentEquals("Q2"))
-        {
+        } else if (Query.contentEquals("Q2")) {
             if (SolutionModes.Incremental.equals(Mode)) {
                 solution = new SolutionQ2(ChangePath);
             } else {
                 solution = new SolutionQ2Batch(ChangePath);
             }
-        }
-        else
-        {
+        } else {
             throw new Exception("Query is unknown");
         }
 
@@ -86,8 +79,7 @@ public class LiveContestDriver {
 //        Report(BenchmarkPhase.Initialization, -1, null);
     }
 
-    static void Load() throws IOException, InterruptedException
-    {
+    static void Load() throws IOException, InterruptedException {
         stopwatch = System.nanoTime();
 
         solution.loadData();
@@ -116,16 +108,14 @@ public class LiveContestDriver {
         Report(BenchmarkPhase.Load, -1, null);
     }
 
-    static void Initial()
-    {
+    static void Initial() {
         stopwatch = System.nanoTime();
         String result = solution.Initial();
         stopwatch = System.nanoTime() - stopwatch;
         Report(BenchmarkPhase.Initial, -1, result);
     }
 
-    static void UpdateFromCSV(int iteration) throws IOException
-    {
+    static void UpdateFromCSV(int iteration) throws IOException {
         File changes = ModelUtils.getChangesetCSVFile(ChangePath, iteration);
         stopwatch = System.nanoTime();
         String result = solution.Update(changes);
@@ -133,15 +123,14 @@ public class LiveContestDriver {
         Report(BenchmarkPhase.Update, iteration, result);
     }
 
-    static void Report(BenchmarkPhase phase, int iteration, String result)
-    {
-    	String iterationStr;
-    	if (iteration == -1) {
-    		iterationStr = "0";
-    	} else {
-    		iterationStr = Integer.toString(iteration);
-    	}
-    	if (ShowRunningTime) {
+    static void Report(BenchmarkPhase phase, int iteration, String result) {
+        String iterationStr;
+        if (iteration == -1) {
+            iterationStr = "0";
+        } else {
+            iterationStr = Integer.toString(iteration);
+        }
+        if (ShowRunningTime) {
             System.out.println(String.format("%s;%s;%s;%s;%s;%s;Time;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(stopwatch)));
         }
         Runtime.getRuntime().gc();
@@ -153,8 +142,7 @@ public class LiveContestDriver {
             long memoryUsed = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
             System.out.println(String.format("%s;%s;%s;%s;%s;%s;Memory;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(memoryUsed)));
         }
-        if (result != null)
-        {
+        if (result != null) {
             System.out.println(String.format("%s;%s;%s;%s;%s;%s;Elements;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), result));
         }
     }

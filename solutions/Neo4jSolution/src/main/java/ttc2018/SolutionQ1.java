@@ -1,37 +1,35 @@
 package ttc2018;
 
-import org.neo4j.graphdb.GraphDatabaseService;
-
 import java.io.File;
 import java.io.IOException;
 
 public class SolutionQ1 extends Solution {
 
-	public SolutionQ1(String DataPath) throws IOException, InterruptedException {
-		super(DataPath);
+    public SolutionQ1(String DataPath) throws IOException, InterruptedException {
+        super(DataPath);
 
-		Query.Q1_INITIAL.setSolution(this);
-		Query.Q1_UPDATE.setSolution(this);
-		Query.Q1_RETRIEVE.setSolution(this);
-	}
-	
-	@Override
-	public String Initial() {
-		runVoidQuery(Query.Q1_INITIAL);
-		String result = runReadQuery(Query.Q1_RETRIEVE);
+        Query.Q1_INITIAL.setSolution(this);
+        Query.Q1_UPDATE.setSolution(this);
+        Query.Q1_RETRIEVE.setSolution(this);
+    }
 
-		return result;
-	}
+    @Override
+    public String Initial() {
+        runVoidQuery(Query.Q1_INITIAL);
+        String result = runReadQuery(Query.Q1_RETRIEVE);
 
-	@Override
-	public String Update(File changes) {
-		beforeUpdate(changes);
+        return result;
+    }
 
-		runVoidQuery(Query.Q1_UPDATE);
-		String result = runReadQuery(Query.Q1_RETRIEVE);
+    @Override
+    public String Update(File changes) {
+        beforeUpdate(changes);
 
-		afterUpdate();
+        runVoidQuery(Query.Q1_UPDATE);
+        String result = runReadQuery(Query.Q1_RETRIEVE);
 
-		return result;
-	}
+        afterUpdate();
+
+        return result;
+    }
 }
