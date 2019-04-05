@@ -177,18 +177,16 @@ public class ModelChangeProcessor {
                 case "posts":
                     Post p = (Post) cli.getAddedElement();
                     posts.addPost(p.getId(), p.getTimestamp(), p.getContent(), p.getSubmitter().getId());
+                    // add child comment tree
+                    for(Comment child: p.getComments()) {
+                        addCommentTree(p, child);
+                    }
                     break;
 
                 case "comments":
                     Submission s = (Submission) cli.getAffectedElement();
                     Comment c = (Comment) cli.getAddedElement();
-                    comments.addComment(
-                            c.getId(),
-                            c.getTimestamp(),
-                            c.getContent(),
-                            c.getSubmitter().getId(),
-                            s.getId(),
-                            c.getPost().getId());
+                    addCommentTree(s, c);
                     break;
 
                 case "users":
@@ -212,6 +210,25 @@ public class ModelChangeProcessor {
 
         } else {
             throw new RuntimeException("Unexpected change type received: " + change.getClass().getName());
+        }
+    }
+
+    /**
+     * Adds a comment along with its recursive child comment tree
+     * @param original the Submission the comment refers to
+     * @param comment the Comment itself to add
+     */
+    private void addCommentTree(Submission original, Comment comment) {
+        comments.addComment(
+                comment.getId(),
+                comment.getTimestamp(),
+                comment.getContent(),
+                comment.getSubmitter().getId(),
+                original.getId(),
+                comment.getPost().getId());
+        // add child comment tree
+        for(Comment child: comment.getComments()) {
+            addCommentTree(comment, child);
         }
     }
 }
