@@ -1,0 +1,513 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Research.Naiad.GraphLINQ</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.NamespaceDoc">
+            <summary>
+            The GraphLINQ framework contains data types and extension methods that add optimized graph-specific
+            operators for streams.
+            </summary>
+            <remarks>
+            The GraphLINQ operators process static graphs. To perform incremental graph computations,
+            use the <see cref="N:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow"/> framework instead.
+            
+            The GraphLINQ framework contains only graph-specific operators, and relies on other frameworks, such as 
+            <see cref="N:Microsoft.Research.Naiad.Frameworks.Lindi"/> to perform extract-transform-load and summarization
+            tasks.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node">
+            <summary>
+            Represents a node (vertex) in a graph.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node.index">
+            <summary>
+            The unique index of the node.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node.op_Implicit(Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node)~System.Int32">
+            <summary>
+            Implicitly extracts the integer index of a node
+            </summary>
+            <param name="node">The node.</param>
+            <returns>The unique index of the node.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node.WithValue``1(``0)">
+            <summary>
+            Creates a <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue`1"/> with this node and the given <paramref name="value"/>.
+            </summary>
+            <typeparam name="TValue">The value type.</typeparam>
+            <param name="value">The value.</param>
+            <returns>A <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue`1"/> based on this node and the given <paramref name="value"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node.#ctor(System.Int32)">
+            <summary>
+            Constructs a node with the given index.
+            </summary>
+            <param name="index">The unique index of the node.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node.Equals(Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node)">
+            <summary>
+            Returns <c>true</c> if this node and the <paramref name="other"/> node have the same index.
+            </summary>
+            <param name="other">The other node.</param>
+            <returns><c>true</c> if and only if the nodes have the same index.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node.GetHashCode">
+            <summary>
+            GetHashCode override
+            </summary>
+            <returns>the node index</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node.ToString">
+            <summary>
+            Returns a string representation of this node.
+            </summary>
+            <returns>A string representation of this node.</returns>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge">
+            <summary>
+            Represents an edge in a graph as a pair of <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node"/>s.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge.source">
+            <summary>
+            The source <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node"/> of this edge.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge.target">
+            <summary>
+            The target <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node"/> of the edge.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge.ToString">
+            <summary>
+            Returns a string representation of this edge.
+            </summary>
+            <returns>A string representation of this edge.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge.#ctor(Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node,Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node)">
+            <summary>
+            Constructs an edge from two <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node"/> objects.
+            </summary>
+            <param name="source">The source node.</param>
+            <param name="target">The target node.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge.GetHashCode">
+            <summary>
+            Returns the hash code for this edge.
+            </summary>
+            <returns>The hash code for this edge.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge.Equals(Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge)">
+            <summary>
+            Returns <c>true</c> if this edge and the <paramref name="other"/> node have the same source and target.
+            </summary>
+            <param name="other">The other edge.</param>
+            <returns><c>true</c> if this edge and the <paramref name="other"/> node have the same source and target.</returns>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue`1">
+            <summary>
+            Represents a <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node"/> that is associated with a value.
+            </summary>
+            <typeparam name="TValue">The value type.</typeparam>
+        </member>
+        <member name="F:Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue`1.node">
+            <summary>
+            The node.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue`1.value">
+            <summary>
+            The value.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue`1.GetHashCode">
+            <summary>
+            GetHashCode override
+            </summary>
+            <returns>node index plus value hash code</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue`1.#ctor(Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node,`0)">
+            <summary>
+            Constructs a node-value pair from the given <paramref name="node"/> and <paramref name="value"/>.
+            </summary>
+            <param name="node">The node.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.EdgeWithValue`1">
+            <summary>
+            Represents an <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge"/> that is associated with a value.
+            </summary>
+            <typeparam name="TValue">The value type.</typeparam>
+        </member>
+        <member name="F:Microsoft.Research.Naiad.Frameworks.GraphLINQ.EdgeWithValue`1.edge">
+            <summary>
+            The edge.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Research.Naiad.Frameworks.GraphLINQ.EdgeWithValue`1.value">
+            <summary>
+            The value.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.EdgeWithValue`1.GetHashCode">
+            <summary>
+            GetHashCode override
+            </summary>
+            <returns>edge hashcode plus value hashcode</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.EdgeWithValue`1.#ctor(Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge,`0)">
+            <summary>
+            Constructs an edge-value pair from the given <paramref name="edge"/> and <paramref name="value"/>.
+            </summary>
+            <param name="edge">The edge.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods">
+            <summary>
+            The GraphLINQ operators are implemented as extension methods on <see cref="T:Microsoft.Research.Naiad.Stream`2"/> objects.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.GenerateDenseNameMapping``1(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.Epoch})">
+            <summary>
+            Computes a mapping from unique identifiers in the input stream to mostly dense <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node"/> indices. 
+            Indices are dense on each worker, but skew among workers can lead to gaps in the tail of the indices.
+            </summary>
+            <typeparam name="TIdentifier">The type of the identifiers.</typeparam>
+            <param name="identifiers">A stream of (not necessarily distinct) identifiers. All identifiers should be in the first epoch.</param>
+            <returns>The stream of densely-named nodes each associated with its initial identifier.</returns>
+            <remarks>The <see cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.RenameEdges``1(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Pair{``0,``0},Microsoft.Research.Naiad.Dataflow.Epoch},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},Microsoft.Research.Naiad.Dataflow.Epoch})"/> and <see cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.RenameNodes``1(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.Epoch},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},Microsoft.Research.Naiad.Dataflow.Epoch})"/> operators can use the results of this operator to rewrite
+            graph edges and nodes in a more compact representation.</remarks>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.RenameEdges``1(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Pair{``0,``0},Microsoft.Research.Naiad.Dataflow.Epoch},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},Microsoft.Research.Naiad.Dataflow.Epoch})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.RenameNodes``1(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.Epoch},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},Microsoft.Research.Naiad.Dataflow.Epoch})"/>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.RenameEdges``1(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Pair{``0,``0},Microsoft.Research.Naiad.Dataflow.Epoch},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},Microsoft.Research.Naiad.Dataflow.Epoch})">
+            <summary>
+            Rewrites the pairs of arbitrary identifiers in <paramref name="edges"/> according to the given <paramref name="renameMapping"/>.
+            </summary>
+            <typeparam name="TIdentifier">The type of the identifiers.</typeparam>
+            <param name="edges">A stream edges named by pairs of identifiers. All pairs should be in the first epoch.</param>
+            <param name="renameMapping">A mapping from <typeparamref name="TIdentifier"/> values to <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node"/> objects.</param>
+            <returns>A stream of <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge"/>s corresponding to the given input <paramref name="edges"/> and <paramref name="renameMapping"/>.</returns>
+            <remarks>
+            The <paramref name="renameMapping"/> typically uses the output of <see cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.GenerateDenseNameMapping``1(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.Epoch})"/>.
+            
+            An edge will appear in the output if and only if both endpoints of the edge exist in the <paramref name="renameMapping"/>.
+            </remarks>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.GenerateDenseNameMapping``1(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.Epoch})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.RenameNodes``1(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.Epoch},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},Microsoft.Research.Naiad.Dataflow.Epoch})"/>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.RenameNodes``1(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.Epoch},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},Microsoft.Research.Naiad.Dataflow.Epoch})">
+            <summary>
+            Rewrites the arbitrary identifiers in <paramref name="nodes"/> according to the given <paramref name="renameMapping"/>.
+            </summary>
+            <typeparam name="TIdentifier">The type of the identifiers.</typeparam>
+            <param name="nodes">A stream of nodes named by identifiers. All identifiers should be in the first epoch.</param>
+            <param name="renameMapping">A mapping from <typeparamref name="TIdentifier"/> values to <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node"/> objects.</param>
+            <returns>A stream of <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node"/>s corresponding to the given input <paramref name="nodes"/> and <paramref name="renameMapping"/>.</returns>
+            <remarks>
+            The <paramref name="renameMapping"/> typically uses the output of <see cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.GenerateDenseNameMapping``1(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.Epoch})"/>.
+            
+            A node will appear in the output if and only if the identifier exists in the <paramref name="renameMapping"/>.
+            </remarks>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.GenerateDenseNameMapping``1(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.Epoch})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.RenameEdges``1(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Pair{``0,``0},Microsoft.Research.Naiad.Dataflow.Epoch},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},Microsoft.Research.Naiad.Dataflow.Epoch})"/>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.RenameUsing``2(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.Epoch},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``1},Microsoft.Research.Naiad.Dataflow.Epoch},System.Func{``0,``1})">
+            <summary>
+            Associates elements of the given <paramref name="stream"/> with nodes selected by the given <paramref name="identifierSelector"/> and <paramref name="renameMapping"/>.
+            </summary>
+            <typeparam name="TInput">The type of the input records.</typeparam>
+            <typeparam name="TIdentifier">The type of the identifiers.</typeparam>
+            <param name="stream">The input stream. All elements should be in the first epoch.</param>
+            <param name="renameMapping">A mapping from <typeparamref name="TIdentifier"/> values to <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node"/> objects.</param>
+            <param name="identifierSelector">Function from input record to identifier, which associates an input record with a node.</param>
+            <returns>A stream of nodes each associated with its respective input record.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.RenameUsing``2(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.IterationIn{Microsoft.Research.Naiad.Dataflow.Epoch}},Microsoft.Research.Naiad.Frameworks.GraphLINQ.AutoRenamer{``1},System.Func{``0,``1})">
+            <summary>
+            Uses an AutoRenamer to create and attach names to records in an input stream based on identifiers producer by an identifierSelector function.
+            </summary>
+            <typeparam name="TInput">Input record type</typeparam>
+            <typeparam name="TIdentifier">Identifier type</typeparam>
+            <param name="stream">The input stream</param>
+            <param name="renamer">The AutoRenamer</param>
+            <param name="identifierSelector">Function from input record to identifier</param>
+            <returns>A stream of pairs of input record and the node corresponding to the record's identifier</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.RenameUsing``2(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.Epoch},Microsoft.Research.Naiad.Frameworks.GraphLINQ.AutoRenamer{``1},System.Func{``0,``1})">
+            <summary>
+            Uses an AutoRenamer to create and attach names to records in an input stream based on identifiers producer by an identifierSelector function.
+            </summary>
+            <typeparam name="TInput">Input record type</typeparam>
+            <typeparam name="TIdentifier">Identifier type</typeparam>
+            <param name="stream">The input stream</param>
+            <param name="renamer">The AutoRenamer</param>
+            <param name="identifierSelector">Function from input record to identifier</param>
+            <returns>A stream of pairs of input record and the node corresponding to the record's identifier</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.FinishRenaming``2(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.IterationIn{Microsoft.Research.Naiad.Dataflow.Epoch}},Microsoft.Research.Naiad.Frameworks.GraphLINQ.AutoRenamer{``1})">
+            <summary>
+            Extracts a stream from an AutoRenaming context. Once called, no further RenameUsing invocations may be used.
+            </summary>
+            <typeparam name="TRecord">Record type</typeparam>
+            <typeparam name="TIdentifier">Identifier type</typeparam>
+            <param name="stream">The stream of records</param>
+            <param name="renamer">The AutoRenamer</param>
+            <returns>The same stream of records, outside of the renaming context.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.TransmitAlong``2(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``1},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge,``1})">
+            <summary>
+            Transmits the value associated with each node in <paramref name="nodes"/> along the matching edges in <paramref name="edges"/>
+            to produce a stream of <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue`1"/>s for each target of a matching edge.
+            </summary>
+            <typeparam name="TValue">The type of value associated with each node.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The stream of nodes with values.</param>
+            <param name="edges">The stream of edges.</param>
+            <returns>The stream of targets with values for each edge in <paramref name="edges"/>.</returns>
+            <remarks>
+            This operator may produce several values for a particular target node. The <see cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.GraphReduce``2(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``1},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge,``1},System.Func{``0,``0,``0},System.Boolean)"/> operator
+            produces a unique value for each target node.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.TransmitAlong``3(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``2},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge,``2},System.Func{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node,``1})">
+            <summary>
+            Transmits the value associated with each node in <paramref name="nodes"/> along the matching edges in <paramref name="edges"/>
+            to produce a stream of <see cref="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue`1"/>s for each target of a matching edge.
+            </summary>
+            <typeparam name="TValue">The type of value associated with each node.</typeparam>
+            <typeparam name="TOutput">The type of value sent to each destination node.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The stream of nodes with values.</param>
+            <param name="edges">The stream of edges.</param>
+            <param name="valueSelector">A function from input (node, value) pair and destination node producing the value to send to that destination.</param>
+            <returns>The stream of targets with values for each edge in <paramref name="edges"/>.</returns>
+            <remarks>
+            This operator may produce several values for a particular target node. The <see cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.GraphReduce``2(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``1},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge,``1},System.Func{``0,``0,``0},System.Boolean)"/> operator
+            produces a unique value for each target node.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.GraphReduce``2(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``1},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge,``1},System.Func{``0,``0,``0},System.Boolean)">
+            <summary>
+            For each target node in <paramref name="edges"/>, aggregates the values at the neighboring <paramref name="nodes"/> using the given <paramref name="combiner"/>.
+            </summary>
+            <typeparam name="TValue">The type of value associated with each node.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The stream of nodes with values.</param>
+            <param name="edges">The stream of edges.</param>
+            <param name="combiner">A function from current value and incoming value, to the new value.</param>
+            <param name="useLocalAggregation">If <c>true</c>, pre-aggregates locally at each worker before the global aggregation.</param>
+            <returns>The stream of aggregated values for each target of an edge in <paramref name="edges"/>.</returns>
+            <remarks>
+            This operator produces a single value for each target node. The <see cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.TransmitAlong``2(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``1},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge,``1})"/> operator
+            produces one value per source node.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.Compact``1(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.Edge,``0})">
+            <summary>
+            Transforms a stream of edges into a single CompactGraph object.
+            </summary>
+            <typeparam name="TTime">Time type</typeparam>
+            <param name="edges">stream of edges</param>
+            <returns>stream of single CompactGraph</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.NodeAggregate``2(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``1},System.Func{``0,``0,``0})">
+            <summary>
+            Aggregates the values associated with each node using the given <paramref name="combiner"/> independently for each time.
+            </summary>
+            <typeparam name="TValue">The type of value associated with each node.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The stream of nodes with values.</param>
+            <param name="combiner">A function from current value and incoming value, to the new value.</param>
+            <returns>The stream containing at most one aggregated value for each distinct node in <paramref name="nodes"/>.</returns>
+            <remarks>
+            This method aggregates values in each locigal time independently. To aggregate across times consider using <see cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.StateMachine``3(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``2},System.Func{``0,``1,``1})"/>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.NodeAggregateLocally``2(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``1},System.Func{``0,``0,``0})">
+            <summary>
+            Aggregates the values associated with each node at each process using the given <paramref name="combiner"/> independently for each time.
+            </summary>
+            <typeparam name="TValue">The type of value associated with each node.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The stream of nodes with values.</param>
+            <param name="combiner">A function from current value and incoming value, to the new value.</param>
+            <returns>The stream of aggregated values at each process for each unique node in <paramref name="nodes"/>.</returns>
+            <remarks>
+            This method aggregates values in each logical time independently. To aggregate across times consider using <see cref="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.StateMachine``3(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``2},System.Func{``0,``1,``1})"/>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.StateMachine``4(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``3},System.Func{``0,``1,Microsoft.Research.Naiad.Pair{``1,``2}},``1)">
+            <summary>
+            Given a stream of values associated with nodes, maintains a state machine for each node,
+            and produces outputs on each transition, based on the given <paramref name="transitionSelector"/>.
+            </summary>
+            <typeparam name="TValue">The type of value associated with each node.</typeparam>
+            <typeparam name="TState">The type of state associated with each node.</typeparam>
+            <typeparam name="TOutput">The type of output produced by each node.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The stream of nodes with values.</param>
+            <param name="transitionSelector">A function from current value and state, to new state and output.</param>
+            <param name="defaultState">The default state associated with a node.</param>
+            <returns>The stream of outputs produced by transitions.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.StateMachine``3(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``2},System.Func{``0,``1,``1},``1)">
+            <summary>
+            Given a stream of values associated with nodes, maintains a state machine for each node,
+            and produces a stream of new states on each transition, based on the given <paramref name="transitionSelector"/>.
+            </summary>
+            <typeparam name="TValue">The type of value associated with each node.</typeparam>
+            <typeparam name="TState">The type of state associated with each node.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The stream of nodes with values.</param>
+            <param name="transitionSelector">A function from current value and state, to new state.</param>
+            <param name="defaultState">The default state associated with a node.</param>
+            <returns>The stream of changed states at each node.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.StateMachine``4(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``3},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``1},``3},System.Func{``0,``1,Microsoft.Research.Naiad.Pair{``1,``2}},``1)">
+            <summary>
+            Given a stream of values and a stream of initial states associated with nodes, maintains a state machine for each node,
+            and produces outputs on each transition, based on the given <paramref name="transitionSelector"/>.
+            </summary>
+            <typeparam name="TValue">The type of value associated with each node.</typeparam>
+            <typeparam name="TState">The type of state associated with each node.</typeparam>
+            <typeparam name="TOutput">The type of output produced by each node.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The stream of nodes with values.</param>
+            <param name="initialStates">The stream of initial states for each node. All initial states should exist at times no later than the first value.</param>
+            <param name="transitionSelector">A function from current value and state, to new state and output.</param>
+            <param name="defaultState">The default state associated with a node.</param>
+            <returns>The stream of outputs produced by transitions.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.StateMachine``3(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``2},System.Func{``0,``1,``1})">
+            <summary>
+            Given a stream of values associated with nodes, maintains a state machine for each node,
+            and produces a stream of new states on each transition, based on the given <paramref name="transitionSelector"/>.
+            </summary>
+            <typeparam name="TValue">The type of value associated with each node.</typeparam>
+            <typeparam name="TState">The type of state associated with each node.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The stream of nodes with values.</param>
+            <param name="transitionSelector">A function from current value and state, to new state.</param>
+            <returns>The stream of changed states at each node.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.StateMachine``4(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``3},System.Func{``0,``1,Microsoft.Research.Naiad.Pair{``1,``2}})">
+            <summary>
+            Given a stream of values associated with nodes, maintains a state machine for each node,
+            and produces outputs on each transition, based on the given <paramref name="transitionSelector"/>.
+            </summary>
+            <typeparam name="TValue">The type of value associated with each node.</typeparam>
+            <typeparam name="TState">The type of state associated with each node.</typeparam>
+            <typeparam name="TOutput">The type of output produced by each node.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The stream of nodes with values.</param>
+            <param name="transitionSelector">A function from current value and state, to new state and output.</param>
+            <returns>The stream of outputs produced by transitions.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.NodeJoin``4(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``3},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``1},``3},System.Func{``0,``1,``2})">
+            <summary>
+            Joins a value stream with a static set of per-node states.
+            </summary>
+            <typeparam name="TValue">The type of value associated with each node.</typeparam>
+            <typeparam name="TState">The type of state associated with each node.</typeparam>
+            <typeparam name="TOutput">The type of output produced by each node.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The stream of nodes with values.</param>
+            <param name="states">The stream of states for each node.</param>
+            <param name="resultSelector">Function from a value and state to an output.</param>
+            <returns>The stream of nodes with outputs.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.FilterBy``2(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{``0},``1},Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node,``1})">
+            <summary>
+            Filters the stream of <paramref name="nodes"/> to contain only those nodes in the <paramref name="restriction"/>.
+            </summary>
+            <typeparam name="TValue">The type of value associated with each node.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The stream of nodes with values.</param>
+            <param name="restriction">The stream of nodes that should appear in the output.</param>
+            <returns>The filtered stream of nodes with values that contains only nodes that are observed in <paramref name="restriction"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.DistinctNodes``1(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node,``0})">
+            <summary>
+            Computes the distinct set of nodes in the input.
+            </summary>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The input stream.</param>
+            <returns>The stream containing the distinct set of nodes in the input.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.CountNodes``1(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.GraphLINQ.Node,``0})">
+            <summary>
+            Computes the number of occurrences of each node in the input.
+            </summary>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="nodes">The input stream.</param>
+            <returns>The stream of nodes whose associated value if the number of occurrences of each node in the input.</returns>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.Option`1">
+            <summary>
+            Represents either a value or an invalid value
+            </summary>
+            <typeparam name="TElement">element type</typeparam>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.ExtensionMethods.Option`1.#ctor(`0)">
+            <summary>
+            Constructs a option with a valid value.
+            </summary>
+            <param name="value">value</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.RenamerVertex`2.OnReceive1(Microsoft.Research.Naiad.Dataflow.Message{`0,Microsoft.Research.Naiad.Dataflow.Epoch})">
+            <summary>
+            Callback on receipt of a batch of elements to rename.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.RenamerVertex`2.OnReceive2(Microsoft.Research.Naiad.Dataflow.Message{Microsoft.Research.Naiad.Frameworks.GraphLINQ.NodeWithValue{`1},Microsoft.Research.Naiad.Dataflow.Epoch})">
+            <summary>
+            Callback on receipt of a batch of nodes with names.
+            </summary>
+            <param name="message">message containing nodes with names</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.RenamerVertex`2.OnNotify(Microsoft.Research.Naiad.Dataflow.Epoch)">
+            <summary>
+            Confirmation once inputs have been exhausted.
+            Should not produce new records; would be a bug.
+            </summary>
+            <param name="time">completed time</param>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.GraphLINQ.AutoRenamer`1">
+            <summary>
+            A renaming context with the ability to choose its own names for identifiers.
+            </summary>
+            <typeparam name="TIdentifier">common identifier type</typeparam>
+        </member>
+        <member name="F:Microsoft.Research.Naiad.Frameworks.GraphLINQ.AutoRenamer`1.Context">
+            <summary>
+            Context used to enter and exit the renaming scope.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.AutoRenamer`1.AddRenameTask``1(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.IterationIn{Microsoft.Research.Naiad.Dataflow.Epoch}},System.Func{``0,`0})">
+            <summary>
+            Adds a rename task, taking a stream in the rename context and a name selection function.
+            </summary>
+            <typeparam name="TInput">input type</typeparam>
+            <param name="stream">source stream</param>
+            <param name="identifierSelector">function from input to identifier</param>
+            <returns>stream of pairs of inputs and node name of associated identifier</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.GraphLINQ.AutoRenamer`1.Dispose">
+            <summary>
+            Creates and connects outputs to their feedback vertices.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Research.Naiad.Frameworks.GraphLINQ.AutoRenamer`1.FinalRenamings">
+            <summary>
+            A stream of renamings produced by the AutoRenamer.
+            </summary>
+        </member>
+    </members>
+</doc>

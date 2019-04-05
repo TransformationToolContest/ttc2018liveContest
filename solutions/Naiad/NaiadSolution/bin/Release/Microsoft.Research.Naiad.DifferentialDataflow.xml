@@ -1,0 +1,1232 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Research.Naiad.DifferentialDataflow</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2">
+            <summary>
+            A collection is a multiset of records that varies according to a logical timestamp.
+            </summary>
+            <typeparam name="TRecord">The type of records in the collection.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <remarks>
+            The <typeparamref name="TTime"/> type parameter is used to ensure that collections are
+            combined in compatible ways, and need not be manipulated directly by the programmer. Initially,
+            <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1"/> collections have an integer-valued <see cref="T:Microsoft.Research.Naiad.Dataflow.Epoch"/> timestamp,
+            which indicates that they vary according to a stream of input epochs. The <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.EnterLoop(Microsoft.Research.Naiad.Dataflow.Iteration.LoopContext{`1})"/> method
+            is used to refer to a collection within a loop, by augmenting its timestamp to have an <see cref="T:Microsoft.Research.Naiad.Dataflow.IterationIn`1"/> value
+            with an additional loop counter.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.PartitionBy``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Partitions a collection by the given key selector.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <returns>A collection with the same elements, but in which all records with the same key will be
+            processed by the same worker.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Consolidate">
+            <summary>
+            Consolidates a collection so that each record occurs with at most one weight.
+            </summary>
+            <returns>A collection with the same elements, but in which all identical records are stored once with a canonical weight.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Consolidate``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Consolidates representation so that each record occurs with at most one weight.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <returns>A collection with the same elements, but in which all identical records are stored once with a canonical weight,
+            and all records with the same key will be processed by the same worker.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Select``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Transforms each record in the collection using the given <paramref name="selector"/> function.
+            </summary>
+            <typeparam name="TOutput">The type of the transformed records.</typeparam>
+            <param name="selector">A transform function to apply to each record.</param>
+            <returns>The collection of transformed records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Where(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Filters the collection to contain only records that match the given <paramref name="predicate"/>.
+            </summary>
+            <param name="predicate">A function that returns <c>true</c> if and only if the record will be kept in the output.</param>
+            <returns>The collection of records that satisfy the predicate.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.SelectMany``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IEnumerable{``0}}})">
+            <summary>
+            Transforms each record in the collection using the given <paramref name="selector"/> function and flattens the result. 
+            </summary>
+            <typeparam name="TOutput">The type of elements of the sequence returned by <paramref name="selector"/>.</typeparam>
+            <param name="selector">A transform function to apply to each record.</param>
+            <returns>The flattened collection of transformed records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.SelectMany``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IEnumerable{System.ArraySegment{``0}}}})">
+            <summary>
+            Transforms each record in the collection using the given <paramref name="selector"/> function and flattens the result.
+            </summary>
+            <typeparam name="TOutput">The type of elements of the array segments in the sequence returned by <paramref name="selector"/>.</typeparam>
+            <param name="selector">A transform function to apply to each record.</param>
+            <returns>The flattened collection of transformed records.</returns>
+            <remarks>
+            This overload supports optimizing the performance of <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.SelectMany``1(System.Linq.Expressions.Expression{System.Func{`0,System.Collections.Generic.IEnumerable{``0}}})"/> by using
+            <see cref="T:System.ArraySegment`1"/> objects to batch the elements returned by <paramref name="selector"/>.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.GroupBy``3(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Func{``0,System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IEnumerable{``2}})">
+            <summary>
+            Groups records using the supplied key selector, and applies the given reduction function.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TValue">The intermediate value type.</typeparam>
+            <typeparam name="TOutput">The result type.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <param name="valueSelector">Function that transforms a record to the intermediate value that is stored for each record.</param>
+            <param name="reducer">Function that transforms a sequence of intermediate values to a sequence of output records.</param>
+            <returns>The collection of output records for each group in the input collection.</returns>
+            <remarks>This overload can reduce the amount of storage required compared to <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.GroupBy``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Func{``0,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{``1}})"/> in cases
+            where the intermediate value is small relative to each original record.
+            
+            If the reducer is a commutative and associative aggregation function, consider using the <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Aggregate``3(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Linq.Expressions.Expression{System.Func{System.Int64,``1,``1,``1}},System.Linq.Expressions.Expression{System.Func{``1,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``1,``2}})"/> (or a related aggregation)
+            operator, which stores a single value for each key, rather than a sequence of values.</remarks>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Count``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Count``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``0,System.Int64,``1}})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Max``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Max``3(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``2}},System.Linq.Expressions.Expression{System.Func{``0,``2,``1}},System.Linq.Expressions.Expression{System.Func{``0,``2,`0}})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Min``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Min``3(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``2}},System.Linq.Expressions.Expression{System.Func{``0,``2,``1}},System.Linq.Expressions.Expression{System.Func{``0,``2,`0}})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Sum``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Int32}},System.Linq.Expressions.Expression{System.Func{``0,System.Int32,``1}})"/>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.GroupBy``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Func{``0,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{``1}})">
+            <summary>
+            Groups records using the supplied key selector, and applies the given reduction function.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TOutput">The result type.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <param name="reducer">Function that transforms a sequence of input records to a sequence of output records.</param>
+            <returns>The collection of output records for each group in the input collection.</returns>
+            <remarks>The <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.GroupBy``3(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Func{``0,System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IEnumerable{``2}})"/> overload can reduce the amount of storage required compared to this overload in cases
+            where the intermediate value is small relative to each original record.
+            
+            If the <paramref name="reducer"/> is a commutative and associative aggregation function, consider using the <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Aggregate``3(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Linq.Expressions.Expression{System.Func{System.Int64,``1,``1,``1}},System.Linq.Expressions.Expression{System.Func{``1,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``1,``2}})"/> (or a related aggregation)
+            operator, which stores a single value for each key, rather than a sequence of values.</remarks>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Count``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Count``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``0,System.Int64,``1}})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Max``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Max``3(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``2}},System.Linq.Expressions.Expression{System.Func{``0,``2,``1}},System.Linq.Expressions.Expression{System.Func{``0,``2,`0}})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Min``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Min``3(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``2}},System.Linq.Expressions.Expression{System.Func{``0,``2,``1}},System.Linq.Expressions.Expression{System.Func{``0,``2,`0}})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Sum``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Int32}},System.Linq.Expressions.Expression{System.Func{``0,System.Int32,``1}})"/>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.CoGroupBy``5(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``3,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``3,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Linq.Expressions.Expression{System.Func{``3,``2}},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IEnumerable{``2},System.Collections.Generic.IEnumerable{``4}}})">
+            <summary>
+            Groups records from both input collections using the respective key selector, and applies the given reduction function.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TValue1">The type of intermediate values stored for this collection.</typeparam>
+            <typeparam name="TValue2">The type of intermediate values stored from the <paramref name="other"/> collection.</typeparam>
+            <typeparam name="TRecord2">The type of records in the <paramref name="other"/> collection.</typeparam>
+            <typeparam name="TOutput">The result type.</typeparam>
+            <param name="other">The other collection.</param>
+            <param name="keySelector1">The key selector applied to records in this collection.</param>
+            <param name="keySelector2">The key selector applied to records in the <paramref name="other"/> collection.</param>
+            <param name="valueSelector1">Function that transforms a record in this collection to the intermediate value that is stored for each record.</param>
+            <param name="valueSelector2">Function that transforms a record in the <paramref name="other"/> collection to the intermediate value that is stored for each record.</param>
+            <param name="reducer">Function that transforms two sequences of intermediate values from each input collection to a sequence of output records.</param>
+            <returns>The collection of output records for each group in either input collection.</returns>
+            <remarks>This overload can reduce the amount of storage required compared to <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.CoGroupBy``3(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``1,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``1,``0}},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IEnumerable{``2}}})"/> in cases
+            where the intermediate values are small relative to each original record.
+            
+            The <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.CoGroupBy``5(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``3,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``3,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Linq.Expressions.Expression{System.Func{``3,``2}},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``1}},System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``2}},System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``4}}}})"/>
+            overload can reduce the amount of computation required compared to this overload, by compressing multiple instances of the
+            same value into a single <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted`1"/> value.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.CoGroupBy``3(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``1,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``1,``0}},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IEnumerable{``2}}})">
+            <summary>
+            Groups records from both input collections using the respective key selector, and applies the given reduction function.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TRecord2">The type of records in the <paramref name="other"/> collection.</typeparam>
+            <typeparam name="TOutput">The result type.</typeparam>
+            <param name="other">The other collection.</param>
+            <param name="keySelector1">The key selector applied to records in this collection.</param>
+            <param name="keySelector2">The key selector applied to records in the <paramref name="other"/> collection.</param>
+            <param name="reducer">Function that transforms two sequences of records from each input collection to a sequence of output records.</param>
+            <returns>The collection of output records for each group in either input collection.</returns>
+            <remarks>The <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.CoGroupBy``5(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``3,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``3,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Linq.Expressions.Expression{System.Func{``3,``2}},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IEnumerable{``2},System.Collections.Generic.IEnumerable{``4}}})"/>
+            overload can reduce the amount of storage required compared to this overload in cases
+            where the intermediate values are small relative to each original record.
+            
+            The <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.CoGroupBy``3(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``1,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``1,``0}},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{`0}},System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``1}},System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``2}}}})"/>
+            overload can reduce the amount of computation required compared to this overload, by compressing multiple instances of the
+            same value into a single <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted`1"/> value.</remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.CoGroupBy``5(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``3,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``3,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Linq.Expressions.Expression{System.Func{``3,``2}},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``1}},System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``2}},System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``4}}}})">
+            <summary>
+            Groups records from both input collections using the respective key selector, and applies the given reduction function.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TValue1">The type of intermediate values stored for this collection.</typeparam>
+            <typeparam name="TValue2">The type of intermediate values stored from the <paramref name="other"/> collection.</typeparam>
+            <typeparam name="TRecord2">The type of records in the <paramref name="other"/> collection.</typeparam>
+            <typeparam name="TOutput">The result type.</typeparam>
+            <param name="other">The other collection.</param>
+            <param name="keySelector1">The key selector applied to records in this collection.</param>
+            <param name="keySelector2">The key selector applied to records in the <paramref name="other"/> collection.</param>
+            <param name="valueSelector1">Function that transforms a record in this collection to the intermediate value that is stored for each record.</param>
+            <param name="valueSelector2">Function that transforms a record in the <paramref name="other"/> collection to the intermediate value that is stored for each record.</param>
+            <param name="reducer">Function that transforms two sequences of weighted intermediate values from each input collection to a sequence of weighted output records.</param>
+            <returns>The collection of output records for each group in either input collection.</returns>
+            <remarks>This overload can reduce the amount of storage required compared to <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.CoGroupBy``3(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``1,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``1,``0}},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{`0}},System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``1}},System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``2}}}})"/> in cases
+            where the intermediate values are small relative to each original record.
+            
+            This overload can reduce the amount of computation required compared to the <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.CoGroupBy``5(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``3,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``3,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Linq.Expressions.Expression{System.Func{``3,``2}},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IEnumerable{``2},System.Collections.Generic.IEnumerable{``4}}})"/> overload, by compressing multiple instances of the
+            same value into a single <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted`1"/> value.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.CoGroupBy``3(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``1,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``1,``0}},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{`0}},System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``1}},System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``2}}}})">
+            <summary>
+            Groups records from both input collections using the respective key selector, and applies the given reduction function.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TRecord2">The type of records in the <paramref name="other"/> collection.</typeparam>
+            <typeparam name="TOutput">The result type.</typeparam>
+            <param name="other">The other collection.</param>
+            <param name="keySelector1">The key selector applied to records in this collection.</param>
+            <param name="keySelector2">The key selector applied to records in the <paramref name="other"/> collection.</param>
+            <param name="reducer">Function that transforms two sequences of weighted records from each input collection to a sequence of weighted output records.</param>
+            <returns>The collection of output records for each group in either input collection.</returns>
+            <remarks>The <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.CoGroupBy``5(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``3,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``3,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Linq.Expressions.Expression{System.Func{``3,``2}},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``1}},System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``2}},System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``4}}}})"/>
+            overload can reduce the amount of storage required compared to this overload in cases
+            where the intermediate values are small relative to each original record.
+            
+            This overload can reduce the amount of computation required compared to the <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.CoGroupBy``3(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``1,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``1,``0}},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IEnumerable{``2}}})"/> overload, by compressing multiple instances of the
+            same value into a single <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted`1"/> value.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Join``3(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``1,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``1,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1,``2}})">
+            <summary>
+            Joins this collection with the <paramref name="other"/> collection, using the respective key selectors.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TRecord2">The type of records in the <paramref name="other"/> collection.</typeparam>
+            <typeparam name="TOutput">The result type.</typeparam>
+            <param name="other">The other collection.</param>
+            <param name="keySelector1">The key selector applied to records in this collection.</param>
+            <param name="keySelector2">The key selector applied to records in the <paramref name="other"/> collection.</param>
+            <param name="resultSelector">Function that transforms records with matching keys to an output record.</param>
+            <returns>The collection of output records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Join``5(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``3,`1},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``3,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Linq.Expressions.Expression{System.Func{``3,``2}},System.Linq.Expressions.Expression{System.Func{``0,``1,``2,``4}})">
+            <summary>
+            Joins this collection with the <paramref name="other"/> collection, using the respective key selectors.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TValue1">The type of intermediate values stored for this collection.</typeparam>
+            <typeparam name="TValue2">The type of intermediate values stored from the <paramref name="other"/> collection.</typeparam>
+            <typeparam name="TRecord2">The type of records in the <paramref name="other"/> collection.</typeparam>
+            <typeparam name="TOutput">The result type.</typeparam>
+            <param name="other">The other collection.</param>
+            <param name="keySelector1">The key selector applied to records in this collection.</param>
+            <param name="keySelector2">The key selector applied to records in the <paramref name="other"/> collection.</param>
+            <param name="valueSelector1">Function that transforms a record in this collection to the intermediate value that is stored for each record.</param>
+            <param name="valueSelector2">Function that transforms a record in the <paramref name="other"/> collection to the intermediate value that is stored for each record.</param>
+            <param name="resultSelector">Function that transforms intermediate values from records with matching keys to an output record.</param>
+            <returns>The collection of output records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Join``4(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``2,`1},System.Linq.Expressions.Expression{System.Func{`0,System.Int32}},System.Linq.Expressions.Expression{System.Func{``2,System.Int32}},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``2,``1}},System.Linq.Expressions.Expression{System.Func{System.Int32,``0,``1,``3}},System.Boolean)">
+            <summary>
+            Joins this collection with the <paramref name="other"/> collection, using the respective integer-valued key selectors.
+            </summary>
+            <typeparam name="TValue1">The type of intermediate values stored for this collection.</typeparam>
+            <typeparam name="TValue2">The type of intermediate values stored from the <paramref name="other"/> collection.</typeparam>
+            <typeparam name="TRecord2">The type of records in the <paramref name="other"/> collection.</typeparam>
+            <typeparam name="TOutput">The result type.</typeparam>
+            <param name="other">The other collection.</param>
+            <param name="keySelector1">The key selector applied to records in this collection.</param>
+            <param name="keySelector2">The key selector applied to records in the <paramref name="other"/> collection.</param>
+            <param name="valueSelector1">Function that transforms a record in this collection to the intermediate value that is stored for each record.</param>
+            <param name="valueSelector2">Function that transforms a record in the <paramref name="other"/> collection to the intermediate value that is stored for each record.</param>
+            <param name="resultSelector">Function that transforms intermediate values from records with matching keys to an output record.</param>
+            <param name="useDenseIntKeys">If <c>true</c>, use optimizations for dense-valued keys, otherwise treat keys as sparse.</param>
+            <returns>The collection of output records.</returns>
+            <remarks>
+            This overload is specialized for collections with integer keys. If <paramref name="useDenseIntKeys"/> is <c>true</c>,
+            the implementation uses a further specialization that exploits the dense nature of the keys.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Aggregate``3(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Linq.Expressions.Expression{System.Func{System.Int64,``1,``1,``1}},System.Linq.Expressions.Expression{System.Func{``1,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``1,``2}})">
+            <summary>
+            Groups records using the supplied key selector, and applies the given aggregation function.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TValue">The intermediate value type.</typeparam>
+            <typeparam name="TOutput">The result type.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <param name="valueSelector">Function that transforms a record to the intermediate value that is stored for each record.</param>
+            <param name="resultSelector">Function that transforms a key and aggregate value to an output record.</param>
+            <param name="axpy">A function that multiplies the first argument by the second and adds the third (cf. SAXPY).</param>
+            <param name="isZeroPredicate">A predicate that returns <c>true</c> if and only if the given value is zero.</param>
+            <returns>The collection of output records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Count``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Groups records using the supplied key selector, and counts the number of records in each group.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <returns>The collection of pairs of keys and the respective counts for each group.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Count``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{``0,System.Int64,``1}})">
+            <summary>
+            Groups records using the supplied key selector, and counts the number of records in each group.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TOutput">The output type.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <param name="resultSelector">Function that transforms a key and count to an output record.</param>
+            <returns>The collection of output records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Sum``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Int32}},System.Linq.Expressions.Expression{System.Func{``0,System.Int32,``1}})">
+            <summary>
+            Groups records using the supplied key selector, and computes the sum of the records in each group.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TOutput">The output type.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <param name="valueSelector">Function that extracts the integer value to be summed each record.</param>
+            <param name="resultSelector">Function that transforms a key and count to an output record.</param>
+            <returns>The collection of output records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Sum``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Int64}},System.Linq.Expressions.Expression{System.Func{``0,System.Int64,``1}})">
+            <summary>
+            Groups records using the supplied key selector, and computes the sum of the records in each group.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TOutput">The output type.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <param name="valueSelector">Function that extracts the long value to be summed each record.</param>
+            <param name="resultSelector">Function that transforms a key and count to an output record.</param>
+            <returns>The collection of output records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Sum``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Single}},System.Linq.Expressions.Expression{System.Func{``0,System.Single,``1}})">
+            <summary>
+            Groups records using the supplied key selector, and computes the sum of the records in each group.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TOutput">The output type.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <param name="valueSelector">Function that extracts the floating-point value to be summed each record.</param>
+            <param name="resultSelector">Function that transforms a key and count to an output record.</param>
+            <returns>The collection of output records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Sum``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Double}},System.Linq.Expressions.Expression{System.Func{``0,System.Double,``1}})">
+            <summary>
+            Groups records using the supplied key selector, and computes the sum of the records in each group.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TOutput">The output type.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <param name="valueSelector">Function that extracts the 64-bit floating-point value to be summed each record.</param>
+            <param name="resultSelector">Function that transforms a key and count to an output record.</param>
+            <returns>The collection of output records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Min``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}})">
+            <summary>
+            Groups records using the supplied key selector, and computes the minimum value in each group.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TComparable">The type of values to be used for comparison.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <param name="comparableSelector">Function that extracts the portion of a record to be used in the comparison.</param>
+            <returns>The collection of minimum-valued records in each group.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Min``3(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``2}},System.Linq.Expressions.Expression{System.Func{``0,``2,``1}},System.Linq.Expressions.Expression{System.Func{``0,``2,`0}})">
+            <summary>
+            Groups records using the supplied key selector, and computes the minimum value in each group.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TValue">The intermediate value type.</typeparam>
+            <typeparam name="TComparable">The type of values to be used for comparison.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <param name="valueSelector">Function that transforms a record to the intermediate value that is stored for each record.</param>
+            <param name="comparableSelector">Function that extracts the portion of a key-value pair to be used in the comparison.</param>
+            <param name="resultSelector">Function that transforms a key and the minimum value to an output record.</param>
+            <returns>The collection of output records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Min``2(System.Linq.Expressions.Expression{System.Func{`0,System.Int32}},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{System.Int32,``0,``1}},System.Linq.Expressions.Expression{System.Func{System.Int32,``0,`0}},System.Boolean)">
+            <summary>
+            Groups records using the supplied integer-valued key selector, and computes the minimum value in each group.
+            </summary>
+            <typeparam name="TValue">The intermediate value type.</typeparam>
+            <typeparam name="TComparable">The type of values to be used for comparison.</typeparam>
+            <param name="keySelector">Function that extracts an integer-valued key from each record.</param>
+            <param name="valueSelector">Function that transforms a record to the intermediate value that is stored for each record.</param>
+            <param name="comparableSelector">Function that extracts the portion of a key-value pair to be used in the comparison.</param>
+            <param name="resultSelector">Function that transforms a key and the minimum value to an output record.</param>
+            <param name="useDenseIntKeys">If <c>true</c>, use optimizations for dense-valued keys, otherwise treat keys as sparse.</param>
+            <returns>The collection of output records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Max``2(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}})">
+            <summary>
+            Groups records using the supplied key selector, and computes the maximum value in each group.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TComparable">The type of values to be used for comparison.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <param name="comparableSelector">Function that extracts the portion of a record to be used in the comparison.</param>
+            <returns>The collection of maximum-valued records in each group.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Max``3(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``2}},System.Linq.Expressions.Expression{System.Func{``0,``2,``1}},System.Linq.Expressions.Expression{System.Func{``0,``2,`0}})">
+            <summary>
+            Groups records using the supplied key selector, and computes the maximum value in each group.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TValue">The intermediate value type.</typeparam>
+            <typeparam name="TComparable">The type of values to be used for comparison.</typeparam>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <param name="valueSelector">Function that transforms a record to the intermediate value that is stored for each record.</param>
+            <param name="comparableSelector">Function that extracts the portion of a key-value pair to be used in the comparison.</param>
+            <param name="resultSelector">Function that transforms a key and the maximum value to an output record.</param>
+            <returns>The collection of output records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Distinct">
+            <summary>
+            Computes the set of distinct records in this collection.
+            </summary>
+            <returns>The collection of distinct records.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Union(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,`1})">
+            <summary>
+            Computes the multiset union of this collection and the <paramref name="other"/> collection.
+            </summary>
+            <param name="other">The other collection.</param>
+            <returns>The collection containing the multiset union of the two input collections.</returns>
+            <remarks>The multiset union contains each record in either this collection or the <paramref name="other"/> collection.
+            For each record in either collection, the multiplicity of that record in the multiset union will be the greater of its
+            multiplicities in either collection.
+            
+            The union operator is stateful. If precise multiplicities are not important (e.g. because the output feeds into a <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Distinct"/>,
+            <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Aggregate``3(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Linq.Expressions.Expression{System.Func{System.Int64,``1,``1,``1}},System.Linq.Expressions.Expression{System.Func{``1,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``1,``2}})"/>, or similarly idempotent operator), the <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Concat(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,`1})"/> operator is a more efficient substitute.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Intersect(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,`1})">
+            <summary>
+            Computes the multiset intersection of this collection and the <paramref name="other"/> collection.
+            </summary>
+            <param name="other">The other collection.</param>
+            <returns>The collection containing the multiset intersection of the two input collections.</returns>
+            <remarks>The multiset union contains each record in both this collection and the <paramref name="other"/> collection.
+            For each record in both collections, the multiplicity of that record in the multiset intersection will be the lesser of its
+            multiplicities in either collection.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.SymmetricDifference(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,`1})">
+            <summary>
+            Computes the multiset symmetric difference of this collection and the <paramref name="other"/> collection.
+            </summary>
+            <param name="other">The other collection.</param>
+            <returns>The collection containing the multiset symmetric difference of the two input collections.</returns>
+            <remarks>The multiset symmetric difference contains each record that is in the <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Union(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,`1})"/>, but not in the <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Intersect(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,`1})"/>
+            of this collection and the <paramref name="other"/> collection. For each record in either collection, the multiplicity of that record in the
+            multiset symmetric difference is the absolute value of the difference between its multiplicities in either collection.</remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Concat(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,`1})">
+            <summary>
+            Computes the concatenation of this collection and the <paramref name="other"/> collection.
+            </summary>
+            <param name="other">The other collection.</param>
+            <returns>The collection containing all records in the two input collections.</returns>
+            <remarks>This operator is stateless. As such, it can be a more efficient alternative to the <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Union(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,`1})"/> operator, when
+            precise multiplicities are not important (e.g. because the output feeds into a <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Distinct"/>,
+            <see cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Aggregate``3(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,``1}},System.Linq.Expressions.Expression{System.Func{System.Int64,``1,``1,``1}},System.Linq.Expressions.Expression{System.Func{``1,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,``1,``2}})"/>, or similarly idempotent operator).
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Except(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,`1})">
+            <summary>
+            Computes the multiset difference of this collection minus the <paramref name="other"/> collection.
+            </summary>
+            <param name="other">The other collection.</param>
+            <returns>The collection containing all records in this collection that are not in the <paramref name="other"/> collection.</returns>
+            <remarks>The behavior of this operator is undefined when the <paramref name="other"/> collection contains records that are not 
+            in this collection.</remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.EnterLoop(Microsoft.Research.Naiad.Dataflow.Iteration.LoopContext{`1})">
+            <summary>
+            Enables this collection to be used as a constant in the given loop context.
+            </summary>
+            <param name="context">The loop context.</param>
+            <returns>This collection, where each timestamp has an additional loop counter.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.EnterLoop(Microsoft.Research.Naiad.Dataflow.Iteration.LoopContext{`1},System.Func{`0,System.Int32})">
+            <summary>
+            Enables this collection to be used in the given loop context, where each record
+            may be introduced at a different iteration.
+            </summary>
+            <param name="context">The loop context.</param>
+            <param name="iterationSelector">Function that maps an input record to the iteration at which that record should be introduced.</param>
+            <returns>This collection, where each timestamp has an addition loop counter.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.GeneralFixedPoint``1(System.Func{Microsoft.Research.Naiad.Dataflow.Iteration.LoopContext{`1},Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,Microsoft.Research.Naiad.Dataflow.IterationIn{`1}},Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,Microsoft.Research.Naiad.Dataflow.IterationIn{`1}}},System.Func{`0,System.Int32},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Int32)">
+            <summary>
+            Computes the fixed point of the subquery <paramref name="f"/> applied to this collection.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <param name="f">The subquery to apply iteratively.</param>
+            <param name="iterationSelector">Function that maps an input record to the iteration at which that record should be introduced.</param>
+            <param name="keySelector">Function that extracts a key from each record, to be used for partitioning the input collection.</param>
+            <param name="maxIterations">The maximum number of iterations to compute.</param>
+            <returns>The result of applying a subquery g to this collection <paramref name="maxIterations"/> times,
+            where g^{i+1} = f(g^i + input.EnterLoop(iterationSelector)^i).</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.FixedPoint(System.Func{Microsoft.Research.Naiad.Dataflow.Iteration.LoopContext{`1},Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,Microsoft.Research.Naiad.Dataflow.IterationIn{`1}},Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,Microsoft.Research.Naiad.Dataflow.IterationIn{`1}}})">
+            <summary>
+            Computes the fixed point of the subquery <paramref name="f"/> applied to this collection.
+            </summary>
+            <param name="f">The subquery to apply iteratively.</param>
+            <returns>The result of applying <paramref name="f"/> to this collection until reaching fixed point.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.FixedPoint(System.Func{Microsoft.Research.Naiad.Dataflow.Iteration.LoopContext{`1},Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,Microsoft.Research.Naiad.Dataflow.IterationIn{`1}},Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,Microsoft.Research.Naiad.Dataflow.IterationIn{`1}}},System.Int32)">
+            <summary>
+            Computes the fixed point of the subquery <paramref name="f"/> applied to this collection.
+            </summary>
+            <param name="f">The subquery to apply iteratively.</param>
+            <param name="maxIterations">The maximum number of iterations to compute.</param>
+            <returns>The result of applying <paramref name="f"/> to this collection <paramref name="maxIterations"/> times, or until fixed point is reached, whichever is earlier.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.FixedPoint``1(System.Func{Microsoft.Research.Naiad.Dataflow.Iteration.LoopContext{`1},Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,Microsoft.Research.Naiad.Dataflow.IterationIn{`1}},Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,Microsoft.Research.Naiad.Dataflow.IterationIn{`1}}},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Computes the fixed point of the subquery <paramref name="f"/> applied to this collection.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <param name="f">The subquery to apply iteratively.</param>
+            <param name="keySelector">Function that extracts a key from each record, to be used for partitioning the input collection.</param>
+            <returns>The result of applying <paramref name="f"/> to this collection until fixed point is reached.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.FixedPoint``1(System.Func{Microsoft.Research.Naiad.Dataflow.Iteration.LoopContext{`1},Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,Microsoft.Research.Naiad.Dataflow.IterationIn{`1}},Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,Microsoft.Research.Naiad.Dataflow.IterationIn{`1}}},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Int32)">
+            <summary>
+            Computes the fixed point of the subquery <paramref name="f"/> applied to this collection.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <param name="f">The subquery to apply iteratively.</param>
+            <param name="keySelector">Function that extracts a key from each record, to be used for partitioning the input collection.</param>
+            <param name="maxIterations">The maximum number of iterations to compute.</param>
+            <returns>The result of applying <paramref name="f"/> to this collection <paramref name="maxIterations"/> times, or until fixed point is reached, whichever is earlier.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Monitor(System.Action{System.Int32,System.Collections.Generic.List{Microsoft.Research.Naiad.Pair{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{`0},`1}}})">
+            <summary>
+            Applies the given action to the records in this collection once for each timestamp on each worker, for monitoring.
+            </summary>
+            <param name="action">The action to apply to each group of records, and the respective worker index.</param>
+            <returns>The input collection.</returns>
+        </member>
+        <member name="P:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.Output">
+            <summary>
+            The underlying Naiad <see cref="T:Microsoft.Research.Naiad.Stream`2"/> of
+            <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted`1"/> elements.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.TypedCollection`2.EnterLoop(Microsoft.Research.Naiad.Dataflow.Iteration.LoopContext{`1})">
+            <summary>
+            Adds a temporal dimension to each record.
+            </summary>
+            <param name="context">Loop context</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.TypedCollection`2.EnterLoop(Microsoft.Research.Naiad.Dataflow.Iteration.LoopContext{`1},System.Func{`0,System.Int32})">
+            <summary>
+            Adds a temporal dimension to each record.
+            </summary>
+            <param name="context">Loop context</param>
+            <param name="initialIteration">initial iteration selector</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.TypedCollection`2.Monitor(System.Action{System.Int32,System.Collections.Generic.List{Microsoft.Research.Naiad.Pair{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{`0},`1}}})">
+            <summary>
+            Monitors records passing through.
+            </summary>
+            <param name="action">Action to be applied to each group of records</param>
+            <returns>Input collection</returns>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NamespaceDoc">
+            <summary>
+            The Differential Dataflow framework contains extension methods that support LINQ-style incremental and iterative operators.
+            </summary>
+            <remarks>
+            The Differential Dataflow operators are defined in terms of <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2"/> objects, each of which wraps
+            a Naiad stream and allows it to be interpreted with multiset semantics.
+            
+            The <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1"/> class is the Differential Dataflow–specific wrapper for the Naiad
+            <see cref="T:Microsoft.Research.Naiad.Input.BatchedDataSource`1"/> class.
+            </remarks>
+            <example>
+            A simple Differential Dataflow program can be written as follows:
+            
+            <code>
+            using Microsoft.Research.Naiad;
+            using Microsoft.Research.Naiad.Frameworks.DifferentialDataflow;
+            
+            class Program
+            {
+                public static void Main(string[] args)
+                {
+                    using (Controller controller = NewController.FromArgs(ref args)
+                    {
+                        using (Computation computation = controller.NewComputation())
+                        {
+                            // Define a computation in terms of collections.
+                            InputCollection&lt;int&gt; input = computation.NewInputCollection();
+                            
+                            var histogram = input.Count(x =&gt; x);
+                            
+                            // A subscription collects the result of the computation, and applies
+                            // an action to the array of weighted updates.
+                            Subscription subscription = histogram.Subscribe(changes =&gt; { /* ... */ });
+            
+                            computation.Activate();
+            
+                            // The OnNext() method takes an IEnumerable&lt;int&gt; that specifies records to add.
+                            input.OnNext(new int[] { 1, 1, 2, 3, 5, 8 });
+                            input.Sync(0); 
+                            
+                            input.OnNext(new int[] { 13 });
+                            input.Sync(1);
+                            
+                            // This OnNext() overload allows elements to be added with integer weights.
+                            // The weights may be positive (adding records) or negative (removing records).
+                            input.OnNext(new Weighted&lt;int&gt;[] { new Weighted&lt;int&gt;(1, -2) });
+                            input.Sync(2);
+            
+                            computation.Join();
+                        }
+            
+                        controller.Join();
+                    }
+                    
+                }
+            }
+            </code>
+            </example>
+            <seealso cref="T:Microsoft.Research.Naiad.Controller"/>
+            <seealso cref="T:Microsoft.Research.Naiad.NewController"/>
+            <seealso cref="T:Microsoft.Research.Naiad.Computation"/>
+            <seealso cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.OnNext``1(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection{``0},System.Collections.Generic.IEnumerable{``0})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1.OnNext(System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{`0}})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.Subscribe``1(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``0,Microsoft.Research.Naiad.Dataflow.Epoch},System.Action{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``0}[]})"/>
+            <seealso cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted`1"/>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1">
+            <summary>
+            A <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2"/> that can be modified by adding or removing records.
+            </summary>
+            <typeparam name="TRecord">The type of records in this collection.</typeparam>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1.OnCompleted(System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{`0}})">
+            <summary>
+            Introduces a batch of <paramref name="values"/> to this collection in a new <see cref="T:Microsoft.Research.Naiad.Dataflow.Epoch"/>, and signals that no more records will be added to or removed from this collection.
+            </summary>
+            <param name="values">The records to be added or removed.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1.OnNext(System.Collections.Generic.IEnumerable{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{`0}})">
+            <summary>
+            Introduces a batch of <paramref name="values"/> to this collection in a new <see cref="T:Microsoft.Research.Naiad.Dataflow.Epoch"/>.
+            </summary>
+            <param name="values">The records to be added or removed.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1.OnCompleted">
+            <summary>
+            Signals that no more records will be added to or removed from this collection.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTrace`1">
+            <summary>
+            Interface for a collection trace, which is a mapping from key indices (of type int)
+            to times (interned, of type int) to records (of time R), to weights (of type int).
+            
+            Typically the key indices are obtained from a Operator.KeyIndices structure, which
+            indicates which offsets in some internal data structure are used for the unprocessed,
+            processed, etc. regions of the collection trace.
+            
+            Typically the time indices are obtained from a LatticeInternTable object associated with
+            the enclosing operator.
+            </summary>
+            <typeparam name="R">Record type</typeparam>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTrace`1.Introduce(System.Int32@,`0,System.Int64,System.Int32)">
+            <summary>
+            Introduces the given record with the given weight at a particular (key, time).
+            
+            After executing this method, the keyIndex may have changed.
+            </summary>
+            <param name="keyIndex">The index for the key to update.</param>
+            <param name="record">The record to introduce.</param>
+            <param name="weight">The weight of the record to introduce.</param>
+            <param name="timeIndex">The index for the time to update.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTrace`1.IntroduceFrom(System.Int32@,System.Int32@,System.Boolean)">
+            <summary>
+            Introduces a batch of records from a source region in this collection trace (typically
+            corresponding to an unprocessed trace or a workspace) to a destination region.
+            
+            After executing this method, the destKeyIndex and sourceKeyIndex may have changed.
+            </summary>
+            <param name="destkeyIndex">The index for the destination, which will be updated.</param>
+            <param name="sourceKeyIndex">The index for the source for the the update.</param>
+            <param name="delete">If true, this will free the storage associated with the sourceKeyIndex.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTrace`1.SubtractStrictlyPriorDifferences(System.Int32@,System.Int32)">
+            <summary>
+            Updates dA[t] to be the negation of all strictly prior differences, where A is the given
+            key region.
+            
+            After executing this method, the keyIndex may have changed.
+            </summary>
+            <param name="keyIndex">The index for the key to update.</param>
+            <param name="timeIndex">The index for the time to update.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTrace`1.ZeroState(System.Int32@)">
+            <summary>
+            Sets the state associated with the given key to zero.
+            
+            After executing this method, the keyIndex may have changed.
+            </summary>
+            <param name="keyIndex">The index for the key to update.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTrace`1.IsZero(System.Int32@)">
+            <summary>
+            Returns true if the state associated with the given key is zero.
+            
+            After executing this method, the keyIndex may have changed.
+            </summary>
+            <param name="keyIndex">The index for the key to interrogate.</param>
+            <returns>True if the state associated with the given key is zero, otherwise false.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTrace`1.EnumerateCollectionAt(System.Int32,System.Int32,Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadList{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{`0}})">
+            <summary>
+            Enumerates the entire collection for the given key at the given time, and stores it in the
+            given list.
+            </summary>
+            <param name="keyIndex">The key to enumerate.</param>
+            <param name="timeIndex">The time at which to enumerate the collection.</param>
+            <param name="toFill">The list that will be populated with records in the collection.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTrace`1.EnumerateDifferenceAt(System.Int32,System.Int32,Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadList{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{`0}})">
+            <summary>
+            Enumerates the difference for the given key at the given time, and stores it in the given list.
+            </summary>
+            <param name="keyIndex">The key to enumerate.</param>
+            <param name="timeIndex">The time at which to enumerate the difference.</param>
+            <param name="toFill">The list that will be populated with records in the difference.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTrace`1.EnumerateTimes(System.Int32,Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadList{System.Int32})">
+            <summary>
+            Enumerates the set of times at which the given key changes, and stores it in the given list.
+            </summary>
+            <param name="keyIndex">The key to enumerate.</param>
+            <param name="timelist">The list that will be populated with the times at which the given key changes.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTrace`1.EnsureStateIsCurrentWRTAdvancedTimes(System.Int32@)">
+            <summary>
+            Updates the state associated with the given key to reflect times that may have been advanced (with a view to compacting their state).
+            </summary>
+            <param name="keyIndex">The index for the key to update.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTrace`1.Release">
+            <summary>
+            Called when the collection trace is released. Currently unused.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTrace`1.Compact">
+            <summary>
+            Applies eager compaction to the collection trace.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTraceImmutable`1">
+            <summary>
+            Represents a collection trace for a collection that is constant with respect to time.
+            </summary>
+            <typeparam name="R">The type of records stored in this trace.</typeparam>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.CollectionTraceWithHeap`1.IntroduceAsHashTable(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.OffsetLength@,`0,System.Int64)">
+            <summary>
+            Incorporates one element into an array.
+            </summary>
+            <param name="into">Target</param>
+            <param name="from">Source</param>
+            <param name="weight">Weight</param>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.CollectionTrace.OffsetLength">
+            <summary>
+            Munge together an index into the heaps array (length) and an offset
+            in that array (offset) into a single integer.
+            
+            The top bit is reserved for flagging merged state offsets.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.IntPair">
+            <summary>
+            An equatable pair of integers
+            </summary>
+        </member>
+        <member name="F:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.IntPair.s">
+            <summary>
+            The first integer.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.IntPair.t">
+            <summary>
+            The second integer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.IntPair.Equals(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.IntPair)">
+            <summary>
+            Returns <c>true</c> if and only if this and the other pair are element-wise equal.
+            </summary>
+            <param name="other">The other pair.</param>
+            <returns><c>true</c> if and only if this and the other pair are element-wise equal.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.IntPair.GetHashCode">
+            <summary>
+            Returns a hashcode for this pair.
+            </summary>
+            <returns>A hashcode for this pair.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.IntPair.ToString">
+            <summary>
+            Returns a string representation of this pair.
+            </summary>
+            <returns>A string representation of this pair.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.IntPair.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructs a new pair from the given integers.
+            </summary>
+            <param name="s">The first integer.</param>
+            <param name="t">The second integer.</param>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted`1">
+            <summary>
+            A record with a signed 64-bit weight, which corresponds to the multiplicity of the record
+            in a multiset.
+            </summary>
+            <typeparam name="TRecord">The type of the record.</typeparam>
+        </member>
+        <member name="F:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted`1.record">
+            <summary>
+            The record.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted`1.weight">
+            <summary>
+            The weight.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted`1.ToString">
+            <summary>
+            Returns a string representation of this weighted record.
+            </summary>
+            <returns>A string representation of this weighted record.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted`1.Equals(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{`0})">
+            <summary>
+            Returns <c>true</c> if and only if this and the <paramref name="other"/> object have equal records and weights.
+            </summary>
+            <param name="other">The other object.</param>
+            <returns><c>true</c> if and only if this and the <paramref name="other"/> object have equal records and weights.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted`1.#ctor(`0,System.Int64)">
+            <summary>
+            Constructs a new weighted object from the given <paramref name="record"/> and <paramref name="weight"/>.
+            </summary>
+            <param name="record">The record.</param>
+            <param name="weight">The weight.</param>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods">
+            <summary>
+            Extension methods for Differential Dataflow <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2"/> objects
+            and related types.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.ToWeighted``1(``0,System.Int64)">
+            <summary>
+            Converts a record to a weighted record with the given weight.
+            </summary>
+            <typeparam name="TRecord">The record type.</typeparam>
+            <param name="record">The record.</param>
+            <param name="weight">The weight.</param>
+            <returns>The weighted record.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.AssumePartitionedBy``3(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``0,``1},System.Linq.Expressions.Expression{System.Func{``0,``2}})">
+            <summary>
+            Instructs downstream operators to assume that the <paramref name="input"/> collection is
+            partitioned according to the given key selector.
+            </summary>
+            <typeparam name="TKey">The key type.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <typeparam name="TRecord">The type of the input records.</typeparam>
+            <param name="input">The input collection.</param>
+            <param name="keySelector">Function that extracts a key from each record.</param>
+            <returns>The input collection.</returns>
+            <remarks>This operator supplies metadata for the given collection that allows downstream operators
+            to optimize partitioning.
+            
+            If the input collection is not partitioned according to the given key selector, the behavior of 
+            downstream operators is undefined.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.AssumeImmutable``2(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``0,``1})">
+            <summary>
+            Indicates that the <paramref name="input"/> collection is immutable.
+            </summary>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <typeparam name="TRecord">The type of the input records.</typeparam>
+            <param name="input">The input collection.</param>
+            <returns>The input collection.</returns>
+            <remarks>This operator supplies metadata for the given collection that allows downstream operators
+            to optimize the data representation.
+            
+            If the input collection is not immutable, the behavior of downstream operators is undefined.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.AdjustTime``2(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``0,``1},System.Func{``0,``1,``1})">
+            <summary>
+            EXPERIMENTAL: Adjusts the timestamp on each record, under the requirement that the timestamp may only advance.
+            </summary>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <typeparam name="TRecord">The type of the input records.</typeparam>
+            <param name="input">The input collection.</param>
+            <param name="timeSelector">Function that maps a record and time to a new time for that record.</param>
+            <returns>See remarks.</returns>
+            <remarks>
+            This operator can be used in the inner loops of differential dataflow programs to "delay" the processing of
+            individual records.
+            </remarks>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.EnterLoop(Microsoft.Research.Naiad.Dataflow.Iteration.LoopContext{`1},System.Func{`0,System.Int32})"/>
+            <seealso cref="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2.GeneralFixedPoint``1(System.Func{Microsoft.Research.Naiad.Dataflow.Iteration.LoopContext{`1},Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,Microsoft.Research.Naiad.Dataflow.IterationIn{`1}},Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{`0,Microsoft.Research.Naiad.Dataflow.IterationIn{`1}}},System.Func{`0,System.Int32},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Int32)"/>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.SlidingWindow``1(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``0,Microsoft.Research.Naiad.Dataflow.Epoch},System.Int32)">
+            <summary>
+            Computes a sliding window over the given <paramref name="windowSize"/> number of <see cref="T:Microsoft.Research.Naiad.Dataflow.Epoch"/>s for the <paramref name="input"/> collection.
+            </summary>
+            <typeparam name="TRecord">The type of the input records.</typeparam>
+            <param name="input">The input collection</param>
+            <param name="windowSize">Number of epochs in which each record should appear.</param>
+            <returns>The collection that represents a sliding window over the input.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.SlidingWindow``1(Microsoft.Research.Naiad.Stream{``0,Microsoft.Research.Naiad.Dataflow.Epoch},System.Int32)">
+            <summary>
+            Computes a sliding window over the given <paramref name="windowSize"/> number of <see cref="T:Microsoft.Research.Naiad.Dataflow.Epoch"/>s for the <paramref name="input"/> collection.
+            </summary>
+            <typeparam name="TRecord">The type of the input records.</typeparam>
+            <param name="input">The input collection</param>
+            <param name="windowSize">Number of epochs in which each record should appear.</param>
+            <returns>The collection that represents a sliding window over the input.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.OnNext``1(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Adds records to an <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1"/>.
+            </summary>
+            <typeparam name="TRecord">The type of the records.</typeparam>
+            <param name="input">The input.</param>
+            <param name="records">The records.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.OnNext``1(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection{``0},System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Introduces several records to an <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1"/> with the same integer weight.
+            </summary>
+            <typeparam name="TRecord">The type of the records.</typeparam>
+            <param name="input">The input.</param>
+            <param name="records">The records.</param>
+            <param name="weight">Positive or negative weight for each record</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.OnNext``1(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection{``0},``0)">
+            <summary>
+            Adds a record to an <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1"/>.
+            </summary>
+            <typeparam name="TRecord">The type of the record.</typeparam>
+            <param name="input">The input.</param>
+            <param name="record">The record.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.OnNext``1(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection{``0},``0,System.Int32)">
+            <summary>
+            Introduces a record to an <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1"/> with an integer weight.
+            </summary>
+            <typeparam name="TRecord">The type of the record.</typeparam>
+            <param name="input">The input.</param>
+            <param name="record">The record.</param>
+            <param name="weight">Positive or negative weight for the record.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.OnNext``1(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection{``0})">
+            <summary>
+            Introduces no records to a <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1"/>.
+            </summary>
+            <remarks>
+            This extension method is typically used when a computation has multiple inputs, to "tick" the
+            inputs that have not changed in an epoch.
+            </remarks>
+            <typeparam name="TRecord">The type of records in the input.</typeparam>
+            <param name="input">The input.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.OnCompleted``1(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection{``0},Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``0})">
+            <summary>
+            Adds a single record with an integer weight and signals that the <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1"/> is complete.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="value">The record.</param>
+            <typeparam name="TRecord">The type of the record.</typeparam>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.OnCompleted``1(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Adds several records and signals that the <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1"/> is complete.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="values">The records.</param>
+            <typeparam name="TRecord">The type of the records.</typeparam>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.OnCompleted``1(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection{``0},``0)">
+            <summary>
+            Adds a single record and signals that the <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1"/> is complete.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="value">The record.</param>
+            <typeparam name="TRecord">The type of the records.</typeparam>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.Subscribe``1(Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection{``0,Microsoft.Research.Naiad.Dataflow.Epoch},System.Action{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``0}[]})">
+            <summary>
+            Registers a callback that will be invoked each time the collection changes with a list of weighted records.
+            </summary>
+            <typeparam name="TRecord">The type of the input records.</typeparam>
+            <param name="input">The input collection.</param>
+            <param name="action">An action that is called with the list of weighted records from each epoch.</param>
+            <returns>A <see cref="T:Microsoft.Research.Naiad.Subscription"/> object for synchronization.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.ExtensionMethods.AsCollection``2(Microsoft.Research.Naiad.Stream{Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Weighted{``0},``1},System.Boolean)">
+            <summary>
+            Converts a stream of weighted records to a differential dataflow <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2"/>.
+            </summary>
+            <typeparam name="TRecord">The type of the input records.</typeparam>
+            <typeparam name="TTime">The type of timestamp on each record.</typeparam>
+            <param name="stream">The input stream.</param>
+            <param name="immutable"><code>true</code> if and only if the stream is immutable.</param>
+            <returns>A <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.Collection`2"/> based on the given <paramref name="stream"/> of weighted records.</returns>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollectionExtensionMethods">
+            <summary>
+            Extension methods
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollectionExtensionMethods.NewInputCollection``1(Microsoft.Research.Naiad.Computation)">
+            <summary>
+            Creates a new <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1"/> in the given computation.
+            </summary>
+            <typeparam name="TRecord">The type of records in the collection.</typeparam>
+            <param name="computation">The graph manager for the computation.</param>
+            <returns>The new <see cref="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.InputCollection`1"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.LatticeInternTable`1.Advance(`0)">
+            <summary>
+            Joins the given time against all elements of reachable times, and returns the meet of these joined times.
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.LatticeInternTable`1.UpdateReachability(System.Collections.Generic.List{Microsoft.Research.Naiad.Runtime.Progress.Pointstamp})">
+            <summary>
+            Updates this intern table's redirection mapping to map each table entry to a hopefully-smaller
+            set of equivalent times, based on the givne set of versions that can reach this table's operator.
+            </summary>
+            <param name="causalTimes"></param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.LatticeInternTable`1.Intern(`0)">
+            <summary>
+            Returns an integer that uniquely identifies the given time in this table.
+            </summary>
+            <param name="time">A time T to intern</param>
+            <returns>An index in this table that uniquely corresponds to the given time.</returns>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadList`1">
+            <summary>
+            Growable array supporting direct array access.
+            </summary>
+            <typeparam name="S"></typeparam>
+        </member>
+        <member name="F:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadList`1.Array">
+            <summary>
+            Array containing data.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadList`1.EnsureCapacity(System.Int32)">
+            <summary>
+            Ensures that there is enough space for size records.
+            </summary>
+            <param name="size">minimum intended capacity</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadList`1.Clear">
+            <summary>
+            Resets the list to contain no elements.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadList`1.Add(`0)">
+            <summary>
+            Adds an element to the end of the list
+            </summary>
+            <param name="element">element to add</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadList`1.RemoveAtAndReturn(System.Int32)">
+            <summary>
+            Returns an element at a specific position, replacing it with the last element.
+            </summary>
+            <param name="index">index</param>
+            <returns>element at index</returns>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadList`1.#ctor(System.Int32)">
+            <summary>
+            Constructs an empty NaiadList of an initial size.
+            </summary>
+            <param name="size">initial size</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadList`1.Checkpoint(Microsoft.Research.Naiad.Serialization.NaiadWriter)">
+            <summary>
+            Writes the contents of the list to a NaiadWriter.
+            </summary>
+            <param name="writer">naiad writer</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadList`1.Restore(Microsoft.Research.Naiad.Serialization.NaiadReader)">
+            <summary>
+            Restores the contents of the list from a NaiadReader.
+            </summary>
+            <param name="reader">naiad reader</param>
+        </member>
+        <member name="P:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadList`1.Count">
+            <summary>
+            Gets and sets the count of valid elements.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadDataStreamProtocol`1">
+            <summary>
+            A set of callback methods that should be implemented to receive a stream that follows the
+            Naiad remote data protocol.
+            
+            The sequence of calls will be as follows:
+            
+            ((StartEpoch (Send*) EndEpoch)* Close)* (StartEpoch (Send*) EndEpoch)? Shutdown
+            </summary>
+            <typeparam name="T">The type of records in this data stream.</typeparam>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadDataStreamProtocol`1.StartEpoch">
+            <summary>
+            Called before sending a batch of records in the same epoch.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadDataStreamProtocol`1.Send(`0)">
+            <summary>
+            Called for each record in an epoch.
+            </summary>
+            <param name="record">The record being sent.</param>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadDataStreamProtocol`1.EndEpoch">
+            <summary>
+            Called after sending a batch of records in the same epoch.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadDataStreamProtocol`1.Close">
+            <summary>
+            Called at the end of a remote Naiad session.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.NaiadDataStreamProtocol`1.Shutdown">
+            <summary>
+            Called at the end of a remote Naiad session, and the final message sent to this object.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.BufferingDataStreamBroadcaster`1">
+            <summary>
+            A data stream protocol handler that will broadcast data of a particular type to a group of zero or more Sockets or other protocol handlers,
+            and aggregate the entire multiset of records seen so that they may be sent to new participants.
+            </summary>
+            <typeparam name="R">The type of records in this data stream.</typeparam>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.RemoteDictionary`3">
+            <summary>
+            A Naiad data stream protocol handler that presents the current aggregated state of a computation output
+            as a key-value dictionary.
+            </summary>
+            <typeparam name="R">The type of records in the data stream.</typeparam>
+            <typeparam name="K">The key type for the dictionary.</typeparam>
+            <typeparam name="V">The value type for the dictionary.</typeparam>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.RemoteDictionary`3.#ctor(System.Func{`0,`1},System.Func{`0,`2},System.Action{System.Action},System.Func{System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`1,`2}},System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`1,`2}}})">
+            <summary>
+            Constructs a new dictionary that processes the incoming data stream using the given selectors.
+            </summary>
+            <param name="keySelector">A function that extracts a key from an incoming record.</param>
+            <param name="valueSelector">A function that extracts a value from an incoming record.</param>
+            <param name="dispatcher">An action that invokes the given action using the appropriate dispatcher (i.e. on the appropriate thread).</param>
+            <param name="observedCollectionConverter">A function that transforms the collection, e.g. by reordering it.</param>
+        </member>
+        <member name="P:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.RemoteDictionary`3.Count">
+            <summary>
+            The number of unique keys in the dictionary.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.RemoteDictionary`3.FirstKey">
+            <summary>
+            The first key in the dictionary, according to the natural ordering on keys.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.RemoteDictionary`3.LastKey">
+            <summary>
+            The last key in the dictionary, according to the natural ordering on keys.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.RemoteDictionary`3.Item(`1)">
+            <summary>
+            Looks up the value associated with the given key.
+            </summary>
+            <param name="key">The key to look up.</param>
+            <returns>The value associated with the given key.</returns>
+        </member>
+        <member name="E:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.RemoteDictionary`3.CollectionChanged">
+            <summary>
+            This event fires at the end of an epoch where the collection has changed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.RemoteEnumerable`1">
+            <summary>
+            A Naiad data stream protocol handler that presents the current aggregated state of a computation output
+            as a collection of records.
+            </summary>
+            <typeparam name="R">The type of records in the data stream.</typeparam>
+        </member>
+        <member name="M:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.RemoteEnumerable`1.#ctor(System.Action{System.Action})">
+            <summary>
+            Constructs a new collection that transforms the incoming data stream into an enumerable collection of records.
+            </summary>
+            <param name="dispatcher">An action that invokes the given action using the appropriate dispatcher (i.e. on the appropriate thread).</param>
+        </member>
+        <member name="P:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.RemoteEnumerable`1.First">
+            <summary>
+            Returns the first item in this collection. Changes to this property will fire the
+            PropertyChanged event.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.RemoteEnumerable`1.CollectionChanged">
+            <summary>
+            Fired when the collection changes at the end of an epoch.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Research.Naiad.Frameworks.DifferentialDataflow.RemoteEnumerable`1.PropertyChanged">
+            <summary>
+            Fired when the .First property changes at the end of an epoch.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,63 @@
+var scored = Comment.all.collect(c | Sequence { c.id, c.score(), c.timestamp }).asSequence;
+Native('java.util.Collections').sort(scored, new Native('org.hawk.ttc2018.queries.ResultComparator'));
+return scored.subList(0, scored.size.min(3));
+
+operation Comment score(): Integer {
+  -- Cannot use global variables: doesn't work for IncUpdateQuery, which
+  -- simply runs score() without any context.
+  var index = 0;
+  var components : Sequence;
+  var stack : Sequence;
+  var indexes : Map;
+  var lowlinks : Map;
+  var onStack : Map;
+
+  for (user in self.likedBy) {
+    if (not indexes.containsKey(user.id)) {
+      user.strongconnect(self, index, components, stack, indexes, lowlinks, onStack);
+    }
+  }
+  return components.collect(component | component.size * component.size).sum();
+}
+
+-- Tarjan's strongly connected components algorithm
+operation User strongconnect(comment: Comment,
+    index: Integer, components: Sequence, stack: Sequence,
+    indexes: Map, lowlinks: Map, onStack: Map
+) {
+  indexes.put(self.id, index);
+  lowlinks.put(self.id, index);
+  index += 1;
+  stack.add(0, self);
+  onStack.put(self.id, true);
+  
+  for (friend in self.friends.select(f | comment.likedBy.contains(f))) {
+    if (not indexes.containsKey(friend.id)) {
+      friend.strongconnect(comment, index, components, stack, indexes, lowlinks, onStack);
+
+      var friendLL = lowlinks.get(friend.id);
+      var selfLL = lowlinks.get(self.id);
+      if (friendLL < selfLL) {
+        lowlinks.put(self.id, friendLL);
+      }
+    } else if (onStack.get(friend.id) = true) {
+      var friendIndex = indexes.get(friend.id);
+      var selfLL = lowlinks.get(self.id);
+      if (friendIndex < selfLL) {
+        lowlinks.put(self.id, friendIndex);
+      }
+    }
+  }
+
+  -- If this is a root node, pop stack and generate component
+  if (lowlinks.get(self.id) = indexes.get(self.id)) {
+    var component : Sequence;
+    var other;
+    while (not other.isDefined() or other.id <> self.id) {
+      other = stack.removeAt(0);
+      onStack.put(other.id, false);
+      component.add(other);
+    }
+    components.add(component);
+  }
+}

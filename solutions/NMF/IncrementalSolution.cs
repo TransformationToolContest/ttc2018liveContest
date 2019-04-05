@@ -16,7 +16,7 @@ namespace TTC2018.LiveContest
 
         protected string QueryResult()
         {
-            return string.Join('|', query.Value.Select(tuple => tuple.Key.Id));
+            return string.Join("|", query.Value.Select(tuple => tuple.Key.Id));
         }
 
         public override string Initial()
@@ -60,7 +60,7 @@ namespace TTC2018.LiveContest
 
         protected string QueryResult()
         {
-            return string.Join('|', query.Value.Select(tuple => tuple.Key.Id));
+            return string.Join("|", query.Value.Select(tuple => tuple.Key.Id));
         }
 
         public override string Initial()

@@ -1,0 +1,46 @@
+package queries
+
+import "https://www.transformation-tool-contest.eu/2018/social_media"
+
+// task 1
+pattern task1(post: Post, score: java Integer) {
+	Post(post);
+	commCount == count find commentOnPost(_comment, post);
+	likeCount == count find likesOnComments(post, _comment2, _user);
+	score == eval(10*commCount + likeCount);
+}
+
+pattern likesOnComments(post: Post, comment: Comment, user: User) {
+	find commentOnPost(comment, post);
+	User.likes(user, comment);
+}
+
+pattern commentOnPost(comment: Comment, post: Post)
+// use this if Comment.post() is guaranteed to point to the root Post of the Submission tree 
+// Comment.post(comment, post);
+{
+ 	Post.comments(post, comment);
+} or {
+	find commentOnPost(parentComment, post);
+	Submission.comments(parentComment, comment);
+}
+
+
+// task 2
+pattern task2(comment: Comment, score: java Integer) {
+	score == count find transitiveFriendLikers(comment, _user, _otherUser);
+}
+
+pattern transitiveFriendLikers(comment: Comment, user1: User, user2: User) {
+	User.likes(user1, comment);
+	user1 == user2;
+} or {
+	find mutuallyLikedComment(comment, user1, friend);
+	find transitiveFriendLikers(comment, friend, user2);
+}
+
+pattern mutuallyLikedComment(comment: Comment, user1: User, user2: User) {
+	User.friends(user1, user2);
+	User.likes(user1, comment);
+	User.likes(user2, comment);
+}

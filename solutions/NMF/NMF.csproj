@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFrameworks>netcoreapp2.0;netstandard2.0</TargetFrameworks>
     <AssemblyName>NMFSolution</AssemblyName>
     <RootNamespace>TTC2018.LiveContest</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="nmf-basics" Version="2.0.126" />
-    <PackageReference Include="NMF-Layering" Version="2.0.126" />
+    <PackageReference Include="NMF-Basics" Version="2.0.136" />
+    <PackageReference Include="NMF-Layering" Version="2.0.136" />
   </ItemGroup>
 
 </Project>
