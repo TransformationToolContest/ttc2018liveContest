@@ -3,20 +3,11 @@
     "Q1",
     "Q2"
   ],
-<<<<<<< HEAD
-  "Tools": ["YAMTL_Solution_B", "YAMTL_Solution_B_batch"],
-  "ChangeSets": [
-    "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"
-  ],
-  "Sequences": 20,
-  "Runs": 10,
-=======
-  "Tools": ["Hawk", "HawkIncUpdate", "HawkIncUpdateQuery"],
+  "Tools": ["EMFSolutionYAMTL", "EMFSolutionYAMTL_Batch"],
   "ChangeSets": [
     "1", "2", "4", "8", "16", "32", "64"
   ],
   "Sequences": 20,
   "Runs": 5,
->>>>>>> upstream/master
   "Timeout": 6000
 }

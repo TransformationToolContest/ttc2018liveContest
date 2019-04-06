@@ -1,0 +1,136 @@
+plugins {
+	id "org.xtext.xtend" version "2.0.4" 
+}
+
+apply plugin: 'application'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+
+group 'yamtl'
+version '0.0.3-SNAPSHOT'
+
+
+eclipse {
+	project {
+	  name = 'EMFSolutionYAMTL'
+	  buildCommand 'org.eclipse.jdt.core.javabuilder'
+	  buildCommand 'org.eclipse.ajdt.core.ajbuilder'
+	  buildCommand 'org.eclipse.buildship.core.gradleprojectbuilder'
+	  buildCommand 'org.eclipse.wst.common.project.facet.core.builder'
+
+	  natures 'org.eclipse.jdt.core.javanature',
+	  	'org.eclipse.ajdt.ui.ajnature',
+		'org.eclipse.buildship.core.gradleprojectnature',
+		'org.eclipse.wst.common.project.facet.core.nature',
+		'org.eclipse.xtext.ui.shared.xtextNature',
+		'org.eclipse.pde.PluginNature'
+	}
+}
+
+repositories {
+	maven {
+		url "https://github.com/yamtl/yamtl.github.io/raw/mvn-repo/mvn-repo/snapshot-repo"
+	}
+	maven {
+		url 'https://oss.sonatype.org/content/repositories/snapshots/'  // xtend 2.15.0-SNAPSHOT
+	}
+	maven{
+		url 'https://oss.sonatype.org/content/repositories/orgeclipseemf-1057' // emf 2.14 https://github.com/eclipse/xtext/issues/1233#issuecomment-404428887
+	}
+//	mavenLocal()
+	mavenCentral()
+    jcenter()
+}
+
+
+ext {
+	yamtlVersion = '0.0.3-SNAPSHOT'
+	xtendVersion = '2.17.1'
+	aspectJVersion = '1.9.3'
+}
+
+
+// XTEND: configures output directories for generated java
+xtend {
+	sourceSets {
+		main.xtendOutputDir = 'src/main/xtend-gen'
+		test.xtendOutputDir = 'src/test/xtend-gen'
+	}
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = [
+				'src/main/java',
+				'src/main/xtend-gen'
+			]
+		}
+	}
+}
+
+
+// ASPECTJ
+configurations {
+	ajc
+	aspects
+	aspectCompile
+	ajInpath
+	compile {
+		extendsFrom aspects
+	}
+}
+  
+compileJava {
+
+  doLast{
+	  ant.taskdef( resource:"org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties", classpath: configurations.ajc.asPath )
+	  ant.iajc(
+		  source:"11",
+		  target:"11",
+		  destDir: sourceSets.main.output.classesDirs[0].absolutePath, 
+		  inpath: configurations.ajInpath.asPath,
+		  maxmem: "512m",
+		  fork: "true",
+		  aspectPath:configurations.aspects.asPath,
+		  sourceRootCopyFilter:"**/.git/*,**/*.java",
+		  classpath:"${configurations.compile.asPath};${configurations.aspectCompile.asPath}"){
+		  sourceroots{
+			  sourceSets.main.java.srcDirs.each{
+				  pathelement(location:it.absolutePath)
+			  }
+		  }
+	  }
+  }
+}
+
+
+dependencies {
+	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$xtendVersion"
+	compile "yamtl:yamtl:${yamtlVersion}"
+	compile 'org.eclipse.emf:org.eclipse.emf.ecore.change:2.11+'
+	// AspectJ
+	ajc "org.aspectj:aspectjtools:${aspectJVersion}"
+	compile("org.aspectj:aspectjrt:${aspectJVersion}")
+	compile("org.aspectj:aspectjweaver:${aspectJVersion}")
+	aspects "yamtl:yamtl:${yamtlVersion}"
+	ajInpath "yamtl:yamtl:${yamtlVersion}"
+	ajInpath  "org.eclipse.emf:org.eclipse.emf.ecore:2.11+"
+}
+
+
+// create a single Jar with all dependencies
+// source: https://www.mkyong.com/gradle/gradle-create-a-jar-file-with-dependencies/
+task fatJar(type: Jar) {
+	manifest {
+		attributes 'LiveContestDriver': 'YAMTL solution',
+			'Implementation-Version': version,
+			'Main-Class': 'ttc2018.LiveContestDriver'
+	}
+	// remove signatures as we are not signing this jar to avoid security warnings
+	exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+	baseName = project.name + '-all'
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	with jar
+}
