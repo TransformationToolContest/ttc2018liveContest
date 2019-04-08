@@ -115,51 +115,23 @@ public abstract class Solution {
 
                         // TODO: remove workaround of duplicate nodes in changeset
                         if (!nodeByIdPropertyExists(Submission, id)) {
-                            String timestamp = line[2];
-                            String content = line[3];
-                            long submitterId = Long.parseLong(line[4]);
-
-                            Node submitter = findSingleNodeByIdProperty(User, submitterId);
-
-                            Label[] labels = line[0].equals(COMMENTS_CHANGE_TYPE) ? CommentLabelSet : PostLabelSet;
-
-                            Node submission = graphDb.createNode(labels);
-                            submission.setProperty(NODE_ID_PROPERTY, id);
-                            submission.setProperty(SUBMISSION_TIMESTAMP_PROPERTY, timestamp);
-                            submission.setProperty(SUBMISSION_CONTENT_PROPERTY, content);
-
-                            submission.createRelationshipTo(submitter, SUBMITTER);
-
-                            if (line[0].equals(COMMENTS_CHANGE_TYPE)) {
-                                long previousSubmissionId = Long.parseLong(line[5]);
-                                long rootPostId = Long.parseLong(line[6]);
-
-                                Node previousSubmission = findSingleNodeByIdProperty(Submission, previousSubmissionId);
-                                Node rootPost = findSingleNodeByIdProperty(Post, rootPostId);
-
-                                submission.createRelationshipTo(previousSubmission, COMMENT_TO);
-                                submission.createRelationshipTo(rootPost, ROOT_POST);
-                            }
+                            addSubmissionVertex(line);
                         }
                         break;
                     }
                     case "Friends": {
                         // add edges only once
-                        if (Long.parseLong(line[1]) <= Long.parseLong(line[2]))
-                            insertEdge(line, FRIEND, User, User);
+                        if (Long.parseLong(line[1]) <= Long.parseLong(line[2])) {
+                            addFriendEdge(line);
+                        }
                         break;
                     }
                     case "Likes": {
-                        insertEdge(line, LIKES, User, Comment);
+                        addLikesEdge(line);
                         break;
                     }
                     case "Users": {
-                        long id = Long.parseLong(line[1]);
-                        String name = line[2];
-
-                        Node user = graphDb.createNode(User);
-                        user.setProperty(NODE_ID_PROPERTY, id);
-                        user.setProperty(USER_NAME_PROPERTY, name);
+                        addUserVertex(line);
                         break;
                     }
                     default:
@@ -171,6 +143,68 @@ public abstract class Solution {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    protected Node addSubmissionVertex(String[] line) {
+        long id = Long.parseLong(line[1]);
+        String timestamp = line[2];
+        String content = line[3];
+        long submitterId = Long.parseLong(line[4]);
+
+        Node submitter = findSingleNodeByIdProperty(User, submitterId);
+
+        Label[] labels = line[0].equals(COMMENTS_CHANGE_TYPE) ? CommentLabelSet : PostLabelSet;
+
+        Node submission = graphDb.createNode(labels);
+        submission.setProperty(NODE_ID_PROPERTY, id);
+        submission.setProperty(SUBMISSION_TIMESTAMP_PROPERTY, timestamp);
+        submission.setProperty(SUBMISSION_CONTENT_PROPERTY, content);
+
+        submission.createRelationshipTo(submitter, SUBMITTER);
+
+        if (line[0].equals(COMMENTS_CHANGE_TYPE)) {
+            long previousSubmissionId = Long.parseLong(line[5]);
+            long rootPostId = Long.parseLong(line[6]);
+
+            Node previousSubmission = findSingleNodeByIdProperty(Submission, previousSubmissionId);
+            Node rootPost = findSingleNodeByIdProperty(Post, rootPostId);
+
+            submission.createRelationshipTo(previousSubmission, COMMENT_TO);
+            submission.createRelationshipTo(rootPost, ROOT_POST);
+
+            afterNewComment(submission);
+        } else {
+            afterNewPost(submission);
+        }
+
+        return submission;
+    }
+
+    protected void afterNewComment(Node comment) {
+
+    }
+
+    protected void afterNewPost(Node post) {
+
+    }
+
+    protected Relationship addFriendEdge(String[] line) {
+        return insertEdge(line, FRIEND, User, User);
+    }
+
+    protected Relationship addLikesEdge(String[] line) {
+        return insertEdge(line, LIKES, User, Comment);
+    }
+
+    protected Node addUserVertex(String[] line) {
+        long id = Long.parseLong(line[1]);
+        String name = line[2];
+
+        Node user = graphDb.createNode(User);
+        user.setProperty(NODE_ID_PROPERTY, id);
+        user.setProperty(USER_NAME_PROPERTY, name);
+
+        return user;
     }
 
     private Node findSingleNodeByIdProperty(Labels label, long id) {
@@ -185,14 +219,14 @@ public abstract class Solution {
         }
     }
 
-    private void insertEdge(String[] line, RelationshipTypes relationshipType, Labels sourceLabel, Labels targetLabel) {
+    private Relationship insertEdge(String[] line, RelationshipTypes relationshipType, Labels sourceLabel, Labels targetLabel) {
         long sourceId = Long.parseLong(line[1]);
         long targetId = Long.parseLong(line[2]);
 
         Node source = findSingleNodeByIdProperty(sourceLabel, sourceId);
         Node target = findSingleNodeByIdProperty(targetLabel, targetId);
 
-        source.createRelationshipTo(target, relationshipType);
+        return source.createRelationshipTo(target, relationshipType);
     }
 
     void afterUpdate() {
