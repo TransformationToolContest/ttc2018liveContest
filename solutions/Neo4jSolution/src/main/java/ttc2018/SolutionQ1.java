@@ -20,14 +20,24 @@ public class SolutionQ1 extends Solution {
         Query.Q1_RETRIEVE.setSolution(this);
     }
 
+    private boolean useScoreIndex = true;
+
+    public SolutionQ1 withoutScoreIndex() {
+        useScoreIndex = false;
+
+        return this;
+    }
+
     @Override
     protected void addConstraintsAndIndicesInTx(GraphDatabaseService dbConnection) {
         super.addConstraintsAndIndicesInTx(dbConnection);
 
-        dbConnection.schema()
-                .indexFor(Post)
-                .on(SUBMISSION_SCORE_PROPERTY)
-                .create();
+        if (useScoreIndex) {
+            dbConnection.schema()
+                    .indexFor(Post)
+                    .on(SUBMISSION_SCORE_PROPERTY)
+                    .create();
+        }
     }
 
     @Override

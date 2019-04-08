@@ -61,6 +61,9 @@ public class LiveContestDriver {
                 case Incremental:
                     solution = new SolutionQ1(ChangePath);
                     break;
+                case IncrementalQ1WithoutScoreIndex:
+                    solution = new SolutionQ1(ChangePath).withoutScoreIndex();
+                    break;
             }
         } else if (Query.contentEquals("Q2")) {
 
@@ -137,6 +140,7 @@ public class LiveContestDriver {
 
     enum SolutionModes {
         Batch,
-        Incremental
+        Incremental,
+        IncrementalQ1WithoutScoreIndex
     }
 }
