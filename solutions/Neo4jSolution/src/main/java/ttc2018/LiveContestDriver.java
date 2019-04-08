@@ -54,16 +54,23 @@ public class LiveContestDriver {
         ChangeSet = System.getenv("ChangeSet");
         Query = System.getenv("Query").toUpperCase();
         if (Query.contentEquals("Q1")) {
-            if (SolutionModes.Incremental.equals(Mode)) {
-                solution = new SolutionQ1(ChangePath);
-            } else {
-                solution = new SolutionQ1Batch(ChangePath);
+            switch (Mode) {
+                case Batch:
+                    solution = new SolutionQ1Batch(ChangePath);
+                    break;
+                case Incremental:
+                    solution = new SolutionQ1(ChangePath);
+                    break;
             }
         } else if (Query.contentEquals("Q2")) {
-            if (SolutionModes.Incremental.equals(Mode)) {
-                solution = new SolutionQ2(ChangePath);
-            } else {
-                solution = new SolutionQ2Batch(ChangePath);
+
+            switch (Mode) {
+                case Batch:
+                    solution = new SolutionQ2Batch(ChangePath);
+                    break;
+                case Incremental:
+                    solution = new SolutionQ2(ChangePath);
+                    break;
             }
         } else {
             throw new Exception("Query is unknown");
