@@ -9,12 +9,8 @@ import java.nio.file.Paths;
 
 public enum Query {
     Q1_BATCH(Paths.get("q1.cypher")),
-    //    Q1_INITIAL(Paths.get("q1-initial.cypher")),
-//    Q1_UPDATE(Paths.get("q1-update.cypher")),
-//    Q1_RETRIEVE(Paths.get("q1-retrieve.cypher")),
-    Q1_INITIAL(""),
-    Q1_UPDATE(""),
-    Q1_RETRIEVE(""),
+    Q1_INITIAL(Paths.get("q1-initial.cypher")),
+    Q1_RETRIEVE(Paths.get("q1-retrieve.cypher")),
 
     Q2_BATCH(Paths.get("q2.cypher")),
     //    Q2_CF_INITIAL(Paths.get("q2-cf-initial.cypher")),

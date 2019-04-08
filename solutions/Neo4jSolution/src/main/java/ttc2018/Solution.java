@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
@@ -89,6 +90,30 @@ public abstract class Solution {
         pb.redirectOutput(ProcessBuilder.Redirect.appendTo(log));
         Process p = pb.start();
         p.waitFor();
+
+        // DB initialization
+        GraphDatabaseService dbConnection = getDbConnection();
+
+        // add uniqueness constraints and indices
+        try (Transaction tx = dbConnection.beginTx()) {
+            addConstraintsAndIndicesInTx(dbConnection);
+
+            tx.success();
+        }
+
+        try (Transaction tx = dbConnection.beginTx()) {
+            // TODO: meaningful timeout
+            dbConnection.schema().awaitIndexesOnline(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        }
+    }
+
+    protected void addConstraintsAndIndicesInTx(GraphDatabaseService dbConnection) {
+        for (Labels label : Labels.values()) {
+            dbConnection.schema()
+                    .constraintFor(label)
+                    .assertPropertyIsUnique(NODE_ID_PROPERTY)
+                    .create();
+        }
     }
 
     void beforeUpdate(File changes) {
@@ -101,6 +126,7 @@ public abstract class Solution {
     public static final String USER_NAME_PROPERTY = "name";
     public static final String SUBMISSION_TIMESTAMP_PROPERTY = "timestamp";
     public static final String SUBMISSION_CONTENT_PROPERTY = "content";
+    public static final String SUBMISSION_SCORE_PROPERTY = "score";
 
     public void processChangeSet(File changeSet) {
         try (Stream<String> stream = Files.lines(changeSet.toPath());
@@ -172,19 +198,19 @@ public abstract class Solution {
             submission.createRelationshipTo(previousSubmission, COMMENT_TO);
             submission.createRelationshipTo(rootPost, ROOT_POST);
 
-            afterNewComment(submission);
+            afterNewComment(submission, submitter, previousSubmission, rootPost);
         } else {
-            afterNewPost(submission);
+            afterNewPost(submission, submitter);
         }
 
         return submission;
     }
 
-    protected void afterNewComment(Node comment) {
+    protected void afterNewComment(Node comment, Node submitter, Node previousSubmission, Node rootPost) {
 
     }
 
-    protected void afterNewPost(Node post) {
+    protected void afterNewPost(Node post, Node submitter) {
 
     }
 
