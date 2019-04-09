@@ -127,6 +127,7 @@ public abstract class Solution {
     public static final String SUBMISSION_TIMESTAMP_PROPERTY = "timestamp";
     public static final String SUBMISSION_CONTENT_PROPERTY = "content";
     public static final String SUBMISSION_SCORE_PROPERTY = "score";
+    public static final String FRIEND_OVERLAY_EDGE_COMMENT_ID_PROPERTY = "commentId";
 
     public void processChangeSet(File changeSet) {
         try (Stream<String> stream = Files.lines(changeSet.toPath());

@@ -7,5 +7,7 @@ public enum RelationshipTypes implements RelationshipType {
     COMMENT_TO,
     LIKES,
     SUBMITTER,
-    FRIEND
+    FRIEND,
+    // extra types
+    FRIEND_WHO_LIKES_COMMENT
 }

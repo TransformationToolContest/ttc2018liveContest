@@ -13,18 +13,10 @@ public enum Query {
     Q1_RETRIEVE(Paths.get("q1-retrieve.cypher")),
 
     Q2_BATCH(Paths.get("q2.cypher")),
-    //    Q2_CF_INITIAL(Paths.get("q2-cf-initial.cypher")),
-//    Q2_CF_UPDATE(Paths.get("q2-cf-update.cypher")),
-//    Q2_CFC_PREPARE(Paths.get("q2-cfc-prepare.cypher")),
-//    Q2_CFC_UPDATE_INIT(Paths.get("q2-cfc-update-during-initial.cypher")),
-//    Q2_CFC_UPDATE_MAINTAIN(Paths.get("q2-cfc-update-during-update.cypher")),
-//    Q2_RETRIEVE(Paths.get("q2-retrieve.cypher")),
-    Q2_CF_INITIAL(""),
-    Q2_CF_UPDATE(""),
-    Q2_CFC_PREPARE(""),
-    Q2_CFC_UPDATE_INIT(""),
-    Q2_CFC_UPDATE_MAINTAIN(""),
-    Q2_RETRIEVE(""),
+    Q2_INITIAL_OVERLAY_GRAPH(Paths.get("q2-initial-overlay-graph.cypher")),
+    Q2_DELETE_OVERLAY_GRAPH("MATCH ()-[friendLikes:FRIEND_WHO_LIKES_COMMENT]->() DELETE friendLikes"),
+    Q2_INITIAL_SCORE(Paths.get("q2-initial-score.cypher")),
+    Q2_RETRIEVE(Paths.get("q2-retrieve.cypher")),
     ;
 
     public static final String ID_COLUMN_NAME = "id";
