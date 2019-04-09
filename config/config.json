@@ -3,7 +3,7 @@
     "Q1",
     "Q2"
   ],
-  "Tools": ["Hawk", "HawkIncUpdate", "HawkIncUpdateQuery"],
+  "Tools": ["EMFSolutionYAMTL", "EMFSolutionYAMTL_Batch"],
   "ChangeSets": [
     "1", "2", "4", "8", "16", "32", "64"
   ],

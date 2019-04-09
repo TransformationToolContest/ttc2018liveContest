@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+        <listEntry value="/EMFSolutionYAMTL_batch/src/main/xtend-gen/ttc2018/LiveContestDriver.java"/>
+    </listAttribute>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+        <listEntry value="1"/>
+    </listAttribute>
+    <mapAttribute key="org.eclipse.debug.core.environmentVariables">
+        <mapEntry key="ChangePath" value="../../models/1"/>
+        <mapEntry key="ChangeSet" value="1"/>
+        <mapEntry key="Query" value="Q1"/>
+        <mapEntry key="RunIndex" value="Debug"/>
+        <mapEntry key="Sequences" value="4"/>
+        <mapEntry key="Tool" value="EMFSolutionYAMTL_batch"/>
+    </mapAttribute>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_CLASSPATH_ONLY_JAR" value="false"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+    <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.eclipse.buildship.core.classpathprovider"/>
+    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="ttc2018.LiveContestDriver"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="EMFSolutionYAMTL_batch"/>
+</launchConfiguration>
