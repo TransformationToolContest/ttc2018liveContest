@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -50,9 +51,13 @@ public abstract class Solution {
     }
 
     String runReadQuery(Query q) {
+        return runReadQuery(q, Collections.emptyMap());
+    }
+
+    String runReadQuery(Query q, Map<String, Object> parameters) {
         List<String> result = new ArrayList<>();
 
-        try (Result rs = q.execute()) {
+        try (Result rs = q.execute(parameters)) {
             for (Map<String, Object> row : org.neo4j.helpers.collection.Iterators.asIterable(rs)) {
                 String id = row.get(ID_COLUMN_NAME).toString();
 
@@ -68,7 +73,11 @@ public abstract class Solution {
     }
 
     void runVoidQuery(Query q) {
-        try (Result rs = q.execute()) {
+        runVoidQuery(q, Collections.emptyMap());
+    }
+
+    void runVoidQuery(Query q, Map<String, Object> parameters) {
+        try (Result rs = q.execute(parameters)) {
             rs.hasNext();
         }
     }
@@ -127,6 +136,7 @@ public abstract class Solution {
     public static final String SUBMISSION_TIMESTAMP_PROPERTY = "timestamp";
     public static final String SUBMISSION_CONTENT_PROPERTY = "content";
     public static final String SUBMISSION_SCORE_PROPERTY = "score";
+    public static final long SUBMISSION_SCORE_DEFAULT = 0L;
     public static final String FRIEND_OVERLAY_EDGE_COMMENT_ID_PROPERTY = "commentId";
 
     public void processChangeSet(File changeSet) {

@@ -53,7 +53,7 @@ public class SolutionQ1 extends Solution {
     protected void afterNewPost(Node post, Node submitter) {
         super.afterNewPost(post, submitter);
 
-        post.setProperty(SUBMISSION_SCORE_PROPERTY, 0L);
+        post.setProperty(SUBMISSION_SCORE_PROPERTY, SUBMISSION_SCORE_DEFAULT);
     }
 
     @Override

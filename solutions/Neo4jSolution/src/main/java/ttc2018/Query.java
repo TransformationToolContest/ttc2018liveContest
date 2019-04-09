@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 
 public enum Query {
     Q1_BATCH(Paths.get("q1.cypher")),
@@ -16,6 +17,9 @@ public enum Query {
     Q2_INITIAL_OVERLAY_GRAPH(Paths.get("q2-initial-overlay-graph.cypher")),
     Q2_DELETE_OVERLAY_GRAPH(Paths.get("q2-delete-overlay-graph.cypher")),
     Q2_INITIAL_SCORE(Paths.get("q2-initial-score.cypher")),
+    Q2_UPDATE_OVERLAY_GRAPH_FRIEND_EDGE(Paths.get("q2-update-overlay-graph-friend-edge.cypher")),
+    Q2_UPDATE_OVERLAY_GRAPH_LIKES_EDGE(Paths.get("q2-update-overlay-graph-likes-edge.cypher")),
+    Q2_RECALCULATE_SCORE(Paths.get("q2-recalculate-score.cypher")),
     Q2_RETRIEVE(Paths.get("q2-retrieve.cypher")),
     ;
 
@@ -42,8 +46,8 @@ public enum Query {
         this.solution = solution;
     }
 
-    public Result execute() {
-        return solution.getDbConnection().execute(queryText);
+    public Result execute(Map<String, Object> parameters) {
+        return solution.getDbConnection().execute(queryText, parameters);
     }
 }
 

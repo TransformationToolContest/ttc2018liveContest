@@ -1,9 +1,13 @@
 package ttc2018;
 
+import com.google.common.collect.ImmutableMap;
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static ttc2018.Labels.Comment;
 
@@ -13,8 +17,10 @@ public class SolutionQ2 extends Solution {
         super(DataPath);
 
         Query.Q2_INITIAL_OVERLAY_GRAPH.setSolution(this);
-        Query.Q2_DELETE_OVERLAY_GRAPH.setSolution(this);
         Query.Q2_INITIAL_SCORE.setSolution(this);
+        Query.Q2_UPDATE_OVERLAY_GRAPH_FRIEND_EDGE.setSolution(this);
+        Query.Q2_UPDATE_OVERLAY_GRAPH_LIKES_EDGE.setSolution(this);
+        Query.Q2_RECALCULATE_SCORE.setSolution(this);
         Query.Q2_RETRIEVE.setSolution(this);
     }
 
@@ -40,12 +46,41 @@ public class SolutionQ2 extends Solution {
     }
 
     @Override
+    protected void afterNewComment(Node comment, Node submitter, Node previousSubmission, Node rootPost) {
+        super.afterNewComment(comment, submitter, previousSubmission, rootPost);
+
+        comment.setProperty(SUBMISSION_SCORE_PROPERTY, SUBMISSION_SCORE_DEFAULT);
+    }
+
+    @Override
+    protected Relationship addFriendEdge(String[] line) {
+        Relationship friendEdge = super.addFriendEdge(line);
+        newFriendEdges.add(friendEdge);
+
+        return friendEdge;
+    }
+
+    @Override
+    protected Relationship addLikesEdge(String[] line) {
+        Relationship likesEdge = super.addLikesEdge(line);
+        newLikesEdges.add(likesEdge);
+
+        return likesEdge;
+    }
+
+    private ArrayList<Relationship> newFriendEdges;
+    private ArrayList<Relationship> newLikesEdges;
+
+    @Override
     public String Update(File changes) {
+        newFriendEdges = new ArrayList<>();
+        newLikesEdges = new ArrayList<>();
+
         beforeUpdate(changes);
 
-        runVoidQuery(Query.Q2_DELETE_OVERLAY_GRAPH);
-        runVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
-        runVoidQuery(Query.Q2_INITIAL_SCORE);
+        runVoidQuery(Query.Q2_UPDATE_OVERLAY_GRAPH_FRIEND_EDGE, ImmutableMap.of("friendEdges", newFriendEdges));
+        runVoidQuery(Query.Q2_UPDATE_OVERLAY_GRAPH_LIKES_EDGE, ImmutableMap.of("likesEdges", newLikesEdges));
+        runVoidQuery(Query.Q2_RECALCULATE_SCORE);
         String result = runReadQuery(Query.Q2_RETRIEVE);
 
         afterUpdate();
