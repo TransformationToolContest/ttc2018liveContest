@@ -14,7 +14,7 @@ public enum Query {
 
     Q2_BATCH(Paths.get("q2.cypher")),
     Q2_INITIAL_OVERLAY_GRAPH(Paths.get("q2-initial-overlay-graph.cypher")),
-    Q2_DELETE_OVERLAY_GRAPH("MATCH ()-[friendLikes:FRIEND_WHO_LIKES_COMMENT]->() DELETE friendLikes"),
+    Q2_DELETE_OVERLAY_GRAPH(Paths.get("q2-delete-overlay-graph.cypher")),
     Q2_INITIAL_SCORE(Paths.get("q2-initial-score.cypher")),
     Q2_RETRIEVE(Paths.get("q2-retrieve.cypher")),
     ;
