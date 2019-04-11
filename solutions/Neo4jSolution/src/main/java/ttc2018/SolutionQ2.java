@@ -78,8 +78,11 @@ public class SolutionQ2 extends Solution {
 
         beforeUpdate(changes);
 
-        runVoidQuery(Query.Q2_UPDATE_OVERLAY_GRAPH_FRIEND_EDGE, ImmutableMap.of("friendEdges", newFriendEdges));
-        runVoidQuery(Query.Q2_UPDATE_OVERLAY_GRAPH_LIKES_EDGE, ImmutableMap.of("likesEdges", newLikesEdges));
+        if (!newFriendEdges.isEmpty())
+            runVoidQuery(Query.Q2_UPDATE_OVERLAY_GRAPH_FRIEND_EDGE, ImmutableMap.of("friendEdges", newFriendEdges));
+        if (!newLikesEdges.isEmpty())
+            runVoidQuery(Query.Q2_UPDATE_OVERLAY_GRAPH_LIKES_EDGE, ImmutableMap.of("likesEdges", newLikesEdges));
+
         runVoidQuery(Query.Q2_RECALCULATE_SCORE);
         String result = runReadQuery(Query.Q2_RETRIEVE);
 
