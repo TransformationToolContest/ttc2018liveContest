@@ -5,11 +5,12 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EContentAdapter
 import org.eclipse.papyrus.aof.core.AOFFactory
 import org.eclipse.papyrus.aof.core.IBox
+import org.eclipse.papyrus.aof.core.IMetaClass
 import org.eclipse.papyrus.aof.core.ISet
 
 class AllContents {
-	// warning: does not preserve ordering 
-	static def <C> _allContents(EObject it, Class<C> type) {
+	// warning: does not preserve ordering
+	static def <C> _allContents(EObject it, IMetaClass<C> type) {
 		val ret = AOFFactory.INSTANCE.<C>createSet
 		// adding the EContentAdapter automatically does the initialization
 		eAdapters.add(new EContentAdapter {

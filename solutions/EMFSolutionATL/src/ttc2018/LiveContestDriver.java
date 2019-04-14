@@ -2,13 +2,16 @@ package ttc2018;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import Changes.ChangesPackage;
 import Changes.ModelChangeSet;
@@ -68,7 +71,15 @@ public class LiveContestDriver {
     	stopwatch = System.nanoTime();
 
     	repository = new ResourceSetImpl();
-		repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+		repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new Resource.Factory() {
+			@Override
+			public Resource createResource(URI uri) {
+				XMIResourceImpl ret = new XMIResourceImpl(uri);
+				ret.setIntrinsicIDToEObjectMap(new HashMap<>());
+				ret.getDefaultLoadOptions().put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, true);
+				return ret;
+			}
+		});
 		repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 		repository.getPackageRegistry().put(SocialNetworkPackage.eINSTANCE.getNsURI(), SocialNetworkPackage.eINSTANCE);
 		repository.getPackageRegistry().put(ChangesPackage.eINSTANCE.getNsURI(), ChangesPackage.eINSTANCE);
@@ -81,11 +92,23 @@ public class LiveContestDriver {
         Query = System.getenv("Query").toUpperCase();
         if (Query.contentEquals("Q1"))
         {
-            solution = new SolutionQ1();
+        	if(Tool.equals("EMFSolutionATL")) {
+        		solution = new SolutionQ1();
+        	} else if(Tool.equals("EMFSolutionATL-Incremental")){
+        		solution = new SolutionQ1ATOL();
+        	} else {
+        		throw new IllegalArgumentException("Unknown tool: " + Tool);
+        	}
         }
         else if (Query.contentEquals("Q2"))
         {
-            solution = new SolutionQ2();
+        	if(Tool.equals("EMFSolutionATL")) {
+        		solution = new SolutionQ2();
+        	} else if(Tool.equals("EMFSolutionATL-Incremental")){
+        		solution = new SolutionQ2ATOL();
+        	} else {
+        		throw new IllegalArgumentException("Unknown tool: " + Tool);
+        	}
         }
         else
         {
@@ -107,6 +130,7 @@ public class LiveContestDriver {
     static void Update(int iteration)
     {
         ModelChangeSet changes = (ModelChangeSet)loadFile(String.format("change%02d.xmi", iteration));
+        EcoreUtil.resolveAll(changes);
         stopwatch = System.nanoTime();
         String result = solution.Update(changes);
         stopwatch = System.nanoTime() - stopwatch;
@@ -122,11 +146,15 @@ public class LiveContestDriver {
     		iterationStr = Integer.toString(iteration);
     	}
         System.out.println(String.format("%s;%s;%s;%s;%s;%s;Time;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(stopwatch)));
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
+	if("true".equals(System.getenv("NoGC"))) {
+		// nothing to do
+	} else {
+		Runtime.getRuntime().gc();
+		Runtime.getRuntime().gc();
+		Runtime.getRuntime().gc();
+		Runtime.getRuntime().gc();
+		Runtime.getRuntime().gc();
+	}
         long memoryUsed = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         System.out.println(String.format("%s;%s;%s;%s;%s;%s;Memory;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(memoryUsed)));
         if (result != null)
