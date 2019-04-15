@@ -1,12 +1,12 @@
 package ttc2018
 
+import org.eclipse.papyrus.aof.core.AOFFactory
 import org.eclipse.papyrus.aof.core.IBox
 import org.eclipse.papyrus.aof.core.IOne
 import org.eclipse.papyrus.aof.core.impl.operation.Operation
 import org.eclipse.papyrus.aof.core.impl.utils.DefaultObserver
-import org.eclipse.papyrus.aof.core.AOFFactory
 
-class Take<E> extends Operation<E> {
+class Drop<E> extends Operation<E> {
 
 	val IBox<E> sourceBox
 	val int n
@@ -14,61 +14,65 @@ class Take<E> extends Operation<E> {
 	new(IBox<E> sourceBox, int n) {
 		this.sourceBox = sourceBox
 		this.n = n
-		var i = 0
-		val iter = sourceBox.iterator
-		while(i < n && iter.hasNext()) {
-			result.add(iter.next)
-			i++
+		val l = sourceBox.length
+		for(var i = n ; i < l ; i++) {
+			result.add(sourceBox.get(i))
 		}
 		sourceBox.registerObservation(new DefaultObserver<E> {
 			override added(int index, E element) {
-				if(index < n) {
-					result.add(index, element)
-					if(result.length == n + 1) {
-						result.removeAt(n)
+				val b = sourceBox.length - n
+				if(index >= n) {
+					result.add(index - n, element)
+					if(result.length > b) {
+						result.removeAt(0)
 					}
+				} else if(result.length < b) {
+					result.add(0, sourceBox.get(n))
 				}
 			}
 			override moved(int newIndex, int oldIndex, E element) {
-				if(newIndex < n) {
-					if(oldIndex < n) {
-						result.move(newIndex, oldIndex)
+				if(newIndex >= n) {
+					if(oldIndex >= n) {
+						result.move(newIndex - n, oldIndex - n)
 					} else {
-						result.add(newIndex, sourceBox.get(newIndex))
-						if(result.length == n + 1) {
-							result.removeAt(n)
-						}
+						result.add(newIndex - n + 1, sourceBox.get(newIndex))
+						result.removeAt(0)
 					}
 				} else {
-					if(oldIndex < n) {
-						removed(oldIndex, element)
+					if(oldIndex >= n) {
+						result.removeAt(oldIndex - n)
+						result.add(0, sourceBox.get(n))
 					} else {
 						// nothing to do
 					}
 				}
 			}
 			override removed(int index, E element) {
-				if(index < n) {
-					result.removeAt(index)
-					if(sourceBox.length > n - 1) {
-						result.add(sourceBox.get(n - 1))
+				val b = sourceBox.length - n
+				if(index >= n) {
+					result.removeAt(index - n)
+					if(result.length < b) {
+						result.add(0, sourceBox.get(n - 1))
 					}
+				} else if(b >= 0 && result.length > b) {
+					result.removeAt(0)
 				}
 			}
 			override replaced(int index, E newElement, E oldElement) {
-				if(index < n) {
-					result.set(index, newElement)
+//				val b = sourceBox.length - n
+				if(index >= n) {
+					result.set(index - n, newElement)
 				}
 			}
 		})
 	}
 
 	override isOptional() {
-		sourceBox.isOptional
+		n === 0 || sourceBox.isOptional
 	}
 
 	override isSingleton() {
-		n === 1
+		sourceBox.isSingleton
 	}
 
 	override isOrdered() {
@@ -93,10 +97,10 @@ class Take<E> extends Operation<E> {
 			bs.inspect("bs: ")
 			val n = i
 			println('''n=«n»''')
-			val cs = new Take(bs, n).result
+			val cs = new Drop(bs, n).result
 			cs.inspect("cs: ")
 			new BoxFuzzer(bs, [BoxFuzzer.rand.nextInt], [
-				SortedBy.assertEquals(bs.take(n), cs)
+				SortedBy.assertEquals(bs.drop(n), cs)
 			], '''[«i» with n=«n»]''')
 		}
 	}

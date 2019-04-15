@@ -1,0 +1,43 @@
+plugins {
+	id "org.xtext.xtend" version "2.0.4"
+}
+
+repositories {
+	mavenCentral()
+	flatDir {
+		dirs	'libs',
+			// generated code for the SocialNetwork metamodel must be imported so that our AOFAccessors active annotation can work
+			"../EMFSolutionTemplate"   // TODO: change relative folder dependency to EMFSolutionTemplate into a project dependency?
+	}
+}
+
+dependencies {
+	compile name: 'aof'
+	compile name: 'solution'
+	compile 'org.eclipse.xtend:org.eclipse.xtend.lib:2.12.0'
+}
+
+apply plugin: 'eclipse'
+apply plugin: 'java'
+apply plugin: 'application'
+
+xtext.version = "2.12.0"
+
+apply plugin: 'java-library-distribution'
+
+xtend {
+	sourceSets {
+		main.xtendOutputDir = 'xtend-gen'
+	}
+}
+
+mainClassName = 'ttc2018.LiveContestDriver'
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src', 'src-gen']
+		}
+	}
+}
+

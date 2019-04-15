@@ -52,10 +52,7 @@ class SolutionQ2 extends Solution {
 		
 		val comps = layering.CreateLayers(c.likedBy)
 		val score = comps.map[size*size].reduce[$0+$1] ?: 0
-			
-		if (c.id == '406915' || c.id == '725662' || c.id == '406503') {
-			println("c.id=" + c.id + " c.score=" + score)
-		}
+
 		return score
 	}
 }

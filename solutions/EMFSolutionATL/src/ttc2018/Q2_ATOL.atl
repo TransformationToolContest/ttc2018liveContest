@@ -1,0 +1,21 @@
+-- @atlcompiler emftvm
+-- @path SN=/EMFSolutionATL/social_network.ecore
+library Q2;
+
+helper context SN!SocialNetworkRoot def: topComments : Collection(String) =
+	self.allContents(SN!Comment)->sortedBy(e |
+		e.timestamp
+	)->sortedBy(e |
+		e.score
+	)->subSequence(1, 3)->collect(e | e.id);
+
+helper context Sequence(SN!User) def: squaredSize : Integer =
+	self->size()->collect(e | e * e);
+
+helper context SN!Comment def : score : Integer =
+	self.likedBy->connectedComponents(u |
+		u.friends->intersection(self.likedBy)
+	)->collect(e |
+		e.squaredSize
+	)->sum();
+

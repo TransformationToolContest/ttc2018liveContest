@@ -1,5 +1,6 @@
 package ttc2018
 
+import org.eclipse.papyrus.aof.core.AOFFactory
 import org.eclipse.papyrus.aof.core.IBox
 import org.eclipse.papyrus.aof.core.impl.operation.Operation
 import org.eclipse.papyrus.aof.core.impl.utils.DefaultObserver
@@ -45,5 +46,15 @@ class Sum extends Operation<Integer> {
 
 	override getResultDefautElement() {
 		0
+	}
+
+	def static void main(String[] args) {
+		val bs = AOFFactory.INSTANCE.createSequence(1, 2, 3, 4, 5, 6)
+		bs.inspect("bs: ")
+		val cs = new Sum(bs).result
+		cs.inspect("cs: ")
+		new BoxFuzzer(bs, [BoxFuzzer.rand.nextInt], [
+			SortedBy.assertEquals("", bs.reduce[$0+$1]?:0, cs.get(0))
+		])
 	}
 }

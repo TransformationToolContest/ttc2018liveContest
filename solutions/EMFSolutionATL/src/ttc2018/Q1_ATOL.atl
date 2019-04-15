@@ -1,0 +1,14 @@
+-- @atlcompiler emftvm
+-- @path SN=/EMFSolutionATL/social_network.ecore
+library Q1;
+
+helper context SN!SocialNetworkRoot def: topPosts : Collection(String) =
+	self.posts->sortedBy(e |
+		e.timestamp
+	)->sortedBy(e |
+		e.score
+	)->subSequence(1, 3)->collect(e | e.id);
+
+helper context SN!Post def : score : Integer =
+	let allComments : Collection(SN!Comment) = self.allContents(SN!Comment) in
+	10 * allComments->size() + allComments->collect(e | e.likedBy->size())->sum();

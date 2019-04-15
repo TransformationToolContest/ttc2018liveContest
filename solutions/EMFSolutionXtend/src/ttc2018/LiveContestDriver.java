@@ -2,13 +2,16 @@ package ttc2018;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import Changes.ChangesPackage;
 import Changes.ModelChangeSet;
@@ -68,7 +71,15 @@ public class LiveContestDriver {
     	stopwatch = System.nanoTime();
 
     	repository = new ResourceSetImpl();
-		repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+		repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new Resource.Factory() {
+			@Override
+			public Resource createResource(URI uri) {
+				XMIResourceImpl ret = new XMIResourceImpl(uri);
+				ret.setIntrinsicIDToEObjectMap(new HashMap<>());
+				ret.getDefaultLoadOptions().put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, true);
+				return ret;
+			}
+		});
 		repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 		repository.getPackageRegistry().put(SocialNetworkPackage.eINSTANCE.getNsURI(), SocialNetworkPackage.eINSTANCE);
 		repository.getPackageRegistry().put(ChangesPackage.eINSTANCE.getNsURI(), ChangesPackage.eINSTANCE);
