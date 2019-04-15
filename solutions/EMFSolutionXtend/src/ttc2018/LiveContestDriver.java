@@ -118,6 +118,7 @@ public class LiveContestDriver {
     static void Update(int iteration)
     {
         ModelChangeSet changes = (ModelChangeSet)loadFile(String.format("change%02d.xmi", iteration));
+        EcoreUtil.resolveAll(changes);
         stopwatch = System.nanoTime();
         String result = solution.Update(changes);
         stopwatch = System.nanoTime() - stopwatch;
