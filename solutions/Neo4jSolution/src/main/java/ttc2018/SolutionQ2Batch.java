@@ -26,6 +26,9 @@ public class SolutionQ2Batch extends Solution {
             case Neo4jSolutionBatch_algo:
                 q2Batch = Query.Q2_BATCH_ALGO;
                 break;
+            case Neo4jSolutionBatch_algo_faulty_without_zero_score:
+                q2Batch = Query.Q2_BATCH_ALGO_FAULTY_WITHOUT_ZERO_SCORE;
+                break;
             default:
                 throw new IllegalArgumentException();
         }
@@ -35,13 +38,14 @@ public class SolutionQ2Batch extends Solution {
     public enum Tool {
         Neo4jSolutionBatch,
         Neo4jSolutionBatch_algo,
+        Neo4jSolutionBatch_algo_faulty_without_zero_score,
     }
 
     @Override
     protected void initializeDb() throws KernelException {
         super.initializeDb();
 
-        if (tool == Tool.Neo4jSolutionBatch_algo)
+        if (tool == Tool.Neo4jSolutionBatch_algo || tool == Tool.Neo4jSolutionBatch_algo_faulty_without_zero_score)
             registerProcedure(graphDb, UnionFindProc.class);
     }
 
