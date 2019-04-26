@@ -13,15 +13,25 @@ import static ttc2018.Labels.Comment;
 
 public class SolutionQ2 extends Solution {
 
-    public SolutionQ2(String DataPath) throws IOException, InterruptedException {
+    private Tool tool;
+
+    public SolutionQ2(String DataPath, String toolName) throws IOException, InterruptedException {
         super(DataPath);
+
+        tool = Tool.valueOf(toolName);
 
         Query.Q2_INITIAL_OVERLAY_GRAPH.setSolution(this);
         Query.Q2_INITIAL_SCORE.setSolution(this);
         Query.Q2_UPDATE_OVERLAY_GRAPH_FRIEND_EDGE.setSolution(this);
         Query.Q2_UPDATE_OVERLAY_GRAPH_LIKES_EDGE.setSolution(this);
         Query.Q2_RECALCULATE_SCORE.setSolution(this);
+        Query.Q2_RECALCULATE_SCORE_V2.setSolution(this);
         Query.Q2_RETRIEVE.setSolution(this);
+    }
+
+    public enum Tool {
+        Neo4jSolution,
+        Neo4jSolution_new_score,
     }
 
     @Override
@@ -83,7 +93,16 @@ public class SolutionQ2 extends Solution {
         if (!newLikesEdges.isEmpty())
             runVoidQuery(Query.Q2_UPDATE_OVERLAY_GRAPH_LIKES_EDGE, ImmutableMap.of("likesEdges", newLikesEdges));
 
-        runVoidQuery(Query.Q2_RECALCULATE_SCORE);
+        switch (tool) {
+            case Neo4jSolution:
+                runVoidQuery(Query.Q2_RECALCULATE_SCORE);
+                break;
+            case Neo4jSolution_new_score:
+                runVoidQuery(Query.Q2_RECALCULATE_SCORE_V2);
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
         String result = runReadQuery(Query.Q2_RETRIEVE);
 
         afterUpdate();

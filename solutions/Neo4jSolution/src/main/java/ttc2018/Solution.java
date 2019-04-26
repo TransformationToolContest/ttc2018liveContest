@@ -3,7 +3,10 @@ package ttc2018;
 import com.google.common.collect.Iterators;
 import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.internal.kernel.api.exceptions.KernelException;
 import org.neo4j.io.fs.FileUtils;
+import org.neo4j.kernel.impl.proc.Procedures;
+import org.neo4j.kernel.internal.GraphDatabaseAPI;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,21 +46,43 @@ public abstract class Solution {
 
     public GraphDatabaseService getDbConnection() {
         if (graphDb == null) {
-            graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(DB_DIR);
-            Runtime.getRuntime().addShutdownHook(new Thread(graphDb::shutdown));
+            try {
+                initializeDb();
+            } catch (KernelException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         return graphDb;
+    }
+
+    protected void initializeDb() throws KernelException {
+        graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(DB_DIR);
+        Runtime.getRuntime().addShutdownHook(new Thread(graphDb::shutdown));
+    }
+
+    // https://github.com/neo4j-contrib/neo4j-apoc-procedures/blob/3.5/src/test/java/apoc/util/TestUtil.java#L95
+    public static void registerProcedure(GraphDatabaseService db, Class<?>... procedures) throws KernelException {
+        Procedures proceduresService = ((GraphDatabaseAPI) db).getDependencyResolver().resolveDependency(Procedures.class);
+        for (Class<?> procedure : procedures) {
+            proceduresService.registerProcedure(procedure, true);
+//            proceduresService.registerFunction(procedure, true);
+//            proceduresService.registerAggregationFunction(procedure, true);
+        }
     }
 
     String runReadQuery(Query q) {
         return runReadQuery(q, Collections.emptyMap());
     }
 
+    protected static final int resultLimit = 3;
+
     String runReadQuery(Query q, Map<String, Object> parameters) {
         List<String> result = new ArrayList<>();
 
         try (Result rs = q.execute(parameters)) {
+
+            int rowCount = 0;
             for (Map<String, Object> row : org.neo4j.helpers.collection.Iterators.asIterable(rs)) {
                 String id = row.get(ID_COLUMN_NAME).toString();
 
@@ -66,6 +91,10 @@ public abstract class Solution {
                 } else {
                     result.add(id);
                 }
+
+                ++rowCount;
+                if (rowCount >= resultLimit)
+                    break;
             }
 
             return String.join("|", result);

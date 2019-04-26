@@ -14,12 +14,14 @@ public enum Query {
     Q1_RETRIEVE(Paths.get("q1-retrieve.cypher")),
 
     Q2_BATCH(Paths.get("q2.cypher")),
+    Q2_BATCH_ALGO(Paths.get("q2-algo.cypher")),
     Q2_INITIAL_OVERLAY_GRAPH(Paths.get("q2-initial-overlay-graph.cypher")),
     Q2_DELETE_OVERLAY_GRAPH(Paths.get("q2-delete-overlay-graph.cypher")),
     Q2_INITIAL_SCORE(Paths.get("q2-initial-score.cypher")),
     Q2_UPDATE_OVERLAY_GRAPH_FRIEND_EDGE(Paths.get("q2-update-overlay-graph-friend-edge.cypher")),
     Q2_UPDATE_OVERLAY_GRAPH_LIKES_EDGE(Paths.get("q2-update-overlay-graph-likes-edge.cypher")),
     Q2_RECALCULATE_SCORE(Paths.get("q2-recalculate-score.cypher")),
+    Q2_RECALCULATE_SCORE_V2(Paths.get("q2-recalculate-score-v2.cypher")),
     Q2_RETRIEVE(Paths.get("q2-retrieve.cypher")),
     ;
 

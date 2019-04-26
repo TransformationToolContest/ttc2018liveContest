@@ -66,10 +66,10 @@ public class LiveContestDriver {
 
             switch (Mode) {
                 case Batch:
-                    solution = new SolutionQ2Batch(ChangePath);
+                    solution = new SolutionQ2Batch(ChangePath, Tool);
                     break;
                 case Incremental:
-                    solution = new SolutionQ2(ChangePath);
+                    solution = new SolutionQ2(ChangePath, Tool);
                     break;
             }
         } else {
