@@ -32,6 +32,11 @@ public class ModelUtils {
         return repository.getResource(URI.createFileURI(ModelUtils.getResourcePath(size, resourceName, ResourceType.XMI).getCanonicalPath()), true);
     }
 
+    static Resource getXMIResource(String basePath, String resourceName) throws IOException {
+        ensureRepositoryInit();
+        return repository.getResource(URI.createFileURI(ModelUtils.getResourcePath(basePath, resourceName, ResourceType.XMI).getCanonicalPath()), true);
+    }
+
     static SocialNetworkRoot loadSocialNetworkFile(int size) throws IOException {
         String resourceName = "initial";
 
@@ -39,10 +44,24 @@ public class ModelUtils {
         return (SocialNetworkRoot) resource.getContents().get(0);
     }
 
+    static SocialNetworkRoot loadSocialNetworkFile(String basePath) throws IOException {
+        String resourceName = "initial";
+
+        Resource resource = getXMIResource(basePath, resourceName);
+        return (SocialNetworkRoot) resource.getContents().get(0);
+    }
+
     static ModelChangeSet loadChangeSetFile(int size, int sequence) throws IOException {
         String resourceName = String.format("change%1$02d", sequence);
 
         Resource resource = getXMIResource(size, resourceName);
+        return (ModelChangeSet) resource.getContents().get(0);
+    }
+
+    static ModelChangeSet loadChangeSetFile(String basePath, int sequence) throws IOException {
+        String resourceName = String.format("change%1$02d", sequence);
+
+        Resource resource = getXMIResource(basePath, resourceName);
         return (ModelChangeSet) resource.getContents().get(0);
     }
 
