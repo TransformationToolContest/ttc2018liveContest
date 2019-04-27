@@ -2,7 +2,7 @@ package ttc2018.sqlmodel;
 
 import java.util.Date;
 
-public class Posts extends SqlCollectionBase<Post> {
+public class Posts extends SqlCollectionBase<Long, Post> {
     public void addPost(String id, String ts, String content, String submitterid) {
         addPost(id, toDate(ts), content, submitterid);
     }
@@ -12,9 +12,12 @@ public class Posts extends SqlCollectionBase<Post> {
     }
 
     public void addPost(long id, Date ts, String content, long submitterid) {
-        elements.add(new Post(id, ts, content, submitterid));
+        Long k = Long.valueOf(id);
+        if (!elements.containsKey(k)) {
+            elements.put(k, new Post(id, ts, content, submitterid));
 
-        printCSV(id, ts, content, submitterid);
+            printCSV(id, ts, content, submitterid);
+        }
     }
 
     @Override

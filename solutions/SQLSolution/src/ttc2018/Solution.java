@@ -140,7 +140,7 @@ public abstract class Solution {
 	}
 
 	void beforeUpdateCommon() {
-		for(SqlCollectionBase<SqlRowBase> c: modelChangeProcessor.getCollections()) {
+		for(SqlCollectionBase<Object, SqlRowBase> c: modelChangeProcessor.getCollections()) {
 			PreparedStatement insert = c.getSqlTable().getInsertPreparedStatement();
 			int cnt = 0;
 			try {
