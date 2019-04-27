@@ -15,7 +15,7 @@ public abstract class SqlCollectionBase<K, V extends SqlRowBase> implements Iter
 
     public abstract SqlTable getSqlTable();
 
-    public static final boolean DO_PRINT = true;
+    public static final boolean DO_PRINT = (System.getenv("DO_PRINT")!=null)?"true".equals(System.getenv("DO_PRINT")):false;
     public static final String SEPARATOR = "|";
 
     PrintStream out = System.out;

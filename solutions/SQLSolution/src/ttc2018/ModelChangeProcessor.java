@@ -23,7 +23,7 @@ public class ModelChangeProcessor {
         int size = args.length>0?new Integer(args[0]):16;
         int sequences = args.length>1?new Integer(args[1]):2;
 
-        PrintStream ps;
+        PrintStream ps = null;
         for (int i=1; i<=sequences; i++) {
             if (SqlCollectionBase.DO_PRINT) {
                 ps = new PrintStream(ModelUtils.getChangesetCSVFile(size, i));
