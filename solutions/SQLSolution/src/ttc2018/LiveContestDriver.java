@@ -42,8 +42,6 @@ public class LiveContestDriver {
 	private final static boolean REPORT_MEMORY_USAGE = false; // the SQL solution uses PostgreSQL, thus Java memory usage is not meaningful
     private final static boolean USE_CHANGES_XMI = false; // determines whether we use the XMI representation of changes file is to be used. Note: for the initial load, we always use the CSV representation
 
-    private static ResourceSet repository;
-
     private static String ChangePath;
     private static String RunIndex;
     private static int Sequences;
@@ -59,22 +57,9 @@ public class LiveContestDriver {
 
     private static Solution solution;
 
-    private static Object loadFile(String path) throws IOException {
-    	Resource mRes = repository.getResource(URI.createFileURI(new File(ChangePath + "/" + path).getCanonicalPath()), true);
-    	return mRes.getContents().get(0);
-    }
-
     static void Initialize() throws Exception
     {
     	stopwatch = System.nanoTime();
-
-    	if (USE_CHANGES_XMI) {
-            repository = new ResourceSetImpl();
-            repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
-            repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
-            repository.getPackageRegistry().put(SocialNetworkPackage.eINSTANCE.getNsURI(), SocialNetworkPackage.eINSTANCE);
-            repository.getPackageRegistry().put(ChangesPackage.eINSTANCE.getNsURI(), ChangesPackage.eINSTANCE);
-        }
 
         ChangePath = System.getenv("ChangePath");
         RunIndex = System.getenv("RunIndex");
@@ -111,7 +96,7 @@ public class LiveContestDriver {
     {
         stopwatch = System.nanoTime();
         if (USE_CHANGES_XMI) {
-            solution.setSocialNetwork((SocialNetworkRoot) loadFile("initial.xmi"), repository);
+            solution.setSocialNetwork(ModelUtils.loadSocialNetworkFile(ChangePath));
         }
         solution.loadData();
         stopwatch = System.nanoTime() - stopwatch;
@@ -128,7 +113,7 @@ public class LiveContestDriver {
 
     static void UpdateFromXMI(int iteration) throws IOException
     {
-        ModelChangeSet changes = (ModelChangeSet)loadFile(String.format("change%02d.xmi", iteration));
+        ModelChangeSet changes = ModelUtils.loadChangeSetFile(ChangePath, iteration);
         stopwatch = System.nanoTime();
         String result = solution.Update(changes);
         stopwatch = System.nanoTime() - stopwatch;

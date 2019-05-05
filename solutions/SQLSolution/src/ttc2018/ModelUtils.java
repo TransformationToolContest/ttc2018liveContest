@@ -8,11 +8,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 public class ModelUtils {
     public static final String modelBasePath = "../../models/";
@@ -32,6 +34,11 @@ public class ModelUtils {
         return repository.getResource(URI.createFileURI(ModelUtils.getResourcePath(size, resourceName, ResourceType.XMI).getCanonicalPath()), true);
     }
 
+    static Resource getXMIResource(String basePath, String resourceName) throws IOException {
+        ensureRepositoryInit();
+        return repository.getResource(URI.createFileURI(ModelUtils.getResourcePath(basePath, resourceName, ResourceType.XMI).getCanonicalPath()), true);
+    }
+
     static SocialNetworkRoot loadSocialNetworkFile(int size) throws IOException {
         String resourceName = "initial";
 
@@ -39,10 +46,24 @@ public class ModelUtils {
         return (SocialNetworkRoot) resource.getContents().get(0);
     }
 
+    static SocialNetworkRoot loadSocialNetworkFile(String basePath) throws IOException {
+        String resourceName = "initial";
+
+        Resource resource = getXMIResource(basePath, resourceName);
+        return (SocialNetworkRoot) resource.getContents().get(0);
+    }
+
     static ModelChangeSet loadChangeSetFile(int size, int sequence) throws IOException {
         String resourceName = String.format("change%1$02d", sequence);
 
         Resource resource = getXMIResource(size, resourceName);
+        return (ModelChangeSet) resource.getContents().get(0);
+    }
+
+    static ModelChangeSet loadChangeSetFile(String basePath, int sequence) throws IOException {
+        String resourceName = String.format("change%1$02d", sequence);
+
+        Resource resource = getXMIResource(basePath, resourceName);
         return (ModelChangeSet) resource.getContents().get(0);
     }
 
@@ -61,7 +82,15 @@ public class ModelUtils {
     protected static void ensureRepositoryInit() {
         if (repository == null) {
             repository = new ResourceSetImpl();
-            repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new XMIResourceFactoryImpl());
+            repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xmi", new Resource.Factory() {
+                @Override
+                public Resource createResource(URI uri) {
+                    XMIResourceImpl ret = new XMIResourceImpl(uri);
+                    ret.setIntrinsicIDToEObjectMap(new HashMap<>());
+                    ret.getDefaultLoadOptions().put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, true);
+                    return ret;
+                }
+            });
             repository.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
             repository.getPackageRegistry().put(SocialNetworkPackage.eINSTANCE.getNsURI(), SocialNetworkPackage.eINSTANCE);
             repository.getPackageRegistry().put(ChangesPackage.eINSTANCE.getNsURI(), ChangesPackage.eINSTANCE);
