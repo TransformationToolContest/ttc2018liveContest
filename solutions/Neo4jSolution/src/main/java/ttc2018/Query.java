@@ -15,6 +15,7 @@ public enum Query {
 
     Q2_BATCH(Paths.get("q2.cypher")),
     Q2_BATCH_ALGO(Paths.get("q2-algo.cypher")),
+    Q2_BATCH_ALGO_WITH_FILTERED_EDGES(Paths.get("q2-algo-with-filtered-edges.cypher")),
     Q2_INITIAL_OVERLAY_GRAPH(Paths.get("q2-initial-overlay-graph.cypher")),
     Q2_DELETE_OVERLAY_GRAPH(Paths.get("q2-delete-overlay-graph.cypher")),
     Q2_INITIAL_SCORE(Paths.get("q2-initial-score.cypher")),
