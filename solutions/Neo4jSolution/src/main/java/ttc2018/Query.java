@@ -18,10 +18,13 @@ public enum Query {
     Q2_INITIAL_OVERLAY_GRAPH(Paths.get("q2-initial-overlay-graph.cypher")),
     Q2_DELETE_OVERLAY_GRAPH(Paths.get("q2-delete-overlay-graph.cypher")),
     Q2_INITIAL_SCORE(Paths.get("q2-initial-score.cypher")),
+    Q2_INITIAL_COMPONENTS_AND_SCORE(Paths.get("q2-initial-components-and-score.cypher")),
+    Q2_INITIAL_ZERO_SCORE(Paths.get("q2-initial-zero-score.cypher")),
     Q2_UPDATE_OVERLAY_GRAPH_FRIEND_EDGE(Paths.get("q2-update-overlay-graph-friend-edge.cypher")),
     Q2_UPDATE_OVERLAY_GRAPH_LIKES_EDGE(Paths.get("q2-update-overlay-graph-likes-edge.cypher")),
+    Q2_MERGE_COMPONENTS_AFTER_FRIEND_EDGE(Paths.get("q2-merge-components-after-friend-edge.cypher")),
+    Q2_MERGE_COMPONENTS_AFTER_LIKES_EDGE(Paths.get("q2-merge-components-after-likes-edge.cypher")),
     Q2_RECALCULATE_SCORE(Paths.get("q2-recalculate-score.cypher")),
-    Q2_RECALCULATE_SCORE_V2(Paths.get("q2-recalculate-score-v2.cypher")),
     Q2_RETRIEVE(Paths.get("q2-retrieve.cypher")),
     ;
 

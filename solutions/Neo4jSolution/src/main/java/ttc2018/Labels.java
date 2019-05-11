@@ -9,6 +9,7 @@ public enum Labels implements Label {
     User,
     // extra labels
     Dirty,
+    Component,
     ;
 
     public static final Label[] PostLabelSet = new Label[]{Submission, Post};

@@ -10,4 +10,6 @@ public enum RelationshipTypes implements RelationshipType {
     FRIEND,
     // extra types
     FRIEND_WHO_LIKES_COMMENT,
+    USER,
+    COMPONENT,
 }
