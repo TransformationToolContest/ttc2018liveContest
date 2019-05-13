@@ -60,20 +60,16 @@ df$View = factor(df$View, levels=c("Q1", "Q2"))
 df$PhaseName = factor(df$PhaseName, levels=c("Load", "Initial", "Update"))
 ```
 
-## Aggregate
+## Summary plot
 
-```{r aggregate, echo=FALSE}
+```{r summary plot, echo=FALSE}
 df.aggregated = ddply(
   .data = df,
   .variables = c("Tool", "View", "ChangeSet", "PhaseName", "MetricName"),
   #.fun = colwise(mean),
   .fun = colwise(gm_mean)
 )
-```
 
-## Plot
-
-```{r plot}
 xbreaks = unique(df.aggregated$ChangeSet)
 xlabels = paste(xbreaks, sep = "")
 yaxis = nice_y_axis()
@@ -88,4 +84,31 @@ ggplot(df.aggregated, aes(x=ChangeSet, y=MetricValue, fill=Tool)) +
     ylab("Execution time [s]") +
     theme_bw()
 ggsave(file="results.pdf", width=250, height=170, units="mm")
+```
+
+## Plot of update iterations
+
+```{r update plot}
+df = df[df$PhaseName == "Update", ]
+df.aggregated = ddply(
+  .data = df,
+  .variables = c("Tool", "View", "ChangeSet", "PhaseName", "Iteration", "MetricName"),
+  #.fun = colwise(mean),
+  .fun = colwise(gm_mean)
+)
+
+xbreaks = unique(df.aggregated$ChangeSet)
+xlabels = paste(xbreaks, sep = "")
+yaxis = nice_y_axis()
+ggplot(df.aggregated, aes(x=Iteration, y=MetricValue, fill=Tool)) +
+    geom_point(aes(col=Tool, shape=Tool)) +
+    geom_line(aes(col=Tool, group=Tool)) +
+    scale_x_log10(breaks=xbreaks) +  
+    scale_y_log10(breaks=yaxis$ybreaks, labels=yaxis$ylabels) +
+    scale_shape_manual(values = seq(0,24)) +
+    facet_grid(ChangeSet~View, drop=FALSE) +
+    xlab("Model size") +
+    ylab("Execution time [s]") +
+    theme_bw()
+ggsave(file="results-iterations.pdf", width=250, height=750, units="mm")
 ```
