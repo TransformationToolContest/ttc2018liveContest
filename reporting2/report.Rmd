@@ -1,3 +1,9 @@
+---
+title: "report"
+output: html_document
+---
+
+```{r setup, include=FALSE}
 library(tidyverse)
 library(plyr)
 
@@ -21,9 +27,16 @@ nice_y_axis = function() {
   
   list(ybreaks = ybreaks, ylabels = ylabels)
 }
+```
 
-## loading data
+## TTC results
 
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+```{r loading and cleaning, echo=FALSE}
 df = read_delim("output.csv", delim = ";")
 df = df[df$MetricName == "Time", ]
 df = df[df$PhaseName != "Initialization", ]
@@ -40,7 +53,11 @@ df = df[df$Tool != "Naiad-1-Thread" &
 #df$tool = factor(df$tool, levels=c(pgx, postgres, sparksee, sparql))
 df$View = factor(df$View, levels=c("Q1", "Q2"))
 df$PhaseName = factor(df$PhaseName, levels=c("Load", "Initial", "Update"))
+```
 
+## Aggregate
+
+```{r aggregate}
 df.aggregated = ddply(
   .data = df,
   .variables = c("Tool", "View", "ChangeSet", "PhaseName", "MetricName"),
@@ -48,7 +65,11 @@ df.aggregated = ddply(
   .fun = colwise(gm_mean),
   .progress = "text"
 )
+```
 
+## Plot
+
+```{r plot}
 xbreaks = unique(df.aggregated$ChangeSet)
 xlabels = paste(xbreaks, sep = "")
 yaxis = nice_y_axis()
@@ -63,3 +84,4 @@ ggplot(df.aggregated, aes(x=ChangeSet, y=MetricValue, fill=Tool)) +
     ylab("Execution time [s]") +
     theme_bw()
 ggsave(file="results.pdf", width=250, height=170, units="mm")
+```
