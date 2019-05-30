@@ -5,7 +5,7 @@ mainClassName = "ttc2018.LiveContestDriver"
 
 ext {
     guavaVersion = '22.0'
-    neo4jVersion = '3.5.4'
+    neo4jVersion = '3.5.6'
     neo4jAlgoVersion = '3.5.4.0'
     neo4jApocVersion = '3.5.0.2'
 }
