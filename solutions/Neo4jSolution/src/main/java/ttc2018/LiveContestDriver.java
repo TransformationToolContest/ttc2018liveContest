@@ -6,21 +6,21 @@ import java.io.IOException;
 public class LiveContestDriver {
 
     public static void main(String[] args) {
-        try {
-            if (args.length == 0) {
-                Mode = SolutionModes.Incremental;
-            } else {
-                Mode = SolutionModes.valueOf(args[0]);
-            }
+        if (args.length == 0) {
+            Mode = SolutionModes.Incremental;
+        } else {
+            Mode = SolutionModes.valueOf(args[0]);
+        }
 
-            Initialize();
+        try {
+            Solution solution = Initialize();
 
             // TODO: define which phase should contain DB and indexes initialization
-            Load();
+            Load(solution);
 
-            Initial();
+            Initial(solution);
             for (int i = 1; i <= Sequences; i++) {
-                UpdateFromCSV(i);
+                UpdateFromCSV(solution, i);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,9 +42,8 @@ public class LiveContestDriver {
 
     private static long stopwatch;
 
-    private static Solution solution;
-
-    static void Initialize() throws Exception {
+    static Solution Initialize() throws Exception {
+        Solution solution = null;
         stopwatch = System.nanoTime();
 
         ChangePath = System.getenv("ChangePath");
@@ -78,9 +77,11 @@ public class LiveContestDriver {
 
         stopwatch = System.nanoTime() - stopwatch;
 //        Report(BenchmarkPhase.Initialization, -1, null);
+
+        return solution;
     }
 
-    static void Load() throws IOException, InterruptedException {
+    static void Load(Solution solution) throws IOException, InterruptedException {
         stopwatch = System.nanoTime();
 
         solution.loadData();
@@ -89,14 +90,14 @@ public class LiveContestDriver {
         Report(BenchmarkPhase.Load, -1, null);
     }
 
-    static void Initial() {
+    static void Initial(Solution solution) {
         stopwatch = System.nanoTime();
         String result = solution.Initial();
         stopwatch = System.nanoTime() - stopwatch;
         Report(BenchmarkPhase.Initial, -1, result);
     }
 
-    static void UpdateFromCSV(int iteration) throws IOException {
+    static void UpdateFromCSV(Solution solution, int iteration) throws IOException {
         File changes = ModelUtils.getChangesetCSVFile(ChangePath, iteration);
         stopwatch = System.nanoTime();
         String result = solution.Update(changes);
