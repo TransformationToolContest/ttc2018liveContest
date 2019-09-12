@@ -11,20 +11,19 @@ import org.neo4j.kernel.internal.GraphDatabaseAPI;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import static apoc.Pools.*;
 import static ttc2018.Labels.*;
 import static ttc2018.Query.ID_COLUMN_NAME;
 import static ttc2018.Query.SCORE_COLUMN_NAME;
 import static ttc2018.RelationshipTypes.*;
 
-public abstract class Solution {
+public abstract class Solution implements AutoCloseable {
     // see: getDbConnection()
     GraphDatabaseService graphDb;
 
@@ -58,7 +57,24 @@ public abstract class Solution {
 
     protected void initializeDb() throws KernelException {
         graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(DB_DIR);
-        Runtime.getRuntime().addShutdownHook(new Thread(graphDb::shutdown));
+        Runtime.getRuntime().addShutdownHook(new Thread(this::close));
+    }
+
+    @Override
+    public void close() {
+        if (graphDb != null) {
+            // bypass APOC bug
+            // based on https://github.com/neo4j-contrib/neo4j-apoc-procedures/commit/d6fd3c07dc62e67453305d4b6d5df72a3eceea12
+            for (ExecutorService service : Arrays.asList(SINGLE, DEFAULT, SCHEDULED)) {
+                try {
+                    service.shutdownNow();
+                    service.awaitTermination(10, TimeUnit.SECONDS);
+                } catch (Exception ignore) {
+                }
+            }
+            graphDb.shutdown();
+            graphDb = null;
+        }
     }
 
     // https://github.com/neo4j-contrib/neo4j-apoc-procedures/blob/3.5/src/test/java/apoc/util/TestUtil.java#L95

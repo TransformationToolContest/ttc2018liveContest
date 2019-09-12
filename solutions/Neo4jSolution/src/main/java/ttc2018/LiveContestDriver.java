@@ -12,8 +12,7 @@ public class LiveContestDriver {
             Mode = SolutionModes.valueOf(args[0]);
         }
 
-        try {
-            Solution solution = Initialize();
+        try (Solution solution = Initialize()) {
 
             // TODO: define which phase should contain DB and indexes initialization
             Load(solution);
