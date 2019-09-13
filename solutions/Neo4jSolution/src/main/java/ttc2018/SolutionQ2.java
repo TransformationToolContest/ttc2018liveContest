@@ -1,9 +1,11 @@
 package ttc2018;
 
 import apoc.create.Create;
+import apoc.path.PathExplorer;
 import apoc.periodic.Periodic;
 import apoc.refactor.GraphRefactoring;
 import com.google.common.collect.ImmutableMap;
+import org.neo4j.cypher.CypherExecutionException;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -12,6 +14,9 @@ import org.neo4j.internal.kernel.api.exceptions.KernelException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static ttc2018.Labels.Comment;
 
@@ -54,7 +59,7 @@ public class SolutionQ2 extends Solution {
                 registerProcedure(graphDb, GraphRefactoring.class);
                 break;
             case Neo4jSolution_explicit_component_periodic:
-                registerProcedure(graphDb, GraphRefactoring.class, Create.class, Periodic.class);
+                registerProcedure(graphDb, GraphRefactoring.class, Create.class, Periodic.class, PathExplorer.class);
                 break;
         }
     }
@@ -88,7 +93,13 @@ public class SolutionQ2 extends Solution {
             case Neo4jSolution_explicit_component_periodic:
                 runVoidQuery(Query.Q2_INITIAL_DYNAMIC_LIKES_LABELS);
 
-                runVoidQuery(Query.Q2_INITIAL_COMPONENTS_PERIODIC);
+                Map batchErrors = (Map) Query.Q2_INITIAL_COMPONENTS_PERIODIC.execute(Collections.emptyMap())
+                        .columnAs("batchErrors")
+                        .stream().collect(Collectors.toList())
+                        .get(0);
+                if (!batchErrors.isEmpty())
+                    throw new CypherExecutionException(batchErrors.toString(), new Exception());
+
                 runVoidQuery(Query.Q2_INITIAL_SCORE_FROM_EXPLICIT_COMPONENTS);
                 break;
             default:
