@@ -34,6 +34,7 @@ sourceSets {
 
 task modelMergeFkConverter(type:JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
+    environment("DO_PRINT", "true")
 
     if (project.hasProperty("modelSize")) {
         args modelSize
@@ -54,6 +55,7 @@ task modelToGraphConverter(type:JavaExec) {
 
 task modelChangeProcessor(type:JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
+    environment("DO_PRINT", "true")
 
     if (project.hasProperty("modelSize") && project.hasProperty("sequences")) {
         args(modelSize, sequences)

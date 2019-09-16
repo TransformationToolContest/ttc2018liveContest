@@ -2,92 +2,278 @@ package ttc2018
 
 import java.util.ArrayList
 import java.util.Iterator
-import java.util.Random
 import java.util.function.Consumer
 import java.util.function.Function
 import org.eclipse.papyrus.aof.core.AOFFactory
 import org.eclipse.papyrus.aof.core.IBox
+import org.eclipse.papyrus.aof.core.IObserver
 import org.eclipse.papyrus.aof.core.IOne
 import org.eclipse.papyrus.aof.core.ISequence
 import org.eclipse.papyrus.aof.core.IUnaryFunction
+import org.eclipse.papyrus.aof.core.impl.BaseDelegate
 import org.eclipse.papyrus.aof.core.impl.operation.Operation
-import org.eclipse.papyrus.aof.core.impl.utils.DefaultObserver
+import org.eclipse.xtend.lib.annotations.Data
 
-// TODO:
-//	- make result box wrap the tree instead of using a default ArrayList
-//	- fix remaining balancing issues
-//	- improve tests
-//	- currently a reversed sort... add a parameter for direction
-// DONE:
-//	- Node.remove
-//	- observe inner boxes: need to pass the old value for removal...
-//	- remove checkConsistency in "production"
-//	- balanced tree
-//		- we already have the size of each node, so we should be able to add the balancing of a
-//		https://en.wikipedia.org/wiki/Weight-balanced_tree
 class SortedBy<E, C extends Comparable<?>> extends Operation<E> {
 	val IBox<E> sourceBox
 	val IUnaryFunction<E, IOne<C>>[] bodies
+	var Function<E, C>[] passiveBodiesCache = null
 
 	var Node<E> root = null
 
 	def passiveBodies() {
-		bodies.map[body | [body.apply(it).get] as Function<E, C>]
+		if(this.passiveBodiesCache === null) {
+			passiveBodiesCache = bodies.map[body | [body.apply(it).get] as Function<E, C>]
+		}
+		passiveBodiesCache
 	}
+
+	static class MutableBoolean {
+		var value = false
+
+		new() {}
+
+		new(boolean value) {
+			this.value = value
+		}
+	}
+
+	// warning: methods child classes calling each other should call the _ variants of the operations
+	// (e.g., replaced_ should call added_, and removed_ instead of added and removed) 
+	@Data
+	static abstract class DisablableObserver<E> implements IObserver<E> {
+		val MutableBoolean enabled
+
+		final override added(int index, E element) {
+			if(enabled.value) {
+				enabled.value = false
+				added_(index, element)
+				enabled.value = true
+			}
+		}
+
+		def void added_(int index, E element)
+
+		final override moved(int newIndex, int oldIndex, E element) {
+			if(enabled.value) {
+				enabled.value = false
+				moved_(newIndex, oldIndex, element)
+				enabled.value = true
+			}
+		}
+
+		def void moved_(int newIndex, int oldIndex, E element)
+
+		final override removed(int index, E element) {
+			if(enabled.value) {
+				enabled.value = false
+				removed_(index, element)
+				enabled.value = true
+			}
+		}
+
+		def void removed_(int index, E element)
+
+		final override replaced(int index, E newElement, E oldElement) {
+			if(enabled.value) {
+				enabled.value = false
+				replaced_(index, newElement, oldElement)
+				enabled.value = true
+			}
+		}
+
+		def void replaced_(int index, E newElement, E oldElement)
+
+		override setDisabled(boolean disabled) {
+			throw new UnsupportedOperationException("not supporting this kind of disabled")
+		}
+
+		final override isDisabled() {
+			false
+		}
+	}
+
+	val observersEnabled = new MutableBoolean(true)
+
 	def add(E it) {
-		bodies.forEach[body |
+		for(body : bodies) {
 			val b = body.apply(it)
-			b.registerObservation(new DefaultObserver<C> {
-				override added(int index, C element) {
-					throw new UnsupportedOperationException("TODO: auto-generated method stub")
+			b.addObserver(new DisablableObserver<C>(observersEnabled) {
+				override added_(int index, C element) {
+					throw new IllegalStateException
 				}
-				override moved(int newIndex, int oldIndex, C element) {
-					throw new UnsupportedOperationException("TODO: auto-generated method stub")
+				override moved_(int newIndex, int oldIndex, C element) {
+					throw new IllegalStateException
 				}
-				override removed(int index, C element) {
-					throw new UnsupportedOperationException("TODO: auto-generated method stub")
+				override removed_(int index, C element) {
+					throw new IllegalStateException
 				}
-				override replaced(int index, C newElement, C oldElement) {
+				override replaced_(int index, C newElement, C oldElement) {
 					b.set(oldElement)
-					result.removeAt(remove(it, passiveBodies))
+					var i = remove(it, passiveBodies)
+					if(virtualBox) {
+						notifyRemoval(i, it)
+					} else {
+						result.removeAt(i)
+					}
 					checkConsistency
 					b.set(newElement)
-					result.add(add(it, passiveBodies), it)
+					i = add(it, passiveBodies)
+					if(virtualBox) {
+						notifyAddition(i, it)
+					} else {
+						result.add(i, it)
+					}
 					checkConsistency
 				}
 			})
-		]
+		}
 		add(it, passiveBodies)
 	}
 
+	// TODO: keep reference to virtual box delegate so that calling its fireAdded and fireRemoved methods can be called
+	// see virtualBox.add
+	def notifyAddition(int index, E elem) {
+		result.observers.forEach[e |
+			if (!e.isDisabled()) {
+				e.added(index, elem)
+			}
+		]
+	}
+
+	// see virtualBox.removeAt
+	def notifyRemoval(int index, E elem) {
+		result.observers.forEach[e |
+			if (!e.isDisabled()) {
+				e.removed(index, elem)
+			}
+		]
+	}
+
+	val boolean virtualBox
+
 	new(IBox<E> sourceBox, IUnaryFunction<E, IOne<C>>...bodies) {
+		this(sourceBox, true, bodies)
+	}
+
+	new(IBox<E> sourceBox, boolean virtualBox, IUnaryFunction<E, IOne<C>>...bodies) {
+		this.virtualBox = virtualBox
 		this.sourceBox = sourceBox
+		if(virtualBox) {
+			result = (AOFFactory.INSTANCE as AOFFactory).createBox(this, new BaseDelegate<E> {
+				// BaseDelegate.indexOf is linear, if we want log(n) access, then we need to search for the element using bodies (which are used to sort the tree) 
+//				override indexOf(E element) {
+//					root.
+//				}
+//				override contains(E element) {
+//					root.
+//				}
+				override get(int index) {
+					root.get(index)
+				}
+				override length() {
+					if(root === null) {
+						0
+					} else {
+						root.size
+					}
+				}
+				override iterator() {
+					new Iterator<E> {
+						var nextNode = init
+						def init() {
+							var ret = root
+							if(ret !== null) {
+								while(ret.lower !== null) {
+									ret = ret.lower
+								}
+							}
+							return ret
+						}
+						override hasNext() {
+							nextNode !== null
+						}
+						override next() {
+							val r = nextNode
+							if(nextNode.upper !== null) {
+								nextNode = nextNode.upper 
+								while(nextNode.lower !== null) {
+									nextNode = nextNode.lower
+								}
+								return r.value
+							}
+							while(true) {
+								if(nextNode.parent === null) {
+									nextNode = null 
+									return r.value
+								}
+								if(nextNode.parent.lower === nextNode) {
+									nextNode = nextNode.parent 
+									return r.value
+								}
+								nextNode =nextNode.parent 
+							}
+						}
+					}
+				}
+				override add(int index, E element) {
+					// no need to add: additions from this operations are already taken into account by additions to the tree
+					// and reverse additions are not supported (yet)
+					// DONE: move this out of this class, like for removeAt, so that reverse changes can be detected and
+					// an exception thrown
+					throw new UnsupportedOperationException
+				}
+				override move(int newIndex, int oldIndex) {
+					// SortedBy never moves its output
+					// it could in theory, but it currently removes then re-adds when the index of an element changes
+					throw new UnsupportedOperationException
+				}
+				override removeAt(int index) {
+					// the assert in Box makes it fail in some cases before we reach here,
+					// so we have to notify removal from somewhere else
+					// plus getting the removed element from here would be tricky
+					throw new UnsupportedOperationException
+				}
+				override set(int index, Object element) {
+					throw new UnsupportedOperationException
+				}
+			})
+		}
 		this.bodies = bodies
 		for(e : sourceBox) {
 			add(e)
 		}
-		infix[result.add(it)]
+		if(!virtualBox) {
+			infix[result.add(it)]
+		}
 		checkConsistency
-		sourceBox.registerObservation(new DefaultObserver<E> {
-			override added(int index, E e) {
+		sourceBox.addObserver(new DisablableObserver<E>(observersEnabled) {
+			override added_(int index, E e) {
 				val i = add(e)
-				assertEquals("", e, root.get(i))
-				result.add(i, e)
-				assertEquals("", e, result.get(i))
+//				assertEquals("", e, root.get(i))
+				if(virtualBox) {
+					notifyAddition(i, e)
+				} else {
+					result.add(i, e)
+				}
+//				assertEquals("", e, result.get(i))
 				checkConsistency
 			}
-			override moved(int newIndex, int oldIndex, E element) {
+			override moved_(int newIndex, int oldIndex, E element) {
 				// nothing to do
 			}
-			override removed(int index, E element) {
-				result.removeAt(
-					remove(element, passiveBodies)
-				)
+			override removed_(int index, E element) {
+				val i = remove(element, passiveBodies)
+				if(virtualBox) {
+					notifyRemoval(i, element)
+				} else {
+					result.removeAt(i)
+				}
 				checkConsistency
 			}
-			override replaced(int index, E newElement, E oldElement) {
-				removed(index, oldElement)
-				added(index, newElement)
+			override replaced_(int index, E newElement, E oldElement) {
+				removed_(index, oldElement)
+				added_(index, newElement)
 			}
 		})
 	}
@@ -134,6 +320,7 @@ class SortedBy<E, C extends Comparable<?>> extends Operation<E> {
 					root = null
 				} else {
 					root = root.upper
+					root.parent = null
 					root.checkConsistency(bodies)
 				}
 				return 0
@@ -141,6 +328,7 @@ class SortedBy<E, C extends Comparable<?>> extends Operation<E> {
 				val pos = root.lowerSize
 				if(root.upper === null) {
 					root = root.lower
+					root.parent = null
 				} else {
 					if(root.lower.size < root.upper.size) {
 						val m = root.upper.min
@@ -168,6 +356,7 @@ class SortedBy<E, C extends Comparable<?>> extends Operation<E> {
 
 	def checkConsistency() {
 		if(debug) {
+			assertEquals("root.parent", null, root?.parent)
 			root?.checkConsistency(passiveBodies)
 			val l = new ArrayList
 			infix[l.add(it)]
@@ -179,7 +368,7 @@ class SortedBy<E, C extends Comparable<?>> extends Operation<E> {
 		}
 	}
 
-	static val balance = true
+	static var balance = true
 
 	def static log2(int it) {
 		Math.log(it) / Math.log(2)
@@ -204,12 +393,12 @@ class SortedBy<E, C extends Comparable<?>> extends Operation<E> {
 					println('''size=«size», log2(size)=«Math.log(size) / Math.log(2)», depth=«depth»''')
 				}
 				if(lower !== null) {
-					assertTrue("", value.lt(lower.value, bodies.iterator) || lower.value.eq(value, bodies))
+					assertTrue("", value.lt(lower.value, bodies) || lower.value.eq(value, bodies))
 					assertEquals("lower.parent", lower.parent, this)
 					lower.checkConsistency(bodies)
 				}
 				if(upper !== null) {
-					assertTrue("", upper.value.lt(value, bodies.iterator) || upper.value.eq(value, bodies))
+					assertTrue("", upper.value.lt(value, bodies) || upper.value.eq(value, bodies))
 					assertEquals("upper.parent", upper.parent, this)
 					upper.checkConsistency(bodies)
 				}
@@ -474,7 +663,7 @@ class SortedBy<E, C extends Comparable<?>> extends Operation<E> {
 					}
 					return pos
 				}
-			} else if(value.lt(e, bodies.iterator)) {
+			} else if(value.lt(e, bodies)) {
 				val r = lower.remove(e, bodies)
 				checkConsistency(bodies)
 				balanceL
@@ -486,21 +675,33 @@ class SortedBy<E, C extends Comparable<?>> extends Operation<E> {
 			}
 		}
 
-		def boolean lt(E a, E b, Iterator<Function<E, ? extends Comparable<?>>> bodies) {
-			if(bodies.hasNext) {
-				val body = bodies.next
+		def boolean lt(E a, E b, Function<E, ? extends Comparable<?>>...bodies) {
+			for(body : bodies) {
 				val ba = body.apply(a) as Comparable<Object>
 				val bb = body.apply(b) as Comparable<Object>
 				if(ba < bb) {
-					true
+					return true
 				} else if(ba == bb) {
-					a.lt(b, bodies)
+					// let following bodies (if any) be used in subsequent iterations
 				} else {
-					false
+					return false
 				}
-			} else {
-				false
 			}
+			return false
+//			if(bodies.hasNext) {
+//				val body = bodies.next
+//				val ba = body.apply(a) as Comparable<Object>
+//				val bb = body.apply(b) as Comparable<Object>
+//				if(ba < bb) {
+//					true
+//				} else if(ba == bb) {
+//					a.lt(b, bodies)
+//				} else {
+//					false
+//				}
+//			} else {
+//				false
+//			}
 		}
 
 		def lowerSize() {
@@ -523,7 +724,7 @@ class SortedBy<E, C extends Comparable<?>> extends Operation<E> {
 			size++
 			val ret =
 //				if(e.lt(value, bodies.iterator)) {
-				if(value.lt(e, bodies.iterator)) {	// reversing sort
+				if(value.lt(e, bodies)) {	// reversing sort
 					if(lower === null) {
 						lower = new Node(e, this)
 						0
@@ -579,7 +780,9 @@ class SortedBy<E, C extends Comparable<?>> extends Operation<E> {
 			AOFFactory.INSTANCE.createOne(body1.apply(it))
 		], [
 			AOFFactory.INSTANCE.createOne(body2.apply(it))
-		]).result.inspect('''sorted[«key»]  : ''')
+		]).result
+		.collect[it]	// this is here to make sure that we are also testing propagation
+		.inspect('''sorted[«key»]  : ''')
 	}
 
 	def static <E> assertEquals(Iterable<E> expected, Iterable<E> actual) {
@@ -593,7 +796,7 @@ class SortedBy<E, C extends Comparable<?>> extends Operation<E> {
 		while(ite.hasNext && ita.hasNext) {
 			val e = ite.next
 			val a = ita.next
-			assertTrue('''«msg»[«i»]: expected «expected», but got «actual»''', e == a)
+			assertTrue('''«msg»[«i»]: expected «expected.join("{", ", ", "}")[toString]», but got «actual»''', e == a)
 			i++
 		}
 		assertEquals('''«msg».size''', ite.hasNext, ita.hasNext)
@@ -606,12 +809,6 @@ class SortedBy<E, C extends Comparable<?>> extends Operation<E> {
 		if(!b) {
 			throw new AssertionError(msg)
 		}
-	}
-
-	static val rand = new Random(0)
-
-	def static chooseIndex(IBox<?> it) {
-		rand.nextInt(it.length)
 	}
 
 	def static void main(String[] args) {
@@ -629,47 +826,9 @@ class SortedBy<E, C extends Comparable<?>> extends Operation<E> {
 			assertEquals(value.sort.reverse, cs)
 			value.removeAt(5)
 			assertEquals(value.sort.reverse, cs)
-			for(i : 0..1000) {
-				print('''[«i»] ''')
-				switch(rand.nextInt(4)) {
-					case 0: {
-						val index = if(value.length === 0) {0} else {value.chooseIndex}
-						val v = rand.nextInt
-						println('''ADD «value» at «index»''')
-						value.add(index, v)
-					}
-					case 1: {
-						if(value.length > 0) {
-							val index = value.chooseIndex
-							println('''REMOVE at «index»''')
-							value.removeAt(index)
-						} else {
-							println("REMOVE impossible on empty box")
-						}
-					}
-					case 2: {
-						if(value.length > 0) {
-							val newIndex = value.chooseIndex
-							val oldIndex = value.chooseIndex
-							println('''MOVE «newIndex», «oldIndex»''')
-							value.move(newIndex, oldIndex)
-						} else {
-							println("MOVE impossible on empty box")
-						}
-					}
-					case 3: {
-						if(value.length > 0) {
-							val index = value.chooseIndex
-							val v = rand.nextInt
-							println('''REPLACE at «index» by «v»''')
-							value.set(index, v)
-						} else {
-							println("REPLACE impossible on empty box")
-						}
-					}
-				}
+			new BoxFuzzer(value, [BoxFuzzer.rand.nextInt], [
 				assertEquals(value.sort.reverse, cs)
-			}
+			])
 		}
 		val ps = AOFFactory.INSTANCE.createSequence(
 			1 -> 0, 2 -> 0, 3 -> 0, 4 -> 0, 5 -> 0, 6 -> 0

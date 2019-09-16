@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 @author: Zsolt Kovari, Georg Hinkel
 
@@ -64,11 +64,13 @@ def benchmark(conf):
                     print("Running benchmark: tool = " + tool + ", change set = " + change_set +
                           ", query = " + query)
                     try:
-                        output = subprocess.check_output(config.get('run', query), shell=True)
+                        output = subprocess.check_output(config.get('run', query), shell=True, timeout=conf.Timeout)
                         with open(result_file, "ab") as file:
                             file.write(output)
                     except CalledProcessError as e:
                         print("Program exited with error")
+                    except subprocess.TimeoutExpired as e:
+                        print("Program reached the timeout set ({0} seconds). The command we executed was '{1}'".format(e.timeout, e.cmd))
 
 
 def clean_dir(*path):
@@ -88,8 +90,8 @@ def visualize():
     Visualizes the benchmark results
     """
     clean_dir("diagrams")
-    set_working_directory("reporting")
-    subprocess.call(["Rscript", "visualize.R", os.path.join(BASE_DIRECTORY, "config", "reporting.json")])
+    set_working_directory("reporting2")
+    subprocess.call(["Rscript", "-e", "rmarkdown::render('report.Rmd', output_format=rmarkdown::pdf_document())"])
 
 
 def extract_results():
@@ -121,6 +123,9 @@ if __name__ == "__main__":
     parser.add_argument("-t", "--test",
                         help="run test",
                         action="store_true")
+    parser.add_argument("-d", "--debug",
+                        help="set debug to true",
+                        action="store_true")
     args = parser.parse_args()
 
 
@@ -128,6 +133,8 @@ if __name__ == "__main__":
     with open("config.json", "r") as config_file:
         config = json.load(config_file, object_hook = JSONObject)
 
+    if args.debug:
+        os.environ['Debug'] = 'true'
     if args.build:
         build(config, args.skip_tests)
     if args.measure:

@@ -1,31 +1,31 @@
 -- @atlcompiler emftvm
 -- @path SN=/socialmedia/social_network.ecore
 
-query topComments = SN!Comment.allInstances()->sortedBy(e | e.timestamp)->reverse()->sortedBy(e | -e.score)->subSequence(1, 3);
+query topComments = SN!Comment.allInstances()->sortedBy(e | e.timestamp)->sortedBy(e | e.score)->reverse()->subSequence(1, 3);
 
 helper context SN!Comment def : score : Integer = 
-	let t:Sequence(Integer) = self.allComponents->collect(c | c.size()*c.size()) in
-	if (t.isEmpty()) then 0 else t.sum() endif;
+	self.allComponents->collect(c | c.size()*c.size())->sum();
 
 helper context SN!Comment def : allComponents : Sequence(Sequence(SN!User)) =
-	self.likedBy->iterate( u; 
-	acc : TupleType(components : Sequence(Sequence(SN!User)), visited : Sequence(SN!User)) = 
-		Tuple{components=Sequence{}, visited=Sequence{}} | 
+	self.likedBy->iterate(u; 
+		acc : TupleType(components : Sequence(Sequence(SN!User)), visited : Sequence(SN!User)) = 
+			Tuple{components=Sequence{}, visited=Sequence{}} | 
 		if (acc.visited->includes(u)) 
 			then acc
-			else let component : Sequence(SN!User) = thisModule.allFriends(u, self.likedBy->excluding(acc.visited)).component in
-				Tuple{components = acc.components.append(component), visited = acc.visited->asSet()->union(component)}				
+			else let component : TupleType(component : Sequence(SN!User), remaining : Sequence(SN!User)) = 
+				thisModule.allFriends(u, self.likedBy->excluding(acc.visited)).component in
+					Tuple{components = acc.components.append(component), visited = acc.visited->union(component)}				
 		endif).components;
 
 helper def : allFriends(u: SN!User, s:Sequence(SN!User)) : TupleType(component : Sequence(SN!User), remaining : Sequence(SN!User)) =
 	if (not s->includes(u))
 		then Tuple{component=Sequence{},remaining=s}
 		else 
-			u.friends->iterate( f; 
+			u.friends->iterate(f; 
 				acc: TupleType(component : Sequence(SN!User), remaining : Sequence(SN!User)) = 
-					Tuple{component=Set{u}, remaining=s->excluding(u)} |
-					let ffriends : TupleType(component : Sequence(SN!User), remaining : Sequence(SN!User)) = 
-						thisModule.allFriends(f,acc.remaining) in
-						Tuple{component=acc.component->union(ffriends.component->asSet()), remaining=ffriends.remaining}
+					Tuple{component=Sequence{u}, remaining=s->excluding(u)} |
+				let ffriends : TupleType(component : Sequence(SN!User), remaining : Sequence(SN!User)) = 
+					thisModule.allFriends(f,acc.remaining) in
+						Tuple{component=acc.component->union(ffriends.component), remaining=ffriends.remaining}
 			)
 	endif;

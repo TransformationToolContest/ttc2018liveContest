@@ -2,17 +2,15 @@ package ttc2018
 
 import Changes.ModelChange
 import Changes.ModelChangeSet
-import SocialNetwork.Comment
 import SocialNetwork.Post
 import java.util.HashMap
 import org.eclipse.emf.common.util.EList
 import org.eclipse.papyrus.aof.core.IBox
 import org.eclipse.papyrus.aof.core.IOne
-import org.eclipse.papyrus.aof.core.IUnaryFunction
 
 import static extension ttc2018.AllContents.*
 
-class SolutionQ1 extends Solution {
+class SolutionQ1 extends Solution implements AOFExtensions {
 	
 	public final static int COMMENT_SCORE = 10
 	
@@ -22,7 +20,11 @@ class SolutionQ1 extends Solution {
 
 	var IBox<String> result
 
+	var IBox<Post> posts
+
 	override String Initial() {
+		posts = socialNetwork._posts
+
 		result = queryQ1
 		return result.join("|")
 	}
@@ -36,9 +38,6 @@ class SolutionQ1 extends Solution {
 	}
 
 	def private queryQ1() {
-		val socialNetwork = this.socialNetwork
-		val posts = socialNetwork._posts
-
 		val answer = posts
 		.sortedBy([computeScore], [
 			_timestamp
@@ -53,31 +52,22 @@ class SolutionQ1 extends Solution {
 		return answer
 	}
 
-	def static <E> take(IBox<E> it, int n) {
-		new Take(it, n).result
-	}
-
-	def static <E> sortedBy(IBox<E> it, IUnaryFunction<E, IOne<? extends Comparable<?>>>...bodies) {
-		new SortedBy(it, bodies).result
-	}
-
+	// having a cache is mandatory, apparently because of how SortedBy resets oldValue
 	val scoreByPost = new HashMap<Post, IOne<Integer>>
 	def private computeScore(Post p) {
 		return scoreByPost.get(p) ?: {
-			val comments = p._allContents(Comment)
+			val comments = p._allContents(SN.Comment)
 			val score = comments.size * COMMENT_SCORE
 						+
 						comments
+						// doing .collectMutable[it?.likedBy?.size ?: emptyOne).sum
+						// may be more efficient because fewer inner observers
 							.likedBy.size.sum * LIKE_SCORE
 	
 			val r = score.asOne(0)
 			scoreByPost.put(p, r)
 			r
 		}
-	}
-
-	def static sum(IBox<Integer> it) {
-		new Sum(it).result as IOne<Integer>
 	}
 
 	def *(IBox<Integer> it, int b) {
