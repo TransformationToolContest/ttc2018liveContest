@@ -1,9 +1,9 @@
 # Visualization
 
-Install R. For Ubuntu 16.04+, the following works:
+Install R and pandoc. For Ubuntu 16.04+, the following works:
 
 ```console
-sudo apt install r-base r-base-dev
+sudo apt install r-base r-base-dev pandoc
 ```
 
 Run R and install the [Tidyverse](https://www.tidyverse.org/) package:
