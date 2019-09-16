@@ -42,7 +42,7 @@ nice_y_axis = function() {
 
 
 ```{r loading and cleaning, echo=FALSE}
-df = read_delim("output.csv", delim = ";")
+df = read_delim("../output/output.csv", delim = ";")
 df = df[df$MetricName == "Time", ]
 df = df[df$PhaseName != "Initialization", ]
 df$MetricValue = as.numeric(df$MetricValue)
