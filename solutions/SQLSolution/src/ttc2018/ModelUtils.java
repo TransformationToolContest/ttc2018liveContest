@@ -87,7 +87,9 @@ public class ModelUtils {
                 public Resource createResource(URI uri) {
                     XMIResourceImpl ret = new XMIResourceImpl(uri);
                     ret.setIntrinsicIDToEObjectMap(new HashMap<>());
-                    ret.getDefaultLoadOptions().put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, true);
+                    ret.getDefaultLoadOptions().put(XMIResource.OPTION_DEFER_IDREF_RESOLUTION, true);
+                    ret.getDefaultLoadOptions().put(XMIResource.OPTION_USE_PARSER_POOL, new XMLParserPoolImpl());
+                    ret.getDefaultLoadOptions().put(XMIResource.OPTION_USE_XML_NAME_TO_FEATURE_MAP, new HashMap<>());
                     return ret;
                 }
             });
