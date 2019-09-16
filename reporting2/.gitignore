@@ -1,3 +1,4 @@
 *.pdf
 *.csv
+*.tex
 .Rproj.user
