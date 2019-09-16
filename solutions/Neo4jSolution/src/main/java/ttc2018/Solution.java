@@ -195,10 +195,7 @@ public abstract class Solution implements AutoCloseable {
                     case COMMENTS_CHANGE_TYPE: {
                         long id = Long.parseLong(line[1]);
 
-                        // TODO: remove workaround of duplicate nodes in changeset
-                        if (!nodeByIdPropertyExists(Submission, id)) {
-                            addSubmissionVertex(line);
-                        }
+                        addSubmissionVertex(line);
                         break;
                     }
                     case "Friends": {
