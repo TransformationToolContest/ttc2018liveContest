@@ -31,7 +31,7 @@ public class SolutionQ2 extends Solution {
     }
 
     public enum Tool {
-        Neo4jSolution,
+        Neo4jSolution_overlay_graph,
         Neo4jSolution_explicit_component,
         Neo4jSolution_explicit_component_periodic,
     }
@@ -65,7 +65,7 @@ public class SolutionQ2 extends Solution {
     @Override
     public String Initial() {
         switch (tool) {
-            case Neo4jSolution:
+            case Neo4jSolution_overlay_graph:
                 runVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
 
                 runVoidQuery(Query.Q2_INITIAL_SCORE);
@@ -137,7 +137,7 @@ public class SolutionQ2 extends Solution {
 
         beforeUpdate(changes);
 
-        if (tool == Tool.Neo4jSolution) {
+        if (tool == Tool.Neo4jSolution_overlay_graph) {
             if (!newFriendEdges.isEmpty())
                 runVoidQuery(Query.Q2_UPDATE_OVERLAY_GRAPH_FRIEND_EDGE, ImmutableMap.of("friendEdges", newFriendEdges));
             if (!newLikesEdges.isEmpty())
