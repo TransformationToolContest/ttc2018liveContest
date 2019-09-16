@@ -96,7 +96,7 @@ public abstract class Solution implements AutoCloseable {
     String runReadQuery(Query q, Map<String, Object> parameters) {
         List<String> result = new ArrayList<>();
 
-        try (Result rs = q.execute(parameters)) {
+        try (Result rs = q.execute(this, parameters)) {
 
             int rowCount = 0;
             for (Map<String, Object> row : org.neo4j.helpers.collection.Iterators.asIterable(rs)) {
@@ -122,7 +122,7 @@ public abstract class Solution implements AutoCloseable {
     }
 
     void runVoidQuery(Query q, Map<String, Object> parameters) {
-        try (Result rs = q.execute(parameters)) {
+        try (Result rs = q.execute(this, parameters)) {
             rs.hasNext();
         }
     }

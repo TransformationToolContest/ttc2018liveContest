@@ -19,9 +19,6 @@ public class SolutionQ2Batch extends Solution {
         switch (tool) {
             case Neo4jSolutionBatch:
                 q2Batch = Query.Q2_BATCH;
-
-                Query.Q2_DELETE_OVERLAY_GRAPH.setSolution(this);
-                Query.Q2_INITIAL_OVERLAY_GRAPH.setSolution(this);
                 break;
             case Neo4jSolutionBatch_algo:
                 q2Batch = Query.Q2_BATCH_ALGO;
@@ -32,7 +29,6 @@ public class SolutionQ2Batch extends Solution {
             default:
                 throw new IllegalArgumentException();
         }
-        q2Batch.setSolution(this);
     }
 
     public enum Tool {

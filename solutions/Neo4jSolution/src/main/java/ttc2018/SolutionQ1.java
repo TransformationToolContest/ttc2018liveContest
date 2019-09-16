@@ -15,9 +15,6 @@ public class SolutionQ1 extends Solution {
 
     public SolutionQ1(String DataPath) throws IOException, InterruptedException {
         super(DataPath);
-
-        Query.Q1_INITIAL.setSolution(this);
-        Query.Q1_RETRIEVE.setSolution(this);
     }
 
     @Override

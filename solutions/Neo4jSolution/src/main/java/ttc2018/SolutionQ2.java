@@ -28,20 +28,6 @@ public class SolutionQ2 extends Solution {
         super(DataPath);
 
         tool = Tool.valueOf(toolName);
-
-        Query.Q2_INITIAL_OVERLAY_GRAPH.setSolution(this);
-        Query.Q2_INITIAL_DYNAMIC_LIKES_LABELS.setSolution(this);
-        Query.Q2_INITIAL_SCORE.setSolution(this);
-        Query.Q2_INITIAL_COMPONENTS_AND_SCORE.setSolution(this);
-        Query.Q2_INITIAL_COMPONENTS_PERIODIC.setSolution(this);
-        Query.Q2_INITIAL_SCORE_FROM_EXPLICIT_COMPONENTS.setSolution(this);
-        Query.Q2_INITIAL_ZERO_SCORE.setSolution(this);
-        Query.Q2_UPDATE_OVERLAY_GRAPH_FRIEND_EDGE.setSolution(this);
-        Query.Q2_UPDATE_OVERLAY_GRAPH_LIKES_EDGE.setSolution(this);
-        Query.Q2_MERGE_COMPONENTS_AFTER_FRIEND_EDGE.setSolution(this);
-        Query.Q2_MERGE_COMPONENTS_AFTER_LIKES_EDGE.setSolution(this);
-        Query.Q2_RECALCULATE_SCORE.setSolution(this);
-        Query.Q2_RETRIEVE.setSolution(this);
     }
 
     public enum Tool {
@@ -93,7 +79,7 @@ public class SolutionQ2 extends Solution {
             case Neo4jSolution_explicit_component_periodic:
                 runVoidQuery(Query.Q2_INITIAL_DYNAMIC_LIKES_LABELS);
 
-                Map batchErrors = (Map) Query.Q2_INITIAL_COMPONENTS_PERIODIC.execute(Collections.emptyMap())
+                Map batchErrors = (Map) Query.Q2_INITIAL_COMPONENTS_PERIODIC.execute(this, Collections.emptyMap())
                         .columnAs("batchErrors")
                         .stream().collect(Collectors.toList())
                         .get(0);

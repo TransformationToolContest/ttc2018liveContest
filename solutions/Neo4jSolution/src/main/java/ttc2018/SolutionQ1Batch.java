@@ -7,8 +7,6 @@ public class SolutionQ1Batch extends Solution {
 
     public SolutionQ1Batch(String DataPath) throws IOException, InterruptedException {
         super(DataPath);
-
-        Query.Q1_BATCH.setSolution(this);
     }
 
     @Override

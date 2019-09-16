@@ -49,14 +49,7 @@ public enum Query {
         queryText = s;
     }
 
-    protected Solution solution;
-
-    public void setSolution(Solution solution) {
-        this.solution = solution;
-    }
-
-    public Result execute(Map<String, Object> parameters) {
+    public Result execute(Solution solution, Map<String, Object> parameters) {
         return solution.getDbConnection().execute(queryText, parameters);
     }
 }
-
