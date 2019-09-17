@@ -3,6 +3,9 @@ dist: bionic
 install: true
 script:
 - scripts/run.py -b -m -e
+before_install:
+- sudo apt-get update
+- sudo apt-get install -y r-base
 notifications:
   email: false
   on_success: change
