@@ -1,6 +1,5 @@
 language: java
-jdk:
-- oraclejdk11
+dist: bionic
 install: true
 script:
 - scripts/run.py -b -m -e
