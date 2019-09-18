@@ -2,12 +2,20 @@ language: java
 dist: bionic
 install: true
 script:
+ - source jdk_switcher.sh
+ - jdk_switcher use openjdk8
  - cp config/config-travis.json config/config.json
- - scripts/run.py -b -m -e
-before_install:
- - sudo apt-get update
- - sudo apt-get install -y r-base
+ - scripts/run.py -b
+ - sudo update-java-alternatives -s java-1.11.0-openjdk-amd64
+ - export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64/
+ - java -version
+ - scripts/run.py -m -e
 notifications:
   email: false
   on_success: change
   on_failure: always
+addons:
+  apt:
+    packages:
+      - openjdk-8-jdk
+      - r-base
