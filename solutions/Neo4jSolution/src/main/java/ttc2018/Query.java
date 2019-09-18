@@ -13,9 +13,9 @@ public enum Query {
     Q1_INITIAL(Paths.get("q1_initial.cypher")),
     Q1_RETRIEVE(Paths.get("q1_retrieve.cypher")),
 
-    Q2_BATCH(Paths.get("q2_batch.cypher")),
-    Q2_BATCH_ALGO(Paths.get("q2_algo.cypher")),
-    Q2_BATCH_ALGO_WITH_FILTERED_EDGES(Paths.get("q2_algo_with_filtered_edges.cypher")),
+    Q2_BATCH_ALGO(Paths.get("q2_batch_algo.cypher")),
+    Q2_BATCH_ALGO_WITH_FILTERED_EDGES(Paths.get("q2_batch_algo_with_filtered_edges.cypher")),
+    Q2_BATCH_OVERLAY(Paths.get("q2_batch_overlay.cypher")),
     Q2_INITIAL_OVERLAY_GRAPH(Paths.get("q2_initial_overlay_graph.cypher")),
     Q2_INITIAL_DYNAMIC_LIKES_LABELS(Paths.get("q2_initial_dynamic_likes_labels.cypher")),
     Q2_DELETE_OVERLAY_GRAPH(Paths.get("q2_delete_overlay_graph.cypher")),

@@ -17,8 +17,8 @@ public class SolutionQ2Batch extends Solution {
         tool = Tool.valueOf(toolName);
 
         switch (tool) {
-            case Neo4jSolutionBatch:
-                q2Batch = Query.Q2_BATCH;
+            case Neo4jSolutionBatch_rebuild_overlay:
+                q2Batch = Query.Q2_BATCH_OVERLAY;
                 break;
             case Neo4jSolutionBatch_algo:
                 q2Batch = Query.Q2_BATCH_ALGO;
@@ -32,9 +32,9 @@ public class SolutionQ2Batch extends Solution {
     }
 
     public enum Tool {
-        Neo4jSolutionBatch,
         Neo4jSolutionBatch_algo,
         Neo4jSolutionBatch_algo_with_filtered_edges,
+        Neo4jSolutionBatch_rebuild_overlay,
     }
 
     @Override
@@ -48,7 +48,7 @@ public class SolutionQ2Batch extends Solution {
     @Override
     public String Initial() {
 
-        if (tool == Tool.Neo4jSolutionBatch) {
+        if (tool == Tool.Neo4jSolutionBatch_rebuild_overlay) {
             runVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
         }
         String result = runReadQuery(q2Batch);
@@ -60,7 +60,7 @@ public class SolutionQ2Batch extends Solution {
     public String Update(File changes) {
         beforeUpdate(changes);
 
-        if (tool == Tool.Neo4jSolutionBatch) {
+        if (tool == Tool.Neo4jSolutionBatch_rebuild_overlay) {
             runVoidQuery(Query.Q2_DELETE_OVERLAY_GRAPH);
             runVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
         }
