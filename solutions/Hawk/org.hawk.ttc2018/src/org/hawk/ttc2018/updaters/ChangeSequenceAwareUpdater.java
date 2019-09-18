@@ -217,8 +217,8 @@ public class ChangeSequenceAwareUpdater extends GraphModelUpdater {
 			.getOrCreateNodeIndex(String.format("%s##%s##%s",
 				SocialNetworkPackage.eNS_URI, eob.eClass().getName(), "id"));
 	
-		final IGraphIterable<IGraphNode> iterableNodes = idx.get("id", id);
-		final Iterator<IGraphNode> itNode = iterableNodes.iterator();
+		final IGraphIterable<? extends IGraphNode> iterableNodes = idx.get("id", id);
+		final Iterator<? extends IGraphNode> itNode = iterableNodes.iterator();
 		if (itNode.hasNext()) {
 			return itNode.next();
 		}
