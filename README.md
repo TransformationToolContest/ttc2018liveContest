@@ -14,7 +14,13 @@ The `docs/2018_TTC_Live.pdf` file contains the [case description](https://github
 
 ## Solution Prerequisites
 
+* AOF, ATL: Requires Java 8 for build (can run with Java 11).
+* Hawk: Requires Java (both 8 and 11 have tested and work).
+* JastAdd: Requires Java 8 for running (already built).
+* Naiad: Requires .NET Framework 4.5.1 (only works on Windows).
 * NMF: You need to install [.NET Core 2.0](https://www.microsoft.com/net/download/linux-package-manager/ubuntu16-04/sdk-current)
+* SQL: Requires PostgreSQL 11 or later.
+* YAMTL: Requires Java 11 for running (already built).
 
 Add your prerequisites here!
 
