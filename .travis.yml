@@ -2,6 +2,7 @@ language: java
 dist: bionic
 install: true
 script:
+ - find -name solution.ini.travis -execdir cp '{}' solution.ini \;
  - source jdk_switcher.sh
  - jdk_switcher use openjdk8
  - cp config/config-travis.json config/config.json
