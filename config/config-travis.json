@@ -1,0 +1,34 @@
+{
+  "Queries": [
+    "Q1",
+    "Q2"
+  ],
+  "Tools": [
+    "EMFSolutionAOF",
+    "EMFSolutionATL",
+    "EMFSolutionATL-Incremental",
+    "EMFSolutionViatra",
+    "EMFSolutionXtend",
+    "EMFSolutionYAMTL",
+    "EMFSolutionYAMTL_batch",
+    "Hawk",
+    "HawkIncUpdate",
+    "HawkIncUpdateQuery",
+    "NMF",
+    "NMF-Incremental",
+    "NMF-Parallel",
+    "NMF-Transactions",
+    "SQLSolution",
+    "SQLSolutionBatch",
+    "jastadd-ttc18-relast-xml-flush",
+    "jastadd-ttc18-relast-xml-inc",
+    "jastadd-ttc18-xml-flush",
+    "jastadd-ttc18-xml-inc"
+  ],
+  "ChangeSets": [
+    "1"
+  ],
+  "Sequences": 1,
+  "Runs": 1,
+  "Timeout": 6000
+}
