@@ -40,24 +40,18 @@ void WriteOutDebugMatrix(const char *title, GrB_Matrix result);
 void WriteOutDebugVector(const char *title, GrB_Vector result);
 
 /*
- * GRAPHBLAS HELPER MACROS
+ * GRAPHBLAS HELPER FUNCTION
  */
 
 //------------------------------------------------------------------------------
-// OK: call a GraphBLAS method and check the result
+// ok: call a GraphBLAS method and check the result
 //------------------------------------------------------------------------------
 
-// OK(method) is a macro that calls a GraphBLAS method and checks the status;
-// if a failure occurs, it handles the error via the CHECK macro above, and
-// returns the error status to the caller.
+// ok(GrB_Info) is a function that processes result of a GraphBLAS method and checks the status;
+// if a failure occurs, it returns the error status to the caller.
 
-#define OK(method)                                         \
-{                                                          \
-    info = method;                                         \
-    if (info != GrB_SUCCESS)                               \
-    {                                                      \
-        throw std::runtime_error{                          \
-            std::string{"GraphBLAS error: "} + GrB_error() \
-        };                                                 \
-    }                                                      \
+void inline ok(GrB_Info info) {
+    if (info != GrB_SUCCESS) {
+        throw std::runtime_error{std::string{"GraphBLAS error: "} + GrB_error()};
+    }
 }

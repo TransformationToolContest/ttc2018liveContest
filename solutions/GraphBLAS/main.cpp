@@ -10,25 +10,24 @@ extern "C" {
 
 GrB_Vector WeaklyConnectedComponents(GrB_Matrix A, bool directed) {
     ComputationTimer total_timer{"WeaklyConnectedComponents"};
-    GrB_Info info;
 
     GrB_Index n;
     GrB_Matrix_nrows(&n, A);
 
     GrB_Matrix C = A;
     if (directed) {
-        OK(GrB_Matrix_new(&C, GrB_BOOL, n, n))
+        ok((GrB_Matrix_new(&C, GrB_BOOL, n, n)));
 
         GrB_Descriptor desc;
-        OK(GrB_Descriptor_new(&desc))
-        OK(GrB_Descriptor_set(desc, GrB_INP1, GrB_TRAN))
+        ok((GrB_Descriptor_new(&desc)));
+        ok((GrB_Descriptor_set(desc, GrB_INP1, GrB_TRAN)));
 
-        OK(GrB_eWiseAdd_Matrix_BinaryOp(C, GrB_NULL, GrB_NULL, GrB_LOR, A, A, desc))
-        OK(GrB_Descriptor_free(&desc))
+        ok((GrB_eWiseAdd_Matrix_BinaryOp(C, GrB_NULL, GrB_NULL, GrB_LOR, A, A, desc)));
+        ok((GrB_Descriptor_free(&desc)));
     } else {
         C = A;
     }
-    GrB_Vector components = NULL;
+    GrB_Vector components = nullptr;
     LAGraph_cc(C, &components);
 
     return components;
