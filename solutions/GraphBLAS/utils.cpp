@@ -85,12 +85,13 @@ ConverterParameters ParseConverterParameters(int argc, char **argv) {
 
 void WriteOutDebugMatrix(const char *title, GrB_Matrix result) {
     printf("%s:\n", title);
-    GrB_Index size;
-    GrB_Matrix_nrows(&size, result);
+    GrB_Index rows, cols;
+    GrB_Matrix_nrows(&rows, result);
+    GrB_Matrix_ncols(&cols, result);
     double element;
 
-    for (unsigned int i = 0; i < size; i++) {
-        for (unsigned int j = 0; j < size; j++) {
+    for (GrB_Index i = 0; i < rows; i++) {
+        for (GrB_Index j = 0; j < cols; j++) {
             GrB_Info info = GrB_Matrix_extractElement_FP64(&element, result, i, j);
 
             if (info == GrB_SUCCESS) {
