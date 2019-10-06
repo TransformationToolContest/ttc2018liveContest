@@ -18,3 +18,5 @@ add_library(
 
 link_libraries(graphblas_utils)
 add_executable(ttc-q2 main.cpp)
+
+add_executable(converter converter.cpp)
