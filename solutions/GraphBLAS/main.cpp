@@ -12,7 +12,7 @@ GrB_Vector WeaklyConnectedComponents(GrB_Matrix A, bool directed) {
     ComputationTimer total_timer{"WeaklyConnectedComponents"};
 
     GrB_Index n;
-    GrB_Matrix_nrows(&n, A);
+    ok(GrB_Matrix_nrows(&n, A));
 
     GrB_Matrix C = A;
     if (directed) {
@@ -28,7 +28,7 @@ GrB_Vector WeaklyConnectedComponents(GrB_Matrix A, bool directed) {
         C = A;
     }
     GrB_Vector components = nullptr;
-    LAGraph_cc(C, &components);
+    ok(LAGraph_cc(C, &components));
 
     return components;
 }
@@ -36,7 +36,7 @@ GrB_Vector WeaklyConnectedComponents(GrB_Matrix A, bool directed) {
 int main(int argc, char **argv) {
     BenchmarkParameters parameters = ParseBenchmarkParameters(argc, argv);
 
-    LAGraph_init();
+    ok(LAGraph_init());
     GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.thread_num);
 
     GrB_Index const NUM_NODES = 7;
@@ -45,27 +45,27 @@ int main(int argc, char **argv) {
     GrB_Index col_indices[] = {1, 3, 4, 6, 5, 0, 2, 5, 2, 2, 3, 4};
     bool values[] = {true, true, true, true, true, true, true, true, true, true, true, true};
     GrB_Matrix graph;
-    GrB_Matrix_new(&graph, GrB_BOOL, NUM_NODES, NUM_NODES);
-    GrB_Matrix_build_BOOL(graph,
+    ok(GrB_Matrix_new(&graph, GrB_BOOL, NUM_NODES, NUM_NODES));
+    ok(GrB_Matrix_build_BOOL(graph,
                           row_indices, col_indices, values,
-                          NUM_EDGES, GrB_LOR);
+                          NUM_EDGES, GrB_LOR));
 
     GrB_Index NODE = 2;
     GrB_Vector result, vec;
-    GrB_Vector_new(&result, GrB_BOOL, NUM_NODES);
-    GrB_Vector_new(&vec, GrB_BOOL, NUM_NODES);
-    GrB_Vector_setElement_BOOL(vec, true, NODE);
+    ok(GrB_Vector_new(&result, GrB_BOOL, NUM_NODES));
+    ok(GrB_Vector_new(&vec, GrB_BOOL, NUM_NODES));
+    ok(GrB_Vector_setElement_BOOL(vec, true, NODE));
 
     WriteOutDebugMatrix("GRAPH", graph);
     WriteOutDebugVector("Target node", vec);
 
     std::cout << "Processing starts at: " << GetCurrentMilliseconds() << std::endl;
-    GrB_mxv(result, GrB_NULL, GrB_NULL, GxB_LOR_LAND_BOOL, graph, vec, GrB_NULL);
+    ok(GrB_mxv(result, GrB_NULL, GrB_NULL, GxB_LOR_LAND_BOOL, graph, vec, GrB_NULL));
     std::cout << "Processing ends at: " << GetCurrentMilliseconds() << std::endl;
 
     WriteOutDebugVector("Sources", result);
 
     // Cleanup
-    GrB_Matrix_free(&graph);
-    GrB_finalize();
+    ok(GrB_Matrix_free(&graph));
+    ok(GrB_finalize());
 }
