@@ -18,6 +18,8 @@ public class SolutionQ2 extends Solution {
 		Query.Q2_CFC_UPDATE_INIT.prepareStatement(conn);
 		Query.Q2_CFC_UPDATE_MAINTAIN.prepareStatement(conn);
 		Query.Q2_RETRIEVE.prepareStatement(conn);
+		Query.Q2_INFO_COUNT_COMMENT_FRIENDS_D.prepareStatement(conn);
+		Query.Q2_INFO_COUNT_LIKES_D.prepareStatement(conn);
 	}
 
 	@Override
@@ -45,13 +47,54 @@ public class SolutionQ2 extends Solution {
 
 	@Override
 	public String Update(File changes) {
+		long stopwatch = System.nanoTime();
 		beforeUpdate(changes);
 
+		long s1 = (System.nanoTime()-stopwatch)/1000;
+		stopwatch=System.nanoTime();
+
 		runVoidQuery(Query.Q2_CF_UPDATE);
-		runVoidQuery(Query.Q2_CFC_UPDATE_MAINTAIN);
+
+		long s2 = (System.nanoTime()-stopwatch)/1000;
+
+		int cntLikesDiff = runSingleIntReadQuery(Query.Q2_INFO_COUNT_LIKES_D);
+		int cntCommentFriendsDiff = runSingleIntReadQuery(Query.Q2_INFO_COUNT_COMMENT_FRIENDS_D);
+		if (LiveContestDriver.ShowDebugInfo) {
+			System.err.println(
+					String.format("Num of diff records: Likes_d: %d, Comment_friends_d: %d"
+							, cntLikesDiff, cntCommentFriendsDiff
+					)
+			);
+		}
+
+		stopwatch=System.nanoTime();
+
+		//System.exit(0);
+
+		// if the diff set for both likes and comment_friends are empty, the closure of the comment friends graph
+		// does not change, so we skip running its maintenance query
+		if (cntCommentFriendsDiff > 0 || cntLikesDiff > 0) {
+			runVoidQuery(Query.Q2_CFC_UPDATE_MAINTAIN);
+		}
+
+		long s3 = (System.nanoTime()-stopwatch)/1000;
+		stopwatch=System.nanoTime();
+
 		String result = runReadQuery(Query.Q2_RETRIEVE);
 
+		long s4 = (System.nanoTime()-stopwatch)/1000;
+		stopwatch=System.nanoTime();
+
+
 		afterUpdate();
+
+
+		long s5 = (System.nanoTime()-stopwatch)/1000;
+		stopwatch=System.nanoTime();
+
+		if (LiveContestDriver.ShowDebugInfo) {
+			System.err.println(String.format("Q2 update: %d %d %d %d %d", s1, s2, s3, s4, s5));
+		}
 
 		return result;
 	}
