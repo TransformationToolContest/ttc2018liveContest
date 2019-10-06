@@ -52,6 +52,7 @@ public class LiveContestDriver {
 
     static final boolean ShowScoresForValidation = "1".equals(System.getenv("SHOW_SCORES"));
     static final boolean ShowRunningTime = !"1".equals(System.getenv("HIDE_RUNTIME"));
+    static final boolean ShowDebugInfo = "1".equals(System.getenv("DEBUG"));
 
     private static long stopwatch;
 

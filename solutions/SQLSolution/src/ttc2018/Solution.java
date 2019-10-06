@@ -91,6 +91,18 @@ public abstract class Solution {
 		}
 	}
 
+	/**
+	 * Runs a read query and return it's single integer result from  the resultset's first row and first column.
+	 */
+	int runSingleIntReadQuery(Query q) {
+		try (ResultSet rs = q.getPreparedStatement().executeQuery()) {
+			rs.next();
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	void runVoidQuery(Query q) {
 		try {
 			q.getPreparedStatement().executeUpdate();
