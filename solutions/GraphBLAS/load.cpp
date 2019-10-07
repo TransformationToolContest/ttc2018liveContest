@@ -1,51 +1,13 @@
-#include <iostream>
 #include <fstream>
-#include <stdexcept>
-
-#include <algorithm>
-#include <string>
-#include <sstream>
-#include <vector>
-#include <map>
 #include <ctime>
+#include <memory>
+#include <iostream>
 #include <iomanip>
-#include <chrono>
+#include "load.h"
 
 #include "utils.h"
 
-struct Comment {
-    uint64_t comment_id;
-    time_t timestamp;
-};
-
-struct Q2_Inputs {
-    std::vector<Comment> comments;
-    std::map<uint64_t, GrB_Index> comment_id_to_column;
-
-    std::map<uint64_t, GrB_Index> user_id_to_column;
-
-    GrB_Matrix likes_matrix, friends_matrix;
-
-    auto users_size() const {
-        return user_id_to_column.size();
-    }
-
-    auto comments_size() const {
-        return comments.size();
-    }
-
-    void free() {
-        ok(GrB_Matrix_free(&likes_matrix));
-        ok(GrB_Matrix_free(&friends_matrix));
-    }
-};
-
-
-int main(int argc, char **argv) {
-    // temp
-    ok(LAGraph_init());
-
-    std::string base_folder = "../../models/1/";
+Q2_Input load(const std::string &base_folder) {
     std::string comments_path = base_folder + "csv-comments-initial.csv";
     std::string friends_path = base_folder + "csv-friends-initial.csv";
     std::string likes_path = base_folder + "csv-likes-initial.csv";
@@ -58,7 +20,7 @@ int main(int argc, char **argv) {
         throw std::runtime_error{"Failed to open input files"};
     }
 
-    Q2_Inputs input{};
+    Q2_Input input{};
 
     char delimiter;
     {
@@ -97,7 +59,7 @@ int main(int argc, char **argv) {
     {
         uint64_t user_id, comment_id;
         while (likes_file >> user_id >> delimiter >> comment_id) {
-            // new users can be added here, since friends file only added users with friends  
+            // new users can be added here, since friends file only added users with friends
             GrB_Index user_column = input.user_id_to_column.emplace(user_id, input.user_id_to_column.size())
                     .first->second;
             GrB_Index comment_column = input.comment_id_to_column.find(comment_id)->second;
@@ -130,17 +92,5 @@ int main(int argc, char **argv) {
     GrB_Index likes_nvals;
     ok(GrB_Matrix_nvals(&likes_nvals, input.likes_matrix));
 
-    WriteOutDebugMatrix("friends", input.friends_matrix);
-
-    std::cout << input.comments.size() << std::endl;
-    std::cout << input.user_id_to_column.size() << "; " << friends_src_columns.size() << ", "
-              << friends_trg_columns.size()
-              << std::endl;
-    std::cout << input.user_id_to_column.size() << "; " << std::endl;
-    std::cout << likes_num << ", " << likes_trg_comment_columns.size() << std::endl;
-    std::cout << std::endl;
-    std::cout << friends_nvals << std::endl;
-    std::cout << likes_nvals << std::endl;
-
-    input.free();
+    return input;
 }

@@ -10,13 +10,8 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 endif()
 
 link_libraries(graphblas lagraph)
-add_library(
-        graphblas_utils
-        SHARED
-        utils.cpp
-)
 
-link_libraries(graphblas_utils)
-add_executable(ttc-q2 main.cpp)
-
-add_executable(converter converter.cpp)
+add_executable(ttc-q2
+        main.cpp
+        load.cpp
+        utils.cpp)

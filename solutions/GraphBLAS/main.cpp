@@ -7,6 +7,7 @@ extern "C" {
 
 #include "utils.h"
 #include "computation_timer.hpp"
+#include "load.h"
 
 GrB_Vector WeaklyConnectedComponents(GrB_Matrix A, bool directed) {
     ComputationTimer total_timer{"WeaklyConnectedComponents"};
@@ -39,33 +40,11 @@ int main(int argc, char **argv) {
     ok(LAGraph_init());
     GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.thread_num);
 
-    GrB_Index const NUM_NODES = 7;
-    GrB_Index const NUM_EDGES = 12;
-    GrB_Index row_indices[] = {0, 0, 1, 1, 2, 3, 3, 4, 5, 6, 6, 6};
-    GrB_Index col_indices[] = {1, 3, 4, 6, 5, 0, 2, 5, 2, 2, 3, 4};
-    bool values[] = {true, true, true, true, true, true, true, true, true, true, true, true};
-    GrB_Matrix graph;
-    ok(GrB_Matrix_new(&graph, GrB_BOOL, NUM_NODES, NUM_NODES));
-    ok(GrB_Matrix_build_BOOL(graph,
-                          row_indices, col_indices, values,
-                          NUM_EDGES, GrB_LOR));
+    Q2_Input input = load();
 
-    GrB_Index NODE = 2;
-    GrB_Vector result, vec;
-    ok(GrB_Vector_new(&result, GrB_BOOL, NUM_NODES));
-    ok(GrB_Vector_new(&vec, GrB_BOOL, NUM_NODES));
-    ok(GrB_Vector_setElement_BOOL(vec, true, NODE));
 
-    WriteOutDebugMatrix("GRAPH", graph);
-    WriteOutDebugVector("Target node", vec);
-
-    std::cout << "Processing starts at: " << GetCurrentMilliseconds() << std::endl;
-    ok(GrB_mxv(result, GrB_NULL, GrB_NULL, GxB_LOR_LAND_BOOL, graph, vec, GrB_NULL));
-    std::cout << "Processing ends at: " << GetCurrentMilliseconds() << std::endl;
-
-    WriteOutDebugVector("Sources", result);
 
     // Cleanup
-    ok(GrB_Matrix_free(&graph));
+    input.free();
     ok(GrB_finalize());
 }
