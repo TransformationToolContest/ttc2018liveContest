@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <memory>
+#include <numeric>
 #include <cassert>
 
 extern "C" {
@@ -10,31 +11,6 @@ extern "C" {
 #include "utils.h"
 #include "computation_timer.hpp"
 #include "load.h"
-
-GrB_Vector WeaklyConnectedComponents(GrB_Matrix A, bool directed) {
-    ComputationTimer total_timer{"WeaklyConnectedComponents"};
-
-    GrB_Index n;
-    ok(GrB_Matrix_nrows(&n, A));
-
-    GrB_Matrix C = A;
-    if (directed) {
-        ok((GrB_Matrix_new(&C, GrB_BOOL, n, n)));
-
-        GrB_Descriptor desc;
-        ok((GrB_Descriptor_new(&desc)));
-        ok((GrB_Descriptor_set(desc, GrB_INP1, GrB_TRAN)));
-
-        ok((GrB_eWiseAdd_Matrix_BinaryOp(C, GrB_NULL, GrB_NULL, GrB_LOR, A, A, desc)));
-        ok((GrB_Descriptor_free(&desc)));
-    } else {
-        C = A;
-    }
-    GrB_Vector components = nullptr;
-    ok(LAGraph_cc(C, &components));
-
-    return components;
-}
 
 int main(int argc, char **argv) {
     BenchmarkParameters parameters = ParseBenchmarkParameters(argc, argv);
@@ -84,10 +60,44 @@ int main(int argc, char **argv) {
 
             WriteOutDebugMatrix(std::to_string(comment_col).c_str(), friends_subgraph);
 
+            // assuming that all component_ids will be in [0, n)
+            GrB_Vector components_vector = nullptr;
+            ok(LAGraph_cc(friends_subgraph, &components_vector));
+
+            WriteOutDebugVector("Components", components_vector);
+
+            std::cout << std::endl;
+
+            ok(GrB_Vector_nvals(&nvals, components_vector));
+            assert(nvals == likes_count);
+
+            GrB_Index n;
+            ok(GrB_Vector_size(&n, components_vector));
+            assert(n == likes_count);
+
+            std::vector<uint64_t> components(likes_count),
+                    component_sizes(likes_count);
+
+            // nullptr: SuiteSparse extension
+            nvals = likes_count;
+            ok(GrB_Vector_extractTuples_UINT64(nullptr, components.data(), &nvals, components_vector));
+            assert(nvals == likes_count);
+
+            for (auto component_id:components)
+                ++component_sizes[component_id];
+
+            std::transform(component_sizes.begin(), component_sizes.end(), component_sizes.begin(),
+                           [](uint64_t n) { return n * n; });
+
+            uint64_t score = std::accumulate(component_sizes.begin(), component_sizes.end(), uint64_t());
+
+            std::cout << score << std::endl << std::endl;
+
             likes_comment_first = likes_comment_last;
             likes_user_first = likes_user_last;
 
             ok(GrB_Matrix_free(&friends_subgraph));
+            ok(GrB_Vector_free(&components_vector));
         }
     }
 
