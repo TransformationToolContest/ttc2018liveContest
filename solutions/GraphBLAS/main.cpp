@@ -2,6 +2,7 @@
 #include <memory>
 #include <numeric>
 #include <cassert>
+#include <queue>
 
 extern "C" {
 #include <GraphBLAS.h>
@@ -19,6 +20,9 @@ int main(int argc, char **argv) {
     GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.thread_num);
 
     Q2_Input input = load("../../models/2/");
+
+    using score_type = std::tuple<uint64_t, time_t, GrB_Index>;
+    std::priority_queue<score_type, std::vector<score_type>, std::greater<>> top_scores;
 
     // make sure tuples are in row-major order (SuiteSparse extension)
     GxB_Format_Value format;
@@ -93,6 +97,12 @@ int main(int argc, char **argv) {
 
             std::cout << score << std::endl << std::endl;
 
+            // TODO: avoid timestamp lookup if possible
+            top_scores.push(std::make_tuple(score, input.comments[comment_col].timestamp, comment_col));
+
+            if (top_scores.size() > 3)
+                top_scores.pop();
+
             likes_comment_first = likes_comment_last;
             likes_user_first = likes_user_last;
 
@@ -101,7 +111,22 @@ int main(int argc, char **argv) {
         }
     }
 
-    // TODO: replace sort by find k largest
+    std::vector<score_type> top_scores_vector;
+    while (!top_scores.empty()) {
+        auto[score, timestamp, comment_col] = top_scores.top();
+        top_scores.pop();
+
+        uint64_t comment_id = input.comments[comment_col].comment_id;
+        top_scores_vector.emplace_back(score, timestamp, comment_id);
+    }
+
+    for (auto iter = top_scores_vector.rbegin(); iter != top_scores_vector.rend(); ++iter) {
+        auto[score, timestamp, comment_id] = *iter;
+
+        if (iter != top_scores_vector.rbegin())
+            std::cout << '|';
+        std::cout << comment_id;
+    }
 
     // Cleanup
     input.free();
