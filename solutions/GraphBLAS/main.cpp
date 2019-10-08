@@ -14,6 +14,8 @@ extern "C" {
 #include "load.h"
 
 int main(int argc, char **argv) {
+    ComputationTimer total_timer{"Q2"};
+
     BenchmarkParameters parameters = ParseBenchmarkParameters(argc, argv);
 
     ok(LAGraph_init());
@@ -62,15 +64,9 @@ int main(int argc, char **argv) {
                                   input.friends_matrix, likes_user_first, likes_count, likes_user_first, likes_count,
                                   GrB_NULL));
 
-            WriteOutDebugMatrix(std::to_string(comment_col).c_str(), friends_subgraph);
-
             // assuming that all component_ids will be in [0, n)
             GrB_Vector components_vector = nullptr;
             ok(LAGraph_cc(friends_subgraph, &components_vector));
-
-            WriteOutDebugVector("Components", components_vector);
-
-            std::cout << std::endl;
 
             ok(GrB_Vector_nvals(&nvals, components_vector));
             assert(nvals == likes_count);
@@ -94,8 +90,6 @@ int main(int argc, char **argv) {
                            [](uint64_t n) { return n * n; });
 
             uint64_t score = std::accumulate(component_sizes.begin(), component_sizes.end(), uint64_t());
-
-            std::cout << score << std::endl << std::endl;
 
             // TODO: avoid timestamp lookup if possible
             top_scores.push(std::make_tuple(score, input.comments[comment_col].timestamp, comment_col));
@@ -127,6 +121,7 @@ int main(int argc, char **argv) {
             std::cout << '|';
         std::cout << comment_id;
     }
+    std::cout << std::endl;
 
     // Cleanup
     input.free();
