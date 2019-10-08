@@ -39,6 +39,6 @@ struct Q2_Input {
     }
 };
 
-Q2_Input load(const std::string& base_folder = "../../models/1/");
+Q2_Input load(const std::string& base_folder);
 
 #endif //GRAPHBLAS_LOAD_H
