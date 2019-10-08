@@ -21,7 +21,9 @@ struct Q2_Input {
 
     std::map<uint64_t, GrB_Index> user_id_to_column;
 
-    GrB_Matrix likes_matrix, friends_matrix;
+    GrB_Matrix likes_matrix_tran, friends_matrix;
+
+    GrB_Index likes_num, friends_num;
 
     auto users_size() const {
         return user_id_to_column.size();
@@ -32,7 +34,7 @@ struct Q2_Input {
     }
 
     void free() {
-        ok(GrB_Matrix_free(&likes_matrix));
+        ok(GrB_Matrix_free(&likes_matrix_tran));
         ok(GrB_Matrix_free(&friends_matrix));
     }
 };

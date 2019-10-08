@@ -69,28 +69,23 @@ Q2_Input load(const std::string &base_folder) {
         }
     }
 
-    unsigned long likes_num = likes_src_user_columns.size();
-    std::unique_ptr<bool[]> likes_values{new bool[likes_num]};
-    std::fill_n(likes_values.get(), likes_num, true);
+    input.likes_num = likes_src_user_columns.size();
+    std::unique_ptr<bool[]> likes_values{new bool[input.likes_num]};
+    std::fill_n(likes_values.get(), input.likes_num, true);
 
-    ok(GrB_Matrix_new(&input.likes_matrix, GrB_BOOL, input.users_size(), input.comments_size()));
-    ok(GrB_Matrix_build_BOOL(input.likes_matrix,
-                             likes_src_user_columns.data(), likes_trg_comment_columns.data(), likes_values.get(),
-                             likes_num, GrB_LOR));
+    ok(GrB_Matrix_new(&input.likes_matrix_tran, GrB_BOOL, input.comments_size(), input.users_size()));
+    ok(GrB_Matrix_build_BOOL(input.likes_matrix_tran,
+                             likes_trg_comment_columns.data(), likes_src_user_columns.data(), likes_values.get(),
+                             input.likes_num, GrB_LOR));
 
-    unsigned long friends_num = friends_src_columns.size();
-    std::unique_ptr<bool[]> friends_values{new bool[friends_num]};
-    std::fill_n(friends_values.get(), friends_num, true);
+    input.friends_num = friends_src_columns.size();
+    std::unique_ptr<bool[]> friends_values{new bool[input.friends_num]};
+    std::fill_n(friends_values.get(), input.friends_num, true);
 
     ok(GrB_Matrix_new(&input.friends_matrix, GrB_BOOL, input.users_size(), input.users_size()));
     ok(GrB_Matrix_build_BOOL(input.friends_matrix,
                              friends_src_columns.data(), friends_trg_columns.data(), friends_values.get(),
-                             friends_num, GrB_LOR));
-
-    GrB_Index friends_nvals;
-    ok(GrB_Matrix_nvals(&friends_nvals, input.friends_matrix));
-    GrB_Index likes_nvals;
-    ok(GrB_Matrix_nvals(&likes_nvals, input.likes_matrix));
+                             input.friends_num, GrB_LOR));
 
     return input;
 }
