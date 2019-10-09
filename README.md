@@ -12,6 +12,16 @@ The `docs/2018_TTC_Live.pdf` file contains the [case description](https://github
 * Python 3.3 or higher
 * R
 
+## Setup
+
+The graph models are stored in the `models` directory. For sizes larger than 512, the files are zipped so make sure you unzip the required sizes first. For example, run:
+
+```bash
+cd models
+unzip 1024.zip
+cd ..
+```
+
 ## Solution Prerequisites
 
 * AOF, ATL: Requires Java 8 for build (can run with Java 11).
