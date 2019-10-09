@@ -67,8 +67,6 @@ def benchmark(conf):
                         output = subprocess.check_output(config.get('run', query), shell=True, timeout=conf.Timeout)
                         with open(result_file, "ab") as file:
                             file.write(output)
-                    except CalledProcessError as e:
-                        print("Program exited with error")
                     except subprocess.TimeoutExpired as e:
                         print("Program reached the timeout set ({0} seconds). The command we executed was '{1}'".format(e.timeout, e.cmd))
 

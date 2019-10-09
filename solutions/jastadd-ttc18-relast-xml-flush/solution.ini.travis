@@ -1,0 +1,7 @@
+[build]
+default=echo "It is already built"
+skipTests=echo "It is already built"
+
+[run]
+Q1=JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-amd64" bin/solve
+Q2=JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-amd64" bin/solve
