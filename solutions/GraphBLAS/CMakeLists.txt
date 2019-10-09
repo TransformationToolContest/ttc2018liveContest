@@ -11,7 +11,9 @@ endif()
 
 link_libraries(graphblas lagraph)
 
+find_package(OpenMP REQUIRED)
 add_executable(ttc-q2
         main.cpp
         load.cpp
         utils.cpp)
+target_link_libraries(ttc-q2 PRIVATE OpenMP::OpenMP_CXX)
