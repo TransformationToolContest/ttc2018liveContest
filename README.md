@@ -44,8 +44,7 @@ One might fine tune the script for the following purposes:
 * `run.py -g` -- generates the instance models
 * `run.py -m` -- run the benchmark without building
 * `run.py -v` -- visualizes the results of the latest benchmark
-* `run.py -e` -- compare results to the reference output. The benchmark shall already been executed using `-m`.
-* `run.py -m -e` -- run benchmark without building, then extract and compare results to the reference output
+* `run.py -c` -- check results by comparing them to the reference output. The benchmark shall already been executed using `-m`.
 * `run.py -t` -- build the project and run tests (usually unit tests as defined for the given solution)
 
 The `config` directory contains the configuration for the scripts:
