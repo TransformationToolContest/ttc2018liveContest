@@ -12,9 +12,25 @@ The `docs/2018_TTC_Live.pdf` file contains the [case description](https://github
 * Python 3.3 or higher
 * R
 
+## Setup
+
+The graph models are stored in the `models` directory. For sizes larger than 512, the files are zipped so make sure you unzip the required sizes first. For example, run:
+
+```bash
+cd models
+unzip 1024.zip
+cd ..
+```
+
 ## Solution Prerequisites
 
+* AOF, ATL: Requires Java 8 for build (can run with Java 11).
+* Hawk: Requires Java (both 8 and 11 have tested and work).
+* JastAdd: Requires Java 8 for running (already built).
+* Naiad: Requires .NET Framework 4.5.1 (only works on Windows).
 * NMF: You need to install [.NET Core 2.0](https://www.microsoft.com/net/download/linux-package-manager/ubuntu16-04/sdk-current)
+* SQL: Requires PostgreSQL 11 or later.
+* YAMTL: Requires Java 11 for running (already built).
 
 Add your prerequisites here!
 
@@ -28,8 +44,7 @@ One might fine tune the script for the following purposes:
 * `run.py -g` -- generates the instance models
 * `run.py -m` -- run the benchmark without building
 * `run.py -v` -- visualizes the results of the latest benchmark
-* `run.py -e` -- compare results to the reference output. The benchmark shall already been executed using `-m`.
-* `run.py -m -e` -- run benchmark without building, then extract and compare results to the reference output
+* `run.py -c` -- check results by comparing them to the reference output. The benchmark shall already been executed using `-m`.
 * `run.py -t` -- build the project and run tests (usually unit tests as defined for the given solution)
 
 The `config` directory contains the configuration for the scripts:
