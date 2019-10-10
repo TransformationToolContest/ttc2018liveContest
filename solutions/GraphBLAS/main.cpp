@@ -3,6 +3,7 @@
 #include <numeric>
 #include <cassert>
 #include <queue>
+#include <omp.h>
 
 extern "C" {
 #include <GraphBLAS.h>
@@ -20,8 +21,9 @@ int main(int argc, char **argv) {
 
     ok(LAGraph_init());
     GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.thread_num);
+    std::cout << parameters.thread_num << '/' << omp_get_max_threads() << std::endl;
 
-    Q2_Input input = load("../../models/2/");
+    Q2_Input input = load("../../models/1024/");
 
     using score_type = std::tuple<uint64_t, time_t, GrB_Index>;
     std::priority_queue<score_type, std::vector<score_type>, std::greater<>> top_scores;
@@ -35,7 +37,8 @@ int main(int argc, char **argv) {
 
     std::unique_ptr<GrB_Index[]> likes_trg_comment_columns{new GrB_Index[input.likes_num]},
             likes_src_user_columns{new GrB_Index[input.likes_num]};
-    GrB_Index *likes_comment_array_last = likes_trg_comment_columns.get() + input.likes_num;
+    GrB_Index *likes_comment_array_first = likes_trg_comment_columns.get(),
+            *likes_comment_array_last = likes_trg_comment_columns.get() + input.likes_num;
 
     // nullptr to avoid extracting matrix values (SuiteSparse extension)
     GrB_Index nvals = input.likes_num;
@@ -44,19 +47,16 @@ int main(int argc, char **argv) {
     assert(nvals == input.likes_num);
 
     // find tuple sequences of each comment in row-major array
-    GrB_Index *likes_comment_first = likes_trg_comment_columns.get();
-    GrB_Index *likes_user_first = likes_src_user_columns.get();
     for (GrB_Index comment_col = 0; comment_col < input.comments_size(); ++comment_col) {
-        if (likes_comment_first == likes_comment_array_last // no more values in likes matrix
-            || comment_col < *likes_comment_first) {
+        auto[likes_comment_first, likes_comment_last] = std::equal_range(likes_comment_array_first,
+                                                                         likes_comment_array_last, comment_col);
+        if (likes_comment_first == likes_comment_last) {
             // no likes for this comment
             continue;
         } else {
-            GrB_Index *likes_comment_last = likes_comment_first;
-            GrB_Index *likes_user_last = likes_user_first;
-            GrB_Index likes_count = 0;
-            for (; likes_comment_last != likes_comment_array_last && *likes_comment_last == comment_col;
-                   ++likes_comment_last, ++likes_user_last, ++likes_count);
+            GrB_Index likes_count = std::distance(likes_comment_first, likes_comment_last);
+            GrB_Index *likes_user_first =
+                    likes_src_user_columns.get() + std::distance(likes_comment_array_first, likes_comment_first);
 
             GrB_Matrix friends_subgraph;
             ok(GrB_Matrix_new(&friends_subgraph, GrB_BOOL, likes_count, likes_count));
@@ -68,7 +68,8 @@ int main(int argc, char **argv) {
             GrB_Vector components_vector = nullptr;
             ok(LAGraph_cc(friends_subgraph, &components_vector));
 
-            ok(GrB_Vector_nvals(&nvals, components_vector));
+            GrB_Index nvals_local = input.likes_num;
+            ok(GrB_Vector_nvals(&nvals_local, components_vector));
             assert(nvals == likes_count);
 
             GrB_Index n;
@@ -79,8 +80,8 @@ int main(int argc, char **argv) {
                     component_sizes(likes_count);
 
             // nullptr: SuiteSparse extension
-            nvals = likes_count;
-            ok(GrB_Vector_extractTuples_UINT64(nullptr, components.data(), &nvals, components_vector));
+            nvals_local = likes_count;
+            ok(GrB_Vector_extractTuples_UINT64(nullptr, components.data(), &nvals_local, components_vector));
             assert(nvals == likes_count);
 
             for (auto component_id:components)
@@ -96,9 +97,6 @@ int main(int argc, char **argv) {
 
             if (top_scores.size() > 3)
                 top_scores.pop();
-
-            likes_comment_first = likes_comment_last;
-            likes_user_first = likes_user_last;
 
             ok(GrB_Matrix_free(&friends_subgraph));
             ok(GrB_Vector_free(&components_vector));
