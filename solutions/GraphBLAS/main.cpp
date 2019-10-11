@@ -17,15 +17,16 @@ extern "C" {
 namespace {
 
     using score_type = std::tuple<uint64_t, time_t, GrB_Index>;
+    using queue_type = std::priority_queue<score_type, std::vector<score_type>, std::greater<>>;
 
     inline void
     compute_score_for_comment(const Q2_Input &input, GrB_Index comment_col, GrB_Index *likes_comment_array_first,
                               GrB_Index *likes_comment_array_last, GrB_Index *likes_user_array_first,
-                              std::priority_queue<score_type, std::vector<score_type>, std::greater<>> &top_scores) __attribute__ ((always_inline));
+                              queue_type &top_scores) __attribute__ ((always_inline));
 
     void compute_score_for_comment(const Q2_Input &input, GrB_Index comment_col, GrB_Index *likes_comment_array_first,
                                    GrB_Index *likes_comment_array_last, GrB_Index *likes_user_array_first,
-                                   std::priority_queue<score_type, std::vector<score_type>, std::greater<>> &top_scores) {
+                                   queue_type &top_scores) {
         auto[likes_comment_first, likes_comment_last] = std::equal_range(likes_comment_array_first,
                                                                          likes_comment_array_last, comment_col);
         if (likes_comment_first != likes_comment_last) {
@@ -90,7 +91,7 @@ int main(int argc, char **argv) {
 
     Q2_Input input = load("../../models/1024/");
 
-    std::priority_queue<score_type, std::vector<score_type>, std::greater<>> top_scores;
+    queue_type top_scores;
 
     // make sure tuples are in row-major order (SuiteSparse extension)
     GxB_Format_Value format;
