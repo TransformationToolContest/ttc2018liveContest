@@ -8,9 +8,9 @@
 #include "utils.h"
 
 Q2_Input load(const std::string &base_folder) {
-    std::string comments_path = base_folder + "csv-comments-initial.csv";
-    std::string friends_path = base_folder + "csv-friends-initial.csv";
-    std::string likes_path = base_folder + "csv-likes-initial.csv";
+    std::string comments_path = base_folder + "/csv-comments-initial.csv";
+    std::string friends_path = base_folder + "/csv-friends-initial.csv";
+    std::string likes_path = base_folder + "/csv-likes-initial.csv";
 
     std::ifstream
             comments_file{comments_path},

@@ -4,6 +4,8 @@
 #include <cassert>
 #include <queue>
 #include <omp.h>
+#include <fstream>
+#include <iterator>
 
 extern "C" {
 #include <GraphBLAS.h>
@@ -80,16 +82,96 @@ namespace {
     }
 }
 
-int main(int argc, char **argv) {
-    ComputationTimer total_timer{"Q2"};
+struct BenchmarkParameters {
+    std::string ChangePath;
+    std::string RunIndex;
+    int Sequences;
+    std::string Tool;
+    std::string ChangeSet;
+    std::string Query;
+    unsigned long thread_num = 1;
+};
 
-    BenchmarkParameters parameters = ParseBenchmarkParameters(argc, argv);
+std::string getenv_string(const char *name) {
+    const char *value = std::getenv(name);
+    if (value)
+        return value;
+    else
+        throw std::runtime_error{std::string{"Missing environmental variable: "} + name};
+}
+
+BenchmarkParameters parse_benchmark_params() {
+    BenchmarkParameters params;
+
+    params.ChangePath = getenv_string("ChangePath");
+    params.RunIndex = getenv_string("RunIndex");
+    params.Sequences = std::stoi(getenv_string("Sequences"));
+    params.Tool = getenv_string("Tool");
+    params.ChangeSet = getenv_string("ChangeSet");
+    params.Query = getenv_string("Query");
+
+    std::transform(params.Query.begin(), params.Query.end(), params.Query.begin(),
+                   [](char c) { return std::toupper(c); });
+
+    return params;
+}
+
+struct BenchmarkPhase {
+    static const std::string Initialization;
+    static const std::string Load;
+    static const std::string Initial;
+    static const std::string Update;
+};
+
+const std::string BenchmarkPhase::Initialization = "Initialization";
+const std::string BenchmarkPhase::Load = "Load";
+const std::string BenchmarkPhase::Initial = "Initial";
+const std::string BenchmarkPhase::Update = "Update";
+
+void report_info(const BenchmarkParameters &parameters, int iteration, const std::string &phase) {
+    std::cout
+            << parameters.Tool << ';'
+            << parameters.Query << ';'
+            << parameters.ChangeSet << ';'
+            << parameters.RunIndex << ';'
+            << iteration << ';'
+            << phase << ';';
+}
+
+void report(const BenchmarkParameters &parameters, int iteration, const std::string &phase,
+            unsigned long long runtime,
+            std::optional<std::vector<score_type>> result_reversed_opt = std::nullopt) {
+    report_info(parameters, iteration, phase);
+    std::cout << "Time" << ';' << runtime << std::endl;
+
+    if (result_reversed_opt) {
+        const auto &result_reversed = result_reversed_opt.value();
+
+        report_info(parameters, iteration, phase);
+        std::cout << "Elements" << ';';
+
+        for (auto iter = result_reversed.rbegin(); iter != result_reversed.rend(); ++iter) {
+            auto comment_id = std::get<2>(*iter);
+
+            if (iter != result_reversed.rbegin())
+                std::cout << '|';
+            std::cout << comment_id;
+        }
+        std::cout << std::endl;
+    }
+
+}
+
+int main(int argc, char **argv) {
+    BenchmarkParameters parameters = parse_benchmark_params();
+
+    ComputationTimer total_timer{"Q2"};
 
     ok(LAGraph_init());
     GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.thread_num);
     std::cout << parameters.thread_num << '/' << omp_get_max_threads() << std::endl;
 
-    Q2_Input input = load("../../models/1024/");
+    Q2_Input input = load(parameters.ChangePath);
 
     queue_type top_scores;
 
@@ -127,14 +209,7 @@ int main(int argc, char **argv) {
         top_scores_vector.emplace_back(score, timestamp, comment_id);
     }
 
-    for (auto iter = top_scores_vector.rbegin(); iter != top_scores_vector.rend(); ++iter) {
-        auto[score, timestamp, comment_id] = *iter;
-
-        if (iter != top_scores_vector.rbegin())
-            std::cout << '|';
-        std::cout << comment_id;
-    }
-    std::cout << std::endl;
+    report(parameters, -1, BenchmarkPhase::Initial, 99999, top_scores_vector);
 
     // Cleanup
     input.free();

@@ -10,17 +10,6 @@ extern "C" {
 /*
  * ARGUMENT PARSING FUNCTIONS
  */
-typedef struct {
-  std::string input_dir;
-  std::string output_file;
-  bool directed = false;
-  unsigned long source_vertex = 0;
-  double damping_factor = 0.0;
-  unsigned long max_iteration = 0;
-  unsigned long thread_num = 1;
-} BenchmarkParameters;
-
-BenchmarkParameters ParseBenchmarkParameters(int argc, char **argv);
 
 typedef struct {
   std::string vertex_file;
