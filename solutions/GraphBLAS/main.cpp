@@ -7,6 +7,7 @@
 #include <iterator>
 #include <iostream>
 #include <chrono>
+#include <set>
 
 extern "C" {
 #include <GraphBLAS.h>
@@ -203,6 +204,30 @@ int main(int argc, char **argv) {
     for (GrB_Index comment_col = 0; comment_col < input.comments_size(); ++comment_col) {
         compute_score_for_comment(input, comment_col, likes_comment_array_first, likes_comment_array_last,
                                   likes_user_array_first, top_scores);
+    }
+
+    // if comments with likes are not enough
+    if (top_scores.size() < 3) {
+        std::set<GrB_Index> comment_cols;
+        std::vector<score_type> top_scores_vector;
+        while (!top_scores.empty()) {
+            auto[score, timestamp, comment_col] = top_scores.top();
+            comment_cols.insert(comment_col);
+            top_scores_vector.emplace_back(score, timestamp, comment_col);
+            top_scores.pop();
+        }
+        for(const auto &score_tuple : top_scores_vector){
+            top_scores.push(score_tuple);
+        }
+
+        for (GrB_Index comment_col = 0; comment_col < input.comments_size(); ++comment_col) {
+            if(comment_cols.emplace(comment_col).second) {
+                top_scores.push(std::make_tuple(0, input.comments[comment_col].timestamp, comment_col));
+            }
+
+            if (top_scores.size() > 3)
+                top_scores.pop();
+        }
     }
 
     std::vector<score_type> top_scores_vector;
