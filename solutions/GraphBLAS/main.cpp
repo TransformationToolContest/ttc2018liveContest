@@ -3,9 +3,10 @@
 #include <numeric>
 #include <cassert>
 #include <queue>
-#include <omp.h>
 #include <fstream>
 #include <iterator>
+#include <iostream>
+#include <chrono>
 
 extern "C" {
 #include <GraphBLAS.h>
@@ -13,7 +14,6 @@ extern "C" {
 }
 
 #include "utils.h"
-#include "computation_timer.hpp"
 #include "load.h"
 
 namespace {
@@ -139,10 +139,10 @@ void report_info(const BenchmarkParameters &parameters, int iteration, const std
 }
 
 void report(const BenchmarkParameters &parameters, int iteration, const std::string &phase,
-            unsigned long long runtime,
+            std::chrono::nanoseconds runtime,
             std::optional<std::vector<score_type>> result_reversed_opt = std::nullopt) {
     report_info(parameters, iteration, phase);
-    std::cout << "Time" << ';' << runtime << std::endl;
+    std::cout << "Time" << ';' << runtime.count() << std::endl;
 
     if (result_reversed_opt) {
         const auto &result_reversed = result_reversed_opt.value();
@@ -165,13 +165,18 @@ void report(const BenchmarkParameters &parameters, int iteration, const std::str
 int main(int argc, char **argv) {
     BenchmarkParameters parameters = parse_benchmark_params();
 
-    ComputationTimer total_timer{"Q2"};
-
     ok(LAGraph_init());
     GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.thread_num);
-    std::cout << parameters.thread_num << '/' << omp_get_max_threads() << std::endl;
+    // std::cout << parameters.thread_num << '/' << omp_get_max_threads() << std::endl;
+
+    using namespace std::chrono;
+    auto load_start = high_resolution_clock::now();
 
     Q2_Input input = load(parameters.ChangePath);
+
+    report(parameters, 0, BenchmarkPhase::Load, round<nanoseconds>(high_resolution_clock::now() - load_start));
+
+    auto initial_start = high_resolution_clock::now();
 
     queue_type top_scores;
 
@@ -209,7 +214,8 @@ int main(int argc, char **argv) {
         top_scores_vector.emplace_back(score, timestamp, comment_id);
     }
 
-    report(parameters, -1, BenchmarkPhase::Initial, 99999, top_scores_vector);
+    report(parameters, 0, BenchmarkPhase::Initial, round<nanoseconds>(high_resolution_clock::now() - initial_start),
+           top_scores_vector);
 
     // Cleanup
     input.free();
