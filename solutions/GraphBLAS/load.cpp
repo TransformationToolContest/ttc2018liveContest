@@ -87,5 +87,12 @@ Q2_Input load(const std::string &base_folder) {
                              friends_src_columns.data(), friends_trg_columns.data(), friends_values.get(),
                              input.friends_num, GrB_LOR));
 
+    // make sure tuples are in row-major order (SuiteSparse extension)
+    GxB_Format_Value format;
+    ok(GxB_Matrix_Option_get(input.likes_matrix_tran, GxB_FORMAT, &format));
+    if (format != GxB_BY_ROW) {
+        throw std::runtime_error{"Matrix is not CSR"};
+    }
+
     return input;
 }

@@ -163,30 +163,22 @@ void report(const BenchmarkParameters &parameters, int iteration, const std::str
 
 }
 
-int main(int argc, char **argv) {
-    BenchmarkParameters parameters = parse_benchmark_params();
-
-    ok(LAGraph_init());
-    GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.thread_num);
-    // std::cout << parameters.thread_num << '/' << omp_get_max_threads() << std::endl;
-
+Q2_Input load(const BenchmarkParameters &parameters) {
     using namespace std::chrono;
     auto load_start = high_resolution_clock::now();
 
     Q2_Input input = load(parameters.ChangePath);
 
-    report(parameters, 0, BenchmarkPhase::Load, round<nanoseconds>(high_resolution_clock::now() - load_start));
+    report(parameters, 0, BenchmarkPhase::Load, round<nanoseconds>(
+            high_resolution_clock::now() - load_start));
+    return input;
+}
 
+void initial(const BenchmarkParameters &parameters, const Q2_Input &input) {
+    using namespace std::chrono;
     auto initial_start = high_resolution_clock::now();
 
     queue_type top_scores;
-
-    // make sure tuples are in row-major order (SuiteSparse extension)
-    GxB_Format_Value format;
-    ok(GxB_Matrix_Option_get(input.likes_matrix_tran, GxB_FORMAT, &format));
-    if (format != GxB_BY_ROW) {
-        throw std::runtime_error{"Matrix is not CSR"};
-    }
 
     std::unique_ptr<GrB_Index[]> likes_trg_comment_columns{new GrB_Index[input.likes_num]},
             likes_src_user_columns{new GrB_Index[input.likes_num]};
@@ -216,12 +208,12 @@ int main(int argc, char **argv) {
             top_scores_vector.emplace_back(score, timestamp, comment_col);
             top_scores.pop();
         }
-        for(const auto &score_tuple : top_scores_vector){
+        for (const auto &score_tuple : top_scores_vector) {
             top_scores.push(score_tuple);
         }
 
         for (GrB_Index comment_col = 0; comment_col < input.comments_size(); ++comment_col) {
-            if(comment_cols.emplace(comment_col).second) {
+            if (comment_cols.emplace(comment_col).second) {
                 top_scores.push(std::make_tuple(0, input.comments[comment_col].timestamp, comment_col));
             }
 
@@ -241,6 +233,17 @@ int main(int argc, char **argv) {
 
     report(parameters, 0, BenchmarkPhase::Initial, round<nanoseconds>(high_resolution_clock::now() - initial_start),
            top_scores_vector);
+}
+
+int main(int argc, char **argv) {
+    BenchmarkParameters parameters = parse_benchmark_params();
+
+    ok(LAGraph_init());
+    GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.thread_num);
+    // std::cout << parameters.thread_num << '/' << omp_get_max_threads() << std::endl;
+
+    Q2_Input input = load(parameters);
+    initial(parameters, input);
 
     // Cleanup
     input.free();
