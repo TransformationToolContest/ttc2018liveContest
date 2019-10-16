@@ -83,16 +83,6 @@ namespace {
     }
 }
 
-struct BenchmarkParameters {
-    std::string ChangePath;
-    std::string RunIndex;
-    int Sequences;
-    std::string Tool;
-    std::string ChangeSet;
-    std::string Query;
-    unsigned long thread_num = 1;
-};
-
 std::string getenv_string(const char *name) {
     const char *value = std::getenv(name);
     if (value)
@@ -167,7 +157,7 @@ Q2_Input load(const BenchmarkParameters &parameters) {
     using namespace std::chrono;
     auto load_start = high_resolution_clock::now();
 
-    Q2_Input input = load(parameters.ChangePath);
+    Q2_Input input = load_initial(parameters);
 
     report(parameters, 0, BenchmarkPhase::Load, round<nanoseconds>(
             high_resolution_clock::now() - load_start));

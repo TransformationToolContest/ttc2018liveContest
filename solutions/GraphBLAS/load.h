@@ -13,6 +13,8 @@ extern "C" {
 struct Comment {
     uint64_t comment_id;
     time_t timestamp;
+
+    Comment(uint64_t comment_id, time_t timestamp) : comment_id(comment_id), timestamp(timestamp) {}
 };
 
 struct Q2_Input {
@@ -39,6 +41,6 @@ struct Q2_Input {
     }
 };
 
-Q2_Input load(const std::string& base_folder);
+Q2_Input load_initial(const BenchmarkParameters &parameters);
 
 #endif //GRAPHBLAS_LOAD_H

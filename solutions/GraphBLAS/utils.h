@@ -7,22 +7,15 @@ extern "C" {
 #include <LAGraph.h>
 }
 
-/*
- * ARGUMENT PARSING FUNCTIONS
- */
-
-typedef struct {
-  std::string vertex_file;
-  std::string edge_file;
-  std::string market_file;
-  std::string mapping_file;
-  bool weighted = false;
-  bool directed = false;
-} ConverterParameters;
-
-ConverterParameters ParseConverterParameters(int argc, char **argv);
-
-time_t GetCurrentMilliseconds();
+struct BenchmarkParameters {
+    std::string ChangePath;
+    std::string RunIndex;
+    int Sequences;
+    std::string Tool;
+    std::string ChangeSet;
+    std::string Query;
+    unsigned long thread_num = 1;
+};
 
 void WriteOutDebugMatrix(const char *title, GrB_Matrix result);
 
