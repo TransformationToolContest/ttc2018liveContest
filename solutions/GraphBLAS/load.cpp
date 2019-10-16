@@ -116,7 +116,9 @@ Q2_Input load_initial(const BenchmarkParameters &parameters) {
     return input;
 }
 
-void load_updates(int iteration, const BenchmarkParameters &parameters, Q2_Input &input) {
+void load_and_apply_updates(int iteration, std::vector<std::pair<GrB_Index, GrB_Index>> &friends_updates,
+                            std::vector<std::pair<GrB_Index, GrB_Index>> &likes_updates,
+                            const BenchmarkParameters &parameters, Q2_Input &input) {
     std::stringstream change_path;
     change_path << parameters.ChangePath << "/change"
                 << std::setfill('0') << std::setw(2)
@@ -129,7 +131,6 @@ void load_updates(int iteration, const BenchmarkParameters &parameters, Q2_Input
 
     auto old_users_size = input.users_size(),
             old_comments_size = input.comments_size();
-    std::vector<std::pair<GrB_Index, GrB_Index>> friends_updates, likes_updates;
 
     std::array<char, 8 + 1> change_type;  // NOLINT(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
     while (change_file >> std::ws, change_file.getline(change_type.data(), change_type.size(), '|')) {

@@ -43,6 +43,8 @@ struct Q2_Input {
 
 Q2_Input load_initial(const BenchmarkParameters &parameters);
 
-void load_updates(int iteration, const BenchmarkParameters &parameters, Q2_Input &input);
+void load_and_apply_updates(int iteration, std::vector<std::pair<GrB_Index, GrB_Index>> &friends_updates,
+                            std::vector<std::pair<GrB_Index, GrB_Index>> &likes_updates,
+                            const BenchmarkParameters &parameters, Q2_Input &input);
 
 #endif //GRAPHBLAS_LOAD_H
