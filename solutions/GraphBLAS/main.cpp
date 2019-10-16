@@ -47,13 +47,16 @@ namespace {
             GrB_Vector components_vector = nullptr;
             ok(LAGraph_cc(friends_subgraph, &components_vector));
 
-            GrB_Index nvals = input.likes_num;
+            GrB_Index nvals;
+#ifndef NDEBUG
+            nvals = input.likes_num;
             ok(GrB_Vector_nvals(&nvals, components_vector));
             assert(nvals == likes_count);
 
             GrB_Index n;
             ok(GrB_Vector_size(&n, components_vector));
             assert(n == likes_count);
+#endif
 
             std::vector<uint64_t> components(likes_count),
                     component_sizes(likes_count);
