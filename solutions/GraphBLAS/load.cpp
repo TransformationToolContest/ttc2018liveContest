@@ -159,34 +159,33 @@ load_updates(std::vector<std::string> &types, int iteration, const BenchmarkPara
 
     if (input.users_size() > old_users_size) {
         ok(GxB_Matrix_resize(input.friends_matrix, input.users_size(), input.users_size()));
-
-        GrB_Index nvals;
-        ok(GrB_Matrix_nvals(&nvals, input.friends_matrix));
-        assert(nvals == input.friends_num);
-
-        for (auto[user1_column, user2_column] : friends_updates) {
-            ok(GrB_Matrix_setElement_BOOL(input.friends_matrix, true, user1_column, user2_column));
-        }
-
-        input.friends_num += friends_updates.size();
-        ok(GrB_Matrix_nvals(&nvals, input.friends_matrix));
-        assert(nvals == input.friends_num);
     }
+
+    GrB_Index nvals;
+    ok(GrB_Matrix_nvals(&nvals, input.friends_matrix));
+    assert(nvals == input.friends_num);
+
+    for (auto[user1_column, user2_column] : friends_updates) {
+        ok(GrB_Matrix_setElement_BOOL(input.friends_matrix, true, user1_column, user2_column));
+    }
+
+    input.friends_num += friends_updates.size();
+    ok(GrB_Matrix_nvals(&nvals, input.friends_matrix));
+    assert(nvals == input.friends_num);
 
     if (input.comments_size() > old_comments_size
         || input.users_size() > old_users_size) {
         ok(GxB_Matrix_resize(input.likes_matrix_tran, input.comments_size(), input.users_size()));
-
-        GrB_Index nvals;
-        ok(GrB_Matrix_nvals(&nvals, input.likes_matrix_tran));
-        assert(nvals == input.likes_num);
-
-        for (auto[user_column, comment_column] : likes_updates) {
-            ok(GrB_Matrix_setElement_BOOL(input.likes_matrix_tran, true, comment_column, user_column));
-        }
-
-        input.likes_num += likes_updates.size();
-        ok(GrB_Matrix_nvals(&nvals, input.likes_matrix_tran));
-        assert(nvals == input.likes_num);
     }
+
+    ok(GrB_Matrix_nvals(&nvals, input.likes_matrix_tran));
+    assert(nvals == input.likes_num);
+
+    for (auto[user_column, comment_column] : likes_updates) {
+        ok(GrB_Matrix_setElement_BOOL(input.likes_matrix_tran, true, comment_column, user_column));
+    }
+
+    input.likes_num += likes_updates.size();
+    ok(GrB_Matrix_nvals(&nvals, input.likes_matrix_tran));
+    assert(nvals == input.likes_num);
 }
