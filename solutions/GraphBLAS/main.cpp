@@ -241,7 +241,7 @@ int main(int argc, char **argv) {
 
     std::vector<std::string> types;
     for (int iteration = 1; iteration <= parameters.Sequences; ++iteration) {
-        load_updates(types, iteration, parameters, input);
+        load_updates(iteration, parameters, input);
         initial(parameters, input, iteration, BenchmarkPhase::Update);
     }
 
