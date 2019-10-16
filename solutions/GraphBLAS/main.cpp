@@ -235,6 +235,11 @@ int main(int argc, char **argv) {
     Q2_Input input = load(parameters);
     initial(parameters, input);
 
+    std::vector<std::string> types;
+    for (int iteration = 1; iteration <= parameters.Sequences; ++iteration) {
+        load_updates(types, iteration, parameters, input);
+    }
+
     // Cleanup
     input.free();
     ok(GrB_finalize());

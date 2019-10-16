@@ -4,7 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include "load.h"
-
+#include <cassert>
 #include "utils.h"
 
 bool read_comment_line(std::ifstream &comments_file, Q2_Input &input) {
@@ -114,4 +114,79 @@ Q2_Input load_initial(const BenchmarkParameters &parameters) {
     }
 
     return input;
+}
+
+void
+load_updates(std::vector<std::string> &types, int iteration, const BenchmarkParameters &parameters, Q2_Input &input) {
+    std::stringstream change_path;
+    change_path << parameters.ChangePath << "/change"
+                << std::setfill('0') << std::setw(2)
+                << iteration << ".csv";
+
+    std::ifstream change_file{change_path.str()};
+    if (!change_file) {
+        throw std::runtime_error{"Failed to open input file"};
+    }
+
+    auto old_users_size = input.users_size(),
+            old_comments_size = input.comments_size();
+    std::vector<std::pair<GrB_Index, GrB_Index>> friends_updates, likes_updates;
+
+    std::array<char, 8 + 1> change_type;  // NOLINT(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+    while (change_file >> std::ws, change_file.getline(change_type.data(), change_type.size(), '|')) {
+        types.emplace_back(change_type.data());
+
+        if (strcmp(change_type.data(), "Friends") == 0) {
+            GrB_Index user1_column, user2_column;
+            read_friends_line(user1_column, user2_column, change_file, input);
+
+            friends_updates.emplace_back(user1_column, user2_column);
+        } else if (strcmp(change_type.data(), "Likes") == 0) {
+            GrB_Index user_column, comment_column;
+            read_likes_line(user_column, comment_column, change_file, input);
+
+            likes_updates.emplace_back(user_column, comment_column);
+        } else if (strcmp(change_type.data(), "Comments") == 0)
+            read_comment_line(change_file, input);
+        else if (strcmp(change_type.data(), "Posts") == 0
+                 || strcmp(change_type.data(), "Users") == 0)
+            // noop for posts and users
+            // new users will be processed when a connecting edge is added
+            change_file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        else
+            throw std::runtime_error{std::string{"Unknown change type: "} + change_type.data()};
+    }
+
+    if (input.users_size() > old_users_size) {
+        ok(GxB_Matrix_resize(input.friends_matrix, input.users_size(), input.users_size()));
+
+        GrB_Index nvals;
+        ok(GrB_Matrix_nvals(&nvals, input.friends_matrix));
+        assert(nvals == input.friends_num);
+
+        for (auto[user1_column, user2_column] : friends_updates) {
+            ok(GrB_Matrix_setElement_BOOL(input.friends_matrix, true, user1_column, user2_column));
+        }
+
+        input.friends_num += friends_updates.size();
+        ok(GrB_Matrix_nvals(&nvals, input.friends_matrix));
+        assert(nvals == input.friends_num);
+    }
+
+    if (input.comments_size() > old_comments_size
+        || input.users_size() > old_users_size) {
+        ok(GxB_Matrix_resize(input.likes_matrix_tran, input.comments_size(), input.users_size()));
+
+        GrB_Index nvals;
+        ok(GrB_Matrix_nvals(&nvals, input.likes_matrix_tran));
+        assert(nvals == input.likes_num);
+
+        for (auto[user_column, comment_column] : likes_updates) {
+            ok(GrB_Matrix_setElement_BOOL(input.likes_matrix_tran, true, comment_column, user_column));
+        }
+
+        input.likes_num += likes_updates.size();
+        ok(GrB_Matrix_nvals(&nvals, input.likes_matrix_tran));
+        assert(nvals == input.likes_num);
+    }
 }
