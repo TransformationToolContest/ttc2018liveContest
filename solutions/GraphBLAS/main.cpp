@@ -164,7 +164,8 @@ Q2_Input load(const BenchmarkParameters &parameters) {
     return input;
 }
 
-void initial(const BenchmarkParameters &parameters, const Q2_Input &input) {
+void initial(const BenchmarkParameters &parameters, const Q2_Input &input, int iteration = 0,
+             const std::string &phase = BenchmarkPhase::Initial) {
     using namespace std::chrono;
     auto initial_start = high_resolution_clock::now();
 
@@ -221,7 +222,7 @@ void initial(const BenchmarkParameters &parameters, const Q2_Input &input) {
         top_scores_vector.emplace_back(score, timestamp, comment_id);
     }
 
-    report(parameters, 0, BenchmarkPhase::Initial, round<nanoseconds>(high_resolution_clock::now() - initial_start),
+    report(parameters, iteration, phase, round<nanoseconds>(high_resolution_clock::now() - initial_start),
            top_scores_vector);
 }
 
@@ -238,6 +239,7 @@ int main(int argc, char **argv) {
     std::vector<std::string> types;
     for (int iteration = 1; iteration <= parameters.Sequences; ++iteration) {
         load_updates(types, iteration, parameters, input);
+        initial(parameters, input, iteration, BenchmarkPhase::Update);
     }
 
     // Cleanup
