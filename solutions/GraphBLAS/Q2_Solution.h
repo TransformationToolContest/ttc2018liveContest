@@ -1,5 +1,4 @@
-#ifndef GRAPHBLAS_Q2_SOLUTION_H
-#define GRAPHBLAS_Q2_SOLUTION_H
+#pragma once
 
 #include <chrono>
 #include <utility>
@@ -60,6 +59,3 @@ public:
         input.free();
     }
 };
-
-
-#endif //GRAPHBLAS_Q2_SOLUTION_H

@@ -1,7 +1,6 @@
 #include <algorithm>
 #include <memory>
 #include <numeric>
-#include <cassert>
 #include <queue>
 #include <fstream>
 #include <iterator>
@@ -15,7 +14,6 @@ extern "C" {
 }
 
 #include "utils.h"
-#include "load.h"
 #include "Q2_Solution_Batch.h"
 
 int main(int argc, char **argv) {

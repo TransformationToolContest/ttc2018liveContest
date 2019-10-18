@@ -1,5 +1,4 @@
-#ifndef GRAPHBLAS_LOAD_H
-#define GRAPHBLAS_LOAD_H
+#pragma once
 
 extern "C" {
 #include <GraphBLAS.h>
@@ -60,5 +59,3 @@ Q2_Input load_initial(const BenchmarkParameters &parameters);
 void load_and_apply_updates(int iteration, std::vector<Friends_Update> &friends_updates,
                             std::vector<Likes_Update> &likes_updates,
                             const BenchmarkParameters &parameters, Q2_Input &input);
-
-#endif //GRAPHBLAS_LOAD_H

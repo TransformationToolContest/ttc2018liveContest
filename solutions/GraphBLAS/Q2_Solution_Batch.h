@@ -1,5 +1,4 @@
-#ifndef GRAPHBLAS_Q2_SOLUTION_BATCH_H
-#define GRAPHBLAS_Q2_SOLUTION_BATCH_H
+#pragma once
 
 #include <queue>
 #include <algorithm>
@@ -141,6 +140,3 @@ public:
         return initial_calculation();
     }
 };
-
-
-#endif //GRAPHBLAS_Q2_SOLUTION_BATCH_H
