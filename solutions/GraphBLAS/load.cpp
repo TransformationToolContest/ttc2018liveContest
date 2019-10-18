@@ -116,8 +116,8 @@ Q2_Input load_initial(const BenchmarkParameters &parameters) {
     return input;
 }
 
-void load_and_apply_updates(int iteration, std::vector<std::pair<GrB_Index, GrB_Index>> &friends_updates,
-                            std::vector<std::pair<GrB_Index, GrB_Index>> &likes_updates,
+void load_and_apply_updates(int iteration, std::vector<Friends_Update> &friends_updates,
+                            std::vector<Likes_Update> &likes_updates,
                             const BenchmarkParameters &parameters, Q2_Input &input) {
     std::stringstream change_path;
     change_path << parameters.ChangePath << "/change"

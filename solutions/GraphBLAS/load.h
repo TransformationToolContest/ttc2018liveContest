@@ -41,10 +41,24 @@ struct Q2_Input {
     }
 };
 
+struct Friends_Update {
+    GrB_Index user1_column, user2_column;
+
+    Friends_Update(GrB_Index user1Column, GrB_Index user2Column)
+            : user1_column(user1Column), user2_column(user2Column) {}
+};
+
+struct Likes_Update {
+    GrB_Index user_column, comment_column;
+
+    Likes_Update(GrB_Index userColumn, GrB_Index commentColumn)
+            : user_column(userColumn), comment_column(commentColumn) {}
+};
+
 Q2_Input load_initial(const BenchmarkParameters &parameters);
 
-void load_and_apply_updates(int iteration, std::vector<std::pair<GrB_Index, GrB_Index>> &friends_updates,
-                            std::vector<std::pair<GrB_Index, GrB_Index>> &likes_updates,
+void load_and_apply_updates(int iteration, std::vector<Friends_Update> &friends_updates,
+                            std::vector<Likes_Update> &likes_updates,
                             const BenchmarkParameters &parameters, Q2_Input &input);
 
 #endif //GRAPHBLAS_LOAD_H

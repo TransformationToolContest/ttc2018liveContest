@@ -136,8 +136,8 @@ public:
     }
 
     std::vector<score_type>
-    update_calculation(int iteration, const std::vector<std::pair<GrB_Index, GrB_Index>> &friends_updates,
-                       const std::vector<std::pair<GrB_Index, GrB_Index>> &likes_updates) override {
+    update_calculation(int iteration, const std::vector<Friends_Update> &friends_updates,
+                       const std::vector<Likes_Update> &likes_updates) override {
         return initial_calculation();
     }
 };

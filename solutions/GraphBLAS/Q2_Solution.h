@@ -31,8 +31,8 @@ public:
                top_scores_vector);
     }
 
-    virtual void load_updates(int iteration, std::vector<std::pair<GrB_Index, GrB_Index>> &friends_updates,
-                              std::vector<std::pair<GrB_Index, GrB_Index>> &likes_updates) {
+    virtual void load_updates(int iteration, std::vector<Friends_Update> &friends_updates,
+                              std::vector<Likes_Update> &likes_updates) {
         load_and_apply_updates(iteration, friends_updates, likes_updates, parameters, input);
     }
 
@@ -40,7 +40,8 @@ public:
         using namespace std::chrono;
         auto update_start = high_resolution_clock::now();
 
-        std::vector<std::pair<GrB_Index, GrB_Index>> friends_updates, likes_updates;
+        std::vector<Friends_Update> friends_updates;
+        std::vector<Likes_Update> likes_updates;
         load_updates(iteration, friends_updates, likes_updates);
         std::vector<score_type> top_scores_vector = update_calculation(iteration, friends_updates, likes_updates);
 
@@ -52,8 +53,8 @@ public:
     virtual std::vector<score_type> initial_calculation() = 0;
 
     virtual std::vector<score_type>
-    update_calculation(int iteration, const std::vector<std::pair<GrB_Index, GrB_Index>> &friends_updates,
-                       const std::vector<std::pair<GrB_Index, GrB_Index>> &likes_updates) = 0;
+    update_calculation(int iteration, const std::vector<Friends_Update> &friends_updates,
+                       const std::vector<Likes_Update> &likes_updates) = 0;
 
     void free() {
         input.free();
