@@ -24,7 +24,7 @@ public:
         using namespace std::chrono;
         auto initial_start = high_resolution_clock::now();
 
-        std::vector<score_type> top_scores_vector = initial_calculation();
+        std::vector<uint64_t> top_scores_vector = initial_calculation();
 
         report(parameters, 0, BenchmarkPhase::Initial, round<nanoseconds>(high_resolution_clock::now() - initial_start),
                top_scores_vector);
@@ -42,16 +42,16 @@ public:
         std::vector<Friends_Update> friends_updates;
         std::vector<Likes_Update> likes_updates;
         load_updates(iteration, friends_updates, likes_updates);
-        std::vector<score_type> top_scores_vector = update_calculation(iteration, friends_updates, likes_updates);
+        std::vector<uint64_t> top_scores_vector = update_calculation(iteration, friends_updates, likes_updates);
 
         report(parameters, iteration, BenchmarkPhase::Update,
                round<nanoseconds>(high_resolution_clock::now() - update_start),
                top_scores_vector);
     }
 
-    virtual std::vector<score_type> initial_calculation() = 0;
+    virtual std::vector<uint64_t> initial_calculation() = 0;
 
-    virtual std::vector<score_type>
+    virtual std::vector<uint64_t>
     update_calculation(int iteration, const std::vector<Friends_Update> &friends_updates,
                        const std::vector<Likes_Update> &likes_updates) = 0;
 

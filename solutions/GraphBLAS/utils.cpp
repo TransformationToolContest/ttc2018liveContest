@@ -48,7 +48,7 @@ void report_info(const BenchmarkParameters &parameters, int iteration, const std
 
 void
 report(const BenchmarkParameters &parameters, int iteration, const std::string &phase, std::chrono::nanoseconds runtime,
-       std::optional<std::vector<score_type>> result_reversed_opt) {
+       std::optional<std::vector<uint64_t>> result_reversed_opt) {
     report_info(parameters, iteration, phase);
     std::cout << "Time" << ';' << runtime.count() << std::endl;
 
@@ -59,7 +59,7 @@ report(const BenchmarkParameters &parameters, int iteration, const std::string &
         std::cout << "Elements" << ';';
 
         for (auto iter = result_reversed.rbegin(); iter != result_reversed.rend(); ++iter) {
-            auto comment_id = std::get<2>(*iter);
+            auto comment_id = *iter;
 
             if (iter != result_reversed.rbegin())
                 std::cout << '|';

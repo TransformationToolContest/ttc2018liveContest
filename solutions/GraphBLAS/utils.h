@@ -32,7 +32,7 @@ struct BenchmarkPhase {
 
 void report(const BenchmarkParameters &parameters, int iteration, const std::string &phase,
             std::chrono::nanoseconds runtime,
-            std::optional<std::vector<score_type>> result_reversed_opt = std::nullopt);
+            std::optional<std::vector<uint64_t>> result_reversed_opt = std::nullopt);
 
 void WriteOutDebugMatrix(const char *title, GrB_Matrix result);
 

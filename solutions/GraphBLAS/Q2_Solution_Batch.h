@@ -11,21 +11,33 @@
 #include "Q2_Solution.h"
 
 class Q2_Solution_Batch : public Q2_Solution {
-
-public:
+protected:
     using queue_type = std::priority_queue<score_type, std::vector<score_type>, std::greater<>>;
 
-    using Q2_Solution::Q2_Solution;
+    static std::vector<uint64_t> convert_score_type_to_comment_id(queue_type top_scores, const Q2_Input &input) {
+        std::vector<uint64_t> top_scores_vector;
+        top_scores_vector.reserve(3);
+
+        while (!top_scores.empty()) {
+            auto[score, timestamp, comment_col] = top_scores.top();
+            top_scores.pop();
+
+            uint64_t comment_id = input.comments[comment_col].comment_id;
+            top_scores_vector.emplace_back(comment_id);
+        }
+
+        return top_scores_vector;
+    }
 
     static inline void
-    compute_score_for_comment(const Q2_Input &input, GrB_Index comment_col, GrB_Index *likes_comment_array_first,
-                              GrB_Index *likes_comment_array_last, GrB_Index *likes_user_array_first,
+    compute_score_for_comment(const Q2_Input &input, GrB_Index comment_col, const GrB_Index *likes_comment_array_first,
+                              const GrB_Index *likes_comment_array_last, const GrB_Index *likes_user_array_first,
                               queue_type &top_scores) __attribute__ ((always_inline)) {
         auto[likes_comment_first, likes_comment_last] = std::equal_range(likes_comment_array_first,
                                                                          likes_comment_array_last, comment_col);
         if (likes_comment_first != likes_comment_last) {
             GrB_Index likes_count = std::distance(likes_comment_first, likes_comment_last);
-            GrB_Index *likes_user_first =
+            const GrB_Index *likes_user_first =
                     likes_user_array_first + std::distance(likes_comment_array_first, likes_comment_first);
 
             GrB_Matrix friends_subgraph;
@@ -76,8 +88,26 @@ public:
         }
     }
 
-    std::vector<score_type> initial_calculation() override {
-        queue_type top_scores;
+public:
+
+    using Q2_Solution::Q2_Solution;
+
+    virtual void compute_score_for_all_comments(const GrB_Index *likes_comment_array_first,
+                                                const GrB_Index *likes_comment_array_last,
+                                                const GrB_Index *likes_user_array_first, queue_type &top_scores) const {
+        // find tuple sequences of each comment in row-major array
+        for (GrB_Index comment_col = 0; comment_col < input.comments_size(); ++comment_col) {
+            compute_score_for_comment(input, comment_col, likes_comment_array_first, likes_comment_array_last,
+                                      likes_user_array_first, top_scores);
+        }
+    }
+
+    virtual queue_type init_top_scores() {
+        return {};
+    }
+
+    queue_type calculate_score() {
+        queue_type top_scores = init_top_scores();
 
         std::unique_ptr<GrB_Index[]> likes_trg_comment_columns{new GrB_Index[input.likes_num]},
                 likes_src_user_columns{new GrB_Index[input.likes_num]};
@@ -91,13 +121,10 @@ public:
                                          input.likes_matrix_tran));
         assert(nvals == input.likes_num);
 
-        // find tuple sequences of each comment in row-major array
-        for (GrB_Index comment_col = 0; comment_col < input.comments_size(); ++comment_col) {
-            compute_score_for_comment(input, comment_col, likes_comment_array_first, likes_comment_array_last,
-                                      likes_user_array_first, top_scores);
-        }
+        compute_score_for_all_comments(likes_comment_array_first, likes_comment_array_last,
+                                       likes_user_array_first, top_scores);
 
-        // if comments with likes are not enough
+        // if comments with likes are not enough collect comments without like
         if (top_scores.size() < 3) {
             std::set<GrB_Index> comment_cols;
             std::vector<score_type> top_scores_vector;
@@ -122,21 +149,16 @@ public:
             }
         }
 
-        std::vector<score_type> top_scores_vector;
-        while (!top_scores.empty()) {
-            auto[score, timestamp, comment_col] = top_scores.top();
-            top_scores.pop();
-
-            uint64_t comment_id = input.comments[comment_col].comment_id;
-            top_scores_vector.emplace_back(score, timestamp, comment_id);
-        }
-
-        return top_scores_vector;
+        return top_scores;
     }
 
-    std::vector<score_type>
-    update_calculation(int iteration, const std::vector<Friends_Update> &friends_updates,
-                       const std::vector<Likes_Update> &likes_updates) override {
-        return initial_calculation();
+    std::vector<uint64_t> initial_calculation() override {
+        return convert_score_type_to_comment_id(calculate_score(), input);
+    }
+
+    std::vector<uint64_t> update_calculation(int iteration,
+                                             const std::vector<Friends_Update> &friends_updates,
+                                             const std::vector<Likes_Update> &likes_updates) override {
+        return convert_score_type_to_comment_id(calculate_score(), input);
     }
 };
