@@ -41,11 +41,11 @@ At a first glance, invoke it without any arguments so that the solution will be 
 One might fine tune the script for the following purposes:
 * `run.py -b` -- builds the projects
 * `run.py -b -s` -- builds the projects without testing
-* `run.py -g` -- generates the instance models
 * `run.py -m` -- run the benchmark without building
 * `run.py -v` -- visualizes the results of the latest benchmark
 * `run.py -c` -- check results by comparing them to the reference output. The benchmark shall already been executed using `-m`.
 * `run.py -t` -- build the project and run tests (usually unit tests as defined for the given solution)
+* `run.py -d` -- runs the process in debug mode, i.e. with the `Debug` environment variable set to `true`
 
 The `config` directory contains the configuration for the scripts:
 * `config.json` -- configuration for the model generation and the benchmark
