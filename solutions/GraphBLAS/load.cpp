@@ -7,7 +7,7 @@
 #include <cassert>
 #include "utils.h"
 
-bool read_comment_line(std::ifstream &comments_file, Q2_Input &input) {
+bool read_comment_line(std::ifstream &comments_file, Q2_Input &input, GrB_Index &comment_col) {
     char delimiter;
     const char *timestamp_format = "%Y-%m-%d %H:%M:%S";
 
@@ -23,11 +23,16 @@ bool read_comment_line(std::ifstream &comments_file, Q2_Input &input) {
     // ignore remaining columns
     comments_file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    GrB_Index column = input.comments.size();
-    input.comment_id_to_column.emplace(comment_id, column);
+    comment_col = input.comments.size();
+    input.comment_id_to_column.emplace(comment_id, comment_col);
     input.comments.emplace_back(comment_id, timestamp);
 
     return true;
+}
+
+bool read_comment_line(std::ifstream &comments_file, Q2_Input &input) {
+    GrB_Index comment_col;
+    return read_comment_line(comments_file, input, comment_col);
 }
 
 bool read_friends_line(GrB_Index &user1_column, GrB_Index &user2_column, std::ifstream &friends_file, Q2_Input &input) {
@@ -89,21 +94,19 @@ Q2_Input load_initial(const BenchmarkParameters &parameters) {
     }
 
     input.likes_num = likes_src_user_columns.size();
-    std::unique_ptr<bool[]> likes_values{new bool[input.likes_num]};
-    std::fill_n(likes_values.get(), input.likes_num, true);
 
     ok(GrB_Matrix_new(&input.likes_matrix_tran, GrB_BOOL, input.comments_size(), input.users_size()));
     ok(GrB_Matrix_build_BOOL(input.likes_matrix_tran,
-                             likes_trg_comment_columns.data(), likes_src_user_columns.data(), likes_values.get(),
+                             likes_trg_comment_columns.data(), likes_src_user_columns.data(),
+                             array_of_true(input.likes_num).get(),
                              input.likes_num, GrB_LOR));
 
     input.friends_num = friends_src_columns.size();
-    std::unique_ptr<bool[]> friends_values{new bool[input.friends_num]};
-    std::fill_n(friends_values.get(), input.friends_num, true);
 
     ok(GrB_Matrix_new(&input.friends_matrix, GrB_BOOL, input.users_size(), input.users_size()));
     ok(GrB_Matrix_build_BOOL(input.friends_matrix,
-                             friends_src_columns.data(), friends_trg_columns.data(), friends_values.get(),
+                             friends_src_columns.data(), friends_trg_columns.data(),
+                             array_of_true(input.friends_num).get(),
                              input.friends_num, GrB_LOR));
 
     // make sure tuples are in row-major order (SuiteSparse extension)
@@ -116,8 +119,7 @@ Q2_Input load_initial(const BenchmarkParameters &parameters) {
     return input;
 }
 
-void load_and_apply_updates(int iteration, std::vector<Friends_Update> &friends_updates,
-                            std::vector<Likes_Update> &likes_updates,
+void load_and_apply_updates(int iteration, Update_Type &current_updates,
                             const BenchmarkParameters &parameters, Q2_Input &input) {
     std::stringstream change_path;
     change_path << parameters.ChangePath << "/change"
@@ -138,16 +140,18 @@ void load_and_apply_updates(int iteration, std::vector<Friends_Update> &friends_
             GrB_Index user1_column, user2_column;
             read_friends_line(user1_column, user2_column, change_file, input);
 
-            friends_updates.emplace_back(user1_column, user2_column);
+            current_updates.friends_updates.emplace_back(user1_column, user2_column);
         } else if (strcmp(change_type.data(), "Likes") == 0) {
             GrB_Index user_column, comment_column;
             read_likes_line(user_column, comment_column, change_file, input);
 
-            likes_updates.emplace_back(user_column, comment_column);
-        } else if (strcmp(change_type.data(), "Comments") == 0)
-            read_comment_line(change_file, input);
-        else if (strcmp(change_type.data(), "Posts") == 0
-                 || strcmp(change_type.data(), "Users") == 0)
+            current_updates.likes_updates.emplace_back(user_column, comment_column);
+        } else if (strcmp(change_type.data(), "Comments") == 0) {
+            GrB_Index comment_col;
+            read_comment_line(change_file, input, comment_col);
+            current_updates.new_comments.emplace_back(comment_col);
+        } else if (strcmp(change_type.data(), "Posts") == 0
+                   || strcmp(change_type.data(), "Users") == 0)
             // noop for posts and users
             // new users will be processed when a connecting edge is added
             change_file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -171,15 +175,15 @@ void load_and_apply_updates(int iteration, std::vector<Friends_Update> &friends_
     assert(nvals == input.likes_num);
 # endif
 
-    for (auto[user1_column, user2_column] : friends_updates) {
+    for (auto[user1_column, user2_column] : current_updates.friends_updates) {
         ok(GrB_Matrix_setElement_BOOL(input.friends_matrix, true, user1_column, user2_column));
     }
-    input.friends_num += friends_updates.size();
+    input.friends_num += current_updates.friends_updates.size();
 
-    for (auto[user_column, comment_column] : likes_updates) {
+    for (auto[user_column, comment_column] : current_updates.likes_updates) {
         ok(GrB_Matrix_setElement_BOOL(input.likes_matrix_tran, true, comment_column, user_column));
     }
-    input.likes_num += likes_updates.size();
+    input.likes_num += current_updates.likes_updates.size();
 
 #ifndef NDEBUG
     ok(GrB_Matrix_nvals(&nvals, input.friends_matrix));

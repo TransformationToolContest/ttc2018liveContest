@@ -15,6 +15,7 @@ extern "C" {
 
 #include "utils.h"
 #include "Q2_Solution_Batch.h"
+#include "Q2_Solution_Incremental_Per_Comment.h"
 
 int main(int argc, char **argv) {
     BenchmarkParameters parameters = parse_benchmark_params();
@@ -23,7 +24,7 @@ int main(int argc, char **argv) {
     GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.thread_num);
     // std::cout << parameters.thread_num << '/' << omp_get_max_threads() << std::endl;
 
-    Q2_Solution_Batch solution{parameters};
+    Q2_Solution_Incremental_Per_Comment solution{parameters};
 
     solution.load();
     solution.initial();

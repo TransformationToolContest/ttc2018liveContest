@@ -14,17 +14,15 @@ class Q2_Solution_Batch : public Q2_Solution {
 protected:
     using queue_type = std::priority_queue<score_type, std::vector<score_type>, std::greater<>>;
 
-    static std::vector<uint64_t> convert_score_type_to_comment_id(queue_type top_scores, const Q2_Input &input) {
+    static std::vector<uint64_t>
+    convert_score_type_to_comment_id(const std::vector<score_type> &top_scores, const Q2_Input &input) {
         std::vector<uint64_t> top_scores_vector;
         top_scores_vector.reserve(3);
 
-        while (!top_scores.empty()) {
-            auto[score, timestamp, comment_col] = top_scores.top();
-            top_scores.pop();
-
-            uint64_t comment_id = input.comments[comment_col].comment_id;
-            top_scores_vector.emplace_back(comment_id);
-        }
+        std::transform(top_scores.begin(), top_scores.end(), std::back_inserter(top_scores_vector),
+                       [&input](const auto &score_tuple) {
+                           return input.comments[std::get<2>(score_tuple)].comment_id;
+                       });
 
         return top_scores_vector;
     }
@@ -61,6 +59,7 @@ protected:
             assert(n == likes_count);
 #endif
 
+            // TODO: avoid value initialization
             std::vector<uint64_t> components(likes_count),
                     component_sizes(likes_count);
 
@@ -102,12 +101,8 @@ public:
         }
     }
 
-    virtual queue_type init_top_scores() {
-        return {};
-    }
-
-    queue_type calculate_score() {
-        queue_type top_scores = init_top_scores();
+    std::vector<score_type> calculate_score() {
+        queue_type top_scores;
 
         std::unique_ptr<GrB_Index[]> likes_trg_comment_columns{new GrB_Index[input.likes_num]},
                 likes_src_user_columns{new GrB_Index[input.likes_num]};
@@ -149,16 +144,21 @@ public:
             }
         }
 
-        return top_scores;
+        std::vector<score_type> top_scores_vector;
+
+        while (!top_scores.empty()) {
+            top_scores_vector.push_back(top_scores.top());
+            top_scores.pop();
+        }
+
+        return top_scores_vector;
     }
 
     std::vector<uint64_t> initial_calculation() override {
         return convert_score_type_to_comment_id(calculate_score(), input);
     }
 
-    std::vector<uint64_t> update_calculation(int iteration,
-                                             const std::vector<Friends_Update> &friends_updates,
-                                             const std::vector<Likes_Update> &likes_updates) override {
+    std::vector<uint64_t> update_calculation(int iteration, const Update_Type &current_updates) override {
         return convert_score_type_to_comment_id(calculate_score(), input);
     }
 };

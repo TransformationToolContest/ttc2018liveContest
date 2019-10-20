@@ -77,13 +77,13 @@ report(const BenchmarkParameters &parameters, int iteration, const std::string &
 void WriteOutDebugMatrix(const char *title, GrB_Matrix result) {
     printf("%s:\n", title);
     GrB_Index rows, cols;
-    GrB_Matrix_nrows(&rows, result);
-    GrB_Matrix_ncols(&cols, result);
+    ok(GrB_Matrix_nrows(&rows, result));
+    ok(GrB_Matrix_ncols(&cols, result));
     double element;
 
     for (GrB_Index i = 0; i < rows; i++) {
         for (GrB_Index j = 0; j < cols; j++) {
-            GrB_Info info = GrB_Matrix_extractElement_FP64(&element, result, i, j);
+            GrB_Info info = ok(GrB_Matrix_extractElement_FP64(&element, result, i, j), false);
 
             if (info == GrB_SUCCESS) {
                 printf("%g ", element);
@@ -103,11 +103,11 @@ void WriteOutDebugMatrix(const char *title, GrB_Matrix result) {
 void WriteOutDebugVector(const char *title, GrB_Vector result) {
     printf("%s:\n", title);
     GrB_Index size;
-    GrB_Vector_size(&size, result);
+    ok(GrB_Vector_size(&size, result));
     double element;
 
     for (unsigned int i = 0; i < size; i++) {
-        GrB_Info info = GrB_Vector_extractElement_FP64(&element, result, i);
+        GrB_Info info = ok(GrB_Vector_extractElement_FP64(&element, result, i), false);
 
         if (info == GrB_SUCCESS) {
             if (element == UINT64_MAX) {

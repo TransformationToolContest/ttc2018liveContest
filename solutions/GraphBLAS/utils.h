@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <vector>
 #include <chrono>
+#include <memory>
 
 extern "C" {
 #include <GraphBLAS.h>
@@ -49,8 +50,18 @@ void WriteOutDebugVector(const char *title, GrB_Vector result);
 // ok(GrB_Info) is a function that processes result of a GraphBLAS method and checks the status;
 // if a failure occurs, it returns the error status to the caller.
 
-void inline ok(GrB_Info info) {
-    if (info != GrB_SUCCESS) {
+inline __attribute__((always_inline))
+GrB_Info ok(GrB_Info info, bool no_value_is_error = true) {
+    if (info == GrB_SUCCESS || (!no_value_is_error && info == GrB_NO_VALUE))
+        return info;
+    else
         throw std::runtime_error{std::string{"GraphBLAS error: "} + GrB_error()};
-    }
+}
+
+inline __attribute__((always_inline))
+std::unique_ptr<bool[]> array_of_true(size_t n){
+    std::unique_ptr<bool[]> array{new bool[n]};
+    std::fill_n(array.get(), n, true);
+
+    return array;
 }

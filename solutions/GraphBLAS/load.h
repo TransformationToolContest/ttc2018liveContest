@@ -54,8 +54,13 @@ struct Likes_Update {
             : user_column(userColumn), comment_column(commentColumn) {}
 };
 
+struct Update_Type {
+    std::vector<Friends_Update> friends_updates;
+    std::vector<Likes_Update> likes_updates;
+    std::vector<GrB_Index> new_comments;
+};
+
 Q2_Input load_initial(const BenchmarkParameters &parameters);
 
-void load_and_apply_updates(int iteration, std::vector<Friends_Update> &friends_updates,
-                            std::vector<Likes_Update> &likes_updates,
+void load_and_apply_updates(int iteration, Update_Type &current_updates,
                             const BenchmarkParameters &parameters, Q2_Input &input);
