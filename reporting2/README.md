@@ -8,10 +8,13 @@ sudo apt install -y r-base r-base-dev pandoc
 sudo apt install -y libssl-dev libxml2-dev libcurl4-openssl-dev
 ```
 
-Run R and install the [Tidyverse](https://www.tidyverse.org/) package:
+Run R and install the [Tidyverse](https://www.tidyverse.org/) and [TinyTeX](https://yihui.name/tinytex/) package:
 
 ```R
 install.packages("tidyverse")
+
+install.packages("tinytex")
+tinytex::install_tinytex()
 ```
 
 (This [might fail](https://github.com/FTSRG/cheat-sheets/wiki/R-programming-language#installing-tidyverse-on-ubuntu) if you haven't installed the second group of packages, `rvest`, `xml2`, .etc.)
