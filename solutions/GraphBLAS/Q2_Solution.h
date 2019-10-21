@@ -15,7 +15,7 @@ public:
         using namespace std::chrono;
         auto load_start = high_resolution_clock::now();
 
-        input = load_initial(parameters);
+        input = load_initial_q2(parameters);
 
         report(parameters, 0, BenchmarkPhase::Load, round<nanoseconds>(high_resolution_clock::now() - load_start));
     }

@@ -9,11 +9,43 @@ extern "C" {
 #include <map>
 #include "utils.h"
 
+struct Post {
+    uint64_t post_id;
+    time_t timestamp;
+
+    Post(uint64_t post_id, time_t timestamp) : post_id(post_id), timestamp(timestamp) {}
+};
+
 struct Comment {
     uint64_t comment_id;
     time_t timestamp;
 
     Comment(uint64_t comment_id, time_t timestamp) : comment_id(comment_id), timestamp(timestamp) {}
+};
+
+struct Q1_Input {
+    std::vector<Post> posts;
+    std::map<uint64_t, GrB_Index> post_id_to_column;
+
+    std::map<uint64_t, GrB_Index> comment_id_to_column;
+
+    GrB_Matrix root_post_tran;
+    GrB_Vector likes_count_vec;
+
+    GrB_Index root_post_num, likes_count_num;
+
+    auto posts_size() const {
+        return posts.size();
+    }
+
+    auto comments_size() const {
+        return comment_id_to_column.size();
+    }
+
+    void free() {
+        ok(GrB_Matrix_free(&root_post_tran));
+        ok(GrB_Vector_free(&likes_count_vec));
+    }
 };
 
 struct Q2_Input {
@@ -60,7 +92,9 @@ struct Update_Type {
     std::vector<GrB_Index> new_comments;
 };
 
-Q2_Input load_initial(const BenchmarkParameters &parameters);
+Q1_Input load_initial_q1(const BenchmarkParameters &parameters);
+
+Q2_Input load_initial_q2(const BenchmarkParameters &parameters);
 
 void load_and_apply_updates(int iteration, Update_Type &current_updates,
                             const BenchmarkParameters &parameters, Q2_Input &input);
