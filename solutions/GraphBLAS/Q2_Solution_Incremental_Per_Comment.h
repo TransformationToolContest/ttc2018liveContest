@@ -12,7 +12,7 @@
 
 class Q2_Solution_Incremental_Per_Comment : public Q2_Solution_Batch {
     std::vector<score_type> last_result;
-    std::optional<std::reference_wrapper<const Update_Type>> current_updates_opt;
+    std::optional<std::reference_wrapper<const Update_Type_Q2>> current_updates_opt;
 
 public:
     using Q2_Solution_Batch::Q2_Solution_Batch;
@@ -121,7 +121,7 @@ public:
         }
     }
 
-    std::vector<uint64_t> update_calculation(int iteration, const Update_Type &current_updates) override {
+    std::vector<uint64_t> update_calculation(int iteration, const Update_Type_Q2 &current_updates) override {
         current_updates_opt = current_updates;
 
         last_result = calculate_score();

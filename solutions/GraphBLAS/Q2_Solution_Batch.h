@@ -88,7 +88,6 @@ protected:
     }
 
 public:
-
     using Q2_Solution::Q2_Solution;
 
     virtual void compute_score_for_all_comments(const GrB_Index *likes_comment_array_first,
@@ -158,7 +157,7 @@ public:
         return convert_score_type_to_comment_id(calculate_score(), input);
     }
 
-    std::vector<uint64_t> update_calculation(int iteration, const Update_Type &current_updates) override {
+    std::vector<uint64_t> update_calculation(int iteration, const Update_Type_Q2 &current_updates) override {
         return convert_score_type_to_comment_id(calculate_score(), input);
     }
 };

@@ -17,6 +17,17 @@ extern "C" {
 #include "Q2_Solution_Batch.h"
 #include "Q2_Solution_Incremental_Per_Comment.h"
 
+std::unique_ptr<BaseSolution> init_solution(BenchmarkParameters &parameters) {
+    if (parameters.Query == "Q2") {
+        if (parameters.Tool == "GBq2-Batch")
+            return std::make_unique<Q2_Solution_Batch>(parameters);
+        if (parameters.Tool == "GBq2-Incr-Comment")
+            return std::make_unique<Q2_Solution_Incremental_Per_Comment>(parameters);
+    }
+
+    throw std::runtime_error{"Unknown query and tool: " + parameters.Query + ", " + parameters.Tool};
+}
+
 int main(int argc, char **argv) {
     BenchmarkParameters parameters = parse_benchmark_params();
 
@@ -24,14 +35,7 @@ int main(int argc, char **argv) {
     GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.thread_num);
     // std::cout << parameters.thread_num << '/' << omp_get_max_threads() << std::endl;
 
-    std::unique_ptr<Q2_Solution> solution;
-
-    if (parameters.Tool == "GBq2-Batch")
-        solution = std::make_unique<Q2_Solution_Batch>(parameters);
-    else if (parameters.Tool == "GBq2-Incr-Comment")
-        solution = std::make_unique<Q2_Solution_Incremental_Per_Comment>(parameters);
-    else
-        throw std::runtime_error{"Unknown tool: " + parameters.Tool};
+    std::unique_ptr<BaseSolution> solution = init_solution(parameters);
 
     solution->load();
     solution->initial();

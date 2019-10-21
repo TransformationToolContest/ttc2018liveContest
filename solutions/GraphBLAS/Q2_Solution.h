@@ -1,57 +1,7 @@
 #pragma once
 
-#include <chrono>
-#include <utility>
-#include "load.h"
+#include "Solution.h"
 
-class Q2_Solution {
-protected:
-    BenchmarkParameters parameters;
-    Q2_Input input;
-public:
-    explicit Q2_Solution(BenchmarkParameters parameters) : parameters{std::move(parameters)} {}
-
-    void load() {
-        using namespace std::chrono;
-        auto load_start = high_resolution_clock::now();
-
-        input = load_initial_q2(parameters);
-
-        report(parameters, 0, BenchmarkPhase::Load, round<nanoseconds>(high_resolution_clock::now() - load_start));
-    }
-
-    void initial() {
-        using namespace std::chrono;
-        auto initial_start = high_resolution_clock::now();
-
-        std::vector<uint64_t> top_scores_vector = initial_calculation();
-
-        report(parameters, 0, BenchmarkPhase::Initial, round<nanoseconds>(high_resolution_clock::now() - initial_start),
-               top_scores_vector);
-    }
-
-    virtual void load_updates(int iteration, Update_Type &current_updates) {
-        load_and_apply_updates(iteration, current_updates, parameters, input);
-    }
-
-    void update(int iteration) {
-        using namespace std::chrono;
-        auto update_start = high_resolution_clock::now();
-
-        Update_Type current_updates;
-        load_updates(iteration, current_updates);
-        std::vector<uint64_t> top_scores_vector = update_calculation(iteration, current_updates);
-
-        report(parameters, iteration, BenchmarkPhase::Update,
-               round<nanoseconds>(high_resolution_clock::now() - update_start),
-               top_scores_vector);
-    }
-
-    virtual std::vector<uint64_t> initial_calculation() = 0;
-
-    virtual std::vector<uint64_t> update_calculation(int iteration, const Update_Type &current_updates) = 0;
-
-    void free() {
-        input.free();
-    }
+struct Q2_Solution : public Solution<Q2_Input, Update_Type_Q2> {
+    using Solution::Solution;
 };
