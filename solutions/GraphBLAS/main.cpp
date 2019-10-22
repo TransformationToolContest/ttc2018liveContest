@@ -14,10 +14,15 @@ extern "C" {
 }
 
 #include "utils.h"
+#include "Q1_Solution_Batch.h"
 #include "Q2_Solution_Batch.h"
 #include "Q2_Solution_Incremental_Per_Comment.h"
 
 std::unique_ptr<BaseSolution> init_solution(BenchmarkParameters &parameters) {
+    if (parameters.Query == "Q1") {
+        if (parameters.Tool == "GBq1-Batch")
+            return std::make_unique<Q1_Solution_Batch>(parameters);
+    }
     if (parameters.Query == "Q2") {
         if (parameters.Tool == "GBq2-Batch")
             return std::make_unique<Q2_Solution_Batch>(parameters);

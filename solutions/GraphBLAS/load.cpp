@@ -197,6 +197,11 @@ Q1_Input Q1_Input::load_initial(const BenchmarkParameters &parameters) {
     return input;
 }
 
+void Q1_Input::load_and_apply_updates(int iteration, Update_Type_Q1 &current_updates,
+                                      const BenchmarkParameters &parameters) {
+
+}
+
 Q2_Input Q2_Input::load_initial(const BenchmarkParameters &parameters) {
     std::string comments_path = parameters.ChangePath + "/csv-comments-initial.csv";
     std::string friends_path = parameters.ChangePath + "/csv-friends-initial.csv";

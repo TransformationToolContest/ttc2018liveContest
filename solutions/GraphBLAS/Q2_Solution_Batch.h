@@ -12,8 +12,6 @@
 
 class Q2_Solution_Batch : public Q2_Solution {
 protected:
-    using queue_type = std::priority_queue<score_type, std::vector<score_type>, std::greater<>>;
-
     static std::vector<uint64_t>
     convert_score_type_to_comment_id(const std::vector<score_type> &top_scores, const Q2_Input &input) {
         std::vector<uint64_t> top_scores_vector;

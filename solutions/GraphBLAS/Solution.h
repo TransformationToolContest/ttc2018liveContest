@@ -8,6 +8,8 @@
 template<typename InputT, typename Update_Type>
 class Solution : public BaseSolution {
 protected:
+    using queue_type = std::priority_queue<score_type, std::vector<score_type>, std::greater<>>;
+
     BenchmarkParameters parameters;
     InputT input;
 public:
