@@ -8,6 +8,7 @@ extern "C" {
 #include <vector>
 #include <map>
 #include "utils.h"
+#include "gb_utils.h"
 
 struct Post {
     uint64_t post_id;
@@ -69,8 +70,8 @@ struct Q1_Input {
     }
 
     void free() {
-        ok(GrB_Matrix_free(&root_post_tran));
-        ok(GrB_Vector_free(&likes_count_vec));
+        GrB_free_cpp(&root_post_tran);
+        GrB_free_cpp(&likes_count_vec);
     }
 
     static Q1_Input load_initial(const BenchmarkParameters &parameters);
@@ -97,8 +98,8 @@ struct Q2_Input {
     }
 
     void free() {
-        ok(GrB_Matrix_free(&likes_matrix_tran));
-        ok(GrB_Matrix_free(&friends_matrix));
+        GrB_free_cpp(&likes_matrix_tran);
+        GrB_free_cpp(&friends_matrix);
     }
 
     static Q2_Input load_initial(const BenchmarkParameters &parameters);

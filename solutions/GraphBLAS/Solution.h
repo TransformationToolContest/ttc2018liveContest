@@ -4,6 +4,7 @@
 #include <utility>
 #include "load.h"
 #include "BaseSolution.h"
+#include "gb_utils.h"
 
 template<typename InputT, typename Update_Type>
 class Solution : public BaseSolution {

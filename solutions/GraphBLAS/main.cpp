@@ -14,6 +14,7 @@ extern "C" {
 }
 
 #include "utils.h"
+#include "gb_utils.h"
 #include "Q1_Solution_Batch.h"
 #include "Q2_Solution_Batch.h"
 #include "Q2_Solution_Incremental_Per_Comment.h"

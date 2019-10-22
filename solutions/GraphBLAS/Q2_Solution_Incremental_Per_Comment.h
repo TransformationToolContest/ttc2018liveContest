@@ -79,8 +79,8 @@ public:
                                           GrB_LOR, GrB_LOR,
                                           affected_comments_mx, GrB_NULL));
 
-            ok(GrB_Matrix_free(&affected_comments_mx));
-            ok(GrB_Matrix_free(&new_friends_mx));
+            GrB_free_cpp(&affected_comments_mx);
+            GrB_free_cpp(&new_friends_mx);
         }
 
         GrB_Index affected_comments_num;
@@ -91,7 +91,7 @@ public:
                                          affected_comments));
         assert(affected_comments_num == affected_comments_vector.size());
 
-        ok(GrB_Vector_free(&affected_comments));
+        GrB_free_cpp(&affected_comments);
 
         return affected_comments_vector;
     }

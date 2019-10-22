@@ -80,8 +80,8 @@ protected:
             if (top_scores.size() > 3)
                 top_scores.pop();
 
-            ok(GrB_Matrix_free(&friends_subgraph));
-            ok(GrB_Vector_free(&components_vector));
+            GrB_free_cpp(&friends_subgraph);
+            GrB_free_cpp(&components_vector);
         }
     }
 
