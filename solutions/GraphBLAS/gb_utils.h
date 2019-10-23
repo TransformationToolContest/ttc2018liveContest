@@ -25,3 +25,21 @@ inline void GrB_free_cpp(GrB_Vector *pointer) { ok(GrB_Vector_free(pointer)); }
 inline void GrB_free_cpp(GrB_Matrix *pointer) { ok(GrB_Matrix_free(pointer)); }
 
 inline void GrB_free_cpp(GrB_Descriptor *pointer) { ok(GrB_Descriptor_free(pointer)); }
+
+template<typename Type>
+struct GrB_cpp_deleter {
+    void operator()(Type b) {
+        GrB_free_cpp(&b);
+    }
+};
+
+template<typename Type>
+using GrB_Object_cpp = std::unique_ptr<typename std::remove_pointer<Type>::type, GrB_cpp_deleter<Type>>;
+
+template<typename Type, typename ...Args>
+GrB_Object_cpp<Type> GB(GrB_Info (&func)(Type *, Args...), Args ...args) {
+    Type gb_instance = nullptr;
+    ok(func(&gb_instance, args...));
+
+    return {gb_instance, {}};
+}

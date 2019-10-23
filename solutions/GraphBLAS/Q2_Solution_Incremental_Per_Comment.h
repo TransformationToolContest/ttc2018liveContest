@@ -48,8 +48,9 @@ public:
         }
 
         if (!friends_updates.empty()) {
-            GrB_Matrix new_friends_mx, affected_comments_mx;
-            ok(GrB_Matrix_new(&new_friends_mx, GrB_BOOL, input.users_size(), friends_updates.size()));
+            GrB_Matrix affected_comments_mx;
+            GrB_Object_cpp<GrB_Matrix> new_friends_mx = GB(GrB_Matrix_new, GrB_BOOL, input.users_size(),
+                                                           friends_updates.size());
             ok(GrB_Matrix_new(&affected_comments_mx, GrB_BOOL, input.comments_size(), friends_updates.size()));
 
             GrB_Index new_friends_nnz = friends_updates.size() * 2;
@@ -67,20 +68,19 @@ public:
 
                 ++column;
             }
-            ok(GrB_Matrix_build_BOOL(new_friends_mx,
+            ok(GrB_Matrix_build_BOOL(new_friends_mx.get(),
                                      new_friends_rows.data(), new_friends_columns.data(),
                                      array_of_true(new_friends_nnz).get(),
                                      new_friends_nnz, GrB_LOR));
 
             ok(GrB_mxm(affected_comments_mx, GrB_NULL, GrB_NULL, GxB_LAND_LAND_BOOL,
-                       input.likes_matrix_tran, new_friends_mx, GrB_NULL));
+                       input.likes_matrix_tran, new_friends_mx.get(), GrB_NULL));
 
             ok(GrB_Matrix_reduce_BinaryOp(affected_comments, GrB_NULL,
                                           GrB_LOR, GrB_LOR,
                                           affected_comments_mx, GrB_NULL));
 
             GrB_free_cpp(&affected_comments_mx);
-            GrB_free_cpp(&new_friends_mx);
         }
 
         GrB_Index affected_comments_num;
