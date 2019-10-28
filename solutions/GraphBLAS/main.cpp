@@ -13,7 +13,6 @@ extern "C" {
 #include <LAGraph.h>
 }
 
-#include "utils.h"
 #include "gb_utils.h"
 #include "Q1_Solution_Batch.h"
 #include "Q2_Solution_Batch.h"
@@ -51,6 +50,5 @@ int main(int argc, char **argv) {
     }
 
     // Cleanup
-    solution->free();
     ok(GrB_finalize());
 }

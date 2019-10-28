@@ -25,6 +25,10 @@ protected:
         return top_scores_vector;
     }
 
+    static inline GrB_Info LAGraph_cc_rev_params(GrB_Vector *result, GrB_Matrix A) {
+        return LAGraph_cc(A, result);
+    }
+
     static inline void
     compute_score_for_comment(const Q2_Input &input, GrB_Index comment_col, const GrB_Index *likes_comment_array_first,
                               const GrB_Index *likes_comment_array_last, const GrB_Index *likes_user_array_first,
@@ -36,24 +40,23 @@ protected:
             const GrB_Index *likes_user_first =
                     likes_user_array_first + std::distance(likes_comment_array_first, likes_comment_first);
 
-            GrB_Matrix friends_subgraph;
-            ok(GrB_Matrix_new(&friends_subgraph, GrB_BOOL, likes_count, likes_count));
-            ok(GrB_Matrix_extract(friends_subgraph, GrB_NULL, GrB_NULL,
-                                  input.friends_matrix, likes_user_first, likes_count, likes_user_first, likes_count,
+            GrB_Object_cpp<GrB_Matrix> friends_subgraph = GB(GrB_Matrix_new, GrB_BOOL, likes_count, likes_count);
+            ok(GrB_Matrix_extract(friends_subgraph.get(), GrB_NULL, GrB_NULL,
+                                  input.friends_matrix.get(),
+                                  likes_user_first, likes_count, likes_user_first, likes_count,
                                   GrB_NULL));
 
             // assuming that all component_ids will be in [0, n)
-            GrB_Vector components_vector = nullptr;
-            ok(LAGraph_cc(friends_subgraph, &components_vector));
+            GrB_Object_cpp<GrB_Vector> components_vector = GB(LAGraph_cc_rev_params, friends_subgraph.get());
 
             GrB_Index nvals;
 #ifndef NDEBUG
             nvals = input.likes_num;
-            ok(GrB_Vector_nvals(&nvals, components_vector));
+            ok(GrB_Vector_nvals(&nvals, components_vector.get()));
             assert(nvals == likes_count);
 
             GrB_Index n;
-            ok(GrB_Vector_size(&n, components_vector));
+            ok(GrB_Vector_size(&n, components_vector.get()));
             assert(n == likes_count);
 #endif
 
@@ -63,7 +66,7 @@ protected:
 
             // nullptr: SuiteSparse extension
             nvals = likes_count;
-            ok(GrB_Vector_extractTuples_UINT64(nullptr, components.data(), &nvals, components_vector));
+            ok(GrB_Vector_extractTuples_UINT64(nullptr, components.data(), &nvals, components_vector.get()));
             assert(nvals == likes_count);
 
             for (auto component_id:components)
@@ -79,9 +82,6 @@ protected:
 
             if (top_scores.size() > 3)
                 top_scores.pop();
-
-            GrB_free_cpp(&friends_subgraph);
-            GrB_free_cpp(&components_vector);
         }
     }
 
@@ -110,7 +110,7 @@ public:
         // nullptr to avoid extracting matrix values (SuiteSparse extension)
         GrB_Index nvals = input.likes_num;
         ok(GrB_Matrix_extractTuples_BOOL(likes_trg_comment_columns.get(), likes_src_user_columns.get(), nullptr, &nvals,
-                                         input.likes_matrix_tran));
+                                         input.likes_matrix_tran.get()));
         assert(nvals == input.likes_num);
 
         compute_score_for_all_comments(likes_comment_array_first, likes_comment_array_last,

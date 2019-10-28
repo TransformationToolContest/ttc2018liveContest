@@ -55,8 +55,4 @@ public:
     virtual std::vector<uint64_t> initial_calculation() = 0;
 
     virtual std::vector<uint64_t> update_calculation(int iteration, const Update_Type &current_updates) = 0;
-
-    void free() override {
-        input.free();
-    }
 };

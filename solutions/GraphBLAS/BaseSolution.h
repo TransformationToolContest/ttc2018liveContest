@@ -10,6 +10,4 @@ struct BaseSolution {
     virtual void initial() = 0;
 
     virtual void update(int iteration) = 0;
-
-    virtual void free() = 0;
 };

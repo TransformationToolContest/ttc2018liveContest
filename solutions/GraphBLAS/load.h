@@ -56,8 +56,8 @@ struct Q1_Input {
 
     std::map<uint64_t, GrB_Index> comment_id_to_column;
 
-    GrB_Matrix root_post_tran;
-    GrB_Vector likes_count_vec;
+    GrB_Object_cpp<GrB_Matrix> root_post_tran;
+    GrB_Object_cpp<GrB_Vector> likes_count_vec;
 
     GrB_Index root_post_num, likes_count_num;
 
@@ -67,11 +67,6 @@ struct Q1_Input {
 
     auto comments_size() const {
         return comment_id_to_column.size();
-    }
-
-    void free() {
-        GrB_free_cpp(&root_post_tran);
-        GrB_free_cpp(&likes_count_vec);
     }
 
     static Q1_Input load_initial(const BenchmarkParameters &parameters);
@@ -85,7 +80,7 @@ struct Q2_Input {
 
     std::map<uint64_t, GrB_Index> user_id_to_column;
 
-    GrB_Matrix likes_matrix_tran, friends_matrix;
+    GrB_Object_cpp<GrB_Matrix> likes_matrix_tran, friends_matrix;
 
     GrB_Index likes_num, friends_num;
 
@@ -95,11 +90,6 @@ struct Q2_Input {
 
     auto comments_size() const {
         return comments.size();
-    }
-
-    void free() {
-        GrB_free_cpp(&likes_matrix_tran);
-        GrB_free_cpp(&friends_matrix);
     }
 
     static Q2_Input load_initial(const BenchmarkParameters &parameters);

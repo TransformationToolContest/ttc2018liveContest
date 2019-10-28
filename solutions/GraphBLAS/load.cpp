@@ -106,7 +106,6 @@ bool read_friends_line(GrB_Index &user1_column, GrB_Index &user2_column, std::if
 }
 
 bool read_likes_line(GrB_Index &comment_column, std::ifstream &likes_file, Q1_Input &input) {
-    char delimiter;
     uint64_t comment_id;
     if (!(likes_file >> ignore_field >> comment_id))
         return false;
@@ -175,21 +174,21 @@ Q1_Input Q1_Input::load_initial(const BenchmarkParameters &parameters) {
     }
 
     input.root_post_num = root_post_src_comment_columns.size();
-    ok(GrB_Matrix_new(&input.root_post_tran, GrB_BOOL, input.posts_size(), input.comments_size()));
-    ok(GrB_Matrix_build_BOOL(input.root_post_tran,
+    input.root_post_tran = GB(GrB_Matrix_new, GrB_BOOL, input.posts_size(), input.comments_size());
+    ok(GrB_Matrix_build_BOOL(input.root_post_tran.get(),
                              root_post_trg_post_columns.data(), root_post_src_comment_columns.data(),
                              array_of_true(input.root_post_num).get(),
                              input.root_post_num, GrB_LOR));
 
     input.likes_count_num = likes_count_columns.size();
-    ok(GrB_Vector_new(&input.likes_count_vec, GrB_UINT64, input.likes_count_num));
-    ok(GrB_Vector_build_UINT64(input.likes_count_vec,
+    input.likes_count_vec = GB(GrB_Vector_new, GrB_UINT64, input.likes_count_num);
+    ok(GrB_Vector_build_UINT64(input.likes_count_vec.get(),
                                likes_count_columns.data(), likes_count_values.data(),
                                input.likes_count_num, GrB_PLUS_UINT64));
 
     // make sure tuples are in row-major order (SuiteSparse extension)
     GxB_Format_Value format;
-    ok(GxB_Matrix_Option_get(input.root_post_tran, GxB_FORMAT, &format));
+    ok(GxB_Matrix_Option_get(input.root_post_tran.get(), GxB_FORMAT, &format));
     if (format != GxB_BY_ROW) {
         throw std::runtime_error{"Matrix is not CSR"};
     }
@@ -235,23 +234,23 @@ Q2_Input Q2_Input::load_initial(const BenchmarkParameters &parameters) {
 
     input.likes_num = likes_src_user_columns.size();
 
-    ok(GrB_Matrix_new(&input.likes_matrix_tran, GrB_BOOL, input.comments_size(), input.users_size()));
-    ok(GrB_Matrix_build_BOOL(input.likes_matrix_tran,
+    input.likes_matrix_tran = GB(GrB_Matrix_new, GrB_BOOL, input.comments_size(), input.users_size());
+    ok(GrB_Matrix_build_BOOL(input.likes_matrix_tran.get(),
                              likes_trg_comment_columns.data(), likes_src_user_columns.data(),
                              array_of_true(input.likes_num).get(),
                              input.likes_num, GrB_LOR));
 
     input.friends_num = friends_src_columns.size();
 
-    ok(GrB_Matrix_new(&input.friends_matrix, GrB_BOOL, input.users_size(), input.users_size()));
-    ok(GrB_Matrix_build_BOOL(input.friends_matrix,
+    input.friends_matrix = GB(GrB_Matrix_new, GrB_BOOL, input.users_size(), input.users_size());
+    ok(GrB_Matrix_build_BOOL(input.friends_matrix.get(),
                              friends_src_columns.data(), friends_trg_columns.data(),
                              array_of_true(input.friends_num).get(),
                              input.friends_num, GrB_LOR));
 
     // make sure tuples are in row-major order (SuiteSparse extension)
     GxB_Format_Value format;
-    ok(GxB_Matrix_Option_get(input.likes_matrix_tran, GxB_FORMAT, &format));
+    ok(GxB_Matrix_Option_get(input.likes_matrix_tran.get(), GxB_FORMAT, &format));
     if (format != GxB_BY_ROW) {
         throw std::runtime_error{"Matrix is not CSR"};
     }
@@ -300,35 +299,35 @@ void Q2_Input::load_and_apply_updates(int iteration, Update_Type_Q2 &current_upd
     }
 
     if (users_size() > old_users_size) {
-        ok(GxB_Matrix_resize(friends_matrix, users_size(), users_size()));
+        ok(GxB_Matrix_resize(friends_matrix.get(), users_size(), users_size()));
     }
     if (comments_size() > old_comments_size
         || users_size() > old_users_size) {
-        ok(GxB_Matrix_resize(likes_matrix_tran, comments_size(), users_size()));
+        ok(GxB_Matrix_resize(likes_matrix_tran.get(), comments_size(), users_size()));
     }
 
 #ifndef NDEBUG
     GrB_Index nvals;
-    ok(GrB_Matrix_nvals(&nvals, friends_matrix));
+    ok(GrB_Matrix_nvals(&nvals, friends_matrix.get()));
     assert(nvals == friends_num);
-    ok(GrB_Matrix_nvals(&nvals, likes_matrix_tran));
+    ok(GrB_Matrix_nvals(&nvals, likes_matrix_tran.get()));
     assert(nvals == likes_num);
 # endif
 
     for (auto[user1_column, user2_column] : current_updates.friends_updates) {
-        ok(GrB_Matrix_setElement_BOOL(friends_matrix, true, user1_column, user2_column));
+        ok(GrB_Matrix_setElement_BOOL(friends_matrix.get(), true, user1_column, user2_column));
     }
     friends_num += current_updates.friends_updates.size();
 
     for (auto[user_column, comment_column] : current_updates.likes_updates) {
-        ok(GrB_Matrix_setElement_BOOL(likes_matrix_tran, true, comment_column, user_column));
+        ok(GrB_Matrix_setElement_BOOL(likes_matrix_tran.get(), true, comment_column, user_column));
     }
     likes_num += current_updates.likes_updates.size();
 
 #ifndef NDEBUG
-    ok(GrB_Matrix_nvals(&nvals, friends_matrix));
+    ok(GrB_Matrix_nvals(&nvals, friends_matrix.get()));
     assert(nvals == friends_num);
-    ok(GrB_Matrix_nvals(&nvals, likes_matrix_tran));
+    ok(GrB_Matrix_nvals(&nvals, likes_matrix_tran.get()));
     assert(nvals == likes_num);
 #endif
 }
