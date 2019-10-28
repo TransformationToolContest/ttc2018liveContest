@@ -181,7 +181,7 @@ Q1_Input Q1_Input::load_initial(const BenchmarkParameters &parameters) {
                              input.root_post_num, GrB_LOR));
 
     input.likes_count_num = likes_count_columns.size();
-    input.likes_count_vec = GB(GrB_Vector_new, GrB_UINT64, input.likes_count_num);
+    input.likes_count_vec = GB(GrB_Vector_new, GrB_UINT64, input.comments_size());
     ok(GrB_Vector_build_UINT64(input.likes_count_vec.get(),
                                likes_count_columns.data(), likes_count_values.data(),
                                input.likes_count_num, GrB_PLUS_UINT64));
