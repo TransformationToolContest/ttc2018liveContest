@@ -39,9 +39,12 @@ template<typename Type>
 using GrB_Object_cpp = std::unique_ptr<typename std::remove_pointer<Type>::type, gb_cpp::GrB_cpp_deleter<Type>>;
 
 template<typename Type, typename ...Args, typename ...Args2>
-GrB_Object_cpp<Type> GB(GrB_Info (&func)(Type *, Args2...), Args&&... args) {
+GrB_Object_cpp<Type> GB(GrB_Info (&func)(Type *, Args2...), Args &&... args) {
     Type gb_instance = nullptr;
     ok(func(&gb_instance, std::forward<Args>(args)...));
 
     return {gb_instance, {}};
 }
+
+template<typename Z, typename X>
+using GB_unary_function_cpp = void (*)(Z *, const X *);
