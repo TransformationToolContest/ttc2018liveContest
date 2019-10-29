@@ -38,10 +38,10 @@ namespace gb_cpp {
 template<typename Type>
 using GrB_Object_cpp = std::unique_ptr<typename std::remove_pointer<Type>::type, gb_cpp::GrB_cpp_deleter<Type>>;
 
-template<typename Type, typename ...Args>
-GrB_Object_cpp<Type> GB(GrB_Info (&func)(Type *, Args...), Args ...args) {
+template<typename Type, typename ...Args, typename ...Args2>
+GrB_Object_cpp<Type> GB(GrB_Info (&func)(Type *, Args2...), Args&&... args) {
     Type gb_instance = nullptr;
-    ok(func(&gb_instance, args...));
+    ok(func(&gb_instance, std::forward<Args>(args)...));
 
     return {gb_instance, {}};
 }
