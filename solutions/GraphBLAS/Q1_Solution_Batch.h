@@ -52,17 +52,29 @@ public:
                    input.root_post_tran.get(), input.likes_count_vec.get(),
                    GrB_NULL));
 
-        // TODO: avoid extracting indices by making the first part dense
+        GrB_Index *score_vector_indices_ptr = nullptr;
+#ifndef NDEBUG
         std::vector<GrB_Index> score_vector_indices(input.posts_size());
+        score_vector_indices_ptr = score_vector_indices.data();
+#endif
         std::vector<uint64_t> score_vector(input.posts_size());
 
+        // first consecutive part of score_vec contains posts with comments i.e. posts with non-zero score
+        // remaining posts have no comments i.e. zero score
         GrB_Index scores_nvals = score_vector.size();
-        ok(GrB_Vector_extractTuples_UINT64(score_vector_indices.data(), score_vector.data(), &scores_nvals,
+        ok(GrB_Vector_extractTuples_UINT64(score_vector_indices_ptr, score_vector.data(), &scores_nvals,
                                            score_vec.get()));
 
-        for (GrB_Index i = 0; i < scores_nvals; ++i) {
-            GrB_Index post_col = score_vector_indices[i];
-            uint64_t score = score_vector[i];
+#ifndef NDEBUG
+        // check first non-zero score part whether it is consecutive or not
+        for (GrB_Index post_col = 0; post_col < scores_nvals; ++post_col) {
+            assert(score_vector_indices[post_col] == post_col);
+        }
+#endif
+
+        // scores_nvals is the length of non-zero part of scores_score_vector
+        for (GrB_Index post_col = 0; post_col < scores_nvals; ++post_col) {
+            uint64_t score = score_vector[post_col];
 
             // TODO: avoid timestamp lookup if possible
             top_scores.push(std::make_tuple(score, input.posts[post_col].timestamp, post_col));

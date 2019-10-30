@@ -41,9 +41,14 @@ bool read_post_line(std::ifstream &posts_file, Q1_Input &input, GrB_Index &post_
     if (!read_comment_or_post_line(posts_file, post_id, timestamp))
         return false;
 
-    post_col = input.posts.size();
-    input.post_id_to_column.emplace(post_id, post_col);
-    input.posts.emplace_back(post_id, timestamp);
+    auto[post_pair_iter, is_new] = input.post_id_to_column.emplace(post_id, input.posts.size());
+    post_col = post_pair_iter->second;
+
+    if (is_new)
+        input.posts.emplace_back(post_id, timestamp);
+    else
+        input.posts[post_col].timestamp = timestamp;
+    assert(input.posts.size() == input.post_id_to_column.size());
 
     return true;
 }
@@ -70,7 +75,12 @@ bool read_comment_line_root_post(GrB_Index &comment_col, GrB_Index &post_col, st
         return false;
 
     comment_col = input.comment_id_to_column.emplace(comment_id, input.comment_id_to_column.size()).first->second;
-    post_col = input.post_id_to_column.find(post_id)->second;
+
+    auto[post_pair_iter, is_new] = input.post_id_to_column.emplace(post_id, input.posts.size());
+    post_col = post_pair_iter->second;
+    if (is_new)
+        input.posts.emplace_back(post_id, -1);
+    assert(input.posts.size() == input.post_id_to_column.size());
 
     return true;
 }
@@ -142,10 +152,9 @@ Q1_Input Q1_Input::load_initial(const BenchmarkParameters &parameters) {
         throw std::runtime_error{"Failed to open input files"};
     }
 
-    Q1_Input input{};
+    Q1_Input input;
 
-    while (read_post_line(posts_file, input));
-
+    // read root_post edges first, therefore posts with comments will come first
     std::vector<GrB_Index> root_post_src_comment_columns, root_post_trg_post_columns;
     {
         GrB_Index comment_col, post_col;
@@ -154,6 +163,9 @@ Q1_Input Q1_Input::load_initial(const BenchmarkParameters &parameters) {
             root_post_trg_post_columns.emplace_back(post_col);
         }
     }
+
+    // read post details and posts without comment
+    while (read_post_line(posts_file, input));
 
     std::vector<GrB_Index> likes_count_columns;
     std::vector<uint64_t> likes_count_values;
@@ -214,7 +226,7 @@ Q2_Input Q2_Input::load_initial(const BenchmarkParameters &parameters) {
         throw std::runtime_error{"Failed to open input files"};
     }
 
-    Q2_Input input{};
+    Q2_Input input;
 
     while (read_comment_line(comments_file, input));
 
