@@ -4,7 +4,86 @@ extern "C" {
 #include <GraphBLAS.h>
 }
 
-#include "utils.h"
+//------------------------------------------------------------------------------
+// ok: call a GraphBLAS method and check the result
+//------------------------------------------------------------------------------
+
+// ok(GrB_Info) is a function that processes result of a GraphBLAS method and checks the status;
+// if a failure occurs, it returns the error status to the caller.
+
+inline __attribute__((always_inline))
+GrB_Info ok(GrB_Info info, bool no_value_is_error = true) {
+    if (info == GrB_SUCCESS || (!no_value_is_error && info == GrB_NO_VALUE))
+        return info;
+    else
+        throw std::runtime_error{std::string{"GraphBLAS error: "} + GrB_error()};
+}
+
+inline __attribute__((always_inline))
+std::unique_ptr<bool[]> array_of_true(size_t n){
+    std::unique_ptr<bool[]> array{new bool[n]};
+    std::fill_n(array.get(), n, true);
+
+    return array;
+}
+
+/*
+ * DEBUG FUNCTIONS
+ */
+
+inline void WriteOutDebugMatrix(const char *title, GrB_Matrix result) {
+    printf("%s:\n", title);
+    GrB_Index rows, cols;
+    ok(GrB_Matrix_nrows(&rows, result));
+    ok(GrB_Matrix_ncols(&cols, result));
+    double element;
+
+    for (GrB_Index i = 0; i < rows; i++) {
+        for (GrB_Index j = 0; j < cols; j++) {
+            GrB_Info info = ok(GrB_Matrix_extractElement_FP64(&element, result, i, j), false);
+
+            if (info == GrB_SUCCESS) {
+                printf("%g ", element);
+            } else if (info == GrB_NO_VALUE) {
+                // It is up to the user to determine what 'no value'
+                // means.  It depends on the semiring used.
+                printf("- ");
+            } else {
+                printf("Error! %s\n", GrB_error());
+            }
+
+        }
+        printf("\n");
+    }
+}
+
+inline void WriteOutDebugVector(const char *title, GrB_Vector result) {
+    printf("%s:\n", title);
+    GrB_Index size;
+    ok(GrB_Vector_size(&size, result));
+    double element;
+
+    for (unsigned int i = 0; i < size; i++) {
+        GrB_Info info = ok(GrB_Vector_extractElement_FP64(&element, result, i), false);
+
+        if (info == GrB_SUCCESS) {
+            if (element == UINT64_MAX) {
+                printf("inf ");
+            } else {
+                printf("%g ", element);
+            }
+
+        } else if (info == GrB_NO_VALUE) {
+            // It is up to the user to determine what 'no value'
+            // means.  It depends on the semiring used.
+            printf("- ");
+        } else {
+            printf("Error! %s\n", GrB_error());
+        }
+
+    }
+    printf("\n");
+}
 
 namespace gb_cpp {
     inline void GB_free_cpp(GrB_Type *pointer) { ok(GrB_Type_free(pointer)); }
