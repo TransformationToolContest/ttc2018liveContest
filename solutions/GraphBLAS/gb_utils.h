@@ -118,6 +118,9 @@ namespace gbxx {
 template<typename Type>
 using GBxx_Object = std::unique_ptr<typename std::remove_pointer<Type>::type, gbxx::GBxx_deleter<Type>>;
 
+template<typename Type>
+using GBxx_Object_shared = std::shared_ptr<typename std::remove_pointer<Type>::type>;
+
 template<typename Type, typename ...Args, typename ...Args2>
 GBxx_Object<Type> GB(GrB_Info (&func)(Type *, Args2...), Args &&... args) {
     Type gb_instance = nullptr;
