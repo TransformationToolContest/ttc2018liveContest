@@ -21,7 +21,7 @@ GrB_Info ok(GrB_Info info, bool no_value_is_error = true) {
 }
 
 inline __attribute__((always_inline))
-std::unique_ptr<bool[]> array_of_true(size_t n){
+std::unique_ptr<bool[]> array_of_true(size_t n) {
     std::unique_ptr<bool[]> array{new bool[n]};
     std::fill_n(array.get(), n, true);
 
@@ -86,40 +86,40 @@ inline void WriteOutDebugVector(const char *title, GrB_Vector result) {
     printf("\n");
 }
 
-namespace gb_cpp {
-    inline void GB_free_cpp(GrB_Type *pointer) { ok(GrB_Type_free(pointer)); }
+namespace gbxx {
+    inline void GBxx_free_cpp(GrB_Type *pointer) { ok(GrB_Type_free(pointer)); }
 
-    inline void GB_free_cpp(GrB_UnaryOp *pointer) { ok(GrB_UnaryOp_free(pointer)); }
+    inline void GBxx_free_cpp(GrB_UnaryOp *pointer) { ok(GrB_UnaryOp_free(pointer)); }
 
-    inline void GB_free_cpp(GrB_BinaryOp *pointer) { ok(GrB_BinaryOp_free(pointer)); }
+    inline void GBxx_free_cpp(GrB_BinaryOp *pointer) { ok(GrB_BinaryOp_free(pointer)); }
 
-    inline void GB_free_cpp(GxB_SelectOp *pointer) { ok(GxB_SelectOp_free(pointer)); }
+    inline void GBxx_free_cpp(GxB_SelectOp *pointer) { ok(GxB_SelectOp_free(pointer)); }
 
-    inline void GB_free_cpp(GrB_Monoid *pointer) { ok(GrB_Monoid_free(pointer)); }
+    inline void GBxx_free_cpp(GrB_Monoid *pointer) { ok(GrB_Monoid_free(pointer)); }
 
-    inline void GB_free_cpp(GrB_Semiring *pointer) { ok(GrB_Semiring_free(pointer)); }
+    inline void GBxx_free_cpp(GrB_Semiring *pointer) { ok(GrB_Semiring_free(pointer)); }
 
-    inline void GB_free_cpp(GxB_Scalar *pointer) { ok(GxB_Scalar_free(pointer)); }
+    inline void GBxx_free_cpp(GxB_Scalar *pointer) { ok(GxB_Scalar_free(pointer)); }
 
-    inline void GB_free_cpp(GrB_Vector *pointer) { ok(GrB_Vector_free(pointer)); }
+    inline void GBxx_free_cpp(GrB_Vector *pointer) { ok(GrB_Vector_free(pointer)); }
 
-    inline void GB_free_cpp(GrB_Matrix *pointer) { ok(GrB_Matrix_free(pointer)); }
+    inline void GBxx_free_cpp(GrB_Matrix *pointer) { ok(GrB_Matrix_free(pointer)); }
 
-    inline void GB_free_cpp(GrB_Descriptor *pointer) { ok(GrB_Descriptor_free(pointer)); }
+    inline void GBxx_free_cpp(GrB_Descriptor *pointer) { ok(GrB_Descriptor_free(pointer)); }
 
     template<typename Type>
-    struct GrB_cpp_deleter {
+    struct GBxx_deleter {
         void operator()(Type b) {
-            GB_free_cpp(&b);
+            GBxx_free_cpp(&b);
         }
     };
 }
 
 template<typename Type>
-using GrB_Object_cpp = std::unique_ptr<typename std::remove_pointer<Type>::type, gb_cpp::GrB_cpp_deleter<Type>>;
+using GBxx_Object = std::unique_ptr<typename std::remove_pointer<Type>::type, gbxx::GBxx_deleter<Type>>;
 
 template<typename Type, typename ...Args, typename ...Args2>
-GrB_Object_cpp<Type> GB(GrB_Info (&func)(Type *, Args2...), Args &&... args) {
+GBxx_Object<Type> GB(GrB_Info (&func)(Type *, Args2...), Args &&... args) {
     Type gb_instance = nullptr;
     ok(func(&gb_instance, std::forward<Args>(args)...));
 
@@ -127,4 +127,4 @@ GrB_Object_cpp<Type> GB(GrB_Info (&func)(Type *, Args2...), Args &&... args) {
 }
 
 template<typename Z, typename X>
-using GB_unary_function_cpp = void (*)(Z *, const X *);
+using GBxx_unary_function = void (*)(Z *, const X *);

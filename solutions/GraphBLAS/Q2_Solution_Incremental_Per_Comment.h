@@ -30,7 +30,7 @@ public:
         if (friends_updates.empty() && likes_updates.empty() && new_comments.empty())
             return {};
 
-        GrB_Object_cpp<GrB_Vector> affected_comments =
+        GBxx_Object<GrB_Vector> affected_comments =
                 GB(GrB_Vector_new, GrB_BOOL, input.comments_size());
 
         if (!likes_updates.empty() || !new_comments.empty()) {
@@ -48,9 +48,9 @@ public:
         }
 
         if (!friends_updates.empty()) {
-            GrB_Object_cpp<GrB_Matrix> new_friends_mx =
+            GBxx_Object<GrB_Matrix> new_friends_mx =
                     GB(GrB_Matrix_new, GrB_BOOL, input.users_size(), friends_updates.size());
-            GrB_Object_cpp<GrB_Matrix> affected_comments_mx =
+            GBxx_Object<GrB_Matrix> affected_comments_mx =
                     GB(GrB_Matrix_new, GrB_BOOL, input.comments_size(), friends_updates.size());
 
             GrB_Index new_friends_nnz = friends_updates.size() * 2;

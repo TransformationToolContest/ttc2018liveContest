@@ -40,14 +40,14 @@ protected:
             const GrB_Index *likes_user_first =
                     likes_user_array_first + std::distance(likes_comment_array_first, likes_comment_first);
 
-            GrB_Object_cpp<GrB_Matrix> friends_subgraph = GB(GrB_Matrix_new, GrB_BOOL, likes_count, likes_count);
+            GBxx_Object<GrB_Matrix> friends_subgraph = GB(GrB_Matrix_new, GrB_BOOL, likes_count, likes_count);
             ok(GrB_Matrix_extract(friends_subgraph.get(), GrB_NULL, GrB_NULL,
                                   input.friends_matrix.get(),
                                   likes_user_first, likes_count, likes_user_first, likes_count,
                                   GrB_NULL));
 
             // assuming that all component_ids will be in [0, n)
-            GrB_Object_cpp<GrB_Vector> components_vector = GB(LAGraph_cc_rev_params, friends_subgraph.get());
+            GBxx_Object<GrB_Vector> components_vector = GB(LAGraph_cc_rev_params, friends_subgraph.get());
 
             GrB_Index nvals;
 #ifndef NDEBUG

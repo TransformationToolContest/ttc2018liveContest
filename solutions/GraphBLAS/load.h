@@ -56,8 +56,8 @@ struct Q1_Input {
 
     std::map<uint64_t, GrB_Index> comment_id_to_column;
 
-    GrB_Object_cpp<GrB_Matrix> root_post_tran;
-    GrB_Object_cpp<GrB_Vector> likes_count_vec;
+    GBxx_Object<GrB_Matrix> root_post_tran;
+    GBxx_Object<GrB_Vector> likes_count_vec;
 
     GrB_Index root_post_num, likes_count_num;
 
@@ -80,7 +80,7 @@ struct Q2_Input {
 
     std::map<uint64_t, GrB_Index> user_id_to_column;
 
-    GrB_Object_cpp<GrB_Matrix> likes_matrix_tran, friends_matrix;
+    GBxx_Object<GrB_Matrix> likes_matrix_tran, friends_matrix;
 
     GrB_Index likes_num, friends_num;
 

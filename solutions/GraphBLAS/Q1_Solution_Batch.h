@@ -31,17 +31,17 @@ public:
     std::vector<score_type> calculate_score() {
         queue_type top_scores;
 
-        GrB_Object_cpp<GrB_Vector> score_vec = GB(GrB_Vector_new, GrB_UINT64, input.posts_size());
+        GBxx_Object<GrB_Vector> score_vec = GB(GrB_Vector_new, GrB_UINT64, input.posts_size());
 
         ok(GrB_Matrix_reduce_BinaryOp(score_vec.get(), GrB_NULL, GrB_NULL,
                                       GrB_PLUS_UINT64, input.root_post_tran.get(),
                                       GrB_NULL));
 
-        GB_unary_function_cpp<uint64_t, uint64_t> multiplyBy10_func = [](auto result, auto input) {
+        GBxx_unary_function<uint64_t, uint64_t> multiplyBy10_func = [](auto result, auto input) {
             *result = *input * 10;
         };
 
-        GrB_Object_cpp<GrB_UnaryOp> multiplyBy10 = GB(GrB_UnaryOp_new,
+        GBxx_Object<GrB_UnaryOp> multiplyBy10 = GB(GrB_UnaryOp_new,
                                                       reinterpret_cast<GxB_unary_function>(multiplyBy10_func),
                                                       GrB_UINT64, GrB_UINT64);
 
