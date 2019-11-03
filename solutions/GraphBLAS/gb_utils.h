@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 extern "C" {
 #include <GraphBLAS.h>
 #include <LAGraph.h>
