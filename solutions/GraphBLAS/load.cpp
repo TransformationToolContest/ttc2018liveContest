@@ -208,7 +208,7 @@ Q1_Input Q1_Input::load_initial(const BenchmarkParameters &parameters) {
     return input;
 }
 
-void Q1_Input::load_and_apply_updates(int iteration, Update_Type_Q1 &current_updates,
+void Q1_Input::load_and_apply_updates(int iteration, Q1_Input::Update_Type &current_updates,
                                       const BenchmarkParameters &parameters) {
 
 }
@@ -270,7 +270,7 @@ Q2_Input Q2_Input::load_initial(const BenchmarkParameters &parameters) {
     return input;
 }
 
-void Q2_Input::load_and_apply_updates(int iteration, Update_Type_Q2 &current_updates,
+void Q2_Input::load_and_apply_updates(int iteration, Q2_Input::Update_Type &current_updates,
                                       const BenchmarkParameters &parameters) {
     std::stringstream change_path;
     change_path << parameters.ChangePath << "/change"

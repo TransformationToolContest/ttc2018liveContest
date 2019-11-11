@@ -38,18 +38,6 @@ struct Likes_Update {
             : user_column(userColumn), comment_column(commentColumn) {}
 };
 
-struct Update_Type_Q1 {
-//    std::vector<Friends_Update> friends_updates;
-//    std::vector<Likes_Update> likes_updates;
-//    std::vector<GrB_Index> new_comments;
-};
-
-struct Update_Type_Q2 {
-    std::vector<Friends_Update> friends_updates;
-    std::vector<Likes_Update> likes_updates;
-    std::vector<GrB_Index> new_comments;
-};
-
 struct Q1_Input {
     std::vector<Post> posts;
     std::map<uint64_t, GrB_Index> post_id_to_column;
@@ -71,7 +59,13 @@ struct Q1_Input {
 
     static Q1_Input load_initial(const BenchmarkParameters &parameters);
 
-    void load_and_apply_updates(int iteration, Update_Type_Q1 &current_updates, const BenchmarkParameters &parameters);
+    struct Update_Type {
+//    std::vector<Friends_Update> friends_updates;
+//    std::vector<Likes_Update> likes_updates;
+//    std::vector<GrB_Index> new_comments;
+    };
+
+    void load_and_apply_updates(int iteration, Update_Type &current_updates, const BenchmarkParameters &parameters);
 };
 
 struct Q2_Input {
@@ -94,5 +88,11 @@ struct Q2_Input {
 
     static Q2_Input load_initial(const BenchmarkParameters &parameters);
 
-    void load_and_apply_updates(int iteration, Update_Type_Q2 &current_updates, const BenchmarkParameters &parameters);
+    struct Update_Type {
+        std::vector<Friends_Update> friends_updates;
+        std::vector<Likes_Update> likes_updates;
+        std::vector<GrB_Index> new_comments;
+    };
+
+    void load_and_apply_updates(int iteration, Update_Type &current_updates, const BenchmarkParameters &parameters);
 };

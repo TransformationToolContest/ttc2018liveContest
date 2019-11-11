@@ -6,7 +6,7 @@
 #include "BaseSolution.h"
 #include "gb_utils.h"
 
-template<typename InputT, typename Update_Type>
+template<typename InputT>
 class Solution : public BaseSolution {
 protected:
     using queue_type = std::priority_queue<score_type, std::vector<score_type>, std::greater<>>;
@@ -35,7 +35,7 @@ public:
                top_scores_vector);
     }
 
-    virtual void load_updates(int iteration, Update_Type &current_updates) {
+    virtual void load_updates(int iteration, typename InputT::Update_Type &current_updates) {
         input.load_and_apply_updates(iteration, current_updates, parameters);
     }
 
@@ -43,7 +43,7 @@ public:
         using namespace std::chrono;
         auto update_start = high_resolution_clock::now();
 
-        Update_Type current_updates;
+        typename InputT::Update_Type current_updates;
         load_updates(iteration, current_updates);
         std::vector<uint64_t> top_scores_vector = update_calculation(iteration, current_updates);
 
@@ -54,5 +54,5 @@ public:
 
     virtual std::vector<uint64_t> initial_calculation() = 0;
 
-    virtual std::vector<uint64_t> update_calculation(int iteration, const Update_Type &current_updates) = 0;
+    virtual std::vector<uint64_t> update_calculation(int iteration, const typename InputT::Update_Type &current_updates) = 0;
 };

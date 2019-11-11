@@ -97,7 +97,7 @@ public:
         return convert_score_type_to_post_id(calculate_score(), input);
     }
 
-    std::vector<uint64_t> update_calculation(int iteration, const Update_Type_Q1 &current_updates) override {
+    std::vector<uint64_t> update_calculation(int iteration, const Q1_Input::Update_Type &current_updates) override {
         return convert_score_type_to_post_id(calculate_score(), input);
     }
 };
