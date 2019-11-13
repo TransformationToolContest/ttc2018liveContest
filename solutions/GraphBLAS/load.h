@@ -38,6 +38,12 @@ struct Likes_Update {
             : user_column(userColumn), comment_column(commentColumn) {}
 };
 
+struct Root_Post_Update {
+    GrB_Index comment_col, post_col;
+
+    Root_Post_Update(GrB_Index commentCol, GrB_Index postCol) : comment_col(commentCol), post_col(postCol) {}
+};
+
 struct Q1_Input {
     std::vector<Post> posts;
     std::map<uint64_t, GrB_Index> post_id_to_column;
@@ -60,9 +66,9 @@ struct Q1_Input {
     static Q1_Input load_initial(const BenchmarkParameters &parameters);
 
     struct Update_Type {
-//    std::vector<Friends_Update> friends_updates;
-//    std::vector<Likes_Update> likes_updates;
-//    std::vector<GrB_Index> new_comments;
+        std::vector<Root_Post_Update> root_post_updates;
+        std::vector<GrB_Index> new_likes;
+        std::vector<GrB_Index> new_posts;
     };
 
     void load_and_apply_updates(int iteration, Update_Type &current_updates, const BenchmarkParameters &parameters);

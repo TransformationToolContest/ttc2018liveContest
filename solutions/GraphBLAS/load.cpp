@@ -139,6 +139,20 @@ bool read_likes_line(GrB_Index &user_column, GrB_Index &comment_column, std::ifs
     return true;
 }
 
+std::ifstream get_change_file(const BenchmarkParameters &parameters, int iteration) {
+    std::stringstream change_path;
+    change_path << parameters.ChangePath << "/change"
+                << std::setfill('0') << std::setw(2)
+                << iteration << ".csv";
+
+    std::ifstream change_file{change_path.str()};
+    if (!change_file) {
+        throw std::runtime_error{"Failed to open input file"};
+    }
+
+    return change_file;
+}
+
 Q1_Input Q1_Input::load_initial(const BenchmarkParameters &parameters) {
     std::string posts_path = parameters.ChangePath + "/csv-posts-initial.csv",
             comments_path = parameters.ChangePath + "/csv-comments-initial.csv",
@@ -210,7 +224,68 @@ Q1_Input Q1_Input::load_initial(const BenchmarkParameters &parameters) {
 
 void Q1_Input::load_and_apply_updates(int iteration, Q1_Input::Update_Type &current_updates,
                                       const BenchmarkParameters &parameters) {
+    std::ifstream change_file = get_change_file(parameters, iteration);
 
+    auto old_posts_size = posts_size(),
+            old_comments_size = comments_size();
+
+    std::array<char, 8 + 1> change_type;  // NOLINT(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
+    while (change_file >> std::ws, change_file.getline(change_type.data(), change_type.size(), '|')) {
+        if (strcmp(change_type.data(), "Posts") == 0) {
+            GrB_Index post_col;
+            read_post_line(change_file, *this, post_col);
+
+            current_updates.new_posts.emplace_back(post_col);
+        } else if (strcmp(change_type.data(), "Comments") == 0) {
+            GrB_Index comment_col, post_col;
+            read_comment_line_root_post(comment_col, post_col, change_file, *this);
+            current_updates.root_post_updates.emplace_back(comment_col, post_col);
+        } else if (strcmp(change_type.data(), "Likes") == 0) {
+            GrB_Index comment_column;
+            read_likes_line(comment_column, change_file, *this);
+
+            current_updates.new_likes.emplace_back(comment_column);
+        } else if (strcmp(change_type.data(), "Friends") == 0
+                   || strcmp(change_type.data(), "Users") == 0)
+            // noop
+            change_file >> ignore_line;
+        else
+            throw std::runtime_error{std::string{"Unknown change type: "} + change_type.data()};
+    }
+
+    if (posts_size() > old_posts_size
+        || comments_size() > old_comments_size) {
+        ok(GxB_Matrix_resize(root_post_tran.get(), posts_size(), comments_size()));
+    }
+    if (comments_size() > old_comments_size) {
+        ok(GxB_Vector_resize(likes_count_vec.get(), comments_size()));
+    }
+
+    GrB_Index nvals;
+#ifndef NDEBUG
+    ok(GrB_Matrix_nvals(&nvals, root_post_tran.get()));
+    assert(nvals == root_post_num);
+    ok(GrB_Vector_nvals(&nvals, likes_count_vec.get()));
+    assert(nvals == likes_count_num);
+# endif
+
+    for (auto[comment_col, post_col] : current_updates.root_post_updates) {
+        ok(GrB_Matrix_setElement_BOOL(root_post_tran.get(), true, post_col, comment_col));
+    }
+    root_post_num += current_updates.root_post_updates.size();
+
+    for (GrB_Index comment_column : current_updates.new_likes) {
+        ok(GrB_Vector_assign_UINT64(likes_count_vec.get(), GrB_NULL, GrB_PLUS_UINT64,
+                                    1,
+                                    &comment_column, 1, GrB_NULL));
+    }
+
+#ifndef NDEBUG
+    ok(GrB_Matrix_nvals(&nvals, root_post_tran.get()));
+    assert(nvals == root_post_num);
+#endif
+    ok(GrB_Vector_nvals(&nvals, likes_count_vec.get()));
+    likes_count_num = nvals;
 }
 
 Q2_Input Q2_Input::load_initial(const BenchmarkParameters &parameters) {
@@ -272,15 +347,7 @@ Q2_Input Q2_Input::load_initial(const BenchmarkParameters &parameters) {
 
 void Q2_Input::load_and_apply_updates(int iteration, Q2_Input::Update_Type &current_updates,
                                       const BenchmarkParameters &parameters) {
-    std::stringstream change_path;
-    change_path << parameters.ChangePath << "/change"
-                << std::setfill('0') << std::setw(2)
-                << iteration << ".csv";
-
-    std::ifstream change_file{change_path.str()};
-    if (!change_file) {
-        throw std::runtime_error{"Failed to open input file"};
-    }
+    std::ifstream change_file = get_change_file(parameters, iteration);
 
     auto old_users_size = users_size(),
             old_comments_size = comments_size();
