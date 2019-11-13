@@ -25,10 +25,6 @@ protected:
         return top_scores_vector;
     }
 
-    static inline GrB_Info LAGraph_cc_rev_params(GrB_Vector *result, GrB_Matrix A) {
-        return LAGraph_cc(A, result);
-    }
-
     static inline void
     compute_score_for_comment(const Q2_Input &input, GrB_Index comment_col, const GrB_Index *likes_comment_array_first,
                               const GrB_Index *likes_comment_array_last, const GrB_Index *likes_user_array_first,
@@ -47,7 +43,7 @@ protected:
                                   GrB_NULL));
 
             // assuming that all component_ids will be in [0, n)
-            GBxx_Object<GrB_Vector> components_vector = GB(LAGraph_cc_rev_params, friends_subgraph.get());
+            GBxx_Object<GrB_Vector> components_vector = GB(LAGraph_fast_sv, friends_subgraph.get(), false);
 
             GrB_Index nvals;
 #ifndef NDEBUG
