@@ -56,14 +56,14 @@ public:
         ok(GrB_Vector_nvals(&scores_nvals, score_vec.get()));
 
         std::vector<GrB_Index> score_vector_indices(scores_nvals);
-        std::vector<uint64_t> score_vector(scores_nvals);
+        std::vector<uint64_t> score_vector_vals(scores_nvals);
 
-        ok(GrB_Vector_extractTuples_UINT64(score_vector_indices.data(), score_vector.data(), &scores_nvals,
+        ok(GrB_Vector_extractTuples_UINT64(score_vector_indices.data(), score_vector_vals.data(), &scores_nvals,
                                            score_vec.get()));
 
         for (GrB_Index i = 0; i < scores_nvals; ++i) {
             GrB_Index post_col = score_vector_indices[i];
-            uint64_t score = score_vector[i];
+            uint64_t score = score_vector_vals[i];
 
             // TODO: avoid timestamp lookup if possible
             top_scores.push(std::make_tuple(score, input.posts[post_col].timestamp, post_col));
