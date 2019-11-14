@@ -222,8 +222,8 @@ Q1_Input Q1_Input::load_initial(const BenchmarkParameters &parameters) {
     return input;
 }
 
-void Q1_Input::load_and_apply_updates(int iteration, Q1_Input::Update_Type &current_updates,
-                                      const BenchmarkParameters &parameters) {
+void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const BenchmarkParameters &parameters,
+                                      bool apply_likes_updates) {
     std::ifstream change_file = get_change_file(parameters, iteration);
 
     auto old_posts_size = posts_size(),
@@ -235,16 +235,18 @@ void Q1_Input::load_and_apply_updates(int iteration, Q1_Input::Update_Type &curr
             GrB_Index post_col;
             read_post_line(change_file, *this, post_col);
 
-            current_updates.new_posts.emplace_back(post_col);
+            updates.new_posts.emplace_back(post_col);
         } else if (strcmp(change_type.data(), "Comments") == 0) {
             GrB_Index comment_col, post_col;
             read_comment_line_root_post(comment_col, post_col, change_file, *this);
-            current_updates.root_post_updates.emplace_back(comment_col, post_col);
+
+            updates.new_root_post_src_comment_columns.push_back(comment_col);
+            updates.new_root_post_trg_post_columns.push_back(post_col);
         } else if (strcmp(change_type.data(), "Likes") == 0) {
             GrB_Index comment_column;
             read_likes_line(comment_column, change_file, *this);
 
-            current_updates.new_likes.emplace_back(comment_column);
+            updates.new_likes_to_comments.emplace_back(comment_column);
         } else if (strcmp(change_type.data(), "Friends") == 0
                    || strcmp(change_type.data(), "Users") == 0)
             // noop
@@ -257,35 +259,43 @@ void Q1_Input::load_and_apply_updates(int iteration, Q1_Input::Update_Type &curr
         || comments_size() > old_comments_size) {
         ok(GxB_Matrix_resize(root_post_tran.get(), posts_size(), comments_size()));
     }
-    if (comments_size() > old_comments_size) {
+    if (apply_likes_updates
+        && comments_size() > old_comments_size) {
         ok(GxB_Vector_resize(likes_count_vec.get(), comments_size()));
     }
 
-    GrB_Index nvals;
-#ifndef NDEBUG
-    ok(GrB_Matrix_nvals(&nvals, root_post_tran.get()));
-    assert(nvals == root_post_num);
-    ok(GrB_Vector_nvals(&nvals, likes_count_vec.get()));
-    assert(nvals == likes_count_num);
-# endif
+    updates.new_root_post_tran = GB(GrB_Matrix_new, GrB_BOOL, posts_size(), comments_size());
+    updates.new_likes_count_vec = GB(GrB_Vector_new, GrB_UINT64, comments_size());
 
-    for (auto[comment_col, post_col] : current_updates.root_post_updates) {
-        ok(GrB_Matrix_setElement_BOOL(root_post_tran.get(), true, post_col, comment_col));
-    }
-    root_post_num += current_updates.root_post_updates.size();
+    if (!updates.new_root_post_src_comment_columns.empty()) {
+        GrB_Index new_root_post_nvals = updates.new_root_post_src_comment_columns.size();
+        ok(GrB_Matrix_build_BOOL(updates.new_root_post_tran.get(),
+                                 updates.new_root_post_trg_post_columns.data(),
+                                 updates.new_root_post_src_comment_columns.data(),
+                                 array_of_true(new_root_post_nvals).get(),
+                                 new_root_post_nvals, GrB_LOR));
+        root_post_num += new_root_post_nvals;
 
-    for (GrB_Index comment_column : current_updates.new_likes) {
-        ok(GrB_Vector_assign_UINT64(likes_count_vec.get(), GrB_NULL, GrB_PLUS_UINT64,
-                                    1,
-                                    &comment_column, 1, GrB_NULL));
+        ok(GrB_eWiseAdd_Matrix_BinaryOp(root_post_tran.get(), GrB_NULL, GrB_NULL,
+                                        GrB_LOR, root_post_tran.get(), updates.new_root_post_tran.get(), GrB_NULL));
     }
 
-#ifndef NDEBUG
-    ok(GrB_Matrix_nvals(&nvals, root_post_tran.get()));
-    assert(nvals == root_post_num);
-#endif
-    ok(GrB_Vector_nvals(&nvals, likes_count_vec.get()));
-    likes_count_num = nvals;
+    if (!updates.new_likes_to_comments.empty()) {
+        std::vector<uint64_t> new_likes_count_vec_vals(updates.new_likes_to_comments.size(), 1);
+        ok(GrB_Vector_build_UINT64(updates.new_likes_count_vec.get(),
+                                   updates.new_likes_to_comments.data(), new_likes_count_vec_vals.data(),
+                                   updates.new_likes_to_comments.size(), GrB_PLUS_UINT64));
+
+        if (apply_likes_updates) {
+            ok(GrB_eWiseAdd_Vector_BinaryOp(likes_count_vec.get(), GrB_NULL, GrB_NULL,
+                                            GrB_PLUS_UINT64, likes_count_vec.get(), updates.new_likes_count_vec.get(),
+                                            GrB_NULL));
+
+            GrB_Index nvals;
+            ok(GrB_Vector_nvals(&nvals, likes_count_vec.get()));
+            likes_count_num = nvals;
+        }
+    }
 }
 
 Q2_Input Q2_Input::load_initial(const BenchmarkParameters &parameters) {
@@ -345,8 +355,8 @@ Q2_Input Q2_Input::load_initial(const BenchmarkParameters &parameters) {
     return input;
 }
 
-void Q2_Input::load_and_apply_updates(int iteration, Q2_Input::Update_Type &current_updates,
-                                      const BenchmarkParameters &parameters) {
+void
+Q2_Input::load_and_apply_updates(int iteration, Q2_Input::Update_Type &updates, const BenchmarkParameters &parameters) {
     std::ifstream change_file = get_change_file(parameters, iteration);
 
     auto old_users_size = users_size(),
@@ -358,16 +368,16 @@ void Q2_Input::load_and_apply_updates(int iteration, Q2_Input::Update_Type &curr
             GrB_Index user1_column, user2_column;
             read_friends_line(user1_column, user2_column, change_file, *this);
 
-            current_updates.friends_updates.emplace_back(user1_column, user2_column);
+            updates.friends_updates.emplace_back(user1_column, user2_column);
         } else if (strcmp(change_type.data(), "Likes") == 0) {
             GrB_Index user_column, comment_column;
             read_likes_line(user_column, comment_column, change_file, *this);
 
-            current_updates.likes_updates.emplace_back(user_column, comment_column);
+            updates.likes_updates.emplace_back(user_column, comment_column);
         } else if (strcmp(change_type.data(), "Comments") == 0) {
             GrB_Index comment_col;
             read_comment_line(change_file, *this, comment_col);
-            current_updates.new_comments.emplace_back(comment_col);
+            updates.new_comments.emplace_back(comment_col);
         } else if (strcmp(change_type.data(), "Posts") == 0
                    || strcmp(change_type.data(), "Users") == 0)
             // noop for posts and users
@@ -393,15 +403,15 @@ void Q2_Input::load_and_apply_updates(int iteration, Q2_Input::Update_Type &curr
     assert(nvals == likes_num);
 # endif
 
-    for (auto[user1_column, user2_column] : current_updates.friends_updates) {
+    for (auto[user1_column, user2_column] : updates.friends_updates) {
         ok(GrB_Matrix_setElement_BOOL(friends_matrix.get(), true, user1_column, user2_column));
     }
-    friends_num += current_updates.friends_updates.size();
+    friends_num += updates.friends_updates.size();
 
-    for (auto[user_column, comment_column] : current_updates.likes_updates) {
+    for (auto[user_column, comment_column] : updates.likes_updates) {
         ok(GrB_Matrix_setElement_BOOL(likes_matrix_tran.get(), true, comment_column, user_column));
     }
-    likes_num += current_updates.likes_updates.size();
+    likes_num += updates.likes_updates.size();
 
 #ifndef NDEBUG
     ok(GrB_Matrix_nvals(&nvals, friends_matrix.get()));

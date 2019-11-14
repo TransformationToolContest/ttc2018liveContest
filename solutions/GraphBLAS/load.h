@@ -66,12 +66,16 @@ struct Q1_Input {
     static Q1_Input load_initial(const BenchmarkParameters &parameters);
 
     struct Update_Type {
-        std::vector<Root_Post_Update> root_post_updates;
-        std::vector<GrB_Index> new_likes;
+        std::vector<GrB_Index> new_root_post_src_comment_columns, new_root_post_trg_post_columns;
+        std::vector<GrB_Index> new_likes_to_comments;
         std::vector<GrB_Index> new_posts;
+
+        GBxx_Object<GrB_Matrix> new_root_post_tran;
+        GBxx_Object<GrB_Vector> new_likes_count_vec;
     };
 
-    void load_and_apply_updates(int iteration, Update_Type &current_updates, const BenchmarkParameters &parameters);
+    void load_and_apply_updates(int iteration, Update_Type &updates, const BenchmarkParameters &parameters,
+                                bool apply_likes_updates = true);
 };
 
 struct Q2_Input {
@@ -100,5 +104,5 @@ struct Q2_Input {
         std::vector<GrB_Index> new_comments;
     };
 
-    void load_and_apply_updates(int iteration, Update_Type &current_updates, const BenchmarkParameters &parameters);
+    void load_and_apply_updates(int iteration, Update_Type &updates, const BenchmarkParameters &parameters);
 };
