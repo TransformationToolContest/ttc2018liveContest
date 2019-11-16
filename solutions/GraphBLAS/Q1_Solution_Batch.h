@@ -25,16 +25,13 @@ protected:
         return top_scores_vector;
     }
 
-public:
-    using Q1_Solution::Q1_Solution;
-
-    std::vector<score_type> calculate_score() {
-        queue_type top_scores;
-
-        GBxx_Object<GrB_Vector> score_vec = GB(GrB_Vector_new, GrB_UINT64, input.posts_size());
+    static GBxx_Object<GrB_Vector>
+    get_score_vec(GrB_Index posts_size, GrB_Matrix root_post_tran_for_reduce, GrB_Matrix root_post_tran_for_mxv,
+                  GrB_Vector likes_count_vec) {
+        GBxx_Object<GrB_Vector> score_vec = GB(GrB_Vector_new, GrB_UINT64, posts_size);
 
         ok(GrB_Matrix_reduce_BinaryOp(score_vec.get(), GrB_NULL, GrB_NULL,
-                                      GrB_PLUS_UINT64, input.root_post_tran.get(),
+                                      GrB_PLUS_UINT64, root_post_tran_for_reduce,
                                       GrB_NULL));
 
         GBxx_unary_function<uint64_t, uint64_t> multiplyBy10_func = [](auto result, auto input) {
@@ -49,8 +46,28 @@ public:
 
         ok(GrB_mxv(score_vec.get(), GrB_NULL, GrB_PLUS_UINT64,
                    GxB_PLUS_TIMES_UINT64,
-                   input.root_post_tran.get(), input.likes_count_vec.get(),
+                   root_post_tran_for_mxv, likes_count_vec,
                    GrB_NULL));
+        return score_vec;
+    }
+
+    virtual GBxx_Object<GrB_Vector> get_score_vec() const {
+        return get_score_vec(input.posts_size(),
+                             input.root_post_tran.get(), input.root_post_tran.get(),
+                             input.likes_count_vec.get());
+    }
+
+    virtual void save_score_vec(GBxx_Object<GrB_Vector> score_vec) {
+        // noop
+    }
+
+public:
+    using Q1_Solution::Q1_Solution;
+
+    std::vector<score_type> calculate_score() {
+        queue_type top_scores;
+
+        GBxx_Object<GrB_Vector> score_vec = get_score_vec();
 
         GrB_Index scores_nvals;
         ok(GrB_Vector_nvals(&scores_nvals, score_vec.get()));
@@ -60,6 +77,8 @@ public:
 
         ok(GrB_Vector_extractTuples_UINT64(score_vector_indices.data(), score_vector_vals.data(), &scores_nvals,
                                            score_vec.get()));
+
+        save_score_vec(std::move(score_vec));
 
         for (GrB_Index i = 0; i < scores_nvals; ++i) {
             GrB_Index post_col = score_vector_indices[i];
