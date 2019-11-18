@@ -15,9 +15,9 @@ protected:
     static std::vector<uint64_t>
     convert_score_type_to_comment_id(const std::vector<score_type> &top_scores, const Q2_Input &input) {
         std::vector<uint64_t> top_scores_vector;
-        top_scores_vector.reserve(3);
+        top_scores_vector.reserve(top_count);
 
-        std::transform(top_scores.begin(), top_scores.end(), std::back_inserter(top_scores_vector),
+        std::transform(top_scores.rbegin(), top_scores.rend(), std::back_inserter(top_scores_vector),
                        [&input](const auto &score_tuple) {
                            return input.comments[std::get<2>(score_tuple)].comment_id;
                        });
@@ -28,7 +28,7 @@ protected:
     static inline void
     compute_score_for_comment(const Q2_Input &input, GrB_Index comment_col, const GrB_Index *likes_comment_array_first,
                               const GrB_Index *likes_comment_array_last, const GrB_Index *likes_user_array_first,
-                              queue_type &top_scores) __attribute__ ((always_inline)) {
+                              std::vector<score_type> &top_scores) __attribute__ ((always_inline)) {
         auto[likes_comment_first, likes_comment_last] = std::equal_range(likes_comment_array_first,
                                                                          likes_comment_array_last, comment_col);
         if (likes_comment_first != likes_comment_last) {
@@ -56,7 +56,6 @@ protected:
             assert(n == likes_count);
 #endif
 
-            // TODO: avoid value initialization
             std::vector<uint64_t> components(likes_count),
                     component_sizes(likes_count);
 
@@ -73,11 +72,7 @@ protected:
 
             uint64_t score = std::accumulate(component_sizes.begin(), component_sizes.end(), uint64_t());
 
-            // TODO: avoid timestamp lookup if possible
-            top_scores.push(std::make_tuple(score, input.comments[comment_col].timestamp, comment_col));
-
-            if (top_scores.size() > 3)
-                top_scores.pop();
+            add_score(top_scores, std::make_tuple(score, input.comments[comment_col].timestamp, comment_col));
         }
     }
 
@@ -86,7 +81,8 @@ public:
 
     virtual void compute_score_for_all_comments(const GrB_Index *likes_comment_array_first,
                                                 const GrB_Index *likes_comment_array_last,
-                                                const GrB_Index *likes_user_array_first, queue_type &top_scores) const {
+                                                const GrB_Index *likes_user_array_first,
+                                                std::vector<score_type> &top_scores) const {
         // find tuple sequences of each comment in row-major array
         for (GrB_Index comment_col = 0; comment_col < input.comments_size(); ++comment_col) {
             compute_score_for_comment(input, comment_col, likes_comment_array_first, likes_comment_array_last,
@@ -95,7 +91,7 @@ public:
     }
 
     std::vector<score_type> calculate_score() {
-        queue_type top_scores;
+        std::vector<score_type> top_scores;
 
         std::unique_ptr<GrB_Index[]> likes_trg_comment_columns{new GrB_Index[input.likes_num]},
                 likes_src_user_columns{new GrB_Index[input.likes_num]};
@@ -113,38 +109,19 @@ public:
                                        likes_user_array_first, top_scores);
 
         // if comments with likes are not enough collect comments without like
-        if (top_scores.size() < 3) {
-            std::set<GrB_Index> comment_cols;
-            std::vector<score_type> top_scores_vector;
-            while (!top_scores.empty()) {
-                auto[score, timestamp, comment_col] = top_scores.top();
-                comment_cols.insert(comment_col);
-                top_scores_vector.emplace_back(score, timestamp, comment_col);
-                top_scores.pop();
-            }
-            for (const auto &score_tuple : top_scores_vector) {
-                top_scores.push(score_tuple);
-            }
-
+        if (top_scores.size() < top_count) {
             for (GrB_Index comment_col = 0; comment_col < input.comments_size(); ++comment_col) {
-                if (comment_cols.emplace(comment_col).second) {
-                    // if this comment wasn't checked before
-                    top_scores.push(std::make_tuple(0, input.comments[comment_col].timestamp, comment_col));
+                if (std::none_of(top_scores.begin(), top_scores.end(),
+                                 [comment_col](auto const &tuple) { return std::get<2>(tuple) == comment_col; })) {
+                    // try to add this comment if not present
+                    add_score(top_scores, std::make_tuple(0, input.comments[comment_col].timestamp, comment_col));
                 }
-
-                if (top_scores.size() > 3)
-                    top_scores.pop();
             }
         }
 
-        std::vector<score_type> top_scores_vector;
+        sort_top_scores(top_scores);
 
-        while (!top_scores.empty()) {
-            top_scores_vector.push_back(top_scores.top());
-            top_scores.pop();
-        }
-
-        return top_scores_vector;
+        return top_scores;
     }
 
     std::vector<uint64_t> initial_calculation() override {

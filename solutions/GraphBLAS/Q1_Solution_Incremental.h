@@ -75,8 +75,8 @@ public:
                 new_result.emplace_back(score, timestamp, comment_col);
             }
         }
-        std::sort(new_result.begin(), new_result.end());
-        new_result.erase(new_result.begin(), new_result.end() - 3);
+        std::sort(new_result.begin(), new_result.end(), std::greater<>{});
+        new_result.resize(top_count);
 
         last_result = std::move(new_result);
 

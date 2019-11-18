@@ -15,9 +15,9 @@ protected:
     static std::vector<uint64_t>
     convert_score_type_to_post_id(const std::vector<score_type> &top_scores, const Q1_Input &input) {
         std::vector<uint64_t> top_scores_vector;
-        top_scores_vector.reserve(3);
+        top_scores_vector.reserve(top_count);
 
-        std::transform(top_scores.begin(), top_scores.end(), std::back_inserter(top_scores_vector),
+        std::transform(top_scores.rbegin(), top_scores.rend(), std::back_inserter(top_scores_vector),
                        [&input](const auto &score_tuple) {
                            return input.posts[std::get<2>(score_tuple)].post_id;
                        });
@@ -65,7 +65,8 @@ public:
     using Q1_Solution::Q1_Solution;
 
     std::vector<score_type> calculate_score() {
-        queue_type top_scores;
+        std::vector<score_type> top_scores;
+        top_scores.reserve(top_count + 1);
 
         GBxx_Object<GrB_Vector> score_vec = get_score_vec();
 
@@ -84,21 +85,12 @@ public:
             GrB_Index post_col = score_vector_indices[i];
             uint64_t score = score_vector_vals[i];
 
-            // TODO: avoid timestamp lookup if possible
-            top_scores.push(std::make_tuple(score, input.posts[post_col].timestamp, post_col));
-
-            if (top_scores.size() > 3)
-                top_scores.pop();
+            add_score(top_scores, std::make_tuple(score, input.posts[post_col].timestamp, post_col));
         }
 
-        std::vector<score_type> top_scores_vector;
+        sort_top_scores(top_scores);
 
-        while (!top_scores.empty()) {
-            top_scores_vector.push_back(top_scores.top());
-            top_scores.pop();
-        }
-
-        return top_scores_vector;
+        return top_scores;
     }
 
     std::vector<uint64_t> initial_calculation() override {

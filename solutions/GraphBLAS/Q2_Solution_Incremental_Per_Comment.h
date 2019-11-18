@@ -95,7 +95,7 @@ public:
     void compute_score_for_all_comments(const GrB_Index *likes_comment_array_first,
                                         const GrB_Index *likes_comment_array_last,
                                         const GrB_Index *likes_user_array_first,
-                                        queue_type &top_scores) const override {
+                                        std::vector<score_type> &top_scores) const override {
         if (!current_updates_opt.has_value()) {
             // for first run compute score for every comment
             Q2_Solution_Batch::compute_score_for_all_comments(likes_comment_array_first, likes_comment_array_last,
@@ -107,7 +107,7 @@ public:
                 if (score != 0 && // avoid caching and initiate scan for comments without likes
                     !std::binary_search(affected_comment_cols.begin(), affected_comment_cols.end(), comment_col))
                     // use last scores if still valid
-                    top_scores.emplace(score, timestamp, comment_col);
+                    add_score(top_scores, std::make_tuple(score, timestamp, comment_col));
             }
 
             for (GrB_Index comment_col : affected_comment_cols) {
