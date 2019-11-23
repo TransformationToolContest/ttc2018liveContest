@@ -31,6 +31,7 @@ cd ..
 * NMF: You need to install [.NET Core 2.0](https://www.microsoft.com/net/download/linux-package-manager/ubuntu16-04/sdk-current)
 * SQL: Requires PostgreSQL 11 or later.
 * YAMTL: Requires Java 11 for running (already built).
+* Differential: Requires Rust and Cargo.
 
 Add your prerequisites here!
 
