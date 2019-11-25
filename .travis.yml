@@ -21,7 +21,7 @@ script:
  - ./load.sh
  - popd
  - popd
- - scripts/run.py -m -e
+ - scripts/run.py -b
 notifications:
   email: false
   on_success: change
