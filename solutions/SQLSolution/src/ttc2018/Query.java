@@ -21,6 +21,8 @@ public enum Query {
     Q2_CFC_UPDATE_INIT(Paths.get("q2-cfc-update-during-initial.sql")),
     Q2_CFC_UPDATE_MAINTAIN(Paths.get("q2-cfc-update-during-update.sql")),
     Q2_RETRIEVE(Paths.get("q2-retrieve.sql")),
+    Q2_INFO_COUNT_LIKES_D("select count(*) as c1, count(*) as c2 from likes_d"),
+    Q2_INFO_COUNT_COMMENT_FRIENDS_D("select count(*) as c1, count(*) as c2 from comment_friends_d"),
     ;
 
 

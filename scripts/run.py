@@ -88,13 +88,13 @@ def visualize():
     Visualizes the benchmark results
     """
     clean_dir("diagrams")
-    set_working_directory("reporting")
-    subprocess.call(["Rscript", "visualize.R", os.path.join(BASE_DIRECTORY, "config", "reporting.json")])
+    set_working_directory("reporting2")
+    subprocess.call(["Rscript", "-e", "rmarkdown::render('report.Rmd', output_format=rmarkdown::pdf_document())"])
 
 
-def extract_results():
+def check_results():
     """
-    Extracts the benchmark results
+    Checks the benchmark results
     """
     clean_dir("results")
     set_working_directory("reporting")
@@ -115,8 +115,8 @@ if __name__ == "__main__":
     parser.add_argument("-v", "--visualize",
                         help="create visualizations",
                         action="store_true")
-    parser.add_argument("-e", "--extract",
-                        help="extract results",
+    parser.add_argument("-c", "--check",
+                        help="check results results",
                         action="store_true")
     parser.add_argument("-t", "--test",
                         help="run test",
@@ -141,8 +141,8 @@ if __name__ == "__main__":
         build(config, False)
     if args.visualize:
         visualize()
-    if args.extract:
-        extract_results()
+    if args.check:
+        check_results()
 
     # if there are no args, execute a full sequence
     # with the test and the visualization/reporting
@@ -151,4 +151,4 @@ if __name__ == "__main__":
         build(config, False)
         benchmark(config)
         visualize()
-        extract_results()
+        check_results()

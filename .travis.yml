@@ -21,13 +21,17 @@ script:
  - ./load.sh
  - popd
  - popd
- - scripts/run.py -m -e
+ - scripts/run.py -b
 notifications:
   email: false
   on_success: change
   on_failure: always
 before_install:
   - sudo apt-get -qq purge --yes postgresql\*
+  - echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" | sudo tee -a /etc/apt/sources.list.d/pgdg.list
+  - wget https://www.postgresql.org/media/keys/ACCC4CF8.asc
+  - sudo apt-key add ACCC4CF8.asc
+  - sudo apt-get update
   - sudo apt-get -qq install --yes postgresql-11
   - sudo sed -i '1ilocal all ttcuser trust' /etc/postgresql/11/main/pg_hba.conf
   - sudo service postgresql restart

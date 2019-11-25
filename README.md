@@ -12,6 +12,16 @@ The `docs/2018_TTC_Live.pdf` file contains the [case description](https://github
 * Python 3.3 or higher
 * R
 
+## Setup
+
+The graph models are stored in the `models` directory. For sizes larger than 512, the files are zipped so make sure you unzip the required sizes first. For example, run:
+
+```bash
+cd models
+unzip 1024.zip
+cd ..
+```
+
 ## Solution Prerequisites
 
 * AOF, ATL: Requires Java 8 for build (can run with Java 11).
@@ -31,12 +41,11 @@ At a first glance, invoke it without any arguments so that the solution will be 
 One might fine tune the script for the following purposes:
 * `run.py -b` -- builds the projects
 * `run.py -b -s` -- builds the projects without testing
-* `run.py -g` -- generates the instance models
 * `run.py -m` -- run the benchmark without building
 * `run.py -v` -- visualizes the results of the latest benchmark
-* `run.py -e` -- compare results to the reference output. The benchmark shall already been executed using `-m`.
-* `run.py -m -e` -- run benchmark without building, then extract and compare results to the reference output
+* `run.py -c` -- check results by comparing them to the reference output. The benchmark shall already been executed using `-m`.
 * `run.py -t` -- build the project and run tests (usually unit tests as defined for the given solution)
+* `run.py -d` -- runs the process in debug mode, i.e. with the `Debug` environment variable set to `true`
 
 The `config` directory contains the configuration for the scripts:
 * `config.json` -- configuration for the model generation and the benchmark
