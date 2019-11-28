@@ -19,15 +19,19 @@ protected:
     GBxx_Object<GrB_Vector> get_score_vec() const override {
         if (updates_opt.has_value()) {
             Q1_Input::Update_Type const &updates = updates_opt.value();
+            // compute additional score of new comments and likes
+            // number of new comments is counted on new_root_post_tran
+            // to get the root post for each new like we use the updated root_post_tran
             GBxx_Object<GrB_Vector> partial_score_vec = Q1_Solution_Batch::get_score_vec(
                     input.posts_size(),
                     updates.new_root_post_tran.get(), input.root_post_tran.get(),
                     updates.new_likes_count_vec.get());
 
-            // update full score vector
+            // update score vector by adding the additional score
             ok(GrB_eWiseAdd_Vector_BinaryOp(last_score_vec.get(), GrB_NULL, GrB_NULL,
                                             GrB_PLUS_UINT64, last_score_vec.get(), partial_score_vec.get(), GrB_NULL));
-            // overwrite scores in partial score vector (evaluate only where both values are non-0 => Mult)
+            // get updated scores for each post where changed, otherwise omit score
+            // overwrite scores in partial score vector (evaluate only where both values are non-0 => eWiseMult)
             ok(GrB_eWiseMult_Vector_BinaryOp(partial_score_vec.get(), GrB_NULL, GrB_NULL,
                                              GrB_SECOND_UINT64, partial_score_vec.get(), last_score_vec.get(),
                                              GrB_NULL));

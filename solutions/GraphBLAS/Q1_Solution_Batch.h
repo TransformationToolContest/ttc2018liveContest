@@ -17,6 +17,7 @@ protected:
         std::vector<uint64_t> top_scores_vector;
         top_scores_vector.reserve(top_count);
 
+        // convert row indices to original post IDs
         std::transform(top_scores.rbegin(), top_scores.rend(), std::back_inserter(top_scores_vector),
                        [&input](const auto &score_tuple) {
                            return input.posts[std::get<2>(score_tuple)].post_id;
@@ -30,6 +31,7 @@ protected:
                   GrB_Vector likes_count_vec) {
         GBxx_Object<GrB_Vector> score_vec = GB(GrB_Vector_new, GrB_UINT64, posts_size);
 
+        // count number of comments for each post
         ok(GrB_Matrix_reduce_BinaryOp(score_vec.get(), GrB_NULL, GrB_NULL,
                                       GrB_PLUS_UINT64, root_post_tran_for_reduce,
                                       GrB_NULL));
@@ -42,8 +44,13 @@ protected:
                                                    reinterpret_cast<GxB_unary_function>(multiplyBy10_func),
                                                    GrB_UINT64, GrB_UINT64);
 
+        // scale score by 10
         ok(GrB_Vector_apply(score_vec.get(), GrB_NULL, GrB_NULL, multiplyBy10.get(), score_vec.get(), GrB_NULL));
 
+        // score = 10*comment_count + likes_count
+        // increase score of each post by the number of likes
+        // select likes number of each comment which belongs to the post (mul: times)
+        // add up them per post (add: plus)
         ok(GrB_mxv(score_vec.get(), GrB_NULL, GrB_PLUS_UINT64,
                    GxB_PLUS_TIMES_UINT64,
                    root_post_tran_for_mxv, likes_count_vec,
@@ -68,6 +75,7 @@ public:
         std::vector<score_type> top_scores;
         top_scores.reserve(top_count + 1);
 
+        // compute score for each post
         GBxx_Object<GrB_Vector> score_vec = get_score_vec();
 
         GrB_Index scores_nvals;
@@ -76,6 +84,7 @@ public:
         std::vector<GrB_Index> score_vector_indices(scores_nvals);
         std::vector<uint64_t> score_vector_vals(scores_nvals);
 
+        // extract scores vector
         ok(GrB_Vector_extractTuples_UINT64(score_vector_indices.data(), score_vector_vals.data(), &scores_nvals,
                                            score_vec.get()));
 
@@ -85,7 +94,7 @@ public:
             GrB_Index post_col = score_vector_indices[i];
             uint64_t score = score_vector_vals[i];
 
-            add_score(top_scores, std::make_tuple(score, input.posts[post_col].timestamp, post_col));
+            add_score_to_toplist(top_scores, std::make_tuple(score, input.posts[post_col].timestamp, post_col));
         }
 
         sort_top_scores(top_scores);

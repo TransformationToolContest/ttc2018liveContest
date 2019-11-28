@@ -17,6 +17,7 @@ protected:
         std::vector<uint64_t> top_scores_vector;
         top_scores_vector.reserve(top_count);
 
+        // convert row indices to original comment IDs
         std::transform(top_scores.rbegin(), top_scores.rend(), std::back_inserter(top_scores_vector),
                        [&input](const auto &score_tuple) {
                            return input.comments[std::get<2>(score_tuple)].comment_id;
@@ -29,21 +30,25 @@ protected:
     compute_score_for_comment(const Q2_Input &input, GrB_Index comment_col, const GrB_Index *likes_comment_array_first,
                               const GrB_Index *likes_comment_array_last, const GrB_Index *likes_user_array_first,
                               std::vector<score_type> &top_scores) __attribute__ ((always_inline)) {
+        // find tuple sequences of each comment in row-major array
+        // users liking a comment are stored consecutively
         auto[likes_comment_first, likes_comment_last] = std::equal_range(likes_comment_array_first,
                                                                          likes_comment_array_last, comment_col);
         if (likes_comment_first != likes_comment_last) {
             GrB_Index likes_count = std::distance(likes_comment_first, likes_comment_last);
+            // get position of first user liking that comment
             const GrB_Index *likes_user_first =
                     likes_user_array_first + std::distance(likes_comment_array_first, likes_comment_first);
 
-            GBxx_Object<GrB_Matrix> friends_subgraph = GB(GrB_Matrix_new, GrB_BOOL, likes_count, likes_count);
-            ok(GrB_Matrix_extract(friends_subgraph.get(), GrB_NULL, GrB_NULL,
+            // extract friendships submatrix of users liking the comment
+            GBxx_Object<GrB_Matrix> friends_overlay_graph = GB(GrB_Matrix_new, GrB_BOOL, likes_count, likes_count);
+            ok(GrB_Matrix_extract(friends_overlay_graph.get(), GrB_NULL, GrB_NULL,
                                   input.friends_matrix.get(),
                                   likes_user_first, likes_count, likes_user_first, likes_count,
                                   GrB_NULL));
 
             // assuming that all component_ids will be in [0, n)
-            GBxx_Object<GrB_Vector> components_vector = GB(LAGraph_fast_sv, friends_subgraph.get(), false);
+            GBxx_Object<GrB_Vector> components_vector = GB(LAGraph_fast_sv, friends_overlay_graph.get(), false);
 
             GrB_Index nvals;
 #ifndef NDEBUG
@@ -64,6 +69,7 @@ protected:
             ok(GrB_Vector_extractTuples_UINT64(nullptr, components.data(), &nvals, components_vector.get()));
             assert(nvals == likes_count);
 
+            // count size of each component
             for (auto component_id:components)
                 ++component_sizes[component_id];
 
@@ -72,7 +78,8 @@ protected:
 
             uint64_t score = std::accumulate(component_sizes.begin(), component_sizes.end(), uint64_t());
 
-            add_score(top_scores, std::make_tuple(score, input.comments[comment_col].timestamp, comment_col));
+            add_score_to_toplist(top_scores,
+                                 std::make_tuple(score, input.comments[comment_col].timestamp, comment_col));
         }
     }
 
@@ -83,7 +90,6 @@ public:
                                                 const GrB_Index *likes_comment_array_last,
                                                 const GrB_Index *likes_user_array_first,
                                                 std::vector<score_type> &top_scores) const {
-        // find tuple sequences of each comment in row-major array
         for (GrB_Index comment_col = 0; comment_col < input.comments_size(); ++comment_col) {
             compute_score_for_comment(input, comment_col, likes_comment_array_first, likes_comment_array_last,
                                       likes_user_array_first, top_scores);
@@ -101,6 +107,7 @@ public:
 
         // nullptr to avoid extracting matrix values (SuiteSparse extension)
         GrB_Index nvals = input.likes_num;
+        // extract likes edges row-wise, users liking a comment are stored consecutively
         ok(GrB_Matrix_extractTuples_BOOL(likes_trg_comment_columns.get(), likes_src_user_columns.get(), nullptr, &nvals,
                                          input.likes_matrix_tran.get()));
         assert(nvals == input.likes_num);
@@ -114,7 +121,8 @@ public:
                 if (std::none_of(top_scores.begin(), top_scores.end(),
                                  [comment_col](auto const &tuple) { return std::get<2>(tuple) == comment_col; })) {
                     // try to add this comment if not present
-                    add_score(top_scores, std::make_tuple(0, input.comments[comment_col].timestamp, comment_col));
+                    add_score_to_toplist(top_scores,
+                                         std::make_tuple(0, input.comments[comment_col].timestamp, comment_col));
                 }
             }
         }

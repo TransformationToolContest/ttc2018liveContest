@@ -33,6 +33,7 @@ public:
         GBxx_Object<GrB_Vector> affected_comments =
                 GB(GrB_Vector_new, GrB_BOOL, input.comments_size());
 
+        // new comments and comments with new likes should be (re)evaluated
         if (!likes_updates.empty() || !new_comments.empty()) {
             std::vector<GrB_Index> liked_or_new_comments;
             liked_or_new_comments.reserve(likes_updates.size() + new_comments.size());
@@ -58,6 +59,8 @@ public:
             new_friends_rows.reserve(new_friends_nnz);
             new_friends_columns.reserve(new_friends_nnz);
 
+            // for each new friendship put a column into the matrix
+            // each column contains 2 true values at the users connected by that friend edge
             GrB_Index column = 0;
             for (auto[user1_column, user2_column]:friends_updates) {
                 new_friends_rows.emplace_back(user1_column);
@@ -72,10 +75,16 @@ public:
                                      new_friends_rows.data(), new_friends_columns.data(),
                                      array_of_true(new_friends_nnz).get(),
                                      new_friends_nnz, GrB_LOR));
-
+            // each column of affected_comments_mx contains true for comments which are affected by the corresponding new friend edge
+            // the 2 true values in each column of new_friends_mx select 2 columns of likes_matrix_tran,
+            //      which contain comments having likes from the users (mul: land)
+            // a comment is affected if both users like it => use element-wise land for the 2 columns (add: land)
             ok(GrB_mxm(affected_comments_mx.get(), GrB_NULL, GrB_NULL, GxB_LAND_LAND_BOOL,
                        input.likes_matrix_tran.get(), new_friends_mx.get(), GrB_NULL));
 
+            // comments which are affected because:
+            // - they are new or got new like edges (already in affected_comments)
+            // - at least one new friend edge affects it (true value(s) in their row in affected_comments_mx)
             ok(GrB_Matrix_reduce_BinaryOp(affected_comments.get(), GrB_NULL,
                                           GrB_LOR, GrB_LOR,
                                           affected_comments_mx.get(), GrB_NULL));
@@ -104,10 +113,10 @@ public:
             const std::vector<GrB_Index> affected_comment_cols = get_affected_comment_cols();
 
             for (auto[score, timestamp, comment_col]:last_result) {
-                if (score != 0 && // avoid caching and initiate scan for comments without likes
+                if (score != 0 && // avoid caching and initiate reevaluation for comments without likes
                     !std::binary_search(affected_comment_cols.begin(), affected_comment_cols.end(), comment_col))
                     // use last scores if still valid
-                    add_score(top_scores, std::make_tuple(score, timestamp, comment_col));
+                    add_score_to_toplist(top_scores, std::make_tuple(score, timestamp, comment_col));
             }
 
             for (GrB_Index comment_col : affected_comment_cols) {
