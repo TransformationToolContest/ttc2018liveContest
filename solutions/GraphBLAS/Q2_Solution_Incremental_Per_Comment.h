@@ -101,14 +101,14 @@ public:
         return affected_comments_vector;
     }
 
-    void compute_score_for_all_comments(const GrB_Index *likes_comment_array_first,
-                                        const GrB_Index *likes_comment_array_last,
-                                        const GrB_Index *likes_user_array_first,
+    void compute_score_for_all_comments(const GrB_Index *likes_comment_array_begin,
+                                        const GrB_Index *likes_comment_array_end,
+                                        const GrB_Index *likes_user_array_begin,
                                         std::vector<score_type> &top_scores) const override {
         if (!current_updates_opt.has_value()) {
             // for first run compute score for every comment
-            Q2_Solution_Batch::compute_score_for_all_comments(likes_comment_array_first, likes_comment_array_last,
-                                                              likes_user_array_first, top_scores);
+            Q2_Solution_Batch::compute_score_for_all_comments(likes_comment_array_begin, likes_comment_array_end,
+                                                              likes_user_array_begin, top_scores);
         } else {
             const std::vector<GrB_Index> affected_comment_cols = get_affected_comment_cols();
 
@@ -120,8 +120,8 @@ public:
             }
 
             for (GrB_Index comment_col : affected_comment_cols) {
-                compute_score_for_comment(input, comment_col, likes_comment_array_first, likes_comment_array_last,
-                                          likes_user_array_first, top_scores);
+                compute_score_for_comment(input, comment_col, likes_comment_array_begin, likes_comment_array_end,
+                                          likes_user_array_begin, top_scores);
             }
         }
     }
