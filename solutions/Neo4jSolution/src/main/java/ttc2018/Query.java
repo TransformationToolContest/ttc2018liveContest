@@ -21,6 +21,7 @@ public enum Query {
     Q2_DELETE_OVERLAY_GRAPH(Paths.get("q2_delete_overlay_graph.cypher")),
     Q2_INITIAL_SCORE(Paths.get("q2_initial_score.cypher")),
     Q2_INITIAL_COMPONENTS_AND_SCORE(Paths.get("q2_initial_components_and_score.cypher")),
+    Q2_INITIAL_COMPONENTS_AND_SCORE_ALGO(Paths.get("q2_initial_components_and_score_algo.cypher")),
     Q2_INITIAL_COMPONENTS_PERIODIC(Paths.get("q2_initial_components_periodic.cypher")),
     Q2_INITIAL_SCORE_FROM_EXPLICIT_COMPONENTS(Paths.get("q2_initial_score_from_explicit_components.cypher")),
     Q2_INITIAL_ZERO_SCORE(Paths.get("q2_initial_zero_score.cypher")),

@@ -3,6 +3,7 @@ package ttc2018;
 import com.google.common.collect.Iterators;
 import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.graphdb.factory.GraphDatabaseSettings;
 import org.neo4j.internal.kernel.api.exceptions.KernelException;
 import org.neo4j.io.fs.FileUtils;
 import org.neo4j.kernel.impl.proc.Procedures;
@@ -56,7 +57,9 @@ public abstract class Solution implements AutoCloseable {
     }
 
     protected void initializeDb() throws KernelException {
-        graphDb = new GraphDatabaseFactory().newEmbeddedDatabase(DB_DIR);
+        graphDb = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(DB_DIR)
+                .setConfig(GraphDatabaseSettings.procedure_unrestricted, "apoc.*,algo.*")
+                .newGraphDatabase();
         Runtime.getRuntime().addShutdownHook(new Thread(this::close));
     }
 
@@ -82,8 +85,8 @@ public abstract class Solution implements AutoCloseable {
         Procedures proceduresService = ((GraphDatabaseAPI) db).getDependencyResolver().resolveDependency(Procedures.class);
         for (Class<?> procedure : procedures) {
             proceduresService.registerProcedure(procedure, true);
-//            proceduresService.registerFunction(procedure, true);
-//            proceduresService.registerAggregationFunction(procedure, true);
+            proceduresService.registerFunction(procedure, true);
+            proceduresService.registerAggregationFunction(procedure, true);
         }
     }
 

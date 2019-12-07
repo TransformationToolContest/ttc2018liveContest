@@ -6,6 +6,8 @@ import apoc.periodic.Periodic;
 import apoc.refactor.GraphRefactoring;
 import com.google.common.collect.ImmutableMap;
 import org.neo4j.cypher.CypherExecutionException;
+import org.neo4j.graphalgo.GetNodeFunc;
+import org.neo4j.graphalgo.UnionFindProc;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -31,21 +33,34 @@ public class SolutionQ2 extends Solution {
     }
 
     public enum Tool {
-        Neo4jSolution_overlay_graph,
-        Neo4jSolution_explicit_component,
-        Neo4jSolution_explicit_component_periodic,
+        Neo4jSolution_overlay_graph(true, false),
+        Neo4jSolution_explicit_component(false, true),
+        Neo4jSolution_explicit_component_periodic(false, true),
+        Neo4jSolution_explicit_component_algo(false, true),
+        ;
+
+        final boolean maintainOverlayGraph;
+        final boolean maintainExplicitComponent;
+
+        Tool(boolean maintainOverlayGraph, boolean maintainExplicitComponent) {
+            this.maintainOverlayGraph = maintainOverlayGraph;
+            this.maintainExplicitComponent = maintainExplicitComponent;
+        }
     }
 
     @Override
     protected void initializeDb() throws KernelException {
         super.initializeDb();
 
+        if (tool.maintainExplicitComponent)
+            registerProcedure(graphDb, GraphRefactoring.class);
+
         switch (tool) {
-            case Neo4jSolution_explicit_component:
-                registerProcedure(graphDb, GraphRefactoring.class);
+            case Neo4jSolution_explicit_component_algo:
+                registerProcedure(graphDb, UnionFindProc.class, GetNodeFunc.class);
                 break;
             case Neo4jSolution_explicit_component_periodic:
-                registerProcedure(graphDb, GraphRefactoring.class, Create.class, Periodic.class, PathExplorer.class);
+                registerProcedure(graphDb, Create.class, Periodic.class, PathExplorer.class);
                 break;
         }
     }
@@ -74,6 +89,10 @@ public class SolutionQ2 extends Solution {
                 runVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
 
                 runVoidQuery(Query.Q2_INITIAL_COMPONENTS_AND_SCORE);
+                runVoidQuery(Query.Q2_INITIAL_ZERO_SCORE);
+                break;
+            case Neo4jSolution_explicit_component_algo:
+                runVoidQuery(Query.Q2_INITIAL_COMPONENTS_AND_SCORE_ALGO);
                 runVoidQuery(Query.Q2_INITIAL_ZERO_SCORE);
                 break;
             case Neo4jSolution_explicit_component_periodic:
@@ -108,7 +127,7 @@ public class SolutionQ2 extends Solution {
         Relationship friendEdge = super.addFriendEdge(line);
         newFriendEdges.add(friendEdge);
 
-        if (tool == Tool.Neo4jSolution_explicit_component || tool == Tool.Neo4jSolution_explicit_component_periodic) {
+        if (tool.maintainExplicitComponent) {
             runVoidQuery(Query.Q2_MERGE_COMPONENTS_AFTER_FRIEND_EDGE, ImmutableMap.of("friendEdge", friendEdge));
         }
 
@@ -120,7 +139,7 @@ public class SolutionQ2 extends Solution {
         Relationship likesEdge = super.addLikesEdge(line);
         newLikesEdges.add(likesEdge);
 
-        if (tool == Tool.Neo4jSolution_explicit_component || tool == Tool.Neo4jSolution_explicit_component_periodic) {
+        if (tool.maintainExplicitComponent) {
             runVoidQuery(Query.Q2_MERGE_COMPONENTS_AFTER_LIKES_EDGE, ImmutableMap.of("likesEdge", likesEdge));
         }
 
@@ -137,7 +156,7 @@ public class SolutionQ2 extends Solution {
 
         beforeUpdate(changes);
 
-        if (tool == Tool.Neo4jSolution_overlay_graph) {
+        if (tool.maintainOverlayGraph) {
             if (!newFriendEdges.isEmpty())
                 runVoidQuery(Query.Q2_UPDATE_OVERLAY_GRAPH_FRIEND_EDGE, ImmutableMap.of("friendEdges", newFriendEdges));
             if (!newLikesEdges.isEmpty())
