@@ -17,3 +17,8 @@ ps aux | grep 'bin/neo4j-solution' | cut -c 1-110
 ```console
 tr '\0' '\n' < /proc/«PROC_ID»/environ | egrep "Debug|Sequences|Runs|RunIndex|Tool|ChangeSet|ChangePath|Query"
 ```
+
+## Concatenate more results
+```console
+cat output/output1.csv <(tail -qn +2 output/output2.csv output/output3.csv) > output/output.csv
+```
