@@ -49,22 +49,24 @@ def benchmark(conf):
     shutil.copy(header, result_file)
     os.environ['Sequences'] = str(conf.Sequences)
     os.environ['Runs'] = str(conf.Runs)
-    for r in range(0, conf.Runs):
-        os.environ['RunIndex'] = str(r)
-        for tool in conf.Tools:
-            config = ConfigParser.ConfigParser()
-            config.read(os.path.join(BASE_DIRECTORY, "solutions", tool, "solution.ini"))
-            set_working_directory("solutions", tool)
-            os.environ['Tool'] = tool
-            for change_set in conf.ChangeSets:
-                full_change_path = os.path.abspath(os.path.join(BASE_DIRECTORY, "models", change_set))
-                os.environ['ChangeSet'] = change_set
-                os.environ['ChangePath'] = full_change_path
-                for query in conf.Queries:
-                    os.environ['Query'] = query
-                    print("Running benchmark: tool = " + tool + ", change set = " + change_set +
-                          ", query = " + query)
-                    try:
+    for tool in conf.Tools:
+        config = ConfigParser.ConfigParser()
+        config.read(os.path.join(BASE_DIRECTORY, "solutions", tool, "solution.ini"))
+        set_working_directory("solutions", tool)
+        os.environ['Tool'] = tool
+        for query in conf.Queries:
+            os.environ['Query'] = query
+            try:
+                for change_set in conf.ChangeSets:
+                    full_change_path = os.path.abspath(os.path.join(BASE_DIRECTORY, "models", change_set))
+                    os.environ['ChangeSet'] = change_set
+                    os.environ['ChangePath'] = full_change_path
+                    for r in range(0, conf.Runs):
+                        os.environ['RunIndex'] = str(r)
+
+                        print("Running benchmark: tool = " + tool + ", change set = " + change_set +
+                              ", query = " + query)
+
                         # instead of subprocess.check_output()
                         # to enforce timeout before Python 3.7.5
                         # and kill sub-processes to avoid interference
@@ -78,8 +80,8 @@ def benchmark(conf):
                                 raise
                         with open(result_file, "ab") as file:
                             file.write(output)
-                    except subprocess.TimeoutExpired as e:
-                        print("Program reached the timeout set ({0} seconds). The command we executed was '{1}'".format(e.timeout, e.cmd))
+            except subprocess.TimeoutExpired as e:
+                print("Program reached the timeout set ({0} seconds). The command we executed was '{1}'".format(e.timeout, e.cmd))
 
 
 def clean_dir(*path):
