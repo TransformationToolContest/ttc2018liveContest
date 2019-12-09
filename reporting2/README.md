@@ -3,12 +3,25 @@
 Install R and pandoc. For Ubuntu 16.04+, the following works:
 
 ```console
+# R base
 sudo apt install -y r-base r-base-dev pandoc
 # for tidyverse
 sudo apt install -y libssl-dev libxml2-dev libcurl4-openssl-dev
+
+# both
+sudo apt install -y r-base r-base-dev pandoc libssl-dev libxml2-dev libcurl4-openssl-dev
 ```
 
-Run R and install the [Tidyverse](https://www.tidyverse.org/) and [TinyTeX](https://yihui.name/tinytex/) package:
+Run R and install the [Tidyverse](https://www.tidyverse.org/) and [TinyTeX](https://yihui.name/tinytex/) package.
+
+To run GCC/G++ on multiple threads, set the following flags:
+
+```bash
+mkdir ~/.R
+echo "MAKEFLAGS = -j40" > ~/.R/Makevars
+```
+
+Install the packages:
 
 ```R
 install.packages("tidyverse")
