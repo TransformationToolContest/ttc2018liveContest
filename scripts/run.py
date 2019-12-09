@@ -8,6 +8,7 @@ import os
 import shutil
 import subprocess
 import sys
+import signal
 try:
     import ConfigParser
 except ImportError:
@@ -64,7 +65,17 @@ def benchmark(conf):
                     print("Running benchmark: tool = " + tool + ", change set = " + change_set +
                           ", query = " + query)
                     try:
-                        output = subprocess.check_output(config.get('run', query), shell=True, timeout=conf.Timeout)
+                        # instead of subprocess.check_output()
+                        # to enforce timeout before Python 3.7.5
+                        # and kill sub-processes to avoid interference
+                        # https://stackoverflow.com/a/36955420
+                        with subprocess.Popen(config.get('run', query), shell=True, stdout=subprocess.PIPE,
+                                              start_new_session=True) as process:
+                            try:
+                                output = process.communicate(timeout=conf.Timeout)[0]
+                            except subprocess.TimeoutExpired:
+                                os.killpg(process.pid, signal.SIGINT)  # send signal to the process group
+                                raise
                         with open(result_file, "ab") as file:
                             file.write(output)
                     except subprocess.TimeoutExpired as e:
