@@ -83,7 +83,7 @@ ggplot(df.aggregated, aes(x=ChangeSet, y=MetricValue, fill=Tool)) +
     xlab("Model size") +
     ylab("Execution time [s]") +
     theme_bw()
-ggsave(file="results.pdf", width=250, height=170, units="mm")
+ggsave(file="results.pdf", width=350, height=170, units="mm")
 ```
 
 ## Plot of update iterations
