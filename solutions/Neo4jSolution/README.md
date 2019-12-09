@@ -8,6 +8,11 @@
 
 # Useful commands
 
+## Find running measurements
+```console
+ps aux | grep 'bin/neo4j-solution' | cut -c 1-110
+```
+
 ## Get start options of running measurement
 ```console
 tr '\0' '\n' < /proc/«PROC_ID»/environ | egrep "Debug|Sequences|Runs|RunIndex|Tool|ChangeSet|ChangePath|Query"
