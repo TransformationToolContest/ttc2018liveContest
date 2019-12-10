@@ -14,7 +14,6 @@ try:
 except ImportError:
     import configparser as ConfigParser
 import json
-from subprocess import CalledProcessError
 
 BASE_DIRECTORY = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 print("Running benchmark with root directory " + BASE_DIRECTORY)
@@ -49,22 +48,24 @@ def benchmark(conf):
     shutil.copy(header, result_file)
     os.environ['Sequences'] = str(conf.Sequences)
     os.environ['Runs'] = str(conf.Runs)
-    for r in range(0, conf.Runs):
-        os.environ['RunIndex'] = str(r)
-        for tool in conf.Tools:
-            config = ConfigParser.ConfigParser()
-            config.read(os.path.join(BASE_DIRECTORY, "solutions", tool, "solution.ini"))
-            set_working_directory("solutions", tool)
-            os.environ['Tool'] = tool
-            for change_set in conf.ChangeSets:
-                full_change_path = os.path.abspath(os.path.join(BASE_DIRECTORY, "models", change_set))
-                os.environ['ChangeSet'] = change_set
-                os.environ['ChangePath'] = full_change_path
-                for query in conf.Queries:
-                    os.environ['Query'] = query
-                    print("Running benchmark: tool = " + tool + ", change set = " + change_set +
-                          ", query = " + query)
-                    try:
+    for tool in conf.Tools:
+        config = ConfigParser.ConfigParser()
+        config.read(os.path.join(BASE_DIRECTORY, "solutions", tool, "solution.ini"))
+        set_working_directory("solutions", tool)
+        os.environ['Tool'] = tool
+        for query in conf.Queries:
+            os.environ['Query'] = query
+            try:
+                for change_set in conf.ChangeSets:
+                    full_change_path = os.path.abspath(os.path.join(BASE_DIRECTORY, "models", change_set))
+                    os.environ['ChangeSet'] = change_set
+                    os.environ['ChangePath'] = full_change_path
+                    for r in range(0, conf.Runs):
+                        os.environ['RunIndex'] = str(r)
+
+                        print("Running benchmark: tool = " + tool + ", change set = " + change_set +
+                              ", query = " + query)
+
                         # instead of subprocess.check_output()
                         # to enforce timeout before Python 3.7.5
                         # and kill sub-processes to avoid interference
@@ -72,14 +73,18 @@ def benchmark(conf):
                         with subprocess.Popen(config.get('run', query), shell=True, stdout=subprocess.PIPE,
                                               start_new_session=True) as process:
                             try:
-                                output = process.communicate(timeout=conf.Timeout)[0]
+                                stdout, stderr = process.communicate(timeout=conf.Timeout)
+                                return_code = process.poll()
+                                if return_code:
+                                    raise subprocess.CalledProcessError(return_code, process.args,
+                                                                        output=stdout, stderr=stderr)
                             except subprocess.TimeoutExpired:
                                 os.killpg(process.pid, signal.SIGINT)  # send signal to the process group
                                 raise
                         with open(result_file, "ab") as file:
-                            file.write(output)
-                    except subprocess.TimeoutExpired as e:
-                        print("Program reached the timeout set ({0} seconds). The command we executed was '{1}'".format(e.timeout, e.cmd))
+                            file.write(stdout)
+            except subprocess.TimeoutExpired as e:
+                print("Program reached the timeout set ({0} seconds). The command we executed was '{1}'".format(e.timeout, e.cmd))
 
 
 def clean_dir(*path):
@@ -140,26 +145,19 @@ if __name__ == "__main__":
 
     set_working_directory("config")
     with open("config.json", "r") as config_file:
-        config = json.load(config_file, object_hook = JSONObject)
-
-    if args.debug:
-        os.environ['Debug'] = 'true'
-    if args.build:
-        build(config, args.skip_tests)
-    if args.measure:
-        benchmark(config)
-    if args.test:
-        build(config, False)
-    if args.visualize:
-        visualize()
-    if args.check:
-        check_results()
+        config = json.load(config_file, object_hook=JSONObject)
 
     # if there are no args, execute a full sequence
     # with the test and the visualization/reporting
-    no_args = all(val==False for val in vars(args).values())
-    if no_args:
-        build(config, False)
+    no_args = all(not val for val in vars(args).values())
+
+    if args.debug:
+        os.environ['Debug'] = 'true'
+    if args.build or args.test or no_args:
+        build(config, args.skip_tests and not args.test)
+    if args.measure or no_args:
         benchmark(config)
+    if args.visualize or no_args:
         visualize()
+    if args.check or no_args:
         check_results()
