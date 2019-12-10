@@ -145,26 +145,19 @@ if __name__ == "__main__":
 
     set_working_directory("config")
     with open("config.json", "r") as config_file:
-        config = json.load(config_file, object_hook = JSONObject)
-
-    if args.debug:
-        os.environ['Debug'] = 'true'
-    if args.build:
-        build(config, args.skip_tests)
-    if args.measure:
-        benchmark(config)
-    if args.test:
-        build(config, False)
-    if args.visualize:
-        visualize()
-    if args.check:
-        check_results()
+        config = json.load(config_file, object_hook=JSONObject)
 
     # if there are no args, execute a full sequence
     # with the test and the visualization/reporting
-    no_args = all(val==False for val in vars(args).values())
-    if no_args:
-        build(config, False)
+    no_args = all(not val for val in vars(args).values())
+
+    if args.debug:
+        os.environ['Debug'] = 'true'
+    if args.build or args.test or no_args:
+        build(config, args.skip_tests and not args.test)
+    if args.measure or no_args:
         benchmark(config)
+    if args.visualize or no_args:
         visualize()
+    if args.check or no_args:
         check_results()
