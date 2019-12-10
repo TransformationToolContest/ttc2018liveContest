@@ -126,7 +126,7 @@ public abstract class Solution implements AutoCloseable {
 
     void runVoidQuery(Query q, Map<String, Object> parameters) {
         try (Result rs = q.execute(this, parameters)) {
-            rs.hasNext();
+            rs.accept(row -> true);
         }
     }
 
