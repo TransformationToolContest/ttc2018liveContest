@@ -1,3 +1,7 @@
+# Differential Dataflow implementation
+
+This implementation is based on [Frank McSherry's work](https://github.com/frankmcsherry/ttc2018liveContest).
+
 ## User's Guide
 
 Assuming that you use Ubuntu, you need the following prerequisites:
