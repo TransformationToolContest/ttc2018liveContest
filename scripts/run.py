@@ -14,7 +14,6 @@ try:
 except ImportError:
     import configparser as ConfigParser
 import json
-from subprocess import CalledProcessError
 
 BASE_DIRECTORY = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 print("Running benchmark with root directory " + BASE_DIRECTORY)
@@ -74,12 +73,16 @@ def benchmark(conf):
                         with subprocess.Popen(config.get('run', query), shell=True, stdout=subprocess.PIPE,
                                               start_new_session=True) as process:
                             try:
-                                output = process.communicate(timeout=conf.Timeout)[0]
+                                stdout, stderr = process.communicate(timeout=conf.Timeout)
+                                return_code = process.poll()
+                                if return_code:
+                                    raise subprocess.CalledProcessError(return_code, process.args,
+                                                                        output=stdout, stderr=stderr)
                             except subprocess.TimeoutExpired:
                                 os.killpg(process.pid, signal.SIGINT)  # send signal to the process group
                                 raise
                         with open(result_file, "ab") as file:
-                            file.write(output)
+                            file.write(stdout)
             except subprocess.TimeoutExpired as e:
                 print("Program reached the timeout set ({0} seconds). The command we executed was '{1}'".format(e.timeout, e.cmd))
 
