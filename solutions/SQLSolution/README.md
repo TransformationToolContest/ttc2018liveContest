@@ -5,7 +5,7 @@
 
 ## Generate CSV models
 
-Use the modelConverter Gradle-task to generate the CSV models. Pass desired model size in the `modelSize` project property.
+Use the `modelToGraphConverter` Gradle-task to generate the CSV models. Pass desired model size in the `modelSize` project property.
 
 Merge FK models will be output as `models/$modelSize/csv-*-initial.csv`, graph models will be output as `models/$modelSize/graph-*-initial.csv`.
 
