@@ -24,3 +24,11 @@ cd LAGraph
 make && sudo make install && sudo ldconfig
 cd ..
 ```
+
+## Configurations
+
+JSON snippet:
+
+```json
+"Tools": ["GBq1-Batch", "GBq1-Incr", "GBq2-Batch", "GBq2-Incr-Comment"],
+```
