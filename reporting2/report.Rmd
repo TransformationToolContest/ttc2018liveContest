@@ -51,11 +51,35 @@ df$MetricValue = df$MetricValue / 10^9
 
 # drop most tools for now
 #df = df[df$Tool == "EMFSolutionViatra" | df$Tool == "SQLSolution", ]
-df = df[df$Tool != "Naiad-1-Thread" &
-        df$Tool != "Naiad-2-Thread" &
-        df$Tool != "Naiad-4-Thread" &
-        df$Tool != "Naiad-6-Thread", ]
-#df$tool = factor(df$tool, levels=c(pgx, postgres, sparksee, sparql))
+
+### Captions
+
+### Neo4j
+df$Tool = gsub("Neo4jSolutionBatch_rebuild_overlay", "Neo4j Batch", df$Tool)
+df$Tool = gsub("Neo4jSolution_explicit_component_periodic", "Neo4j Incremental", df$Tool)
+#df$Tool = gsub("Neo4jSolution_explicit_component_algo", "Neo4j Incremental 2)", df$Tool)
+
+## Differential
+df$Tool = gsub("^differential$", "Differential Dataflow (1 thread)", df$Tool)
+df$Tool = gsub("^differential-08$", "Differential Dataflow (8 threads)", df$Tool)
+
+## Naiad
+# Drop middle of the road Naiad results
+df = df[df$Tool != "Naiad-2-Thread" & df$Tool != "Naiad-4-Thread" & df$Tool != "Naiad-6-Thread", ]
+# df = df[df$Tool != "Naiad-1-Thread" & df$Tool != "Naiad-2-Thread" & df$Tool != "Naiad-4-Thread" & df$Tool != "Naiad-6-Thread", ]
+df$Tool = gsub("^Naiad-1-Thread$", "Naiad (1 thread)", df$Tool)
+df$Tool = gsub("^Naiad-8-Thread$", "Naiad (8 threads)", df$Tool)
+
+## EMF
+df$Tool = gsub("^EMFSolutionXtend$", "Xtend (EMF)", df$Tool)
+
+## GraphBLAS
+df$Tool = gsub("^GBq1-Batch$", "GraphBLAS Batch", df$Tool)
+df$Tool = gsub("^GBq2-Batch$", "GraphBLAS Batch", df$Tool)
+df$Tool = gsub("^GBq1-Incr$", "GraphBLAS Incremental", df$Tool)
+df$Tool = gsub("^GBq2-Incr-Comment$", "GraphBLAS Incremental", df$Tool)
+
+
 df$View = factor(df$View, levels=c("Q1", "Q2"))
 df$PhaseName = factor(df$PhaseName, levels=c("Load", "Initial", "Update"))
 ```
