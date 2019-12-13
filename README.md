@@ -54,6 +54,16 @@ The `config` directory contains the configuration for the scripts:
     Timeout is only applied to the solutions' run phase (see `-m` for `run.py`), so it is not applied to e.g. the build phase (see `-b` for `run.py`).
 * `reporting.json` -- configuration for the visualization
 
+### Setting the heap size
+
+By default, Java tools run with a heap size - both minimum (`Xms`) and maximum (`Xmx`) - of 6GB.
+This can be replaced with the following script (using [`ag`](https://geoff.greer.fm/ag/)).
+
+```bash
+ag Xms6G -l | xargs sed -i 's/Xms6G/Xms200G/g'
+ag Xmx6G -l | xargs sed -i 's/Xmx6G/Xmx200G/g'
+```
+
 ### Running the benchmark
 
 The script runs the benchmark for the given number of runs, for the specified tools and change sequences.
