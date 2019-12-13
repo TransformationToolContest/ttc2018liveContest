@@ -49,28 +49,36 @@ public:
         }
 
         if (!friends_updates.empty()) {
+            GrB_Index friends_updates_undirected_size = friends_updates.size() / 2;
             GBxx_Object<GrB_Matrix> new_friends_mx =
-                    GB(GrB_Matrix_new, GrB_BOOL, input.users_size(), friends_updates.size());
+                    GB(GrB_Matrix_new, GrB_BOOL, input.users_size(), friends_updates_undirected_size);
             GBxx_Object<GrB_Matrix> affected_comments_mx =
-                    GB(GrB_Matrix_new, GrB_BOOL, input.comments_size(), friends_updates.size());
+                    GB(GrB_Matrix_new, GrB_BOOL, input.comments_size(), friends_updates_undirected_size);
 
-            GrB_Index new_friends_nnz = friends_updates.size() * 2;
+            // edges are listed in both directions, but matrix contains only them only once
+            GrB_Index new_friends_nnz = 2 * friends_updates_undirected_size;
             std::vector<GrB_Index> new_friends_rows, new_friends_columns;
             new_friends_rows.reserve(new_friends_nnz);
             new_friends_columns.reserve(new_friends_nnz);
 
+            // incidence matrix for new friendships
             // for each new friendship put a column into the matrix
             // each column contains 2 true values at the users connected by that friend edge
             GrB_Index column = 0;
             for (auto[user1_column, user2_column]:friends_updates) {
-                new_friends_rows.emplace_back(user1_column);
-                new_friends_rows.emplace_back(user2_column);
+                if (user1_column < user2_column) {
+                    new_friends_rows.emplace_back(user1_column);
+                    new_friends_rows.emplace_back(user2_column);
 
-                new_friends_columns.emplace_back(column);
-                new_friends_columns.emplace_back(column);
+                    new_friends_columns.emplace_back(column);
+                    new_friends_columns.emplace_back(column);
 
-                ++column;
+                    ++column;
+                }
             }
+            assert(column == friends_updates_undirected_size);
+            assert(new_friends_rows.size() == new_friends_nnz);
+            assert(new_friends_columns.size() == new_friends_nnz);
             ok(GrB_Matrix_build_BOOL(new_friends_mx.get(),
                                      new_friends_rows.data(), new_friends_columns.data(),
                                      array_of_true(new_friends_nnz).get(),
