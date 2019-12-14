@@ -8,11 +8,18 @@ public class Friends extends SqlCollectionBase<AbstractMap.SimpleImmutableEntry<
     }
 
     public void addFriend(long user1id, long user2id) {
+        if (user2id < user1id) {
+            // swap ids so user1id < user2 is enforced in order to keep
+            // their order consistent and to filter accidental duplicates
+            long userTmpId = user1id;
+            user1id = user2id;
+            user2id = userTmpId;
+        }
         AbstractMap.SimpleImmutableEntry<Long, Long> k = new AbstractMap.SimpleImmutableEntry<>(user1id, user2id);
         if (!elements.containsKey(k)) {
             elements.put(k, new Friend(user1id, user2id));
-
             printCSV(user1id, user2id);
+            printCSV(user2id, user1id);
         }
     }
 
