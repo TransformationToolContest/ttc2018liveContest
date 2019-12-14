@@ -8,7 +8,7 @@ WITH diff_posts AS (
 )
 , diff_comments AS (
     select p.id, p.ts, 10*count(distinct c.id) + count(l.userid) as score
-    from posts p
+    from posts_i p
         inner join comments_d c on (p.id = c.postid)
         left join likes l on (c.id = l.commentid)
     where 1=1
@@ -16,8 +16,8 @@ WITH diff_posts AS (
 )
 , diff_likes AS (
     select p.id, p.ts, count(l.userid) as score
-    from posts p
-        inner join comments c on (p.id = c.postid)
+    from posts_i p
+        inner join comments_i c on (p.id = c.postid)
         inner join likes_d l on (c.id = l.commentid)
     where 1=1
     group by p.id, p.ts
