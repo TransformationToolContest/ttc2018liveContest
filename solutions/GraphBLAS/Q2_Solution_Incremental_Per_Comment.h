@@ -49,38 +49,56 @@ public:
         }
 
         if (!friends_updates.empty()) {
+            GrB_Index friends_updates_undirected_size = friends_updates.size() / 2;
             GBxx_Object<GrB_Matrix> new_friends_mx =
-                    GB(GrB_Matrix_new, GrB_BOOL, input.users_size(), friends_updates.size());
+                    GB(GrB_Matrix_new, GrB_BOOL, input.users_size(), friends_updates_undirected_size);
             GBxx_Object<GrB_Matrix> affected_comments_mx =
-                    GB(GrB_Matrix_new, GrB_BOOL, input.comments_size(), friends_updates.size());
+                    GB(GrB_Matrix_new, GrB_UINT8, input.comments_size(), friends_updates_undirected_size);
 
-            GrB_Index new_friends_nnz = friends_updates.size() * 2;
+            // edges are listed in both directions, but matrix contains only them only once
+            GrB_Index new_friends_nnz = 2 * friends_updates_undirected_size;
             std::vector<GrB_Index> new_friends_rows, new_friends_columns;
             new_friends_rows.reserve(new_friends_nnz);
             new_friends_columns.reserve(new_friends_nnz);
 
+            // incidence matrix for new friendships
             // for each new friendship put a column into the matrix
             // each column contains 2 true values at the users connected by that friend edge
             GrB_Index column = 0;
             for (auto[user1_column, user2_column]:friends_updates) {
-                new_friends_rows.emplace_back(user1_column);
-                new_friends_rows.emplace_back(user2_column);
+                if (user1_column < user2_column) {
+                    new_friends_rows.emplace_back(user1_column);
+                    new_friends_rows.emplace_back(user2_column);
 
-                new_friends_columns.emplace_back(column);
-                new_friends_columns.emplace_back(column);
+                    new_friends_columns.emplace_back(column);
+                    new_friends_columns.emplace_back(column);
 
-                ++column;
+                    ++column;
+                }
             }
+            assert(column == friends_updates_undirected_size);
+            assert(new_friends_rows.size() == new_friends_nnz);
+            assert(new_friends_columns.size() == new_friends_nnz);
             ok(GrB_Matrix_build_BOOL(new_friends_mx.get(),
                                      new_friends_rows.data(), new_friends_columns.data(),
                                      array_of_true(new_friends_nnz).get(),
                                      new_friends_nnz, GrB_LOR));
+
             // each column of affected_comments_mx contains true for comments which are affected by the corresponding new friend edge
             // the 2 true values in each column of new_friends_mx select 2 columns of likes_matrix_tran,
-            //      which contain comments having likes from the users (mul: land)
-            // a comment is affected if both users like it => use element-wise land for the 2 columns (add: land)
-            ok(GrB_mxm(affected_comments_mx.get(), GrB_NULL, GrB_NULL, GxB_LAND_LAND_BOOL,
+            //      which contain comments having likes from the users (multiplication)
+            // a comment is affected if both users like it
+            // => we sum how many users - among the two selected in each column - likes each comment
+            // result: -, 1, 2 in each cell
+            ok(GrB_mxm(affected_comments_mx.get(), GrB_NULL, GrB_NULL, GxB_PLUS_TIMES_UINT8,
                        input.likes_matrix_tran.get(), new_friends_mx.get(), GrB_NULL));
+
+            auto scalar2 = GB(GxB_Scalar_new, GrB_UINT8);
+            ok(GxB_Scalar_setElement_UINT8(scalar2.get(), 2));
+
+            // filter the matrix: only cells with 2 remain (only comments with likes from both users)
+            ok(GxB_Matrix_select(affected_comments_mx.get(), GrB_NULL, GrB_NULL, GxB_EQ_THUNK,
+                                 affected_comments_mx.get(), scalar2.get(), GrB_NULL));
 
             // comments which are affected because:
             // - they are new or got new like edges (already in affected_comments)

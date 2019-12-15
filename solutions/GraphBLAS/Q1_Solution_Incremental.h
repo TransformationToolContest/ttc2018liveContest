@@ -31,10 +31,9 @@ protected:
             ok(GrB_eWiseAdd_Vector_BinaryOp(last_score_vec.get(), GrB_NULL, GrB_NULL,
                                             GrB_PLUS_UINT64, last_score_vec.get(), partial_score_vec.get(), GrB_NULL));
             // get updated scores for each post where changed, otherwise omit score
-            // overwrite scores in partial score vector (evaluate only where both values are non-0 => eWiseMult)
-            ok(GrB_eWiseMult_Vector_BinaryOp(partial_score_vec.get(), GrB_NULL, GrB_NULL,
-                                             GrB_SECOND_UINT64, partial_score_vec.get(), last_score_vec.get(),
-                                             GrB_NULL));
+            // overwrite scores in partial score vector using partial score vector as mask
+            ok(GrB_Vector_extract(partial_score_vec.get(), partial_score_vec.get(), GrB_NULL,
+                                  last_score_vec.get(), GrB_ALL, 0, GrB_NULL));
 
             return partial_score_vec;
         } else {
