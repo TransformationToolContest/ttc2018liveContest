@@ -1,11 +1,11 @@
 {
   "runtimeTarget": {
-    "name": ".NETCoreApp,Version=v2.0",
-    "signature": "a66868b7cfdbeb8b967bcf830bc2a120f2462d47"
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
   },
   "compilationOptions": {},
   "targets": {
-    ".NETCoreApp,Version=v2.0": {
+    ".NETCoreApp,Version=v3.1": {
       "NMFSolution/1.0.0": {
         "dependencies": {
           "NMF-Basics": "2.0.136",
@@ -80,35 +80,35 @@
     "NMF-Basics/2.0.136": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ZnJmazllvfmvmKi29NgD7/vdDXXDJCLLLKBGSQTGvC4f5YzIrzc/krZ2noChgypsSZzBbPTli+pejo3j/3FlBA==",
+      "sha512": "sha512-1Z2HR7fcbCZfocQq1JsCRJZjDFL/fKszMhYlgEn7PEtn3Ejjae6onUh9LHZWA9UowBFiu3ZsDMFxc+TigKWKcQ==",
       "path": "nmf-basics/2.0.136",
       "hashPath": "nmf-basics.2.0.136.nupkg.sha512"
     },
     "NMF-Expressions/2.0.136": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-lt/7KNgrFCyczlUfCsnxaIjzR/xq11Ff8rtmkWsry8LVU0ssstzQf2CO12EIOH1Cw6yRYURcUdPC3BiTfmq/6A==",
+      "sha512": "sha512-jF6//tj3FM2jXDg2Ndts+lIA2c6+syRF7vOZoQbGRIqKwE7amWZ/eOOs83/3YMrLhsbU8uq7GtU9sQVodmwWjw==",
       "path": "nmf-expressions/2.0.136",
       "hashPath": "nmf-expressions.2.0.136.nupkg.sha512"
     },
     "NMF-Layering/2.0.136": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Iylr7oc/VmmuNLRlb+ItqUr+BoxzbwUB1Y+gtv61heezx5ai0lcH2Y83S9hYFFTGtLA+NuHnNnIYXaMZdETBhA==",
+      "sha512": "sha512-aPUoWwv31akq6d1SaRmSvZZI1tTnVjvV2v1YOV3jQRs9Mmla+bxMbfaBhRt4fvycPLUaKqd7dGJ8lnTeELukFw==",
       "path": "nmf-layering/2.0.136",
       "hashPath": "nmf-layering.2.0.136.nupkg.sha512"
     },
     "NMF-Repository/2.0.136": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Dc/irQoxZMl3mCgTdZZn47ko+Wf6Q82ck8nusY3XBD3HH6ipW0jJnvAL2o0twEchu9AL2+hEvN7fCZ/fMaq9EQ==",
+      "sha512": "sha512-LPo7jSuiLkL+SXfpHQobf7K+FMcfwMZ6yyS/JPasPz8vt2aUScjuHF/mqMgbGS5hPOmHtDwZeevZdshr18zjug==",
       "path": "nmf-repository/2.0.136",
       "hashPath": "nmf-repository.2.0.136.nupkg.sha512"
     },
     "NMF-Utilities/2.0.136": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-dC0vIZjzwK9tmqsR5DTJEY5Bgm8Dbrg42SPwWXyVjz/amRnwNmj9g+okllybUZuqUgl6jOFDnj6m0qXvCaKukg==",
+      "sha512": "sha512-YOCEcVuqhP7w7l5b2W7evl15OZFfpvSbzcQ80M4BqqsNCzR5xTaP1YDZx4l+J3SHbrCvdwkzOqI/bmxyJyEd0g==",
       "path": "nmf-utilities/2.0.136",
       "hashPath": "nmf-utilities.2.0.136.nupkg.sha512"
     }
