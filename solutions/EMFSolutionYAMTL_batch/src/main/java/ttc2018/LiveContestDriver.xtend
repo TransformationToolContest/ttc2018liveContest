@@ -44,7 +44,7 @@ class LiveContestDriver {
     }
     def private static Object loadDeltaFile(String path) {
 		val modelPath = '''«ChangePath»/«path»'''
-		val res = solution.xform.engine.registry.registry.loadModel(modelPath, true)
+		val res = solution.xform.loadModel(modelPath, true)
 		res.contents.head
     }
 
@@ -67,13 +67,13 @@ class LiveContestDriver {
 				newHashMap
 			])
 			
-			val delta = solution.xform.engine.registry.getDelta('sn', deltaName)
+			val delta = solution.xform.getDelta('sn', deltaName)
 			(delta.deltaRes.contents.head as ChangeDescription).applyAndReverse()
         }
         
         for (var iteration = Sequences; iteration > 0; iteration--) {
         	val deltaName = '''change«iteration»'''
-        	val delta = solution.xform.engine.registry.getDelta('sn', deltaName)
+        	val delta = solution.xform.getDelta('sn', deltaName)
 			(delta.deltaRes.contents.head as ChangeDescription).applyAndReverse()
         }
         

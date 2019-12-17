@@ -1,5 +1,5 @@
 plugins {
-	id "org.xtext.xtend" version "2.0.4" 
+	id "org.xtext.xtend" version "2.0.8" 
 }
 
 apply plugin: 'application'
@@ -7,9 +7,11 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 
 group 'yamtl'
-version '0.0.3-SNAPSHOT'
+version '0.0.6-SNAPSHOT'
 
-sourceCompatibility = 1.11
+sourceCompatibility = 1.8
+
+mainClassName="ttc2018.LiveContestDriver"
 
 eclipse {
 	project {
@@ -32,12 +34,6 @@ repositories {
 	maven {
 		url "https://github.com/yamtl/yamtl.github.io/raw/mvn-repo/mvn-repo/snapshot-repo"
 	}
-	maven {
-		url 'https://oss.sonatype.org/content/repositories/snapshots/'  // xtend 2.15.0-SNAPSHOT
-	}
-	maven{
-		url 'https://oss.sonatype.org/content/repositories/orgeclipseemf-1057' // emf 2.14 https://github.com/eclipse/xtext/issues/1233#issuecomment-404428887
-	}
 //	mavenLocal()
 	mavenCentral()
     jcenter()
@@ -45,9 +41,9 @@ repositories {
 
 
 ext {
-	yamtlVersion = '0.0.3-SNAPSHOT'
-	xtendVersion = '2.17.1'
-	aspectJVersion = '1.9.2'
+	yamtlVersion = '0.0.6-SNAPSHOT'
+	xtendVersion = '2.20.0'
+	aspectJVersion = '1.9.4'
 }
 
 
@@ -87,8 +83,8 @@ compileJava {
   doLast{
 	  ant.taskdef( resource:"org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties", classpath: configurations.ajc.asPath )
 	  ant.iajc(
-		  source:"11",
-		  target:"11",
+		  source:"1.8",
+		  target:"1.8",
 		  destDir: sourceSets.main.output.classesDirs[0].absolutePath, 
 		  inpath: configurations.ajInpath.asPath,
 		  maxmem: "512m",
@@ -107,6 +103,10 @@ compileJava {
 
 
 dependencies {
+	compile 'org.eclipse.emf:org.eclipse.emf.ecore.xmi:2.15.0'
+	compile 'org.eclipse.emf:org.eclipse.emf.ecore.change:2.11.0'
+
+	// original deps 
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$xtendVersion"
 	compile "yamtl:yamtl:${yamtlVersion}"
 	compile 'org.eclipse.emf:org.eclipse.emf.ecore.change:2.11+'
@@ -134,3 +134,5 @@ task fatJar(type: Jar) {
 	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 	with jar
 }
+
+// ./gradlew clean run --args="ChangePath=../../models/1 ChangeSet=1 Query=Q1 RunIndex=Debug Sequences=1 Tool=EMFSolutionYAMTL_batch"

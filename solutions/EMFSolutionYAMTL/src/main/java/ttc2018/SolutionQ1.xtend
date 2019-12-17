@@ -14,7 +14,7 @@ class SolutionQ1 extends Solution {
 		xform.selectedExecutionPhases = ExecutionPhase.MATCH_ONLY
 		xform.fromRoots = false
 		xform.executionMode = ExecutionMode.INCREMENTAL
-		
+		xform.initLocationsWhenLoading = true		
 	}
 	
 	override String Initial() {

@@ -12,7 +12,7 @@ class SolutionQ2 extends Solution {
 		xform.extentTypeModifier = ExtentTypeModifier.LIST
 		xform.selectedExecutionPhases = ExecutionPhase.MATCH_ONLY
 		xform.fromRoots = false
-//		xform.executionMode = ExecutionMode.INCREMENTAL
+		xform.initLocationsWhenLoading = true
 	}
 
 	override String Initial() {
