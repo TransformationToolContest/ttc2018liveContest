@@ -16,7 +16,6 @@ import java.util.Map;
 
 public abstract class Solution {
 	protected SocialNetworkRoot socialNetwork;
-	protected ResourceSet resourceSet;
 	protected ModelChangeProcessor modelChangeProcessor;
 
 	// see: getDbConnection()
@@ -26,13 +25,8 @@ public abstract class Solution {
     	return socialNetwork;
     }
     
-    public ResourceSet getResourceSet() {
-		return resourceSet;
-	}
-    
-    public void setSocialNetwork(SocialNetworkRoot network, ResourceSet resourceSet) {
+    public void setSocialNetwork(SocialNetworkRoot network) {
     	socialNetwork = network;
-    	this.resourceSet = resourceSet;
     }
 
     public abstract String Initial();
@@ -97,6 +91,18 @@ public abstract class Solution {
 		}
 	}
 
+	/**
+	 * Runs a read query and return it's single integer result from  the resultset's first row and first column.
+	 */
+	int runSingleIntReadQuery(Query q) {
+		try (ResultSet rs = q.getPreparedStatement().executeQuery()) {
+			rs.next();
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	void runVoidQuery(Query q) {
 		try {
 			q.getPreparedStatement().executeUpdate();
@@ -140,7 +146,7 @@ public abstract class Solution {
 	}
 
 	void beforeUpdateCommon() {
-		for(SqlCollectionBase<SqlRowBase> c: modelChangeProcessor.getCollections()) {
+		for(SqlCollectionBase<Object, SqlRowBase> c: modelChangeProcessor.getCollections()) {
 			PreparedStatement insert = c.getSqlTable().getInsertPreparedStatement();
 			int cnt = 0;
 			try {

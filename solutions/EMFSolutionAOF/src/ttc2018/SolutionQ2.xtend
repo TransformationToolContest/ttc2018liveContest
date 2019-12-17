@@ -3,17 +3,16 @@ package ttc2018
 import Changes.ModelChange
 import Changes.ModelChangeSet
 import SocialNetwork.Comment
+import SocialNetwork.User
+import de.fzi.se.Layering
 import java.util.HashMap
 import org.eclipse.emf.common.util.EList
 import org.eclipse.papyrus.aof.core.IBox
 import org.eclipse.papyrus.aof.core.IOne
-import org.eclipse.papyrus.aof.core.IUnaryFunction
 
-import static extension ttc2018.SolutionQ1.*
 import static extension ttc2018.AllContents.*
 
-
-class SolutionQ2 extends Solution {
+class SolutionQ2 extends Solution implements AOFExtensions {
 	
 	val extension SN = new SN
 	
@@ -40,7 +39,7 @@ class SolutionQ2 extends Solution {
 	def private queryQ2() {
 		val comments =
 			socialNetwork
-				._allContents(Comment)
+				._allContents(SN.Comment)
 		
 		val answer = comments.sortedBy([
 			computeScore
@@ -56,24 +55,36 @@ class SolutionQ2 extends Solution {
 	val scoreByComment = new HashMap<Comment, IOne<Integer>>
 	def computeScore(Comment c) {
 		return scoreByComment.get(c) ?: {
+//*			// more memory-hungry fine-grained incremental version
 			val s = c._likedBy
-					 .layering[u |
-						u._friends.selectMutable[f |
-							f._likes.select[it == c].notEmpty
-						]
+					 .connectedComponents[u |
+//						u._friends.selectMutable[f |
+//							f._likes.select[it == c].notEmpty
+//						]
+						u._friends.intersection(c._likedBy)
 					].collectMutable[it?.size?.square ?: emptyOne].sum
+/*/			// more memory-frugal coarse-grained incremental version
+			// DONE: create an active operation that listens to a bunch of boxes, and recomputes completely if one these boxes changes, whatever the change
+			// this would enable coarse-grained incrementality where necessary
+			val s = new OpaqueOperation[
+				val layering = new Layering[User u | u.friends.filter[likes.contains(c)]]
+				val comps = layering.CreateLayers(c.likedBy)
+				comps.map[size*size].reduce[$0+$1] ?: 0
+			]
+			.observe(c._likedBy)	// no need to observe opposite (i.e., User.likes)
+			.<User>observeInners(c._likedBy.collect[_friends])
+			.result
+/**/
+
 			scoreByComment.put(c, s)
 //			println('''«c.id» : «s.get»''')
 			s
 		}
 	}
 
-	def <E> layering(IBox<E> it, IUnaryFunction<E, IBox<E>> accessor) {
-		new Layering(it, accessor).result
-	}
-
-	def square(IBox<Integer> it) {
-		collect[it * it]
+	val squareCache = new HashMap<IBox<Integer>, IBox<Integer>>
+	def square(IBox<Integer> source) {
+		squareCache.computeIfAbsent(source)[collect[it * it]]
 	}
 
 	def -(IBox<Integer> it) {

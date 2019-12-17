@@ -1,0 +1,53 @@
+language: java
+dist: bionic
+install: true
+script:
+ - find -name solution.ini.travis -execdir cp '{}' solution.ini \;
+ - source jdk_switcher.sh
+ - jdk_switcher use openjdk8
+ - cp config/config-travis.json config/config.json
+ - pushd solutions/Hawk
+ - ./install-hawk-deps.sh
+ - popd
+ - scripts/run.py -b
+ - sudo update-java-alternatives -s java-1.11.0-openjdk-amd64
+ - export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64/
+ - java -version
+ - pushd solutions/SQLSolution
+ - ./gradlew --console plain --quiet modelConverter -PmodelSize=1
+ - chmod 755 $HOME
+ - pushd load-scripts
+ - export PG_USER=ttcuser
+ - ./load.sh
+ - popd
+ - popd
+ - scripts/run.py -b
+notifications:
+  email: false
+  on_success: change
+  on_failure: always
+before_install:
+  - sudo apt-get -qq purge --yes postgresql\*
+  - echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" | sudo tee -a /etc/apt/sources.list.d/pgdg.list
+  - wget https://www.postgresql.org/media/keys/ACCC4CF8.asc
+  - sudo apt-key add ACCC4CF8.asc
+  - sudo apt-get update
+  - sudo apt-get -qq install --yes postgresql-11
+  - sudo sed -i '1ilocal all ttcuser trust' /etc/postgresql/11/main/pg_hba.conf
+  - sudo service postgresql restart
+  - pg_lsclusters
+before_script:
+  - sudo -u postgres psql -c "select version();"
+  - sudo -u postgres psql -c "create user ttcuser password 'secret'; alter role ttcuser with login createdb superuser;"
+  - /usr/bin/createdb -U ttcuser ttcuser
+addons:
+  apt:
+    packages:
+      - openjdk-8-jdk
+      - r-base
+      - dotnet-sdk-2.1
+    sources:
+      - sourceline: 'deb [arch=amd64] https://packages.microsoft.com/ubuntu/18.04/prod bionic main'
+        key_url: 'https://packages.microsoft.com/keys/microsoft.asc'
+      - sourceline: 'deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main'
+        key_url: 'https://www.postgresql.org/media/keys/ACCC4CF8.asc'

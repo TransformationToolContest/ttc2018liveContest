@@ -169,8 +169,8 @@
             <configuration>
               <executable>java</executable>
               <arguments>
-                <argument>-Xmx8g</argument>
-                <argument>-Xms8g</argument>
+                <argument>-Xmx6G</argument>
+                <argument>-Xms6G</argument>
                 <argument>-classpath</argument>
                 <!-- automatically creates the classpath using all project dependencies,
                      also adding the project build directory -->
@@ -194,7 +194,7 @@
               <executable>java</executable>
               <arguments>
                 <argument>-Xmx8g</argument>
-                <argument>-Xms8g</argument>
+                <argument>-Xms4g</argument>
                 <argument>-classpath</argument>
                 <!-- automatically creates the classpath using all project dependencies,
                      also adding the project build directory -->
@@ -218,7 +218,7 @@
               <executable>java</executable>
               <arguments>
                 <argument>-Xmx8g</argument>
-                <argument>-Xms8g</argument>
+                <argument>-Xms4g</argument>
                 <argument>-classpath</argument>
                 <!-- automatically creates the classpath using all project dependencies,
                      also adding the project build directory -->

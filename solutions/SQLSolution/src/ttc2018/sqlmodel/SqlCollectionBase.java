@@ -6,16 +6,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public abstract class SqlCollectionBase<T extends SqlRowBase> implements Iterable<T> {
-    ArrayList<T> elements = new ArrayList<>();
+public abstract class SqlCollectionBase<K, V extends SqlRowBase> implements Iterable<V> {
+    LinkedHashMap<K, V> elements = new LinkedHashMap<>();
 
-    public Iterator<T> iterator() {
-        return elements.iterator();
+    public Iterator<V> iterator() {
+        return elements.values().iterator();
     }
 
     public abstract SqlTable getSqlTable();
 
-    public static final boolean DO_PRINT = false;
+    public static final boolean DO_PRINT = (System.getenv("DO_PRINT")!=null)?"true".equals(System.getenv("DO_PRINT")):false;
     public static final String SEPARATOR = "|";
 
     PrintStream out = System.out;

@@ -1,15 +1,13 @@
 -- @atlcompiler emftvm
 -- @path SN=/socialmedia/social_network.ecore
 
-query topPosts = SN!Post.allInstances()->sortedBy(e | e.timestamp.getTime())->reverse()->sortedBy(e | -e.score)->subSequence(1, 3);
+query topPosts = SN!Post.allInstances()->sortedBy(e | e.timestamp)->sortedBy(e | e.score)->reverse()->subSequence(1, 3);
 
 helper context SN!Submission def : allComments : Sequence(SN!Comment) =
 	self.comments->union(self.comments->collect(e | e.allComments)->flatten());
 
 helper context SN!Post def : countLikes : Integer =
-	let t : Sequence(Integer) = self.allComments->collect(e|
-		if (e.likedBy.oclIsUndefined()) then 0 else e.likedBy.size() endif) in
-		if (t.isEmpty()) then 0 else t->sum() endif;
+	self.allComments->collect(e| e.likedBy.size())->sum();
 
 helper context SN!Post def : score : Integer = 
 	10*self.allComments->size() + self.countLikes;
