@@ -2,6 +2,9 @@
 
 [PostgreSQL](https://www.postgresql.org/) solution for the TTC 2018 Live case.
 
+## Prerequisites
+
+PostgreSQL 11 is required. On Ubuntu 18.04, this can be done [using an APT repository](https://pgdash.io/blog/postgres-11-getting-started.html).
 
 ## Generate CSV models
 
