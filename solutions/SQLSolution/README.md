@@ -41,7 +41,7 @@ ALTER ROLE ttcuser WITH login createdb superuser;
 
 ## Allow access for ttcuser
 
-For the commandline operations, you can allow ttcuser to access the database.
+For the command-line operations, you can allow `ttcuser` to access the database.
 
 :warning: Warning: never do this on a production system.
 
@@ -74,8 +74,7 @@ If `MODEL_SIZE` is set, the model directory is inferred unless overridden by `PG
 
 The `load.sh` has default options that loads the dataset of size 1 to the `ttc2018sf1` database with your current user. If these fit your needs, just run the script as `./load.sh`.
 
-
-If you get _Permission denied_ errors, change the permissions of your home directory to 755 - but please make sure you understand its implications first:
+If you get *Permission denied* errors, change the permissions of your home directory to 755 - but please make sure you understand its implications first:
 
 ```bash
 chmod 755 ~

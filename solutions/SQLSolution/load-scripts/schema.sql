@@ -89,7 +89,7 @@ create table q1_result (
 , score bigint not null
 );
 
--- maintain comment_friends closed here
+-- maintain comment_friends_closed here
 create table q2_comment_friends_closed (
   commentid bigint not null
 , head_userid bigint not null
