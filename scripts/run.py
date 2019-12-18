@@ -132,7 +132,7 @@ if __name__ == "__main__":
                         help="create visualizations",
                         action="store_true")
     parser.add_argument("-c", "--check",
-                        help="check results results",
+                        help="check results",
                         action="store_true")
     parser.add_argument("-t", "--test",
                         help="run test",
