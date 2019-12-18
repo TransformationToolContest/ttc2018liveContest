@@ -45,7 +45,7 @@ addons:
     packages:
       - openjdk-8-jdk
       - r-base
-      - dotnet-sdk-2.1
+      - dotnet-sdk-3.1
     sources:
       - sourceline: 'deb [arch=amd64] https://packages.microsoft.com/ubuntu/18.04/prod bionic main'
         key_url: 'https://packages.microsoft.com/keys/microsoft.asc'
