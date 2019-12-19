@@ -3,7 +3,7 @@ MATCH (c:Comment)<-[likesEdge]-(u:User)
 CREATE (c)-[:COMPONENT]->(uComp:Component {size: 1})-[:USER]->(u)
 WITH c, uComp, u
 OPTIONAL MATCH (c)-[:COMPONENT]->(comp2:Component) // OPTIONAL: to go forth if there is no such component
-  WHERE (comp2)-[:USER]->(:User)<-[:FRIEND]->(u) // should I add LIKE edge as constraint?
+  WHERE (comp2)-[:USER]->(:User)<-[:FRIEND]->(u)
 WITH c,
      uComp + collect(comp2) AS components,
      1 + sum(comp2.size) AS newCompSize,
