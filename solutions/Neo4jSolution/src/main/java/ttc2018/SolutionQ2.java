@@ -35,7 +35,7 @@ public class SolutionQ2 extends Solution {
     public enum Tool {
         Neo4jSolution_overlay_graph(true, false),
         Neo4jSolution_explicit_component(false, true),
-        Neo4jSolution_explicit_component_periodic(false, true),
+        Neo4jSolution(false, true), // previously Neo4jSolution_explicit_component_periodic
         Neo4jSolution_explicit_component_algo(false, true),
         ;
 
@@ -59,7 +59,7 @@ public class SolutionQ2 extends Solution {
             case Neo4jSolution_explicit_component_algo:
                 registerProcedure(graphDb, UnionFindProc.class, GetNodeFunc.class);
                 break;
-            case Neo4jSolution_explicit_component_periodic:
+            case Neo4jSolution:
                 registerProcedure(graphDb, Create.class, Periodic.class, PathExplorer.class);
                 break;
         }
@@ -95,7 +95,7 @@ public class SolutionQ2 extends Solution {
                 runVoidQuery(Query.Q2_INITIAL_COMPONENTS_AND_SCORE_ALGO);
                 runVoidQuery(Query.Q2_INITIAL_ZERO_SCORE);
                 break;
-            case Neo4jSolution_explicit_component_periodic:
+            case Neo4jSolution:
                 runVoidQuery(Query.Q2_INITIAL_DYNAMIC_LIKES_LABELS);
 
                 Map batchErrors = (Map) Query.Q2_INITIAL_COMPONENTS_PERIODIC.execute(this, Collections.emptyMap())

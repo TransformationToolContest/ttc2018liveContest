@@ -20,7 +20,7 @@ public class SolutionQ2Batch extends Solution {
             case Neo4jSolutionBatch_rebuild_overlay:
                 q2Batch = Query.Q2_BATCH_OVERLAY;
                 break;
-            case Neo4jSolutionBatch_algo:
+            case Neo4jSolutionBatch:
                 q2Batch = Query.Q2_BATCH_ALGO;
                 break;
             case Neo4jSolutionBatch_algo_with_filtered_edges:
@@ -32,7 +32,7 @@ public class SolutionQ2Batch extends Solution {
     }
 
     public enum Tool {
-        Neo4jSolutionBatch_algo,
+        Neo4jSolutionBatch, // previously Neo4jSolutionBatch_algo
         Neo4jSolutionBatch_algo_with_filtered_edges,
         Neo4jSolutionBatch_rebuild_overlay,
     }
@@ -41,7 +41,7 @@ public class SolutionQ2Batch extends Solution {
     protected void initializeDb() throws KernelException {
         super.initializeDb();
 
-        if (tool == Tool.Neo4jSolutionBatch_algo || tool == Tool.Neo4jSolutionBatch_algo_with_filtered_edges)
+        if (tool == Tool.Neo4jSolutionBatch || tool == Tool.Neo4jSolutionBatch_algo_with_filtered_edges)
             registerProcedure(graphDb, UnionFindProc.class);
     }
 
