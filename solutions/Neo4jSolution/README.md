@@ -1,10 +1,10 @@
 # Before running Neo4j solutions
 
-- https://neo4j.com/download-center/#community
-  - https://neo4j.com/artifact.php?name=neo4j-community-3.5.13-unix.tar.gz
-- `.env` file
-  - Set `NEO4J_HOME=` to Neo4j installation
-  - Increase Java maximum heap size if possible
+- Grab Neo4j Community Edition (https://neo4j.com/download-center/#community), e.g. on Linux, run:
+  - `wget https://neo4j.com/artifact.php?name=neo4j-community-3.5.13-unix.tar.gz`
+- Set the environment variables:
+  - Set `export NEO4J_HOME=` to Neo4j installation directory
+  - Increase Java maximum heap size as described in the main README
 
 # Useful commands
 
