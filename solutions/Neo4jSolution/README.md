@@ -22,3 +22,10 @@ tr '\0' '\n' < /proc/«PROC_ID»/environ | egrep "Debug|Sequences|Runs|RunIndex|
 ```console
 cat output/output1.csv <(tail -qn +2 output/output2.csv output/output3.csv) > output/output.csv
 ```
+
+## Print model sizes
+
+Run from `models/` directory:
+```console
+echo size vertex edge; ls -d */ | grep -v example | grep -oE '[0-9]+' | sort -n | xargs -I {} bash -c 'echo {} $(cat {}/graph-comments-initial.csv {}/graph-posts-initial.csv {}/graph-users-initial.csv | wc -l) $(cat {}/graph-comment-to-initial.csv {}/graph-root-post-initial.csv {}/graph-likes-initial.csv {}/graph-friends-initial.csv | wc -l)'
+```
