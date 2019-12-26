@@ -4,15 +4,12 @@
 
 ## Prerequisites
 
-PostgreSQL 11 is required. On Ubuntu 18.04, this can be done [using an APT repository](https://pgdash.io/blog/postgres-11-getting-started.html).
+PostgreSQL 11 is required. On Ubuntu 18.04, it can be installed [using an APT repository](https://pgdash.io/blog/postgres-11-getting-started.html).
 
 ## Generate CSV models
 
-Use the modelConverter Gradle-task to generate the CSV models. Pass desired model size in the `modelSize` project property.
-
-Models will be output as `models/$modelSize/csv-*-initial.csv`.
-
-E.g. to generate CSV models for size 4, use:
+Use the `modelConverter` Gradle task to generate the CSV models. Pass desired model size in the `modelSize` project property.
+Models will be output as `models/$modelSize/csv-*-initial.csv` files. E.g. to generate CSV models for size 4, use:
 
 ```console
 ./gradlew modelConverter -PmodelSize=4
@@ -20,9 +17,7 @@ E.g. to generate CSV models for size 4, use:
 
 ## Configuring the database
 
-The default configuration uses the `ttc2018sf1` database.
-
-On a typical Ubuntu install, you might want to run:
+The default configuration uses the `ttc2018sf1` database. On a typical Ubuntu install, you might want to run:
 
 ```bash
 sudo -u postgres psql
@@ -47,7 +42,7 @@ For the command-line operations, you can allow `ttcuser` to access the database.
 
 :warning: Warning: never do this on a production system.
 
-Edit the `pg_hba.conf` file and add the following line:
+Edit the `pg_hba.conf` file and add the following line at the beginning of the file:
 
 ```
 local all ttcuser trust
@@ -90,3 +85,5 @@ You are now connected to database "ttc2018sf1" as user "postgres".
 ttc2018sf1=# SELECT count(*) FROM users;
 # ...
 ```
+
+For a detailed example on how to use Postgres, see the CI configuration file (`.travis.yml` in the repository root).
