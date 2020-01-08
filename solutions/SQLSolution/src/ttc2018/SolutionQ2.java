@@ -12,11 +12,11 @@ public class SolutionQ2 extends Solution {
 		super(DataPath);
 
 		Connection conn = getDbConnection();
-		Query.Q2_CF_INITIAL.prepareStatement(conn);
-		Query.Q2_CF_UPDATE.prepareStatement(conn);
-		Query.Q2_CFC_PREPARE.prepareStatement(conn);
-		Query.Q2_CFC_UPDATE_INIT.prepareStatement(conn);
-		Query.Q2_CFC_UPDATE_MAINTAIN.prepareStatement(conn);
+		Query.Q2_CF_INIT.prepareStatement(conn);
+		Query.Q2_CF_MAINTAIN.prepareStatement(conn);
+		Query.Q2_CFC_INIT_STEP1.prepareStatement(conn);
+		Query.Q2_CFC_INIT_STEP2.prepareStatement(conn);
+		Query.Q2_CFC_MAINTAIN.prepareStatement(conn);
 		Query.Q2_RETRIEVE.prepareStatement(conn);
 		Query.Q2_INFO_COUNT_COMMENT_FRIENDS_D.prepareStatement(conn);
 		Query.Q2_INFO_COUNT_LIKES_D.prepareStatement(conn);
@@ -24,9 +24,9 @@ public class SolutionQ2 extends Solution {
 
 	@Override
 	public String Initial() {
-		runVoidQuery(Query.Q2_CF_INITIAL);
-		runVoidQuery(Query.Q2_CFC_PREPARE);
-		runVoidQuery(Query.Q2_CFC_UPDATE_INIT);
+		runVoidQuery(Query.Q2_CF_INIT);
+		runVoidQuery(Query.Q2_CFC_INIT_STEP1);
+		runVoidQuery(Query.Q2_CFC_INIT_STEP2);
 		String result = runReadQuery(Query.Q2_RETRIEVE);
 
 		return result;
@@ -36,8 +36,8 @@ public class SolutionQ2 extends Solution {
 	public String Update(ModelChangeSet changes) {
 		beforeUpdate(changes);
 
-		runVoidQuery(Query.Q2_CF_UPDATE);
-		runVoidQuery(Query.Q2_CFC_UPDATE_MAINTAIN);
+		runVoidQuery(Query.Q2_CF_MAINTAIN);
+		runVoidQuery(Query.Q2_CFC_MAINTAIN);
 		String result = runReadQuery(Query.Q2_RETRIEVE);
 
 		afterUpdate();
@@ -53,7 +53,7 @@ public class SolutionQ2 extends Solution {
 		long s1 = (System.nanoTime()-stopwatch)/1000;
 		stopwatch=System.nanoTime();
 
-		runVoidQuery(Query.Q2_CF_UPDATE);
+		runVoidQuery(Query.Q2_CF_MAINTAIN);
 
 		long s2 = (System.nanoTime()-stopwatch)/1000;
 
@@ -74,7 +74,7 @@ public class SolutionQ2 extends Solution {
 		// if the diff set for both likes and comment_friends are empty, the closure of the comment friends graph
 		// does not change, so we skip running its maintenance query
 		if (cntCommentFriendsDiff > 0 || cntLikesDiff > 0) {
-			runVoidQuery(Query.Q2_CFC_UPDATE_MAINTAIN);
+			runVoidQuery(Query.Q2_CFC_MAINTAIN);
 		}
 
 		long s3 = (System.nanoTime()-stopwatch)/1000;
