@@ -14,7 +14,7 @@ script:
  - export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64/
  - java -version
  - pushd solutions/SQLSolution
- - ./gradlew --console plain --quiet modelConverter -PmodelSize=1
+ - ./gradlew --console plain --quiet modelToGraphConverter -PmodelSize=1
  - chmod 755 $HOME
  - pushd load-scripts
  - export PG_USER=ttcuser

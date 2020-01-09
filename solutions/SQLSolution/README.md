@@ -8,11 +8,13 @@ PostgreSQL 11 is required. On Ubuntu 18.04, it can be installed [using an APT re
 
 ## Generate CSV models
 
-Use the `modelConverter` Gradle task to generate the CSV models. Pass desired model size in the `modelSize` project property.
-Models will be output as `models/$modelSize/csv-*-initial.csv` files. E.g. to generate CSV models for size 4, use:
+Use the `modelToGraphConverter` Gradle-task to generate the CSV models. Pass desired model size in the `modelSize` project property.
+
+Merge FK models will be output as `models/$modelSize/csv-*-initial.csv`, graph models will be output as `models/$modelSize/graph-*-initial.csv`.
 
 ```console
-./gradlew modelConverter -PmodelSize=4
+./gradlew modelMergeFkConverter -PmodelSize=4
+./gradlew modelToGraphConverter -PmodelSize=4
 ```
 
 ## Configuring the database
