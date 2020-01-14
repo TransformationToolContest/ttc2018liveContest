@@ -6,10 +6,10 @@
       "environmentVariables": {
         "RunIndex": "Debug",
         "Sequences": "20",
-        "ChangePath": "D:\\Projekte\\ttc2018liveContest\\models\\512",
+        "ChangePath": "D:\\Projekte\\ttc2018liveContest\\models\\8",
         "Query": "Q2",
         "Tool": "NMF",
-        "ChangeSet": "512"
+        "ChangeSet": "8"
       }
     }
   }

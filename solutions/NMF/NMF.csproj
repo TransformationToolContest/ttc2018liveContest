@@ -17,9 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NMF-Basics" Version="2.0.156" />
-    <PackageReference Include="NMF-Expressions" Version="2.0.156" />
-    <PackageReference Include="NMF-Layering" Version="2.0.156" />
+    <PackageReference Include="NMF-Basics" Version="2.0.157" />
+    <PackageReference Include="NMF-Expressions" Version="2.0.157" />
+    <PackageReference Include="NMF-Layering" Version="2.0.157" />
   </ItemGroup>
 
 </Project>
