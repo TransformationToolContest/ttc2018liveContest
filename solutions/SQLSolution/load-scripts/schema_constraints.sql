@@ -2,7 +2,7 @@ ALTER TABLE posts ADD PRIMARY KEY (id, status);
 ALTER TABLE comments ADD PRIMARY KEY (id, status);
 ALTER TABLE users ADD PRIMARY KEY (id, status);
 
-ALTER TABLE q1_result ADD PRIMARY KEY (postid);
+ALTER TABLE q1_scoring ADD PRIMARY KEY (postid);
 
 -- re-order friends on the storage level by user1id.
 -- This order is not hold after writes to the table.
@@ -44,4 +44,4 @@ INSERT INTO comment_friends (status, commentid, user1id, user2id)
 CREATE INDEX comment_friends_comment_userids ON comment_friends (commentid, user1id, user2id);
 CREATE INDEX comment_friends_comment_user1id ON comment_friends (commentid, user1id);
 
-CREATE UNIQUE INDEX q2_comment_friends_closed_all ON q2_comment_friends_closed (commentid, head_userid, tail_userid);
+CREATE UNIQUE INDEX comment_friends_closed_all ON comment_friends_closed (commentid, head_userid, tail_userid);

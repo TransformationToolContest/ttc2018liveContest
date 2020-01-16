@@ -22,7 +22,7 @@ WITH diff_posts AS (
     where 1=1
     group by p.id, p.ts
 )
-INSERT INTO q1_result AS r (postid, postts, score)
+INSERT INTO q1_scoring AS r (postid, postts, score)
     select id, ts, sum(score) as score
     from (
         select * from diff_posts

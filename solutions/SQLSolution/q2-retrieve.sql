@@ -1,6 +1,6 @@
 WITH comment_components AS (
     SELECT commentid, tail_userid AS userid, min(head_userid) AS componentid
-      FROM q2_comment_friends_closed
+      FROM comment_friends_closed
      GROUP BY commentid, tail_userid
 )
 , comment_component_sizes AS (
