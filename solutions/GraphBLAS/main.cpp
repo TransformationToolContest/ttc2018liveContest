@@ -21,15 +21,15 @@ extern "C" {
 
 std::unique_ptr<BaseSolution> init_solution(BenchmarkParameters &parameters) {
     if (parameters.Query == "Q1") {
-        if (parameters.Tool == "GBq1-Batch")
+        if (parameters.Tool.rfind("GBq1-Batch", 0) == 0)
             return std::make_unique<Q1_Solution_Batch>(parameters);
-        if (parameters.Tool == "GBq1-Incr")
+        if (parameters.Tool.rfind("GBq1-Incr", 0) == 0)
             return std::make_unique<Q1_Solution_Incremental>(parameters);
     }
     if (parameters.Query == "Q2") {
-        if (parameters.Tool == "GBq2-Batch")
+        if (parameters.Tool.rfind("GBq2-Batch", 0) == 0)
             return std::make_unique<Q2_Solution_Batch>(parameters);
-        if (parameters.Tool == "GBq2-Incr-Comment")
+        if (parameters.Tool.rfind("GBq2-Incr-Comment", 0) == 0)
             return std::make_unique<Q2_Solution_Incremental_Per_Comment>(parameters);
     }
 
