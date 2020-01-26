@@ -419,4 +419,6 @@ Q2_Input::load_and_apply_updates(int iteration, Q2_Input::Update_Type &updates, 
     ok(GrB_Matrix_nvals(&nvals, likes_matrix_tran.get()));
     assert(nvals == likes_num);
 #endif
+    // finish pending updates before parallel execution
+    GrB_wait();
 }
