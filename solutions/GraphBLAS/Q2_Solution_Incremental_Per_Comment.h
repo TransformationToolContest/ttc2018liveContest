@@ -143,10 +143,8 @@ public:
                 std::vector<score_type> top_scores_local;
 
 #pragma omp for schedule(dynamic)
-                for (auto comment_col_iter = std::begin(affected_comment_cols);
-                     comment_col_iter != std::end(affected_comment_cols);
-                     ++comment_col_iter) {
-                    compute_score_for_comment(input, *comment_col_iter, likes_comment_array_begin,
+                for (size_t i = 0; i < affected_comment_cols.size(); ++i) { // NOLINT(modernize-loop-convert)
+                    compute_score_for_comment(input, affected_comment_cols[i], likes_comment_array_begin,
                                               likes_comment_array_end,
                                               likes_user_array_begin, top_scores);
                 }
