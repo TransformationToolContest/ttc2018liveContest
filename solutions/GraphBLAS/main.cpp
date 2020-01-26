@@ -40,10 +40,11 @@ int main(int argc, char **argv) {
     BenchmarkParameters parameters = parse_benchmark_params();
 
     ok(LAGraph_init());
-    ok(GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.thread_num));
+    if (parameters.ThreadsNum > 0)
+        ok(GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.ThreadsNum));
 //    int nthreads_max = 0;
 //    ok(GxB_Global_Option_get(GxB_GLOBAL_NTHREADS, &nthreads_max));
-//    std::cout << nthreads_max << '/' << omp_get_max_threads() << std::endl;
+//    std::cerr << nthreads_max << '/' << omp_get_max_threads() << std::endl;
 
     std::unique_ptr<BaseSolution> solution = init_solution(parameters);
 

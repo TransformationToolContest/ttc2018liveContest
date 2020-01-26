@@ -90,9 +90,21 @@ public:
                                                 const GrB_Index *likes_comment_array_end,
                                                 const GrB_Index *likes_user_array_begin,
                                                 std::vector<score_type> &top_scores) const {
-        for (GrB_Index comment_col = 0; comment_col < input.comments_size(); ++comment_col) {
-            compute_score_for_comment(input, comment_col, likes_comment_array_begin, likes_comment_array_end,
-                                      likes_user_array_begin, top_scores);
+        int nthreads = LAGraph_get_nthreads();
+#pragma omp parallel num_threads(nthreads)
+        {
+            std::vector<score_type> top_scores_local;
+
+#pragma omp for schedule(dynamic)
+            for (GrB_Index comment_col = 0; comment_col < input.comments_size(); ++comment_col) {
+                compute_score_for_comment(input, comment_col, likes_comment_array_begin, likes_comment_array_end,
+                                          likes_user_array_begin, top_scores_local);
+            }
+
+#pragma omp critical(Q2_add_score_to_toplist)
+            for (auto score : top_scores_local) {
+                add_score_to_toplist(top_scores, score);
+            }
         }
     }
 
