@@ -146,7 +146,7 @@ public:
                 for (size_t i = 0; i < affected_comment_cols.size(); ++i) { // NOLINT(modernize-loop-convert)
                     compute_score_for_comment(input, affected_comment_cols[i], likes_comment_array_begin,
                                               likes_comment_array_end,
-                                              likes_user_array_begin, top_scores);
+                                              likes_user_array_begin, top_scores_local);
                 }
 
 #pragma omp critical(Q2_add_score_to_toplist)
