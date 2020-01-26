@@ -26,7 +26,7 @@ create table posts_d partition of posts for values in ('D');
 
 create table comments (
   like posts including all
-, previousid bigint not null
+, parentid bigint not null
 , postid bigint not null
 ) partition by list (status);
 

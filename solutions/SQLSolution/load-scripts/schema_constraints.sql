@@ -19,7 +19,7 @@ CREATE UNIQUE INDEX likes_commentid_userid ON likes (commentid, userid, status);
 -- create index on foreign keys
 CREATE INDEX posts_submitterid ON posts (submitterid);
 CREATE INDEX comments_submitterid ON comments (submitterid);
-CREATE INDEX comments_previousid ON comments (previousid);
+CREATE INDEX comments_parentid ON comments (parentid);
 CREATE INDEX comments_postid ON comments (postid);
 CREATE INDEX friends_user2id ON friends (user2id);
 CREATE INDEX likes_userid ON likes (userid);
