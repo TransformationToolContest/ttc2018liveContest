@@ -14,8 +14,7 @@ public class SolutionQ2 extends Solution {
 		Connection conn = getDbConnection();
 		Query.Q2_CF_INIT.prepareStatement(conn);
 		Query.Q2_CF_MAINTAIN.prepareStatement(conn);
-		Query.Q2_CFC_INIT_STEP1.prepareStatement(conn);
-		Query.Q2_CFC_INIT_STEP2.prepareStatement(conn);
+		Query.Q2_CFC_INIT.prepareStatement(conn);
 		Query.Q2_CFC_MAINTAIN.prepareStatement(conn);
 		Query.Q2_RETRIEVE.prepareStatement(conn);
 		Query.Q2_INFO_COUNT_COMMENT_FRIENDS_D.prepareStatement(conn);
@@ -25,8 +24,7 @@ public class SolutionQ2 extends Solution {
 	@Override
 	public String Initial() {
 		runVoidQuery(Query.Q2_CF_INIT);
-		runVoidQuery(Query.Q2_CFC_INIT_STEP1);
-		runVoidQuery(Query.Q2_CFC_INIT_STEP2);
+		runVoidQuery(Query.Q2_CFC_INIT);
 		String result = runReadQuery(Query.Q2_RETRIEVE);
 
 		return result;
