@@ -74,10 +74,10 @@ df$Tool = gsub("^Naiad-8-Thread$", "Naiad (8 threads)", df$Tool)
 df$Tool = gsub("^EMFSolutionXtend$", "Xtend (EMF)", df$Tool)
 
 ## GraphBLAS
-df$Tool = gsub("^GBq1-Batch$", "GraphBLAS Batch", df$Tool)
-df$Tool = gsub("^GBq2-Batch$", "GraphBLAS Batch", df$Tool)
-df$Tool = gsub("^GBq1-Incr$", "GraphBLAS Incremental", df$Tool)
-df$Tool = gsub("^GBq2-Incr-Comment$", "GraphBLAS Incremental", df$Tool)
+df$Tool = gsub("^GB-Batch-x1$", "GraphBLAS Batch (1 thread)", df$Tool)
+df$Tool = gsub("^GB-Batch-x8$", "GraphBLAS Batch (8 threads)", df$Tool)
+df$Tool = gsub("^GB-Incr-x1$", "GraphBLAS Incremental (1 thread)", df$Tool)
+df$Tool = gsub("^GB-Incr-x8$", "GraphBLAS Incremental (8 threads)", df$Tool)
 
 
 df$View = factor(df$View, levels=c("Q1", "Q2"))
