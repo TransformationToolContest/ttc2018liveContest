@@ -14,5 +14,5 @@ export Tool=EMFSolutionViatra
 ```
 
 ```console
-JAVA_OPTS=-Xmx2G build/install/EMFSolutionViatra/bin/EMFSolutionViatra
+JAVA_OPTS=-Xmx6G build/install/EMFSolutionViatra/bin/EMFSolutionViatra
 ```

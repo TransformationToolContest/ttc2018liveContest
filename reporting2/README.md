@@ -2,6 +2,8 @@
 
 Install R and pandoc. For Ubuntu 16.04+, the following works:
 
+Get the latest version as described in: https://cran.r-project.org/bin/linux/ubuntu/README.html
+
 ```console
 # R base
 sudo apt install -y r-base r-base-dev pandoc
@@ -24,9 +26,7 @@ echo "MAKEFLAGS = -j40" > ~/.R/Makevars
 Install the packages:
 
 ```R
-install.packages("tidyverse")
-
-install.packages("tinytex")
+install.packages(c("tidyverse", "ggpubr", "tinytex"))
 tinytex::install_tinytex()
 ```
 
