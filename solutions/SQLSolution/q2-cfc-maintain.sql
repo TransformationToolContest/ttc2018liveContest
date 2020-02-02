@@ -30,6 +30,9 @@ comment_friends_closed_stage0 AS (
       SELECT distinct cfc.commentid, cfc.head_userid, r.tail_userid
         FROM comment_friends_closed_stage1 cfc
              inner join comment_friends_closed r on (cfc.tail_userid = r.head_userid AND cfc.commentid = r.commentid)
+             -- LEFT JOIN and WHERE ... IS NULL is the antijoin
+             -- used to eliminate edges already present in the previous closure
+             -- this is to prevent unnecessary CONFLICTs in the INSERT statement below.
              left join comment_friends_closed s0 on (cfc.commentid = s0.commentid AND cfc.head_userid = s0.head_userid AND cfc.tail_userid = s0.tail_userid)
       WHERE s0.commentid IS NULL
     UNION
