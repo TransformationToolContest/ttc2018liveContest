@@ -1,7 +1,6 @@
 WITH RECURSIVE -- recursive stands here regardless of the fact that the 2nd subquery is the recursive one
-  comment_friends (status, commentid, user1id, user2id) AS (
-    SELECT 'I' AS status
-         , l1.commentid, f.user1id, f.user2id
+  comment_friends (commentid, user1id, user2id) AS (
+    SELECT l1.commentid, f.user1id, f.user2id
       FROM likes l1, likes l2
          , friends f
      WHERE 1=1
