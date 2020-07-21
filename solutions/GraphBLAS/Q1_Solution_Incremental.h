@@ -74,7 +74,9 @@ public:
         // use last scores if still valid
         for (auto[score, timestamp, comment_col]:last_result) {
             if (std::none_of(new_result.begin(), new_result.end(),
-                             [comment_col](auto const &new_tuple) { return std::get<2>(new_tuple) == comment_col; })) {
+                             [comment_col = comment_col](auto const &new_tuple) {
+                                 return std::get<2>(new_tuple) == comment_col;
+                             })) {
                 new_result.emplace_back(score, timestamp, comment_col);
             }
         }

@@ -21,15 +21,15 @@ extern "C" {
 
 std::unique_ptr<BaseSolution> init_solution(BenchmarkParameters &parameters) {
     if (parameters.Query == "Q1") {
-        if (parameters.Tool == "GBq1-Batch")
+        if (parameters.Tool.rfind("GB-Batch", 0) == 0)
             return std::make_unique<Q1_Solution_Batch>(parameters);
-        if (parameters.Tool == "GBq1-Incr")
+        if (parameters.Tool.rfind("GB-Incr", 0) == 0)
             return std::make_unique<Q1_Solution_Incremental>(parameters);
     }
     if (parameters.Query == "Q2") {
-        if (parameters.Tool == "GBq2-Batch")
+        if (parameters.Tool.rfind("GB-Batch", 0) == 0)
             return std::make_unique<Q2_Solution_Batch>(parameters);
-        if (parameters.Tool == "GBq2-Incr-Comment")
+        if (parameters.Tool.rfind("GB-Incr", 0) == 0)
             return std::make_unique<Q2_Solution_Incremental_Per_Comment>(parameters);
     }
 
@@ -40,10 +40,11 @@ int main(int argc, char **argv) {
     BenchmarkParameters parameters = parse_benchmark_params();
 
     ok(LAGraph_init());
-    ok(GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.thread_num));
-//    int nthreads_max = 0;
-//    ok(GxB_Global_Option_get(GxB_GLOBAL_NTHREADS, &nthreads_max));
-//    std::cout << nthreads_max << '/' << omp_get_max_threads() << std::endl;
+    if (parameters.ThreadsNum > 0)
+        ok(GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.ThreadsNum));
+    int nthreads_max = 0;
+    ok(GxB_Global_Option_get(GxB_GLOBAL_NTHREADS, &nthreads_max));
+    std::cerr << "Threads: " << nthreads_max << '/' << omp_get_max_threads() << std::endl;
 
     std::unique_ptr<BaseSolution> solution = init_solution(parameters);
 

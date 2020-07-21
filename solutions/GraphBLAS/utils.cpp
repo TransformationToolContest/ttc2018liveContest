@@ -25,6 +25,10 @@ BenchmarkParameters parse_benchmark_params() {
     params.ChangeSet = getenv_string("ChangeSet");
     params.Query = getenv_string("Query");
 
+    const char *ThreadsNum_str = std::getenv("ThreadsNum");
+    if (ThreadsNum_str)
+        params.ThreadsNum = std::stoi(ThreadsNum_str);
+
     std::transform(params.Query.begin(), params.Query.end(), params.Query.begin(),
                    [](char c) { return std::toupper(c); });
 

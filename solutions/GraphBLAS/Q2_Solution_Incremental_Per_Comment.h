@@ -137,9 +137,22 @@ public:
                     add_score_to_toplist(top_scores, std::make_tuple(score, timestamp, comment_col));
             }
 
-            for (GrB_Index comment_col : affected_comment_cols) {
-                compute_score_for_comment(input, comment_col, likes_comment_array_begin, likes_comment_array_end,
-                                          likes_user_array_begin, top_scores);
+            int nthreads = LAGraph_get_nthreads();
+#pragma omp parallel num_threads(nthreads)
+            {
+                std::vector<score_type> top_scores_local;
+
+#pragma omp for schedule(dynamic)
+                for (size_t i = 0; i < affected_comment_cols.size(); ++i) { // NOLINT(modernize-loop-convert)
+                    compute_score_for_comment(input, affected_comment_cols[i], likes_comment_array_begin,
+                                              likes_comment_array_end,
+                                              likes_user_array_begin, top_scores_local);
+                }
+
+#pragma omp critical(Q2_add_score_to_toplist)
+                for (auto score : top_scores_local) {
+                    add_score_to_toplist(top_scores, score);
+                }
             }
         }
     }
