@@ -1,4 +1,6 @@
-# also maintain .dockerignore
+.git
+
+# from .gitignore
 
 **/plugin.xml_gen
 **/obj/
