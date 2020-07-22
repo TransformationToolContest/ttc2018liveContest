@@ -32,3 +32,11 @@ JSON snippet:
 ```json
 "Tools": ["GBq1-Batch", "GBq1-Incr", "GBq2-Batch", "GBq2-Incr-Comment"],
 ```
+
+## Docker image
+
+To build and run Docker image, run the following from the repo's root directory:
+```bash
+docker build -f solutions/GraphBLAS/Dockerfile -t ftsrg/ttc2018:graphblas .
+docker run --rm -it ftsrg/ttc2018:graphblas
+```
