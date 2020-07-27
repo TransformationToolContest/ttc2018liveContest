@@ -1,0 +1,52 @@
+ARG BASE_CONTAINER=ubuntu:20.04
+
+# Approach from Microsoft is to use one image to build, one image to run. This
+# makes the final image smaller, since it only needs the runtime.
+
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+WORKDIR /source
+COPY solutions/NMF solutions/NMF
+COPY solutions/NMF-Incremental solutions/NMF-Incremental
+COPY solutions/NMF-Parallel solutions/NMF-Parallel
+COPY solutions/NMF-Transactions solutions/NMF-Transactions
+COPY scripts scripts
+COPY config/config-docker-net31.json config/config.json
+
+RUN apt-get update && \
+    apt-get -yq --no-install-recommends install python3 && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN scripts/run.py -b
+
+# Now we build the normal image to run, which is based on Ubuntu 20.04.
+
+FROM ${BASE_CONTAINER}
+
+# to prevent tzdata from requiring user input
+# https://askubuntu.com/a/1013396/415610
+ENV DEBIAN_FRONTEND=noninteractive
+
+WORKDIR /ttc
+COPY models models
+COPY expected-results expected-results
+COPY output output
+COPY reporting reporting
+COPY scripts scripts
+
+# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends ca-certificates wget apt-transport-https && \
+    wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+    dpkg -i packages-microsoft-prod.deb && rm packages-microsoft-prod.deb && \
+    apt-get update && \
+    apt-get install -yq --no-install-recommends git python3 r-base dotnet-runtime-3.1 && \
+    rm -rf /var/lib/apt/lists/*
+
+# most frequently changing folders
+COPY --from=build /source/solutions solutions
+COPY config/config-docker-net31.json config/config.json
+
+# no need to build (already done)
+
+# run the benchmark in container
+CMD scripts/run.py -mc
