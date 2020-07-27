@@ -12,13 +12,26 @@ COPY output output
 COPY reporting reporting
 COPY scripts scripts
 
-RUN apt-get update
-RUN apt-get install -yq --no-install-recommends \
-  openjdk-8-jdk-headless git python3 maven r-base
-RUN update-java-alternatives --set java-1.8.0-openjdk-amd64
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends \
+      openjdk-8-jdk-headless git python3 maven r-base && \
+    update-java-alternatives --set java-1.8.0-openjdk-amd64 && \
+    rm -rf /var/lib/apt/lists/*
 
-# most frequently changing folders
-COPY solutions solutions
+# solution folders
+COPY solutions/EMFSolutionAOF solutions/EMFSolutionAOF
+COPY solutions/EMFSolutionATL solutions/EMFSolutionATL
+COPY solutions/EMFSolutionATL-Incremental solutions/EMFSolutionATL-Incremental
+COPY solutions/EMFSolutionXtend solutions/EMFSolutionXtend
+COPY solutions/Hawk solutions/Hawk
+COPY solutions/HawkIncUpdate solutions/HawkIncUpdate
+COPY solutions/HawkIncUpdateQuery solutions/HawkIncUpdateQuery
+COPY solutions/jastadd-ttc18-relast-xml-flush solutions/jastadd-ttc18-relast-xml-flush
+COPY solutions/jastadd-ttc18-relast-xml-inc solutions/jastadd-ttc18-relast-xml-inc
+COPY solutions/jastadd-ttc18-xml-flush solutions/jastadd-ttc18-xml-flush
+COPY solutions/jastadd-ttc18-xml-inc solutions/jastadd-ttc18-xml-inc
+
+# config
 COPY config/config-docker-java8.json config/config.json
 
 # build solutions in config.json
