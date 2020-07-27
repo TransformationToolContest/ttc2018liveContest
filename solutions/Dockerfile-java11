@@ -1,0 +1,28 @@
+ARG BASE_CONTAINER=ubuntu:20.04
+FROM ${BASE_CONTAINER}
+
+# to prevent tzdata from requiring user input
+# https://askubuntu.com/a/1013396/415610
+ENV DEBIAN_FRONTEND=noninteractive
+
+WORKDIR /ttc
+COPY models models
+COPY expected-results expected-results
+COPY output output
+COPY reporting reporting
+COPY scripts scripts
+
+RUN apt-get update
+RUN apt-get install -yq --no-install-recommends \
+  openjdk-11-jdk-headless git python3 maven r-base
+RUN update-java-alternatives --set java-1.11.0-openjdk-amd64
+
+# most frequently changing folders
+COPY solutions solutions
+COPY config/config-docker-java11.json config/config.json
+
+# build solutions in config.json
+RUN scripts/run.py -b
+
+# run the benchmark in container
+CMD scripts/run.py -mc

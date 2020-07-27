@@ -8,3 +8,7 @@ set -e
 # Java 8 solutions
 sudo docker build -t "$DOCKER_REPO:java8" -f solutions/Dockerfile-java8 .
 sudo docker push "$DOCKER_REPO:java8"
+
+# Java 11 solutions
+sudo docker build -t "$DOCKER_REPO:java11" -f solutions/Dockerfile-java11 .
+sudo docker push "$DOCKER_REPO:java11"
