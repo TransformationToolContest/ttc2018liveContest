@@ -35,3 +35,4 @@ changes/1024/
 /20180821_diagrams/
 *.swp
 .Rproj.user
+**/*.class
