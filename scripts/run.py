@@ -28,6 +28,7 @@ def build(conf, skip_tests=False):
     Builds all solutions
     """
     for tool in conf.Tools:
+        print("Building " + tool)
         config = ConfigParser.ConfigParser()
         config.read(os.path.join(BASE_DIRECTORY, "solutions", tool, "solution.ini"))
         set_working_directory("solutions", tool)
