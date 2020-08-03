@@ -3,8 +3,10 @@ Native('java.util.Collections').sort(scored, new Native('org.hawk.ttc2018.querie
 return scored.subList(0, scored.size.min(3));
 
 operation Comment score(): Integer {
-  -- Cannot use global variables: doesn't work for IncUpdateQuery, which
-  -- simply runs score() without any context.
+  /*
+   * Cannot use global variables: does not work for IncUpdateQuery, which
+   * simply runs score() without any context.
+   */
   var index = 0;
   var components : Sequence;
   var stack : Sequence;
@@ -20,11 +22,10 @@ operation Comment score(): Integer {
   return components.collect(component | component.size * component.size).sum();
 }
 
--- Tarjan's strongly connected components algorithm
+// Tarjan's strongly connected components algorithm
 operation User strongconnect(comment: Comment,
     index: Integer, components: Sequence, stack: Sequence,
-    indexes: Map, lowlinks: Map, onStack: Map
-) {
+    indexes: Map, lowlinks: Map, onStack: Map) {
   indexes.put(self.id, index);
   lowlinks.put(self.id, index);
   index += 1;
@@ -49,7 +50,7 @@ operation User strongconnect(comment: Comment,
     }
   }
 
-  -- If this is a root node, pop stack and generate component
+  // If this is a root node, pop stack and generate component
   if (lowlinks.get(self.id) = indexes.get(self.id)) {
     var component : Sequence;
     var other;

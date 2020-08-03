@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.epsilon.eol.EolModule;
-import org.hawk.core.query.InvalidQueryException;
-import org.hawk.core.query.QueryExecutionException;
-import org.hawk.epsilon.emc.EOLQueryEngine;
-import org.hawk.graph.updater.GraphModelUpdater;
+import org.eclipse.hawk.core.query.InvalidQueryException;
+import org.eclipse.hawk.core.query.QueryExecutionException;
+import org.eclipse.hawk.epsilon.emc.EOLQueryEngine;
+import org.eclipse.hawk.graph.updater.GraphModelUpdater;
 import org.hawk.ttc2018.metamodels.Metamodels;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

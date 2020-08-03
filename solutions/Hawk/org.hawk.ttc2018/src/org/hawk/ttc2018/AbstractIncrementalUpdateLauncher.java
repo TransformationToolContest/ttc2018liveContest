@@ -7,8 +7,8 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.hawk.core.IModelIndexer;
-import org.hawk.localfolder.LocalFolder;
+import org.eclipse.hawk.core.IModelIndexer;
+import org.eclipse.hawk.localfolder.LocalFolder;
 import org.hawk.ttc2018.updaters.ChangeSequenceAwareUpdater;
 
 import SocialNetwork.SocialNetworkPackage;

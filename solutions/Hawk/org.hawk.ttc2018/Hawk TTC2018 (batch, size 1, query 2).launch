@@ -9,7 +9,7 @@
     <mapAttribute key="org.eclipse.debug.core.environmentVariables">
         <mapEntry key="ChangePath" value="/home/antonio/src/ttc2018liveContest/models/1"/>
         <mapEntry key="ChangeSet" value="1"/>
-        <mapEntry key="Query" value="Q1"/>
+        <mapEntry key="Query" value="Q2"/>
         <mapEntry key="RunIndex" value="1"/>
         <mapEntry key="Sequences" value="20"/>
     </mapAttribute>

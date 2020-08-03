@@ -31,17 +31,17 @@ import org.eclipse.epsilon.eol.EolModule;
 import org.eclipse.epsilon.eol.dom.Operation;
 import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
 import org.eclipse.epsilon.eol.models.ModelRepository;
-import org.hawk.core.VcsCommitItem;
-import org.hawk.core.graph.IGraphEdge;
-import org.hawk.core.graph.IGraphNode;
-import org.hawk.core.graph.IGraphTransaction;
-import org.hawk.core.model.IHawkObject;
-import org.hawk.core.query.InvalidQueryException;
-import org.hawk.core.query.QueryExecutionException;
-import org.hawk.core.util.GraphChangeAdapter;
-import org.hawk.epsilon.emc.EOLQueryEngine;
-import org.hawk.epsilon.emc.wrappers.GraphNodeWrapper;
-import org.hawk.graph.ModelElementNode;
+import org.eclipse.hawk.core.VcsCommitItem;
+import org.eclipse.hawk.core.graph.IGraphEdge;
+import org.eclipse.hawk.core.graph.IGraphNode;
+import org.eclipse.hawk.core.graph.IGraphTransaction;
+import org.eclipse.hawk.core.model.IHawkObject;
+import org.eclipse.hawk.core.query.InvalidQueryException;
+import org.eclipse.hawk.core.query.QueryExecutionException;
+import org.eclipse.hawk.core.util.GraphChangeAdapter;
+import org.eclipse.hawk.epsilon.emc.EOLQueryEngine;
+import org.eclipse.hawk.epsilon.emc.EOLQueryEngine.GraphNodeWrapper;
+import org.eclipse.hawk.graph.ModelElementNode;
 import org.hawk.ttc2018.queries.ResultComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -173,7 +173,7 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 
 		for (Object postID : ids) {
 			final IGraphNode node = hawk.getIndexer().getGraph().getNodeById(postID);
-			final GraphNodeWrapper gw = new GraphNodeWrapper(node, hawkModel);
+			final GraphNodeWrapper gw = hawkModel.wrap(node);
 			int score;
 			try {
 				score = (Integer) scoreOp.execute(gw, Collections.emptyList(), ((EolModule) scoreOp.getModule()).getContext());

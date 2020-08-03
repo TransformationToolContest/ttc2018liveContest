@@ -2,8 +2,10 @@ var index = 0;
 var components = Sequence {};
 var stack = Sequence {};
 
--- Cannot use EOL extended props here, as we use identity-based keys in
--- the ExtendedProperties object.
+/*
+ * Cannot use EOL extended props here, as we use identity-based keys in
+ * the ExtendedProperties object.
+ */
 var indexes : Map;
 var lowlinks : Map;
 var onStack : Map;
@@ -17,7 +19,7 @@ var onStack : Map;
   return components.collect(component | component.size * component.size).sum();
 //}
 
--- Tarjan's strongly connected components algorithm
+// Tarjan's strongly connected components algorithm
 operation User strongconnect(comment: Comment) {
   indexes.put(self.id, index);
   lowlinks.put(self.id, index);
@@ -43,7 +45,7 @@ operation User strongconnect(comment: Comment) {
     }
   }
 
-  -- If this is a root node, pop stack and generate component
+  // If this is a root node, pop stack and generate component
   if (lowlinks.get(self.id) = indexes.get(self.id)) {
     var component : Sequence;
     var other;
