@@ -22,6 +22,7 @@ RUN apt-get update && \
 COPY solutions/EMFSolutionAOF solutions/EMFSolutionAOF
 COPY solutions/EMFSolutionATL solutions/EMFSolutionATL
 COPY solutions/EMFSolutionATL-Incremental solutions/EMFSolutionATL-Incremental
+COPY solutions/EMFSolutionTemplate solutions/EMFSolutionTemplate
 COPY solutions/EMFSolutionXtend solutions/EMFSolutionXtend
 COPY solutions/Hawk solutions/Hawk
 COPY solutions/HawkIncUpdate solutions/HawkIncUpdate
