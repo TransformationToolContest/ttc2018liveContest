@@ -16,6 +16,7 @@ import java.util.function.Function;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.io.FileUtils;
 import org.hawk.ttc2018.AbstractLauncher.Snapshot;
 import org.junit.After;
 import org.junit.Before;
@@ -80,8 +81,14 @@ public class LauncherTest {
 		opts.setQuery(query);
 
 		AbstractLauncher launcher = ctor.apply(opts);
-		launcher.run();
-		assertEquals(readExpected(launcher), launcher.getResults());
+		try {
+			launcher.run();
+			assertEquals(readExpected(launcher), launcher.getResults());
+		} finally {
+			if (launcher.getHawk() != null) {
+				FileUtils.deleteDirectory(launcher.getHawk().getIndexFolder());
+			}
+		}
 	}
 
 	private List<Snapshot> readExpected(AbstractLauncher launcher) throws IOException {

@@ -35,6 +35,7 @@ public abstract class AbstractLauncher {
 
 	protected final LauncherOptions opts;
 	private final List<Snapshot> results = new ArrayList<>();
+	private StandaloneHawk hawk;
 
 	public class Snapshot {
 		public int iteration;
@@ -121,7 +122,7 @@ public abstract class AbstractLauncher {
 		final File tmpBackup = File.createTempFile("backupInitial", ".xmi");
 		Files.copy(fInitial, tmpBackup);
 
-		final StandaloneHawk hawk = createHawk();
+		hawk = createHawk();
 		try {
 			initialization(hawk);
 			try (PhaseWrapper w = new PhaseWrapper(0, Phase.Load)) {
@@ -154,6 +155,10 @@ public abstract class AbstractLauncher {
 				LOGGER.error(e.getMessage(), e);
 			}
 		}
+	}
+
+	public StandaloneHawk getHawk() {
+		return hawk;
 	}
 
 	public LauncherOptions getOptions() {

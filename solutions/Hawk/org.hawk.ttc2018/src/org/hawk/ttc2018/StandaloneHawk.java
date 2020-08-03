@@ -29,7 +29,6 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import org.eclipse.hawk.core.IConsole;
 import org.eclipse.hawk.core.IModelIndexer;
@@ -66,6 +65,10 @@ public class StandaloneHawk {
 	public StandaloneHawk(IModelUpdater updater) throws IOException {
 		this.indexFolder = Files.createTempDirectory("hawkttc18").toFile();
 		this.updater = updater;
+	}
+
+	public File getIndexFolder() {
+		return indexFolder;
 	}
 
 	public void run() throws Exception {
