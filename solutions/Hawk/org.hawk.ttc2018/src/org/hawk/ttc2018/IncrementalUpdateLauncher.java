@@ -35,15 +35,15 @@ public class IncrementalUpdateLauncher extends AbstractIncrementalUpdateLauncher
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(IncrementalUpdateLauncher.class);
 
-	public IncrementalUpdateLauncher(Map<String, String> env) {
-		super(env);
+	public IncrementalUpdateLauncher(LauncherOptions opts) {
+		super(opts);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected List<List<Object>> runQuery(StandaloneHawk hawk)
 			throws IOException, InvalidQueryException, QueryExecutionException {
-		return (List<List<Object>>) hawk.eol(query.getDerivedQuery());
+		return (List<List<Object>>) hawk.eol(opts.getQuery().getDerivedQuery());
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class IncrementalUpdateLauncher extends AbstractIncrementalUpdateLauncher
 	public static void main(String[] args) {
 		Map<String, String> env = System.getenv();
 		try {
-			new IncrementalUpdateLauncher(env).run();
+			new IncrementalUpdateLauncher(new LauncherOptions(env)).run();
 		} catch (Throwable e) {
 			LOGGER.error(e.getMessage(), e);
 		}

@@ -128,14 +128,15 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 	private EolModule eolRescoreModule;
 	private EOLQueryEngine hawkModel;
 
-	public IncrementalUpdateQueryLauncher(Map<String, String> env) throws Exception {
-		super(env);
+	public IncrementalUpdateQueryLauncher(LauncherOptions opts) {
+		super(opts);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected List<List<Object>> runQuery(StandaloneHawk hawk)
 			throws IOException, InvalidQueryException, QueryExecutionException {
+		final Query query = opts.getQuery();
 		if (prevResults == null) {
 			prevResults = (List<List<Object>>) hawk.eol(query.getFullQuery());
 			hawk.getIndexer().addGraphChangeListener(listener);
@@ -198,7 +199,7 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 
 	protected EolModule getRescoreEOLModule(StandaloneHawk hawk) throws Exception {
 		if (eolRescoreModule == null) {
-			eolRescoreModule = parseEOLModule(query.getFullQuery());
+			eolRescoreModule = parseEOLModule(opts.getQuery().getFullQuery());
 		} else {
 			final ModelRepository modelRepository = eolRescoreModule.getContext().getModelRepository();
 			modelRepository.removeModel(modelRepository.getModelByName("Changes"));
@@ -221,7 +222,7 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 	public static void main(String[] args) {
 		Map<String, String> env = System.getenv();
 		try {
-			new IncrementalUpdateQueryLauncher(env).run();
+			new IncrementalUpdateQueryLauncher(new LauncherOptions(env)).run();
 		} catch (Throwable e) {
 			LOGGER.error(e.getMessage(), e);
 		}

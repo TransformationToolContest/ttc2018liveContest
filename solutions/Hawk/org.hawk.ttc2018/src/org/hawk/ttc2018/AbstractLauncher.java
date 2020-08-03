@@ -7,8 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 import org.eclipse.epsilon.eol.EolModule;
 import org.eclipse.hawk.core.query.InvalidQueryException;
@@ -18,6 +19,8 @@ import org.eclipse.hawk.graph.updater.GraphModelUpdater;
 import org.hawk.ttc2018.metamodels.Metamodels;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.io.Files;
 
 import Changes.ChangesPackage;
 import SocialNetwork.SocialNetworkPackage;
@@ -30,11 +33,8 @@ public abstract class AbstractLauncher {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLauncher.class);
 	public static final String INITIAL_MODEL_FILENAME = "initial.xmi";
 
-	protected final File changePath;
-	protected final String changeSet;
-	protected final Query query;
-	protected final int runIndex;
-	protected final int sequences;
+	protected final LauncherOptions opts;
+	private final List<Snapshot> results = new ArrayList<>();
 
 	public class Snapshot {
 		public int iteration;
@@ -50,12 +50,34 @@ public abstract class AbstractLauncher {
 		}
 
 		public void print(PrintStream out) {
-			final String msg = String.format("%s;%s;%s;%d;%d;%s;%s;%s", getTool(), query.getIdentifier(),
-					changeSet == null ? "" : changeSet, runIndex, iteration, phase.toString(), metric.toString(),
+			final String msg = String.format("%s;%s;%s;%d;%d;%s;%s;%s", getTool(), opts.getQuery().getIdentifier(),
+					opts.getChangeSet() == null ? "" : opts.getChangeSet(), opts.getRunIndex(), iteration, phase.toString(), metric.toString(),
 					metricValue + "");
 
 			out.println(msg);
 			LOGGER.info(msg);
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + Objects.hash(iteration, metric, metricValue, phase);
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+
+			Snapshot other = (Snapshot) obj;
+			return iteration == other.iteration && metric == other.metric
+					&& Objects.equals(metricValue, other.metricValue) && phase == other.phase;
 		}
 	}
 
@@ -84,13 +106,8 @@ public abstract class AbstractLauncher {
 		}
 	}
 
-	public AbstractLauncher(Map<String, String> env) {
-		this.changePath = new File(env.get("ChangePath"));
-		this.changeSet = env.get("ChangeSet");
-		this.query = Query.fromQuery(env.get("Query"));
-		this.runIndex = Integer.valueOf(env.get("RunIndex"));
-		this.sequences = Integer.valueOf(env.get("Sequences"));
-
+	public AbstractLauncher(LauncherOptions opts) {
+		this.opts = opts;
 		LOGGER.info("Running in JVM {}", System.getProperty("java.version"));
 	}
 
@@ -98,6 +115,11 @@ public abstract class AbstractLauncher {
 		// Make sure the static metamodels are in the global EMF registry
 		ChangesPackage.eINSTANCE.getName();
 		SocialNetworkPackage.eINSTANCE.getName();
+
+		// Create a backup copy of the initial XMI
+		final File fInitial = new File(opts.getChangePath(), INITIAL_MODEL_FILENAME);
+		final File tmpBackup = File.createTempFile("backupInitial", ".xmi");
+		Files.copy(fInitial, tmpBackup);
 
 		final StandaloneHawk hawk = createHawk();
 		try {
@@ -109,7 +131,7 @@ public abstract class AbstractLauncher {
 				initialView(hawk);
 			}
 
-			for (int iChangeSequence = 1; iChangeSequence <= sequences; ++iChangeSequence) {
+			for (int iChangeSequence = 1; iChangeSequence <= opts.getSequences(); ++iChangeSequence) {
 				try (PhaseWrapper w = new PhaseWrapper(iChangeSequence, Phase.Update)) {
 					applyChanges(iChangeSequence, hawk);
 				}
@@ -118,15 +140,28 @@ public abstract class AbstractLauncher {
 		} finally {
 			hawk.shutdown();
 
-			// Reset the input model after we are done (originally at the beginning,
-			// change requested by Georg to avoid interfering with other solutions)
-			final File fInitial = new File(changePath, INITIAL_MODEL_FILENAME);
+			/*
+			 * Reset the input model after we are done (originally at the beginning,
+			 * change requested by Georg to avoid interfering with other solutions.
+			 *
+			 * Use a plain copy instead of depending on 'git checkout', since the Docker
+			 * images do not use a git clone.
+			 */
 			try {
-				Runtime.getRuntime().exec(new String[] { "git", "checkout", fInitial.getAbsolutePath() });
+				Files.copy(tmpBackup, fInitial);
+				tmpBackup.delete();
 			} catch (IOException e) {
 				LOGGER.error(e.getMessage(), e);
 			}
 		}
+	}
+
+	public LauncherOptions getOptions() {
+		return opts;
+	}
+
+	public List<Snapshot> getResults() {
+		return results;
 	}
 
 	protected StandaloneHawk createHawk() throws IOException {
@@ -140,7 +175,9 @@ public abstract class AbstractLauncher {
 		final String elementsString = formatResults(results);
 
 		LOGGER.info("Produced results: {}", results);
-		new Snapshot(0, Phase.Initial, Metric.Elements, elementsString).print(System.out);
+		final Snapshot snapshot = new Snapshot(0, Phase.Initial, Metric.Elements, elementsString);
+		snapshot.print(System.out);
+		this.results.add(snapshot);
 	}
 
 	protected String formatResults(final List<List<Object>> results) {
@@ -172,6 +209,7 @@ public abstract class AbstractLauncher {
 
 	protected void applyChanges(int iChangeSequence, final StandaloneHawk hawk)
 			throws Throwable, IOException, InvalidQueryException, QueryExecutionException {
+		final File changePath = opts.getChangePath();
 		final File fChange = new File(changePath, String.format("change%02d.xmi", iChangeSequence));
 		final File fInitial = new File(changePath, INITIAL_MODEL_FILENAME);
 		applyChanges(fInitial, iChangeSequence, fChange);
@@ -182,7 +220,9 @@ public abstract class AbstractLauncher {
 		final List<List<Object>> results = runQuery(hawk);
 		final String elementsString = formatResults(results);
 		LOGGER.info("Produced results: {}", results);
-		new Snapshot(iChangeSequence, Phase.Update, Metric.Elements, elementsString).print(System.out);
+		final Snapshot snapshot = new Snapshot(iChangeSequence, Phase.Update, Metric.Elements, elementsString);
+		snapshot.print(System.out);
+		this.results.add(snapshot);
 	}
 
 	protected abstract void applyChanges(File fInitial, int iChangeSequence, File fChanges) throws Exception;
@@ -211,6 +251,7 @@ public abstract class AbstractLauncher {
 	}
 
 	protected void registerDerivedAttribute(StandaloneHawk hawk) throws IOException {
+		final Query query = opts.getQuery();
 		hawk.getIndexer().addDerivedAttribute(SocialNetworkPackage.eNS_URI, query.getExtendedType(), "score",
 			"Integer", false, false, false, EOLQueryEngine.TYPE, streamToString(query.getDerivedAttribute()));
 	}

@@ -18,6 +18,7 @@
 
   <build>
     <sourceDirectory>src</sourceDirectory>
+    <testSourceDirectory>src-test</testSourceDirectory>
     <resources>
       <resource>
         <directory>src</directory>
@@ -100,6 +101,18 @@
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-csv</artifactId>
+      <version>1.8</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

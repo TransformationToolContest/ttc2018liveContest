@@ -49,8 +49,8 @@ public class BatchLauncher extends AbstractLauncher {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(BatchLauncher.class);
 
-	public BatchLauncher(Map<String, String> env) {
-		super(env);
+	public BatchLauncher(LauncherOptions opts) {
+		super(opts);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class BatchLauncher extends AbstractLauncher {
 
 	@Override
 	protected void modelLoading(final StandaloneHawk hawk) throws Throwable {
-		hawk.requestFileIndex(new File(changePath, INITIAL_MODEL_FILENAME));
+		hawk.requestFileIndex(new File(opts.getChangePath(), INITIAL_MODEL_FILENAME));
 		hawk.waitForSync();
 	}
 
@@ -104,13 +104,13 @@ public class BatchLauncher extends AbstractLauncher {
 	@Override
 	protected List<List<Object>> runQuery(StandaloneHawk hawk)
 			throws IOException, InvalidQueryException, QueryExecutionException {
-		return (List<List<Object>>) hawk.eol(query.getDerivedQuery());
+		return (List<List<Object>>) hawk.eol(opts.getQuery().getDerivedQuery());
 	}
 
 	public static void main(String[] args) {
 		Map<String, String> env = System.getenv();
 		try {
-			new BatchLauncher(env).run();
+			new BatchLauncher(new LauncherOptions(env)).run();
 		} catch (Throwable e) {
 			LOGGER.error(e.getMessage(), e);
 		}
