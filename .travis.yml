@@ -6,9 +6,6 @@ script:
  - source jdk_switcher.sh
  - jdk_switcher use openjdk8
  - cp config/config-travis.json config/config.json
- - pushd solutions/Hawk
- - ./install-hawk-deps.sh
- - popd
  - scripts/run.py -b
  - sudo update-java-alternatives -s java-1.11.0-openjdk-amd64
  - export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64/
