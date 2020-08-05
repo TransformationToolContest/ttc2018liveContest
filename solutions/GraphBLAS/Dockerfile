@@ -1,19 +1,22 @@
 ARG BASE_CONTAINER=ubuntu:20.04
 FROM ${BASE_CONTAINER}
 
-WORKDIR /ttc
-COPY models models
-
 # to prevent tzdata from requiring user input
 # https://askubuntu.com/a/1013396/415610
 ENV DEBIAN_FRONTEND=noninteractive
+
+WORKDIR /ttc
+COPY models models
+COPY expected-results expected-results
+COPY output output
+COPY reporting reporting
+COPY scripts scripts
 
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends \
         ca-certificates apt-transport-https \
         git build-essential cmake \
-        python3 \
-        r-base \
+        python3 r-base \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt
@@ -36,13 +39,12 @@ RUN git clone --depth 1 https://github.com/GraphBLAS/LAGraph && \
     ldconfig
 
 WORKDIR /ttc
-# copy other folders
-COPY expected-results expected-results
-COPY output output
-COPY reporting reporting
-COPY scripts scripts
 # most frequently changing folders
-COPY solutions solutions
+COPY solutions/GB-Batch-x1/ solutions/GB-Batch-x1/
+COPY solutions/GB-Batch-xAll/ solutions/GB-Batch-xAll/
+COPY solutions/GB-Incr-x1/ solutions/GB-Incr-x1/
+COPY solutions/GB-Incr-xAll/ solutions/GB-Incr-xAll/
+COPY solutions/GraphBLAS/ solutions/GraphBLAS/
 COPY config/config-docker-graphblas.json config/config.json
 
 # build solutions in config.json
