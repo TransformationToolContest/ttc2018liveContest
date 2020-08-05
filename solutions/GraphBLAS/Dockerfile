@@ -8,22 +8,19 @@ COPY models models
 # https://askubuntu.com/a/1013396/415610
 ENV DEBIAN_FRONTEND=noninteractive
 
-# TODO: merge installations when final
-#RUN apt-get update && \
-#    apt-get install -yq --no-install-recommends \
-#        ... \
-#    && rm -rf /var/lib/apt/lists/*
-RUN apt-get update
-RUN apt-get install -yq --no-install-recommends \
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends \
         ca-certificates apt-transport-https \
         git build-essential cmake \
-        python3
+        python3 \
+        r-base \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt
 ARG SS_RELEASE=v3.3.3
 ARG SS_BURBLE=0
-# TODO: set SS_COMPACT=0 for benchmark
-ARG SS_COMPACT=1
+# SS_COMPACT=0 for benchmark, 1 for fast compilation
+ARG SS_COMPACT=0
 
 # remove previous GraphBLAS install if exists
 RUN rm -f /usr/local/lib/libgraphblas.so* && \
@@ -37,11 +34,6 @@ RUN git clone --depth 1 https://github.com/GraphBLAS/LAGraph && \
     cmake .. && \
     make -j$(nproc) install && \
     ldconfig
-
-RUN apt-get install -yq --no-install-recommends \
-        r-base
-        # r-base-dev pandoc \
-#        libssl-dev libxml2-dev libcurl4-openssl-dev
 
 WORKDIR /ttc
 # copy other folders
