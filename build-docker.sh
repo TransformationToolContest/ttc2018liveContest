@@ -24,21 +24,20 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-# `ls solutions/Dockerfile-* | sed -r 's/.*-(.+$)/\1/' | xargs`
-TOOLS="differential graphblas java11 java8 neo4j net31 sql"
+TOOLS=$(./ls-docker-images.sh)
 # where license permits push images to Docker Hub
-TOOLS_TO_PUSH="differential graphblas java11 java8 net31 sql"
+TOOLS_TO_PUSH=$(echo "$TOOLS" | grep -v neo4j)
 
 if [ $build ]; then
   for TOOL in $TOOLS; do
-    echo Build "$TOOL"
+    echo "==================== Build $TOOL ===================="
     docker build -t "$DOCKER_REPO:$TOOL" -f "solutions/Dockerfile-$TOOL" .
   done
 fi
 
 if [ $push ]; then
   for TOOL in $TOOLS_TO_PUSH; do
-    echo Push "$TOOL"
+    echo "==================== Push $TOOL ===================="
     docker push "$DOCKER_REPO:$TOOL"
   done
 fi
