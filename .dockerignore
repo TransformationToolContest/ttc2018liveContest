@@ -1,5 +1,8 @@
 .git
 
+# from solutions/GraphBLAS/.gitignore
+solutions/GraphBLAS/cmake-build-*/
+
 # from .gitignore
 
 **/plugin.xml_gen
