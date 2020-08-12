@@ -44,8 +44,7 @@ def benchmark(conf):
     """
     header = os.path.join(BASE_DIRECTORY, "output", "header.csv")
     result_file = os.path.join(BASE_DIRECTORY, "output", "output.csv")
-    if os.path.exists(result_file):
-        os.remove(result_file)
+    # overwrite with the header
     shutil.copy(header, result_file)
     os.environ['Sequences'] = str(conf.Sequences)
     os.environ['Runs'] = str(conf.Runs)
