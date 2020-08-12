@@ -1,30 +1,39 @@
 ARG BASE_CONTAINER=ubuntu:20.04
 FROM ${BASE_CONTAINER}
 
-# to prevent tzdata from requiring user input
+# to prevent tzdata installer from requiring user input
 # https://askubuntu.com/a/1013396/415610
 ENV DEBIAN_FRONTEND=noninteractive
 
+# most common dependencies
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends python3 r-base unzip ca-certificates apt-transport-https wget git \
+    && rm -rf /var/lib/apt/lists/*
+
+# big files, not expected to change
 WORKDIR /ttc
 COPY models models
-COPY expected-results expected-results
-COPY output output
-COPY reporting reporting
-COPY scripts scripts
+RUN cd models && unzip 1024.zip
 
+# dependencies (separated to share layers with other images)
 RUN apt-get update && \
-    apt-get install -yq --no-install-recommends \
-      openjdk-11-jdk-headless python3 r-base \
-      wget && \
-    update-java-alternatives --set java-1.11.0-openjdk-amd64 && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -yq --no-install-recommends openjdk-11-jdk-headless \
+    && update-java-alternatives --set java-1.11.0-openjdk-amd64 \
+    && rm -rf /var/lib/apt/lists/*
 
+# install Neo4j
 ENV NEO4J_NAME=neo4j-community-3.5.20
 ENV NEO4J_HOME=/opt/$NEO4J_NAME
 WORKDIR /opt
 RUN wget -qO- "https://neo4j.com/artifact.php?name=${NEO4J_NAME}-unix.tar.gz" | tar -xzv
 
 WORKDIR /ttc
+
+# small and stable files
+COPY expected-results expected-results
+COPY reporting reporting
+COPY scripts scripts
+COPY output output
 
 # most frequently changing folders
 COPY solutions/Neo4jSolution solutions/Neo4jSolution

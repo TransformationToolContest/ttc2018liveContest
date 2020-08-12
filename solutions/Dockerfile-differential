@@ -1,24 +1,31 @@
 ARG BASE_CONTAINER=ubuntu:20.04
 FROM ${BASE_CONTAINER}
 
-# to prevent tzdata from requiring user input
+# to prevent tzdata installer from requiring user input
 # https://askubuntu.com/a/1013396/415610
 ENV DEBIAN_FRONTEND=noninteractive
 
-WORKDIR /ttc
-COPY models models
-COPY expected-results expected-results
-COPY output output
-COPY reporting reporting
-COPY scripts scripts
-
+# most common dependencies
 RUN apt-get update && \
-    apt-get install -yq --no-install-recommends \
-        python3 r-base \
-        rustc cargo \
+    apt-get install -yq --no-install-recommends python3 r-base unzip ca-certificates apt-transport-https wget git \
     && rm -rf /var/lib/apt/lists/*
 
+# big files, not expected to change
 WORKDIR /ttc
+COPY models models
+RUN cd models && unzip 1024.zip
+
+# dependencies (separated to share layers with other images)
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends rustc cargo \
+    && rm -rf /var/lib/apt/lists/*
+
+# small and stable files
+COPY expected-results expected-results
+COPY reporting reporting
+COPY scripts scripts
+COPY output output
+
 # most frequently changing folders
 COPY solutions/differential/ solutions/differential/
 COPY solutions/differential-08/ solutions/differential-08/
