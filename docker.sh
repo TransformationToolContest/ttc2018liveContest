@@ -6,12 +6,11 @@ DOCKER_REPO=ftsrg/ttc2018
 set -e
 
 if [[ "$#" -eq 0 ]]; then
-  build=1
-
   echo Parameters:
-  echo "  -b|--build (default if none given)"
+  echo "  -b|--build"
   echo "  -p|--push"
-  echo
+  echo "  -r|--run"
+  exit
 fi
 
 # https://stackoverflow.com/a/33826763
@@ -19,6 +18,7 @@ while [[ "$#" -gt 0 ]]; do
     case $1 in
         -b|--build) build=1 ;;
         -p|--push) push=1 ;;
+        -r|--run) run=1 ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
     shift
@@ -39,5 +39,14 @@ if [ $push ]; then
   for TOOL in $TOOLS_TO_PUSH; do
     echo "==================== Push $TOOL ===================="
     docker push "$DOCKER_REPO:$TOOL"
+  done
+fi
+
+if [ $run ]; then
+  for TOOL in $TOOLS; do
+    echo "==================== Run $TOOL ===================="
+    HOST_OUTPUT_PATH=$(realpath output/output-docker-$TOOL.csv)
+    touch "$HOST_OUTPUT_PATH"
+    docker run --rm -v "$HOST_OUTPUT_PATH":/ttc/output/output.csv "$DOCKER_REPO:$TOOL"
   done
 fi
