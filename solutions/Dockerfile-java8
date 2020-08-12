@@ -20,6 +20,11 @@ RUN apt-get update && \
     apt-get install -yq --no-install-recommends openjdk-8-jdk-headless maven \
     && update-java-alternatives --set java-1.8.0-openjdk-amd64 \
     && rm -rf /var/lib/apt/lists/*
+# pre-download Gradle wrapper (all tools use the same version)
+ENV GRADLE_WRAPPER_TOOL_PATH=solutions/EMFSolutionXtend/
+COPY $GRADLE_WRAPPER_TOOL_PATH/gradle/wrapper $GRADLE_WRAPPER_TOOL_PATH/gradle/wrapper
+COPY $GRADLE_WRAPPER_TOOL_PATH/gradlew $GRADLE_WRAPPER_TOOL_PATH/gradlew
+RUN $GRADLE_WRAPPER_TOOL_PATH/gradlew --version
 
 # small and stable files
 COPY expected-results expected-results
