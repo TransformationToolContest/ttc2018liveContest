@@ -51,4 +51,5 @@ COPY config/config-docker-sql.json config/config.json
 # build solutions in config.json
 RUN scripts/run.py -b
 
-CMD solutions/SQLSolution/docker-entrypoint.sh
+COPY docker/entrypoint-sql.sh entrypoint.sh
+CMD entrypoint.sh

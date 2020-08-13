@@ -24,14 +24,14 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-TOOLS=$(./ls-docker-images.sh)
+TOOLS=$(docker/ls-images.sh)
 # where license permits push images to Docker Hub
 TOOLS_TO_PUSH=$(echo "$TOOLS" | grep -v neo4j)
 
 if [ $build ]; then
   for TOOL in $TOOLS; do
     echo "==================== Build $TOOL ===================="
-    docker build -t "$DOCKER_REPO:$TOOL" -f "solutions/Dockerfile-$TOOL" .
+    docker build -t "$DOCKER_REPO:$TOOL" -f "docker/Dockerfile-$TOOL" .
   done
 fi
 
