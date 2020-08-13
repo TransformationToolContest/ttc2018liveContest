@@ -30,30 +30,39 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-# where license permits push images to Docker Hub
-TAGS_TO_PUSH=$(echo "$TAGS" | grep -v neo4j)
-
 echo "Operations: ${build+build }${push+push }${run+run }"
 echo Tags: $TAGS
 echo
 
+# where license permits push images to Docker Hub
+TAGS_TO_PUSH=$(docker/ls-images.sh -t "$TAGS" -p)
+TOOLS_TO_RUN=$(docker/ls-images.sh -t "$TAGS" -r)
+
 if [ $build ]; then
+  echo ==================== Build: $TAGS ====================
   for TAG in $TAGS; do
-    echo "==================== Build $TAG ===================="
-    docker build -t "$DOCKER_REPO:$TAG" -f "docker/Dockerfile-$TAG" .
+    echo "-------------------- Build $TAG --------------------"
+
+    DOCKER_CONTEXT=.
+    if [[ $TAG == "common" ]]; then
+      DOCKER_CONTEXT=models
+    fi
+    docker build -t "$DOCKER_REPO:$TAG" -f "docker/Dockerfile-$TAG" $DOCKER_CONTEXT
   done
 fi
 
 if [ $push ]; then
+  echo ==================== Push: $TAGS_TO_PUSH ====================
   for TAG in $TAGS_TO_PUSH; do
-    echo "==================== Push $TAG ===================="
+    echo "-------------------- Push $TAG --------------------"
     docker push "$DOCKER_REPO:$TAG"
   done
 fi
 
 if [ $run ]; then
-  for TOOL in $TAGS; do
-    echo "==================== Run $TOOL ===================="
+  echo ==================== Run: $TOOLS_TO_RUN ====================
+  for TOOL in $TOOLS_TO_RUN; do
+    echo "-------------------- Run $TOOL --------------------"
     HOST_OUTPUT_PATH=$(realpath output/output-docker-$TOOL.csv)
     TOOL_DOCKER_CONFIG_PATH=$(realpath config/config-docker-$TOOL.json)
     touch "$HOST_OUTPUT_PATH"
