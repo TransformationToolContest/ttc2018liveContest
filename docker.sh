@@ -46,7 +46,11 @@ if [ $run ]; then
   for TOOL in $TOOLS; do
     echo "==================== Run $TOOL ===================="
     HOST_OUTPUT_PATH=$(realpath output/output-docker-$TOOL.csv)
+    TOOL_DOCKER_CONFIG_PATH=$(realpath config/config-docker-$TOOL.json)
     touch "$HOST_OUTPUT_PATH"
-    docker run --rm -v "$HOST_OUTPUT_PATH":/ttc/output/output.csv "$DOCKER_REPO:$TOOL"
+    docker run --rm \
+      -v "$HOST_OUTPUT_PATH":/ttc/output/output.csv \
+      -v "$TOOL_DOCKER_CONFIG_PATH":/ttc/config/config.json \
+      "$DOCKER_REPO:$TOOL"
   done
 fi
