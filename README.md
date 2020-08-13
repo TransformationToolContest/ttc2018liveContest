@@ -56,12 +56,11 @@ The `config` directory contains the configuration for the scripts:
 
 ### Setting the heap size
 
-By default, Java tools run with a heap size - both minimum (`Xms`) and maximum (`Xmx`) - of 6GB.
-This can be replaced with the following script (using [`ag`](https://geoff.greer.fm/ag/)).
+By default, Java tools run with a heap size - both minimum (`Xms`) and maximum (`Xmx`) - of 6 GB.
+This can be set to `«HEAP»` GB with the following script (using [`ag`](https://geoff.greer.fm/ag/)).
 
 ```bash
-ag Xms6G -l | xargs sed -i 's/Xms6G/Xms200G/g'
-ag Xmx6G -l | xargs sed -i 's/Xmx6G/Xmx200G/g'
+ag 'Xm(s|x)[0-9]+G' -l0 | xargs -0 sed -i -r 's/Xm(s|x)[0-9]+G/Xm\1«HEAP»G/g'
 ```
 
 ### Running the benchmark
