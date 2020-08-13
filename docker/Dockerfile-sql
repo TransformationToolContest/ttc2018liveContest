@@ -52,4 +52,4 @@ COPY config/config-docker-sql.json config/config.json
 RUN scripts/run.py -b
 
 COPY docker/entrypoint-sql.sh entrypoint.sh
-CMD entrypoint.sh
+CMD ./entrypoint.sh

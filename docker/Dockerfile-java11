@@ -44,5 +44,5 @@ COPY config/config-docker-java11.json config/config.json
 # build solutions in config.json
 RUN scripts/run.py -b
 
-# run the benchmark in container
-CMD scripts/run.py -mc
+COPY docker/entrypoint-java11.sh entrypoint.sh
+CMD ./entrypoint.sh

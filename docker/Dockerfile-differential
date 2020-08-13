@@ -34,5 +34,5 @@ COPY config/config-docker-differential.json config/config.json
 # build solutions in config.json
 RUN scripts/run.py -b
 
-# run the benchmark in container
-CMD scripts/run.py -mc
+COPY docker/entrypoint-differential.sh entrypoint.sh
+CMD ./entrypoint.sh

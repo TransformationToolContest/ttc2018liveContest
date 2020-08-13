@@ -55,5 +55,5 @@ COPY config/config-docker-net31.json config/config.json
 
 # no need to build (already done)
 
-# run the benchmark in container
-CMD scripts/run.py -mc
+COPY docker/entrypoint-net31.sh entrypoint.sh
+CMD ./entrypoint.sh
