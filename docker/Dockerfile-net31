@@ -1,5 +1,3 @@
-ARG BASE_CONTAINER=ubuntu:20.04
-
 # Approach from Microsoft is to use one image to build, one image to run. This
 # makes the final image smaller, since it only needs the runtime.
 
@@ -18,22 +16,8 @@ RUN apt-get update && \
 
 RUN scripts/run.py -b
 
-# Now we build the normal image to run, which is based on Ubuntu 20.04.
-FROM ${BASE_CONTAINER}
-
-# to prevent tzdata installer from requiring user input
-# https://askubuntu.com/a/1013396/415610
-ENV DEBIAN_FRONTEND=noninteractive
-
-# most common dependencies
-RUN apt-get update && \
-    apt-get install -yq --no-install-recommends python3 r-base unzip ca-certificates apt-transport-https wget git \
-    && rm -rf /var/lib/apt/lists/*
-
-# big files, not expected to change
-WORKDIR /ttc
-COPY models models
-RUN cd models && unzip 1024.zip
+# Now we build the normal image to run, which is based on the common image (Ubuntu 20.04).
+FROM ftsrg/ttc2018:common
 
 # dependencies (separated to share layers with other images)
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run

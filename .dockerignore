@@ -1,4 +1,5 @@
 .git
+models
 
 # from solutions/GraphBLAS/.gitignore
 solutions/GraphBLAS/cmake-build-*/
