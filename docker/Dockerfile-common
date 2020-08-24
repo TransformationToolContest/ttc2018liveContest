@@ -1,5 +1,27 @@
 ARG BASE_CONTAINER=ubuntu:20.04
+
+# do not use `COPY . .` as it invalidates the cache somehow...
+# avoid creating more layers by using multi-staged build
+FROM scratch AS models
+WORKDIR /ttc/models
+COPY 1 1
+COPY 2 2
+COPY 4 4
+COPY 8 8
+COPY 16 16
+COPY 32 32
+COPY 64 64
+COPY 128 128
+COPY 256 256
+COPY 512 512
+COPY 1024 1024
+COPY 1024.zip 1024.zip
+
+# final image
 FROM ${BASE_CONTAINER}
+
+# big files, not expected to change
+COPY --from=models / /
 
 # to prevent tzdata installer from requiring user input
 # https://askubuntu.com/a/1013396/415610
@@ -10,8 +32,7 @@ RUN apt-get update && \
     apt-get install -yq --no-install-recommends python3 r-base unzip ca-certificates apt-transport-https wget git \
     && rm -rf /var/lib/apt/lists/*
 
-# big files, not expected to change
+WORKDIR /ttc/models
+RUN unzip 1024.zip
+
 WORKDIR /ttc
-# Docker context: models/
-COPY . models
-RUN cd models && unzip 1024.zip
