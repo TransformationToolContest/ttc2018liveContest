@@ -6,26 +6,9 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # install GraphBLAS and LAGraph
-WORKDIR /opt
-ARG SS_RELEASE=v3.3.3
-ARG SS_BURBLE=0
-# SS_COMPACT=0 for benchmark, 1 for fast compilation
-ARG SS_COMPACT=0
-
-# remove previous GraphBLAS install if exists
-RUN rm -f /usr/local/lib/libgraphblas.so* && \
-    git clone --depth 1 --branch ${SS_RELEASE} https://github.com/DrTimothyAldenDavis/GraphBLAS && \
-    cd GraphBLAS/build && \
-    cmake .. -DGB_BURBLE=${SS_BURBLE} -DGBCOMPACT=${SS_COMPACT} && \
-    make -j$(nproc) install
-
-RUN git clone --depth 1 https://github.com/GraphBLAS/LAGraph && \
-    cd LAGraph/build && \
-    cmake .. && \
-    make -j$(nproc) install && \
-    ldconfig
-
-WORKDIR /ttc
+COPY --from=graphblas/lagraph:13June2020 / /
+# Make sure you are a root user when refreshing the shared library cache
+RUN ldconfig
 
 # small and stable files
 COPY expected-results expected-results
