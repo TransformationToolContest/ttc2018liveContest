@@ -69,6 +69,7 @@ if [ $run ]; then
     docker run --rm \
       -v "$HOST_OUTPUT_PATH":/ttc/output/output.csv \
       -v "$TOOL_DOCKER_CONFIG_PATH":/ttc/config/config.json \
+      -it \
       "$DOCKER_REPO:$TOOL"
   done
 fi
