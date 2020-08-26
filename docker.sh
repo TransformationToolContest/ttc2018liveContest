@@ -18,7 +18,7 @@ fi
 
 TAGS=$(docker/ls-images.sh)
 
-DOCKER_PARAMS=
+DOCKER_PARAMS=()
 
 # https://stackoverflow.com/a/33826763
 while [[ "$#" -gt 0 ]]; do
@@ -28,7 +28,7 @@ while [[ "$#" -gt 0 ]]; do
         -r|--run) run=1 ;;
 
         -t|--tags) TAGS="$2"; shift ;;
-        -h|--java-heap-size) DOCKER_PARAMS="$DOCKER_PARAMS -e JAVA_HEAP_SIZE=$2"; shift ;;
+        -h|--java-heap-size) DOCKER_PARAMS+=("-e" "JAVA_HEAP_SIZE=$2"); shift ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
     shift
@@ -73,7 +73,7 @@ if [ $run ]; then
     docker run --rm \
       -v "$HOST_OUTPUT_PATH":/ttc/output/output.csv \
       -v "$TOOL_DOCKER_CONFIG_PATH":/ttc/config/config.json \
-      $DOCKER_PARAMS \
+      "${DOCKER_PARAMS[@]}" \
       -it \
       "$DOCKER_REPO:$TOOL"
   done
