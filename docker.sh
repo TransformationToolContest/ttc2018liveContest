@@ -8,6 +8,7 @@ set -e
 
 if [[ "$#" -eq 0 ]]; then
   echo Parameters:
+  echo "  --pull"
   echo "  -b|--build"
   echo "  -p|--push"
   echo "  -r|--run"
@@ -42,6 +43,7 @@ DOCKER_PARAMS=()
 # https://stackoverflow.com/a/33826763
 while [[ "$#" -gt 0 ]]; do
     case $1 in
+        --pull) pull=1 ;;
         -b|--build) build=1 ;;
         -p|--push) push=1 ;;
         -r|--run) run=1 ;;
@@ -58,8 +60,16 @@ echo Tags: $TAGS
 echo
 
 # where license permits push images to Docker Hub
-TAGS_TO_PUSH=$(docker/ls-images.sh -t "$TAGS" -p)
+PUBLISHABLE_TAGS=$(docker/ls-images.sh -t "$TAGS" -p)
 TOOLS_TO_RUN=$(docker/ls-images.sh -t "$TAGS" -r)
+
+if [ $pull ]; then
+  echo ==================== Pull: $PUBLISHABLE_TAGS ====================
+  for TAG in $PUBLISHABLE_TAGS; do
+    echo "-------------------- Pull $TAG --------------------"
+    docker pull "$DOCKER_REPO:$TAG"
+  done
+fi
 
 if [ $build ]; then
   echo ==================== Build: $TAGS ====================
@@ -75,8 +85,8 @@ if [ $build ]; then
 fi
 
 if [ $push ]; then
-  echo ==================== Push: $TAGS_TO_PUSH ====================
-  for TAG in $TAGS_TO_PUSH; do
+  echo ==================== Push: $PUBLISHABLE_TAGS ====================
+  for TAG in $PUBLISHABLE_TAGS; do
     echo "-------------------- Push $TAG --------------------"
     docker push "$DOCKER_REPO:$TAG"
   done
