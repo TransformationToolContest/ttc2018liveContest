@@ -40,3 +40,5 @@ RUN scripts/run.py -b
 
 COPY docker/entrypoint-neo4j.sh entrypoint.sh
 CMD ./entrypoint.sh
+
+ENV JAVA_HEAP_SIZE=6G
