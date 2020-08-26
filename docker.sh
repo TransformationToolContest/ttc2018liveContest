@@ -1,5 +1,6 @@
 #!/bin/bash
 
+GITHUB_REPO=TransformationToolContest/ttc2018liveContest
 DOCKER_REPO=ftsrg/ttc2018
 
 # exit immediately if a command fails
@@ -17,6 +18,24 @@ if [[ "$#" -eq 0 ]]; then
 fi
 
 TAGS=$(docker/ls-images.sh)
+
+DOCKER_BUILD_PARAMS=()
+README_TXT_ARG=""
+
+# log current version into the image
+if git rev-parse --is-inside-work-tree >/dev/null 2>/dev/null; then
+  GIT_SHA=$(git rev-parse HEAD)
+
+  if ! git diff-index --quiet HEAD --; then
+    README_TXT_ARG="${README_TXT_ARG}WARNING! There are uncommitted changes:"$'\n'
+    README_TXT_ARG="${README_TXT_ARG}$(git diff --stat HEAD)"$'\n\n'
+    >&2 echo "$README_TXT_ARG"
+  fi
+  README_TXT_ARG="${README_TXT_ARG}https://github.com/$GITHUB_REPO/commit/$GIT_SHA"
+  DOCKER_BUILD_PARAMS+=("--build-arg" "README_TXT_ARG=$README_TXT_ARG")
+else
+  >&2 echo WARNING!!! This is not a git repo. I cannot log the current version into the image.
+fi
 
 DOCKER_PARAMS=()
 
@@ -51,7 +70,7 @@ if [ $build ]; then
     if [[ $TAG == "common" ]]; then
       DOCKER_CONTEXT=models
     fi
-    docker build -t "$DOCKER_REPO:$TAG" -f "docker/Dockerfile-$TAG" $DOCKER_CONTEXT
+    docker build "${DOCKER_BUILD_PARAMS[@]}" -t "$DOCKER_REPO:$TAG" -f "docker/Dockerfile-$TAG" $DOCKER_CONTEXT
   done
 fi
 

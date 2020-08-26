@@ -38,3 +38,9 @@ RUN scripts/run.py -b
 
 COPY docker/entrypoint-sql.sh entrypoint.sh
 CMD ./entrypoint.sh
+
+# save build information
+ARG README_TXT_ARG=""
+ENV README_TXT=$README_TXT_ARG
+RUN date -Is > README.md
+RUN echo "$README_TXT" >> README.md
