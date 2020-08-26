@@ -10,6 +10,7 @@ if [[ "$#" -eq 0 ]]; then
   echo Parameters:
   echo "  --pull"
   echo "  -b|--build"
+  echo "  --build-if-not-fresh      # rebuild runnable image if it is based on different commit"
   echo "  -p|--push"
   echo "  -r|--run"
   echo
@@ -45,6 +46,7 @@ while [[ "$#" -gt 0 ]]; do
     case $1 in
         --pull) pull=1 ;;
         -b|--build) build=1 ;;
+        --build-if-not-fresh) build=1 ; build_if_not_fresh=1 ;;
         -p|--push) push=1 ;;
         -r|--run) run=1 ;;
 
@@ -72,9 +74,27 @@ if [ $pull ]; then
 fi
 
 if [ $build ]; then
-  echo ==================== Build: $TAGS ====================
-  for TAG in $TAGS; do
+  if [[ $build_if_not_fresh ]]; then
+    TAGS_TO_BUILD=$TOOLS_TO_RUN
+  else
+    TAGS_TO_BUILD=$TAGS
+  fi
+
+  echo ==================== Build: $TAGS_TO_BUILD ====================
+  for TAG in $TAGS_TO_BUILD; do
     echo "-------------------- Build $TAG --------------------"
+
+    if [[ $build_if_not_fresh  ]]; then
+      # allow command to fail
+      set +e
+      OLD_OR_MISSING_IMAGE=$(docker run --rm $DOCKER_REPO:$TAG cat README.md | grep -q $GIT_SHA || echo $?)
+      set -e
+
+      if [[ ! $OLD_OR_MISSING_IMAGE ]]; then
+        echo Fresh image, build skipped
+        continue
+      fi
+    fi
 
     DOCKER_CONTEXT=.
     if [[ $TAG == "common" ]]; then
