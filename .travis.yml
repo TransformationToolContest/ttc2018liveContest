@@ -4,9 +4,11 @@ services:
   - docker
 script:
   # do not use slow release mode for building
-  - sed -i s/--release// solutions/differential/solution.ini
+  - sed -i s/--release// solutions/differential*/solution.ini
+  - sed -i "s|/release/|/dev/|" solutions/differential*/solution.ini
   - ./docker.sh --pull
   - ./docker.sh --build-if-not-fresh
+  - docker/set-configs.sh
   - ./docker.sh -r
 notifications:
   email: false
