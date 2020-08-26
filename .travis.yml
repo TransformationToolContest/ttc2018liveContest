@@ -3,6 +3,8 @@ dist: bionic
 services:
   - docker
 script:
+  # do not use slow release mode for building
+  - sed -i s/--release// solutions/differential/solution.ini
   - ./docker.sh --pull
   - ./docker.sh --build-if-not-fresh
   - ./docker.sh -r
