@@ -41,6 +41,7 @@ fi
 
 DOCKER_PARAMS=()
 
+# process parameters
 # https://stackoverflow.com/a/33826763
 while [[ "$#" -gt 0 ]]; do
     case $1 in
@@ -65,15 +66,15 @@ echo
 PUBLISHABLE_TAGS=$(docker/ls-images.sh -t "$TAGS" -p)
 TOOLS_TO_RUN=$(docker/ls-images.sh -t "$TAGS" -r)
 
-if [ $pull ]; then
+if [[ $pull ]]; then
   echo ==================== Pull: $PUBLISHABLE_TAGS ====================
   for TAG in $PUBLISHABLE_TAGS; do
     echo "-------------------- Pull $TAG --------------------"
-    docker pull "$DOCKER_REPO:$TAG"
+    docker pull $DOCKER_REPO:$TAG
   done
 fi
 
-if [ $build ]; then
+if [[ $build ]]; then
   if [[ $build_if_not_fresh ]]; then
     TAGS_TO_BUILD=$TOOLS_TO_RUN
   else
@@ -100,19 +101,19 @@ if [ $build ]; then
     if [[ $TAG == "common" ]]; then
       DOCKER_CONTEXT=models
     fi
-    docker build "${DOCKER_BUILD_PARAMS[@]}" -t "$DOCKER_REPO:$TAG" -f "docker/Dockerfile-$TAG" $DOCKER_CONTEXT
+    docker build "${DOCKER_BUILD_PARAMS[@]}" -t $DOCKER_REPO:$TAG -f "docker/Dockerfile-$TAG" $DOCKER_CONTEXT
   done
 fi
 
-if [ $push ]; then
+if [[ $push ]]; then
   echo ==================== Push: $PUBLISHABLE_TAGS ====================
   for TAG in $PUBLISHABLE_TAGS; do
     echo "-------------------- Push $TAG --------------------"
-    docker push "$DOCKER_REPO:$TAG"
+    docker push $DOCKER_REPO:$TAG
   done
 fi
 
-if [ $run ]; then
+if [[ $run ]]; then
   echo ==================== Run: $TOOLS_TO_RUN ====================
   for TOOL in $TOOLS_TO_RUN; do
     echo "-------------------- Run $TOOL --------------------"
@@ -124,6 +125,6 @@ if [ $run ]; then
       -v "$TOOL_DOCKER_CONFIG_PATH":/ttc/config/config.json \
       "${DOCKER_PARAMS[@]}" \
       -it \
-      "$DOCKER_REPO:$TOOL"
+      $DOCKER_REPO:$TOOL
   done
 fi
