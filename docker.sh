@@ -14,7 +14,7 @@ if [[ "$#" -eq 0 ]]; then
   echo "  -p|--push"
   echo "  -r|--run"
   echo
-  echo "  -t|--tags \"TAG1 TAG2 ...\""
+  echo "  -t|--tags \"TAG1 TAG2 ...\" # list the tags using \`docker/ls-images.sh\`"
   echo "  -h|--java-heap-size 6G    # run Java solutions with 6 GB of heap (default)"
   exit
 fi
