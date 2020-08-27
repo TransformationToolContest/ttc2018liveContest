@@ -3,13 +3,13 @@ dist: bionic
 services:
   - docker
 script:
-  # do not use slow release mode for building
+  # do not use slow release mode for Rust build
   - sed -i s/--release// solutions/differential*/solution.ini
   - sed -i "s|/release/|/dev/|" solutions/differential*/solution.ini
-  - ./docker.sh --pull
-  - ./docker.sh --build-if-not-fresh
-  - docker/set-configs.sh
-  - ./docker.sh -r
+  - ./docker.sh --pull                # pull available images
+  - ./docker.sh --build-if-not-fresh  # (re)build image if different than current commit
+  - docker/set-configs.sh             # copy generic settings from config.json to config-docker-*.json files
+  - ./docker.sh -r                    # run measurements
 notifications:
   email: false
   on_success: change
