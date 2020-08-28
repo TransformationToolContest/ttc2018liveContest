@@ -70,8 +70,9 @@ def benchmark(conf):
                         # to enforce timeout before Python 3.7.5
                         # and kill sub-processes to avoid interference
                         # https://stackoverflow.com/a/36955420
-                        with subprocess.Popen(config.get('run', query), shell=True, stdout=subprocess.PIPE,
-                                              start_new_session=True) as process:
+                        # https://www.saltycrane.com/blog/2011/04/how-use-bash-shell-python-subprocess-instead-binsh/
+                        with subprocess.Popen(config.get('run', query), shell=True, executable='/bin/bash',
+                                              stdout=subprocess.PIPE, start_new_session=True) as process:
                             try:
                                 stdout, stderr = process.communicate(timeout=conf.Timeout)
                                 return_code = process.poll()
