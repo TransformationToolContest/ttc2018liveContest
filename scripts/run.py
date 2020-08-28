@@ -9,6 +9,7 @@ import shutil
 import subprocess
 import sys
 import signal
+import tempfile
 try:
     import ConfigParser
 except ImportError:
@@ -60,6 +61,13 @@ def benchmark(conf):
                     full_change_path = os.path.abspath(os.path.join(BASE_DIRECTORY, "models", change_set))
                     os.environ['ChangeSet'] = change_set
                     os.environ['ChangePath'] = full_change_path
+
+                    # Do a backup of initial.xmi before any runs
+                    initial_xmi = os.path.join(full_change_path, "initial.xmi")
+                    fbackup, initial_xmi_backup = tempfile.mkstemp(prefix="ttcbackup_", suffix=".xmi")
+                    os.close(fbackup)
+                    shutil.copy(initial_xmi, initial_xmi_backup)
+
                     for r in range(0, conf.Runs):
                         os.environ['RunIndex'] = str(r)
 
@@ -82,8 +90,16 @@ def benchmark(conf):
                             except subprocess.TimeoutExpired:
                                 os.killpg(process.pid, signal.SIGINT)  # send signal to the process group
                                 raise
+                            finally:
+                                # Restore the backup no matter what
+                                shutil.copy(initial_xmi_backup, initial_xmi)
+
                         with open(result_file, "ab") as file:
                             file.write(stdout)
+
+                    # after the runs, delete the backup
+                    os.unlink(initial_xmi_backup)
+
             except subprocess.TimeoutExpired as e:
                 print("Program reached the timeout set ({0} seconds). The command we executed was '{1}'".format(e.timeout, e.cmd))
 
