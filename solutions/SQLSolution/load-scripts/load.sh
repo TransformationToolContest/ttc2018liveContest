@@ -7,15 +7,15 @@ PG_DB_NAME=${PG_DB_NAME:-ttc2018sf1}
 PG_USER=${PG_USER:-$USER}
 PG_PORT=${PG_PORT:-5432}
 
-# check whether run from Docker image
-if [ -f /ttc/entrypoint.sh ]; then
-  # restart DB to avoid any stuck process from previous run
-  service postgresql restart
-  # show status
-  pg_lsclusters
-fi
-
 if [ "$1" == "" -o "$1" == "schema-only" ]; then
+  # check whether run from Docker image
+  if [ -f /ttc/entrypoint.sh ]; then
+    # restart DB to avoid any stuck process from previous run
+    service postgresql restart
+    # show status
+    pg_lsclusters
+  fi
+
   /usr/bin/dropdb --if-exists $PG_DB_NAME -U $PG_USER -p $PG_PORT
   /usr/bin/createdb $PG_DB_NAME -U $PG_USER -p $PG_PORT --template template0 -l "C"
   /usr/bin/psql -d $PG_DB_NAME -U $PG_USER -p $PG_PORT -a -f $(dirname $0)/schema.sql
