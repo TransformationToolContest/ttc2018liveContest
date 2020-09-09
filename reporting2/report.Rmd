@@ -102,7 +102,7 @@ ggplot(df.aggregated, aes(x=ChangeSet, y=MetricValue, fill=Tool)) +
     geom_line(aes(col=Tool, group=Tool)) +
     scale_x_log10(breaks=xbreaks) +  
     scale_y_log10(breaks=yaxis$ybreaks, labels=yaxis$ylabels) +
-    scale_shape_manual(values = seq(0,24)) +
+    scale_shape_manual(values = seq(0,32)) +
     facet_grid(View~PhaseName, drop=FALSE) +
     xlab("Model size") +
     ylab("Execution time [s]") +
@@ -129,7 +129,7 @@ ggplot(df.aggregated, aes(x=Iteration, y=MetricValue, fill=Tool)) +
     geom_line(aes(col=Tool, group=Tool)) +
     scale_x_log10(breaks=xbreaks) +  
     scale_y_log10(breaks=yaxis$ybreaks, labels=yaxis$ylabels) +
-    scale_shape_manual(values = seq(0,24)) +
+    scale_shape_manual(values = seq(0,32)) +
     facet_grid(ChangeSet~View, drop=FALSE) +
     xlab("Model size") +
     ylab("Execution time [s]") +
