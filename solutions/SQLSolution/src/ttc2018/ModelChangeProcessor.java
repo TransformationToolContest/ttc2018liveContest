@@ -192,6 +192,9 @@ public class ModelChangeProcessor {
                 case "users":
                     User u = (User) cli.getAddedElement();
                     users.addUser(u.getId(), u.getName());
+                    for(User f: u.getFriends()) {
+                        friends.addFriend(u.getId(), f.getId());
+                    }
                     break;
 
                 default:
