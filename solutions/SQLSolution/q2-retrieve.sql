@@ -1,7 +1,7 @@
 WITH comment_components AS (
-    SELECT commentid, tail_userid AS userid, min(head_userid) AS componentid
+    SELECT commentid, head_userid AS userid, min(tail_userid) AS componentid
       FROM comment_friends_closed
-     GROUP BY commentid, tail_userid
+     GROUP BY commentid, head_userid
 )
 , comment_component_sizes AS (
     SELECT cc.commentid, cc.componentid, count(*) AS component_size
