@@ -10,13 +10,18 @@ public class SolutionQ1 extends Solution {
 
 	public SolutionQ1(String DataPath) throws IOException, InterruptedException {
 		super(DataPath);
+	}
 
+	@Override
+	void prepareStatements() {
 		Connection conn = getDbConnection();
 		Query.Q1_INIT.prepareStatement(conn);
 		Query.Q1_MAINTAIN.prepareStatement(conn);
 		Query.Q1_RETRIEVE.prepareStatement(conn);
+
+		super.prepareStatements();
 	}
-	
+
 	@Override
 	public String Initial() {
 		runVoidQuery(Query.Q1_INIT);

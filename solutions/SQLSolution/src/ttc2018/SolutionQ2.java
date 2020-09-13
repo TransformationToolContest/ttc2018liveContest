@@ -10,7 +10,10 @@ public class SolutionQ2 extends Solution {
 
 	public SolutionQ2(String DataPath) throws IOException, InterruptedException {
 		super(DataPath);
+	}
 
+	@Override
+	void prepareStatements() {
 		Connection conn = getDbConnection();
 		Query.Q2_CF_INIT.prepareStatement(conn);
 		Query.Q2_CF_MAINTAIN.prepareStatement(conn);
@@ -19,6 +22,8 @@ public class SolutionQ2 extends Solution {
 		Query.Q2_RETRIEVE.prepareStatement(conn);
 		Query.Q2_INFO_COUNT_COMMENT_FRIENDS_D.prepareStatement(conn);
 		Query.Q2_INFO_COUNT_LIKES_D.prepareStatement(conn);
+
+		super.prepareStatements();
 	}
 
 	@Override

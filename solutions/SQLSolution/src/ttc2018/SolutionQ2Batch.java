@@ -10,9 +10,14 @@ public class SolutionQ2Batch extends Solution {
 
 	public SolutionQ2Batch(String DataPath) throws IOException, InterruptedException {
 		super(DataPath);
+	}
 
+	@Override
+	void prepareStatements() {
 		Connection conn = getDbConnection();
 		Query.Q2_BATCH.prepareStatement(conn);
+
+		super.prepareStatements();
 	}
 
 	@Override
