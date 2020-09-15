@@ -1,0 +1,21 @@
+{
+  "Queries": [
+    "Q1",
+    "Q2"
+  ],
+  "Tools": [
+    "Neo4jSolution",
+    "Neo4jSolutionBatch",
+    "Neo4jSolutionBatch_algo_with_filtered_edges",
+    "Neo4jSolutionBatch_rebuild_overlay",
+    "Neo4jSolution_explicit_component",
+    "Neo4jSolution_explicit_component_algo",
+    "Neo4jSolution_overlay_graph"
+  ],
+  "ChangeSets": [
+    "1", "2"
+  ],
+  "Sequences": 20,
+  "Runs": 1,
+  "Timeout": 1800
+}

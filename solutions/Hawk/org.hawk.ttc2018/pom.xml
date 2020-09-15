@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.hawk</groupId>
-  <artifactId>org.hawk.ttc2018</artifactId>
+  <groupId>org.eclipse.hawk</groupId>
+  <artifactId>ttc2018</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
@@ -12,10 +12,13 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
     <logback.version>1.2.3</logback.version>
+    <hawk.version>2.1.0-SNAPSHOT</hawk.version>
+    <epsilon.version>2.0.0</epsilon.version>
   </properties>
 
   <build>
     <sourceDirectory>src</sourceDirectory>
+    <testSourceDirectory>src-test</testSourceDirectory>
     <resources>
       <resource>
         <directory>src</directory>
@@ -56,80 +59,38 @@
   <dependencies>
     <dependency>
 	    <groupId>${project.groupId}</groupId>
-	    <artifactId>org.hawk.core</artifactId>
-	    <version>1.2.0-SNAPSHOT</version>
+	    <artifactId>org.eclipse.hawk.core</artifactId>
+	    <version>${hawk.version}</version>
     </dependency>
     <dependency>
 	    <groupId>${project.groupId}</groupId>
-	    <artifactId>org.hawk.emf</artifactId>
-	    <version>1.2.0-SNAPSHOT</version>
+	    <artifactId>org.eclipse.hawk.emf</artifactId>
+	    <version>${hawk.version}</version>
     </dependency>
     <dependency>
 	    <groupId>${project.groupId}</groupId>
-	    <artifactId>org.hawk.epsilon</artifactId>
-	    <version>1.2.0-SNAPSHOT</version>
+	    <artifactId>org.eclipse.hawk.epsilon</artifactId>
+	    <version>${hawk.version}</version>
     </dependency>
     <dependency>
 	    <groupId>${project.groupId}</groupId>
-	    <artifactId>org.hawk.graph</artifactId>
-	    <version>1.2.0-SNAPSHOT</version>
+	    <artifactId>org.eclipse.hawk.graph</artifactId>
+	    <version>${hawk.version}</version>
     </dependency>
     <dependency>
 	    <groupId>${project.groupId}</groupId>
-	    <artifactId>org.hawk.localfolder</artifactId>
-	    <version>1.2.0-SNAPSHOT</version>
+	    <artifactId>org.eclipse.hawk.localfolder</artifactId>
+	    <version>${hawk.version}</version>
     </dependency>
     <dependency>
 	    <groupId>${project.groupId}</groupId>
-	    <artifactId>org.hawk.neo4j-v2</artifactId>
-	    <version>1.2.0-SNAPSHOT</version>
+	    <artifactId>org.eclipse.hawk.greycat</artifactId>
+	    <version>${hawk.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.epsilon</groupId>
-      <artifactId>epsilon-emf</artifactId>
-      <version>1.5.0-SNAPSHOT</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.eclipse.xtext</groupId>
-          <artifactId>org.eclipse.xtext</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.eclipse.xtext</groupId>
-          <artifactId>org.eclipse.xtext.xbase</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.eclipse.xtext</groupId>
-          <artifactId>org.eclipse.xtext.ecore</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.eclipse.emf</groupId>
-          <artifactId>org.eclipse.emf.mwe2.runtime</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.eclipse.emf</groupId>
-          <artifactId>org.eclipse.emf.codegen</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.eclipse.emf</groupId>
-          <artifactId>org.eclipse.emf.codegen.ecore</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.eclipse.emf</groupId>
-          <artifactId>org.eclipse.emf.codegen.ecore.xtext</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.eclipse.emf</groupId>
-          <artifactId>org.eclipse.emf.ecore.xcore</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.eclipse.platform</groupId>
-          <artifactId>org.eclipse.core.runtime</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.eclipse.xsd</groupId>
-          <artifactId>org.eclipse.xsd</artifactId>
-        </exclusion>
-      </exclusions>
+	    <groupId>org.eclipse.epsilon</groupId>
+	    <artifactId>org.eclipse.epsilon.emc.emf</artifactId>
+	    <version>${epsilon.version}</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -141,6 +102,18 @@
       <artifactId>logback-classic</artifactId>
       <version>${logback.version}</version>
     </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-csv</artifactId>
+      <version>1.8</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <repositories>
@@ -149,12 +122,12 @@
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
     <repository>
-      <id>mondo-hawk-mvn-repo</id>
-      <url>https://raw.github.com/mondo-project/mondo-hawk/mvn-repo/</url>
       <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
+        <enabled>false</enabled>
       </snapshots>
+      <id>bintray-bluezio-maven</id>
+      <name>bintray</name>
+      <url>https://dl.bintray.com/bluezio/maven</url>
     </repository>
   </repositories>
 

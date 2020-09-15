@@ -1,0 +1,25 @@
+{
+  "Queries": [
+    "Q1",
+    "Q2"
+  ],
+  "Tools": [
+      "EMFSolutionAOF",
+      "EMFSolutionATL",
+      "EMFSolutionATL-Incremental",
+      "EMFSolutionXtend",
+      "Hawk",
+      "HawkIncUpdate",
+      "HawkIncUpdateQuery",
+      "jastadd-ttc18-relast-xml-flush",
+      "jastadd-ttc18-relast-xml-inc",
+      "jastadd-ttc18-xml-flush",
+      "jastadd-ttc18-xml-inc"
+  ],
+  "ChangeSets": [
+    "1", "2"
+  ],
+  "Sequences": 20,
+  "Runs": 1,
+  "Timeout": 1800
+}

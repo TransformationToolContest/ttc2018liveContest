@@ -1,0 +1,37 @@
+FROM ftsrg/ttc2018:common
+
+# dependencies (separated to share layers with other images)
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends build-essential cmake \
+    && rm -rf /var/lib/apt/lists/*
+
+# install GraphBLAS and LAGraph
+COPY --from=graphblas/lagraph:13June2020 / /
+# Make sure you are a root user when refreshing the shared library cache
+RUN ldconfig
+
+# small and stable files
+COPY expected-results expected-results
+COPY reporting reporting
+COPY scripts scripts
+COPY output output
+
+# most frequently changing folders
+COPY solutions/GB-Batch-x1/ solutions/GB-Batch-x1/
+COPY solutions/GB-Batch-xAll/ solutions/GB-Batch-xAll/
+COPY solutions/GB-Incr-x1/ solutions/GB-Incr-x1/
+COPY solutions/GB-Incr-xAll/ solutions/GB-Incr-xAll/
+COPY solutions/GraphBLAS/ solutions/GraphBLAS/
+COPY config/config-docker-graphblas.json config/config.json
+
+# build solutions in config.json
+RUN scripts/run.py -b
+
+COPY docker/entrypoint-graphblas.sh entrypoint.sh
+CMD ./entrypoint.sh
+
+# save build information
+ARG README_TXT_ARG=""
+ENV README_TXT=$README_TXT_ARG
+RUN date -Is > README.md
+RUN echo "$README_TXT" >> README.md

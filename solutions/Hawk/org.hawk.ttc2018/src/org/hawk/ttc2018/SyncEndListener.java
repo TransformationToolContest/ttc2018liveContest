@@ -19,7 +19,7 @@ package org.hawk.ttc2018;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Semaphore;
 
-import org.hawk.core.util.GraphChangeAdapter;
+import org.eclipse.hawk.core.util.GraphChangeAdapter;
 
 /**
  * Simple listener that allows for blocking another thread until a

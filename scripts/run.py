@@ -9,6 +9,7 @@ import shutil
 import subprocess
 import sys
 import signal
+import tempfile
 try:
     import ConfigParser
 except ImportError:
@@ -28,6 +29,7 @@ def build(conf, skip_tests=False):
     Builds all solutions
     """
     for tool in conf.Tools:
+        print("Building " + tool)
         config = ConfigParser.ConfigParser()
         config.read(os.path.join(BASE_DIRECTORY, "solutions", tool, "solution.ini"))
         set_working_directory("solutions", tool)
@@ -43,8 +45,7 @@ def benchmark(conf):
     """
     header = os.path.join(BASE_DIRECTORY, "output", "header.csv")
     result_file = os.path.join(BASE_DIRECTORY, "output", "output.csv")
-    if os.path.exists(result_file):
-        os.remove(result_file)
+    # overwrite with the header
     shutil.copy(header, result_file)
     os.environ['Sequences'] = str(conf.Sequences)
     os.environ['Runs'] = str(conf.Runs)
@@ -60,6 +61,13 @@ def benchmark(conf):
                     full_change_path = os.path.abspath(os.path.join(BASE_DIRECTORY, "models", change_set))
                     os.environ['ChangeSet'] = change_set
                     os.environ['ChangePath'] = full_change_path
+
+                    # Do a backup of initial.xmi before any runs
+                    initial_xmi = os.path.join(full_change_path, "initial.xmi")
+                    fbackup, initial_xmi_backup = tempfile.mkstemp(prefix="ttcbackup_", suffix=".xmi")
+                    os.close(fbackup)
+                    shutil.copy(initial_xmi, initial_xmi_backup)
+
                     for r in range(0, conf.Runs):
                         os.environ['RunIndex'] = str(r)
 
@@ -70,8 +78,9 @@ def benchmark(conf):
                         # to enforce timeout before Python 3.7.5
                         # and kill sub-processes to avoid interference
                         # https://stackoverflow.com/a/36955420
-                        with subprocess.Popen(config.get('run', query), shell=True, stdout=subprocess.PIPE,
-                                              start_new_session=True) as process:
+                        # https://www.saltycrane.com/blog/2011/04/how-use-bash-shell-python-subprocess-instead-binsh/
+                        with subprocess.Popen(config.get('run', query), shell=True, executable='/bin/bash',
+                                              stdout=subprocess.PIPE, start_new_session=True) as process:
                             try:
                                 stdout, stderr = process.communicate(timeout=conf.Timeout)
                                 return_code = process.poll()
@@ -81,8 +90,16 @@ def benchmark(conf):
                             except subprocess.TimeoutExpired:
                                 os.killpg(process.pid, signal.SIGINT)  # send signal to the process group
                                 raise
+                            finally:
+                                # Restore the backup no matter what
+                                shutil.copy(initial_xmi_backup, initial_xmi)
+
                         with open(result_file, "ab") as file:
                             file.write(stdout)
+
+                    # after the runs, delete the backup
+                    os.unlink(initial_xmi_backup)
+
             except subprocess.TimeoutExpired as e:
                 print("Program reached the timeout set ({0} seconds). The command we executed was '{1}'".format(e.timeout, e.cmd))
 

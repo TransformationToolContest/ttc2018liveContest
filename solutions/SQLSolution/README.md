@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-PostgreSQL 11 is required. On Ubuntu 18.04, it can be installed [using an APT repository](https://pgdash.io/blog/postgres-11-getting-started.html).
+PostgreSQL 12 is required. On Ubuntu 20.04, it can be installed by running `apt-get install postgresql-12`. On older systems please refer to [[1](https://computingforgeeks.com/install-postgresql-12-on-ubuntu/), [2](https://pgdash.io/blog/postgres-11-getting-started.html)].
 
 ## Generate CSV models
 
@@ -81,7 +81,7 @@ chmod 755 ~
 
 To play around with the data, connect to PostgreSQL and switch to the database:
 
-```sql
+```console
 postgres=# \c ttc2018sf1
 You are now connected to database "ttc2018sf1" as user "postgres".
 ttc2018sf1=# SELECT count(*) FROM users;

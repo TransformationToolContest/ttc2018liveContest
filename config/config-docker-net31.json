@@ -1,0 +1,18 @@
+{
+  "Queries": [
+    "Q1",
+    "Q2"
+  ],
+  "Tools": [
+      "NMF",
+      "NMF-Incremental",
+      "NMF-Parallel",
+      "NMF-Transactions"
+  ],
+  "ChangeSets": [
+    "1", "2"
+  ],
+  "Sequences": 20,
+  "Runs": 1,
+  "Timeout": 1800
+}

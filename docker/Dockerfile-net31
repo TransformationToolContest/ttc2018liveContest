@@ -1,0 +1,49 @@
+# Approach from Microsoft is to use one image to build, one image to run. This
+# makes the final image smaller, since it only needs the runtime.
+
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+WORKDIR /source
+COPY solutions/NMF solutions/NMF
+COPY solutions/NMF-Incremental solutions/NMF-Incremental
+COPY solutions/NMF-Parallel solutions/NMF-Parallel
+COPY solutions/NMF-Transactions solutions/NMF-Transactions
+COPY scripts scripts
+COPY config/config-docker-net31.json config/config.json
+
+RUN apt-get update && \
+    apt-get -yq --no-install-recommends install python3 && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN scripts/run.py -b
+
+# Now we build the normal image to run, which is based on the common image (Ubuntu 20.04).
+FROM ftsrg/ttc2018:common
+
+# dependencies (separated to share layers with other images)
+# https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
+RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb && \
+    dpkg -i packages-microsoft-prod.deb && rm packages-microsoft-prod.deb && \
+    apt-get update && \
+    apt-get install -yq --no-install-recommends dotnet-runtime-3.1 && \
+    rm -rf /var/lib/apt/lists/*
+
+# small and stable files
+COPY expected-results expected-results
+COPY reporting reporting
+COPY scripts scripts
+COPY output output
+
+# most frequently changing folders
+COPY --from=build /source/solutions solutions
+COPY config/config-docker-net31.json config/config.json
+
+# no need to build (already done)
+
+COPY docker/entrypoint-net31.sh entrypoint.sh
+CMD ./entrypoint.sh
+
+# save build information
+ARG README_TXT_ARG=""
+ENV README_TXT=$README_TXT_ARG
+RUN date -Is > README.md
+RUN echo "$README_TXT" >> README.md
