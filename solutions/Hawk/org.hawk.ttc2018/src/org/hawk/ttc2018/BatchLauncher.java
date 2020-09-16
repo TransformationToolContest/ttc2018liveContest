@@ -118,6 +118,7 @@ public class BatchLauncher extends AbstractLauncher {
 
 	@Override
 	protected String getTool() {
-		return "Hawk";
+		String parent = super.getTool();
+		return parent != null ? parent : "Hawk";
 	}
 }

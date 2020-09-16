@@ -1,6 +1,9 @@
 .git
 models
 
+# from solutions/Hawk/.gitignore
+solutions/Hawk/hawk/
+
 # from solutions/GraphBLAS/.gitignore
 solutions/GraphBLAS/cmake-build-*/
 

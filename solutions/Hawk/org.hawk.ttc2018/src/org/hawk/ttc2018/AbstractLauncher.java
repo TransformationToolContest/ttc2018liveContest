@@ -232,7 +232,9 @@ public abstract class AbstractLauncher {
 
 	protected abstract void applyChanges(File fInitial, int iChangeSequence, File fChanges) throws Exception;
 
-	protected abstract String getTool();
+	protected String getTool() {
+		return System.getenv("Tool");
+	}
 
 	protected EolModule parseEOLModule(final InputStream is) throws IOException, Exception {
 		final EolModule eolm = new EolModule();

@@ -44,7 +44,6 @@ import org.eclipse.hawk.core.util.SLF4JConsole;
 import org.eclipse.hawk.emf.metamodel.EMFMetaModelResourceFactory;
 import org.eclipse.hawk.epsilon.emc.EOLQueryEngine;
 import org.eclipse.hawk.graph.updater.GraphMetaModelUpdater;
-import org.eclipse.hawk.greycat.LevelDBGreycatDatabase;
 import org.eclipse.hawk.localfolder.LocalFile;
 import org.eclipse.hawk.localfolder.LocalFolder;
 
@@ -73,7 +72,7 @@ public class StandaloneHawk {
 
 	public void run() throws Exception {
 		console = new SLF4JConsole();
-		db = new LevelDBGreycatDatabase();
+		db = createDatabase();
 		db.run(new File(indexFolder, "db"), console);
 		
 		final FileBasedCredentialsStore credStore = new FileBasedCredentialsStore(
@@ -89,6 +88,11 @@ public class StandaloneHawk {
 		indexer.addModelUpdater(updater);
 		indexer.setDB(db, true);
 		indexer.init(0, 0);
+	}
+
+	private IGraphDatabase createDatabase() throws Exception {
+		String dbClass = System.getenv().getOrDefault("DatabaseClass", "org.eclipse.hawk.greycat.LevelDBGreycatDatabase");
+		return (IGraphDatabase) Class.forName(dbClass).getConstructor().newInstance();
 	}
 
 	public void shutdown() throws Exception {
@@ -169,4 +173,7 @@ public class StandaloneHawk {
 		return indexer;
 	}
 
+	public IGraphDatabase getDatabase() {
+		return db;
+	}
 }
