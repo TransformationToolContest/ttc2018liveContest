@@ -26,6 +26,9 @@ COPY solutions/EMFSolutionXtend solutions/EMFSolutionXtend
 COPY solutions/Hawk solutions/Hawk
 COPY solutions/HawkIncUpdate solutions/HawkIncUpdate
 COPY solutions/HawkIncUpdateQuery solutions/HawkIncUpdateQuery
+COPY solutions/HawkNeo4J solutions/HawkNeo4J
+COPY solutions/HawkNeo4JIncUpdate solutions/HawkNeo4JIncUpdate
+COPY solutions/HawkNeo4JIncUpdateQuery solutions/HawkNeo4JIncUpdateQuery
 COPY solutions/jastadd-ttc18-relast-xml-flush solutions/jastadd-ttc18-relast-xml-flush
 COPY solutions/jastadd-ttc18-relast-xml-inc solutions/jastadd-ttc18-relast-xml-inc
 COPY solutions/jastadd-ttc18-xml-flush solutions/jastadd-ttc18-xml-flush
