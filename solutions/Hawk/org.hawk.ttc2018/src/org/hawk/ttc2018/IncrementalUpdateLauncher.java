@@ -64,7 +64,8 @@ public class IncrementalUpdateLauncher extends AbstractIncrementalUpdateLauncher
 
 	@Override
 	protected String getTool() {
-		return "HawkIncUpdate";
+		String parent = super.getTool();
+		return parent != null ? parent : "HawkIncUpdate";
 	}
 
 }

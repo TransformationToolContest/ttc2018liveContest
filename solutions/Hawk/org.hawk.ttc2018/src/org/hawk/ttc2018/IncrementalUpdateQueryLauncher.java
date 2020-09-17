@@ -230,7 +230,8 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 
 	@Override
 	protected String getTool() {
-		return "HawkIncUpdateQuery";
+		String parent = super.getTool();
+		return parent != null ? parent : "HawkIncUpdateQuery";
 	}
 
 }
