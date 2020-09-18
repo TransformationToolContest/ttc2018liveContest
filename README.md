@@ -76,3 +76,56 @@ Make sure you read the `README.md` file in the `reporting` directory and install
 ## Implementing the benchmark for a new tool
 
 To implement a tool, you need to create a new directory in the solutions directory and give it a suitable name.
+
+## Running the benchmark with Docker
+
+Instructions for running the benchmark starting with a fresh Ubuntu 20.04 VM.
+
+Create a file system on `$DEVICE` and mount it to `MOUNT_POINT`.
+
+```bash
+sudo mkfs.ext4 $DEVICE
+sudo mount $DEVICE $MOUNT_POINT
+```
+
+Install docker with `apt`:
+
+```bash
+sudo apt install docker.io
+```
+
+Change Docker's storage location by editing `/etc/docker/daemon.json`. This file :
+
+```bash
+sudo vim /etc/docker/daemon.json
+```
+
+Add the following content
+```json
+{
+  "data-root": "SET_TO_SOMEWHERE_UNDER_MOUNT_POINT"
+}
+```
+
+Restart Docker:
+```bash
+sudo snap restart docker
+```
+
+Build the Docker images as follows.
+
+:warning: Do not unzip the `1024.zip` file.
+
+```bash
+./docker.sh -b
+```
+
+Once they are built, set the configuration in `TODO`:
+
+Then, run them using:
+
+```bash
+./docker TODO
+```
+
+TODO: set num threads
