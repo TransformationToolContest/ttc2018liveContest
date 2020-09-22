@@ -81,17 +81,25 @@ To implement a tool, you need to create a new directory in the solutions directo
 
 Instructions for running the benchmark starting with a fresh Ubuntu 20.04 VM.
 
-Create a file system on `$DEVICE` and mount it to `MOUNT_POINT`.
+### Configuration
+
+Create a file system and mount it. Example:
 
 ```bash
-sudo mkfs.ext4 $DEVICE
-sudo mount $DEVICE $MOUNT_POINT
+sudo mkfs.ext4 /dev/nvme1n1
+sudo mount /dev/nvme1n1 /mnt/data
 ```
 
-Install docker with `apt`:
+Install Docker with `apt`:
 
 ```bash
 sudo apt install docker.io
+```
+
+Configure Docker to run without `sudo`:
+```bash
+sudo gpasswd -a $USER docker
+newgrp docker
 ```
 
 Change Docker's storage location by editing `/etc/docker/daemon.json`. This file :
@@ -100,27 +108,31 @@ Change Docker's storage location by editing `/etc/docker/daemon.json`. This file
 sudo vim /etc/docker/daemon.json
 ```
 
-Add the following content
+Set the `data-root` of Docker (where the containers are stored) to a location with ample space (e.g. the newly mounted disk):
+Add the following content:
 ```json
 {
-  "data-root": "SET_TO_SOMEWHERE_UNDER_MOUNT_POINT"
+  "data-root": "/path/to/directory"
 }
 ```
 
 Restart Docker:
 ```bash
-sudo snap restart docker
+sudo service docker restart
 ```
+
+### Building the images
+
+:warning: Do not unzip the `1024.zip` file.
 
 Build the Docker images as follows.
 
-:warning: Do not unzip the `1024.zip` file.
 
 ```bash
 ./docker.sh -b
 ```
 
-Once they are built, set the configuration in `TODO`:
+Once they are built, set the desired configuration in `config/config.json`.
 
 Then, run them using:
 
