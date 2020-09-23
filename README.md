@@ -83,7 +83,7 @@ Instructions for running the benchmark starting with a fresh Ubuntu 20.04 VM.
 
 ### Configuration
 
-Create a file system and mount it. Example:
+Create a file system and mount it. Example, assuming the `/dev/nvme1n1` device mounting to `/mnt/data`:
 
 ```bash
 sudo mkfs.ext4 /dev/nvme1n1
@@ -109,10 +109,10 @@ sudo vim /etc/docker/daemon.json
 ```
 
 Set the `data-root` of Docker (where the containers are stored) to a location with ample space (e.g. the newly mounted disk):
-Add the following content:
+Assuming your storage is `/mnt/data`, use the following configuration:
 ```json
 {
-  "data-root": "/path/to/directory"
+  "data-root": "/mnt/data"
 }
 ```
 
