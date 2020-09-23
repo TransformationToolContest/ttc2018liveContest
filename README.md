@@ -137,7 +137,7 @@ sudo service docker restart
 E.g. `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"`
 - Copy generic settings from `config.json` to `config-docker-*.json` files:\
 `docker/set-configs.sh`
-- Run measurements with the given Java heap size: (limit the CPU cores if needed: `--cpus 0-7`)\
+- Run measurements with the desired Java heap size: (limit the CPU cores if needed: `--cpus 0-7`)\
 `./docker.sh -r --java-heap-size 60G |& tee -a output/log-$(date "+%Y-%m-%dT%H.%M.%S").log`
 
 For other available options check `./docker.sh`.
