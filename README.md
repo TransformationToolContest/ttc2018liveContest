@@ -83,7 +83,7 @@ Instructions for running the benchmark starting with a fresh Ubuntu 20.04 VM.
 
 ### Configuration
 
-Create a file system and mount it. Example, assuming the `/dev/nvme1n1` device mounting to `/mnt/data`:
+In case of Amazon EC2, create a file system and mount it. Example, assuming the `/dev/nvme1n1` device mounting to `/mnt/data`:
 
 ```bash
 sudo mkfs.ext4 /dev/nvme1n1
@@ -121,23 +121,17 @@ Restart Docker:
 sudo service docker restart
 ```
 
-### Building the images
+### Building and running the images
 
 :warning: Do not unzip the `1024.zip` file.
 
-Build the Docker images as follows.
+- `git pull`
+- Save measurement results (`output/*`) if necessary
+- Clean all files to have a clean build: `git clean -ixd` then `c`.
+- If the online images are fresh, pull the images: `./docker.sh --pull`
+- Build outdated images or not uploaded: `./docker.sh --build-if-not-fresh`
+- Set the desired configuration in `config/config.json` (with the exception of "Tools")
+- Copy generic settings from config.json to config-docker-*.json files: `docker/set-configs.sh`
+- Run measurements with the given Java heap size: `./docker.sh -r --java-heap-size 60G |& tee -a output/log-$(date "+%Y-%m-%dT%H.%M.%S").log` (limit the CPU cores if needed: `--cpus 0-7`)
 
-
-```bash
-./docker.sh -b
-```
-
-Once they are built, set the desired configuration in `config/config.json`.
-
-Then, run them using:
-
-```bash
-./docker TODO
-```
-
-TODO: set num threads
+For other available options check `./docker.sh`.
