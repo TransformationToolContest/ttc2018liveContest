@@ -127,11 +127,16 @@ sudo service docker restart
 
 - `git pull`
 - Save measurement results (`output/*`) if necessary
-- Clean all files to have a clean build: `git clean -ixd` then `c`.
-- If the online images are fresh, pull the images: `./docker.sh --pull`
-- Build outdated images or not uploaded: `./docker.sh --build-if-not-fresh`
+- Clean all files to have a clean build:\
+`git clean -ixd` then `c` for clean if asked.
+- If the online images are fresh, pull the images:\
+`./docker.sh --pull`
+- Build outdated images or not uploaded:\
+`./docker.sh --build-if-not-fresh`
 - Set the desired configuration in `config/config.json` (with the exception of "Tools")
-- Copy generic settings from config.json to config-docker-*.json files: `docker/set-configs.sh`
-- Run measurements with the given Java heap size: `./docker.sh -r --java-heap-size 60G |& tee -a output/log-$(date "+%Y-%m-%dT%H.%M.%S").log` (limit the CPU cores if needed: `--cpus 0-7`)
+- Copy generic settings from config.json to config-docker-*.json files:\
+`docker/set-configs.sh`
+- Run measurements with the given Java heap size: (limit the CPU cores if needed: `--cpus 0-7`)\
+`./docker.sh -r --java-heap-size 60G |& tee -a output/log-$(date "+%Y-%m-%dT%H.%M.%S").log`
 
 For other available options check `./docker.sh`.
