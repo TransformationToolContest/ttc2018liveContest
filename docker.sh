@@ -6,6 +6,8 @@ DOCKER_REPO=ftsrg/ttc2018
 # exit immediately if a command fails
 set -e
 
+echo "Command: $0 $@"
+
 if [[ "$#" -eq 0 ]]; then
   echo Parameters:
   echo "  --pull"
