@@ -22,6 +22,7 @@ if [[ "$#" -eq 0 ]]; then
   exit
 fi
 
+DATE=$(date "+%Y-%m-%dT%H.%M.%S")
 TAGS=$(docker/ls-images.sh)
 
 DOCKER_BUILD_PARAMS=()
@@ -121,7 +122,7 @@ if [[ $run ]]; then
   echo ==================== Run: $TOOLS_TO_RUN ====================
   for TOOL in $TOOLS_TO_RUN; do
     echo "-------------------- Run $TOOL --------------------"
-    HOST_OUTPUT_PATH=$(realpath output/output-docker-$TOOL.csv)
+    HOST_OUTPUT_PATH=$(realpath output/output-docker-$DATE-$TOOL.csv)
     TOOL_DOCKER_CONFIG_PATH=$(realpath config/config-docker-$TOOL.json)
     touch "$HOST_OUTPUT_PATH"
     docker run --rm \
