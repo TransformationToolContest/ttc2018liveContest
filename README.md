@@ -81,14 +81,18 @@ To implement a tool, you need to create a new directory in the solutions directo
 
 Instructions for running the benchmark starting with a fresh Ubuntu 20.04 VM.
 
-### Configuration
+### Initialize server
 
-In case of Amazon EC2, create a file system and mount it. Example, assuming the `/dev/nvme1n1` device mounting to `/mnt/data`:
+In case of cloud virtual machines (e.g. Amazon EC2, Azure), first create a file system and mount it. Example, assuming the `/dev/nvme1n1` device mounting to `/mnt/data`:
 
 ```bash
 sudo mkfs.ext4 /dev/nvme1n1
 sudo mount /dev/nvme1n1 /mnt/data
 ```
+
+### Docker
+
+On Ubuntu 20.04, the Docker version installed from `apt` is sufficient. If you wish to install the latest Docker, follow [the official installation instructions](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
 
 Install Docker with `apt`:
 
@@ -102,8 +106,7 @@ sudo gpasswd -a $USER docker
 newgrp docker
 ```
 
-Change Docker's storage location by editing `/etc/docker/daemon.json`. This file :
-
+Change Docker's storage location by editing `/etc/docker/daemon.json`:
 ```bash
 sudo vim /etc/docker/daemon.json
 ```
