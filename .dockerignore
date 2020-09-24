@@ -26,6 +26,7 @@ solutions/GraphBLAS/cmake-build-*/
 **/.Rhistory
 **/.RData
 output/output*.csv
+output/log*.log
 .pydevproject
 deps/
 diagrams/
