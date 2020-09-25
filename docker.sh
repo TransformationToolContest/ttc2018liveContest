@@ -6,6 +6,8 @@ DOCKER_REPO=ftsrg/ttc2018
 # exit immediately if a command fails
 set -e
 
+echo "Command: $0 $@"
+
 if [[ "$#" -eq 0 ]]; then
   echo Parameters:
   echo "  --pull"
@@ -16,9 +18,11 @@ if [[ "$#" -eq 0 ]]; then
   echo
   echo "  -t|--tags \"TAG1 TAG2 ...\" # list the tags using \`docker/ls-images.sh\`"
   echo "  -h|--java-heap-size 6G    # run Java solutions with 6 GB of heap (default)"
+  echo "  -c|--cpus 0-7,15          # limit container to use the first 8 CPU cores and the 16th one"
   exit
 fi
 
+DATE=$(date "+%Y-%m-%dT%H.%M.%S")
 TAGS=$(docker/ls-images.sh)
 
 DOCKER_BUILD_PARAMS=()
@@ -53,6 +57,7 @@ while [[ "$#" -gt 0 ]]; do
 
         -t|--tags) TAGS="$2"; shift ;;
         -h|--java-heap-size) DOCKER_PARAMS+=("-e" "JAVA_HEAP_SIZE=$2"); shift ;;
+        -c|--cpus) DOCKER_PARAMS+=("--cpuset-cpus=$2"); shift ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
     shift
@@ -117,7 +122,7 @@ if [[ $run ]]; then
   echo ==================== Run: $TOOLS_TO_RUN ====================
   for TOOL in $TOOLS_TO_RUN; do
     echo "-------------------- Run $TOOL --------------------"
-    HOST_OUTPUT_PATH=$(realpath output/output-docker-$TOOL.csv)
+    HOST_OUTPUT_PATH=$(realpath output/output-docker-$DATE-$TOOL.csv)
     TOOL_DOCKER_CONFIG_PATH=$(realpath config/config-docker-$TOOL.json)
     touch "$HOST_OUTPUT_PATH"
     docker run --rm \

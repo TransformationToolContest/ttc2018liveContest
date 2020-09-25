@@ -76,3 +76,71 @@ Make sure you read the `README.md` file in the `reporting` directory and install
 ## Implementing the benchmark for a new tool
 
 To implement a tool, you need to create a new directory in the solutions directory and give it a suitable name.
+
+## Running the benchmark with Docker
+
+Instructions for running the benchmark starting with a fresh Ubuntu 20.04 VM.
+
+### Initialize server
+
+In case of cloud virtual machines (e.g. Amazon EC2, Azure), first create a file system and mount it. Example, assuming the `/dev/nvme1n1` device mounting to `/mnt/data`:
+
+```bash
+sudo mkfs.ext4 /dev/nvme1n1
+sudo mount /dev/nvme1n1 /mnt/data
+```
+
+### Docker
+
+On Ubuntu 20.04, the Docker version installed from `apt` is sufficient. If you wish to install the latest Docker, follow [the official installation instructions](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
+
+Install Docker with `apt`:
+
+```bash
+sudo apt install docker.io
+```
+
+Configure Docker to run without `sudo`:
+```bash
+sudo gpasswd -a $USER docker
+newgrp docker
+```
+
+Change Docker's storage location by editing `/etc/docker/daemon.json`:
+```bash
+sudo vim /etc/docker/daemon.json
+```
+
+Set the `data-root` of Docker (where the containers are stored) to a location with ample space (e.g. the newly mounted disk):
+Assuming your storage is `/mnt/data`, use the following configuration:
+```json
+{
+  "data-root": "/mnt/data"
+}
+```
+
+Restart Docker:
+```bash
+sudo service docker restart
+```
+
+### Building and running the images
+
+:warning: Do not unzip the `1024.zip` file.
+
+- `git pull`
+- Save measurement results (`output/*`) if necessary
+- Clean all files to have a clean build:\
+`git clean -ixd` then `c` for clean if asked.
+- If the online images are fresh, pull the images:\
+`./docker.sh --pull`
+- Build outdated images or not uploaded:\
+`./docker.sh --build-if-not-fresh`
+- Set the desired configuration in `config/config.json` (with the exception of "Tools")\
+E.g. `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"`
+- Copy generic settings from `config.json` to `config-docker-*.json` files:\
+`docker/set-configs.sh`
+- Run measurements with the desired Java heap size: (limit the CPU cores if needed: `--cpus 0-7`)\
+`./docker.sh -r --java-heap-size 60G |& tee -a output/log-$(date "+%Y-%m-%dT%H.%M.%S").log`
+
+For other available options check `./docker.sh`.
