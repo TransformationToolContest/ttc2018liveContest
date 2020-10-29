@@ -11,7 +11,7 @@ echo "Command: $0 $@"
 if [[ "$#" -eq 0 ]]; then
   echo Parameters:
   echo "  --pull"
-  echo "  -b|--build"
+  echo "  -b|--build                # runs 'scripts/run.py -b --skip-tests' inside"
   echo "  --build-if-not-fresh      # rebuild runnable image if it is based on different commit"
   echo "  -p|--push"
   echo "  -r|--run"

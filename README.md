@@ -134,7 +134,7 @@ sudo service docker restart
 `git clean -ixd` then `c` for clean if asked.
 - If the online images are fresh, pull the images:\
 `./docker.sh --pull`
-- Build outdated images or not uploaded:\
+- Build outdated images or not uploaded (without running the tests):\
 `./docker.sh --build-if-not-fresh`
 - Set the desired configuration in `config/config.json` (with the exception of "Tools")\
 E.g. `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"`
