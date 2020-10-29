@@ -25,7 +25,7 @@ COPY solutions/GraphBLAS/ solutions/GraphBLAS/
 COPY config/config-docker-graphblas.json config/config.json
 
 # build solutions in config.json
-RUN scripts/run.py -b
+RUN scripts/run.py -b --skip-tests
 
 COPY docker/entrypoint-graphblas.sh entrypoint.sh
 CMD ./entrypoint.sh

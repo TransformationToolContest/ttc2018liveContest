@@ -36,7 +36,7 @@ COPY solutions/Neo4jSolution_overlay_graph solutions/Neo4jSolution_overlay_graph
 COPY config/config-docker-neo4j.json config/config.json
 
 # build solutions in config.json
-RUN scripts/run.py -b
+RUN scripts/run.py -b --skip-tests
 
 COPY docker/entrypoint-neo4j.sh entrypoint.sh
 CMD ./entrypoint.sh

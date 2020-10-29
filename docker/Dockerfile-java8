@@ -38,7 +38,7 @@ COPY solutions/jastadd-ttc18-xml-inc solutions/jastadd-ttc18-xml-inc
 COPY config/config-docker-java8.json config/config.json
 
 # build solutions in config.json
-RUN scripts/run.py -b
+RUN scripts/run.py -b --skip-tests
 
 COPY docker/entrypoint-java8.sh entrypoint.sh
 CMD ./entrypoint.sh

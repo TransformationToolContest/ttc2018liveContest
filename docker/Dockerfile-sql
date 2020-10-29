@@ -34,7 +34,7 @@ COPY solutions/SQLSolutionBatch solutions/SQLSolutionBatch
 COPY config/config-docker-sql.json config/config.json
 
 # build solutions in config.json
-RUN scripts/run.py -b
+RUN scripts/run.py -b --skip-tests
 
 COPY docker/entrypoint-sql.sh entrypoint.sh
 CMD ./entrypoint.sh

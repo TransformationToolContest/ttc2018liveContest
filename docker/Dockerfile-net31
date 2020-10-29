@@ -14,7 +14,7 @@ RUN apt-get update && \
     apt-get -yq --no-install-recommends install python3 && \
     rm -rf /var/lib/apt/lists/*
 
-RUN scripts/run.py -b
+RUN scripts/run.py -b --skip-tests
 
 # Now we build the normal image to run, which is based on the common image (Ubuntu 20.04).
 FROM ftsrg/ttc2018:common

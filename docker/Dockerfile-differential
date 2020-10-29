@@ -17,7 +17,7 @@ COPY solutions/differential-08/ solutions/differential-08/
 COPY config/config-docker-differential.json config/config.json
 
 # build solutions in config.json
-RUN scripts/run.py -b
+RUN scripts/run.py -b --skip-tests
 
 COPY docker/entrypoint-differential.sh entrypoint.sh
 CMD ./entrypoint.sh

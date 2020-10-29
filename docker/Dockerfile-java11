@@ -27,7 +27,7 @@ COPY solutions/EMFSolutionYAMTL_batch solutions/EMFSolutionYAMTL_batch
 COPY config/config-docker-java11.json config/config.json
 
 # build solutions in config.json
-RUN scripts/run.py -b
+RUN scripts/run.py -b --skip-tests
 
 COPY docker/entrypoint-java11.sh entrypoint.sh
 CMD ./entrypoint.sh
