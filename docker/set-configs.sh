@@ -9,7 +9,7 @@ CONFIG_TEMPLATE=config/config.json
 for DOCKER_TAG in $(docker/ls-images.sh -r); do
   CONFIG_FOR_DOCKER=config/config-docker-$DOCKER_TAG.json
 
-  ORIGINAL_TOOLS_SETTING="$(grep -Ezo '"Tools"[^]]*]' "$CONFIG_FOR_DOCKER" | tr '\n' '\f' )"
+  ORIGINAL_TOOLS_SETTING="$(grep -Ezo '"Tools"[^]]*]' "$CONFIG_FOR_DOCKER" | tr -d '\0' | tr '\n' '\f' )"
 
   # https://unix.stackexchange.com/a/525524
   # https://unix.stackexchange.com/a/152389
