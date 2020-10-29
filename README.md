@@ -137,7 +137,7 @@ sudo service docker restart
 - Build outdated images or not uploaded (without running the tests):\
 `./docker.sh --build-if-not-fresh`
 - Set the desired configuration in `config/config.json` (with the exception of "Tools")\
-E.g. `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"`
+E.g. `Timeout`: `600`, `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"`
 - Copy generic settings from `config.json` to `config-docker-*.json` files:\
 `docker/set-configs.sh`
 - Run measurements with the desired Java heap size: (limit the CPU cores if needed: `--cpus 0-7`)\
