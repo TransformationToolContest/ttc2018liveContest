@@ -149,3 +149,12 @@ E.g. `Timeout`: `600`, `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128
 `./docker.sh -r --java-heap-size 60G |& tee -a output/log-$(date "+%Y-%m-%dT%H.%M.%S").log`
 
 Run `./docker.sh` to list other available options.
+
+### Java version
+
+To get the exact OpenJDK version installed in the Docker images, use:
+
+```bash
+docker run --rm -it ftsrg/ttc2018:java8 java -version
+docker run --rm -it ftsrg/ttc2018:java11 java -version
+```
