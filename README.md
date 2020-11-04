@@ -95,9 +95,8 @@ sudo mount /dev/nvme1n1 /mnt/data
 On Ubuntu 20.04, the Docker version installed from `apt` is sufficient. If you wish to install the latest Docker, follow [the official installation instructions](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).
 
 Install Docker with `apt`:
-
 ```bash
-sudo apt install docker.io
+sudo apt update && sudo apt install -y docker
 ```
 
 Configure Docker to run without `sudo`:
@@ -124,6 +123,12 @@ Restart Docker:
 sudo service docker restart
 ```
 
+### Images
+
+The Docker images are defined in the `docker` directory as `Dockerfile-$TAG`, e.g. `Dockerfile-java11` contains the Docker image for running tool using Java 11.
+
+The tools supported by each image are defined in the `config` directory in the `config/config-$TAG.json` file.
+
 ### Building and running the images
 
 :warning: Do not unzip the `1024.zip` file.
@@ -143,4 +148,4 @@ E.g. `Timeout`: `600`, `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128
 - Run measurements with the desired Java heap size: (limit the CPU cores if needed: `--cpus 0-7`)\
 `./docker.sh -r --java-heap-size 60G |& tee -a output/log-$(date "+%Y-%m-%dT%H.%M.%S").log`
 
-For other available options check `./docker.sh`.
+Run `./docker.sh` to list other available options.
