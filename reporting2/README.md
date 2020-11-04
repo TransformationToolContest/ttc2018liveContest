@@ -1,29 +1,30 @@
 # Visualization
 
-Install R and pandoc. For Ubuntu 16.04+, the following works:
+Install R and pandoc.
+
+## Ubuntu 
+
+For Ubuntu 16.04+, the following works:
 
 Get the latest version as described in: https://cran.r-project.org/bin/linux/ubuntu/README.html
 
 ```console
-# R base
-sudo apt install -y r-base r-base-dev pandoc
-# for tidyverse
-sudo apt install -y libssl-dev libxml2-dev libcurl4-openssl-dev
-
-# both
 sudo apt install -y r-base r-base-dev pandoc libssl-dev libxml2-dev libcurl4-openssl-dev
 ```
+
+## Fedora
 
 On Fedora:
 
 ```console
-sudo dnf install -y R R-Rcpp-devel rstudio-desktop
-sudo dnf install -y openssl-devel libxml2-devel libcurl-devel
+sudo dnf install -y R R-Rcpp-devel rstudio-desktop openssl-devel libxml2-devel libcurl-devel
 ```
+
+## R packages
 
 Run R and install the [Tidyverse](https://www.tidyverse.org/) and [TinyTeX](https://yihui.name/tinytex/) package.
 
-To run GCC/G++ on multiple threads, set the following flags:
+To run GCC/G++ on multiple (e.g. `8`) threads, set the following flags:
 
 ```bash
 mkdir ~/.R
@@ -43,4 +44,12 @@ To generate the plot, use the Makefile:
 
 ```console
 make
+```
+
+## Concatenating results
+
+To produce a single file `output.csv` from the results, use the following command:
+
+```bash
+cat output/header.csv <(tail -qn +2 output/output*.csv) > output.csv
 ```
