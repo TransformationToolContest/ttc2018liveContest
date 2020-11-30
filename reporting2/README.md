@@ -48,8 +48,8 @@ make
 
 ## Concatenating results
 
-To produce a single file `output.csv` from the results, use the following command:
+To produce a single file `output.csv` from the results, use the following command: (cf. `paper-repo/output/README.md`)
 
 ```bash
-cat output/header.csv <(tail -qn +2 output/output*.csv) > output.csv
+cat output/header.csv <(tail -qn +2 output/output-docker-*.csv) > output.csv
 ```
