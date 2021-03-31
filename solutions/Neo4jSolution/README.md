@@ -1,7 +1,7 @@
 # Before running Neo4j solutions
 
 - Grab Neo4j Community Edition (https://neo4j.com/download-center/#community), e.g. on Linux, run:
-  - `wget https://neo4j.com/artifact.php?name=neo4j-community-3.5.20-unix.tar.gz`
+  - `wget https://neo4j.com/artifact.php?name=neo4j-community-4.2.4-unix.tar.gz`
 - Set the environment variables:
   - Set `export NEO4J_HOME=` to Neo4j installation directory
   - Increase Java maximum heap size as described in the main README

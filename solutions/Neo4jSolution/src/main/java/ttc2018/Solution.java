@@ -140,7 +140,6 @@ public abstract class Solution implements AutoCloseable {
         ProcessBuilder pb = new ProcessBuilder(LOAD_SCRIPT);
         Map<String, String> env = pb.environment();
         env.put("NEO4J_DATA_DIR", DataPath);
-        env.put("NEO4J_DB_DIR", DB_DIR.getCanonicalPath());
 
         File log = new File("log.txt");
         pb.redirectErrorStream(true);
