@@ -1,5 +1,5 @@
 MATCH (c:Comment)
-CALL algo.unionFind.stream(
+CALL gds.wcc.stream(
 'MATCH (c:Comment)<-[:LIKES]-(u:User)
  WHERE id(c)=' + id(c) + '
    RETURN id(u) as id',
