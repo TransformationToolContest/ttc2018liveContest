@@ -1,7 +1,7 @@
 package ttc2018;
 
 import org.neo4j.exceptions.KernelException;
-import org.neo4j.graphalgo.wcc.Wcc;
+import org.neo4j.graphalgo.wcc.WccStreamProc;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +43,7 @@ public class SolutionQ2Batch extends Solution {
 
         if (tool == Tool.Neo4jSolutionBatch || tool == Tool.Neo4jSolutionBatch_algo_with_filtered_edges) {
             try {
-                registerProcedure(graphDb, Wcc.class);
+                registerProcedure(graphDb, WccStreamProc.class);
             } catch (KernelException e) {
                 throw new UnsupportedOperationException(e);
             }

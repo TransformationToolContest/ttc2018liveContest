@@ -51,9 +51,7 @@ public enum Query {
         queryText = s;
     }
 
-    public Result execute(Solution solution, Map<String, Object> parameters) {
-        try (Transaction tx = solution.getDbConnection().beginTx()) {
-            return tx.execute(queryText, parameters);
-        }
+    public Result execute(Transaction tx, Map<String, Object> parameters) {
+        return tx.execute(queryText, parameters);
     }
 }

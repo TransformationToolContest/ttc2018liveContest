@@ -22,7 +22,8 @@ repositories {
 dependencies {
     compile group: 'com.google.guava', name: 'guava', version: guavaVersion
     compile "org.neo4j:neo4j:${neo4jVersion}"
-    compile "org.neo4j.gds:proc-common:${neo4jGdsVersion}"
+    compile "org.neo4j.gds:algo:${neo4jGdsVersion}"
+    compile "org.neo4j.gds:proc-community:${neo4jGdsVersion}"
     compile "org.neo4j.procedure:apoc:${neo4jApocVersion}:all"
 
     testCompile group: 'junit', name: 'junit', version: '4.12'

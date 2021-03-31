@@ -6,6 +6,7 @@ import apoc.periodic.Periodic;
 import apoc.refactor.GraphRefactoring;
 import com.google.common.collect.ImmutableMap;
 import org.neo4j.exceptions.KernelException;
+import org.neo4j.graphalgo.functions.AsNodeFunc;
 import org.neo4j.graphalgo.wcc.Wcc;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
@@ -57,7 +58,7 @@ public class SolutionQ2 extends Solution {
 
             switch (tool) {
                 case Neo4jSolution_explicit_component_algo:
-                    registerProcedure(graphDb, Wcc.class);
+                    registerProcedure(graphDb, Wcc.class, AsNodeFunc.class);
                     break;
                 case Neo4jSolution:
                     registerProcedure(graphDb, Create.class, Periodic.class, PathExplorer.class);
@@ -102,12 +103,14 @@ public class SolutionQ2 extends Solution {
             case Neo4jSolution:
                 runVoidQuery(Query.Q2_INITIAL_DYNAMIC_LIKES_LABELS);
 
-                Map batchErrors = (Map) Query.Q2_INITIAL_COMPONENTS_PERIODIC.execute(this, Collections.emptyMap())
-                        .columnAs("batchErrors")
-                        .stream().collect(Collectors.toList())
-                        .get(0);
-                if (!batchErrors.isEmpty())
-                    throw new RuntimeException(batchErrors.toString(), new Exception());
+                try (Transaction tx = graphDb.beginTx()) {
+                    Map batchErrors = (Map) Query.Q2_INITIAL_COMPONENTS_PERIODIC.execute(tx, Collections.emptyMap())
+                            .columnAs("batchErrors")
+                            .stream().collect(Collectors.toList())
+                            .get(0);
+                    if (!batchErrors.isEmpty())
+                        throw new RuntimeException(batchErrors.toString(), new Exception());
+                }
 
                 runVoidQuery(Query.Q2_INITIAL_SCORE_FROM_EXPLICIT_COMPONENTS);
                 break;
