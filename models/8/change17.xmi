@@ -8,13 +8,13 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Post #//@changes.3/@addedElement" affectedElement="social:User initial.xmi#2285" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:CompositionListInsertion" index="2302" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="528739" timestamp="2010-04-02T12:34:46" content="" submitter="initial.xmi#2285">
-      <comments post="#//@changes.3/@addedElement" id="528848" timestamp="2010-04-02T12:39:21" content="fine" submitter="initial.xmi#555" />
+      <comments id="528848" timestamp="2010-04-02T12:39:21" content="fine" submitter="initial.xmi#555" />
     </addedElement>
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment 528848" affectedElement="social:User initial.xmi#555" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" affectedElement="social:Post #//@changes.3/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="#//@changes.3/@addedElement" id="528848" timestamp="2010-04-02T12:39:21" content="fine" submitter="initial.xmi#555" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="528848" timestamp="2010-04-02T12:39:21" content="fine" submitter="initial.xmi#555" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Post #//@changes.3/@addedElement" affectedElement="social:Comment 528848" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>

@@ -3,14 +3,14 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#7696581394796" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" index="2" affectedElement="social:Comment initial.xmi#77309626106" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#77309625913" id="85899560701" timestamp="2011-10-09T01:13:01" content="no way!" submitter="initial.xmi#7696581394796" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="85899560701" timestamp="2011-10-09T01:13:01" content="no way!" submitter="initial.xmi#7696581394796" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment initial.xmi#77309626106" affectedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.3/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#5497558140712" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" index="1" affectedElement="social:Comment initial.xmi#77310269562" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#77310269418" id="85900204155" timestamp="2011-10-09T01:13:27" content="cool" submitter="initial.xmi#5497558140712" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="85900204155" timestamp="2011-10-09T01:13:27" content="cool" submitter="initial.xmi#5497558140712" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment initial.xmi#77310269562" affectedElement="social:Comment #//@changes.3/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>

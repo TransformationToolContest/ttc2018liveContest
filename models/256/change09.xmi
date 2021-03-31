@@ -10,6 +10,6 @@
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.3/@addedElement" affectedElement="social:User initial.xmi#6597069770969" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:CompositionListInsertion" index="2" affectedElement="social:Comment initial.xmi#51539829571" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#51539828838" id="51539829576" timestamp="2011-03-07T13:28:18" content="LOL" submitter="initial.xmi#6597069770969" />
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="51539829576" timestamp="2011-03-07T13:28:18" content="LOL" submitter="initial.xmi#6597069770969" />
   </changes>
 </changes:ModelChangeSet>

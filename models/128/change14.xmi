@@ -3,7 +3,7 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#1099511628041" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" index="3" affectedElement="social:Comment initial.xmi#34359849391" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#34359849102" id="34359849396" timestamp="2010-11-05T17:06:26" content="duh" submitter="initial.xmi#1099511628041" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="34359849396" timestamp="2010-11-05T17:06:26" content="duh" submitter="initial.xmi#1099511628041" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment initial.xmi#34359849391" affectedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>

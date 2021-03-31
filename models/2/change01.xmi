@@ -3,7 +3,7 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#4281" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" index="1" affectedElement="social:Comment initial.xmi#725040" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#723156" id="725041" timestamp="2010-03-10T15:31:35" content="About Joseph Haydn, Michael Haydn, himself . About Frédéric Chopin, are for solo piano,." submitter="initial.xmi#4281" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="725041" timestamp="2010-03-10T15:31:35" content="About Joseph Haydn, Michael Haydn, himself . About Frédéric Chopin, are for solo piano,." submitter="initial.xmi#4281" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment initial.xmi#725040" affectedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>

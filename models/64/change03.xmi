@@ -3,7 +3,7 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#1099511631980" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" index="4" affectedElement="social:Comment initial.xmi#25769993928" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#25769993819" id="25769993939" timestamp="2010-08-07T14:52:35" content="About Salman Rushdie, of his fiction is s. About Mary Magdalene, Jesus. Jesus clea." submitter="initial.xmi#1099511631980" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="25769993939" timestamp="2010-08-07T14:52:35" content="About Salman Rushdie, of his fiction is s. About Mary Magdalene, Jesus. Jesus clea." submitter="initial.xmi#1099511631980" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment initial.xmi#25769993928" affectedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
