@@ -70,6 +70,7 @@ public class SocialNetworkFactoryImpl extends EFactoryImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Post createPost() {
 		PostImpl post = new PostImpl();
 		return post;
@@ -80,6 +81,7 @@ public class SocialNetworkFactoryImpl extends EFactoryImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Comment createComment() {
 		CommentImpl comment = new CommentImpl();
 		return comment;
@@ -90,6 +92,7 @@ public class SocialNetworkFactoryImpl extends EFactoryImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public User createUser() {
 		UserImpl user = new UserImpl();
 		return user;
@@ -100,6 +103,7 @@ public class SocialNetworkFactoryImpl extends EFactoryImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SocialNetworkRoot createSocialNetworkRoot() {
 		SocialNetworkRootImpl socialNetworkRoot = new SocialNetworkRootImpl();
 		return socialNetworkRoot;
@@ -110,6 +114,7 @@ public class SocialNetworkFactoryImpl extends EFactoryImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SocialNetworkPackage getSocialNetworkPackage() {
 		return (SocialNetworkPackage)getEPackage();
 	}

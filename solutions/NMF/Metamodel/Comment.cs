@@ -49,14 +49,8 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// <summary>
         /// The backing field for the LikedBy property
         /// </summary>
+        [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private CommentLikedByCollection _likedBy;
-        
-        private static Lazy<ITypedElement> _postReference = new Lazy<ITypedElement>(RetrievePostReference);
-        
-        /// <summary>
-        /// The backing field for the Post property
-        /// </summary>
-        private IPost _post;
         
         private static IClass _classInstance;
         
@@ -106,42 +100,6 @@ namespace TTC2018.LiveContest.SocialNetwork
         }
         
         /// <summary>
-        /// The post property
-        /// </summary>
-        [DisplayNameAttribute("post")]
-        [CategoryAttribute("Comment")]
-        [XmlElementNameAttribute("post")]
-        [XmlAttributeAttribute(true)]
-        public IPost Post
-        {
-            get
-            {
-                return this._post;
-            }
-            set
-            {
-                if ((this._post != value))
-                {
-                    IPost old = this._post;
-                    ValueChangedEventArgs e = new ValueChangedEventArgs(old, value);
-                    this.OnPostChanging(e);
-                    this.OnPropertyChanging("Post", e, _postReference);
-                    this._post = value;
-                    if ((old != null))
-                    {
-                        old.Deleted -= this.OnResetPost;
-                    }
-                    if ((value != null))
-                    {
-                        value.Deleted += this.OnResetPost;
-                    }
-                    this.OnPostChanged(e);
-                    this.OnPropertyChanged("Post", e, _postReference);
-                }
-            }
-        }
-        
-        /// <summary>
         /// Gets the referenced model elements of this model element
         /// </summary>
         public override IEnumerableExpression<IModelElement> ReferencedElements
@@ -177,19 +135,9 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// </summary>
         public event System.EventHandler<ValueChangedEventArgs> CommentedChanged;
         
-        /// <summary>
-        /// Gets fired before the Post property changes its value
-        /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> PostChanging;
-        
-        /// <summary>
-        /// Gets fired when the Post property changed its value
-        /// </summary>
-        public event System.EventHandler<ValueChangedEventArgs> PostChanged;
-        
         private static ITypedElement RetrieveCommentedReference()
         {
-            return ((ITypedElement)(((ModelElement)(Comment.ClassInstance)).Resolve("commented")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.Comment.ClassInstance)).Resolve("commented")));
         }
         
         /// <summary>
@@ -257,7 +205,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         
         private static ITypedElement RetrieveLikedByReference()
         {
-            return ((ITypedElement)(((ModelElement)(Comment.ClassInstance)).Resolve("likedBy")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.Comment.ClassInstance)).Resolve("likedBy")));
         }
         
         /// <summary>
@@ -280,47 +228,6 @@ namespace TTC2018.LiveContest.SocialNetwork
             this.OnCollectionChanged("LikedBy", e, _likedByReference);
         }
         
-        private static ITypedElement RetrievePostReference()
-        {
-            return ((ITypedElement)(((ModelElement)(Comment.ClassInstance)).Resolve("post")));
-        }
-        
-        /// <summary>
-        /// Raises the PostChanging event
-        /// </summary>
-        /// <param name="eventArgs">The event data</param>
-        protected virtual void OnPostChanging(ValueChangedEventArgs eventArgs)
-        {
-            System.EventHandler<ValueChangedEventArgs> handler = this.PostChanging;
-            if ((handler != null))
-            {
-                handler.Invoke(this, eventArgs);
-            }
-        }
-        
-        /// <summary>
-        /// Raises the PostChanged event
-        /// </summary>
-        /// <param name="eventArgs">The event data</param>
-        protected virtual void OnPostChanged(ValueChangedEventArgs eventArgs)
-        {
-            System.EventHandler<ValueChangedEventArgs> handler = this.PostChanged;
-            if ((handler != null))
-            {
-                handler.Invoke(this, eventArgs);
-            }
-        }
-        
-        /// <summary>
-        /// Handles the event that the Post property must reset
-        /// </summary>
-        /// <param name="sender">The object that sent this reset request</param>
-        /// <param name="eventArgs">The event data for the reset event</param>
-        private void OnResetPost(object sender, System.EventArgs eventArgs)
-        {
-            this.Post = null;
-        }
-        
         /// <summary>
         /// Resolves the given URI to a child model element
         /// </summary>
@@ -332,10 +239,6 @@ namespace TTC2018.LiveContest.SocialNetwork
             if ((reference == "COMMENTED"))
             {
                 return this.Commented;
-            }
-            if ((reference == "POST"))
-            {
-                return this.Post;
             }
             return base.GetModelElementForReference(reference, index);
         }
@@ -366,11 +269,6 @@ namespace TTC2018.LiveContest.SocialNetwork
                 this.Commented = ((ISubmission)(value));
                 return;
             }
-            if ((feature == "POST"))
-            {
-                this.Post = ((IPost)(value));
-                return;
-            }
             base.SetFeature(feature, value);
         }
         
@@ -384,10 +282,6 @@ namespace TTC2018.LiveContest.SocialNetwork
             if ((reference == "COMMENTED"))
             {
                 return new CommentedProxy(this);
-            }
-            if ((reference == "POST"))
-            {
-                return new PostProxy(this);
             }
             return base.GetExpressionForReference(reference);
         }
@@ -433,10 +327,6 @@ namespace TTC2018.LiveContest.SocialNetwork
                         count = (count + 1);
                     }
                     count = (count + this._parent.LikedBy.Count);
-                    if ((this._parent.Post != null))
-                    {
-                        count = (count + 1);
-                    }
                     return count;
                 }
             }
@@ -445,14 +335,12 @@ namespace TTC2018.LiveContest.SocialNetwork
             {
                 this._parent.CommentedChanged += this.PropagateValueChanges;
                 this._parent.LikedBy.AsNotifiable().CollectionChanged += this.PropagateCollectionChanges;
-                this._parent.PostChanged += this.PropagateValueChanges;
             }
             
             protected override void DetachCore()
             {
                 this._parent.CommentedChanged -= this.PropagateValueChanges;
                 this._parent.LikedBy.AsNotifiable().CollectionChanged -= this.PropagateCollectionChanges;
-                this._parent.PostChanged -= this.PropagateValueChanges;
             }
             
             /// <summary>
@@ -475,15 +363,6 @@ namespace TTC2018.LiveContest.SocialNetwork
                 {
                     this._parent.LikedBy.Add(likedByCasted);
                 }
-                if ((this._parent.Post == null))
-                {
-                    IPost postCasted = item.As<IPost>();
-                    if ((postCasted != null))
-                    {
-                        this._parent.Post = postCasted;
-                        return;
-                    }
-                }
             }
             
             /// <summary>
@@ -493,7 +372,6 @@ namespace TTC2018.LiveContest.SocialNetwork
             {
                 this._parent.Commented = null;
                 this._parent.LikedBy.Clear();
-                this._parent.Post = null;
             }
             
             /// <summary>
@@ -508,10 +386,6 @@ namespace TTC2018.LiveContest.SocialNetwork
                     return true;
                 }
                 if (this._parent.LikedBy.Contains(item))
-                {
-                    return true;
-                }
-                if ((item == this._parent.Post))
                 {
                     return true;
                 }
@@ -545,11 +419,6 @@ namespace TTC2018.LiveContest.SocialNetwork
                 {
                     likedByEnumerator.Dispose();
                 }
-                if ((this._parent.Post != null))
-                {
-                    array[arrayIndex] = this._parent.Post;
-                    arrayIndex = (arrayIndex + 1);
-                }
             }
             
             /// <summary>
@@ -570,11 +439,6 @@ namespace TTC2018.LiveContest.SocialNetwork
                 {
                     return true;
                 }
-                if ((this._parent.Post == item))
-                {
-                    this._parent.Post = null;
-                    return true;
-                }
                 return false;
             }
             
@@ -584,7 +448,7 @@ namespace TTC2018.LiveContest.SocialNetwork
             /// <returns>A generic enumerator</returns>
             public override IEnumerator<IModelElement> GetEnumerator()
             {
-                return Enumerable.Empty<IModelElement>().Concat(this._parent.Commented).Concat(this._parent.LikedBy).Concat(this._parent.Post).GetEnumerator();
+                return Enumerable.Empty<IModelElement>().Concat(this._parent.Commented).Concat(this._parent.LikedBy).GetEnumerator();
             }
         }
         
@@ -615,37 +479,6 @@ namespace TTC2018.LiveContest.SocialNetwork
                 set
                 {
                     this.ModelElement.Commented = value;
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Represents a proxy to represent an incremental access to the post property
-        /// </summary>
-        private sealed class PostProxy : ModelPropertyChange<IComment, IPost>
-        {
-            
-            /// <summary>
-            /// Creates a new observable property access proxy
-            /// </summary>
-            /// <param name="modelElement">The model instance element for which to create the property access proxy</param>
-            public PostProxy(IComment modelElement) : 
-                    base(modelElement, "post")
-            {
-            }
-            
-            /// <summary>
-            /// Gets or sets the value of this expression
-            /// </summary>
-            public override IPost Value
-            {
-                get
-                {
-                    return this.ModelElement.Post;
-                }
-                set
-                {
-                    this.ModelElement.Post = value;
                 }
             }
         }

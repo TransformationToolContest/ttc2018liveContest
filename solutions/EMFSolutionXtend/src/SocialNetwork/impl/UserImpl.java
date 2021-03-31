@@ -136,6 +136,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -145,6 +146,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(String newId) {
 		String oldId = id;
 		id = newId;
@@ -157,6 +159,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -166,6 +169,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -178,6 +182,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Submission> getSubmissions() {
 		if (submissions == null) {
 			submissions = new EObjectWithInverseResolvingEList<Submission>(Submission.class, this, SocialNetworkPackage.USER__SUBMISSIONS, SocialNetworkPackage.SUBMISSION__SUBMITTER);
@@ -190,6 +195,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Comment> getLikes() {
 		if (likes == null) {
 			likes = new EObjectWithInverseResolvingEList.ManyInverse<Comment>(Comment.class, this, SocialNetworkPackage.USER__LIKES, SocialNetworkPackage.COMMENT__LIKED_BY);
@@ -202,6 +208,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<User> getFriends() {
 		if (friends == null) {
 			friends = new EObjectResolvingEList<User>(User.class, this, SocialNetworkPackage.USER__FRIENDS);
@@ -353,7 +360,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (id: ");
 		result.append(id);
 		result.append(", name: ");
