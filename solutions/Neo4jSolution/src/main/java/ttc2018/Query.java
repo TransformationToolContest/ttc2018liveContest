@@ -1,6 +1,7 @@
 package ttc2018;
 
 import org.neo4j.graphdb.Result;
+import org.neo4j.graphdb.Transaction;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -51,6 +52,8 @@ public enum Query {
     }
 
     public Result execute(Solution solution, Map<String, Object> parameters) {
-        return solution.getDbConnection().execute(queryText, parameters);
+        try (Transaction tx = solution.getDbConnection().beginTx()) {
+            return tx.execute(queryText, parameters);
+        }
     }
 }

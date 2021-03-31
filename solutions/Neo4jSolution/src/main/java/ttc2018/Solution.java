@@ -1,24 +1,25 @@
 package ttc2018;
 
 import com.google.common.collect.Iterators;
+import org.neo4j.configuration.GraphDatabaseSettings;
+import org.neo4j.dbms.api.DatabaseManagementService;
+import org.neo4j.dbms.api.DatabaseManagementServiceBuilder;
+import org.neo4j.exceptions.KernelException;
 import org.neo4j.graphdb.*;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import org.neo4j.graphdb.factory.GraphDatabaseSettings;
-import org.neo4j.internal.kernel.api.exceptions.KernelException;
 import org.neo4j.io.fs.FileUtils;
-import org.neo4j.kernel.impl.proc.Procedures;
+import org.neo4j.kernel.api.procedure.GlobalProcedures;
 import org.neo4j.kernel.internal.GraphDatabaseAPI;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import static apoc.Pools.*;
 import static ttc2018.Labels.*;
 import static ttc2018.Query.ID_COLUMN_NAME;
 import static ttc2018.Query.SCORE_COLUMN_NAME;
@@ -26,6 +27,8 @@ import static ttc2018.RelationshipTypes.*;
 
 public abstract class Solution implements AutoCloseable {
     // see: getDbConnection()
+
+    DatabaseManagementService managementService;
     GraphDatabaseService graphDb;
 
     public abstract String Initial();
@@ -35,7 +38,7 @@ public abstract class Solution implements AutoCloseable {
      */
     public abstract String Update(File changes);
 
-    private final static File DB_DIR = new File("db-dir/graph.db");
+    private final static Path DB_DIR = new File("db-dir/graph.db").toPath();
     private final static String LOAD_SCRIPT = "load-scripts/load.sh";
 
     private String DataPath;
@@ -46,43 +49,33 @@ public abstract class Solution implements AutoCloseable {
 
     public GraphDatabaseService getDbConnection() {
         if (graphDb == null) {
-            try {
-                initializeDb();
-            } catch (KernelException e) {
-                throw new RuntimeException(e);
-            }
+            initializeDb();
         }
 
         return graphDb;
     }
 
-    protected void initializeDb() throws KernelException {
-        graphDb = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(DB_DIR)
-                .setConfig(GraphDatabaseSettings.procedure_unrestricted, "apoc.*,algo.*")
-                .newGraphDatabase();
+    protected void initializeDb() {
+        managementService = new DatabaseManagementServiceBuilder(DB_DIR)
+                .setConfig(GraphDatabaseSettings.procedure_unrestricted, List.of("apoc.*,gds.*"))
+                .build();
+
+        managementService.createDatabase("neo4j");
+        graphDb = managementService.database("neo4j");
         Runtime.getRuntime().addShutdownHook(new Thread(this::close));
     }
 
     @Override
     public void close() {
-        if (graphDb != null) {
-            // bypass APOC bug
-            // based on https://github.com/neo4j-contrib/neo4j-apoc-procedures/commit/d6fd3c07dc62e67453305d4b6d5df72a3eceea12
-            for (ExecutorService service : Arrays.asList(SINGLE, DEFAULT, SCHEDULED)) {
-                try {
-                    service.shutdownNow();
-                    service.awaitTermination(10, TimeUnit.SECONDS);
-                } catch (Exception ignore) {
-                }
-            }
-            graphDb.shutdown();
-            graphDb = null;
+        if (managementService != null) {
+            managementService.shutdown();
+            managementService = null;
         }
     }
 
     // https://github.com/neo4j-contrib/neo4j-apoc-procedures/blob/3.5/src/test/java/apoc/util/TestUtil.java#L95
-    public static void registerProcedure(GraphDatabaseService db, Class<?>... procedures) throws KernelException {
-        Procedures proceduresService = ((GraphDatabaseAPI) db).getDependencyResolver().resolveDependency(Procedures.class);
+    public static void registerProcedure(GraphDatabaseService db, Class<?>... procedures) throws KernelException, KernelException {
+        GlobalProcedures proceduresService = ((GraphDatabaseAPI) db).getDependencyResolver().resolveDependency(GlobalProcedures.class);
         for (Class<?> procedure : procedures) {
             proceduresService.registerProcedure(procedure, true);
             proceduresService.registerFunction(procedure, true);
@@ -102,7 +95,8 @@ public abstract class Solution implements AutoCloseable {
         try (Result rs = q.execute(this, parameters)) {
 
             int rowCount = 0;
-            for (Map<String, Object> row : org.neo4j.helpers.collection.Iterators.asIterable(rs)) {
+            while (rs.hasNext()) {
+                Map<String, Object> row = rs.next();
                 String id = row.get(ID_COLUMN_NAME).toString();
 
                 if (LiveContestDriver.ShowScoresForValidation) {
@@ -135,7 +129,7 @@ public abstract class Solution implements AutoCloseable {
             throw new RuntimeException("$NEO4J_HOME is not defined.");
 
         // delete previous DB
-        FileUtils.deleteRecursively(DB_DIR);
+        FileUtils.deleteDirectory(DB_DIR);
 
         ProcessBuilder pb = new ProcessBuilder(LOAD_SCRIPT);
         Map<String, String> env = pb.environment();
@@ -154,21 +148,23 @@ public abstract class Solution implements AutoCloseable {
         try (Transaction tx = dbConnection.beginTx()) {
             addConstraintsAndIndicesInTx(dbConnection);
 
-            tx.success();
+            tx.commit();
         }
 
         try (Transaction tx = dbConnection.beginTx()) {
             // TODO: meaningful timeout
-            dbConnection.schema().awaitIndexesOnline(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            tx.schema().awaitIndexesOnline(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
         }
     }
 
     protected void addConstraintsAndIndicesInTx(GraphDatabaseService dbConnection) {
         for (Labels label : Labels.values()) {
-            dbConnection.schema()
-                    .constraintFor(label)
-                    .assertPropertyIsUnique(NODE_ID_PROPERTY)
-                    .create();
+            try ( Transaction tx = dbConnection.beginTx() ) {
+                tx.schema()
+                        .constraintFor(label)
+                        .assertPropertyIsUnique(NODE_ID_PROPERTY)
+                        .create();
+            }
         }
     }
 
@@ -220,7 +216,7 @@ public abstract class Solution implements AutoCloseable {
                 }
             });
 
-            tx.success();
+            tx.commit();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -236,29 +232,30 @@ public abstract class Solution implements AutoCloseable {
 
         Label[] labels = line[0].equals(COMMENTS_CHANGE_TYPE) ? CommentLabelSet : PostLabelSet;
 
-        Node submission = graphDb.createNode(labels);
-        submission.setProperty(NODE_ID_PROPERTY, id);
-        submission.setProperty(SUBMISSION_TIMESTAMP_PROPERTY, timestamp);
-        submission.setProperty(SUBMISSION_CONTENT_PROPERTY, content);
+        try (Transaction tx = graphDb.beginTx()) {
+            Node submission = tx.createNode(labels);
+            submission.setProperty(NODE_ID_PROPERTY, id);
+            submission.setProperty(SUBMISSION_TIMESTAMP_PROPERTY, timestamp);
+            submission.setProperty(SUBMISSION_CONTENT_PROPERTY, content);
 
-        submission.createRelationshipTo(submitter, SUBMITTER);
+            submission.createRelationshipTo(submitter, SUBMITTER);
 
-        if (line[0].equals(COMMENTS_CHANGE_TYPE)) {
-            long previousSubmissionId = Long.parseLong(line[5]);
-            long rootPostId = Long.parseLong(line[6]);
+            if (line[0].equals(COMMENTS_CHANGE_TYPE)) {
+                long previousSubmissionId = Long.parseLong(line[5]);
+                long rootPostId = Long.parseLong(line[6]);
 
-            Node previousSubmission = findSingleNodeByIdProperty(Submission, previousSubmissionId);
-            Node rootPost = findSingleNodeByIdProperty(Post, rootPostId);
+                Node previousSubmission = findSingleNodeByIdProperty(Submission, previousSubmissionId);
+                Node rootPost = findSingleNodeByIdProperty(Post, rootPostId);
 
-            submission.createRelationshipTo(previousSubmission, COMMENT_TO);
-            submission.createRelationshipTo(rootPost, ROOT_POST);
+                submission.createRelationshipTo(previousSubmission, COMMENT_TO);
+                submission.createRelationshipTo(rootPost, ROOT_POST);
 
-            afterNewComment(submission, submitter, previousSubmission, rootPost);
-        } else {
-            afterNewPost(submission, submitter);
+                afterNewComment(submission, submitter, previousSubmission, rootPost);
+            } else {
+                afterNewPost(submission, submitter);
+            }
+            return submission;
         }
-
-        return submission;
     }
 
     protected void afterNewComment(Node comment, Node submitter, Node previousSubmission, Node rootPost) {
@@ -281,22 +278,27 @@ public abstract class Solution implements AutoCloseable {
         long id = Long.parseLong(line[1]);
         String name = line[2];
 
-        Node user = graphDb.createNode(User);
-        user.setProperty(NODE_ID_PROPERTY, id);
-        user.setProperty(USER_NAME_PROPERTY, name);
-
-        return user;
+        try (Transaction tx = graphDb.beginTx()) {
+            Node user = tx.createNode(User);
+            user.setProperty(NODE_ID_PROPERTY, id);
+            user.setProperty(USER_NAME_PROPERTY, name);
+            return user;
+        }
     }
 
     private Node findSingleNodeByIdProperty(Labels label, long id) {
-        try (ResourceIterator<Node> nodes = graphDb.findNodes(label, NODE_ID_PROPERTY, id)) {
-            return Iterators.getOnlyElement(nodes);
+        try (Transaction tx = graphDb.beginTx()) {
+            try (ResourceIterator<Node> nodes = tx.findNodes(label, NODE_ID_PROPERTY, id)) {
+                return Iterators.getOnlyElement(nodes);
+            }
         }
     }
 
     private boolean nodeByIdPropertyExists(Labels label, long id) {
-        try (ResourceIterator<Node> nodes = graphDb.findNodes(label, NODE_ID_PROPERTY, id)) {
-            return nodes.hasNext();
+        try (Transaction tx = graphDb.beginTx()) {
+            try (ResourceIterator<Node> nodes = tx.findNodes(label, NODE_ID_PROPERTY, id)) {
+                return nodes.hasNext();
+            }
         }
     }
 

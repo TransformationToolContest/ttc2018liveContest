@@ -1,8 +1,10 @@
 package ttc2018;
 
+import org.neo4j.exceptions.KernelException;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.Transaction;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,11 +22,13 @@ public class SolutionQ1 extends Solution {
     @Override
     protected void addConstraintsAndIndicesInTx(GraphDatabaseService dbConnection) {
         super.addConstraintsAndIndicesInTx(dbConnection);
-
-        dbConnection.schema()
+        try ( Transaction tx = graphDb.beginTx() ) {
+            tx.schema()
                 .indexFor(Post)
                 .on(SUBMISSION_SCORE_PROPERTY)
                 .create();
+            tx.commit();
+        }
     }
 
     @Override

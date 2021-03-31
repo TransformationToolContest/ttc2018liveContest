@@ -1,7 +1,7 @@
 package ttc2018;
 
-import org.neo4j.graphalgo.UnionFindProc;
-import org.neo4j.internal.kernel.api.exceptions.KernelException;
+import org.neo4j.exceptions.KernelException;
+import org.neo4j.graphalgo.wcc.Wcc;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,11 +38,16 @@ public class SolutionQ2Batch extends Solution {
     }
 
     @Override
-    protected void initializeDb() throws KernelException {
+    protected void initializeDb() {
         super.initializeDb();
 
-        if (tool == Tool.Neo4jSolutionBatch || tool == Tool.Neo4jSolutionBatch_algo_with_filtered_edges)
-            registerProcedure(graphDb, UnionFindProc.class);
+        if (tool == Tool.Neo4jSolutionBatch || tool == Tool.Neo4jSolutionBatch_algo_with_filtered_edges) {
+            try {
+                registerProcedure(graphDb, Wcc.class);
+            } catch (KernelException e) {
+                throw new UnsupportedOperationException(e);
+            }
+        }
     }
 
     @Override

@@ -5,13 +5,12 @@ import apoc.path.PathExplorer;
 import apoc.periodic.Periodic;
 import apoc.refactor.GraphRefactoring;
 import com.google.common.collect.ImmutableMap;
-import org.neo4j.cypher.CypherExecutionException;
-import org.neo4j.graphalgo.GetNodeFunc;
-import org.neo4j.graphalgo.UnionFindProc;
+import org.neo4j.exceptions.KernelException;
+import org.neo4j.graphalgo.wcc.Wcc;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
-import org.neo4j.internal.kernel.api.exceptions.KernelException;
+import org.neo4j.graphdb.Transaction;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,19 +48,23 @@ public class SolutionQ2 extends Solution {
     }
 
     @Override
-    protected void initializeDb() throws KernelException {
+    protected void initializeDb() {
         super.initializeDb();
 
-        if (tool.maintainExplicitComponent)
-            registerProcedure(graphDb, GraphRefactoring.class);
+        try {
+            if (tool.maintainExplicitComponent)
+                registerProcedure(graphDb, GraphRefactoring.class);
 
-        switch (tool) {
-            case Neo4jSolution_explicit_component_algo:
-                registerProcedure(graphDb, UnionFindProc.class, GetNodeFunc.class);
-                break;
-            case Neo4jSolution:
-                registerProcedure(graphDb, Create.class, Periodic.class, PathExplorer.class);
-                break;
+            switch (tool) {
+                case Neo4jSolution_explicit_component_algo:
+                    registerProcedure(graphDb, Wcc.class);
+                    break;
+                case Neo4jSolution:
+                    registerProcedure(graphDb, Create.class, Periodic.class, PathExplorer.class);
+                    break;
+            }
+        } catch (KernelException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -69,11 +72,12 @@ public class SolutionQ2 extends Solution {
     protected void addConstraintsAndIndicesInTx(GraphDatabaseService dbConnection) {
         super.addConstraintsAndIndicesInTx(dbConnection);
 
-        dbConnection.schema()
-                .indexFor(Comment)
-                .on(SUBMISSION_SCORE_PROPERTY)
-                .create();
-
+        try ( Transaction tx = graphDb.beginTx() ) {
+            tx.schema()
+                    .indexFor(Comment)
+                    .on(SUBMISSION_SCORE_PROPERTY)
+                    .create();
+        }
         // note: cannot create index on commentId property of FRIEND_WHO_LIKES_COMMENT edge
     }
 
@@ -103,7 +107,7 @@ public class SolutionQ2 extends Solution {
                         .stream().collect(Collectors.toList())
                         .get(0);
                 if (!batchErrors.isEmpty())
-                    throw new CypherExecutionException(batchErrors.toString(), new Exception());
+                    throw new RuntimeException(batchErrors.toString(), new Exception());
 
                 runVoidQuery(Query.Q2_INITIAL_SCORE_FROM_EXPLICIT_COMPONENTS);
                 break;
