@@ -34,7 +34,7 @@ std::unique_ptr<BaseSolution> init_solution(BenchmarkParameters &parameters) {
 int main(int argc, char **argv) {
     BenchmarkParameters parameters = parse_benchmark_params();
 
-    ok(LAGraph_init());
+    LAGraph_Init(NULL);
     if (parameters.ThreadsNum > 0)
         ok(GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.ThreadsNum));
     int nthreads_max = 0;

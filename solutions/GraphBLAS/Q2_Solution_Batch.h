@@ -48,7 +48,16 @@ protected:
                                   GrB_NULL));
 
             // assuming that all component_ids will be in [0, n)
-            GBxx_Object<GrB_Vector> components_vector = GB(LAGraph_cc_fastsv5, friends_overlay_graph.get(), false);
+            LAGraph_Graph G;
+            GrB_Matrix A = friends_overlay_graph.get();
+            LAGraph_New(&G, &A, LAGRAPH_ADJACENCY_UNDIRECTED, NULL);
+            // TODO: compilation fails here for the wrapper call:
+            GBxx_Object<GrB_Vector> components_vector = GB(LAGraph_ConnectedComponents, G, NULL);
+            // <test>
+            // GrB_Vector* components_vector2;
+            // LAGraph_ConnectedComponents(components_vector2, G, NULL);
+            // </test>
+            LAGraph_Delete(&G, NULL);
 
             GrB_Index nvals;
 #ifndef NDEBUG
@@ -90,7 +99,8 @@ public:
                                                 const GrB_Index *likes_comment_array_end,
                                                 const GrB_Index *likes_user_array_begin,
                                                 std::vector<score_type> &top_scores) const {
-        int nthreads = LAGraph_get_nthreads();
+        int nthreads;
+        LAGraph_GetNumThreads(&nthreads, NULL);
 #pragma omp parallel num_threads(nthreads)
         {
             std::vector<score_type> top_scores_local;
