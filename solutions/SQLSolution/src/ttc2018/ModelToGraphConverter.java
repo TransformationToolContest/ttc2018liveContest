@@ -36,7 +36,6 @@ public class ModelToGraphConverter {
 		PrintWriter friendsFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-friends-initial", ResourceType.CSV));
 		PrintWriter likesFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-likes-initial", ResourceType.CSV));
 		PrintWriter commentToFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-comment-to-initial", ResourceType.CSV));
-		PrintWriter rootPostFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-root-post-initial", ResourceType.CSV));
 		PrintWriter submitterFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-submitter-initial", ResourceType.CSV));
 
 		printCSV(usersFile, "id:ID", "name:STRING");
@@ -46,7 +45,6 @@ public class ModelToGraphConverter {
 		printCSV(friendsFile,   ":START_ID", ":END_ID");
 		printCSV(likesFile,     ":START_ID", ":END_ID");
 		printCSV(commentToFile, ":START_ID", ":END_ID");
-		printCSV(rootPostFile,  ":START_ID", ":END_ID");
 		printCSV(submitterFile, ":START_ID", ":END_ID");
 
 		root.eAllContents().forEachRemaining(x -> {
@@ -98,10 +96,6 @@ public class ModelToGraphConverter {
 				c.getId()
 			,	c.getCommented().getId()
 			);
-			printCSV(rootPostFile,
-				c.getId()
-			,	c.getPost().getId()
-			);
 		});
 		posts.forEach(p -> {
 			printCSV(postsFile,
@@ -122,7 +116,6 @@ public class ModelToGraphConverter {
 		friendsFile.close();
 		likesFile.close();
 		commentToFile.close();
-		rootPostFile.close();
 		submitterFile.close();
     }
 
