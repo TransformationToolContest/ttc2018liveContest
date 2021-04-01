@@ -276,7 +276,7 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
                                  new_root_post_nvals, GrB_LOR));
         root_post_num += new_root_post_nvals;
 
-        ok(GrB_eWiseAdd_Matrix_BinaryOp(root_post_tran.get(), GrB_NULL, GrB_NULL,
+        ok(GrB_Matrix_eWiseAdd_BinaryOp(root_post_tran.get(), GrB_NULL, GrB_NULL,
                                         GrB_LOR, root_post_tran.get(), updates.new_root_post_tran.get(), GrB_NULL));
     }
 
@@ -287,7 +287,7 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
                                    updates.new_likes_to_comments.size(), GrB_PLUS_UINT64));
 
         if (apply_likes_updates) {
-            ok(GrB_eWiseAdd_Vector_BinaryOp(likes_count_vec.get(), GrB_NULL, GrB_NULL,
+            ok(GrB_Vector_eWiseAdd_BinaryOp(likes_count_vec.get(), GrB_NULL, GrB_NULL,
                                             GrB_PLUS_UINT64, likes_count_vec.get(), updates.new_likes_count_vec.get(),
                                             GrB_NULL));
 
@@ -419,6 +419,4 @@ Q2_Input::load_and_apply_updates(int iteration, Q2_Input::Update_Type &updates, 
     ok(GrB_Matrix_nvals(&nvals, likes_matrix_tran.get()));
     assert(nvals == likes_num);
 #endif
-    // finish pending updates before parallel execution
-    GrB_wait();
 }

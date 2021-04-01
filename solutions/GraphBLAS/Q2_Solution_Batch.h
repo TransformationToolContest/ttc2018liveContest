@@ -48,7 +48,7 @@ protected:
                                   GrB_NULL));
 
             // assuming that all component_ids will be in [0, n)
-            GBxx_Object<GrB_Vector> components_vector = GB(LAGraph_cc_fastsv, friends_overlay_graph.get(), false);
+            GBxx_Object<GrB_Vector> components_vector = GB(LAGraph_cc_fastsv5, friends_overlay_graph.get(), false);
 
             GrB_Index nvals;
 #ifndef NDEBUG

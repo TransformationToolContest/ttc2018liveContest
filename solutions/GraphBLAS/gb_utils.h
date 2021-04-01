@@ -4,6 +4,7 @@
 
 extern "C" {
 #include <GraphBLAS.h>
+#define LAGRAPH_EXPERIMENTAL_ASK_BEFORE_BENCHMARKING
 #include <LAGraph.h>
 }
 
@@ -19,7 +20,7 @@ GrB_Info ok(GrB_Info info, bool no_value_is_error = true) {
     if (info == GrB_SUCCESS || (!no_value_is_error && info == GrB_NO_VALUE))
         return info;
     else
-        throw std::runtime_error{std::string{"GraphBLAS error: "} + GrB_error()};
+        throw std::runtime_error{std::string{"GraphBLAS error"}};
 }
 
 inline __attribute__((always_inline))
@@ -52,7 +53,7 @@ inline void WriteOutDebugMatrix(const char *title, GrB_Matrix result) {
                 // means.  It depends on the semiring used.
                 printf("- ");
             } else {
-                printf("Error! %s\n", GrB_error());
+                printf("Error! %s\n");
             }
 
         }
@@ -81,7 +82,7 @@ inline void WriteOutDebugVector(const char *title, GrB_Vector result) {
             // means.  It depends on the semiring used.
             printf("- ");
         } else {
-            printf("Error! %s\n", GrB_error());
+            printf("Error! %s\n");
         }
 
     }

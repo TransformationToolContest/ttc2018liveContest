@@ -8,11 +8,6 @@
 #include <chrono>
 #include <set>
 
-extern "C" {
-#include <GraphBLAS.h>
-#include <LAGraph.h>
-}
-
 #include "gb_utils.h"
 #include "Q1_Solution_Batch.h"
 #include "Q1_Solution_Incremental.h"

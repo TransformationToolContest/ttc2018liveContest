@@ -5,7 +5,7 @@
 Install CMake (the package in Ubuntu 18.04 satisfies the minimum version requirements):
 
 ```bash
-sudo apt install cmake
+sudo apt install -y cmake
 ```
 
 ## Grab and compile dependencies
@@ -13,13 +13,12 @@ sudo apt install cmake
 ```bash
 export JOBS=$(nproc)
 
-wget http://faculty.cse.tamu.edu/davis/GraphBLAS/GraphBLAS-3.1.1.tar.gz
-tar xf GraphBLAS-3.1.1.tar.gz
-cd GraphBLAS-3.1.1
+git clone --branch v4.0.1 https://github.com/DrTimothyAldenDavis/GraphBLAS/
+cd GraphBLAS
 make && sudo make install && sudo ldconfig
 cd ..
 
-git clone https://github.com/GraphBLAS/LAGraph
+git clone --branch 4Jan2021 https://github.com/GraphBLAS/LAGraph
 cd LAGraph
 make && sudo make install && sudo ldconfig
 cd ..
