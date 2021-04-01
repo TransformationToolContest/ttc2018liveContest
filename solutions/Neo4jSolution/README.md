@@ -1,3 +1,5 @@
+:warning: The code erases Neo4j database folder. DO NOT RUN THIS IN PRODUCTION!
+
 # Before running Neo4j solutions
 
 - Grab Neo4j Community Edition (https://neo4j.com/download-center/#community), e.g. on Linux, run:
