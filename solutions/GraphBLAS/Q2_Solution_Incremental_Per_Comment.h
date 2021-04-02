@@ -138,7 +138,7 @@ public:
             }
 
             int nthreads;
-            LAGraph_GetNumThreads(&nthreads, NULL);
+            ok(LAGraph_GetNumThreads(&nthreads, nullptr));
 #pragma omp parallel num_threads(nthreads)
             {
                 std::vector<score_type> top_scores_local;
