@@ -1,6 +1,8 @@
 #pragma once
 
 #include <memory>
+#include <numeric>
+#include <type_traits>
 
 extern "C" {
 #include <GraphBLAS.h>
@@ -17,16 +19,43 @@ extern "C" {
 
 inline __attribute__((always_inline))
 GrB_Info ok(GrB_Info info, bool no_value_is_error = true) {
-    if (info == GrB_SUCCESS || (!no_value_is_error && info == GrB_NO_VALUE))
+    using namespace std::string_literals;
+
+    if (info == GrB_SUCCESS || (!no_value_is_error && info == GrB_NO_VALUE)) {
         return info;
-    else
-        throw std::runtime_error{std::string{"GraphBLAS error"}};
+    } else {
+        throw std::runtime_error{"GraphBLAS error."};
+    }
 }
 
 inline __attribute__((always_inline))
 std::unique_ptr<bool[]> array_of_true(size_t n) {
     std::unique_ptr<bool[]> array{new bool[n]};
-    std::fill_n(array.get(), n, true);
+
+    int nthreads;
+    LAGraph_GetNumThreads(&nthreads, nullptr);  // TODO: check return value
+    nthreads = std::min<size_t>(n / 4096, nthreads);
+    nthreads = std::max(nthreads, 1);
+#pragma omp parallel for num_threads(nthreads) schedule(static)
+    for (size_t i = 0; i < n; ++i) {
+        array[i] = true;
+    }
+
+    return array;
+}
+
+inline __attribute__((always_inline))
+std::unique_ptr<GrB_Index[]> array_of_indices(size_t n) {
+    std::unique_ptr<GrB_Index[]> array{new GrB_Index[n]};
+
+    int nthreads;
+    LAGraph_GetNumThreads(&nthreads, nullptr);  // TODO: check return value
+    nthreads = std::min<size_t>(n / 4096, nthreads);
+    nthreads = std::max(nthreads, 1);
+#pragma omp parallel for num_threads(nthreads) schedule(static)
+    for (size_t i = 0; i < n; ++i) {
+        array[i] = i;
+    }
 
     return array;
 }
@@ -35,8 +64,10 @@ std::unique_ptr<bool[]> array_of_true(size_t n) {
  * DEBUG FUNCTIONS
  */
 
-inline void WriteOutDebugMatrix(const char *title, GrB_Matrix result) {
-    printf("%s:\n", title);
+inline void WriteOutDebugMatrix(GrB_Matrix result, const char *title = nullptr) {
+    if (title)
+        printf("%s:\n", title);
+
     GrB_Index rows, cols;
     ok(GrB_Matrix_nrows(&rows, result));
     ok(GrB_Matrix_ncols(&cols, result));
@@ -53,7 +84,7 @@ inline void WriteOutDebugMatrix(const char *title, GrB_Matrix result) {
                 // means.  It depends on the semiring used.
                 printf("- ");
             } else {
-                printf("Error! %s\n");
+                printf("GraphBLAS error");
             }
 
         }
@@ -61,8 +92,10 @@ inline void WriteOutDebugMatrix(const char *title, GrB_Matrix result) {
     }
 }
 
-inline void WriteOutDebugVector(const char *title, GrB_Vector result) {
-    printf("%s:\n", title);
+inline void WriteOutDebugVector(GrB_Vector result, const char *title = nullptr) {
+    if (title)
+        printf("%s:\n", title);
+
     GrB_Index size;
     ok(GrB_Vector_size(&size, result));
     double element;
@@ -82,7 +115,7 @@ inline void WriteOutDebugVector(const char *title, GrB_Vector result) {
             // means.  It depends on the semiring used.
             printf("- ");
         } else {
-            printf("Error! %s\n");
+            throw std::runtime_error{"GraphBLAS error."};
         }
 
     }
@@ -118,19 +151,78 @@ namespace gbxx {
     };
 }
 
+/**
+ * Owning smart pointer that disposes GrB object when it goes out of scope.
+ *
+ * Usage:
+ * Initialize using first (out) parameter of function
+ *   GBxx_Object<GrB_Matrix> mx = GB(GrB_Matrix_new, GrB_BOOL, nrows, ncols);
+ *
+ * Initialize manually
+ *   GrB_Matrix mx_ptr = nullptr;
+ *   // init
+ *   GBxx_Object<GrB_Matrix> mx{mx_ptr};
+ *
+ * When a GrB_Matrix* pointer is needed
+ *   // binwrite might change the pointer since it uses export and import
+ *   GrB_Matrix mx_ptr = mx.release();
+ *   LAGraph_binwrite(&mx_ptr, "outfile.grb", nullptr);
+ *   mx.reset(mx_ptr);
+ */
 template<typename Type>
 using GBxx_Object = std::unique_ptr<typename std::remove_pointer<Type>::type, gbxx::GBxx_deleter<Type>>;
 
 template<typename Type>
 using GBxx_Object_shared = std::shared_ptr<typename std::remove_pointer<Type>::type>;
 
-template<typename Type, typename ...Args, typename ...Args2>
-GBxx_Object<Type> GB(GrB_Info (&func)(Type *, Args2...), Args &&... args) {
+
+/**
+ * Initialize a GBxx_Object<Type> smart pointer using func.
+ *
+ * Usage:
+ *   GBxx_Object<GrB_Matrix> mx = GB(GrB_Matrix_new, GrB_BOOL, nrows, ncols);
+ *
+ * @tparam Type GrB object type
+ * @param func A function: func(Type*, Args...)
+ * @param args 2nd and more parameters of func.
+ * @return The smart pointer initialized with func(&out, args...)
+ */
+template<typename Type, typename ...ArgsIn, typename ...Args>
+GBxx_Object<Type> GB(GrB_Info (&func)(Type *, Args...), ArgsIn &&... args) {
     Type gb_instance = nullptr;
-    ok(func(&gb_instance, std::forward<Args>(args)...));
+    ok(func(&gb_instance, std::forward<ArgsIn>(args)...));
 
     return {gb_instance, {}};
 }
 
 template<typename Z, typename X>
 using GBxx_unary_function = void (*)(Z *, const X *);
+
+/**
+ * unwrap(GBxx_Object<GrB_*> o) = o.get()
+ * unwrap(GrB_* o) = o
+ */
+template<typename Type>
+auto unwrap(Type const &v) {
+    if constexpr (std::is_pointer_v<Type>)
+        return v;
+    else
+        return v.get();
+}
+
+//
+// Wrappers
+//
+
+template<typename GBxx_Object>
+GrB_Index GBxx_nvals(GBxx_Object const &o) {
+    auto ptr = unwrap(o);
+    GrB_Index nvals;
+    if constexpr (std::is_same_v<decltype(ptr), GrB_Matrix>)
+        ok(GrB_Matrix_nvals(&nvals, ptr));
+    else if constexpr (std::is_same_v<decltype(ptr), GrB_Vector>)
+        ok(GrB_Vector_nvals(&nvals, ptr));
+    else
+        ok(GxB_Scalar_nvals(&nvals, ptr));
+    return nvals;
+}
