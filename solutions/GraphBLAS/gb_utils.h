@@ -13,10 +13,7 @@ extern "C" {
 //------------------------------------------------------------------------------
 // ok: call a GraphBLAS method and check the result
 //------------------------------------------------------------------------------
-
-// ok(GrB_Info) is a function that processes result of a GraphBLAS method and checks the status;
-// if a failure occurs, it returns the error status to the caller.
-
+/// Throw exception on GraphBLAS error
 inline __attribute__((always_inline))
 GrB_Info ok(GrB_Info info, bool no_value_is_error = true) {
     using namespace std::string_literals;
@@ -24,7 +21,19 @@ GrB_Info ok(GrB_Info info, bool no_value_is_error = true) {
     if (info == GrB_SUCCESS || (!no_value_is_error && info == GrB_NO_VALUE)) {
         return info;
     } else {
-        throw std::runtime_error{"GraphBLAS error."};
+        throw std::runtime_error{"GraphBLAS error: "s + std::to_string(info)};
+    }
+}
+
+/// Throw exception on LAGraph error
+inline __attribute__((always_inline))
+int ok(int status) {
+    using namespace std::string_literals;
+
+    if (status < 0) {
+        throw std::runtime_error{"LAGraph error: "s + std::to_string(status)};
+    } else {
+        return status;
     }
 }
 
@@ -33,7 +42,7 @@ std::unique_ptr<bool[]> array_of_true(size_t n) {
     std::unique_ptr<bool[]> array{new bool[n]};
 
     int nthreads;
-    LAGraph_GetNumThreads(&nthreads, nullptr);  // TODO: check return value
+    ok(LAGraph_GetNumThreads(&nthreads, nullptr));
     nthreads = std::min<size_t>(n / 4096, nthreads);
     nthreads = std::max(nthreads, 1);
 #pragma omp parallel for num_threads(nthreads) schedule(static)
@@ -49,7 +58,7 @@ std::unique_ptr<GrB_Index[]> array_of_indices(size_t n) {
     std::unique_ptr<GrB_Index[]> array{new GrB_Index[n]};
 
     int nthreads;
-    LAGraph_GetNumThreads(&nthreads, nullptr);  // TODO: check return value
+    ok(LAGraph_GetNumThreads(&nthreads, nullptr));
     nthreads = std::min<size_t>(n / 4096, nthreads);
     nthreads = std::max(nthreads, 1);
 #pragma omp parallel for num_threads(nthreads) schedule(static)
