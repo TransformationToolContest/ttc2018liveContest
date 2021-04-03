@@ -5,11 +5,7 @@
 #include <chrono>
 #include <memory>
 
-extern "C" {
-#include <GraphBLAS.h>
-#define LAGRAPH_EXPERIMENTAL_ASK_BEFORE_BENCHMARKING
-#include <LAGraph.h>
-}
+#include "gb_utils.h"
 
 struct BenchmarkParameters {
     std::string ChangePath;
