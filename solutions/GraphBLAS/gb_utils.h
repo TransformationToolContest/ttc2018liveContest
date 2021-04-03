@@ -152,6 +152,8 @@ namespace gbxx {
 
     inline void GBxx_free_cpp(GrB_Descriptor *pointer) { ok(GrB_Descriptor_free(pointer)); }
 
+    inline void GBxx_free_cpp(LAGraph_Graph *pointer) { ok(LAGraph_Delete(pointer, nullptr)); }
+
     template<typename Type>
     struct GBxx_deleter {
         void operator()(Type b) {
@@ -184,7 +186,6 @@ using GBxx_Object = std::unique_ptr<typename std::remove_pointer<Type>::type, gb
 template<typename Type>
 using GBxx_Object_shared = std::shared_ptr<typename std::remove_pointer<Type>::type>;
 
-
 /**
  * Initialize a GBxx_Object<Type> smart pointer using func.
  *
@@ -192,12 +193,13 @@ using GBxx_Object_shared = std::shared_ptr<typename std::remove_pointer<Type>::t
  *   GBxx_Object<GrB_Matrix> mx = GB(GrB_Matrix_new, GrB_BOOL, nrows, ncols);
  *
  * @tparam Type GrB object type
+ * @tparam ReturnType return type of func
  * @param func A function: func(Type*, Args...)
  * @param args 2nd and more parameters of func.
  * @return The smart pointer initialized with func(&out, args...)
  */
-template<typename Type, typename ...ArgsIn, typename ...Args>
-GBxx_Object<Type> GB(GrB_Info (&func)(Type *, Args...), ArgsIn &&... args) {
+template<typename Type, typename ReturnType, typename ...ArgsIn, typename ...Args>
+GBxx_Object<Type> GB(ReturnType (&func)(Type *, Args...), ArgsIn &&... args) {
     Type gb_instance = nullptr;
     ok(func(&gb_instance, std::forward<ArgsIn>(args)...));
 
@@ -234,4 +236,9 @@ GrB_Index GBxx_nvals(GBxx_Object const &o) {
     else
         ok(GxB_Scalar_nvals(&nvals, ptr));
     return nvals;
+}
+
+inline GBxx_Object<LAGraph_Graph> to_LAGraph(GBxx_Object<GrB_Matrix> mx, LAGraph_Kind kind = LAGRAPH_KIND_UNKNOWN) {
+    GrB_Matrix mx_ptr = mx.release();
+    return GB(LAGraph_New, &mx_ptr, kind, nullptr);
 }
