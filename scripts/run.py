@@ -94,6 +94,7 @@ def benchmark(conf):
                                 # Restore the backup no matter what
                                 shutil.copy(initial_xmi_backup, initial_xmi)
 
+                        print(stdout)
                         with open(result_file, "ab") as file:
                             file.write(stdout)
 
