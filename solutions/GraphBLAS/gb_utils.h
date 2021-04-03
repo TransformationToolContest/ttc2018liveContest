@@ -24,6 +24,14 @@ GrB_Info ok(GrB_Info info, bool no_value_is_error = true) {
 }
 
 inline __attribute__((always_inline))
+int ok_LAGr(int info, bool no_value_is_error = true) {
+    if (info == GrB_SUCCESS || (!no_value_is_error && info == GrB_NO_VALUE))
+        return info;
+    else
+        throw std::runtime_error{std::string{"LAGraph error"}};
+}
+
+inline __attribute__((always_inline))
 std::unique_ptr<bool[]> array_of_true(size_t n) {
     std::unique_ptr<bool[]> array{new bool[n]};
     std::fill_n(array.get(), n, true);
@@ -128,6 +136,14 @@ template<typename Type, typename ...Args, typename ...Args2>
 GBxx_Object<Type> GB(GrB_Info (&func)(Type *, Args2...), Args &&... args) {
     Type gb_instance = nullptr;
     ok(func(&gb_instance, std::forward<Args>(args)...));
+
+    return {gb_instance, {}};
+}
+
+template<typename Type, typename ...Args, typename ...Args2>
+GBxx_Object<Type> LAGr(int (&func)(Type *, Args2...), Args &&... args) {
+    Type gb_instance = nullptr;
+    ok_LAGr(func(&gb_instance, std::forward<Args>(args)...));
 
     return {gb_instance, {}};
 }
