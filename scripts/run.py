@@ -84,6 +84,8 @@ def benchmark(conf):
                             try:
                                 stdout, stderr = process.communicate(timeout=conf.Timeout)
                                 return_code = process.poll()
+                                print(stdout)
+                                print(stderr)
                                 if return_code:
                                     raise subprocess.CalledProcessError(return_code, process.args,
                                                                         output=stdout, stderr=stderr)
@@ -94,7 +96,6 @@ def benchmark(conf):
                                 # Restore the backup no matter what
                                 shutil.copy(initial_xmi_backup, initial_xmi)
 
-                        print(stdout)
                         with open(result_file, "ab") as file:
                             file.write(stdout)
 
