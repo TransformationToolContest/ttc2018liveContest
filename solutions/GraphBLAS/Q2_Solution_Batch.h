@@ -51,8 +51,7 @@ protected:
             LAGraph_Graph G;
             GrB_Matrix A = friends_overlay_graph.get();
             LAGraph_New(&G, &A, LAGRAPH_ADJACENCY_UNDIRECTED, NULL);
-            char msg [LAGRAPH_MSG_LEN];
-            GBxx_Object<GrB_Vector> components_vector = LAGr(LAGraph_ConnectedComponents, G, msg);
+            GBxx_Object<GrB_Vector> components_vector = LAGr(LAGraph_ConnectedComponents, G, nullptr);
             LAGraph_Delete(&G, NULL);
 
             GrB_Index nvals;
