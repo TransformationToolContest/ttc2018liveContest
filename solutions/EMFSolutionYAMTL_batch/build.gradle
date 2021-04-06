@@ -8,9 +8,9 @@ apply plugin: 'eclipse'
 
 
 group 'yamtl'
-version '0.0.6-SNAPSHOT'
+version '0.0.9-SNAPSHOT'
 
-sourceCompatibility = 1.8
+//sourceCompatibility = 1.8
 
 mainClassName="ttc2018.LiveContestDriver"
 
@@ -42,9 +42,9 @@ repositories {
 
 
 ext {
-	yamtlVersion = '0.0.6-SNAPSHOT'
+	yamtlVersion = '0.0.9-SNAPSHOT'
 	xtendVersion = '2.20.0'
-	aspectJVersion = '1.9.4'
+	aspectJVersion = '1.9.6'
 }
 
 
@@ -84,8 +84,8 @@ compileJava {
   doLast{
 	  ant.taskdef( resource:"org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties", classpath: configurations.ajc.asPath )
 	  ant.iajc(
-		  source:"1.8",
-		  target:"1.8",
+//		  source:"1.8",
+//		  target:"1.8",
 		  destDir: sourceSets.main.output.classesDirs[0].absolutePath, 
 		  inpath: configurations.ajInpath.asPath,
 		  maxmem: "512m",
