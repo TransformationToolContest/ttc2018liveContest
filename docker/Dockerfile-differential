@@ -1,0 +1,29 @@
+FROM ftsrg/ttc2018:common
+
+# dependencies (separated to share layers with other images)
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends rustc cargo \
+    && rm -rf /var/lib/apt/lists/*
+
+# small and stable files
+COPY expected-results expected-results
+COPY reporting reporting
+COPY scripts scripts
+COPY output output
+
+# most frequently changing folders
+COPY solutions/differential/ solutions/differential/
+COPY solutions/differential-08/ solutions/differential-08/
+COPY config/config-docker-differential.json config/config.json
+
+# build solutions in config.json
+RUN scripts/run.py -b --skip-tests
+
+COPY docker/entrypoint-differential.sh entrypoint.sh
+CMD ./entrypoint.sh
+
+# save build information
+ARG README_TXT_ARG=""
+ENV README_TXT=$README_TXT_ARG
+RUN date -Is > README.md
+RUN echo "$README_TXT" >> README.md

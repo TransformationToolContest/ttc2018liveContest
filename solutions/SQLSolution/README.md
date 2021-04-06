@@ -2,24 +2,24 @@
 
 [PostgreSQL](https://www.postgresql.org/) solution for the TTC 2018 Live case.
 
+## Prerequisites
+
+PostgreSQL 12 is required. On Ubuntu 20.04, it can be installed by running `apt-get install postgresql-12`. On older systems please refer to [[1](https://computingforgeeks.com/install-postgresql-12-on-ubuntu/), [2](https://pgdash.io/blog/postgres-11-getting-started.html)].
 
 ## Generate CSV models
 
-Use the modelConverter Gradle-task to generate the CSV models. Pass desired model size in the `modelSize` project property.
+Use the `modelToGraphConverter` Gradle-task to generate the CSV models. Pass desired model size in the `modelSize` project property.
 
-Models will be output as `models/$modelSize/csv-*-initial.csv`.
-
-E.g. to generate CSV models for size 4, use:
+Merge FK models will be output as `models/$modelSize/csv-*-initial.csv`, graph models will be output as `models/$modelSize/graph-*-initial.csv`.
 
 ```console
-./gradlew modelConverter -PmodelSize=4
+./gradlew modelMergeFkConverter -PmodelSize=4
+./gradlew modelToGraphConverter -PmodelSize=4
 ```
 
 ## Configuring the database
 
-The default configuration uses the `ttc2018sf1` database.
-
-On a typical Ubuntu install, you might want to run:
+The default configuration uses the `ttc2018sf1` database. On a typical Ubuntu install, you might want to run:
 
 ```bash
 sudo -u postgres psql
@@ -44,7 +44,7 @@ For the command-line operations, you can allow `ttcuser` to access the database.
 
 :warning: Warning: never do this on a production system.
 
-Edit the `pg_hba.conf` file and add the following line:
+Edit the `pg_hba.conf` file and add the following line at the beginning of the file:
 
 ```
 local all ttcuser trust
@@ -81,9 +81,11 @@ chmod 755 ~
 
 To play around with the data, connect to PostgreSQL and switch to the database:
 
-```sql
+```console
 postgres=# \c ttc2018sf1
 You are now connected to database "ttc2018sf1" as user "postgres".
 ttc2018sf1=# SELECT count(*) FROM users;
 # ...
 ```
+
+For a detailed example on how to use Postgres, see the CI configuration file (`.travis.yml` in the repository root).

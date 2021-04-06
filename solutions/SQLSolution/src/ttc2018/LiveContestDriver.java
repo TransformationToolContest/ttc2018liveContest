@@ -100,6 +100,7 @@ public class LiveContestDriver {
             solution.setSocialNetwork(ModelUtils.loadSocialNetworkFile(ChangePath));
         }
         solution.loadData();
+        solution.prepareStatements();
         stopwatch = System.nanoTime() - stopwatch;
         Report(BenchmarkPhase.Load, -1, null);
     }

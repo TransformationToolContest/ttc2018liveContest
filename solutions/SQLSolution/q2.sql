@@ -1,7 +1,6 @@
 WITH RECURSIVE -- recursive stands here regardless of the fact that the 2nd subquery is the recursive one
-  comment_friends (status, commentid, user1id, user2id) AS (
-    SELECT 'I' AS status
-         , l1.commentid, f.user1id, f.user2id
+  comment_friends (commentid, user1id, user2id) AS (
+    SELECT l1.commentid, f.user1id, f.user2id
       FROM likes l1, likes l2
          , friends f
      WHERE 1=1
@@ -27,23 +26,19 @@ WITH RECURSIVE -- recursive stands here regardless of the fact that the 2nd subq
        AND cfc.commentid = f.commentid
 )
 , comment_components AS (
-    SELECT commentid, tail_userid AS userid, min(head_userid) AS componentid
+    SELECT commentid, head_userid AS userid, min(tail_userid) AS componentid
       FROM comment_friends_closed
-     GROUP BY commentid, tail_userid
+     GROUP BY commentid, head_userid
 )
 , comment_component_sizes AS (
     SELECT cc.commentid, cc.componentid, count(*) AS component_size
       FROM comment_components cc
      GROUP BY cc.commentid, cc.componentid
 )
-, scoring AS (
-   -- Here we include all comments in order to have also those that have no likes
-SELECT c.id AS commentid, coalesce(sum(ccs.component_size*ccs.component_size), 0) AS score
+    -- consider all comments including those without likes
+SELECT c.id AS commentid, coalesce( sum( power(ccs.component_size, 2) ), 0) AS score
   FROM comments c left join comment_component_sizes ccs on (ccs.commentid = c.id)
  WHERE 1=1
  GROUP BY c.id, c.ts
- ORDER BY sum(ccs.component_size*ccs.component_size) DESC NULLS LAST, c.ts DESC LIMIT 3
-)
-SELECT *
-  FROM scoring
+ ORDER BY sum( power(ccs.component_size, 2) ) DESC NULLS LAST, c.ts DESC LIMIT 3
 ;

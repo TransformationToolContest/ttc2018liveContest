@@ -31,17 +31,17 @@ import org.eclipse.epsilon.eol.EolModule;
 import org.eclipse.epsilon.eol.dom.Operation;
 import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
 import org.eclipse.epsilon.eol.models.ModelRepository;
-import org.hawk.core.VcsCommitItem;
-import org.hawk.core.graph.IGraphEdge;
-import org.hawk.core.graph.IGraphNode;
-import org.hawk.core.graph.IGraphTransaction;
-import org.hawk.core.model.IHawkObject;
-import org.hawk.core.query.InvalidQueryException;
-import org.hawk.core.query.QueryExecutionException;
-import org.hawk.core.util.GraphChangeAdapter;
-import org.hawk.epsilon.emc.EOLQueryEngine;
-import org.hawk.epsilon.emc.wrappers.GraphNodeWrapper;
-import org.hawk.graph.ModelElementNode;
+import org.eclipse.hawk.core.VcsCommitItem;
+import org.eclipse.hawk.core.graph.IGraphEdge;
+import org.eclipse.hawk.core.graph.IGraphNode;
+import org.eclipse.hawk.core.graph.IGraphTransaction;
+import org.eclipse.hawk.core.model.IHawkObject;
+import org.eclipse.hawk.core.query.InvalidQueryException;
+import org.eclipse.hawk.core.query.QueryExecutionException;
+import org.eclipse.hawk.core.util.GraphChangeAdapter;
+import org.eclipse.hawk.epsilon.emc.EOLQueryEngine;
+import org.eclipse.hawk.epsilon.emc.EOLQueryEngine.GraphNodeWrapper;
+import org.eclipse.hawk.graph.ModelElementNode;
 import org.hawk.ttc2018.queries.ResultComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -128,14 +128,15 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 	private EolModule eolRescoreModule;
 	private EOLQueryEngine hawkModel;
 
-	public IncrementalUpdateQueryLauncher(Map<String, String> env) throws Exception {
-		super(env);
+	public IncrementalUpdateQueryLauncher(LauncherOptions opts) {
+		super(opts);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected List<List<Object>> runQuery(StandaloneHawk hawk)
 			throws IOException, InvalidQueryException, QueryExecutionException {
+		final Query query = opts.getQuery();
 		if (prevResults == null) {
 			prevResults = (List<List<Object>>) hawk.eol(query.getFullQuery());
 			hawk.getIndexer().addGraphChangeListener(listener);
@@ -173,7 +174,7 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 
 		for (Object postID : ids) {
 			final IGraphNode node = hawk.getIndexer().getGraph().getNodeById(postID);
-			final GraphNodeWrapper gw = new GraphNodeWrapper(node, hawkModel);
+			final GraphNodeWrapper gw = hawkModel.wrap(node);
 			int score;
 			try {
 				score = (Integer) scoreOp.execute(gw, Collections.emptyList(), ((EolModule) scoreOp.getModule()).getContext());
@@ -198,7 +199,7 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 
 	protected EolModule getRescoreEOLModule(StandaloneHawk hawk) throws Exception {
 		if (eolRescoreModule == null) {
-			eolRescoreModule = parseEOLModule(query.getFullQuery());
+			eolRescoreModule = parseEOLModule(opts.getQuery().getFullQuery());
 		} else {
 			final ModelRepository modelRepository = eolRescoreModule.getContext().getModelRepository();
 			modelRepository.removeModel(modelRepository.getModelByName("Changes"));
@@ -221,7 +222,7 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 	public static void main(String[] args) {
 		Map<String, String> env = System.getenv();
 		try {
-			new IncrementalUpdateQueryLauncher(env).run();
+			new IncrementalUpdateQueryLauncher(new LauncherOptions(env)).run();
 		} catch (Throwable e) {
 			LOGGER.error(e.getMessage(), e);
 		}
@@ -229,7 +230,8 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 
 	@Override
 	protected String getTool() {
-		return "HawkIncUpdateQuery";
+		String parent = super.getTool();
+		return parent != null ? parent : "HawkIncUpdateQuery";
 	}
 
 }

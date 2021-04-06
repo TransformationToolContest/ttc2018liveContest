@@ -1,0 +1,16 @@
+{
+  "Queries": [
+    "Q1",
+    "Q2"
+  ],
+  "Tools": [
+    "differential",
+    "differential-08"
+  ],
+  "ChangeSets": [
+    "1", "2", "4"
+  ],
+  "Sequences": 20,
+  "Runs": 1,
+  "Timeout": 1800
+}

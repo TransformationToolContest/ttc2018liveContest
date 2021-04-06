@@ -10,16 +10,21 @@ public class SolutionQ1 extends Solution {
 
 	public SolutionQ1(String DataPath) throws IOException, InterruptedException {
 		super(DataPath);
-
-		Connection conn = getDbConnection();
-		Query.Q1_INITIAL.prepareStatement(conn);
-		Query.Q1_UPDATE.prepareStatement(conn);
-		Query.Q1_RETRIEVE.prepareStatement(conn);
 	}
-	
+
+	@Override
+	void prepareStatements() {
+		Connection conn = getDbConnection();
+		Query.Q1_INIT.prepareStatement(conn);
+		Query.Q1_MAINTAIN.prepareStatement(conn);
+		Query.Q1_RETRIEVE.prepareStatement(conn);
+
+		super.prepareStatements();
+	}
+
 	@Override
 	public String Initial() {
-		runVoidQuery(Query.Q1_INITIAL);
+		runVoidQuery(Query.Q1_INIT);
 		String result = runReadQuery(Query.Q1_RETRIEVE);
 
 		return result;
@@ -29,7 +34,7 @@ public class SolutionQ1 extends Solution {
 	public String Update(ModelChangeSet changes) {
 		beforeUpdate(changes);
 
-		runVoidQuery(Query.Q1_UPDATE);
+		runVoidQuery(Query.Q1_MAINTAIN);
 		String result = runReadQuery(Query.Q1_RETRIEVE);
 
 		afterUpdate();
@@ -41,7 +46,7 @@ public class SolutionQ1 extends Solution {
 	public String Update(File changes) {
 		beforeUpdate(changes);
 
-		runVoidQuery(Query.Q1_UPDATE);
+		runVoidQuery(Query.Q1_MAINTAIN);
 		String result = runReadQuery(Query.Q1_RETRIEVE);
 
 		afterUpdate();

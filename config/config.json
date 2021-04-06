@@ -5,9 +5,9 @@
   ],
   "Tools": ["EMFSolutionYAMTL", "EMFSolutionYAMTL_batch"],
   "ChangeSets": [
-    "1", "2", "4", "8", "16", "32", "64"
+    "1", "2"
   ],
   "Sequences": 20,
-  "Runs": 5,
-  "Timeout": 6000
+  "Runs": 1,
+  "Timeout": 60
 }

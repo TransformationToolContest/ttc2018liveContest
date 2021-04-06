@@ -17,7 +17,7 @@ struct BenchmarkParameters {
     std::string Tool;
     std::string ChangeSet;
     std::string Query;
-    unsigned long thread_num = 1;
+    int ThreadsNum = 0;
 };
 
 BenchmarkParameters parse_benchmark_params();

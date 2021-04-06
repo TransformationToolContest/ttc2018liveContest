@@ -54,7 +54,9 @@ public abstract class Solution {
 		modelChangeProcessor = new ModelChangeProcessor();
 
 		loadSchema();
+	}
 
+	void prepareStatements() {
 		Connection conn = getDbConnection();
 		for(SqlTable t: SqlTable.values()) {
 			t.prepareStatements(conn);

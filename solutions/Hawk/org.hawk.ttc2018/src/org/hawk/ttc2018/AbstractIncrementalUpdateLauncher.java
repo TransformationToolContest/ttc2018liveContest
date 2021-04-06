@@ -2,13 +2,12 @@ package org.hawk.ttc2018;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.hawk.core.IModelIndexer;
-import org.hawk.localfolder.LocalFolder;
+import org.eclipse.hawk.core.IModelIndexer;
+import org.eclipse.hawk.localfolder.LocalFolder;
 import org.hawk.ttc2018.updaters.ChangeSequenceAwareUpdater;
 
 import SocialNetwork.SocialNetworkPackage;
@@ -18,8 +17,8 @@ public abstract class AbstractIncrementalUpdateLauncher extends AbstractLauncher
 	private static final Pattern CHANGES_FNAME = Pattern.compile("change0*([0-9]+).xmi");
 	private LocalFolder localFolder;
 
-	public AbstractIncrementalUpdateLauncher(Map<String, String> env) {
-		super(env);
+	public AbstractIncrementalUpdateLauncher(LauncherOptions opts) {
+		super(opts);
 	}
 
 	@Override
@@ -45,7 +44,7 @@ public abstract class AbstractIncrementalUpdateLauncher extends AbstractLauncher
 
 	@Override
 	protected void modelLoading(final StandaloneHawk hawk) throws Throwable {
-		localFolder = hawk.requestFolderIndex(changePath, filterByChangeSequenceLimit(0));
+		localFolder = hawk.requestFolderIndex(opts.getChangePath(), filterByChangeSequenceLimit(0));
 		hawk.waitForSync();
 
 		// Need these for quickly finding by ID

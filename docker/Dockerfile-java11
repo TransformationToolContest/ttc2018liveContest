@@ -1,0 +1,41 @@
+FROM ftsrg/ttc2018:common
+
+# dependencies (separated to share layers with other images)
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends openjdk-11-jdk-headless \
+    && update-java-alternatives --set java-1.11.0-openjdk-amd64 \
+    && rm -rf /var/lib/apt/lists/*
+# pre-download Gradle wrapper (all tools use the same version)
+ENV GRADLE_WRAPPER_TOOL_PATH=solutions/EMFSolutionXtend/
+COPY $GRADLE_WRAPPER_TOOL_PATH/gradle/wrapper $GRADLE_WRAPPER_TOOL_PATH/gradle/wrapper
+COPY $GRADLE_WRAPPER_TOOL_PATH/gradlew $GRADLE_WRAPPER_TOOL_PATH/gradlew
+RUN $GRADLE_WRAPPER_TOOL_PATH/gradlew --version
+
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends maven \
+    && rm -rf /var/lib/apt/lists/*
+
+# small and stable files
+COPY expected-results expected-results
+COPY reporting reporting
+COPY scripts scripts
+COPY output output
+
+# most frequently changing folders
+COPY solutions/EMFSolutionYAMTL solutions/EMFSolutionYAMTL
+COPY solutions/EMFSolutionYAMTL_batch solutions/EMFSolutionYAMTL_batch
+COPY config/config-docker-java11.json config/config.json
+
+# build solutions in config.json
+RUN scripts/run.py -b --skip-tests
+
+COPY docker/entrypoint-java11.sh entrypoint.sh
+CMD ./entrypoint.sh
+
+ENV JAVA_HEAP_SIZE=6G
+
+# save build information
+ARG README_TXT_ARG=""
+ENV README_TXT=$README_TXT_ARG
+RUN date -Is > README.md
+RUN echo "$README_TXT" >> README.md

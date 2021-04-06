@@ -3,7 +3,7 @@ COPY posts_i (id, ts, content, submitterid)
 FROM 'PATHVAR/csv-posts-initial.csv' WITH DELIMITER '|' CSV;
 
 -- Populate comments table
-COPY comments_i (id, ts, content, submitterid, previousid, postid)
+COPY comments_i (id, ts, content, submitterid, parentid, postid)
 FROM 'PATHVAR/csv-comments-initial.csv' WITH DELIMITER '|' CSV;
 
 -- Populate users table

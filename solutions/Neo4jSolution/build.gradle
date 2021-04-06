@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "ttc2018.LiveContestDriver"
+
+ext {
+    guavaVersion = '22.0'
+    neo4jVersion = '3.5.6'
+    neo4jAlgoVersion = '3.5.4.0'
+    neo4jApocVersion = '3.5.0.2'
+}
+
+group 'ttc2018'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.google.guava', name: 'guava', version: guavaVersion
+    compile "org.neo4j:neo4j:${neo4jVersion}"
+    compile "org.neo4j:graph-algorithms-algo:${neo4jAlgoVersion}"
+    compile "org.neo4j.procedure:apoc:${neo4jApocVersion}"
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

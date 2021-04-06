@@ -1,0 +1,46 @@
+FROM ftsrg/ttc2018:common
+
+# dependencies (separated to share layers with other images)
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends openjdk-11-jdk-headless \
+    && update-java-alternatives --set java-1.11.0-openjdk-amd64 \
+    && rm -rf /var/lib/apt/lists/*
+# pre-download Gradle wrapper (all tools use the same version)
+ENV GRADLE_WRAPPER_TOOL_PATH=solutions/EMFSolutionXtend/
+COPY $GRADLE_WRAPPER_TOOL_PATH/gradle/wrapper $GRADLE_WRAPPER_TOOL_PATH/gradle/wrapper
+COPY $GRADLE_WRAPPER_TOOL_PATH/gradlew $GRADLE_WRAPPER_TOOL_PATH/gradlew
+RUN $GRADLE_WRAPPER_TOOL_PATH/gradlew --version
+
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends postgresql-12 \
+    && rm -rf /var/lib/apt/lists/*
+
+# small and stable files
+COPY expected-results expected-results
+COPY reporting reporting
+COPY scripts scripts
+COPY output output
+
+# configure Postgres
+RUN sed -i '1ilocal all ttcuser trust' /etc/postgresql/12/main/pg_hba.conf && \
+    service postgresql restart && \
+    pg_lsclusters && \
+    runuser postgres -lc 'psql -c "select version();"' && \
+    runuser postgres -lc "psql -c \"create user ttcuser password 'secret'; alter role ttcuser with login createdb superuser;\""
+
+# most frequently changing folders
+COPY solutions/SQLSolution solutions/SQLSolution
+COPY solutions/SQLSolutionBatch solutions/SQLSolutionBatch
+COPY config/config-docker-sql.json config/config.json
+
+# build solutions in config.json
+RUN scripts/run.py -b --skip-tests
+
+COPY docker/entrypoint-sql.sh entrypoint.sh
+CMD ./entrypoint.sh
+
+# save build information
+ARG README_TXT_ARG=""
+ENV README_TXT=$README_TXT_ARG
+RUN date -Is > README.md
+RUN echo "$README_TXT" >> README.md
