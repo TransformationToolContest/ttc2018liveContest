@@ -19,8 +19,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin/default"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"/>
-	<classpathentry kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/yamtl/yamtl/0.0.9-SNAPSHOT/e94509560da76e5f36983a847b3ede3abf3e6627/yamtl-0.0.9-SNAPSHOT.jar">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11/"/>
+	<classpathentry kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/yamtl/yamtl/0.0.10-SNAPSHOT/f94dc4ee937badf68b287ce6bb6fb5f7a7610f0d/yamtl-0.0.10-SNAPSHOT.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
@@ -75,12 +75,22 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.ecore/2.23.0/7aeceadc95729b8d11755a1c04ce72d07338c6d/org.eclipse.emf.ecore-2.23.0-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.ecore/2.23.0/7826e0eab245184ece5eea2341e7333312f4a329/org.eclipse.emf.ecore-2.23.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.xtend/org.eclipse.xtend.lib.macro/2.20.0/4abda528d9e3b17c293aa75105f05b05a4a56b69/org.eclipse.xtend.lib.macro-2.20.0-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.xtend/org.eclipse.xtend.lib.macro/2.20.0/4e429d55748e09021ded1e6e78515e736159ffd/org.eclipse.xtend.lib.macro-2.20.0.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.6/2566800dc841d9d2c5a0d34d807e45d4107dbbdf/commons-io-2.6-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.6/815893df5f31da2ece4040fe0a12fd44b577afaf/commons-io-2.6.jar">
+	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.xtext/org.eclipse.xtext.xbase.lib/2.20.0/affcf538a893a6637377ad9985866bba8fa7e7e/org.eclipse.xtext.xbase.lib-2.20.0-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.xtext/org.eclipse.xtext.xbase.lib/2.20.0/55e9d0630f0f64735d0b564cdbee0b1f2217bceb/org.eclipse.xtext.xbase.lib-2.20.0.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/ab373/.m2/repository/commons-io/commons-io/2.6/commons-io-2.6.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
@@ -90,12 +100,12 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.ecore/2.23.0/7aeceadc95729b8d11755a1c04ce72d07338c6d/org.eclipse.emf.ecore-2.23.0-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.ecore/2.23.0/7826e0eab245184ece5eea2341e7333312f4a329/org.eclipse.emf.ecore-2.23.0.jar">
+	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.common/2.22.0/31e775a40d4c491adc099002192fc73fa27e6400/org.eclipse.emf.common-2.22.0-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.common/2.22.0/7c2b41d2c9e1d7c1556d99bc496d86a6c1e7e9f9/org.eclipse.emf.common-2.22.0.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.xtext/org.eclipse.xtext.xbase.lib/2.20.0/affcf538a893a6637377ad9985866bba8fa7e7e/org.eclipse.xtext.xbase.lib-2.20.0-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.xtext/org.eclipse.xtext.xbase.lib/2.20.0/55e9d0630f0f64735d0b564cdbee0b1f2217bceb/org.eclipse.xtext.xbase.lib-2.20.0.jar">
+	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/27.1-jre/5dfa313690a903560bf27478345780a607bf1e9b/guava-27.1-jre-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/27.1-jre/e47b59c893079b87743cdcfb6f17ca95c08c592c/guava-27.1-jre.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
@@ -175,21 +185,6 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.common/2.22.0/31e775a40d4c491adc099002192fc73fa27e6400/org.eclipse.emf.common-2.22.0-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.emf/org.eclipse.emf.common/2.22.0/7c2b41d2c9e1d7c1556d99bc496d86a6c1e7e9f9/org.eclipse.emf.common-2.22.0.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/27.1-jre/5dfa313690a903560bf27478345780a607bf1e9b/guava-27.1-jre-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/27.1-jre/e47b59c893079b87743cdcfb6f17ca95c08c592c/guava-27.1-jre.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.platform/org.eclipse.osgi/3.15.0/bc32d8fcce5bd3a2bcc6f3d4ff2c8f9dff91d4d3/org.eclipse.osgi-3.15.0-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.platform/org.eclipse.osgi/3.15.0/3be4886abb215510ff7b31a5cfda128c835a42fc/org.eclipse.osgi-3.15.0.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/com.google.guava/failureaccess/1.0.1/1d064e61aad6c51cc77f9b59dc2cccc78e792f5a/failureaccess-1.0.1-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/com.google.guava/failureaccess/1.0.1/1dcf1de382a0bf95a3d8b0849546c88bac1292c9/failureaccess-1.0.1.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
@@ -215,12 +210,17 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/1efdf5b737b02f9b72ebdec4f72c37ec411302ff/j2objc-annotations-1.1-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/1.1/ed28ded51a8b1c6b112568def5f4b455e6809019/j2objc-annotations-1.1.jar">
+	<classpathentry kind="lib" path="/Users/ab373/.m2/repository/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.17/8fb5b5ad9c9723951b9fccaba5bb657fa6064868/animal-sniffer-annotations-1.17-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.codehaus.mojo/animal-sniffer-annotations/1.17/f97ce6decaea32b36101e37979f8b647f00681fb/animal-sniffer-annotations-1.17.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.platform/org.eclipse.osgi/3.15.0/bc32d8fcce5bd3a2bcc6f3d4ff2c8f9dff91d4d3/org.eclipse.osgi-3.15.0-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.eclipse.platform/org.eclipse.osgi/3.15.0/3be4886abb215510ff7b31a5cfda128c835a42fc/org.eclipse.osgi-3.15.0.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
@@ -235,17 +235,17 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.17/677abe279b68c5e7490d6d50c6951376238d7d3e/log4j-1.2.17-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.17/5af35056b4d257e4b64b9e8069c0746e8b08629f/log4j-1.2.17.jar">
+	<classpathentry sourcepath="/Users/ab373/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar" kind="lib" path="/Users/ab373/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/com.google.inject/guice/3.0/d117c4481f64955cb1862ed38cb568add2f5fe05/guice-3.0-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/com.google.inject/guice/3.0/9d84f15fe35e2c716a02979fb62f50a29f38aefa/guice-3.0.jar">
+	<classpathentry kind="lib" path="/Users/ab373/.m2/repository/com/google/inject/guice/3.0/guice-3.0.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.antlr/antlr-runtime/3.2/fc08e5ebbee6d8c4576b34743aec39989e9bf2c4/antlr-runtime-3.2-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/org.antlr/antlr-runtime/3.2/31c746001016c6226bd7356c9f87a6a084ce3715/antlr-runtime-3.2.jar">
+	<classpathentry kind="lib" path="/Users/ab373/.m2/repository/org/antlr/antlr-runtime/3.2/antlr-runtime-3.2.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
@@ -265,12 +265,12 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/a00123f261762a7c5e0ec916a2c7c8298d29c400/javax.inject-1-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar">
+	<classpathentry sourcepath="/Users/ab373/.m2/repository/javax/inject/javax.inject/1/javax.inject-1-sources.jar" kind="lib" path="/Users/ab373/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="/Users/ab373/.gradle/caches/modules-2/files-2.1/aopalliance/aopalliance/1.0/4a4b6d692e17846a9f3da036438a7ac491d3c814/aopalliance-1.0-sources.jar" kind="lib" path="/Users/ab373/.gradle/caches/modules-2/files-2.1/aopalliance/aopalliance/1.0/235ba8b489512805ac13a8f9ea77a1ca5ebe3e8/aopalliance-1.0.jar">
+	<classpathentry sourcepath="/Users/ab373/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar" kind="lib" path="/Users/ab373/.m2/repository/aopalliance/aopalliance/1.0/aopalliance-1.0.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>

@@ -1,112 +1,115 @@
-//package yamtl;
-//
-//import java.util.ArrayList;
-//import java.util.LinkedHashMap;
-//import java.util.List;
-//import java.util.Map;
-//
-//import org.aspectj.lang.JoinPoint;
-//import org.aspectj.lang.annotation.After;
-//import org.aspectj.lang.annotation.Aspect;
-//import org.aspectj.lang.annotation.Before;
-//import org.aspectj.lang.annotation.Pointcut;
-//import org.eclipse.emf.ecore.EClass;
-//import org.eclipse.emf.ecore.EObject;
-//import org.eclipse.xtext.xbase.lib.Pair;
-//
-//import yamtl.core.ComputationStep;
-//import yamtl.core.MatchMap;
-//import yamtl.core.QueryStep;
-//import yamtl.core.YAMTLModule;
-//
-//@Aspect
-//public class FeatureCallAspect {
-//	YAMTLModule module;
-//
-//	
-//	
-//	// TO BE UPDATED
-//	@Pointcut("within(SocialNetwork.impl.*)")
-//	// END TO BE UPDATED 
-//	private void syntacticScope() {}
-//	
-//
-//	
-//	// //////////////////////////////////////////////////////////////
-//	// DO NOT MODIFY BELOW
-//	// //////////////////////////////////////////////////////////////
-//	@Before("within(yamtl.core.YAMTLModule) && execution(void execute())")
-//	public void getModule(JoinPoint thisJoinPoint) {
-//		module = (YAMTLModule) thisJoinPoint.getThis(); 
-//	}
-//
-//	@Pointcut("( (within(yamtl.utils.ReduceUtil) && execution(void reduce(yamtl.core.MatchMap))) )")
-//	private void controlFlowReduceScope() {}
-//
-//	@Pointcut("((within(yamtl.utils.MatcherUtil) && execution(* findMatchesAndSchedule(..))) || (within(yamtl.core.Engine) && execution(* propagateDelta(..))))")
-//	private void controlFlowMatchingScope() {}
-//
-//	@Pointcut("((within(yamtl.utils.MatcherUtil) && execution(* insertTupleMatch(..))))")
-//	private void controlFlowInsertTrafostepScope() {}
-//
-//	@Pointcut("((within(yamtl.core.Engine) && execution(* evaluateHelper(yamtl.core.YAMTLHelper))))")
-//	private void controlFlowQueryEvaluationScope() {}
-//
-//	@After("cflowbelow(controlFlowMatchingScope()) && !cflowbelow(controlFlowInsertTrafostepScope()) && syntacticScope() && target(org.eclipse.emf.ecore.EObject) && execution(* *..get* (..))") // get(* *)
-//	public void featureGetCallInMatching(JoinPoint thisJoinPoint) {
-//		EObject object = (EObject) thisJoinPoint.getTarget();
-//		
-//		if (object.eClass() instanceof EClass) {
-//			String featureName = thisJoinPoint.getSignature().getName();
-//			featureName = featureName.substring(3, featureName.length());
-//			
-//			//		module.getEngine().trackFeatureInSourcePattern(object, featureName);
-//			
-//			if ((module != null) && (object != null)) {
-//				if (this.module.debug) {
-//					System.out.print("	in filter: ");
-//					System.out.println("registering during MATCHING: " + object.eClass().getName() + "::" + featureName);
-//				}
-//				module.getEngine().getFeatureCallList().add(new Pair<EObject, String>(object, featureName));
-//			}
-//		}
-//	}
-//
-//	@After("(cflowbelow(controlFlowReduceScope()) || cflowbelow(controlFlowQueryEvaluationScope())) && syntacticScope() && target(org.eclipse.emf.ecore.EObject) && execution(* *..get* (..))") 
-//	public void featureGetCallInReduce(JoinPoint thisJoinPoint) {
-//		EObject object = (EObject) thisJoinPoint.getTarget();
-//		String featureName = thisJoinPoint.getSignature().getName();
-//		featureName = featureName.substring(3, featureName.length());
-//		
-//		if ((module != null) && (object != null)) {
-//		 	ComputationStep step = module.getEngine().getCurrentTrafoStepStack().peek();
-//		 	
-//		 	if (this.module.debug) {
-//		 		System.out.print("	in aspect: ");
-//			 	if (step instanceof MatchMap) {
-//			 		System.out.println("	registering during REDUCING: " + object.eClass().getName() + "::" + featureName + " in trafo step " + ((MatchMap) step).getRule().getName());
-//			 	} else {
-//			 		System.out.println("	registering during REDUCING: " + object.eClass().getName() + "::" + featureName + " in helper " + ((QueryStep) step).getHelper().getName());
-//			 	}
-//		 	}
-//
-//		 	List<ComputationStep>list = new ArrayList<ComputationStep>();
-//			list.add(step);
-//			Map<String, List<ComputationStep>> featureMap = module.getEngine().getFeatureCallToTrafoStep().get(object);
-//			if (featureMap == null) {
-//				featureMap = new LinkedHashMap<String,List<ComputationStep>>();
-//				featureMap.put(featureName, list);
-//				module.getEngine().getFeatureCallToTrafoStep().put(object, featureMap);
-//				
-//			} else {
-//				List<ComputationStep> trafoStepList = featureMap.get(featureName);
-//				if (trafoStepList == null) {
-//					featureMap.put(featureName, list);
-//				} else {
-//					trafoStepList.add(step);
-//				}
-//			}
-//			
-//		}
-//	}
-//}
+package yamtl;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.eclipse.emf.ecore.EObject;
+
+import yamtl.core.YAMTLModule;
+
+@Aspect
+public class FeatureCallAspect {
+	YAMTLModule module;
+
+	// when initializing many-valued features, a get is performed
+	// we need this variable to control that initilize is only applied 
+	// at the top level (first get)
+	private int getLevel = 0;
+	private int colLevel = 0;
+	
+	
+	// TO BE UPDATED
+	@Pointcut("within(SocialNetwork.impl.*)")
+	// END TO BE UPDATED 
+	private void syntacticScope() {}
+	
+
+	
+	// //////////////////////////////////////////////////////////////
+	// DO NOT MODIFY BELOW
+	// //////////////////////////////////////////////////////////////
+	@Before("within(yamtl.core.YAMTLModule) && execution(void execute())")
+	public void getModule(JoinPoint thisJoinPoint) {
+		module = (YAMTLModule) thisJoinPoint.getThis(); 
+	}
+
+	@Pointcut("(within(yamtl.core.YAMTLModule) && execution(* reduce(..)))")
+	private void controlFlowReduceScope() {}
+
+	@Pointcut("((within(yamtl.core.YAMTLModule) && execution(* findMatchesAndSchedule(..))))")
+	private void controlFlowMatchingScope() {}
+
+	@Pointcut("((within(yamtl.core.YAMTLModule) && execution(* insertTupleMatch(..))))")
+	private void controlFlowInsertTrafostepScope() {}
+
+	@Pointcut("((within(yamtl.core.YAMTLModule) && execution(* evaluateHelper(..))))")
+	private void controlFlowQueryEvaluationScope() {}
+
+	@After("cflowbelow(controlFlowMatchingScope()) && !cflowbelow(controlFlowInsertTrafostepScope()) && syntacticScope() && target(org.eclipse.emf.ecore.EObject) && execution(* *..get* (..))") // get(* *)
+	public void featureGetCallInMatching(JoinPoint thisJoinPoint) {
+		EObject eObj = (EObject) thisJoinPoint.getTarget();
+		String featureName = thisJoinPoint.getSignature().getName();
+		featureName = decapitalize(featureName.substring(3, featureName.length()));
+		
+		module.featureGetCallInMatching(eObj, featureName);
+	}
+	
+	@After("(cflowbelow(controlFlowReduceScope()) || cflowbelow(controlFlowQueryEvaluationScope())) && syntacticScope() && target(org.eclipse.emf.ecore.EObject) && execution(* *..get* (..))") 
+	public void featureGetCallInReduce(JoinPoint thisJoinPoint) {
+		EObject eObj = (EObject) thisJoinPoint.getTarget();
+		String featureName = thisJoinPoint.getSignature().getName();
+		featureName = decapitalize(featureName.substring(3, featureName.length()));
+		
+		module.featureGetCallInReduce(eObj, featureName);
+	}
+	
+	
+	
+	@After("(cflowbelow(controlFlowReduceScope()) ) && syntacticScope() && target(org.eclipse.emf.ecore.EObject) && execution(* *..set* (..))") 
+	public void featureSetCallInReduce(JoinPoint thisJoinPoint) {
+		EObject eObj = (EObject) thisJoinPoint.getTarget();
+		String featureName = thisJoinPoint.getSignature().getName();
+		featureName = decapitalize(featureName.substring(3, featureName.length()));
+		
+		module.featureGetCallInReduce(eObj, featureName);
+	}
+	
+	@After("within(java.util.*) && (cflowbelow(controlFlowReduceScope()) ) && syntacticScope() && target(java.util.Collection) "
+			+ "&& ("
+				+ "call(* java.util.Collection.add(..)) || "
+				+ "call(* java.util.Collection.addAll(..)) ||"
+				+ "call(* java.util.Collection.remove(..)) ||"
+				+ "call(* java.util.Collection.removeAll(..)) ||"
+				+ "call(* java.util.Collection.clear(..)) ||"
+				+ "call(* java.util.Collection.retainAll(..))"
+			+ ")") 
+	public void collectionModification(JoinPoint thisJoinPoint) {
+		if (colLevel==0) {
+			colLevel++;
+			
+			if (module != null) {
+				module.collectionModification(thisJoinPoint);
+			}
+			
+			colLevel--;
+		}
+	}
+	
+	
+	public static String getFeatureName(String featureName) {
+		if (featureName.startsWith("set"))
+			return featureName.substring(3, featureName.length());
+		else // unset
+			return featureName.substring(5, featureName.length());
+	}
+	public static String decapitalize(String string) {
+	    if (string == null || string.length() == 0) {
+	        return string;
+	    }
+	    char c[] = string.toCharArray();
+	    c[0] = Character.toLowerCase(c[0]);
+	    return new String(c);
+	}
+}

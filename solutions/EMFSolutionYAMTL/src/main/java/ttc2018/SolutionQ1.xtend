@@ -20,8 +20,6 @@ class SolutionQ1 extends Solution {
 	override String Initial() {
 		xform.execute()
 		(xform as Q1_yamtl).bestThree.map[id].join('|')
-
-
 	}
 
 	override String Update(String deltaName) {

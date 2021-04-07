@@ -1,5 +1,4 @@
 plugins {
-//	id "org.xtext.xtend" version "2.0.4" 
 	id "org.xtext.xtend" version "2.0.8" 
 }
 
@@ -7,11 +6,8 @@ apply plugin: 'application'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-
 group = 'yamtl'
-version = '0.0.9-SNAPSHOT'
-
-//sourceCompatibility = 1.8
+version = '0.0.10-SNAPSHOT'
 
 eclipse {
 	project {
@@ -30,6 +26,10 @@ eclipse {
 	}
 }
 
+
+mainClassName="ttc2018.LiveContestDriver"
+
+
 repositories {
 	maven {
 		url "https://github.com/yamtl/yamtl.github.io/raw/mvn-repo/mvn-repo/snapshot-repo"
@@ -41,8 +41,7 @@ repositories {
 
 
 ext {
-	yamtlVersion = version
-//	xtendVersion = '2.17.1'
+	yamtlVersion = '0.0.10-SNAPSHOT'
 	xtendVersion = '2.20.0'
 	aspectJVersion = '1.9.6'
 }
@@ -78,19 +77,19 @@ configurations {
 		extendsFrom aspects
 	}
 }
-  
-compileJava {
 
+
+compileJava {
+  sourceCompatibility = 1.8 // 11
   doLast{
 	  ant.taskdef( resource:"org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties", classpath: configurations.ajc.asPath )
 	  ant.iajc(
-//		  source:"1.8",
-//		  target:"1.8",
-		  destDir: sourceSets.main.output.classesDirs[0].absolutePath, 
+		  source: sourceCompatibility,
+		  destDir: sourceSets.main.output.classesDirs.singleFile.absolutePath,
 		  inpath: configurations.ajInpath.asPath,
 		  maxmem: "512m",
 		  fork: "true",
-		  aspectPath:configurations.aspects.asPath,
+		  aspectPath: configurations.aspects.asPath,
 		  sourceRootCopyFilter:"**/.git/*,**/*.java",
 		  classpath:"${configurations.compile.asPath};${configurations.aspectCompile.asPath}"){
 		  sourceroots{
@@ -114,7 +113,6 @@ dependencies {
 	ajc "org.aspectj:aspectjtools:${aspectJVersion}"
 	compile("org.aspectj:aspectjrt:${aspectJVersion}")
 	compile("org.aspectj:aspectjweaver:${aspectJVersion}")
-	aspects "yamtl:yamtl:${yamtlVersion}"
 	ajInpath "yamtl:yamtl:${yamtlVersion}"
 	ajInpath  "org.eclipse.emf:org.eclipse.emf.ecore:2.11+"
 }
@@ -136,5 +134,5 @@ task fatJar(type: Jar) {
 }
 
 
-mainClassName="ttc2018.LiveContestDriver"
+
 // ./gradlew clean run -DChangePath=../../models/8 -DChangeSet=2 -DQuery=Q2 -DRunIndex=Debug -DSequences=1 -DTool=EMFSolutionYAMTL
