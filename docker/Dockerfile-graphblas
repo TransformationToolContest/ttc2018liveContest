@@ -6,7 +6,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # install GraphBLAS and LAGraph
-COPY --from=graphblas/lagraph:4Jan2021 / /
+COPY --from=marci543/lagraph:2021Apr01-reorg-99ad411 / /
 # Make sure you are a root user when refreshing the shared library cache
 RUN ldconfig
 
