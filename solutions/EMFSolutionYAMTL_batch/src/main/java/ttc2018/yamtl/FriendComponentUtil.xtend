@@ -1,4 +1,4 @@
-package yamtl
+package ttc2018.yamtl
 
 
 import SocialNetwork.User

@@ -1,5 +1,4 @@
-package yamtl
-
+package ttc2018.yamtl
 
 import SocialNetwork.User
 import java.util.List
@@ -34,7 +33,7 @@ class FriendComponentUtil {
 	
 	// explores friends recursively until all the relevant ones are visited
 	def private void computeComponent(User u, Set<User> comp) {
-//		// keep those users who liked the comment
+		// keep those users who liked the comment
 		for (f: u.friends) {
 			if (userSet.contains(f)) {
 				val isAdded = comp.add(f)

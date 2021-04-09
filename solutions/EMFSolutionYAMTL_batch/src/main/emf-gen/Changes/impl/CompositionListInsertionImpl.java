@@ -245,7 +245,6 @@ public class CompositionListInsertionImpl extends CompositionChangeImpl implemen
 
 		EList<EObject> collection = (EList<EObject>)this.getAffectedElement().eGet(this.getFeature());
 		collection.add(this.getIndex(), this.getAddedElement());
-//		collection.add(this.getAddedElement());
 	}
 
 } //CompositionListInsertionImpl

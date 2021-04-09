@@ -1,4 +1,4 @@
-package yamtl
+package ttc2018.yamtl
 
 import SocialNetwork.Comment
 import SocialNetwork.Post
@@ -9,9 +9,9 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import yamtl.core.YAMTLModule
 import yamtl.dsl.Rule
 
-import static extension yamtl.Util.addIfIsThreeBest
-import static extension yamtl.Util.sum
-import static extension yamtl.Util.getBestThree
+import static extension ttc2018.yamtl.Util.addIfIsThreeBest
+import static extension ttc2018.yamtl.Util.sum
+import static extension ttc2018.yamtl.Util.getBestThree
 
 class Q1_yamtl extends YAMTLModule {
 	
