@@ -1,7 +1,6 @@
 package ttc2018;
 
-import yamtl.Q1_yamtl
-import yamtl.core.YAMTLModule.ExecutionMode
+import ttc2018.yamtl.Q1_yamtl
 import yamtl.core.YAMTLModule.ExecutionPhase
 import yamtl.core.YAMTLModule.ExtentTypeModifier
 
@@ -24,8 +23,6 @@ class SolutionQ1 extends Solution {
 	override String Update(String deltaName) {
 		(xform as Q1_yamtl).threeBestCandidates.clear()
 		(xform as Q1_yamtl).candidatesWithNilScore.clear()
-		
-		
 		xform.reset()
 		
 		xform.applyDelta('sn', deltaName)

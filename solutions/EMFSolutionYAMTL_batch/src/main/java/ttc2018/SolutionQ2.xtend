@@ -1,6 +1,6 @@
 package ttc2018;
 
-import yamtl.Q2_yamtl
+import ttc2018.yamtl.Q2_yamtl
 import yamtl.core.YAMTLModule.ExecutionPhase
 import yamtl.core.YAMTLModule.ExtentTypeModifier
 
@@ -21,7 +21,6 @@ class SolutionQ2 extends Solution {
 	}
 
 	override String Update(String deltaName) {
-		
 		(xform as Q2_yamtl).threeBestCandidates.clear()
 		(xform as Q2_yamtl).candidatesWithNilScore.clear()
 		xform.reset()
