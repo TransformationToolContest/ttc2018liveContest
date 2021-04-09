@@ -46,6 +46,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// <summary>
         /// The backing field for the Id property
         /// </summary>
+        [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private string _id;
         
         private static Lazy<ITypedElement> _idAttribute = new Lazy<ITypedElement>(RetrieveIdAttribute);
@@ -53,6 +54,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// <summary>
         /// The backing field for the Timestamp property
         /// </summary>
+        [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private DateTime _timestamp;
         
         private static Lazy<ITypedElement> _timestampAttribute = new Lazy<ITypedElement>(RetrieveTimestampAttribute);
@@ -60,6 +62,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// <summary>
         /// The backing field for the Content property
         /// </summary>
+        [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private string _content;
         
         private static Lazy<ITypedElement> _contentAttribute = new Lazy<ITypedElement>(RetrieveContentAttribute);
@@ -69,6 +72,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// <summary>
         /// The backing field for the Submitter property
         /// </summary>
+        [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private IUser _submitter;
         
         private static Lazy<ITypedElement> _commentsReference = new Lazy<ITypedElement>(RetrieveCommentsReference);
@@ -76,6 +80,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// <summary>
         /// The backing field for the Comments property
         /// </summary>
+        [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private SubmissionCommentsCollection _comments;
         
         private static IClass _classInstance;
@@ -320,7 +325,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         
         private static ITypedElement RetrieveIdAttribute()
         {
-            return ((ITypedElement)(((ModelElement)(Submission.ClassInstance)).Resolve("id")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.Submission.ClassInstance)).Resolve("id")));
         }
         
         /// <summary>
@@ -351,7 +356,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         
         private static ITypedElement RetrieveTimestampAttribute()
         {
-            return ((ITypedElement)(((ModelElement)(Submission.ClassInstance)).Resolve("timestamp")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.Submission.ClassInstance)).Resolve("timestamp")));
         }
         
         /// <summary>
@@ -382,7 +387,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         
         private static ITypedElement RetrieveContentAttribute()
         {
-            return ((ITypedElement)(((ModelElement)(Submission.ClassInstance)).Resolve("content")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.Submission.ClassInstance)).Resolve("content")));
         }
         
         /// <summary>
@@ -413,7 +418,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         
         private static ITypedElement RetrieveSubmitterReference()
         {
-            return ((ITypedElement)(((ModelElement)(Submission.ClassInstance)).Resolve("submitter")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.Submission.ClassInstance)).Resolve("submitter")));
         }
         
         /// <summary>
@@ -454,7 +459,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         
         private static ITypedElement RetrieveCommentsReference()
         {
-            return ((ITypedElement)(((ModelElement)(Submission.ClassInstance)).Resolve("comments")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.Submission.ClassInstance)).Resolve("comments")));
         }
         
         /// <summary>

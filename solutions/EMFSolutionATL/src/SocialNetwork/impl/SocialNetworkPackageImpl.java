@@ -87,7 +87,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link SocialNetworkPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -101,7 +101,8 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 		if (isInited) return (SocialNetworkPackage)EPackage.Registry.INSTANCE.getEPackage(SocialNetworkPackage.eNS_URI);
 
 		// Obtain or create and register package
-		SocialNetworkPackageImpl theSocialNetworkPackage = (SocialNetworkPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SocialNetworkPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SocialNetworkPackageImpl());
+		Object registeredSocialNetworkPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SocialNetworkPackageImpl theSocialNetworkPackage = registeredSocialNetworkPackage instanceof SocialNetworkPackageImpl ? (SocialNetworkPackageImpl)registeredSocialNetworkPackage : new SocialNetworkPackageImpl();
 
 		isInited = true;
 
@@ -114,7 +115,6 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 		// Mark meta-data to indicate it can't be changed
 		theSocialNetworkPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(SocialNetworkPackage.eNS_URI, theSocialNetworkPackage);
 		return theSocialNetworkPackage;
@@ -125,6 +125,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSubmission() {
 		return submissionEClass;
 	}
@@ -134,6 +135,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSubmission_Id() {
 		return (EAttribute)submissionEClass.getEStructuralFeatures().get(0);
 	}
@@ -143,6 +145,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSubmission_Timestamp() {
 		return (EAttribute)submissionEClass.getEStructuralFeatures().get(1);
 	}
@@ -152,6 +155,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSubmission_Content() {
 		return (EAttribute)submissionEClass.getEStructuralFeatures().get(2);
 	}
@@ -161,6 +165,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSubmission_Submitter() {
 		return (EReference)submissionEClass.getEStructuralFeatures().get(3);
 	}
@@ -170,6 +175,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSubmission_Comments() {
 		return (EReference)submissionEClass.getEStructuralFeatures().get(4);
 	}
@@ -179,6 +185,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPost() {
 		return postEClass;
 	}
@@ -188,6 +195,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getComment() {
 		return commentEClass;
 	}
@@ -197,6 +205,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getComment_Commented() {
 		return (EReference)commentEClass.getEStructuralFeatures().get(0);
 	}
@@ -206,6 +215,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getComment_LikedBy() {
 		return (EReference)commentEClass.getEStructuralFeatures().get(1);
 	}
@@ -215,15 +225,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComment_Post() {
-		return (EReference)commentEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@Override
 	public EClass getUser() {
 		return userEClass;
 	}
@@ -233,6 +235,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUser_Id() {
 		return (EAttribute)userEClass.getEStructuralFeatures().get(0);
 	}
@@ -242,6 +245,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getUser_Name() {
 		return (EAttribute)userEClass.getEStructuralFeatures().get(1);
 	}
@@ -251,6 +255,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getUser_Submissions() {
 		return (EReference)userEClass.getEStructuralFeatures().get(2);
 	}
@@ -260,6 +265,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getUser_Likes() {
 		return (EReference)userEClass.getEStructuralFeatures().get(3);
 	}
@@ -269,6 +275,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getUser_Friends() {
 		return (EReference)userEClass.getEStructuralFeatures().get(4);
 	}
@@ -278,6 +285,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSocialNetworkRoot() {
 		return socialNetworkRootEClass;
 	}
@@ -287,6 +295,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSocialNetworkRoot_Posts() {
 		return (EReference)socialNetworkRootEClass.getEStructuralFeatures().get(0);
 	}
@@ -296,6 +305,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSocialNetworkRoot_Users() {
 		return (EReference)socialNetworkRootEClass.getEStructuralFeatures().get(1);
 	}
@@ -305,6 +315,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SocialNetworkFactory getSocialNetworkFactory() {
 		return (SocialNetworkFactory)getEFactoryInstance();
 	}
@@ -340,7 +351,6 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 		commentEClass = createEClass(COMMENT);
 		createEReference(commentEClass, COMMENT__COMMENTED);
 		createEReference(commentEClass, COMMENT__LIKED_BY);
-		createEReference(commentEClass, COMMENT__POST);
 
 		userEClass = createEClass(USER);
 		createEAttribute(userEClass, USER__ID);
@@ -398,7 +408,6 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 		initEClass(commentEClass, Comment.class, "Comment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComment_Commented(), this.getSubmission(), this.getSubmission_Comments(), "commented", null, 1, 1, Comment.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getComment_LikedBy(), this.getUser(), this.getUser_Likes(), "likedBy", null, 0, -1, Comment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getComment_Post(), this.getPost(), null, "post", null, 1, 1, Comment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(userEClass, User.class, "User", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUser_Id(), ecorePackage.getEString(), "id", null, 1, 1, User.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

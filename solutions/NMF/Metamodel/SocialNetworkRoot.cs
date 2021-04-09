@@ -46,6 +46,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// <summary>
         /// The backing field for the Posts property
         /// </summary>
+        [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private ObservableCompositionOrderedSet<IPost> _posts;
         
         private static Lazy<ITypedElement> _usersReference = new Lazy<ITypedElement>(RetrieveUsersReference);
@@ -53,6 +54,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// <summary>
         /// The backing field for the Users property
         /// </summary>
+        [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private ObservableCompositionOrderedSet<IUser> _users;
         
         private static IClass _classInstance;
@@ -140,7 +142,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         
         private static ITypedElement RetrievePostsReference()
         {
-            return ((ITypedElement)(((ModelElement)(SocialNetworkRoot.ClassInstance)).Resolve("posts")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.SocialNetworkRoot.ClassInstance)).Resolve("posts")));
         }
         
         /// <summary>
@@ -165,7 +167,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         
         private static ITypedElement RetrieveUsersReference()
         {
-            return ((ITypedElement)(((ModelElement)(SocialNetworkRoot.ClassInstance)).Resolve("users")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.SocialNetworkRoot.ClassInstance)).Resolve("users")));
         }
         
         /// <summary>

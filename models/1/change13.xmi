@@ -2,9 +2,9 @@
 <changes:ModelChangeSet xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xmi="http://www.omg.org/XMI" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@addedElement" affectedElement="social:User initial.xmi#407" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:CompositionListInsertion" index="6" affectedElement="social:Post initial.xmi#215401" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#215401" id="215485" timestamp="2010-03-03T12:10:50" content="About Josi. About Vinc. About Jarm. About Al G. About Otto. About Paul. Ab." submitter="initial.xmi#407" />
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="215485" timestamp="2010-03-03T12:10:50" content="About Josi. About Vinc. About Jarm. About Al G. About Otto. About Paul. Ab." submitter="initial.xmi#407" />
   </changes>
   <changes xsi:type="changes:CompositionListInsertion" index="0" affectedElement="social:Post initial.xmi#404236" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#404236" id="999992" timestamp="2018-06-27T10:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="999992" timestamp="2018-06-27T10:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
   </changes>
 </changes:ModelChangeSet>

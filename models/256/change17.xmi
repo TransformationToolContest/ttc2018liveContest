@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <changes:ModelChangeSet xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xmi="http://www.omg.org/XMI" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
   <changes xsi:type="changes:CompositionListInsertion" index="0" affectedElement="social:Post initial.xmi#34360665576" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#34360665576" id="999994" timestamp="2018-06-27T19:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="999994" timestamp="2018-06-27T19:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#3298534884947" affectedElement="social:User initial.xmi#1099511628460" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#1099511628460" affectedElement="social:User initial.xmi#3298534884947" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />

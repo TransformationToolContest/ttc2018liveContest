@@ -80,6 +80,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Post> getPosts() {
 		if (posts == null) {
 			posts = new EObjectContainmentEList<Post>(Post.class, this, SocialNetworkPackage.SOCIAL_NETWORK_ROOT__POSTS);
@@ -92,6 +93,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<User> getUsers() {
 		if (users == null) {
 			users = new EObjectContainmentEList<User>(User.class, this, SocialNetworkPackage.SOCIAL_NETWORK_ROOT__USERS);
