@@ -46,15 +46,15 @@
   <posts id="298553" timestamp="2010-02-03T13:45:09" content="" submitter="4661" />
   <posts id="1048870" timestamp="2010-02-03T15:59:47" content="" submitter="974" />
   <posts id="529360" timestamp="2010-02-09T04:05:10" content="" submitter="2608">
-    <comments post="529360" id="529590" timestamp="2010-02-09T04:05:20" content="LOL" submitter="2886" />
-    <comments post="529360" id="529589" timestamp="2010-02-09T04:20:53" content="cool" submitter="2886" />
-    <comments post="529360" id="529591" timestamp="2010-02-09T05:19:19" content="ok" submitter="2886" />
-    <comments post="529360" id="529594" timestamp="2010-02-09T06:08:38" content="right" submitter="3633" />
-    <comments post="529360" id="529592" timestamp="2010-02-09T06:31:37" content="About Niccolò Machiavelli, a diplomat, political philosopher, playwright, and a civi." submitter="2886">
-      <comments post="529360" id="529595" timestamp="2010-02-09T07:19:44" content="good" submitter="2886" />
+    <comments id="529590" timestamp="2010-02-09T04:05:20" content="LOL" submitter="2886" />
+    <comments id="529589" timestamp="2010-02-09T04:20:53" content="cool" submitter="2886" />
+    <comments id="529591" timestamp="2010-02-09T05:19:19" content="ok" submitter="2886" />
+    <comments id="529594" timestamp="2010-02-09T06:08:38" content="right" submitter="3633" />
+    <comments id="529592" timestamp="2010-02-09T06:31:37" content="About Niccolò Machiavelli, a diplomat, political philosopher, playwright, and a civi." submitter="2886">
+      <comments id="529595" timestamp="2010-02-09T07:19:44" content="good" submitter="2886" />
     </comments>
-    <comments post="529360" id="529593" timestamp="2010-02-09T07:27:33" content="duh" submitter="2886" />
-    <comments post="529360" id="529588" timestamp="2010-02-09T08:17:12" content="cool" submitter="2886" />
+    <comments id="529593" timestamp="2010-02-09T07:27:33" content="duh" submitter="2886" />
+    <comments id="529588" timestamp="2010-02-09T08:17:12" content="cool" submitter="2886" />
   </posts>
   <posts id="1076792" timestamp="2010-02-09T16:21:23" content="" submitter="3825" />
   <posts id="1301393" timestamp="2010-02-11T12:01:34" content="" submitter="4555" />
@@ -66,22 +66,22 @@
   <posts id="299395" timestamp="2010-02-11T19:23:30" content="photo299395.jpg" submitter="4661" />
   <posts id="798675" timestamp="2010-02-12T10:37:40" content="" submitter="2788" />
   <posts id="701070" timestamp="2010-02-12T18:19:04" content="" submitter="1564">
-    <comments post="701070" id="702748" timestamp="2010-02-12T18:19:57" content="cool" submitter="143" />
-    <comments post="701070" id="702760" timestamp="2010-02-12T18:23:49" content="About Pope Benedict . About Andrew Lloyd W. About John Gielgud, . About Ringo Starr." submitter="143" />
-    <comments post="701070" id="702747" timestamp="2010-02-12T18:38:09" content="About John How. About Pope Ben. About Albert E. About Karl Mar. About Lord Byr. About M." submitter="3825">
-      <comments post="701070" id="702757" timestamp="2010-02-12T18:50:35" content="ok" submitter="143" />
-      <comments post="701070" id="702759" timestamp="2010-02-12T20:37:02" content="no way!" submitter="143" />
-      <comments post="701070" id="702750" timestamp="2010-02-13T08:12:06" content="great" submitter="3825" />
-      <comments post="701070" id="702753" timestamp="2010-02-13T09:58:17" content="ok" submitter="3825" />
-      <comments post="701070" id="702756" timestamp="2010-02-13T10:43:48" content="About Pope Be. About Karl Ma. About Lord By. About Ben Jon. About Michael. About G." submitter="143">
-        <comments post="701070" id="702758" timestamp="2010-02-13T10:44:00" content="duh" submitter="143" />
+    <comments id="702748" timestamp="2010-02-12T18:19:57" content="cool" submitter="143" />
+    <comments id="702760" timestamp="2010-02-12T18:23:49" content="About Pope Benedict . About Andrew Lloyd W. About John Gielgud, . About Ringo Starr." submitter="143" />
+    <comments id="702747" timestamp="2010-02-12T18:38:09" content="About John How. About Pope Ben. About Albert E. About Karl Mar. About Lord Byr. About M." submitter="3825">
+      <comments id="702757" timestamp="2010-02-12T18:50:35" content="ok" submitter="143" />
+      <comments id="702759" timestamp="2010-02-12T20:37:02" content="no way!" submitter="143" />
+      <comments id="702750" timestamp="2010-02-13T08:12:06" content="great" submitter="3825" />
+      <comments id="702753" timestamp="2010-02-13T09:58:17" content="ok" submitter="3825" />
+      <comments id="702756" timestamp="2010-02-13T10:43:48" content="About Pope Be. About Karl Ma. About Lord By. About Ben Jon. About Michael. About G." submitter="143">
+        <comments id="702758" timestamp="2010-02-13T10:44:00" content="duh" submitter="143" />
       </comments>
-      <comments post="701070" id="702749" timestamp="2010-02-13T13:18:00" content="great" submitter="3825" />
+      <comments id="702749" timestamp="2010-02-13T13:18:00" content="great" submitter="3825" />
     </comments>
-    <comments post="701070" id="702755" timestamp="2010-02-12T22:05:25" content="About John Howar. About Pope Bened. About George Fri. About Clint East. About Michael Bl. About ." submitter="143" />
-    <comments post="701070" id="702752" timestamp="2010-02-13T01:11:10" content="no" submitter="143" />
-    <comments post="701070" id="702754" timestamp="2010-02-13T07:15:06" content="thx" submitter="143" />
-    <comments post="701070" id="702751" timestamp="2010-02-13T14:18:54" content="thanks" submitter="3825" />
+    <comments id="702755" timestamp="2010-02-12T22:05:25" content="About John Howar. About Pope Bened. About George Fri. About Clint East. About Michael Bl. About ." submitter="143" />
+    <comments id="702752" timestamp="2010-02-13T01:11:10" content="no" submitter="143" />
+    <comments id="702754" timestamp="2010-02-13T07:15:06" content="thx" submitter="143" />
+    <comments id="702751" timestamp="2010-02-13T14:18:54" content="thanks" submitter="3825" />
   </posts>
   <posts id="705054" timestamp="2010-02-13T01:54:47" content="" submitter="4273" />
   <posts id="96148" timestamp="2010-02-13T18:31:22" content="photo96148.jpg" submitter="3217" />
@@ -118,48 +118,48 @@
   <posts id="96424" timestamp="2010-02-14T12:08:51" content="photo96424.jpg" submitter="3217" />
   <posts id="404145" timestamp="2010-02-15T18:18:56" content="" submitter="3705" />
   <posts id="571477" timestamp="2010-02-16T06:18:31" content="" submitter="459">
-    <comments post="571477" id="571690" timestamp="2010-02-16T06:20:23" content="right" submitter="1259" />
-    <comments post="571477" id="571692" timestamp="2010-02-16T06:51:56" content="duh" submitter="1259" />
-    <comments post="571477" id="571685" timestamp="2010-02-16T07:54:09" content="fine" submitter="1259" />
-    <comments post="571477" id="571688" timestamp="2010-02-16T15:18:18" content="no way!" submitter="1259" />
-    <comments post="571477" id="571686" timestamp="2010-02-16T18:56:02" content="About Lleyton Hew. About John Coltra. About Herman Melv. About Rihanna, re. About Chasi." submitter="1259">
-      <comments post="571477" id="571691" timestamp="2010-02-16T23:58:35" content="cool" submitter="1259" />
-      <comments post="571477" id="571687" timestamp="2010-02-17T00:41:03" content="I see" submitter="1259" />
-      <comments post="571477" id="571702" timestamp="2010-02-17T01:43:11" content="fine" submitter="1259" />
-      <comments post="571477" id="571689" timestamp="2010-02-17T03:20:32" content="yes" submitter="1259" />
-      <comments post="571477" id="571693" timestamp="2010-02-17T07:29:53" content="About Lleyton . About John Col. About Weird Al. About Lionel R. About Herman M. About De." submitter="1259">
-        <comments post="571477" id="571701" timestamp="2010-02-17T07:54:19" content="About Bono, is omnivorous and i. About John Coltrane, awarded th. About Weird Al Yankovic, no lon. About Angelina Jolie, Croft in . About Johnny Depp, as th." submitter="1259" />
-        <comments post="571477" id="571696" timestamp="2010-02-17T13:24:08" content="About Lley. About Robe. About John. About Tenn. About Lion. About Herm. About Nigh. Abo." submitter="1259" />
-        <comments post="571477" id="571694" timestamp="2010-02-17T15:49:36" content="About The Dutchess, . About Brazil, larges. About Bette Midler S. About De Do Do." submitter="1259">
-          <comments post="571477" id="571700" timestamp="2010-02-17T19:37:00" content="duh" submitter="1259" />
-          <comments post="571477" id="571695" timestamp="2010-02-18T07:42:04" content="cool" submitter="1259" />
+    <comments id="571690" timestamp="2010-02-16T06:20:23" content="right" submitter="1259" />
+    <comments id="571692" timestamp="2010-02-16T06:51:56" content="duh" submitter="1259" />
+    <comments id="571685" timestamp="2010-02-16T07:54:09" content="fine" submitter="1259" />
+    <comments id="571688" timestamp="2010-02-16T15:18:18" content="no way!" submitter="1259" />
+    <comments id="571686" timestamp="2010-02-16T18:56:02" content="About Lleyton Hew. About John Coltra. About Herman Melv. About Rihanna, re. About Chasi." submitter="1259">
+      <comments id="571691" timestamp="2010-02-16T23:58:35" content="cool" submitter="1259" />
+      <comments id="571687" timestamp="2010-02-17T00:41:03" content="I see" submitter="1259" />
+      <comments id="571702" timestamp="2010-02-17T01:43:11" content="fine" submitter="1259" />
+      <comments id="571689" timestamp="2010-02-17T03:20:32" content="yes" submitter="1259" />
+      <comments id="571693" timestamp="2010-02-17T07:29:53" content="About Lleyton . About John Col. About Weird Al. About Lionel R. About Herman M. About De." submitter="1259">
+        <comments id="571701" timestamp="2010-02-17T07:54:19" content="About Bono, is omnivorous and i. About John Coltrane, awarded th. About Weird Al Yankovic, no lon. About Angelina Jolie, Croft in . About Johnny Depp, as th." submitter="1259" />
+        <comments id="571696" timestamp="2010-02-17T13:24:08" content="About Lley. About Robe. About John. About Tenn. About Lion. About Herm. About Nigh. Abo." submitter="1259" />
+        <comments id="571694" timestamp="2010-02-17T15:49:36" content="About The Dutchess, . About Brazil, larges. About Bette Midler S. About De Do Do." submitter="1259">
+          <comments id="571700" timestamp="2010-02-17T19:37:00" content="duh" submitter="1259" />
+          <comments id="571695" timestamp="2010-02-18T07:42:04" content="cool" submitter="1259" />
         </comments>
-        <comments post="571477" id="571699" timestamp="2010-02-17T16:23:36" content="roflol" submitter="1259" />
-        <comments post="571477" id="571697" timestamp="2010-02-18T06:04:18" content="thx" submitter="1259" />
+        <comments id="571699" timestamp="2010-02-17T16:23:36" content="roflol" submitter="1259" />
+        <comments id="571697" timestamp="2010-02-18T06:04:18" content="thx" submitter="1259" />
       </comments>
-      <comments post="571477" id="571698" timestamp="2010-02-17T13:40:56" content="fine" submitter="1259" />
+      <comments id="571698" timestamp="2010-02-17T13:40:56" content="fine" submitter="1259" />
     </comments>
   </posts>
   <posts id="1301406" timestamp="2010-02-16T18:36:20" content="" submitter="4555">
-    <comments post="1301406" id="1301996" timestamp="2010-02-16T20:02:22" content="great" submitter="2608" />
-    <comments post="1301406" id="1301990" timestamp="2010-02-16T20:58:24" content="maybe" submitter="2608" />
-    <comments post="1301406" id="1301998" timestamp="2010-02-17T08:00:46" content="no" submitter="2608" />
-    <comments post="1301406" id="1301991" timestamp="2010-02-17T08:46:36" content="About Napoleon, coalition with Napoleon. T. About Al Green, Roll Hall of Fame inducte." submitter="2608">
-      <comments post="1301406" id="1302000" timestamp="2010-02-17T09:04:56" content="About Napoleon, as this was wh. About Robert F. Kennedy, Gate . About Al Green, hit single." submitter="2608" />
-      <comments post="1301406" id="1301994" timestamp="2010-02-17T16:42:21" content="yes" submitter="2608" />
-      <comments post="1301406" id="1301992" timestamp="2010-02-17T18:09:15" content="About Napoleon, later in . About Charles I of Englan. About Al Green, Stone ." submitter="2608">
-        <comments post="1301406" id="1301997" timestamp="2010-02-17T20:11:14" content="cool" submitter="2608" />
-        <comments post="1301406" id="1302001" timestamp="2010-02-18T03:33:04" content="About Charles I of Engla. About Kate Bush, solo fe. About Maggie May, and ." submitter="2608">
-          <comments post="1301406" id="1302002" timestamp="2010-02-18T03:37:42" content="About Charles I . About Kate Bush,. About Otis Reddi. About Polythene . About Maggie." submitter="2608" />
+    <comments id="1301996" timestamp="2010-02-16T20:02:22" content="great" submitter="2608" />
+    <comments id="1301990" timestamp="2010-02-16T20:58:24" content="maybe" submitter="2608" />
+    <comments id="1301998" timestamp="2010-02-17T08:00:46" content="no" submitter="2608" />
+    <comments id="1301991" timestamp="2010-02-17T08:46:36" content="About Napoleon, coalition with Napoleon. T. About Al Green, Roll Hall of Fame inducte." submitter="2608">
+      <comments id="1302000" timestamp="2010-02-17T09:04:56" content="About Napoleon, as this was wh. About Robert F. Kennedy, Gate . About Al Green, hit single." submitter="2608" />
+      <comments id="1301994" timestamp="2010-02-17T16:42:21" content="yes" submitter="2608" />
+      <comments id="1301992" timestamp="2010-02-17T18:09:15" content="About Napoleon, later in . About Charles I of Englan. About Al Green, Stone ." submitter="2608">
+        <comments id="1301997" timestamp="2010-02-17T20:11:14" content="cool" submitter="2608" />
+        <comments id="1302001" timestamp="2010-02-18T03:33:04" content="About Charles I of Engla. About Kate Bush, solo fe. About Maggie May, and ." submitter="2608">
+          <comments id="1302002" timestamp="2010-02-18T03:37:42" content="About Charles I . About Kate Bush,. About Otis Reddi. About Polythene . About Maggie." submitter="2608" />
         </comments>
-        <comments post="1301406" id="1301993" timestamp="2010-02-18T05:23:13" content="About Charles I of. About Jimi Hendrix. About Al Green, to. About Sinner M." submitter="2608">
-          <comments post="1301406" id="1301995" timestamp="2010-02-18T05:38:05" content="maybe" submitter="2608" />
-          <comments post="1301406" id="1302003" timestamp="2010-02-18T12:54:09" content="thx" submitter="2608" />
+        <comments id="1301993" timestamp="2010-02-18T05:23:13" content="About Charles I of. About Jimi Hendrix. About Al Green, to. About Sinner M." submitter="2608">
+          <comments id="1301995" timestamp="2010-02-18T05:38:05" content="maybe" submitter="2608" />
+          <comments id="1302003" timestamp="2010-02-18T12:54:09" content="thx" submitter="2608" />
         </comments>
       </comments>
     </comments>
-    <comments post="1301406" id="1301989" timestamp="2010-02-17T18:11:39" content="About Napoleon, of France. She beat the fir. About Robert the Bruce, of England. He cla." submitter="2608">
-      <comments post="1301406" id="1301999" timestamp="2010-02-17T22:35:27" content="roflol" submitter="2608" />
+    <comments id="1301989" timestamp="2010-02-17T18:11:39" content="About Napoleon, of France. She beat the fir. About Robert the Bruce, of England. He cla." submitter="2608">
+      <comments id="1301999" timestamp="2010-02-17T22:35:27" content="roflol" submitter="2608" />
     </comments>
   </posts>
   <posts id="1029294" timestamp="2010-02-17T02:04:35" content="photo1029294.jpg" submitter="2191" />
@@ -196,66 +196,66 @@
   <posts id="705183" timestamp="2010-02-18T12:16:28" content="" submitter="4273" />
   <posts id="658586" timestamp="2010-02-18T14:03:52" content="" submitter="3571" />
   <posts id="705199" timestamp="2010-02-18T15:11:13" content="" submitter="4273">
-    <comments post="705199" id="706670" timestamp="2010-02-18T15:24:05" content="About Friedr. About Nicolá. About David . About Willia. About Adam S. About The Ba. About Lindsa." submitter="459">
-      <comments post="705199" id="706676" timestamp="2010-02-18T17:16:33" content="great" submitter="459" />
-      <comments post="705199" id="706675" timestamp="2010-02-18T22:19:47" content="thanks" submitter="459" />
-      <comments post="705199" id="706677" timestamp="2010-02-18T22:29:41" content="duh" submitter="459" />
-      <comments post="705199" id="706672" timestamp="2010-02-18T23:47:23" content="maybe" submitter="459" />
-      <comments post="705199" id="706671" timestamp="2010-02-19T13:42:04" content="About Fri. About Dav. About Bey. About Muh. About Ada. About Naz. About Lin. ." submitter="459">
-        <comments post="705199" id="706678" timestamp="2010-02-19T14:13:25" content="good" submitter="459" />
-        <comments post="705199" id="706673" timestamp="2010-02-20T02:44:44" content="About Fri. About Dav. About Bey. About Fra. About Lou. About Bet. About Gra.." submitter="459">
-          <comments post="705199" id="706674" timestamp="2010-02-20T07:40:43" content="ok" submitter="459" />
+    <comments id="706670" timestamp="2010-02-18T15:24:05" content="About Friedr. About Nicolá. About David . About Willia. About Adam S. About The Ba. About Lindsa." submitter="459">
+      <comments id="706676" timestamp="2010-02-18T17:16:33" content="great" submitter="459" />
+      <comments id="706675" timestamp="2010-02-18T22:19:47" content="thanks" submitter="459" />
+      <comments id="706677" timestamp="2010-02-18T22:29:41" content="duh" submitter="459" />
+      <comments id="706672" timestamp="2010-02-18T23:47:23" content="maybe" submitter="459" />
+      <comments id="706671" timestamp="2010-02-19T13:42:04" content="About Fri. About Dav. About Bey. About Muh. About Ada. About Naz. About Lin. ." submitter="459">
+        <comments id="706678" timestamp="2010-02-19T14:13:25" content="good" submitter="459" />
+        <comments id="706673" timestamp="2010-02-20T02:44:44" content="About Fri. About Dav. About Bey. About Fra. About Lou. About Bet. About Gra.." submitter="459">
+          <comments id="706674" timestamp="2010-02-20T07:40:43" content="ok" submitter="459" />
         </comments>
       </comments>
     </comments>
-    <comments post="705199" id="706669" timestamp="2010-02-18T15:46:12" content="duh" submitter="459" />
+    <comments id="706669" timestamp="2010-02-18T15:46:12" content="duh" submitter="459" />
   </posts>
   <posts id="269913" timestamp="2010-02-18T16:09:43" content="" submitter="407" />
   <posts id="705247" timestamp="2010-02-18T16:10:28" content="" submitter="4273">
-    <comments post="705247" id="707069" timestamp="2010-02-18T17:10:26" content="no" submitter="459" />
-    <comments post="705247" id="707067" timestamp="2010-02-18T20:09:07" content="About George. About Nicolá. About Miles . About Univer. About Songs . Abou." submitter="459">
-      <comments post="705247" id="707070" timestamp="2010-02-19T10:40:39" content="right" submitter="459" />
+    <comments id="707069" timestamp="2010-02-18T17:10:26" content="no" submitter="459" />
+    <comments id="707067" timestamp="2010-02-18T20:09:07" content="About George. About Nicolá. About Miles . About Univer. About Songs . Abou." submitter="459">
+      <comments id="707070" timestamp="2010-02-19T10:40:39" content="right" submitter="459" />
     </comments>
-    <comments post="705247" id="707066" timestamp="2010-02-19T01:37:19" content="no way!" submitter="459" />
-    <comments post="705247" id="707065" timestamp="2010-02-19T15:21:07" content="About Nicolás Almagro, is . About Weird Al Yankovic, &amp;. About How Do You Do It?." submitter="459">
-      <comments post="705247" id="707071" timestamp="2010-02-19T15:21:21" content="thx" submitter="459" />
-      <comments post="705247" id="707072" timestamp="2010-02-19T15:36:34" content="roflol" submitter="459" />
-      <comments post="705247" id="707073" timestamp="2010-02-19T15:38:35" content="cool" submitter="459" />
-      <comments post="705247" id="707068" timestamp="2010-02-19T22:44:20" content="roflol" submitter="459" />
+    <comments id="707066" timestamp="2010-02-19T01:37:19" content="no way!" submitter="459" />
+    <comments id="707065" timestamp="2010-02-19T15:21:07" content="About Nicolás Almagro, is . About Weird Al Yankovic, &amp;. About How Do You Do It?." submitter="459">
+      <comments id="707071" timestamp="2010-02-19T15:21:21" content="thx" submitter="459" />
+      <comments id="707072" timestamp="2010-02-19T15:36:34" content="roflol" submitter="459" />
+      <comments id="707073" timestamp="2010-02-19T15:38:35" content="cool" submitter="459" />
+      <comments id="707068" timestamp="2010-02-19T22:44:20" content="roflol" submitter="459" />
     </comments>
   </posts>
   <posts id="269926" timestamp="2010-02-18T16:40:28" content="" submitter="407" />
   <posts id="269914" timestamp="2010-02-18T17:57:43" content="" submitter="407" />
   <posts id="269934" timestamp="2010-02-18T20:06:43" content="" submitter="407" />
   <posts id="705185" timestamp="2010-02-18T20:15:43" content="" submitter="4273">
-    <comments post="705185" id="706559" timestamp="2010-02-18T20:16:10" content="fine" submitter="459" />
-    <comments post="705185" id="706560" timestamp="2010-02-18T21:12:52" content="right" submitter="459" />
-    <comments post="705185" id="706573" timestamp="2010-02-18T21:14:01" content="About Arnold Sch. About George Ber. About George W. . About Shimmy Dis. About Al." submitter="459" />
-    <comments post="705185" id="706561" timestamp="2010-02-19T02:41:55" content="yes" submitter="459" />
-    <comments post="705185" id="706563" timestamp="2010-02-19T03:22:00" content="LOL" submitter="459" />
-    <comments post="705185" id="706565" timestamp="2010-02-19T05:14:40" content="About Robbie. About Willia. About John G. About Weird . About Ice Cu. About Shimmy. Ab." submitter="459">
-      <comments post="705185" id="706566" timestamp="2010-02-19T10:56:00" content="About Rob. About Wil. About Wei. About Ice. About Mar. About Afg. About Swi. About Sh." submitter="459">
-        <comments post="705185" id="706568" timestamp="2010-02-19T18:45:14" content="About Jo. About Ji. About Ma. About Ro. About Th. About Is. About Af. About Sh. ." submitter="459" />
-        <comments post="705185" id="706571" timestamp="2010-02-20T02:10:15" content="great" submitter="459" />
+    <comments id="706559" timestamp="2010-02-18T20:16:10" content="fine" submitter="459" />
+    <comments id="706560" timestamp="2010-02-18T21:12:52" content="right" submitter="459" />
+    <comments id="706573" timestamp="2010-02-18T21:14:01" content="About Arnold Sch. About George Ber. About George W. . About Shimmy Dis. About Al." submitter="459" />
+    <comments id="706561" timestamp="2010-02-19T02:41:55" content="yes" submitter="459" />
+    <comments id="706563" timestamp="2010-02-19T03:22:00" content="LOL" submitter="459" />
+    <comments id="706565" timestamp="2010-02-19T05:14:40" content="About Robbie. About Willia. About John G. About Weird . About Ice Cu. About Shimmy. Ab." submitter="459">
+      <comments id="706566" timestamp="2010-02-19T10:56:00" content="About Rob. About Wil. About Wei. About Ice. About Mar. About Afg. About Swi. About Sh." submitter="459">
+        <comments id="706568" timestamp="2010-02-19T18:45:14" content="About Jo. About Ji. About Ma. About Ro. About Th. About Is. About Af. About Sh. ." submitter="459" />
+        <comments id="706571" timestamp="2010-02-20T02:10:15" content="great" submitter="459" />
       </comments>
-      <comments post="705185" id="706569" timestamp="2010-02-19T20:46:58" content="LOL" submitter="459" />
-      <comments post="705185" id="706567" timestamp="2010-02-19T21:14:05" content="About Napole. About Ennio . About Robbie. About Shimmy. About Poland. About W." submitter="459" />
+      <comments id="706569" timestamp="2010-02-19T20:46:58" content="LOL" submitter="459" />
+      <comments id="706567" timestamp="2010-02-19T21:14:05" content="About Napole. About Ennio . About Robbie. About Shimmy. About Poland. About W." submitter="459" />
     </comments>
-    <comments post="705185" id="706562" timestamp="2010-02-19T07:09:36" content="roflol" submitter="459" />
-    <comments post="705185" id="706570" timestamp="2010-02-19T07:46:23" content="About Albert, . About Nicolás . About John Pee. About Louis Ar. About Ice Cube. Abou." submitter="459" />
-    <comments post="705185" id="706564" timestamp="2010-02-19T10:36:02" content="thanks" submitter="459" />
-    <comments post="705185" id="706572" timestamp="2010-02-19T18:28:30" content="About Margaret Thatc. About Mick Jagger, S. About Ice Cube, seri. About Bill Cosby, He. About Shimmy ." submitter="459" />
+    <comments id="706562" timestamp="2010-02-19T07:09:36" content="roflol" submitter="459" />
+    <comments id="706570" timestamp="2010-02-19T07:46:23" content="About Albert, . About Nicolás . About John Pee. About Louis Ar. About Ice Cube. Abou." submitter="459" />
+    <comments id="706564" timestamp="2010-02-19T10:36:02" content="thanks" submitter="459" />
+    <comments id="706572" timestamp="2010-02-19T18:28:30" content="About Margaret Thatc. About Mick Jagger, S. About Ice Cube, seri. About Bill Cosby, He. About Shimmy ." submitter="459" />
   </posts>
   <posts id="269908" timestamp="2010-02-18T21:11:13" content="" submitter="407" />
   <posts id="705193" timestamp="2010-02-18T22:26:58" content="" submitter="4273">
-    <comments post="705193" id="706620" timestamp="2010-02-18T22:27:12" content="About Bryan Adams,. About Gordon Brown. About 50 Cent, 200. About Björk, Th." submitter="459" />
+    <comments id="706620" timestamp="2010-02-18T22:27:12" content="About Bryan Adams,. About Gordon Brown. About 50 Cent, 200. About Björk, Th." submitter="459" />
   </posts>
   <posts id="585272" timestamp="2010-02-18T23:13:28" content="" submitter="2917" />
   <posts id="705228" timestamp="2010-02-19T02:04:28" content="" submitter="4273">
-    <comments post="705228" id="706924" timestamp="2010-02-19T05:03:42" content="right" submitter="459" />
-    <comments post="705228" id="706925" timestamp="2010-02-19T23:17:52" content="About Le. About Sa. About Ma. About Ni. About Ni. About 50. About Ma. About Ch. About Ch. ." submitter="459">
-      <comments post="705228" id="706926" timestamp="2010-02-20T01:14:43" content="great" submitter="459" />
-      <comments post="705228" id="706927" timestamp="2010-02-20T10:49:20" content="About. About. About. About. About. About. About. About. About. About. About. Abo." submitter="459" />
+    <comments id="706924" timestamp="2010-02-19T05:03:42" content="right" submitter="459" />
+    <comments id="706925" timestamp="2010-02-19T23:17:52" content="About Le. About Sa. About Ma. About Ni. About Ni. About 50. About Ma. About Ch. About Ch. ." submitter="459">
+      <comments id="706926" timestamp="2010-02-20T01:14:43" content="great" submitter="459" />
+      <comments id="706927" timestamp="2010-02-20T10:49:20" content="About. About. About. About. About. About. About. About. About. About. About. Abo." submitter="459" />
     </comments>
   </posts>
   <posts id="492040" timestamp="2010-02-19T02:58:09" content="photo492040.jpg" submitter="4643" />
@@ -283,24 +283,24 @@
   <posts id="1377619" timestamp="2010-02-19T03:03:31" content="photo1377619.jpg" submitter="2023" />
   <posts id="1377620" timestamp="2010-02-19T03:03:32" content="photo1377620.jpg" submitter="2023" />
   <posts id="705149" timestamp="2010-02-19T06:38:13" content="" submitter="4273">
-    <comments post="705149" id="706248" timestamp="2010-02-19T06:43:32" content="About James Brown, recording artist. He is the originator of funk music and is a major f." submitter="459">
-      <comments post="705149" id="706257" timestamp="2010-02-19T06:58:26" content="Dream a Little Dream of Me is a song with music by Fabian Andre and Wilbur Schwandt and lyrics by Gus Kahn. About Dream a Littl." submitter="459">
-        <comments post="705149" id="706261" timestamp="2010-02-19T12:38:24" content="About Felix Mendelssohn, in English-speaking countries, as Felix Mendelssohn (3 February 1809 –." submitter="459" />
+    <comments id="706248" timestamp="2010-02-19T06:43:32" content="About James Brown, recording artist. He is the originator of funk music and is a major f." submitter="459">
+      <comments id="706257" timestamp="2010-02-19T06:58:26" content="Dream a Little Dream of Me is a song with music by Fabian Andre and Wilbur Schwandt and lyrics by Gus Kahn. About Dream a Littl." submitter="459">
+        <comments id="706261" timestamp="2010-02-19T12:38:24" content="About Felix Mendelssohn, in English-speaking countries, as Felix Mendelssohn (3 February 1809 –." submitter="459" />
       </comments>
-      <comments post="705149" id="706250" timestamp="2010-02-19T15:07:51" content="I see" submitter="459" />
-      <comments post="705149" id="706258" timestamp="2010-02-19T19:33:11" content="thanks" submitter="459" />
-      <comments post="705149" id="706251" timestamp="2010-02-19T19:43:53" content="maybe" submitter="459" />
-      <comments post="705149" id="706249" timestamp="2010-02-19T20:11:43" content="duh" submitter="459" />
+      <comments id="706250" timestamp="2010-02-19T15:07:51" content="I see" submitter="459" />
+      <comments id="706258" timestamp="2010-02-19T19:33:11" content="thanks" submitter="459" />
+      <comments id="706251" timestamp="2010-02-19T19:43:53" content="maybe" submitter="459" />
+      <comments id="706249" timestamp="2010-02-19T20:11:43" content="duh" submitter="459" />
     </comments>
-    <comments post="705149" id="706260" timestamp="2010-02-19T07:05:13" content="cool" submitter="459" />
-    <comments post="705149" id="706253" timestamp="2010-02-19T07:21:33" content="About Gilbert du Motier, marquis de Lafayette, Battle of Brandywine, he still managed t." submitter="459">
-      <comments post="705149" id="706256" timestamp="2010-02-19T09:02:59" content="About Gilbert du Motier, marquis de Laf. About Michael Bloomberg, firm. A Demo." submitter="459" />
-      <comments post="705149" id="706255" timestamp="2010-02-19T09:20:05" content="cool" submitter="459" />
-      <comments post="705149" id="706259" timestamp="2010-02-20T02:43:50" content="right" submitter="459" />
+    <comments id="706260" timestamp="2010-02-19T07:05:13" content="cool" submitter="459" />
+    <comments id="706253" timestamp="2010-02-19T07:21:33" content="About Gilbert du Motier, marquis de Lafayette, Battle of Brandywine, he still managed t." submitter="459">
+      <comments id="706256" timestamp="2010-02-19T09:02:59" content="About Gilbert du Motier, marquis de Laf. About Michael Bloomberg, firm. A Demo." submitter="459" />
+      <comments id="706255" timestamp="2010-02-19T09:20:05" content="cool" submitter="459" />
+      <comments id="706259" timestamp="2010-02-20T02:43:50" content="right" submitter="459" />
     </comments>
-    <comments post="705149" id="706252" timestamp="2010-02-19T07:35:10" content="thx" submitter="459" />
-    <comments post="705149" id="706254" timestamp="2010-02-19T11:47:13" content="About Plato, letters have been ascribe. About Cary Grant, an Honorary Oscar ." submitter="459">
-      <comments post="705149" id="706262" timestamp="2010-02-19T11:52:01" content="I see" submitter="459" />
+    <comments id="706252" timestamp="2010-02-19T07:35:10" content="thx" submitter="459" />
+    <comments id="706254" timestamp="2010-02-19T11:47:13" content="About Plato, letters have been ascribe. About Cary Grant, an Honorary Oscar ." submitter="459">
+      <comments id="706262" timestamp="2010-02-19T11:52:01" content="I see" submitter="459" />
     </comments>
   </posts>
   <posts id="704893" timestamp="2010-02-19T08:50:53" content="photo704893.jpg" submitter="1564" />
@@ -319,39 +319,39 @@
   <posts id="704906" timestamp="2010-02-19T08:51:06" content="photo704906.jpg" submitter="1564" />
   <posts id="704907" timestamp="2010-02-19T08:51:07" content="photo704907.jpg" submitter="1564" />
   <posts id="723282" timestamp="2010-02-19T14:13:58" content="" submitter="2783">
-    <comments post="723282" id="726488" timestamp="2010-02-19T14:14:10" content="maybe" submitter="4755" />
-    <comments post="723282" id="726484" timestamp="2010-02-19T14:15:37" content="About Wolfgang Am. About Nikolai Rim. About Charlie Cha. About Rush Limbau. About Rock ." submitter="1103">
-      <comments post="723282" id="726493" timestamp="2010-02-19T23:32:08" content="About Wolfga. About Sheryl. About Kris K. About Rush L. About Scotla. About." submitter="4755">
-        <comments post="723282" id="726499" timestamp="2010-02-20T01:41:01" content="duh" submitter="1103" />
+    <comments id="726488" timestamp="2010-02-19T14:14:10" content="maybe" submitter="4755" />
+    <comments id="726484" timestamp="2010-02-19T14:15:37" content="About Wolfgang Am. About Nikolai Rim. About Charlie Cha. About Rush Limbau. About Rock ." submitter="1103">
+      <comments id="726493" timestamp="2010-02-19T23:32:08" content="About Wolfga. About Sheryl. About Kris K. About Rush L. About Scotla. About." submitter="4755">
+        <comments id="726499" timestamp="2010-02-20T01:41:01" content="duh" submitter="1103" />
       </comments>
     </comments>
-    <comments post="723282" id="726485" timestamp="2010-02-19T14:32:41" content="About Wolfgang Amade. About Augustus, by h. About Pope John Paul. About Charlie Ch." submitter="1103">
-      <comments post="723282" id="726490" timestamp="2010-02-19T14:54:49" content="I see" submitter="1103" />
-      <comments post="723282" id="726491" timestamp="2010-02-19T21:52:16" content="I see" submitter="1103" />
-      <comments post="723282" id="726489" timestamp="2010-02-20T13:41:38" content="About George Lucas, He is the founder, c. About Argentina, Cup, the Confederatio." submitter="1103">
-        <comments post="723282" id="726494" timestamp="2010-02-20T13:43:35" content="roflol" submitter="1103" />
+    <comments id="726485" timestamp="2010-02-19T14:32:41" content="About Wolfgang Amade. About Augustus, by h. About Pope John Paul. About Charlie Ch." submitter="1103">
+      <comments id="726490" timestamp="2010-02-19T14:54:49" content="I see" submitter="1103" />
+      <comments id="726491" timestamp="2010-02-19T21:52:16" content="I see" submitter="1103" />
+      <comments id="726489" timestamp="2010-02-20T13:41:38" content="About George Lucas, He is the founder, c. About Argentina, Cup, the Confederatio." submitter="1103">
+        <comments id="726494" timestamp="2010-02-20T13:43:35" content="roflol" submitter="1103" />
       </comments>
     </comments>
-    <comments post="723282" id="726495" timestamp="2010-02-19T17:05:54" content="About Wolfgang Amadeu. About Gustav Mahler, . About Augustus, remai. About Charlie C." submitter="1103" />
-    <comments post="723282" id="726496" timestamp="2010-02-19T17:37:56" content="ok" submitter="1103" />
-    <comments post="723282" id="726486" timestamp="2010-02-19T23:03:19" content="right" submitter="4755" />
-    <comments post="723282" id="726492" timestamp="2010-02-19T23:16:47" content="About Wolfgang Amadeus. About Herbert Hoover, . About Rush Limbaugh, U. About George B. M." submitter="4755">
-      <comments post="723282" id="726497" timestamp="2010-02-20T11:51:20" content="About Wolfgang . About Silvio Be. About Lil Jon, . About Rush Limb. About G." submitter="4755">
-        <comments post="723282" id="726498" timestamp="2010-02-20T18:33:25" content="fine" submitter="1103" />
+    <comments id="726495" timestamp="2010-02-19T17:05:54" content="About Wolfgang Amadeu. About Gustav Mahler, . About Augustus, remai. About Charlie C." submitter="1103" />
+    <comments id="726496" timestamp="2010-02-19T17:37:56" content="ok" submitter="1103" />
+    <comments id="726486" timestamp="2010-02-19T23:03:19" content="right" submitter="4755" />
+    <comments id="726492" timestamp="2010-02-19T23:16:47" content="About Wolfgang Amadeus. About Herbert Hoover, . About Rush Limbaugh, U. About George B. M." submitter="4755">
+      <comments id="726497" timestamp="2010-02-20T11:51:20" content="About Wolfgang . About Silvio Be. About Lil Jon, . About Rush Limb. About G." submitter="4755">
+        <comments id="726498" timestamp="2010-02-20T18:33:25" content="fine" submitter="1103" />
       </comments>
     </comments>
-    <comments post="723282" id="726483" timestamp="2010-02-19T23:28:20" content="roflol" submitter="4755" />
-    <comments post="723282" id="726487" timestamp="2010-02-20T09:15:45" content="good" submitter="4755" />
+    <comments id="726483" timestamp="2010-02-19T23:28:20" content="roflol" submitter="4755" />
+    <comments id="726487" timestamp="2010-02-20T09:15:45" content="good" submitter="4755" />
   </posts>
   <posts id="1160530" timestamp="2010-02-19T23:14:14" content="photo1160530.jpg" submitter="4231" />
   <posts id="1160531" timestamp="2010-02-19T23:14:15" content="photo1160531.jpg" submitter="4231" />
   <posts id="1160532" timestamp="2010-02-19T23:14:16" content="photo1160532.jpg" submitter="4231" />
   <posts id="1048852" timestamp="2010-02-20T00:12:16" content="" submitter="974" />
   <posts id="862824" timestamp="2010-02-20T06:36:16" content="" submitter="143">
-    <comments post="862824" id="863364" timestamp="2010-02-20T06:41:53" content="fine" submitter="4755" />
-    <comments post="862824" id="863367" timestamp="2010-02-20T11:13:03" content="duh" submitter="4755" />
-    <comments post="862824" id="863365" timestamp="2010-02-20T15:10:37" content="yes" submitter="1564" />
-    <comments post="862824" id="863366" timestamp="2010-02-20T17:25:12" content="no way!" submitter="4755" />
+    <comments id="863364" timestamp="2010-02-20T06:41:53" content="fine" submitter="4755" />
+    <comments id="863367" timestamp="2010-02-20T11:13:03" content="duh" submitter="4755" />
+    <comments id="863365" timestamp="2010-02-20T15:10:37" content="yes" submitter="1564" />
+    <comments id="863366" timestamp="2010-02-20T17:25:12" content="no way!" submitter="4755" />
   </posts>
   <posts id="704643" timestamp="2010-02-20T07:30:54" content="photo704643.jpg" submitter="1564" />
   <posts id="704644" timestamp="2010-02-20T07:30:55" content="photo704644.jpg" submitter="1564" />
@@ -365,31 +365,31 @@
   <posts id="704652" timestamp="2010-02-20T07:31:03" content="photo704652.jpg" submitter="1564" />
   <posts id="704653" timestamp="2010-02-20T07:31:04" content="photo704653.jpg" submitter="1564" />
   <posts id="167197" timestamp="2010-02-20T10:22:18" content="" submitter="555">
-    <comments post="167197" id="167610" timestamp="2010-02-20T10:32:04" content="maybe" submitter="3633" />
-    <comments post="167197" id="167616" timestamp="2010-02-20T10:33:04" content="I see" submitter="3633" />
-    <comments post="167197" id="167611" timestamp="2010-02-20T11:00:56" content="About Augustine of Hippo, Augustinus Hipponensis; November 13, 354 – August 28, 430), also . About Kingdom of the Two Sicilies, States. It was heavily agricultural, like the other It." submitter="94">
-      <comments post="167197" id="167623" timestamp="2010-02-20T11:13:25" content="About Augustine of Hippo, After his co. About Martin Van Buren, (1833–1837) a." submitter="94">
-        <comments post="167197" id="167627" timestamp="2010-02-20T11:13:37" content="yes" submitter="94" />
-        <comments post="167197" id="167624" timestamp="2010-02-20T13:43:21" content="thanks" submitter="3633" />
+    <comments id="167610" timestamp="2010-02-20T10:32:04" content="maybe" submitter="3633" />
+    <comments id="167616" timestamp="2010-02-20T10:33:04" content="I see" submitter="3633" />
+    <comments id="167611" timestamp="2010-02-20T11:00:56" content="About Augustine of Hippo, Augustinus Hipponensis; November 13, 354 – August 28, 430), also . About Kingdom of the Two Sicilies, States. It was heavily agricultural, like the other It." submitter="94">
+      <comments id="167623" timestamp="2010-02-20T11:13:25" content="About Augustine of Hippo, After his co. About Martin Van Buren, (1833–1837) a." submitter="94">
+        <comments id="167627" timestamp="2010-02-20T11:13:37" content="yes" submitter="94" />
+        <comments id="167624" timestamp="2010-02-20T13:43:21" content="thanks" submitter="3633" />
       </comments>
-      <comments post="167197" id="167622" timestamp="2010-02-20T19:55:35" content="thanks" submitter="94" />
-      <comments post="167197" id="167619" timestamp="2010-02-20T20:58:25" content="roflol" submitter="94" />
-      <comments post="167197" id="167621" timestamp="2010-02-21T04:34:50" content="no" submitter="3633" />
-      <comments post="167197" id="167620" timestamp="2010-02-21T09:50:22" content="thx" submitter="94" />
+      <comments id="167622" timestamp="2010-02-20T19:55:35" content="thanks" submitter="94" />
+      <comments id="167619" timestamp="2010-02-20T20:58:25" content="roflol" submitter="94" />
+      <comments id="167621" timestamp="2010-02-21T04:34:50" content="no" submitter="3633" />
+      <comments id="167620" timestamp="2010-02-21T09:50:22" content="thx" submitter="94" />
     </comments>
-    <comments post="167197" id="167613" timestamp="2010-02-20T12:34:22" content="LOL" submitter="3633" />
-    <comments post="167197" id="167612" timestamp="2010-02-20T15:49:28" content="About Gaetano Donizetti, works are the operas L'elisir d'amore (1832), Lucia di Lammermoor." submitter="94">
-      <comments post="167197" id="167617" timestamp="2010-02-20T15:50:32" content="About Gaetano Donizetti, works are the op. About Marie Antoinette, and Autre-chien." submitter="3633">
-        <comments post="167197" id="167625" timestamp="2010-02-20T15:51:38" content="About Margaret Thatcher, became associated with her uncompromising politics and le." submitter="3633" />
-        <comments post="167197" id="167626" timestamp="2010-02-21T03:15:21" content="thx" submitter="94" />
+    <comments id="167613" timestamp="2010-02-20T12:34:22" content="LOL" submitter="3633" />
+    <comments id="167612" timestamp="2010-02-20T15:49:28" content="About Gaetano Donizetti, works are the operas L'elisir d'amore (1832), Lucia di Lammermoor." submitter="94">
+      <comments id="167617" timestamp="2010-02-20T15:50:32" content="About Gaetano Donizetti, works are the op. About Marie Antoinette, and Autre-chien." submitter="3633">
+        <comments id="167625" timestamp="2010-02-20T15:51:38" content="About Margaret Thatcher, became associated with her uncompromising politics and le." submitter="3633" />
+        <comments id="167626" timestamp="2010-02-21T03:15:21" content="thx" submitter="94" />
       </comments>
-      <comments post="167197" id="167614" timestamp="2010-02-20T19:58:36" content="maybe" submitter="94" />
-      <comments post="167197" id="167615" timestamp="2010-02-21T05:44:43" content="duh" submitter="3633" />
+      <comments id="167614" timestamp="2010-02-20T19:58:36" content="maybe" submitter="94" />
+      <comments id="167615" timestamp="2010-02-21T05:44:43" content="duh" submitter="3633" />
     </comments>
-    <comments post="167197" id="167618" timestamp="2010-02-20T21:39:36" content="About Augustine of Hippo, Bishop of Hippo Re. About Cecil B. DeMille, Commandments, which." submitter="94">
-      <comments post="167197" id="167628" timestamp="2010-02-21T00:46:14" content="great" submitter="94" />
+    <comments id="167618" timestamp="2010-02-20T21:39:36" content="About Augustine of Hippo, Bishop of Hippo Re. About Cecil B. DeMille, Commandments, which." submitter="94">
+      <comments id="167628" timestamp="2010-02-21T00:46:14" content="great" submitter="94" />
     </comments>
-    <comments post="167197" id="167629" timestamp="2010-02-21T10:12:28" content="cool" submitter="3633" />
+    <comments id="167629" timestamp="2010-02-21T10:12:28" content="cool" submitter="3633" />
   </posts>
   <posts id="996812" timestamp="2010-02-20T10:36:22" content="photo996812.jpg" submitter="2609" />
   <posts id="996813" timestamp="2010-02-20T10:36:23" content="photo996813.jpg" submitter="2609" />
@@ -402,24 +402,24 @@
   <posts id="996820" timestamp="2010-02-20T10:36:30" content="photo996820.jpg" submitter="2609" />
   <posts id="996821" timestamp="2010-02-20T10:36:31" content="photo996821.jpg" submitter="2609" />
   <posts id="723212" timestamp="2010-02-21T02:39:59" content="" submitter="2783">
-    <comments likedBy="1103 4555 768 4755 1050" post="723212" id="725662" timestamp="2010-02-21T02:41:22" content="About Charles, Prince of Wales, he sponsors The Prince's Charities and is p." submitter="4755">
-      <comments post="723212" id="725663" timestamp="2010-02-21T02:41:32" content="good" submitter="4755" />
-      <comments post="723212" id="725674" timestamp="2010-02-21T08:02:01" content="ok" submitter="4755" />
-      <comments post="723212" id="725666" timestamp="2010-02-21T09:57:07" content="maybe" submitter="4755" />
-      <comments post="723212" id="725670" timestamp="2010-02-21T12:53:59" content="About Pope John XXIII, to see it to comp. About Charles, Prince of Wales, Parker." submitter="1103">
-        <comments post="723212" id="725671" timestamp="2010-02-21T12:54:59" content="yes" submitter="4755" />
-        <comments post="723212" id="725673" timestamp="2010-02-21T13:06:47" content="thanks" submitter="4755" />
+    <comments likedBy="1103 4555 768 4755 1050" id="725662" timestamp="2010-02-21T02:41:22" content="About Charles, Prince of Wales, he sponsors The Prince's Charities and is p." submitter="4755">
+      <comments id="725663" timestamp="2010-02-21T02:41:32" content="good" submitter="4755" />
+      <comments id="725674" timestamp="2010-02-21T08:02:01" content="ok" submitter="4755" />
+      <comments id="725666" timestamp="2010-02-21T09:57:07" content="maybe" submitter="4755" />
+      <comments id="725670" timestamp="2010-02-21T12:53:59" content="About Pope John XXIII, to see it to comp. About Charles, Prince of Wales, Parker." submitter="1103">
+        <comments id="725671" timestamp="2010-02-21T12:54:59" content="yes" submitter="4755" />
+        <comments id="725673" timestamp="2010-02-21T13:06:47" content="thanks" submitter="4755" />
       </comments>
-      <comments post="723212" id="725665" timestamp="2010-02-21T13:18:18" content="thx" submitter="1103" />
-      <comments post="723212" id="725664" timestamp="2010-02-21T13:47:18" content="yes" submitter="4755" />
-      <comments post="723212" id="725669" timestamp="2010-02-21T17:19:57" content="About Charles, Prince of Wales, Prince Philip. About Louis Armstrong, Renowned for his cha." submitter="4755">
-        <comments post="723212" id="725675" timestamp="2010-02-21T22:47:34" content="About Somalia, states in the world. Somalia lies in the easternmost part of Africa.." submitter="1103" />
-        <comments post="723212" id="725672" timestamp="2010-02-22T00:13:18" content="About Charles, Prince of Wal. About Louis Armstrong, an in. About Alec Baldwin, Actor." submitter="4755" />
+      <comments id="725665" timestamp="2010-02-21T13:18:18" content="thx" submitter="1103" />
+      <comments id="725664" timestamp="2010-02-21T13:47:18" content="yes" submitter="4755" />
+      <comments id="725669" timestamp="2010-02-21T17:19:57" content="About Charles, Prince of Wales, Prince Philip. About Louis Armstrong, Renowned for his cha." submitter="4755">
+        <comments id="725675" timestamp="2010-02-21T22:47:34" content="About Somalia, states in the world. Somalia lies in the easternmost part of Africa.." submitter="1103" />
+        <comments id="725672" timestamp="2010-02-22T00:13:18" content="About Charles, Prince of Wal. About Louis Armstrong, an in. About Alec Baldwin, Actor." submitter="4755" />
       </comments>
-      <comments post="723212" id="725668" timestamp="2010-02-21T22:04:26" content="no" submitter="1103" />
-      <comments post="723212" id="725667" timestamp="2010-02-21T22:28:24" content="right" submitter="4755" />
+      <comments id="725668" timestamp="2010-02-21T22:04:26" content="no" submitter="1103" />
+      <comments id="725667" timestamp="2010-02-21T22:28:24" content="right" submitter="4755" />
     </comments>
-    <comments post="723212" id="725661" timestamp="2010-02-21T21:38:32" content="thx" submitter="1103" />
+    <comments id="725661" timestamp="2010-02-21T21:38:32" content="thx" submitter="1103" />
   </posts>
   <posts id="1076403" timestamp="2010-02-21T02:53:31" content="photo1076403.jpg" submitter="1419" />
   <posts id="1076404" timestamp="2010-02-21T02:53:32" content="photo1076404.jpg" submitter="1419" />
@@ -515,24 +515,24 @@
   <posts id="722173" timestamp="2010-02-24T02:33:33" content="photo722173.jpg" submitter="267" />
   <posts id="1172371" timestamp="2010-02-24T10:10:32" content="photo1172371.jpg" submitter="683" />
   <posts id="723174" timestamp="2010-02-24T18:56:29" content="" submitter="2783">
-    <comments post="723174" id="725249" timestamp="2010-02-24T21:45:43" content="no" submitter="1103" />
-    <comments post="723174" id="725251" timestamp="2010-02-24T22:17:40" content="thanks" submitter="4555" />
-    <comments post="723174" id="725250" timestamp="2010-02-25T02:04:35" content="no way!" submitter="4755" />
-    <comments post="723174" id="725248" timestamp="2010-02-25T13:09:37" content="thx" submitter="1103" />
+    <comments id="725249" timestamp="2010-02-24T21:45:43" content="no" submitter="1103" />
+    <comments id="725251" timestamp="2010-02-24T22:17:40" content="thanks" submitter="4555" />
+    <comments id="725250" timestamp="2010-02-25T02:04:35" content="no way!" submitter="4755" />
+    <comments id="725248" timestamp="2010-02-25T13:09:37" content="thx" submitter="1103" />
   </posts>
   <posts id="167173" timestamp="2010-02-24T20:20:46" content="" submitter="555">
-    <comments post="167173" id="167358" timestamp="2010-02-24T20:25:13" content="great" submitter="3092" />
-    <comments post="167173" id="167357" timestamp="2010-02-24T20:25:54" content="great" submitter="3633" />
-    <comments post="167173" id="167359" timestamp="2010-02-25T07:07:13" content="About Britney Spears, making her one o. About Ringo Starr, Starr achieved so." submitter="3092">
-      <comments post="167173" id="167364" timestamp="2010-02-25T07:07:45" content="no way!" submitter="94" />
-      <comments post="167173" id="167360" timestamp="2010-02-25T07:10:02" content="About Lleyton Hewitt, 1, who has a current AT. About Ringo Starr, name Ringo Starr, is an ." submitter="94">
-        <comments post="167173" id="167366" timestamp="2010-02-25T07:10:16" content="no way!" submitter="94" />
+    <comments id="167358" timestamp="2010-02-24T20:25:13" content="great" submitter="3092" />
+    <comments id="167357" timestamp="2010-02-24T20:25:54" content="great" submitter="3633" />
+    <comments id="167359" timestamp="2010-02-25T07:07:13" content="About Britney Spears, making her one o. About Ringo Starr, Starr achieved so." submitter="3092">
+      <comments id="167364" timestamp="2010-02-25T07:07:45" content="no way!" submitter="94" />
+      <comments id="167360" timestamp="2010-02-25T07:10:02" content="About Lleyton Hewitt, 1, who has a current AT. About Ringo Starr, name Ringo Starr, is an ." submitter="94">
+        <comments id="167366" timestamp="2010-02-25T07:10:16" content="no way!" submitter="94" />
       </comments>
-      <comments post="167173" id="167363" timestamp="2010-02-25T07:30:41" content="yes" submitter="3092" />
-      <comments post="167173" id="167367" timestamp="2010-02-25T09:44:26" content="thx" submitter="94" />
-      <comments post="167173" id="167361" timestamp="2010-02-25T10:19:25" content="About Wolfgang Amadeus Mozart, compositions in the shadow of Mozart, and Joseph Hay." submitter="3633">
-        <comments post="167173" id="167362" timestamp="2010-02-25T14:50:49" content="About Paris Commune, the conditions in which it formed, its controversial decrees, and." submitter="94">
-          <comments post="167173" id="167365" timestamp="2010-02-25T15:09:47" content="ok" submitter="94" />
+      <comments id="167363" timestamp="2010-02-25T07:30:41" content="yes" submitter="3092" />
+      <comments id="167367" timestamp="2010-02-25T09:44:26" content="thx" submitter="94" />
+      <comments id="167361" timestamp="2010-02-25T10:19:25" content="About Wolfgang Amadeus Mozart, compositions in the shadow of Mozart, and Joseph Hay." submitter="3633">
+        <comments id="167362" timestamp="2010-02-25T14:50:49" content="About Paris Commune, the conditions in which it formed, its controversial decrees, and." submitter="94">
+          <comments id="167365" timestamp="2010-02-25T15:09:47" content="ok" submitter="94" />
         </comments>
       </comments>
     </comments>
@@ -550,37 +550,37 @@
   <posts id="215103" timestamp="2010-02-25T04:57:13" content="photo215103.jpg" submitter="1103" />
   <posts id="215104" timestamp="2010-02-25T04:57:14" content="photo215104.jpg" submitter="1103" />
   <posts id="701052" timestamp="2010-02-25T06:12:04" content="" submitter="1564">
-    <comments post="701052" id="702562" timestamp="2010-02-25T06:12:39" content="About Karl Marx, Marx is ty. About Robbie Williams, voca. About Britney Spears, in." submitter="1079">
-      <comments post="701052" id="702567" timestamp="2010-02-25T06:45:31" content="maybe" submitter="1079" />
-      <comments post="701052" id="702564" timestamp="2010-02-25T13:20:50" content="fine" submitter="1079" />
-      <comments post="701052" id="702566" timestamp="2010-02-25T16:38:37" content="great" submitter="1079" />
+    <comments id="702562" timestamp="2010-02-25T06:12:39" content="About Karl Marx, Marx is ty. About Robbie Williams, voca. About Britney Spears, in." submitter="1079">
+      <comments id="702567" timestamp="2010-02-25T06:45:31" content="maybe" submitter="1079" />
+      <comments id="702564" timestamp="2010-02-25T13:20:50" content="fine" submitter="1079" />
+      <comments id="702566" timestamp="2010-02-25T16:38:37" content="great" submitter="1079" />
     </comments>
-    <comments post="701052" id="702568" timestamp="2010-02-25T07:00:20" content="great" submitter="3825" />
-    <comments post="701052" id="702563" timestamp="2010-02-25T15:36:16" content="no way!" submitter="143" />
-    <comments post="701052" id="702565" timestamp="2010-02-25T18:58:40" content="ok" submitter="3825" />
+    <comments id="702568" timestamp="2010-02-25T07:00:20" content="great" submitter="3825" />
+    <comments id="702563" timestamp="2010-02-25T15:36:16" content="no way!" submitter="143" />
+    <comments id="702565" timestamp="2010-02-25T18:58:40" content="ok" submitter="3825" />
   </posts>
   <posts id="1048824" timestamp="2010-02-25T14:31:18" content="" submitter="974">
-    <comments post="1048824" id="1048972" timestamp="2010-02-25T14:35:29" content="cool" submitter="3705" />
-    <comments post="1048824" id="1048966" timestamp="2010-02-25T15:06:15" content="LOL" submitter="3705" />
-    <comments post="1048824" id="1048962" timestamp="2010-02-25T16:33:11" content="I see" submitter="3705" />
-    <comments post="1048824" id="1048963" timestamp="2010-02-25T21:35:46" content="LOL" submitter="3705" />
-    <comments post="1048824" id="1048964" timestamp="2010-02-25T21:54:59" content="yes" submitter="3705" />
-    <comments post="1048824" id="1048965" timestamp="2010-02-26T08:41:32" content="About Omar Sharif, Sharif (April 10, 1932) i. About Weird Al Yankovic, Single or Album, S." submitter="3705">
-      <comments post="1048824" id="1048969" timestamp="2010-02-26T09:03:21" content="thx" submitter="3705" />
-      <comments post="1048824" id="1048968" timestamp="2010-02-26T09:38:47" content="thx" submitter="3705" />
-      <comments post="1048824" id="1048970" timestamp="2010-02-26T10:28:34" content="fine" submitter="3705" />
-      <comments post="1048824" id="1048971" timestamp="2010-02-26T22:28:58" content="About Omar Sharif, films including Lawrence of Arabia, Doctor Zhivago and Fun. About Honky Château, on 11 October 1995 by the RIAA. This was the final Elto." submitter="3705" />
-      <comments post="1048824" id="1048967" timestamp="2010-02-27T05:35:41" content="ok" submitter="3705" />
+    <comments id="1048972" timestamp="2010-02-25T14:35:29" content="cool" submitter="3705" />
+    <comments id="1048966" timestamp="2010-02-25T15:06:15" content="LOL" submitter="3705" />
+    <comments id="1048962" timestamp="2010-02-25T16:33:11" content="I see" submitter="3705" />
+    <comments id="1048963" timestamp="2010-02-25T21:35:46" content="LOL" submitter="3705" />
+    <comments id="1048964" timestamp="2010-02-25T21:54:59" content="yes" submitter="3705" />
+    <comments id="1048965" timestamp="2010-02-26T08:41:32" content="About Omar Sharif, Sharif (April 10, 1932) i. About Weird Al Yankovic, Single or Album, S." submitter="3705">
+      <comments id="1048969" timestamp="2010-02-26T09:03:21" content="thx" submitter="3705" />
+      <comments id="1048968" timestamp="2010-02-26T09:38:47" content="thx" submitter="3705" />
+      <comments id="1048970" timestamp="2010-02-26T10:28:34" content="fine" submitter="3705" />
+      <comments id="1048971" timestamp="2010-02-26T22:28:58" content="About Omar Sharif, films including Lawrence of Arabia, Doctor Zhivago and Fun. About Honky Château, on 11 October 1995 by the RIAA. This was the final Elto." submitter="3705" />
+      <comments id="1048967" timestamp="2010-02-27T05:35:41" content="ok" submitter="3705" />
     </comments>
   </posts>
   <posts id="659035" timestamp="2010-02-25T15:15:05" content="" submitter="4624" />
   <posts id="700974" timestamp="2010-02-25T16:51:15" content="" submitter="1564">
-    <comments post="700974" id="701773" timestamp="2010-02-25T16:56:29" content="About Especially for You, for You was the fifth international single released from singer ." submitter="1079" />
-    <comments post="700974" id="701770" timestamp="2010-02-25T17:22:45" content="About Nigeria, jihadists who seek to establish sharia law. The people of Nigeria hav." submitter="3825">
-      <comments post="700974" id="701774" timestamp="2010-02-25T17:28:37" content="yes" submitter="3825" />
+    <comments id="701773" timestamp="2010-02-25T16:56:29" content="About Especially for You, for You was the fifth international single released from singer ." submitter="1079" />
+    <comments id="701770" timestamp="2010-02-25T17:22:45" content="About Nigeria, jihadists who seek to establish sharia law. The people of Nigeria hav." submitter="3825">
+      <comments id="701774" timestamp="2010-02-25T17:28:37" content="yes" submitter="3825" />
     </comments>
-    <comments post="700974" id="701771" timestamp="2010-02-25T18:38:57" content="ok" submitter="143" />
-    <comments post="700974" id="701772" timestamp="2010-02-25T19:57:12" content="About Andrew Johnson, in fighting and ending the rebellion; he implemented R." submitter="3825" />
+    <comments id="701771" timestamp="2010-02-25T18:38:57" content="ok" submitter="143" />
+    <comments id="701772" timestamp="2010-02-25T19:57:12" content="About Andrew Johnson, in fighting and ending the rebellion; he implemented R." submitter="3825" />
   </posts>
   <posts id="747410" timestamp="2010-02-26T02:19:27" content="photo747410.jpg" submitter="3688" />
   <posts id="747411" timestamp="2010-02-26T02:19:28" content="photo747411.jpg" submitter="3688" />
@@ -600,57 +600,57 @@
   <posts id="197075" timestamp="2010-02-26T04:13:05" content="photo197075.jpg" submitter="1909" />
   <posts id="197076" timestamp="2010-02-26T04:13:06" content="photo197076.jpg" submitter="1909" />
   <posts id="700933" timestamp="2010-02-26T05:07:12" content="" submitter="1564">
-    <comments post="700933" id="701287" timestamp="2010-02-26T05:07:22" content="maybe" submitter="3825" />
-    <comments post="700933" id="701291" timestamp="2010-02-26T05:14:20" content="thanks" submitter="143" />
-    <comments post="700933" id="701286" timestamp="2010-02-26T06:26:16" content="good" submitter="1079" />
-    <comments post="700933" id="701290" timestamp="2010-02-26T06:26:59" content="I see" submitter="143" />
-    <comments post="700933" id="701285" timestamp="2010-02-26T06:32:59" content="no" submitter="143" />
-    <comments post="700933" id="701289" timestamp="2010-02-26T11:11:03" content="About John Howard, of Ki. About Dmitry Medvedev, e. About Rain on Your Parad. About Brazil, Cabra." submitter="143">
-      <comments post="700933" id="701292" timestamp="2010-02-26T17:47:04" content="thx" submitter="143" />
-      <comments post="700933" id="701295" timestamp="2010-02-26T19:07:02" content="About Henry II of England, fought what has been termed a cold war over several decades. H. About Igor Stravinsky, a few two- or three-note cells and clarity of form, of instrumen." submitter="143" />
-      <comments post="700933" id="701296" timestamp="2010-02-27T05:12:01" content="I see" submitter="143" />
+    <comments id="701287" timestamp="2010-02-26T05:07:22" content="maybe" submitter="3825" />
+    <comments id="701291" timestamp="2010-02-26T05:14:20" content="thanks" submitter="143" />
+    <comments id="701286" timestamp="2010-02-26T06:26:16" content="good" submitter="1079" />
+    <comments id="701290" timestamp="2010-02-26T06:26:59" content="I see" submitter="143" />
+    <comments id="701285" timestamp="2010-02-26T06:32:59" content="no" submitter="143" />
+    <comments id="701289" timestamp="2010-02-26T11:11:03" content="About John Howard, of Ki. About Dmitry Medvedev, e. About Rain on Your Parad. About Brazil, Cabra." submitter="143">
+      <comments id="701292" timestamp="2010-02-26T17:47:04" content="thx" submitter="143" />
+      <comments id="701295" timestamp="2010-02-26T19:07:02" content="About Henry II of England, fought what has been termed a cold war over several decades. H. About Igor Stravinsky, a few two- or three-note cells and clarity of form, of instrumen." submitter="143" />
+      <comments id="701296" timestamp="2010-02-27T05:12:01" content="I see" submitter="143" />
     </comments>
-    <comments post="700933" id="701294" timestamp="2010-02-26T11:46:22" content="About John Howard,. About Antonín Dvoř. About T-Pain. About Joan Crawfor. ." submitter="3825" />
-    <comments post="700933" id="701293" timestamp="2010-02-26T13:41:28" content="cool" submitter="143" />
-    <comments post="700933" id="701284" timestamp="2010-02-26T18:02:20" content="ok" submitter="3825" />
-    <comments post="700933" id="701288" timestamp="2010-02-27T04:20:50" content="LOL" submitter="143" />
+    <comments id="701294" timestamp="2010-02-26T11:46:22" content="About John Howard,. About Antonín Dvoř. About T-Pain. About Joan Crawfor. ." submitter="3825" />
+    <comments id="701293" timestamp="2010-02-26T13:41:28" content="cool" submitter="143" />
+    <comments id="701284" timestamp="2010-02-26T18:02:20" content="ok" submitter="3825" />
+    <comments id="701288" timestamp="2010-02-27T04:20:50" content="LOL" submitter="143" />
   </posts>
   <posts id="1076642" timestamp="2010-02-26T06:46:01" content="" submitter="3092">
-    <comments post="1076642" id="1076675" timestamp="2010-02-26T06:48:02" content="fine" submitter="555" />
-    <comments post="1076642" id="1076672" timestamp="2010-02-26T06:48:27" content="ok" submitter="555" />
-    <comments post="1076642" id="1076676" timestamp="2010-02-26T19:40:39" content="thx" submitter="555" />
-    <comments post="1076642" id="1076681" timestamp="2010-02-26T23:15:09" content="great" submitter="555" />
-    <comments post="1076642" id="1076677" timestamp="2010-02-26T23:50:03" content="About Galileo Galilei, into the greater, oscillating relationship of science. About Richard Dawkins, Watchmaker, he argued against the watchmaker analog." submitter="555">
-      <comments post="1076642" id="1076684" timestamp="2010-02-26T23:50:29" content="About Galileo Galilei, Barbican Theatre. Music by Philip Glass, libretto and original. About Dionne Warwick, and a United States Ambassador of Health. Having been in . Ab." submitter="555" />
-      <comments post="1076642" id="1076678" timestamp="2010-02-26T23:51:27" content="LOL" submitter="555" />
-      <comments post="1076642" id="1076682" timestamp="2010-02-27T10:59:07" content="About Galileo Galilei, through Galileo'. About Claude Debussy, Debussy (22 Aug." submitter="555">
-        <comments post="1076642" id="1076683" timestamp="2010-02-27T11:00:50" content="I see" submitter="555" />
+    <comments id="1076675" timestamp="2010-02-26T06:48:02" content="fine" submitter="555" />
+    <comments id="1076672" timestamp="2010-02-26T06:48:27" content="ok" submitter="555" />
+    <comments id="1076676" timestamp="2010-02-26T19:40:39" content="thx" submitter="555" />
+    <comments id="1076681" timestamp="2010-02-26T23:15:09" content="great" submitter="555" />
+    <comments id="1076677" timestamp="2010-02-26T23:50:03" content="About Galileo Galilei, into the greater, oscillating relationship of science. About Richard Dawkins, Watchmaker, he argued against the watchmaker analog." submitter="555">
+      <comments id="1076684" timestamp="2010-02-26T23:50:29" content="About Galileo Galilei, Barbican Theatre. Music by Philip Glass, libretto and original. About Dionne Warwick, and a United States Ambassador of Health. Having been in . Ab." submitter="555" />
+      <comments id="1076678" timestamp="2010-02-26T23:51:27" content="LOL" submitter="555" />
+      <comments id="1076682" timestamp="2010-02-27T10:59:07" content="About Galileo Galilei, through Galileo'. About Claude Debussy, Debussy (22 Aug." submitter="555">
+        <comments id="1076683" timestamp="2010-02-27T11:00:50" content="I see" submitter="555" />
       </comments>
-      <comments post="1076642" id="1076690" timestamp="2010-02-27T18:50:52" content="right" submitter="555" />
+      <comments id="1076690" timestamp="2010-02-27T18:50:52" content="right" submitter="555" />
     </comments>
-    <comments post="1076642" id="1076673" timestamp="2010-02-27T05:41:17" content="About Galileo Galilei, the opera has been r. About Gloria Macapagal-Arroyo, Jr. on Jan." submitter="555">
-      <comments post="1076642" id="1076674" timestamp="2010-02-27T05:43:02" content="roflol" submitter="555" />
-      <comments post="1076642" id="1076680" timestamp="2010-02-27T05:47:11" content="roflol" submitter="555" />
-      <comments post="1076642" id="1076685" timestamp="2010-02-27T11:36:09" content="good" submitter="555" />
-      <comments post="1076642" id="1076686" timestamp="2010-02-27T14:31:07" content="About Galileo Galilei, Gal. About Gloria Macapagal-Arr. About Equatorial Guine." submitter="555">
-        <comments post="1076642" id="1076689" timestamp="2010-02-27T22:48:01" content="no" submitter="555" />
+    <comments id="1076673" timestamp="2010-02-27T05:41:17" content="About Galileo Galilei, the opera has been r. About Gloria Macapagal-Arroyo, Jr. on Jan." submitter="555">
+      <comments id="1076674" timestamp="2010-02-27T05:43:02" content="roflol" submitter="555" />
+      <comments id="1076680" timestamp="2010-02-27T05:47:11" content="roflol" submitter="555" />
+      <comments id="1076685" timestamp="2010-02-27T11:36:09" content="good" submitter="555" />
+      <comments id="1076686" timestamp="2010-02-27T14:31:07" content="About Galileo Galilei, Gal. About Gloria Macapagal-Arr. About Equatorial Guine." submitter="555">
+        <comments id="1076689" timestamp="2010-02-27T22:48:01" content="no" submitter="555" />
       </comments>
-      <comments post="1076642" id="1076688" timestamp="2010-02-27T15:43:02" content="LOL" submitter="555" />
-      <comments post="1076642" id="1076679" timestamp="2010-02-27T20:12:39" content="duh" submitter="555" />
-      <comments post="1076642" id="1076687" timestamp="2010-02-28T04:29:05" content="About Paul Hindemith, 1895 – 28 December 1963) was a German composer, violist, violinis." submitter="555" />
+      <comments id="1076688" timestamp="2010-02-27T15:43:02" content="LOL" submitter="555" />
+      <comments id="1076679" timestamp="2010-02-27T20:12:39" content="duh" submitter="555" />
+      <comments id="1076687" timestamp="2010-02-28T04:29:05" content="About Paul Hindemith, 1895 – 28 December 1963) was a German composer, violist, violinis." submitter="555" />
     </comments>
   </posts>
   <posts id="723076" timestamp="2010-02-26T08:18:20" content="" submitter="2783">
-    <comments post="723076" id="724193" timestamp="2010-02-26T09:42:32" content="About Wolfgang Amadeus Mozart, with the dark. About Take a Look in the Mirror, album to ." submitter="4555">
-      <comments post="723076" id="724194" timestamp="2010-02-26T09:57:05" content="thanks" submitter="1222" />
-      <comments post="723076" id="724197" timestamp="2010-02-26T14:53:34" content="About Wolfgang Amadeus Mozart, and tw. About Leonardo DiCaprio, Productions." submitter="1103">
-        <comments post="723076" id="724198" timestamp="2010-02-26T14:53:49" content="great" submitter="1103" />
+    <comments id="724193" timestamp="2010-02-26T09:42:32" content="About Wolfgang Amadeus Mozart, with the dark. About Take a Look in the Mirror, album to ." submitter="4555">
+      <comments id="724194" timestamp="2010-02-26T09:57:05" content="thanks" submitter="1222" />
+      <comments id="724197" timestamp="2010-02-26T14:53:34" content="About Wolfgang Amadeus Mozart, and tw. About Leonardo DiCaprio, Productions." submitter="1103">
+        <comments id="724198" timestamp="2010-02-26T14:53:49" content="great" submitter="1103" />
       </comments>
-      <comments post="723076" id="724196" timestamp="2010-02-27T04:59:53" content="About Pope Pius X, and evolution. He eliminated the Italian majority in the College of ." submitter="768" />
+      <comments id="724196" timestamp="2010-02-27T04:59:53" content="About Pope Pius X, and evolution. He eliminated the Italian majority in the College of ." submitter="768" />
     </comments>
-    <comments post="723076" id="724195" timestamp="2010-02-26T10:41:09" content="fine" submitter="1103" />
-    <comments post="723076" id="724192" timestamp="2010-02-26T14:08:55" content="ok" submitter="4755" />
-    <comments post="723076" id="724191" timestamp="2010-02-27T00:52:17" content="thx" submitter="1050" />
+    <comments id="724195" timestamp="2010-02-26T10:41:09" content="fine" submitter="1103" />
+    <comments id="724192" timestamp="2010-02-26T14:08:55" content="ok" submitter="4755" />
+    <comments id="724191" timestamp="2010-02-27T00:52:17" content="thx" submitter="1050" />
   </posts>
   <posts id="751307" timestamp="2010-02-26T10:34:10" content="photo751307.jpg" submitter="4831" />
   <posts id="751308" timestamp="2010-02-26T10:34:11" content="photo751308.jpg" submitter="4831" />
@@ -702,8 +702,8 @@
   <posts id="299449" timestamp="2010-02-26T20:09:24" content="photo299449.jpg" submitter="4661" />
   <posts id="299450" timestamp="2010-02-26T20:09:25" content="photo299450.jpg" submitter="4661" />
   <posts id="1029331" timestamp="2010-02-26T20:16:05" content="" submitter="2886">
-    <comments post="1029331" id="1029464" timestamp="2010-02-26T20:23:49" content="fine" submitter="4231" />
-    <comments post="1029331" id="1029465" timestamp="2010-02-27T08:02:47" content="roflol" submitter="4231" />
+    <comments id="1029464" timestamp="2010-02-26T20:23:49" content="fine" submitter="4231" />
+    <comments id="1029465" timestamp="2010-02-27T08:02:47" content="roflol" submitter="4231" />
   </posts>
   <posts id="331828" timestamp="2010-02-26T23:13:20" content="photo331828.jpg" submitter="4178" />
   <posts id="331829" timestamp="2010-02-26T23:13:21" content="photo331829.jpg" submitter="4178" />
@@ -720,14 +720,14 @@
   <posts id="331840" timestamp="2010-02-26T23:13:32" content="photo331840.jpg" submitter="4178" />
   <posts id="331841" timestamp="2010-02-26T23:13:33" content="photo331841.jpg" submitter="4178" />
   <posts id="269843" timestamp="2010-02-27T01:57:09" content="" submitter="407">
-    <comments post="269843" id="270072" timestamp="2010-02-27T02:54:39" content="maybe" submitter="3331" />
-    <comments post="269843" id="270071" timestamp="2010-02-27T07:15:59" content="About Garry Kasparov, Karpov. He held the off. About Adam Smith, Smith is the author of Th." submitter="3331">
-      <comments post="269843" id="270074" timestamp="2010-02-27T07:26:42" content="About Garry Kasparov, up . About Chiang Kai-shek, Af. About Adam Smith, phi." submitter="3331">
-        <comments post="269843" id="270075" timestamp="2010-02-27T10:08:14" content="right" submitter="3331" />
+    <comments id="270072" timestamp="2010-02-27T02:54:39" content="maybe" submitter="3331" />
+    <comments id="270071" timestamp="2010-02-27T07:15:59" content="About Garry Kasparov, Karpov. He held the off. About Adam Smith, Smith is the author of Th." submitter="3331">
+      <comments id="270074" timestamp="2010-02-27T07:26:42" content="About Garry Kasparov, up . About Chiang Kai-shek, Af. About Adam Smith, phi." submitter="3331">
+        <comments id="270075" timestamp="2010-02-27T10:08:14" content="right" submitter="3331" />
       </comments>
-      <comments post="269843" id="270073" timestamp="2010-02-27T17:46:16" content="yes" submitter="3331" />
+      <comments id="270073" timestamp="2010-02-27T17:46:16" content="yes" submitter="3331" />
     </comments>
-    <comments post="269843" id="270070" timestamp="2010-02-27T15:59:53" content="thanks" submitter="3331" />
+    <comments id="270070" timestamp="2010-02-27T15:59:53" content="thanks" submitter="3331" />
   </posts>
   <posts id="731488" timestamp="2010-02-27T08:47:23" content="" submitter="4986" />
   <posts id="1428047" timestamp="2010-02-27T11:40:56" content="photo1428047.jpg" submitter="702" />
@@ -737,15 +737,15 @@
   <posts id="1428051" timestamp="2010-02-27T11:41:00" content="photo1428051.jpg" submitter="702" />
   <posts id="1428052" timestamp="2010-02-27T11:41:01" content="photo1428052.jpg" submitter="702" />
   <posts id="404069" timestamp="2010-02-27T21:49:52" content="" submitter="3705">
-    <comments post="404069" id="405021" timestamp="2010-02-28T00:54:11" content="roflol" submitter="2886" />
-    <comments post="404069" id="405018" timestamp="2010-02-28T01:06:31" content="About Cyndi Lauper, top five singles b. About Subterranean Homesick Blues, cl." submitter="2886" />
-    <comments post="404069" id="405019" timestamp="2010-02-28T08:28:27" content="roflol" submitter="2886" />
-    <comments post="404069" id="405020" timestamp="2010-02-28T11:43:01" content="About Herbert Kitchener, 1st Earl Kitchener, that he consistently rose in ability as he . About Subterranean Homesick Blues, as the lead track to the album Bringing It All Back ." submitter="974" />
-    <comments post="404069" id="405017" timestamp="2010-02-28T16:24:32" content="fine" submitter="2886" />
+    <comments id="405021" timestamp="2010-02-28T00:54:11" content="roflol" submitter="2886" />
+    <comments id="405018" timestamp="2010-02-28T01:06:31" content="About Cyndi Lauper, top five singles b. About Subterranean Homesick Blues, cl." submitter="2886" />
+    <comments id="405019" timestamp="2010-02-28T08:28:27" content="roflol" submitter="2886" />
+    <comments id="405020" timestamp="2010-02-28T11:43:01" content="About Herbert Kitchener, 1st Earl Kitchener, that he consistently rose in ability as he . About Subterranean Homesick Blues, as the lead track to the album Bringing It All Back ." submitter="974" />
+    <comments id="405017" timestamp="2010-02-28T16:24:32" content="fine" submitter="2886" />
   </posts>
   <posts id="230755" timestamp="2010-02-28T04:42:08" content="" submitter="4644">
-    <comments post="230755" id="230891" timestamp="2010-02-28T05:06:32" content="About George H. W. Bush, of his son G. About Walking After You, a 1998 sin." submitter="4555" />
-    <comments post="230755" id="230890" timestamp="2010-03-01T02:58:28" content="About Louis XIV of France, Per. About Nikolai Rimsky-Korsakov,. About Nancy Pelosi, A memb." submitter="4555" />
+    <comments id="230891" timestamp="2010-02-28T05:06:32" content="About George H. W. Bush, of his son G. About Walking After You, a 1998 sin." submitter="4555" />
+    <comments id="230890" timestamp="2010-03-01T02:58:28" content="About Louis XIV of France, Per. About Nikolai Rimsky-Korsakov,. About Nancy Pelosi, A memb." submitter="4555" />
   </posts>
   <posts id="1428225" timestamp="2010-02-28T07:17:54" content="photo1428225.jpg" submitter="702" />
   <posts id="1428226" timestamp="2010-02-28T07:17:55" content="photo1428226.jpg" submitter="702" />
@@ -776,15 +776,15 @@
   <posts id="64104" timestamp="2010-03-01T04:17:42" content="photo64104.jpg" submitter="4296" />
   <posts id="64105" timestamp="2010-03-01T04:17:43" content="photo64105.jpg" submitter="4296" />
   <posts id="215398" timestamp="2010-03-01T12:14:29" content="" submitter="3331">
-    <comments post="215398" id="215444" timestamp="2010-03-01T12:14:57" content="About Harry S. Truman, respon. About 50 Cent, which is set t. About Weird Al Yankovic, Outt. About Howard Stern, style." submitter="407">
-      <comments post="215398" id="215448" timestamp="2010-03-01T12:15:12" content="yes" submitter="407" />
-      <comments post="215398" id="215450" timestamp="2010-03-02T10:11:01" content="About Harry S. Truman, re. About Poodle Hat, cover w. About The High End of L." submitter="407" />
+    <comments id="215444" timestamp="2010-03-01T12:14:57" content="About Harry S. Truman, respon. About 50 Cent, which is set t. About Weird Al Yankovic, Outt. About Howard Stern, style." submitter="407">
+      <comments id="215448" timestamp="2010-03-01T12:15:12" content="yes" submitter="407" />
+      <comments id="215450" timestamp="2010-03-02T10:11:01" content="About Harry S. Truman, re. About Poodle Hat, cover w. About The High End of L." submitter="407" />
     </comments>
-    <comments post="215398" id="215449" timestamp="2010-03-01T12:16:16" content="no way!" submitter="407" />
-    <comments post="215398" id="215445" timestamp="2010-03-01T14:39:11" content="I see" submitter="407" />
-    <comments post="215398" id="215443" timestamp="2010-03-02T08:33:21" content="About Che Gueva. About Pope John. About Jarmila G. About Hernán Co. About Malaysia,. About Georges B. Abou." submitter="407">
-      <comments post="215398" id="215446" timestamp="2010-03-02T10:39:57" content="About Che Guev. About Plato. About Ozzy Osb. About Mary, Qu. About Richard . About Ma." submitter="407">
-        <comments post="215398" id="215447" timestamp="2010-03-02T18:06:47" content="thanks" submitter="407" />
+    <comments id="215449" timestamp="2010-03-01T12:16:16" content="no way!" submitter="407" />
+    <comments id="215445" timestamp="2010-03-01T14:39:11" content="I see" submitter="407" />
+    <comments id="215443" timestamp="2010-03-02T08:33:21" content="About Che Gueva. About Pope John. About Jarmila G. About Hernán Co. About Malaysia,. About Georges B. Abou." submitter="407">
+      <comments id="215446" timestamp="2010-03-02T10:39:57" content="About Che Guev. About Plato. About Ozzy Osb. About Mary, Qu. About Richard . About Ma." submitter="407">
+        <comments id="215447" timestamp="2010-03-02T18:06:47" content="thanks" submitter="407" />
       </comments>
     </comments>
   </posts>
@@ -808,168 +808,168 @@
   <posts id="254982" timestamp="2010-03-01T13:06:43" content="photo254982.jpg" submitter="512" />
   <posts id="254983" timestamp="2010-03-01T13:06:44" content="photo254983.jpg" submitter="512" />
   <posts id="404233" timestamp="2010-03-01T16:32:29" content="" submitter="3705">
-    <comments post="404233" id="406729" timestamp="2010-03-02T00:55:35" content="LOL" submitter="2886" />
+    <comments id="406729" timestamp="2010-03-02T00:55:35" content="LOL" submitter="2886" />
   </posts>
   <posts id="967206" timestamp="2010-03-01T16:44:17" content="" submitter="2004">
-    <comments post="967206" id="967394" timestamp="2010-03-01T19:10:28" content="LOL" submitter="4555" />
-    <comments post="967206" id="967393" timestamp="2010-03-02T12:01:30" content="LOL" submitter="4555" />
+    <comments id="967394" timestamp="2010-03-01T19:10:28" content="LOL" submitter="4555" />
+    <comments id="967393" timestamp="2010-03-02T12:01:30" content="LOL" submitter="4555" />
   </posts>
   <posts id="404315" timestamp="2010-03-01T21:15:14" content="" submitter="3705">
-    <comments post="404315" id="407581" timestamp="2010-03-01T22:52:01" content="good" submitter="974" />
-    <comments post="404315" id="407580" timestamp="2010-03-02T01:12:12" content="right" submitter="2886" />
-    <comments post="404315" id="407587" timestamp="2010-03-02T04:02:34" content="no" submitter="974" />
-    <comments post="404315" id="407586" timestamp="2010-03-02T09:25:56" content="no" submitter="2886" />
-    <comments post="404315" id="407582" timestamp="2010-03-02T10:43:30" content="About Jim Ca. About Sigmun. About Jarmil. About London. About Moby, . About." submitter="974">
-      <comments post="404315" id="407595" timestamp="2010-03-02T10:44:46" content="good" submitter="2886" />
-      <comments post="404315" id="407584" timestamp="2010-03-02T13:13:04" content="cool" submitter="974" />
-      <comments post="404315" id="407592" timestamp="2010-03-02T16:01:34" content="right" submitter="2608" />
-      <comments post="404315" id="407596" timestamp="2010-03-03T08:59:30" content="I see" submitter="974" />
+    <comments id="407581" timestamp="2010-03-01T22:52:01" content="good" submitter="974" />
+    <comments id="407580" timestamp="2010-03-02T01:12:12" content="right" submitter="2886" />
+    <comments id="407587" timestamp="2010-03-02T04:02:34" content="no" submitter="974" />
+    <comments id="407586" timestamp="2010-03-02T09:25:56" content="no" submitter="2886" />
+    <comments id="407582" timestamp="2010-03-02T10:43:30" content="About Jim Ca. About Sigmun. About Jarmil. About London. About Moby, . About." submitter="974">
+      <comments id="407595" timestamp="2010-03-02T10:44:46" content="good" submitter="2886" />
+      <comments id="407584" timestamp="2010-03-02T13:13:04" content="cool" submitter="974" />
+      <comments id="407592" timestamp="2010-03-02T16:01:34" content="right" submitter="2608" />
+      <comments id="407596" timestamp="2010-03-03T08:59:30" content="I see" submitter="974" />
     </comments>
-    <comments post="404315" id="407583" timestamp="2010-03-02T11:25:23" content="About Augustus, i. About Jarmila Gaj. About Thomas Edis. About Moby, a sty. About Coppe." submitter="974">
-      <comments post="404315" id="407597" timestamp="2010-03-02T11:25:36" content="right" submitter="1259" />
-      <comments post="404315" id="407591" timestamp="2010-03-02T12:09:03" content="About Mary of T. About Weird Al . About Dustin Ho. About Moby, Jac. About C." submitter="2886">
-        <comments post="404315" id="407593" timestamp="2010-03-02T17:20:18" content="no" submitter="974" />
-        <comments post="404315" id="407594" timestamp="2010-03-02T23:50:16" content="LOL" submitter="2608" />
+    <comments id="407583" timestamp="2010-03-02T11:25:23" content="About Augustus, i. About Jarmila Gaj. About Thomas Edis. About Moby, a sty. About Coppe." submitter="974">
+      <comments id="407597" timestamp="2010-03-02T11:25:36" content="right" submitter="1259" />
+      <comments id="407591" timestamp="2010-03-02T12:09:03" content="About Mary of T. About Weird Al . About Dustin Ho. About Moby, Jac. About C." submitter="2886">
+        <comments id="407593" timestamp="2010-03-02T17:20:18" content="no" submitter="974" />
+        <comments id="407594" timestamp="2010-03-02T23:50:16" content="LOL" submitter="2608" />
       </comments>
-      <comments post="404315" id="407589" timestamp="2010-03-03T00:12:13" content="great" submitter="2608" />
-      <comments post="404315" id="407585" timestamp="2010-03-03T00:36:04" content="great" submitter="1259" />
-      <comments post="404315" id="407590" timestamp="2010-03-03T05:18:33" content="duh" submitter="1259" />
-      <comments post="404315" id="407588" timestamp="2010-03-03T06:21:57" content="thx" submitter="974" />
+      <comments id="407589" timestamp="2010-03-03T00:12:13" content="great" submitter="2608" />
+      <comments id="407585" timestamp="2010-03-03T00:36:04" content="great" submitter="1259" />
+      <comments id="407590" timestamp="2010-03-03T05:18:33" content="duh" submitter="1259" />
+      <comments id="407588" timestamp="2010-03-03T06:21:57" content="thx" submitter="974" />
     </comments>
-    <comments post="404315" id="407579" timestamp="2010-03-02T16:53:32" content="no way!" submitter="2608" />
+    <comments id="407579" timestamp="2010-03-02T16:53:32" content="no way!" submitter="2608" />
   </posts>
   <posts id="215399" timestamp="2010-03-01T22:36:59" content="" submitter="3331">
-    <comments post="215399" id="215460" timestamp="2010-03-01T22:38:05" content="good" submitter="407" />
-    <comments post="215399" id="215451" timestamp="2010-03-01T23:42:05" content="About Franz Kafka, ex. About Queen Elizabeth. About Abraham Lincoln. About Weird Al Ya." submitter="407">
-      <comments post="215399" id="215453" timestamp="2010-03-01T23:50:11" content="About Franz Kafka, to the aut. About Queen Elizabeth The Que. About Douglas MacArthur, U.S.. About Edward II of Engla." submitter="407">
-        <comments post="215399" id="215455" timestamp="2010-03-02T16:44:38" content="About Franz Kaf. About W. B. Yea. About Douglas M. About Edward II. About Abrah." submitter="407">
-          <comments post="215399" id="215457" timestamp="2010-03-02T20:18:00" content="thanks" submitter="407" />
-          <comments post="215399" id="215456" timestamp="2010-03-02T20:44:26" content="fine" submitter="407" />
-          <comments post="215399" id="215461" timestamp="2010-03-03T04:42:17" content="thanks" submitter="407" />
-          <comments post="215399" id="215462" timestamp="2010-03-03T08:35:18" content="About Samuel Beck. About Douglas Mac. About Dennis Hopp. About Giuseppe Ve. About Edward." submitter="407" />
+    <comments id="215460" timestamp="2010-03-01T22:38:05" content="good" submitter="407" />
+    <comments id="215451" timestamp="2010-03-01T23:42:05" content="About Franz Kafka, ex. About Queen Elizabeth. About Abraham Lincoln. About Weird Al Ya." submitter="407">
+      <comments id="215453" timestamp="2010-03-01T23:50:11" content="About Franz Kafka, to the aut. About Queen Elizabeth The Que. About Douglas MacArthur, U.S.. About Edward II of Engla." submitter="407">
+        <comments id="215455" timestamp="2010-03-02T16:44:38" content="About Franz Kaf. About W. B. Yea. About Douglas M. About Edward II. About Abrah." submitter="407">
+          <comments id="215457" timestamp="2010-03-02T20:18:00" content="thanks" submitter="407" />
+          <comments id="215456" timestamp="2010-03-02T20:44:26" content="fine" submitter="407" />
+          <comments id="215461" timestamp="2010-03-03T04:42:17" content="thanks" submitter="407" />
+          <comments id="215462" timestamp="2010-03-03T08:35:18" content="About Samuel Beck. About Douglas Mac. About Dennis Hopp. About Giuseppe Ve. About Edward." submitter="407" />
         </comments>
       </comments>
-      <comments post="215399" id="215454" timestamp="2010-03-02T06:08:16" content="good" submitter="407" />
-      <comments post="215399" id="215458" timestamp="2010-03-02T09:20:01" content="right" submitter="407" />
+      <comments id="215454" timestamp="2010-03-02T06:08:16" content="good" submitter="407" />
+      <comments id="215458" timestamp="2010-03-02T09:20:01" content="right" submitter="407" />
     </comments>
-    <comments post="215399" id="215459" timestamp="2010-03-02T00:30:50" content="About Clint Eastwood, (1979), Tightrope (1984). About England, England's Royal Society laid ." submitter="407" />
-    <comments post="215399" id="215452" timestamp="2010-03-02T01:01:59" content="duh" submitter="407" />
+    <comments id="215459" timestamp="2010-03-02T00:30:50" content="About Clint Eastwood, (1979), Tightrope (1984). About England, England's Royal Society laid ." submitter="407" />
+    <comments id="215452" timestamp="2010-03-02T01:01:59" content="duh" submitter="407" />
   </posts>
   <posts id="573437" timestamp="2010-03-02T00:30:14" content="" submitter="4418" />
   <posts id="1115130" timestamp="2010-03-02T01:45:14" content="" submitter="3764" />
   <posts id="1076820" timestamp="2010-03-02T02:03:14" content="" submitter="3825">
-    <comments post="1076820" id="1077368" timestamp="2010-03-02T02:08:16" content="About Aldous Huxley, and philosophical mysticism. He is also well known for advocating." submitter="1564" />
-    <comments post="1076820" id="1077364" timestamp="2010-03-02T03:06:07" content="About Jules Verne, of his bo. About Jarmila Gajdošová, kno. About Harold Wilson, to ." submitter="1564">
-      <comments post="1076820" id="1077369" timestamp="2010-03-02T07:15:30" content="fine" submitter="1564" />
+    <comments id="1077368" timestamp="2010-03-02T02:08:16" content="About Aldous Huxley, and philosophical mysticism. He is also well known for advocating." submitter="1564" />
+    <comments id="1077364" timestamp="2010-03-02T03:06:07" content="About Jules Verne, of his bo. About Jarmila Gajdošová, kno. About Harold Wilson, to ." submitter="1564">
+      <comments id="1077369" timestamp="2010-03-02T07:15:30" content="fine" submitter="1564" />
     </comments>
-    <comments post="1076820" id="1077360" timestamp="2010-03-02T12:27:35" content="About Burt Bacharach, Jackie DeShannon and others. As of 2006, Bacharach had w." submitter="1564">
-      <comments post="1076820" id="1077366" timestamp="2010-03-02T12:37:50" content="duh" submitter="1564" />
-      <comments post="1076820" id="1077361" timestamp="2010-03-03T05:59:53" content="About Al Green, Me, I'm Still In Love With You, Love and Happiness, and Let's Stay Tog." submitter="1564">
-        <comments post="1076820" id="1077362" timestamp="2010-03-03T06:00:14" content="thanks" submitter="1564" />
+    <comments id="1077360" timestamp="2010-03-02T12:27:35" content="About Burt Bacharach, Jackie DeShannon and others. As of 2006, Bacharach had w." submitter="1564">
+      <comments id="1077366" timestamp="2010-03-02T12:37:50" content="duh" submitter="1564" />
+      <comments id="1077361" timestamp="2010-03-03T05:59:53" content="About Al Green, Me, I'm Still In Love With You, Love and Happiness, and Let's Stay Tog." submitter="1564">
+        <comments id="1077362" timestamp="2010-03-03T06:00:14" content="thanks" submitter="1564" />
       </comments>
     </comments>
-    <comments post="1076820" id="1077358" timestamp="2010-03-02T23:59:33" content="About Jarmila Gajdošová, a Slovak-Australian. About Dolly Parton, author. About Jarmila ." submitter="1564">
-      <comments post="1076820" id="1077367" timestamp="2010-03-03T00:10:55" content="I see" submitter="1564" />
+    <comments id="1077358" timestamp="2010-03-02T23:59:33" content="About Jarmila Gajdošová, a Slovak-Australian. About Dolly Parton, author. About Jarmila ." submitter="1564">
+      <comments id="1077367" timestamp="2010-03-03T00:10:55" content="I see" submitter="1564" />
     </comments>
   </posts>
   <posts id="585268" timestamp="2010-03-02T02:03:59" content="" submitter="2917" />
   <posts id="404212" timestamp="2010-03-02T02:04:44" content="" submitter="3705">
-    <comments post="404212" id="406499" timestamp="2010-03-02T02:04:55" content="ok" submitter="974" />
-    <comments post="404212" id="406493" timestamp="2010-03-02T07:43:23" content="cool" submitter="974" />
-    <comments post="404212" id="406498" timestamp="2010-03-02T09:48:34" content="About Tom Hanks, is also known for his Osc. About Condoleezza Rice, Business and a d." submitter="2886">
-      <comments post="404212" id="406506" timestamp="2010-03-02T09:50:02" content="duh" submitter="2886" />
-      <comments post="404212" id="406500" timestamp="2010-03-02T14:44:28" content="About Tom Hanks, roles in . About Condoleezza Rice, Mi. About Dacia, Getae as ." submitter="1259">
-        <comments post="404212" id="406502" timestamp="2010-03-03T07:19:13" content="maybe" submitter="1259" />
+    <comments id="406499" timestamp="2010-03-02T02:04:55" content="ok" submitter="974" />
+    <comments id="406493" timestamp="2010-03-02T07:43:23" content="cool" submitter="974" />
+    <comments id="406498" timestamp="2010-03-02T09:48:34" content="About Tom Hanks, is also known for his Osc. About Condoleezza Rice, Business and a d." submitter="2886">
+      <comments id="406506" timestamp="2010-03-02T09:50:02" content="duh" submitter="2886" />
+      <comments id="406500" timestamp="2010-03-02T14:44:28" content="About Tom Hanks, roles in . About Condoleezza Rice, Mi. About Dacia, Getae as ." submitter="1259">
+        <comments id="406502" timestamp="2010-03-03T07:19:13" content="maybe" submitter="1259" />
       </comments>
-      <comments post="404212" id="406501" timestamp="2010-03-03T05:21:17" content="maybe" submitter="2608" />
-      <comments post="404212" id="406503" timestamp="2010-03-03T06:30:35" content="About Barack Obama, earning his law degree. He worked as a civil rights attorn. About Condoleezza Rice, as the second African American, and the second woman.." submitter="2886" />
-      <comments post="404212" id="406504" timestamp="2010-03-03T07:32:59" content="About Tom Hanks, roles in Big,. About Condoleezza Rice, secret. About Fiji, city and town ." submitter="974" />
+      <comments id="406501" timestamp="2010-03-03T05:21:17" content="maybe" submitter="2608" />
+      <comments id="406503" timestamp="2010-03-03T06:30:35" content="About Barack Obama, earning his law degree. He worked as a civil rights attorn. About Condoleezza Rice, as the second African American, and the second woman.." submitter="2886" />
+      <comments id="406504" timestamp="2010-03-03T07:32:59" content="About Tom Hanks, roles in Big,. About Condoleezza Rice, secret. About Fiji, city and town ." submitter="974" />
     </comments>
-    <comments post="404212" id="406497" timestamp="2010-03-02T15:14:55" content="right" submitter="2886" />
-    <comments post="404212" id="406495" timestamp="2010-03-02T16:41:27" content="great" submitter="2886" />
-    <comments post="404212" id="406492" timestamp="2010-03-02T17:24:02" content="LOL" submitter="2608" />
-    <comments post="404212" id="406496" timestamp="2010-03-02T20:55:13" content="no" submitter="2886" />
-    <comments post="404212" id="406494" timestamp="2010-03-03T01:53:34" content="roflol" submitter="2608" />
+    <comments id="406497" timestamp="2010-03-02T15:14:55" content="right" submitter="2886" />
+    <comments id="406495" timestamp="2010-03-02T16:41:27" content="great" submitter="2886" />
+    <comments id="406492" timestamp="2010-03-02T17:24:02" content="LOL" submitter="2608" />
+    <comments id="406496" timestamp="2010-03-02T20:55:13" content="no" submitter="2886" />
+    <comments id="406494" timestamp="2010-03-03T01:53:34" content="roflol" submitter="2608" />
   </posts>
   <posts id="723217" timestamp="2010-03-02T02:08:38" content="" submitter="2783">
-    <comments post="723217" id="725717" timestamp="2010-03-02T02:11:46" content="About The Simpsons Sing the Blues, on February 16, 1991, staying there for a furt." submitter="1222">
-      <comments post="723217" id="725727" timestamp="2010-03-02T02:12:22" content="cool" submitter="1050" />
-      <comments post="723217" id="725725" timestamp="2010-03-02T02:42:11" content="fine" submitter="1050" />
-      <comments post="723217" id="725721" timestamp="2010-03-02T03:45:16" content="roflol" submitter="1050" />
-      <comments post="723217" id="725724" timestamp="2010-03-02T05:22:22" content="About Cole Porter, and I've Got You Under My Skin. He also composed scores ." submitter="1050">
-        <comments post="723217" id="725726" timestamp="2010-03-02T06:36:52" content="good" submitter="4555" />
+    <comments id="725717" timestamp="2010-03-02T02:11:46" content="About The Simpsons Sing the Blues, on February 16, 1991, staying there for a furt." submitter="1222">
+      <comments id="725727" timestamp="2010-03-02T02:12:22" content="cool" submitter="1050" />
+      <comments id="725725" timestamp="2010-03-02T02:42:11" content="fine" submitter="1050" />
+      <comments id="725721" timestamp="2010-03-02T03:45:16" content="roflol" submitter="1050" />
+      <comments id="725724" timestamp="2010-03-02T05:22:22" content="About Cole Porter, and I've Got You Under My Skin. He also composed scores ." submitter="1050">
+        <comments id="725726" timestamp="2010-03-02T06:36:52" content="good" submitter="4555" />
       </comments>
     </comments>
-    <comments post="723217" id="725720" timestamp="2010-03-02T07:22:49" content="yes" submitter="768" />
-    <comments post="723217" id="725716" timestamp="2010-03-02T09:11:30" content="maybe" submitter="1103" />
-    <comments post="723217" id="725719" timestamp="2010-03-02T09:52:19" content="good" submitter="768" />
-    <comments post="723217" id="725722" timestamp="2010-03-02T11:50:18" content="maybe" submitter="1103" />
-    <comments post="723217" id="725718" timestamp="2010-03-02T14:01:08" content="great" submitter="768" />
-    <comments post="723217" id="725723" timestamp="2010-03-02T23:27:40" content="yes" submitter="768" />
+    <comments id="725720" timestamp="2010-03-02T07:22:49" content="yes" submitter="768" />
+    <comments id="725716" timestamp="2010-03-02T09:11:30" content="maybe" submitter="1103" />
+    <comments id="725719" timestamp="2010-03-02T09:52:19" content="good" submitter="768" />
+    <comments id="725722" timestamp="2010-03-02T11:50:18" content="maybe" submitter="1103" />
+    <comments id="725718" timestamp="2010-03-02T14:01:08" content="great" submitter="768" />
+    <comments id="725723" timestamp="2010-03-02T23:27:40" content="yes" submitter="768" />
   </posts>
   <posts id="404247" timestamp="2010-03-02T02:51:59" content="" submitter="3705">
-    <comments post="404247" id="406838" timestamp="2010-03-02T19:30:55" content="About Albert Einstei. About Rod Stewart, c. About Timbaland, in . About Robert Redford. About Danger Da." submitter="2886" />
-    <comments post="404247" id="406837" timestamp="2010-03-03T00:34:21" content="About Erwin Rommel,. About Jarmila Gajdo. About Donovan, race. About Éamon d." submitter="2608" />
+    <comments id="406838" timestamp="2010-03-02T19:30:55" content="About Albert Einstei. About Rod Stewart, c. About Timbaland, in . About Robert Redford. About Danger Da." submitter="2886" />
+    <comments id="406837" timestamp="2010-03-03T00:34:21" content="About Erwin Rommel,. About Jarmila Gajdo. About Donovan, race. About Éamon d." submitter="2608" />
   </posts>
   <posts id="404236" timestamp="2010-03-02T03:31:44" content="" submitter="3705">
-    <comments post="404236" id="406750" timestamp="2010-03-02T03:32:13" content="LOL" submitter="2886" />
-    <comments post="404236" id="406745" timestamp="2010-03-02T05:10:17" content="About Akbar, 1989. About 50 Cent, kno. About Rutherford B. About John, King o. About Peter the." submitter="974">
-      <comments post="404236" id="406747" timestamp="2010-03-02T05:11:53" content="great" submitter="974" />
-      <comments post="404236" id="406758" timestamp="2010-03-02T05:11:58" content="About Akbar, ma. About Dmitry Me. About Britney S. About 50 Cent, . About Weim." submitter="2608">
-        <comments post="404236" id="406762" timestamp="2010-03-02T16:00:22" content="roflol" submitter="2886" />
-        <comments post="404236" id="406761" timestamp="2010-03-02T17:51:55" content="yes" submitter="2608" />
+    <comments id="406750" timestamp="2010-03-02T03:32:13" content="LOL" submitter="2886" />
+    <comments id="406745" timestamp="2010-03-02T05:10:17" content="About Akbar, 1989. About 50 Cent, kno. About Rutherford B. About John, King o. About Peter the." submitter="974">
+      <comments id="406747" timestamp="2010-03-02T05:11:53" content="great" submitter="974" />
+      <comments id="406758" timestamp="2010-03-02T05:11:58" content="About Akbar, ma. About Dmitry Me. About Britney S. About 50 Cent, . About Weim." submitter="2608">
+        <comments id="406762" timestamp="2010-03-02T16:00:22" content="roflol" submitter="2886" />
+        <comments id="406761" timestamp="2010-03-02T17:51:55" content="yes" submitter="2608" />
       </comments>
-      <comments post="404236" id="406749" timestamp="2010-03-02T06:01:14" content="About Aurangze. About 50 Cent,. About Angelina. About John, Ki. About Peter th. About Pa." submitter="2886">
-        <comments post="404236" id="406759" timestamp="2010-03-02T07:25:22" content="great" submitter="2608" />
-        <comments post="404236" id="406751" timestamp="2010-03-02T18:41:31" content="great" submitter="2886" />
-        <comments post="404236" id="406763" timestamp="2010-03-03T04:37:12" content="About Hermann Görin. About Aurangzeb, wi. About Livy, before . About Red Head." submitter="974" />
+      <comments id="406749" timestamp="2010-03-02T06:01:14" content="About Aurangze. About 50 Cent,. About Angelina. About John, Ki. About Peter th. About Pa." submitter="2886">
+        <comments id="406759" timestamp="2010-03-02T07:25:22" content="great" submitter="2608" />
+        <comments id="406751" timestamp="2010-03-02T18:41:31" content="great" submitter="2886" />
+        <comments id="406763" timestamp="2010-03-03T04:37:12" content="About Hermann Görin. About Aurangzeb, wi. About Livy, before . About Red Head." submitter="974" />
       </comments>
-      <comments post="404236" id="406757" timestamp="2010-03-02T09:05:11" content="roflol" submitter="2886" />
-      <comments post="404236" id="406756" timestamp="2010-03-02T12:43:52" content="I see" submitter="2608" />
-      <comments post="404236" id="406752" timestamp="2010-03-02T18:48:36" content="thanks" submitter="974" />
+      <comments id="406757" timestamp="2010-03-02T09:05:11" content="roflol" submitter="2886" />
+      <comments id="406756" timestamp="2010-03-02T12:43:52" content="I see" submitter="2608" />
+      <comments id="406752" timestamp="2010-03-02T18:48:36" content="thanks" submitter="974" />
     </comments>
-    <comments post="404236" id="406760" timestamp="2010-03-02T06:19:21" content="About Jarmila Gajdošová, Groth from 2009 . About Elizabeth Taylor, a second Academy . About Weird Al Yankovic, charting singl." submitter="2608">
-      <comments post="404236" id="406764" timestamp="2010-03-02T13:19:45" content="fine" submitter="974" />
+    <comments id="406760" timestamp="2010-03-02T06:19:21" content="About Jarmila Gajdošová, Groth from 2009 . About Elizabeth Taylor, a second Academy . About Weird Al Yankovic, charting singl." submitter="2608">
+      <comments id="406764" timestamp="2010-03-02T13:19:45" content="fine" submitter="974" />
     </comments>
-    <comments post="404236" id="406755" timestamp="2010-03-02T07:09:16" content="I see" submitter="2608" />
-    <comments post="404236" id="406753" timestamp="2010-03-02T09:21:10" content="right" submitter="2608" />
-    <comments post="404236" id="406754" timestamp="2010-03-02T14:45:41" content="LOL" submitter="2608" />
-    <comments post="404236" id="406748" timestamp="2010-03-02T19:22:14" content="no way!" submitter="974" />
-    <comments post="404236" id="406746" timestamp="2010-03-02T23:42:17" content="I see" submitter="2608" />
+    <comments id="406755" timestamp="2010-03-02T07:09:16" content="I see" submitter="2608" />
+    <comments id="406753" timestamp="2010-03-02T09:21:10" content="right" submitter="2608" />
+    <comments id="406754" timestamp="2010-03-02T14:45:41" content="LOL" submitter="2608" />
+    <comments id="406748" timestamp="2010-03-02T19:22:14" content="no way!" submitter="974" />
+    <comments id="406746" timestamp="2010-03-02T23:42:17" content="I see" submitter="2608" />
   </posts>
   <posts id="1076812" timestamp="2010-03-02T04:24:14" content="" submitter="3825">
-    <comments post="1076812" id="1077291" timestamp="2010-03-02T10:22:54" content="no way!" submitter="1564" />
-    <comments post="1076812" id="1077293" timestamp="2010-03-02T10:31:58" content="About Cole Porter, include Nig. About Weird Al Yankovic, until. About Hole in the Head, It." submitter="1564">
-      <comments post="1076812" id="1077295" timestamp="2010-03-02T10:35:24" content="About Weird Al Yank. About Faith Hill, S. About The Wild, the. About Hole in." submitter="1564">
-        <comments post="1076812" id="1077297" timestamp="2010-03-02T12:32:11" content="LOL" submitter="1564" />
+    <comments id="1077291" timestamp="2010-03-02T10:22:54" content="no way!" submitter="1564" />
+    <comments id="1077293" timestamp="2010-03-02T10:31:58" content="About Cole Porter, include Nig. About Weird Al Yankovic, until. About Hole in the Head, It." submitter="1564">
+      <comments id="1077295" timestamp="2010-03-02T10:35:24" content="About Weird Al Yank. About Faith Hill, S. About The Wild, the. About Hole in." submitter="1564">
+        <comments id="1077297" timestamp="2010-03-02T12:32:11" content="LOL" submitter="1564" />
       </comments>
     </comments>
-    <comments post="1076812" id="1077296" timestamp="2010-03-02T14:55:48" content="no" submitter="1564" />
-    <comments post="1076812" id="1077294" timestamp="2010-03-02T20:04:17" content="ok" submitter="1564" />
-    <comments post="1076812" id="1077292" timestamp="2010-03-03T03:55:51" content="roflol" submitter="1564" />
+    <comments id="1077296" timestamp="2010-03-02T14:55:48" content="no" submitter="1564" />
+    <comments id="1077294" timestamp="2010-03-02T20:04:17" content="ok" submitter="1564" />
+    <comments id="1077292" timestamp="2010-03-03T03:55:51" content="roflol" submitter="1564" />
   </posts>
   <posts id="215405" timestamp="2010-03-02T05:42:14" content="" submitter="3331">
-    <comments post="215405" id="215520" timestamp="2010-03-02T05:42:39" content="About Jarmil. About Arthur. About 50 Cen. About Steve . About The Fi. About ." submitter="407">
-      <comments post="215405" id="215528" timestamp="2010-03-02T18:54:08" content="right" submitter="407" />
+    <comments id="215520" timestamp="2010-03-02T05:42:39" content="About Jarmil. About Arthur. About 50 Cen. About Steve . About The Fi. About ." submitter="407">
+      <comments id="215528" timestamp="2010-03-02T18:54:08" content="right" submitter="407" />
     </comments>
-    <comments post="215405" id="215517" timestamp="2010-03-02T05:45:55" content="About Confuciu. About Weird Al. About Al Green. About Saddam H. About Smack Th. About Du." submitter="407">
-      <comments post="215405" id="215519" timestamp="2010-03-02T07:20:48" content="About Wolfga. About Confuc. About Thomas. About Beyonc. About Weird . About Smack . About." submitter="407">
-        <comments post="215405" id="215524" timestamp="2010-03-02T10:20:09" content="I see" submitter="407" />
+    <comments id="215517" timestamp="2010-03-02T05:45:55" content="About Confuciu. About Weird Al. About Al Green. About Saddam H. About Smack Th. About Du." submitter="407">
+      <comments id="215519" timestamp="2010-03-02T07:20:48" content="About Wolfga. About Confuc. About Thomas. About Beyonc. About Weird . About Smack . About." submitter="407">
+        <comments id="215524" timestamp="2010-03-02T10:20:09" content="I see" submitter="407" />
       </comments>
-      <comments post="215405" id="215518" timestamp="2010-03-02T07:21:34" content="cool" submitter="407" />
-      <comments post="215405" id="215525" timestamp="2010-03-02T17:29:41" content="no way!" submitter="407" />
-      <comments post="215405" id="215522" timestamp="2010-03-02T18:20:44" content="yes" submitter="407" />
+      <comments id="215518" timestamp="2010-03-02T07:21:34" content="cool" submitter="407" />
+      <comments id="215525" timestamp="2010-03-02T17:29:41" content="no way!" submitter="407" />
+      <comments id="215522" timestamp="2010-03-02T18:20:44" content="yes" submitter="407" />
     </comments>
-    <comments post="215405" id="215515" timestamp="2010-03-02T09:45:28" content="no" submitter="407" />
-    <comments post="215405" id="215526" timestamp="2010-03-02T19:16:00" content="About Arthur C. C. About Janet Jacks. About D. W. Griff. About Smack That,. About Xiongnu." submitter="407">
-      <comments post="215405" id="215527" timestamp="2010-03-02T19:17:06" content="I see" submitter="407" />
+    <comments id="215515" timestamp="2010-03-02T09:45:28" content="no" submitter="407" />
+    <comments id="215526" timestamp="2010-03-02T19:16:00" content="About Arthur C. C. About Janet Jacks. About D. W. Griff. About Smack That,. About Xiongnu." submitter="407">
+      <comments id="215527" timestamp="2010-03-02T19:17:06" content="I see" submitter="407" />
     </comments>
-    <comments post="215405" id="215516" timestamp="2010-03-02T21:29:15" content="ok" submitter="407" />
-    <comments post="215405" id="215521" timestamp="2010-03-02T23:29:36" content="About Thomas Jef. About 50 Cent, 2. About Weird Al Y. About Saddam Hus. About Smack ." submitter="407" />
+    <comments id="215516" timestamp="2010-03-02T21:29:15" content="ok" submitter="407" />
+    <comments id="215521" timestamp="2010-03-02T23:29:36" content="About Thomas Jef. About 50 Cent, 2. About Weird Al Y. About Saddam Hus. About Smack ." submitter="407" />
   </posts>
   <posts id="1115110" timestamp="2010-03-02T05:51:59" content="" submitter="3764" />
   <posts id="1076816" timestamp="2010-03-02T05:53:29" content="" submitter="3825">
-    <comments post="1076816" id="1077328" timestamp="2010-03-02T15:59:30" content="About Peter Paul Rubens, and diplomat who was. About Kenny Rogers, of The 200 Most Influenti. About Weird Al Yankovic, album was Yankovic's. About Lionel Richie, and actor. From 19." submitter="1564" />
+    <comments id="1077328" timestamp="2010-03-02T15:59:30" content="About Peter Paul Rubens, and diplomat who was. About Kenny Rogers, of The 200 Most Influenti. About Weird Al Yankovic, album was Yankovic's. About Lionel Richie, and actor. From 19." submitter="1564" />
   </posts>
   <posts id="96174" timestamp="2010-03-02T05:57:23" content="photo96174.jpg" submitter="3217" />
   <posts id="96175" timestamp="2010-03-02T05:57:24" content="photo96175.jpg" submitter="3217" />
@@ -990,415 +990,415 @@
   <posts id="96190" timestamp="2010-03-02T05:57:39" content="photo96190.jpg" submitter="3217" />
   <posts id="96191" timestamp="2010-03-02T05:57:40" content="photo96191.jpg" submitter="3217" />
   <posts id="404258" timestamp="2010-03-02T07:30:14" content="" submitter="3705">
-    <comments post="404258" id="406948" timestamp="2010-03-02T07:30:36" content="yes" submitter="2608" />
-    <comments post="404258" id="406946" timestamp="2010-03-02T16:29:37" content="great" submitter="2608" />
-    <comments post="404258" id="406940" timestamp="2010-03-02T16:58:57" content="great" submitter="974" />
-    <comments post="404258" id="406941" timestamp="2010-03-02T18:46:38" content="ok" submitter="974" />
-    <comments post="404258" id="406942" timestamp="2010-03-02T21:10:16" content="thx" submitter="2608" />
-    <comments post="404258" id="406950" timestamp="2010-03-02T22:32:59" content="About Francis I . About Jarmila Ga. About Brigham Yo. About Immanuel K. About Edwar." submitter="2608" />
-    <comments post="404258" id="406947" timestamp="2010-03-02T23:37:21" content="About Jarmila . About Jonathan. About Éamon de. About Philip G. About Immanuel. About E." submitter="2608" />
-    <comments likedBy="1259" post="404258" id="406944" timestamp="2010-03-03T03:33:55" content="About Jarmila Gajdošová, She tu. About Alice Cooper, Alice Coope. About Al Green, as Al Green, is. About Philip Glass, describing . About Immanuel Kant, the p." submitter="2886">
-      <comments post="404258" id="406945" timestamp="2010-03-03T06:07:33" content="About Alanis Morissette, an. About Giacomo Puccini, Seco. About Alice Cooper, bigger . About Al Green, his popular. About Immanuel Kant, specul. About Wisin vs. Yand." submitter="1259" />
+    <comments id="406948" timestamp="2010-03-02T07:30:36" content="yes" submitter="2608" />
+    <comments id="406946" timestamp="2010-03-02T16:29:37" content="great" submitter="2608" />
+    <comments id="406940" timestamp="2010-03-02T16:58:57" content="great" submitter="974" />
+    <comments id="406941" timestamp="2010-03-02T18:46:38" content="ok" submitter="974" />
+    <comments id="406942" timestamp="2010-03-02T21:10:16" content="thx" submitter="2608" />
+    <comments id="406950" timestamp="2010-03-02T22:32:59" content="About Francis I . About Jarmila Ga. About Brigham Yo. About Immanuel K. About Edwar." submitter="2608" />
+    <comments id="406947" timestamp="2010-03-02T23:37:21" content="About Jarmila . About Jonathan. About Éamon de. About Philip G. About Immanuel. About E." submitter="2608" />
+    <comments likedBy="1259" id="406944" timestamp="2010-03-03T03:33:55" content="About Jarmila Gajdošová, She tu. About Alice Cooper, Alice Coope. About Al Green, as Al Green, is. About Philip Glass, describing . About Immanuel Kant, the p." submitter="2886">
+      <comments id="406945" timestamp="2010-03-03T06:07:33" content="About Alanis Morissette, an. About Giacomo Puccini, Seco. About Alice Cooper, bigger . About Al Green, his popular. About Immanuel Kant, specul. About Wisin vs. Yand." submitter="1259" />
     </comments>
-    <comments post="404258" id="406943" timestamp="2010-03-03T05:10:31" content="cool" submitter="974" />
+    <comments id="406943" timestamp="2010-03-03T05:10:31" content="cool" submitter="974" />
   </posts>
   <posts id="404250" timestamp="2010-03-02T09:03:14" content="" submitter="3705">
-    <comments post="404250" id="406880" timestamp="2010-03-02T15:53:16" content="no" submitter="2608" />
-    <comments post="404250" id="406876" timestamp="2010-03-02T19:41:43" content="ok" submitter="2886" />
-    <comments post="404250" id="406879" timestamp="2010-03-03T00:12:39" content="About . About . About . About . About . About . About . About . About . About .." submitter="1259" />
-    <comments post="404250" id="406875" timestamp="2010-03-03T02:31:37" content="About Will. About Kama. About Quee. About Step. About Walt. About Rudy. About Jack. About ." submitter="1259">
-      <comments post="404250" id="406877" timestamp="2010-03-03T04:23:42" content="About Will. About Alex. About Quee. About Morr. About Step. About Walt. About Will. About Rudy. About Jack. About Kell. About Mate. About Ghan." submitter="2886">
-        <comments post="404250" id="406881" timestamp="2010-03-03T04:46:55" content="About . About . About . About . About . About . About . About . About . About . Ab." submitter="974" />
-        <comments post="404250" id="406884" timestamp="2010-03-03T06:19:34" content="About . About . About . About . About . About . About . About . About . About .." submitter="974" />
+    <comments id="406880" timestamp="2010-03-02T15:53:16" content="no" submitter="2608" />
+    <comments id="406876" timestamp="2010-03-02T19:41:43" content="ok" submitter="2886" />
+    <comments id="406879" timestamp="2010-03-03T00:12:39" content="About . About . About . About . About . About . About . About . About . About .." submitter="1259" />
+    <comments id="406875" timestamp="2010-03-03T02:31:37" content="About Will. About Kama. About Quee. About Step. About Walt. About Rudy. About Jack. About ." submitter="1259">
+      <comments id="406877" timestamp="2010-03-03T04:23:42" content="About Will. About Alex. About Quee. About Morr. About Step. About Walt. About Will. About Rudy. About Jack. About Kell. About Mate. About Ghan." submitter="2886">
+        <comments id="406881" timestamp="2010-03-03T04:46:55" content="About . About . About . About . About . About . About . About . About . About . Ab." submitter="974" />
+        <comments id="406884" timestamp="2010-03-03T06:19:34" content="About . About . About . About . About . About . About . About . About . About .." submitter="974" />
       </comments>
-      <comments post="404250" id="406878" timestamp="2010-03-03T05:24:31" content="thanks" submitter="1259" />
+      <comments id="406878" timestamp="2010-03-03T05:24:31" content="thanks" submitter="1259" />
     </comments>
   </posts>
   <posts id="404210" timestamp="2010-03-02T09:06:14" content="" submitter="3705">
-    <comments post="404210" id="406466" timestamp="2010-03-02T09:43:27" content="maybe" submitter="1259" />
-    <comments post="404210" id="406456" timestamp="2010-03-02T11:14:03" content="About S. About M. About A. About W. About D. About J. About S. About Y. Abo." submitter="2608">
-      <comments post="404210" id="406458" timestamp="2010-03-02T16:37:36" content="About . About . About . About . About . About . About . About . About . About . About . A." submitter="974">
-        <comments post="404210" id="406463" timestamp="2010-03-02T17:31:24" content="About . About . About . About . About . About . About . About . About . About . About." submitter="2608">
-          <comments post="404210" id="406469" timestamp="2010-03-03T05:19:48" content="About . About . About . About . About . About . About . About . About . Abo." submitter="974">
-            <comments post="404210" id="406472" timestamp="2010-03-03T05:21:33" content="I see" submitter="2886" />
+    <comments id="406466" timestamp="2010-03-02T09:43:27" content="maybe" submitter="1259" />
+    <comments id="406456" timestamp="2010-03-02T11:14:03" content="About S. About M. About A. About W. About D. About J. About S. About Y. Abo." submitter="2608">
+      <comments id="406458" timestamp="2010-03-02T16:37:36" content="About . About . About . About . About . About . About . About . About . About . About . A." submitter="974">
+        <comments id="406463" timestamp="2010-03-02T17:31:24" content="About . About . About . About . About . About . About . About . About . About . About." submitter="2608">
+          <comments id="406469" timestamp="2010-03-03T05:19:48" content="About . About . About . About . About . About . About . About . About . Abo." submitter="974">
+            <comments id="406472" timestamp="2010-03-03T05:21:33" content="I see" submitter="2886" />
           </comments>
         </comments>
-        <comments post="404210" id="406459" timestamp="2010-03-02T20:30:40" content="duh" submitter="2886" />
+        <comments id="406459" timestamp="2010-03-02T20:30:40" content="duh" submitter="2886" />
       </comments>
-      <comments post="404210" id="406457" timestamp="2010-03-02T19:18:35" content="About Si. About Py. About Wi. About We. About Sa. About Ja. About Su. About Ne." submitter="2608">
-        <comments post="404210" id="406470" timestamp="2010-03-02T20:43:05" content="About Ludwig Wittge. About Michael Bublé. About Pyotr Ilyich . About William Henry. About Dennis Hopper. About James A. Garf. About Sunday Bloody. About Nigh." submitter="974" />
-        <comments post="404210" id="406464" timestamp="2010-03-02T21:52:34" content="thanks" submitter="1259" />
+      <comments id="406457" timestamp="2010-03-02T19:18:35" content="About Si. About Py. About Wi. About We. About Sa. About Ja. About Su. About Ne." submitter="2608">
+        <comments id="406470" timestamp="2010-03-02T20:43:05" content="About Ludwig Wittge. About Michael Bublé. About Pyotr Ilyich . About William Henry. About Dennis Hopper. About James A. Garf. About Sunday Bloody. About Nigh." submitter="974" />
+        <comments id="406464" timestamp="2010-03-02T21:52:34" content="thanks" submitter="1259" />
       </comments>
-      <comments post="404210" id="406461" timestamp="2010-03-03T04:29:57" content="good" submitter="1259" />
+      <comments id="406461" timestamp="2010-03-03T04:29:57" content="good" submitter="1259" />
     </comments>
-    <comments post="404210" id="406465" timestamp="2010-03-02T11:53:14" content="ok" submitter="2608" />
-    <comments post="404210" id="406462" timestamp="2010-03-02T12:17:19" content="About Sigmund . About Horatio . About Bill Cli. About Theodore. About Weird Al. About Éam." submitter="1259">
-      <comments post="404210" id="406467" timestamp="2010-03-03T00:32:26" content="About Bill C. About Theodo. About Bing C. About Weird . About Éamon . About Willia. Abo." submitter="1259">
-        <comments post="404210" id="406471" timestamp="2010-03-03T00:32:39" content="About Brian. About Bill . About Bing . About Weird. About Meat . About I Me . About." submitter="2608" />
-        <comments post="404210" id="406468" timestamp="2010-03-03T06:59:44" content="LOL" submitter="974" />
+    <comments id="406465" timestamp="2010-03-02T11:53:14" content="ok" submitter="2608" />
+    <comments id="406462" timestamp="2010-03-02T12:17:19" content="About Sigmund . About Horatio . About Bill Cli. About Theodore. About Weird Al. About Éam." submitter="1259">
+      <comments id="406467" timestamp="2010-03-03T00:32:26" content="About Bill C. About Theodo. About Bing C. About Weird . About Éamon . About Willia. Abo." submitter="1259">
+        <comments id="406471" timestamp="2010-03-03T00:32:39" content="About Brian. About Bill . About Bing . About Weird. About Meat . About I Me . About." submitter="2608" />
+        <comments id="406468" timestamp="2010-03-03T06:59:44" content="LOL" submitter="974" />
       </comments>
     </comments>
   </posts>
   <posts id="404167" timestamp="2010-03-02T09:27:14" content="" submitter="3705">
-    <comments post="404167" id="406040" timestamp="2010-03-02T09:27:24" content="duh" submitter="2886" />
-    <comments post="404167" id="406044" timestamp="2010-03-02T09:36:45" content="About Elizabet. About Lady Gag. About Master o. About Unbreaka. About Black &amp; . About Ne." submitter="2608">
-      <comments post="404167" id="406055" timestamp="2010-03-02T15:10:39" content="ok" submitter="974" />
-      <comments post="404167" id="406046" timestamp="2010-03-03T07:09:03" content="About Lady Gaga, T. About James Brown,. About Fred Astaire. About Master o." submitter="1259" />
+    <comments id="406040" timestamp="2010-03-02T09:27:24" content="duh" submitter="2886" />
+    <comments id="406044" timestamp="2010-03-02T09:36:45" content="About Elizabet. About Lady Gag. About Master o. About Unbreaka. About Black &amp; . About Ne." submitter="2608">
+      <comments id="406055" timestamp="2010-03-02T15:10:39" content="ok" submitter="974" />
+      <comments id="406046" timestamp="2010-03-03T07:09:03" content="About Lady Gaga, T. About James Brown,. About Fred Astaire. About Master o." submitter="1259" />
     </comments>
-    <comments post="404167" id="406041" timestamp="2010-03-02T09:41:04" content="About Jarmila Gajdošová, turn. About Clement Attlee, would b. About Crimea, notably by Will. About Hohenzollern-Sigmaringe. About New Surrender, Fe." submitter="1259">
-      <comments post="404167" id="406053" timestamp="2010-03-02T09:48:57" content="About Aurangz. About Jarmila. About Amy Win. About Leona L. About Crimea. About New." submitter="974" />
-      <comments post="404167" id="406043" timestamp="2010-03-02T10:05:11" content="I see" submitter="1259" />
-      <comments post="404167" id="406042" timestamp="2010-03-02T13:56:02" content="About Clement Attl. About B.B. King, t. About Fat Joe. About Al Green, #6. ." submitter="2886">
-        <comments post="404167" id="406047" timestamp="2010-03-02T13:57:17" content="good" submitter="1259" />
-        <comments post="404167" id="406057" timestamp="2010-03-02T16:43:35" content="ok" submitter="2608" />
-        <comments post="404167" id="406051" timestamp="2010-03-02T22:36:50" content="roflol" submitter="2608" />
+    <comments id="406041" timestamp="2010-03-02T09:41:04" content="About Jarmila Gajdošová, turn. About Clement Attlee, would b. About Crimea, notably by Will. About Hohenzollern-Sigmaringe. About New Surrender, Fe." submitter="1259">
+      <comments id="406053" timestamp="2010-03-02T09:48:57" content="About Aurangz. About Jarmila. About Amy Win. About Leona L. About Crimea. About New." submitter="974" />
+      <comments id="406043" timestamp="2010-03-02T10:05:11" content="I see" submitter="1259" />
+      <comments id="406042" timestamp="2010-03-02T13:56:02" content="About Clement Attl. About B.B. King, t. About Fat Joe. About Al Green, #6. ." submitter="2886">
+        <comments id="406047" timestamp="2010-03-02T13:57:17" content="good" submitter="1259" />
+        <comments id="406057" timestamp="2010-03-02T16:43:35" content="ok" submitter="2608" />
+        <comments id="406051" timestamp="2010-03-02T22:36:50" content="roflol" submitter="2608" />
       </comments>
     </comments>
-    <comments post="404167" id="406050" timestamp="2010-03-02T09:49:30" content="thanks" submitter="2608" />
-    <comments post="404167" id="406045" timestamp="2010-03-02T10:02:21" content="About Jarmila . About Elizabet. About Charles . About Lenny Kr. About Éamon de. About Ant." submitter="2608">
-      <comments post="404167" id="406054" timestamp="2010-03-02T16:30:44" content="duh" submitter="974" />
-      <comments post="404167" id="406052" timestamp="2010-03-03T05:16:47" content="duh" submitter="2886" />
-      <comments post="404167" id="406048" timestamp="2010-03-03T05:30:19" content="LOL" submitter="2608" />
+    <comments id="406050" timestamp="2010-03-02T09:49:30" content="thanks" submitter="2608" />
+    <comments id="406045" timestamp="2010-03-02T10:02:21" content="About Jarmila . About Elizabet. About Charles . About Lenny Kr. About Éamon de. About Ant." submitter="2608">
+      <comments id="406054" timestamp="2010-03-02T16:30:44" content="duh" submitter="974" />
+      <comments id="406052" timestamp="2010-03-03T05:16:47" content="duh" submitter="2886" />
+      <comments id="406048" timestamp="2010-03-03T05:30:19" content="LOL" submitter="2608" />
     </comments>
-    <comments post="404167" id="406058" timestamp="2010-03-02T12:52:46" content="right" submitter="2608" />
+    <comments id="406058" timestamp="2010-03-02T12:52:46" content="right" submitter="2608" />
   </posts>
   <posts id="404226" timestamp="2010-03-02T10:00:14" content="" submitter="3705">
-    <comments post="404226" id="406647" timestamp="2010-03-02T11:21:15" content="thx" submitter="2608" />
-    <comments post="404226" id="406646" timestamp="2010-03-02T19:17:05" content="About Jarmila Gajdošová, Groth from 2. About Alice Cooper, show that featu." submitter="2886">
-      <comments post="404226" id="406649" timestamp="2010-03-02T19:31:23" content="About Jarmila Gajdošová, . About Alice Cooper, his 1. About Éamon de Valera,." submitter="2608" />
-      <comments post="404226" id="406648" timestamp="2010-03-02T23:39:22" content="thanks" submitter="2886" />
+    <comments id="406647" timestamp="2010-03-02T11:21:15" content="thx" submitter="2608" />
+    <comments id="406646" timestamp="2010-03-02T19:17:05" content="About Jarmila Gajdošová, Groth from 2. About Alice Cooper, show that featu." submitter="2886">
+      <comments id="406649" timestamp="2010-03-02T19:31:23" content="About Jarmila Gajdošová, . About Alice Cooper, his 1. About Éamon de Valera,." submitter="2608" />
+      <comments id="406648" timestamp="2010-03-02T23:39:22" content="thanks" submitter="2886" />
     </comments>
-    <comments post="404226" id="406645" timestamp="2010-03-03T00:59:04" content="I see" submitter="974" />
+    <comments id="406645" timestamp="2010-03-03T00:59:04" content="I see" submitter="974" />
   </posts>
   <posts id="585274" timestamp="2010-03-02T11:21:14" content="" submitter="2917" />
   <posts id="404280" timestamp="2010-03-02T12:02:29" content="" submitter="3705">
-    <comments post="404280" id="407182" timestamp="2010-03-02T12:07:01" content="good" submitter="2608" />
-    <comments post="404280" id="407171" timestamp="2010-03-02T12:12:06" content="yes" submitter="2886" />
-    <comments post="404280" id="407172" timestamp="2010-03-02T12:59:08" content="ok" submitter="2608" />
-    <comments post="404280" id="407177" timestamp="2010-03-02T16:07:55" content="yes" submitter="974" />
-    <comments post="404280" id="407173" timestamp="2010-03-02T18:17:13" content="right" submitter="974" />
-    <comments post="404280" id="407175" timestamp="2010-03-02T23:46:48" content="no" submitter="2608" />
-    <comments post="404280" id="407174" timestamp="2010-03-02T23:58:21" content="About René Des. About Claude M. About Louis Ar. About Robert F. About Eart." submitter="2608">
-      <comments post="404280" id="407180" timestamp="2010-03-02T23:58:32" content="About Shania. About René D. About Claude. About Louis . About Earth . About New Tr. Abo." submitter="2886">
-        <comments post="404280" id="407181" timestamp="2010-03-03T07:31:50" content="About Step. About René. About Clau. About Osca. About Fred. About A Mi. About New .." submitter="1259" />
+    <comments id="407182" timestamp="2010-03-02T12:07:01" content="good" submitter="2608" />
+    <comments id="407171" timestamp="2010-03-02T12:12:06" content="yes" submitter="2886" />
+    <comments id="407172" timestamp="2010-03-02T12:59:08" content="ok" submitter="2608" />
+    <comments id="407177" timestamp="2010-03-02T16:07:55" content="yes" submitter="974" />
+    <comments id="407173" timestamp="2010-03-02T18:17:13" content="right" submitter="974" />
+    <comments id="407175" timestamp="2010-03-02T23:46:48" content="no" submitter="2608" />
+    <comments id="407174" timestamp="2010-03-02T23:58:21" content="About René Des. About Claude M. About Louis Ar. About Robert F. About Eart." submitter="2608">
+      <comments id="407180" timestamp="2010-03-02T23:58:32" content="About Shania. About René D. About Claude. About Louis . About Earth . About New Tr. Abo." submitter="2886">
+        <comments id="407181" timestamp="2010-03-03T07:31:50" content="About Step. About René. About Clau. About Osca. About Fred. About A Mi. About New .." submitter="1259" />
       </comments>
-      <comments post="404280" id="407179" timestamp="2010-03-03T03:53:24" content="fine" submitter="974" />
+      <comments id="407179" timestamp="2010-03-03T03:53:24" content="fine" submitter="974" />
     </comments>
-    <comments post="404280" id="407178" timestamp="2010-03-03T08:16:51" content="duh" submitter="974" />
+    <comments id="407178" timestamp="2010-03-03T08:16:51" content="duh" submitter="974" />
   </posts>
   <posts id="404266" timestamp="2010-03-02T12:08:29" content="" submitter="3705">
-    <comments post="404266" id="407030" timestamp="2010-03-02T12:11:02" content="right" submitter="1259" />
-    <comments post="404266" id="407025" timestamp="2010-03-02T12:58:15" content="great" submitter="974" />
-    <comments post="404266" id="407021" timestamp="2010-03-02T12:59:38" content="About Henry IV of F. About 50 Cent, Who'. About Al Green, mus. About My Favou." submitter="974">
-      <comments post="404266" id="407028" timestamp="2010-03-02T12:59:54" content="thanks" submitter="974" />
-      <comments post="404266" id="407031" timestamp="2010-03-03T04:44:45" content="thx" submitter="1259" />
+    <comments id="407030" timestamp="2010-03-02T12:11:02" content="right" submitter="1259" />
+    <comments id="407025" timestamp="2010-03-02T12:58:15" content="great" submitter="974" />
+    <comments id="407021" timestamp="2010-03-02T12:59:38" content="About Henry IV of F. About 50 Cent, Who'. About Al Green, mus. About My Favou." submitter="974">
+      <comments id="407028" timestamp="2010-03-02T12:59:54" content="thanks" submitter="974" />
+      <comments id="407031" timestamp="2010-03-03T04:44:45" content="thx" submitter="1259" />
     </comments>
-    <comments post="404266" id="407022" timestamp="2010-03-02T14:15:19" content="About Barack Obama, . About Tom Cruise, (2. About Boonoonoonoos,. About My Favour." submitter="2608">
-      <comments post="404266" id="407024" timestamp="2010-03-02T14:15:47" content="right" submitter="974" />
-      <comments post="404266" id="407027" timestamp="2010-03-02T14:17:22" content="About Barack Obama, in Jul. About Tom Cruise, in a var. About Waylon Jennings, acc. About Doris Day, and femal. About Boonoonoonoos, In th. About My Favourite." submitter="2608">
-        <comments post="404266" id="407029" timestamp="2010-03-02T17:14:22" content="thanks" submitter="2886" />
+    <comments id="407022" timestamp="2010-03-02T14:15:19" content="About Barack Obama, . About Tom Cruise, (2. About Boonoonoonoos,. About My Favour." submitter="2608">
+      <comments id="407024" timestamp="2010-03-02T14:15:47" content="right" submitter="974" />
+      <comments id="407027" timestamp="2010-03-02T14:17:22" content="About Barack Obama, in Jul. About Tom Cruise, in a var. About Waylon Jennings, acc. About Doris Day, and femal. About Boonoonoonoos, In th. About My Favourite." submitter="2608">
+        <comments id="407029" timestamp="2010-03-02T17:14:22" content="thanks" submitter="2886" />
       </comments>
-      <comments post="404266" id="407023" timestamp="2010-03-02T19:28:39" content="no way!" submitter="974" />
-      <comments post="404266" id="407026" timestamp="2010-03-02T20:19:33" content="thanks" submitter="2886" />
+      <comments id="407023" timestamp="2010-03-02T19:28:39" content="no way!" submitter="974" />
+      <comments id="407026" timestamp="2010-03-02T20:19:33" content="thanks" submitter="2886" />
     </comments>
   </posts>
   <posts id="404307" timestamp="2010-03-02T12:30:14" content="" submitter="3705">
-    <comments post="404307" id="407483" timestamp="2010-03-02T15:56:59" content="About Igor Strav. About Jarmila Ga. About William Sh. About Stanley Ku. About Wei." submitter="2608" />
-    <comments post="404307" id="407475" timestamp="2010-03-02T18:18:17" content="About Weird Al Yankovic, LP Weird Al . About Universal Studios, studios thr." submitter="2886">
-      <comments post="404307" id="407478" timestamp="2010-03-02T18:18:27" content="yes" submitter="974" />
-      <comments post="404307" id="407479" timestamp="2010-03-02T18:20:37" content="cool" submitter="1259" />
-      <comments post="404307" id="407477" timestamp="2010-03-03T01:02:20" content="About Music Machine II, by Candle that is a continuation of the Music Machine album from 1977. It is set in Agapeland, a." submitter="974" />
-      <comments post="404307" id="407476" timestamp="2010-03-03T04:23:22" content="About Secret Messages, Louis Clark and real stringed instruments. It was also the ." submitter="2886" />
+    <comments id="407483" timestamp="2010-03-02T15:56:59" content="About Igor Strav. About Jarmila Ga. About William Sh. About Stanley Ku. About Wei." submitter="2608" />
+    <comments id="407475" timestamp="2010-03-02T18:18:17" content="About Weird Al Yankovic, LP Weird Al . About Universal Studios, studios thr." submitter="2886">
+      <comments id="407478" timestamp="2010-03-02T18:18:27" content="yes" submitter="974" />
+      <comments id="407479" timestamp="2010-03-02T18:20:37" content="cool" submitter="1259" />
+      <comments id="407477" timestamp="2010-03-03T01:02:20" content="About Music Machine II, by Candle that is a continuation of the Music Machine album from 1977. It is set in Agapeland, a." submitter="974" />
+      <comments id="407476" timestamp="2010-03-03T04:23:22" content="About Secret Messages, Louis Clark and real stringed instruments. It was also the ." submitter="2886" />
     </comments>
-    <comments post="404307" id="407481" timestamp="2010-03-02T23:19:08" content="About Igor Stravinsk. About Jarmila Gajdoš. About William Shakes. About Weird Al Ya." submitter="974" />
+    <comments id="407481" timestamp="2010-03-02T23:19:08" content="About Igor Stravinsk. About Jarmila Gajdoš. About William Shakes. About Weird Al Ya." submitter="974" />
   </posts>
   <posts id="404244" timestamp="2010-03-02T12:39:14" content="" submitter="3705">
-    <comments post="404244" id="406828" timestamp="2010-03-02T13:27:20" content="About Jarmila Ga. About 50 Cent, f. About The Everly. About Rocket 88,. About Lov." submitter="974" />
-    <comments post="404244" id="406826" timestamp="2010-03-02T13:57:04" content="no" submitter="974" />
-    <comments post="404244" id="406827" timestamp="2010-03-03T00:25:14" content="thx" submitter="2608" />
-    <comments post="404244" id="406825" timestamp="2010-03-03T04:43:54" content="duh" submitter="2886" />
+    <comments id="406828" timestamp="2010-03-02T13:27:20" content="About Jarmila Ga. About 50 Cent, f. About The Everly. About Rocket 88,. About Lov." submitter="974" />
+    <comments id="406826" timestamp="2010-03-02T13:57:04" content="no" submitter="974" />
+    <comments id="406827" timestamp="2010-03-03T00:25:14" content="thx" submitter="2608" />
+    <comments id="406825" timestamp="2010-03-03T04:43:54" content="duh" submitter="2886" />
   </posts>
   <posts id="1339403" timestamp="2010-03-02T12:49:34" content="" submitter="3627" />
   <posts id="404186" timestamp="2010-03-02T13:10:44" content="" submitter="3705">
-    <comments post="404186" id="406187" timestamp="2010-03-02T13:11:11" content="About Jarmi. About Thoma. About Éamon. About Pete . About Al Gr. About Primi. About Rober." submitter="1259">
-      <comments post="404186" id="406195" timestamp="2010-03-02T22:29:07" content="maybe" submitter="2608" />
+    <comments id="406187" timestamp="2010-03-02T13:11:11" content="About Jarmi. About Thoma. About Éamon. About Pete . About Al Gr. About Primi. About Rober." submitter="1259">
+      <comments id="406195" timestamp="2010-03-02T22:29:07" content="maybe" submitter="2608" />
     </comments>
-    <comments post="404186" id="406192" timestamp="2010-03-02T13:46:15" content="About Avril Lav. About Sigmund F. About Queen Eli. About William T. About Claud." submitter="2886" />
-    <comments post="404186" id="406189" timestamp="2010-03-02T19:09:50" content="About Karl M. About Thomas. About Robert. About Where . About Watch . About Beauti. A." submitter="974">
-      <comments post="404186" id="406190" timestamp="2010-03-02T19:14:38" content="duh" submitter="1259" />
+    <comments id="406192" timestamp="2010-03-02T13:46:15" content="About Avril Lav. About Sigmund F. About Queen Eli. About William T. About Claud." submitter="2886" />
+    <comments id="406189" timestamp="2010-03-02T19:09:50" content="About Karl M. About Thomas. About Robert. About Where . About Watch . About Beauti. A." submitter="974">
+      <comments id="406190" timestamp="2010-03-02T19:14:38" content="duh" submitter="1259" />
     </comments>
-    <comments post="404186" id="406186" timestamp="2010-03-02T20:31:32" content="About Sigmund Freud, th. About Nikolaus Pevsner,. About Saint George, Ort. About Jarmila Gajdošová. About Thomas Jefferson,. About Al Green, In 2005. About For Your." submitter="2886" />
-    <comments post="404186" id="406191" timestamp="2010-03-03T03:04:46" content="no" submitter="2608" />
+    <comments id="406186" timestamp="2010-03-02T20:31:32" content="About Sigmund Freud, th. About Nikolaus Pevsner,. About Saint George, Ort. About Jarmila Gajdošová. About Thomas Jefferson,. About Al Green, In 2005. About For Your." submitter="2886" />
+    <comments id="406191" timestamp="2010-03-03T03:04:46" content="no" submitter="2608" />
   </posts>
   <posts id="404196" timestamp="2010-03-02T13:25:44" content="" submitter="3705">
-    <comments post="404196" id="406314" timestamp="2010-03-02T13:56:18" content="roflol" submitter="2886" />
-    <comments post="404196" id="406310" timestamp="2010-03-02T19:48:16" content="yes" submitter="2886" />
-    <comments post="404196" id="406312" timestamp="2010-03-03T03:37:15" content="I see" submitter="2608" />
-    <comments post="404196" id="406315" timestamp="2010-03-03T05:56:49" content="maybe" submitter="2608" />
-    <comments post="404196" id="406311" timestamp="2010-03-03T06:53:23" content="maybe" submitter="2886" />
-    <comments post="404196" id="406313" timestamp="2010-03-03T07:17:01" content="duh" submitter="1259" />
+    <comments id="406314" timestamp="2010-03-02T13:56:18" content="roflol" submitter="2886" />
+    <comments id="406310" timestamp="2010-03-02T19:48:16" content="yes" submitter="2886" />
+    <comments id="406312" timestamp="2010-03-03T03:37:15" content="I see" submitter="2608" />
+    <comments id="406315" timestamp="2010-03-03T05:56:49" content="maybe" submitter="2608" />
+    <comments id="406311" timestamp="2010-03-03T06:53:23" content="maybe" submitter="2886" />
+    <comments id="406313" timestamp="2010-03-03T07:17:01" content="duh" submitter="1259" />
   </posts>
   <posts id="404223" timestamp="2010-03-02T13:33:14" content="" submitter="3705">
-    <comments post="404223" id="406612" timestamp="2010-03-02T13:33:25" content="fine" submitter="1259" />
-    <comments post="404223" id="406611" timestamp="2010-03-02T13:42:52" content="no" submitter="2608" />
-    <comments post="404223" id="406613" timestamp="2010-03-02T13:51:27" content="thx" submitter="2886" />
-    <comments post="404223" id="406610" timestamp="2010-03-02T16:39:07" content="right" submitter="2608" />
-    <comments post="404223" id="406615" timestamp="2010-03-03T03:58:14" content="About Weird Al Yankovic, peaked at number . About The Amazing Jeckel Brothers, by Is." submitter="2886">
-      <comments post="404223" id="406622" timestamp="2010-03-03T04:04:49" content="About Weird Al Yankovic, by American s. About Will.i.am, before being follow." submitter="2886">
-        <comments post="404223" id="406625" timestamp="2010-03-03T04:14:50" content="no" submitter="974" />
-        <comments post="404223" id="406624" timestamp="2010-03-03T06:57:17" content="thx" submitter="2608" />
+    <comments id="406612" timestamp="2010-03-02T13:33:25" content="fine" submitter="1259" />
+    <comments id="406611" timestamp="2010-03-02T13:42:52" content="no" submitter="2608" />
+    <comments id="406613" timestamp="2010-03-02T13:51:27" content="thx" submitter="2886" />
+    <comments id="406610" timestamp="2010-03-02T16:39:07" content="right" submitter="2608" />
+    <comments id="406615" timestamp="2010-03-03T03:58:14" content="About Weird Al Yankovic, peaked at number . About The Amazing Jeckel Brothers, by Is." submitter="2886">
+      <comments id="406622" timestamp="2010-03-03T04:04:49" content="About Weird Al Yankovic, by American s. About Will.i.am, before being follow." submitter="2886">
+        <comments id="406625" timestamp="2010-03-03T04:14:50" content="no" submitter="974" />
+        <comments id="406624" timestamp="2010-03-03T06:57:17" content="thx" submitter="2608" />
       </comments>
     </comments>
-    <comments post="404223" id="406614" timestamp="2010-03-03T07:45:45" content="great" submitter="2608" />
+    <comments id="406614" timestamp="2010-03-03T07:45:45" content="great" submitter="2608" />
   </posts>
   <posts id="1115127" timestamp="2010-03-02T13:36:59" content="" submitter="3764" />
   <posts id="1115126" timestamp="2010-03-02T14:02:29" content="" submitter="3764" />
   <posts id="1018582" timestamp="2010-03-02T14:05:29" content="" submitter="3055" />
   <posts id="404237" timestamp="2010-03-02T15:13:44" content="" submitter="3705">
-    <comments post="404237" id="406765" timestamp="2010-03-02T15:26:07" content="fine" submitter="2886" />
-    <comments post="404237" id="406767" timestamp="2010-03-02T17:01:58" content="About Arnaud Clément, De. About Sheryl Crow, duets. About Darfur, United S." submitter="2608" />
-    <comments post="404237" id="406768" timestamp="2010-03-02T18:35:33" content="thanks" submitter="974" />
-    <comments post="404237" id="406766" timestamp="2010-03-03T06:10:32" content="yes" submitter="1259" />
+    <comments id="406765" timestamp="2010-03-02T15:26:07" content="fine" submitter="2886" />
+    <comments id="406767" timestamp="2010-03-02T17:01:58" content="About Arnaud Clément, De. About Sheryl Crow, duets. About Darfur, United S." submitter="2608" />
+    <comments id="406768" timestamp="2010-03-02T18:35:33" content="thanks" submitter="974" />
+    <comments id="406766" timestamp="2010-03-03T06:10:32" content="yes" submitter="1259" />
   </posts>
   <posts id="215403" timestamp="2010-03-02T15:36:59" content="" submitter="3331">
-    <comments post="215403" id="215504" timestamp="2010-03-02T15:58:35" content="no way!" submitter="407" />
-    <comments post="215403" id="215494" timestamp="2010-03-02T16:44:32" content="About Nikolai Rimsky-Korsakov, of the sea mi. About Count Basie, theater in his town of R." submitter="407">
-      <comments post="215403" id="215505" timestamp="2010-03-02T17:34:05" content="duh" submitter="407" />
-      <comments post="215403" id="215499" timestamp="2010-03-03T05:58:27" content="About Benito Mussolini, also created . About Nikolai Rimsky-Korsakov, compl." submitter="407">
-        <comments post="215403" id="215510" timestamp="2010-03-03T07:50:25" content="roflol" submitter="407" />
-        <comments post="215403" id="215506" timestamp="2010-03-03T08:12:10" content="About Benito Mussolini, . About Nikolai Rimsky-Kor. About Pharrell William." submitter="407" />
+    <comments id="215504" timestamp="2010-03-02T15:58:35" content="no way!" submitter="407" />
+    <comments id="215494" timestamp="2010-03-02T16:44:32" content="About Nikolai Rimsky-Korsakov, of the sea mi. About Count Basie, theater in his town of R." submitter="407">
+      <comments id="215505" timestamp="2010-03-02T17:34:05" content="duh" submitter="407" />
+      <comments id="215499" timestamp="2010-03-03T05:58:27" content="About Benito Mussolini, also created . About Nikolai Rimsky-Korsakov, compl." submitter="407">
+        <comments id="215510" timestamp="2010-03-03T07:50:25" content="roflol" submitter="407" />
+        <comments id="215506" timestamp="2010-03-03T08:12:10" content="About Benito Mussolini, . About Nikolai Rimsky-Kor. About Pharrell William." submitter="407" />
       </comments>
-      <comments post="215403" id="215509" timestamp="2010-03-03T05:59:26" content="yes" submitter="407" />
-      <comments post="215403" id="215497" timestamp="2010-03-03T07:33:38" content="About Christopher Lee, prequel trilog. About Count Basie, long engagement a." submitter="407" />
+      <comments id="215509" timestamp="2010-03-03T05:59:26" content="yes" submitter="407" />
+      <comments id="215497" timestamp="2010-03-03T07:33:38" content="About Christopher Lee, prequel trilog. About Count Basie, long engagement a." submitter="407" />
     </comments>
-    <comments post="215403" id="215495" timestamp="2010-03-02T16:50:00" content="maybe" submitter="407" />
-    <comments post="215403" id="215493" timestamp="2010-03-02T16:54:31" content="good" submitter="407" />
-    <comments post="215403" id="215503" timestamp="2010-03-02T18:00:11" content="right" submitter="407" />
-    <comments post="215403" id="215496" timestamp="2010-03-02T20:24:42" content="About Pope John XXIII, but di. About David Bowie, Throughout. About Beyoncé Knowles, Dre." submitter="407">
-      <comments post="215403" id="215498" timestamp="2010-03-02T22:41:43" content="fine" submitter="407" />
+    <comments id="215495" timestamp="2010-03-02T16:50:00" content="maybe" submitter="407" />
+    <comments id="215493" timestamp="2010-03-02T16:54:31" content="good" submitter="407" />
+    <comments id="215503" timestamp="2010-03-02T18:00:11" content="right" submitter="407" />
+    <comments id="215496" timestamp="2010-03-02T20:24:42" content="About Pope John XXIII, but di. About David Bowie, Throughout. About Beyoncé Knowles, Dre." submitter="407">
+      <comments id="215498" timestamp="2010-03-02T22:41:43" content="fine" submitter="407" />
     </comments>
-    <comments post="215403" id="215502" timestamp="2010-03-03T01:15:41" content="thx" submitter="407" />
-    <comments post="215403" id="215501" timestamp="2010-03-03T08:27:38" content="good" submitter="407" />
+    <comments id="215502" timestamp="2010-03-03T01:15:41" content="thx" submitter="407" />
+    <comments id="215501" timestamp="2010-03-03T08:27:38" content="good" submitter="407" />
   </posts>
   <posts id="585269" timestamp="2010-03-02T16:28:44" content="" submitter="2917" />
   <posts id="1115133" timestamp="2010-03-02T16:37:44" content="" submitter="3764" />
   <posts id="1076821" timestamp="2010-03-02T17:20:29" content="" submitter="3825">
-    <comments post="1076821" id="1077375" timestamp="2010-03-02T17:21:47" content="About Mick Jagg. About Gerald Fo. About Leonardo . About Panama, p. About Feels Lik. About." submitter="1564">
-      <comments post="1076821" id="1077377" timestamp="2010-03-02T17:22:54" content="thanks" submitter="1564" />
+    <comments id="1077375" timestamp="2010-03-02T17:21:47" content="About Mick Jagg. About Gerald Fo. About Leonardo . About Panama, p. About Feels Lik. About." submitter="1564">
+      <comments id="1077377" timestamp="2010-03-02T17:22:54" content="thanks" submitter="1564" />
     </comments>
-    <comments post="1076821" id="1077380" timestamp="2010-03-02T17:22:44" content="roflol" submitter="1564" />
-    <comments post="1076821" id="1077373" timestamp="2010-03-02T18:03:25" content="About Mick Jagger, trad. About Tim Burton, close. About Adam Sandler, a f. About Martin Van Buren,. About Feels Like." submitter="1564">
-      <comments post="1076821" id="1077378" timestamp="2010-03-03T06:15:23" content="yes" submitter="1564" />
+    <comments id="1077380" timestamp="2010-03-02T17:22:44" content="roflol" submitter="1564" />
+    <comments id="1077373" timestamp="2010-03-02T18:03:25" content="About Mick Jagger, trad. About Tim Burton, close. About Adam Sandler, a f. About Martin Van Buren,. About Feels Like." submitter="1564">
+      <comments id="1077378" timestamp="2010-03-03T06:15:23" content="yes" submitter="1564" />
     </comments>
-    <comments post="1076821" id="1077374" timestamp="2010-03-02T19:39:03" content="fine" submitter="1564" />
-    <comments post="1076821" id="1077381" timestamp="2010-03-02T21:05:53" content="great" submitter="1564" />
-    <comments post="1076821" id="1077372" timestamp="2010-03-03T00:32:14" content="LOL" submitter="1564" />
-    <comments post="1076821" id="1077370" timestamp="2010-03-03T03:03:21" content="good" submitter="1564" />
+    <comments id="1077374" timestamp="2010-03-02T19:39:03" content="fine" submitter="1564" />
+    <comments id="1077381" timestamp="2010-03-02T21:05:53" content="great" submitter="1564" />
+    <comments id="1077372" timestamp="2010-03-03T00:32:14" content="LOL" submitter="1564" />
+    <comments id="1077370" timestamp="2010-03-03T03:03:21" content="good" submitter="1564" />
   </posts>
   <posts id="404299" timestamp="2010-03-02T17:32:29" content="" submitter="3705">
-    <comments post="404299" id="407394" timestamp="2010-03-02T18:40:45" content="About Che Guevara, 196. About Margaret Thatche. About Barbra Streisand. About Ira Gershwi." submitter="1259">
-      <comments post="404299" id="407397" timestamp="2010-03-02T18:41:16" content="thx" submitter="2608" />
-      <comments post="404299" id="407395" timestamp="2010-03-02T19:57:54" content="fine" submitter="974" />
+    <comments id="407394" timestamp="2010-03-02T18:40:45" content="About Che Guevara, 196. About Margaret Thatche. About Barbra Streisand. About Ira Gershwi." submitter="1259">
+      <comments id="407397" timestamp="2010-03-02T18:41:16" content="thx" submitter="2608" />
+      <comments id="407395" timestamp="2010-03-02T19:57:54" content="fine" submitter="974" />
     </comments>
-    <comments post="404299" id="407396" timestamp="2010-03-02T18:50:30" content="About Jarmila Gajd. About Bruce Spring. About Alice Cooper. About Scarlet ." submitter="2886" />
+    <comments id="407396" timestamp="2010-03-02T18:50:30" content="About Jarmila Gajd. About Bruce Spring. About Alice Cooper. About Scarlet ." submitter="2886" />
   </posts>
   <posts id="404248" timestamp="2010-03-02T17:39:59" content="" submitter="3705">
-    <comments post="404248" id="406855" timestamp="2010-03-02T17:47:01" content="thx" submitter="2886" />
-    <comments post="404248" id="406853" timestamp="2010-03-02T17:49:57" content="no" submitter="2886" />
-    <comments post="404248" id="406843" timestamp="2010-03-02T18:05:31" content="no" submitter="2886" />
-    <comments post="404248" id="406841" timestamp="2010-03-02T18:17:45" content="good" submitter="2886" />
-    <comments post="404248" id="406844" timestamp="2010-03-02T20:52:47" content="fine" submitter="2608" />
-    <comments post="404248" id="406846" timestamp="2010-03-02T21:41:44" content="About Louis XIV of . About Jarmila Gajdo. About Abraham Linco. About 50 Cent,." submitter="974">
-      <comments post="404248" id="406849" timestamp="2010-03-03T00:04:45" content="About Rabindranath Tagore,. About Gloria Macapagal-Arr. About Jarmila Gajdošov." submitter="2886">
-        <comments post="404248" id="406852" timestamp="2010-03-03T02:20:52" content="roflol" submitter="2608" />
+    <comments id="406855" timestamp="2010-03-02T17:47:01" content="thx" submitter="2886" />
+    <comments id="406853" timestamp="2010-03-02T17:49:57" content="no" submitter="2886" />
+    <comments id="406843" timestamp="2010-03-02T18:05:31" content="no" submitter="2886" />
+    <comments id="406841" timestamp="2010-03-02T18:17:45" content="good" submitter="2886" />
+    <comments id="406844" timestamp="2010-03-02T20:52:47" content="fine" submitter="2608" />
+    <comments id="406846" timestamp="2010-03-02T21:41:44" content="About Louis XIV of . About Jarmila Gajdo. About Abraham Linco. About 50 Cent,." submitter="974">
+      <comments id="406849" timestamp="2010-03-03T00:04:45" content="About Rabindranath Tagore,. About Gloria Macapagal-Arr. About Jarmila Gajdošov." submitter="2886">
+        <comments id="406852" timestamp="2010-03-03T02:20:52" content="roflol" submitter="2608" />
       </comments>
     </comments>
-    <comments post="404248" id="406839" timestamp="2010-03-02T22:42:50" content="thanks" submitter="2886" />
-    <comments post="404248" id="406854" timestamp="2010-03-02T23:11:03" content="good" submitter="1259" />
-    <comments post="404248" id="406845" timestamp="2010-03-03T00:28:02" content="I see" submitter="1259" />
-    <comments post="404248" id="406840" timestamp="2010-03-03T01:34:43" content="About Jarmila Gajdošová, to 2011, is . About Richard Nixon, exploration. He . About Who Let the Dogs Out?, and plac. About Western Sahara, the Western ." submitter="1259">
-      <comments post="404248" id="406856" timestamp="2010-03-03T02:01:45" content="no way!" submitter="974" />
-      <comments post="404248" id="406848" timestamp="2010-03-03T02:24:49" content="LOL" submitter="974" />
-      <comments post="404248" id="406847" timestamp="2010-03-03T04:40:11" content="cool" submitter="2608" />
+    <comments id="406839" timestamp="2010-03-02T22:42:50" content="thanks" submitter="2886" />
+    <comments id="406854" timestamp="2010-03-02T23:11:03" content="good" submitter="1259" />
+    <comments id="406845" timestamp="2010-03-03T00:28:02" content="I see" submitter="1259" />
+    <comments id="406840" timestamp="2010-03-03T01:34:43" content="About Jarmila Gajdošová, to 2011, is . About Richard Nixon, exploration. He . About Who Let the Dogs Out?, and plac. About Western Sahara, the Western ." submitter="1259">
+      <comments id="406856" timestamp="2010-03-03T02:01:45" content="no way!" submitter="974" />
+      <comments id="406848" timestamp="2010-03-03T02:24:49" content="LOL" submitter="974" />
+      <comments id="406847" timestamp="2010-03-03T04:40:11" content="cool" submitter="2608" />
     </comments>
   </posts>
   <posts id="404263" timestamp="2010-03-02T17:53:29" content="" submitter="3705">
-    <comments post="404263" id="406992" timestamp="2010-03-02T17:54:59" content="fine" submitter="2886" />
-    <comments post="404263" id="406994" timestamp="2010-03-02T17:57:41" content="About Euripides, . About Rabindranat. About Jarmila Gaj. About Arthur Well. About David ." submitter="2608">
-      <comments post="404263" id="407004" timestamp="2010-03-02T17:58:50" content="no" submitter="2608" />
-      <comments post="404263" id="407005" timestamp="2010-03-02T18:24:50" content="About Euripid. About Henry V. About Arthur . About David H. About Vietnam. About K." submitter="2608" />
-      <comments post="404263" id="406995" timestamp="2010-03-02T22:29:09" content="duh" submitter="1259" />
-      <comments post="404263" id="407006" timestamp="2010-03-03T00:35:33" content="About Charle. About Euripi. About Jarmil. About Arthur. About David . About Syria,. Abou." submitter="2608" />
-      <comments post="404263" id="407009" timestamp="2010-03-03T04:08:25" content="ok" submitter="1259" />
+    <comments id="406992" timestamp="2010-03-02T17:54:59" content="fine" submitter="2886" />
+    <comments id="406994" timestamp="2010-03-02T17:57:41" content="About Euripides, . About Rabindranat. About Jarmila Gaj. About Arthur Well. About David ." submitter="2608">
+      <comments id="407004" timestamp="2010-03-02T17:58:50" content="no" submitter="2608" />
+      <comments id="407005" timestamp="2010-03-02T18:24:50" content="About Euripid. About Henry V. About Arthur . About David H. About Vietnam. About K." submitter="2608" />
+      <comments id="406995" timestamp="2010-03-02T22:29:09" content="duh" submitter="1259" />
+      <comments id="407006" timestamp="2010-03-03T00:35:33" content="About Charle. About Euripi. About Jarmil. About Arthur. About David . About Syria,. Abou." submitter="2608" />
+      <comments id="407009" timestamp="2010-03-03T04:08:25" content="ok" submitter="1259" />
     </comments>
-    <comments post="404263" id="407003" timestamp="2010-03-02T18:03:29" content="thx" submitter="1259" />
-    <comments post="404263" id="406993" timestamp="2010-03-02T19:10:14" content="About Charles Darwin, It is notable for its World War II–e. About Ronald Reagan, new political and economic initiative. About Cape Colony, remained in the British Empire, beco." submitter="1259">
-      <comments post="404263" id="406997" timestamp="2010-03-02T19:29:39" content="duh" submitter="2608" />
-      <comments post="404263" id="407002" timestamp="2010-03-02T21:28:30" content="thx" submitter="974" />
+    <comments id="407003" timestamp="2010-03-02T18:03:29" content="thx" submitter="1259" />
+    <comments id="406993" timestamp="2010-03-02T19:10:14" content="About Charles Darwin, It is notable for its World War II–e. About Ronald Reagan, new political and economic initiative. About Cape Colony, remained in the British Empire, beco." submitter="1259">
+      <comments id="406997" timestamp="2010-03-02T19:29:39" content="duh" submitter="2608" />
+      <comments id="407002" timestamp="2010-03-02T21:28:30" content="thx" submitter="974" />
     </comments>
-    <comments post="404263" id="407001" timestamp="2010-03-02T19:31:45" content="no way!" submitter="2608" />
-    <comments post="404263" id="407011" timestamp="2010-03-02T19:56:17" content="LOL" submitter="974" />
+    <comments id="407001" timestamp="2010-03-02T19:31:45" content="no way!" submitter="2608" />
+    <comments id="407011" timestamp="2010-03-02T19:56:17" content="LOL" submitter="974" />
   </posts>
   <posts id="404319" timestamp="2010-03-02T17:55:44" content="" submitter="3705">
-    <comments post="404319" id="407639" timestamp="2010-03-02T18:05:31" content="I see" submitter="974" />
-    <comments post="404319" id="407641" timestamp="2010-03-02T21:11:03" content="About Anne, Queen of G. About Joss Whedon, co-. About Ludwig van Beeth. About Stephen King." submitter="2886">
-      <comments post="404319" id="407643" timestamp="2010-03-03T00:23:43" content="no" submitter="974" />
+    <comments id="407639" timestamp="2010-03-02T18:05:31" content="I see" submitter="974" />
+    <comments id="407641" timestamp="2010-03-02T21:11:03" content="About Anne, Queen of G. About Joss Whedon, co-. About Ludwig van Beeth. About Stephen King." submitter="2886">
+      <comments id="407643" timestamp="2010-03-03T00:23:43" content="no" submitter="974" />
     </comments>
   </posts>
   <posts id="1115143" timestamp="2010-03-02T17:57:59" content="" submitter="3764" />
   <posts id="1115144" timestamp="2010-03-02T18:08:29" content="" submitter="3764" />
   <posts id="1115114" timestamp="2010-03-02T18:24:59" content="" submitter="3764" />
   <posts id="1076833" timestamp="2010-03-02T18:44:29" content="" submitter="3825">
-    <comments post="1076833" id="1077510" timestamp="2010-03-02T18:45:16" content="fine" submitter="1564" />
-    <comments post="1076833" id="1077503" timestamp="2010-03-02T18:49:25" content="About Alanis M. About Jarmila . About Woody Al. About Miley Cy. About That Was. Abou." submitter="1564">
-      <comments post="1076833" id="1077513" timestamp="2010-03-02T18:52:07" content="right" submitter="1564" />
-      <comments post="1076833" id="1077508" timestamp="2010-03-02T21:57:56" content="thx" submitter="1564" />
-      <comments post="1076833" id="1077506" timestamp="2010-03-03T01:19:02" content="maybe" submitter="1564" />
-      <comments post="1076833" id="1077509" timestamp="2010-03-03T03:15:08" content="About Adolf H. About Raphael. About Jarmila. About Stevie . About Miley C. About." submitter="1564" />
-      <comments post="1076833" id="1077512" timestamp="2010-03-03T07:43:04" content="I see" submitter="1564" />
+    <comments id="1077510" timestamp="2010-03-02T18:45:16" content="fine" submitter="1564" />
+    <comments id="1077503" timestamp="2010-03-02T18:49:25" content="About Alanis M. About Jarmila . About Woody Al. About Miley Cy. About That Was. Abou." submitter="1564">
+      <comments id="1077513" timestamp="2010-03-02T18:52:07" content="right" submitter="1564" />
+      <comments id="1077508" timestamp="2010-03-02T21:57:56" content="thx" submitter="1564" />
+      <comments id="1077506" timestamp="2010-03-03T01:19:02" content="maybe" submitter="1564" />
+      <comments id="1077509" timestamp="2010-03-03T03:15:08" content="About Adolf H. About Raphael. About Jarmila. About Stevie . About Miley C. About." submitter="1564" />
+      <comments id="1077512" timestamp="2010-03-03T07:43:04" content="I see" submitter="1564" />
     </comments>
-    <comments post="1076833" id="1077500" timestamp="2010-03-02T21:52:14" content="yes" submitter="1564" />
-    <comments post="1076833" id="1077498" timestamp="2010-03-02T22:10:41" content="About Plat. About Nico. About Jarm. About Wood. About 50 C. About Weir. Ab." submitter="1564">
-      <comments post="1076833" id="1077499" timestamp="2010-03-03T02:29:13" content="no way!" submitter="1564" />
-      <comments post="1076833" id="1077502" timestamp="2010-03-03T08:00:46" content="About Adolf. About Georg. About Nicol. About Alexa. About Jarmi. About Frank. A." submitter="1564" />
+    <comments id="1077500" timestamp="2010-03-02T21:52:14" content="yes" submitter="1564" />
+    <comments id="1077498" timestamp="2010-03-02T22:10:41" content="About Plat. About Nico. About Jarm. About Wood. About 50 C. About Weir. Ab." submitter="1564">
+      <comments id="1077499" timestamp="2010-03-03T02:29:13" content="no way!" submitter="1564" />
+      <comments id="1077502" timestamp="2010-03-03T08:00:46" content="About Adolf. About Georg. About Nicol. About Alexa. About Jarmi. About Frank. A." submitter="1564" />
     </comments>
-    <comments post="1076833" id="1077497" timestamp="2010-03-03T02:16:19" content="I see" submitter="1564" />
-    <comments post="1076833" id="1077507" timestamp="2010-03-03T02:16:21" content="fine" submitter="1564" />
+    <comments id="1077497" timestamp="2010-03-03T02:16:19" content="I see" submitter="1564" />
+    <comments id="1077507" timestamp="2010-03-03T02:16:21" content="fine" submitter="1564" />
   </posts>
   <posts id="215402" timestamp="2010-03-02T18:48:14" content="" submitter="3331">
-    <comments post="215402" id="215488" timestamp="2010-03-02T18:48:25" content="cool" submitter="407" />
-    <comments post="215402" id="215489" timestamp="2010-03-02T19:44:42" content="About Victor Hugo, and his wo. About George Washington, over. About Willie Nelson, the end . About Weird Al Yankovic, albu. About Please Please Me, Of th. About Saint Andrew, p." submitter="407" />
-    <comments post="215402" id="215487" timestamp="2010-03-03T00:17:05" content="maybe" submitter="407" />
-    <comments post="215402" id="215490" timestamp="2010-03-03T05:04:32" content="About Joan o. About Jarmil. About Bono, . About Alice . About Al Gre. About Please. ." submitter="407" />
-    <comments post="215402" id="215486" timestamp="2010-03-03T08:42:06" content="yes" submitter="407" />
+    <comments id="215488" timestamp="2010-03-02T18:48:25" content="cool" submitter="407" />
+    <comments id="215489" timestamp="2010-03-02T19:44:42" content="About Victor Hugo, and his wo. About George Washington, over. About Willie Nelson, the end . About Weird Al Yankovic, albu. About Please Please Me, Of th. About Saint Andrew, p." submitter="407" />
+    <comments id="215487" timestamp="2010-03-03T00:17:05" content="maybe" submitter="407" />
+    <comments id="215490" timestamp="2010-03-03T05:04:32" content="About Joan o. About Jarmil. About Bono, . About Alice . About Al Gre. About Please. ." submitter="407" />
+    <comments id="215486" timestamp="2010-03-03T08:42:06" content="yes" submitter="407" />
   </posts>
   <posts id="404189" timestamp="2010-03-02T18:50:29" content="" submitter="3705">
-    <comments post="404189" id="406233" timestamp="2010-03-02T23:02:22" content="roflol" submitter="974" />
-    <comments post="404189" id="406235" timestamp="2010-03-03T03:37:53" content="About George I. About George B. About Jarmila . About Roger Wa. About United S. About I W." submitter="2608">
-      <comments post="404189" id="406239" timestamp="2010-03-03T04:25:22" content="yes" submitter="2886" />
+    <comments id="406233" timestamp="2010-03-02T23:02:22" content="roflol" submitter="974" />
+    <comments id="406235" timestamp="2010-03-03T03:37:53" content="About George I. About George B. About Jarmila . About Roger Wa. About United S. About I W." submitter="2608">
+      <comments id="406239" timestamp="2010-03-03T04:25:22" content="yes" submitter="2886" />
     </comments>
-    <comments post="404189" id="406230" timestamp="2010-03-03T03:48:48" content="cool" submitter="2886" />
-    <comments post="404189" id="406232" timestamp="2010-03-03T06:50:48" content="thx" submitter="1259" />
-    <comments post="404189" id="406231" timestamp="2010-03-03T07:23:02" content="About George Berna. About Oprah Winfre. About Weird Al Yan. About Liza Minnell. About I Wi." submitter="974">
-      <comments post="404189" id="406236" timestamp="2010-03-03T08:21:36" content="About Elizabeth I of E. About Pharrell William. About I Will Always Lo. About Cape Colony,." submitter="2608" />
+    <comments id="406230" timestamp="2010-03-03T03:48:48" content="cool" submitter="2886" />
+    <comments id="406232" timestamp="2010-03-03T06:50:48" content="thx" submitter="1259" />
+    <comments id="406231" timestamp="2010-03-03T07:23:02" content="About George Berna. About Oprah Winfre. About Weird Al Yan. About Liza Minnell. About I Wi." submitter="974">
+      <comments id="406236" timestamp="2010-03-03T08:21:36" content="About Elizabeth I of E. About Pharrell William. About I Will Always Lo. About Cape Colony,." submitter="2608" />
     </comments>
   </posts>
   <posts id="1115147" timestamp="2010-03-02T19:21:14" content="" submitter="3764" />
   <posts id="585263" timestamp="2010-03-02T19:29:29" content="" submitter="2917" />
   <posts id="215407" timestamp="2010-03-02T20:54:59" content="" submitter="3331" />
   <posts id="404162" timestamp="2010-03-02T21:39:59" content="" submitter="3705">
-    <comments post="404162" id="405976" timestamp="2010-03-02T21:42:08" content="About Charles I of Eng. About Thomas Jefferson. About Michael Jordan, . About John Travolta, a. About Landgraviat." submitter="974">
-      <comments post="404162" id="405978" timestamp="2010-03-02T21:50:18" content="cool" submitter="974" />
+    <comments id="405976" timestamp="2010-03-02T21:42:08" content="About Charles I of Eng. About Thomas Jefferson. About Michael Jordan, . About John Travolta, a. About Landgraviat." submitter="974">
+      <comments id="405978" timestamp="2010-03-02T21:50:18" content="cool" submitter="974" />
     </comments>
-    <comments post="404162" id="405967" timestamp="2010-03-02T21:43:54" content="no way!" submitter="974" />
-    <comments post="404162" id="405969" timestamp="2010-03-02T22:03:57" content="right" submitter="1259" />
-    <comments post="404162" id="405965" timestamp="2010-03-02T22:08:44" content="ok" submitter="2608" />
-    <comments post="404162" id="405971" timestamp="2010-03-02T22:29:17" content="About Saint George. About Jarmila Gajdo. About Sean Connery,. About Orson Welles,. About Al Green, thi. About John Trav." submitter="2886">
-      <comments post="404162" id="405981" timestamp="2010-03-02T23:11:39" content="ok" submitter="2608" />
-      <comments post="404162" id="405972" timestamp="2010-03-03T02:39:38" content="About Augus. About Saint. About Ennio. About Pyotr. About Jarmi. About Orson. Ab." submitter="974" />
+    <comments id="405967" timestamp="2010-03-02T21:43:54" content="no way!" submitter="974" />
+    <comments id="405969" timestamp="2010-03-02T22:03:57" content="right" submitter="1259" />
+    <comments id="405965" timestamp="2010-03-02T22:08:44" content="ok" submitter="2608" />
+    <comments id="405971" timestamp="2010-03-02T22:29:17" content="About Saint George. About Jarmila Gajdo. About Sean Connery,. About Orson Welles,. About Al Green, thi. About John Trav." submitter="2886">
+      <comments id="405981" timestamp="2010-03-02T23:11:39" content="ok" submitter="2608" />
+      <comments id="405972" timestamp="2010-03-03T02:39:38" content="About Augus. About Saint. About Ennio. About Pyotr. About Jarmi. About Orson. Ab." submitter="974" />
     </comments>
-    <comments post="404162" id="405966" timestamp="2010-03-03T00:28:07" content="duh" submitter="2886" />
-    <comments post="404162" id="405968" timestamp="2010-03-03T01:25:34" content="yes" submitter="974" />
-    <comments post="404162" id="405970" timestamp="2010-03-03T02:45:30" content="duh" submitter="974" />
+    <comments id="405966" timestamp="2010-03-03T00:28:07" content="duh" submitter="2886" />
+    <comments id="405968" timestamp="2010-03-03T01:25:34" content="yes" submitter="974" />
+    <comments id="405970" timestamp="2010-03-03T02:45:30" content="duh" submitter="974" />
   </posts>
   <posts id="404213" timestamp="2010-03-02T21:39:59" content="" submitter="3705">
-    <comments post="404213" id="406508" timestamp="2010-03-03T01:31:29" content="great" submitter="2886" />
+    <comments id="406508" timestamp="2010-03-03T01:31:29" content="great" submitter="2886" />
   </posts>
   <posts id="1115113" timestamp="2010-03-02T21:49:44" content="" submitter="3764" />
   <posts id="1115129" timestamp="2010-03-02T21:53:29" content="" submitter="3764" />
   <posts id="269874" timestamp="2010-03-02T22:41:26" content="" submitter="407" />
   <posts id="404227" timestamp="2010-03-02T22:54:14" content="" submitter="3705">
-    <comments post="404227" id="406655" timestamp="2010-03-02T23:22:57" content="LOL" submitter="1259" />
-    <comments post="404227" id="406652" timestamp="2010-03-03T00:30:43" content="About Jar. About LL . About Al . About Ele. About Al . About Tup. About Hir. A." submitter="1259">
-      <comments post="404227" id="406658" timestamp="2010-03-03T00:32:59" content="roflol" submitter="2608" />
-      <comments post="404227" id="406653" timestamp="2010-03-03T06:32:50" content="roflol" submitter="974" />
+    <comments id="406655" timestamp="2010-03-02T23:22:57" content="LOL" submitter="1259" />
+    <comments id="406652" timestamp="2010-03-03T00:30:43" content="About Jar. About LL . About Al . About Ele. About Al . About Tup. About Hir. A." submitter="1259">
+      <comments id="406658" timestamp="2010-03-03T00:32:59" content="roflol" submitter="2608" />
+      <comments id="406653" timestamp="2010-03-03T06:32:50" content="roflol" submitter="974" />
     </comments>
   </posts>
   <posts id="404174" timestamp="2010-03-02T23:13:44" content="" submitter="3705">
-    <comments post="404174" id="406117" timestamp="2010-03-02T23:14:02" content="roflol" submitter="974" />
-    <comments post="404174" id="406123" timestamp="2010-03-02T23:15:09" content="thx" submitter="974" />
-    <comments post="404174" id="406122" timestamp="2010-03-02T23:24:29" content="ok" submitter="2886" />
-    <comments post="404174" id="406120" timestamp="2010-03-02T23:32:17" content="thanks" submitter="2608" />
-    <comments post="404174" id="406119" timestamp="2010-03-03T00:12:26" content="About Adolf Hitler, some. About Louis Philippe I, . About Jarmila Gajdošov." submitter="1259">
-      <comments post="404174" id="406125" timestamp="2010-03-03T00:15:10" content="About Louis Philippe I, last ki. About Al Green, peak of his pop. About Germany, regions became." submitter="974" />
+    <comments id="406117" timestamp="2010-03-02T23:14:02" content="roflol" submitter="974" />
+    <comments id="406123" timestamp="2010-03-02T23:15:09" content="thx" submitter="974" />
+    <comments id="406122" timestamp="2010-03-02T23:24:29" content="ok" submitter="2886" />
+    <comments id="406120" timestamp="2010-03-02T23:32:17" content="thanks" submitter="2608" />
+    <comments id="406119" timestamp="2010-03-03T00:12:26" content="About Adolf Hitler, some. About Louis Philippe I, . About Jarmila Gajdošov." submitter="1259">
+      <comments id="406125" timestamp="2010-03-03T00:15:10" content="About Louis Philippe I, last ki. About Al Green, peak of his pop. About Germany, regions became." submitter="974" />
     </comments>
-    <comments post="404174" id="406115" timestamp="2010-03-03T01:21:09" content="great" submitter="2886" />
-    <comments post="404174" id="406118" timestamp="2010-03-03T01:47:25" content="About Brian Eno, This page contains information related to recordings by English ele." submitter="974">
-      <comments post="404174" id="406124" timestamp="2010-03-03T01:59:48" content="good" submitter="2608" />
+    <comments id="406115" timestamp="2010-03-03T01:21:09" content="great" submitter="2886" />
+    <comments id="406118" timestamp="2010-03-03T01:47:25" content="About Brian Eno, This page contains information related to recordings by English ele." submitter="974">
+      <comments id="406124" timestamp="2010-03-03T01:59:48" content="good" submitter="2608" />
     </comments>
-    <comments post="404174" id="406121" timestamp="2010-03-03T05:13:19" content="fine" submitter="2608" />
+    <comments id="406121" timestamp="2010-03-03T05:13:19" content="fine" submitter="2608" />
   </posts>
   <posts id="1076807" timestamp="2010-03-03T00:03:59" content="" submitter="3825">
-    <comments post="1076807" id="1077249" timestamp="2010-03-03T00:04:24" content="right" submitter="1564" />
-    <comments post="1076807" id="1077248" timestamp="2010-03-03T00:28:37" content="I see" submitter="1564" />
-    <comments post="1076807" id="1077250" timestamp="2010-03-03T08:34:36" content="ok" submitter="1564" />
+    <comments id="1077249" timestamp="2010-03-03T00:04:24" content="right" submitter="1564" />
+    <comments id="1077248" timestamp="2010-03-03T00:28:37" content="I see" submitter="1564" />
+    <comments id="1077250" timestamp="2010-03-03T08:34:36" content="ok" submitter="1564" />
   </posts>
   <posts id="585279" timestamp="2010-03-03T00:38:29" content="" submitter="2917" />
   <posts id="585273" timestamp="2010-03-03T01:03:14" content="" submitter="2917" />
   <posts id="1115128" timestamp="2010-03-03T01:44:29" content="" submitter="3764" />
   <posts id="404286" timestamp="2010-03-03T03:28:44" content="" submitter="3705">
-    <comments post="404286" id="407249" timestamp="2010-03-03T03:38:51" content="About Jarmila Gajdo. About Leona Lewis, . About Weird Al Yank. About Matt Damo." submitter="1259">
-      <comments post="404286" id="407260" timestamp="2010-03-03T03:39:13" content="no" submitter="1259" />
-      <comments post="404286" id="407251" timestamp="2010-03-03T04:59:30" content="About Tiberius, in 39 BC,. About Leona Lewis, third . About Meat Loaf, Mons." submitter="2886">
-        <comments post="404286" id="407253" timestamp="2010-03-03T04:59:40" content="maybe" submitter="2608" />
-        <comments post="404286" id="407265" timestamp="2010-03-03T05:22:18" content="ok" submitter="2886" />
+    <comments id="407249" timestamp="2010-03-03T03:38:51" content="About Jarmila Gajdo. About Leona Lewis, . About Weird Al Yank. About Matt Damo." submitter="1259">
+      <comments id="407260" timestamp="2010-03-03T03:39:13" content="no" submitter="1259" />
+      <comments id="407251" timestamp="2010-03-03T04:59:30" content="About Tiberius, in 39 BC,. About Leona Lewis, third . About Meat Loaf, Mons." submitter="2886">
+        <comments id="407253" timestamp="2010-03-03T04:59:40" content="maybe" submitter="2608" />
+        <comments id="407265" timestamp="2010-03-03T05:22:18" content="ok" submitter="2886" />
       </comments>
-      <comments post="404286" id="407254" timestamp="2010-03-03T05:06:20" content="cool" submitter="2608" />
+      <comments id="407254" timestamp="2010-03-03T05:06:20" content="cool" submitter="2608" />
     </comments>
   </posts>
   <posts id="1115146" timestamp="2010-03-03T03:35:29" content="" submitter="3764" />
   <posts id="1076815" timestamp="2010-03-03T03:50:29" content="" submitter="3825">
-    <comments post="1076815" id="1077321" timestamp="2010-03-03T03:51:41" content="About Marti. About Felix. About Livy,. About Igor . About Jarmi. About Beyon. About Since." submitter="1564">
-      <comments post="1076815" id="1077322" timestamp="2010-03-03T03:55:25" content="About W. About M. About J. About I. About J. About B. About M. About S. Abo." submitter="1564" />
-      <comments post="1076815" id="1077325" timestamp="2010-03-03T05:38:18" content="About Mart. About Livy. About Geor. About Beyo. About Hadr. About When. About Goo." submitter="1564" />
+    <comments id="1077321" timestamp="2010-03-03T03:51:41" content="About Marti. About Felix. About Livy,. About Igor . About Jarmi. About Beyon. About Since." submitter="1564">
+      <comments id="1077322" timestamp="2010-03-03T03:55:25" content="About W. About M. About J. About I. About J. About B. About M. About S. Abo." submitter="1564" />
+      <comments id="1077325" timestamp="2010-03-03T05:38:18" content="About Mart. About Livy. About Geor. About Beyo. About Hadr. About When. About Goo." submitter="1564" />
     </comments>
-    <comments post="1076815" id="1077319" timestamp="2010-03-03T05:38:54" content="About Felix Mend. About David Bowi. About John Gielg. About William Pi. About Hadria." submitter="1564" />
+    <comments id="1077319" timestamp="2010-03-03T05:38:54" content="About Felix Mend. About David Bowi. About John Gielg. About William Pi. About Hadria." submitter="1564" />
   </posts>
   <posts id="298571" timestamp="2010-03-03T03:55:07" content="" submitter="4661" />
   <posts id="404262" timestamp="2010-03-03T04:19:44" content="" submitter="3705">
-    <comments post="404262" id="406984" timestamp="2010-03-03T04:37:59" content="no" submitter="2886" />
-    <comments post="404262" id="406989" timestamp="2010-03-03T04:38:39" content="good" submitter="2886" />
-    <comments post="404262" id="406988" timestamp="2010-03-03T04:54:59" content="About John Howard, of . About Jarmila Gajdošov. About Al Green, April . About Andre Agas." submitter="2886">
-      <comments post="404262" id="406991" timestamp="2010-03-03T07:14:57" content="About John Howard, Howard Duke . About Jarmila Gajdošová, Groth . About Parallel Lines, reached n. About Philip Glass, of hi." submitter="2886" />
+    <comments id="406984" timestamp="2010-03-03T04:37:59" content="no" submitter="2886" />
+    <comments id="406989" timestamp="2010-03-03T04:38:39" content="good" submitter="2886" />
+    <comments id="406988" timestamp="2010-03-03T04:54:59" content="About John Howard, of . About Jarmila Gajdošov. About Al Green, April . About Andre Agas." submitter="2886">
+      <comments id="406991" timestamp="2010-03-03T07:14:57" content="About John Howard, Howard Duke . About Jarmila Gajdošová, Groth . About Parallel Lines, reached n. About Philip Glass, of hi." submitter="2886" />
     </comments>
-    <comments post="404262" id="406987" timestamp="2010-03-03T08:20:25" content="duh" submitter="2608" />
-    <comments post="404262" id="406985" timestamp="2010-03-03T08:44:05" content="right" submitter="2886" />
+    <comments id="406987" timestamp="2010-03-03T08:20:25" content="duh" submitter="2608" />
+    <comments id="406985" timestamp="2010-03-03T08:44:05" content="right" submitter="2886" />
   </posts>
   <posts id="404283" timestamp="2010-03-03T04:54:59" content="" submitter="3705">
-    <comments post="404283" id="407204" timestamp="2010-03-03T05:06:58" content="yes" submitter="2886" />
-    <comments post="404283" id="407206" timestamp="2010-03-03T06:18:48" content="About . About . About . About . About . About . About . About . About . Abo." submitter="974">
-      <comments post="404283" id="407210" timestamp="2010-03-03T07:39:27" content="About J. About J. About K. About J. About M. About L. About D. About S. About L. Abo." submitter="2886" />
+    <comments id="407204" timestamp="2010-03-03T05:06:58" content="yes" submitter="2886" />
+    <comments id="407206" timestamp="2010-03-03T06:18:48" content="About . About . About . About . About . About . About . About . About . Abo." submitter="974">
+      <comments id="407210" timestamp="2010-03-03T07:39:27" content="About J. About J. About K. About J. About M. About L. About D. About S. About L. Abo." submitter="2886" />
     </comments>
   </posts>
   <posts id="215400" timestamp="2010-03-03T05:05:29" content="" submitter="3331">
-    <comments post="215400" id="215463" timestamp="2010-03-03T05:23:10" content="About Catherine. About Jarmila G. About Andrew Ll. About Jesus, wi. About Pri." submitter="407" />
-    <comments post="215400" id="215464" timestamp="2010-03-03T05:52:52" content="duh" submitter="407" />
+    <comments id="215463" timestamp="2010-03-03T05:23:10" content="About Catherine. About Jarmila G. About Andrew Ll. About Jesus, wi. About Pri." submitter="407" />
+    <comments id="215464" timestamp="2010-03-03T05:52:52" content="duh" submitter="407" />
   </posts>
   <posts id="1115119" timestamp="2010-03-03T05:48:14" content="" submitter="3764" />
   <posts id="1378654" timestamp="2010-03-03T06:12:08" content="" submitter="3962">
-    <comments post="1378654" id="1378977" timestamp="2010-03-03T06:36:56" content="About Augustine of . About Leonard Cohen. About Luther Vandro. About SexyBack.." submitter="1259">
-      <comments post="1378654" id="1378981" timestamp="2010-03-03T06:38:08" content="thx" submitter="1259" />
-      <comments post="1378654" id="1378979" timestamp="2010-03-03T08:20:14" content="thx" submitter="1259" />
-      <comments post="1378654" id="1378985" timestamp="2010-03-03T09:00:42" content="About Leonard Cohe. About Donna Summer. About SexyBack, no. About Mali, Ma." submitter="1259" />
+    <comments id="1378977" timestamp="2010-03-03T06:36:56" content="About Augustine of . About Leonard Cohen. About Luther Vandro. About SexyBack.." submitter="1259">
+      <comments id="1378981" timestamp="2010-03-03T06:38:08" content="thx" submitter="1259" />
+      <comments id="1378979" timestamp="2010-03-03T08:20:14" content="thx" submitter="1259" />
+      <comments id="1378985" timestamp="2010-03-03T09:00:42" content="About Leonard Cohe. About Donna Summer. About SexyBack, no. About Mali, Ma." submitter="1259" />
     </comments>
   </posts>
   <posts id="404178" timestamp="2010-03-03T06:12:14" content="" submitter="3705" />
   <posts id="1115145" timestamp="2010-03-03T06:22:44" content="" submitter="3764" />
   <posts id="404190" timestamp="2010-03-03T06:24:14" content="" submitter="3705">
-    <comments post="404190" id="406243" timestamp="2010-03-03T07:40:02" content="About Agatha Christie, with . About Alice Cooper, Vincent . About Ali, about 2500 sp." submitter="2886">
-      <comments post="404190" id="406244" timestamp="2010-03-03T07:44:34" content="About Agatha Ch. About Alice Coo. About Genius of. About Ali. About 9 to 5 ." submitter="2886" />
+    <comments id="406243" timestamp="2010-03-03T07:40:02" content="About Agatha Christie, with . About Alice Cooper, Vincent . About Ali, about 2500 sp." submitter="2886">
+      <comments id="406244" timestamp="2010-03-03T07:44:34" content="About Agatha Ch. About Alice Coo. About Genius of. About Ali. About 9 to 5 ." submitter="2886" />
     </comments>
   </posts>
   <posts id="1018586" timestamp="2010-03-03T06:36:59" content="" submitter="3055" />
   <posts id="215401" timestamp="2010-03-03T07:06:59" content="" submitter="3331">
-    <comments post="215401" id="215476" timestamp="2010-03-03T07:10:20" content="About Dmitry Medvedev, with 70.28%. About Jarmila Gajdošová, as Jarmil. About Lord Byron, Met never produc. About Amy Winehouse, Frank, was cr. About Will Smith, in Hollywo." submitter="407">
-      <comments post="215401" id="215483" timestamp="2010-03-03T07:37:30" content="great" submitter="407" />
+    <comments id="215476" timestamp="2010-03-03T07:10:20" content="About Dmitry Medvedev, with 70.28%. About Jarmila Gajdošová, as Jarmil. About Lord Byron, Met never produc. About Amy Winehouse, Frank, was cr. About Will Smith, in Hollywo." submitter="407">
+      <comments id="215483" timestamp="2010-03-03T07:37:30" content="great" submitter="407" />
     </comments>
-    <comments post="215401" id="215471" timestamp="2010-03-03T07:12:10" content="thx" submitter="407" />
-    <comments post="215401" id="215472" timestamp="2010-03-03T07:51:45" content="thx" submitter="407" />
-    <comments post="215401" id="215484" timestamp="2010-03-03T07:54:54" content="good" submitter="407" />
-    <comments post="215401" id="215473" timestamp="2010-03-03T08:20:37" content="duh" submitter="407" />
-    <comments post="215401" id="215474" timestamp="2010-03-03T08:29:43" content="cool" submitter="407" />
+    <comments id="215471" timestamp="2010-03-03T07:12:10" content="thx" submitter="407" />
+    <comments id="215472" timestamp="2010-03-03T07:51:45" content="thx" submitter="407" />
+    <comments id="215484" timestamp="2010-03-03T07:54:54" content="good" submitter="407" />
+    <comments id="215473" timestamp="2010-03-03T08:20:37" content="duh" submitter="407" />
+    <comments id="215474" timestamp="2010-03-03T08:29:43" content="cool" submitter="407" />
   </posts>
   <posts id="573433" timestamp="2010-03-03T07:24:59" content="" submitter="4418" />
   <posts id="573436" timestamp="2010-03-03T08:30:59" content="" submitter="4418" />

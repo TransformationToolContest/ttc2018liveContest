@@ -15,7 +15,7 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.5/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#8796093022866" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" index="2" affectedElement="social:Post initial.xmi#77309556143" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#77309556143" id="85899490797" timestamp="2011-10-09T01:03:40" content="About Adolf Hitler, and political partie. About Emanuel Swedenborg, doctrine to r." submitter="initial.xmi#8796093022866" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="85899490797" timestamp="2011-10-09T01:03:40" content="About Adolf Hitler, and political partie. About Emanuel Swedenborg, doctrine to r." submitter="initial.xmi#8796093022866" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Post initial.xmi#77309556143" affectedElement="social:Comment #//@changes.5/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
@@ -26,7 +26,7 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.8/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#2199023259530" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" index="2" affectedElement="social:Comment initial.xmi#77310861622" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#77310861595" id="85900796216" timestamp="2011-10-09T01:04:32" content="About Francis Ford Coppola, directed, . About Kid Rock, sales over 5 million." submitter="initial.xmi#2199023259530" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="85900796216" timestamp="2011-10-09T01:04:32" content="About Francis Ford Coppola, directed, . About Kid Rock, sales over 5 million." submitter="initial.xmi#2199023259530" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment initial.xmi#77310861622" affectedElement="social:Comment #//@changes.8/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
@@ -36,6 +36,6 @@
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.11/@addedElement" affectedElement="social:User initial.xmi#7696581394782" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:CompositionListInsertion" affectedElement="social:Comment initial.xmi#77310638812" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#77310634951" id="85900573408" timestamp="2011-10-09T01:07:02" content="right" submitter="initial.xmi#7696581394782" />
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="85900573408" timestamp="2011-10-09T01:07:02" content="right" submitter="initial.xmi#7696581394782" />
   </changes>
 </changes:ModelChangeSet>

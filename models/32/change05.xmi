@@ -3,19 +3,19 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#3055" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" index="2" affectedElement="social:Post initial.xmi#17179933907" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#17179933907" id="17179934062" timestamp="2010-06-27T22:06:25" content="About Albert Eins. About William Sha. About Darfur, is . About Nikolai Che. About Nanz." submitter="initial.xmi#3055" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="17179934062" timestamp="2010-06-27T22:06:25" content="About Albert Eins. About William Sha. About Darfur, is . About Nikolai Che. About Nanz." submitter="initial.xmi#3055" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Post initial.xmi#17179933907" affectedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.3/@addedElement" affectedElement="social:User initial.xmi#1099511630189" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:CompositionListInsertion" index="1" affectedElement="social:Comment initial.xmi#17180002694" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#17180002558" id="17180002698" timestamp="2010-06-27T22:06:50" content="About Herbert Kitchener, . About Devil Woman, album . About Blue in Green, ." submitter="initial.xmi#1099511630189" />
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="17180002698" timestamp="2010-06-27T22:06:50" content="About Herbert Kitchener, . About Devil Woman, album . About Blue in Green, ." submitter="initial.xmi#1099511630189" />
   </changes>
   <changes xsi:type="changes:CompositionListInsertion" index="0" affectedElement="social:Post initial.xmi#8591277452" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#8591277452" id="999991" timestamp="2018-06-27T09:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="999991" timestamp="2018-06-27T09:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
   </changes>
   <changes xsi:type="changes:CompositionListInsertion" index="0" affectedElement="social:Post initial.xmi#8591277452" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#8591277452" id="999992" timestamp="2018-06-27T19:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="999992" timestamp="2018-06-27T19:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
   </changes>
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment initial.xmi#867518" affectedElement="social:User initial.xmi#555" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/likes" />

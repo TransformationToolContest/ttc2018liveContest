@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/64/initial.xmi#25769993928"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="25769993939"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/64/initial.xmi#17180846288"/>
+    <value featureName="likedBy">
+      <listChanges index="7">
+        <referenceValues href="../../models/64/initial.xmi#1099511629463"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/64/initial.xmi#1099511629463"/>
+    <value featureName="likes">
+      <listChanges index="11">
+        <referenceValues href="../../models/64/initial.xmi#17180846288"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="25769993939" timestamp="2010-08-07T14:52:35.000+0100" content="About Salman Rushdie, of his fiction is s. About Mary Magdalene, Jesus. Jesus clea.">
+    <submitter href="../../models/64/initial.xmi#1099511631980"/>
+    <post href="../../models/64/initial.xmi#25769993819"/>
+  </objectsToAttach>
+</change:ChangeDescription>

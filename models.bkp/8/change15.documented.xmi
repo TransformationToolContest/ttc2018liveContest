@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#1076733"/>
+    <value featureName="likedBy">
+      <listChanges index="1">
+        <referenceValues href="../../models/8/initial.xmi#1847"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#1847"/>
+    <value featureName="likes">
+      <listChanges index="0">
+        <referenceValues href="../../models/8/initial.xmi#1076733"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#4018"/>
+    <value featureName="friends">
+      <listChanges index="2">
+        <referenceValues href="../../models/8/initial.xmi#4178"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#4178"/>
+    <value featureName="friends">
+      <listChanges index="4">
+        <referenceValues href="../../models/8/initial.xmi#4018"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#939"/>
+    <value featureName="name" dataValue="Alejandro Sumac"/>
+    <value featureName="submissions">
+      <listChanges index="0" referenceValues="765121 765122 765123 765124 765125"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="2291" referenceValues="765126"/>
+      <listChanges index="2291" referenceValues="765125"/>
+      <listChanges index="2291" referenceValues="765124"/>
+      <listChanges index="2291" referenceValues="765123"/>
+      <listChanges index="2291" referenceValues="765122"/>
+      <listChanges index="2291" referenceValues="765121"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Post" id="765121" timestamp="2010-04-02T10:08:57.000+0100" content="photo765121.jpg"/>
+  <objectsToAttach xsi:type="social:Post" id="765122" timestamp="2010-04-02T10:08:58.000+0100" content="photo765122.jpg"/>
+  <objectsToAttach xsi:type="social:Post" id="765123" timestamp="2010-04-02T10:08:59.000+0100" content="photo765123.jpg"/>
+  <objectsToAttach xsi:type="social:Post" id="765124" timestamp="2010-04-02T10:09:00.000+0100" content="photo765124.jpg"/>
+  <objectsToAttach xsi:type="social:Post" id="765125" timestamp="2010-04-02T10:09:01.000+0100" content="photo765125.jpg"/>
+  <objectsToAttach xsi:type="social:Post" id="765126" timestamp="2010-04-02T10:09:02.000+0100" content="photo765126.jpg">
+    <submitter href="../../models/8/initial.xmi#939"/>
+  </objectsToAttach>
+</change:ChangeDescription>

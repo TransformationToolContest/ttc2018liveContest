@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#111669369227"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="111669369230"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#111669679419"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="111669679424"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="111669369230" timestamp="2012-05-23T03:51:21.000+0100" content="About Ridl. About Wood. About Walt. About Al G. About John. About Arie. Abou.">
+    <submitter href="../../models/1024/initial.xmi#10995116282656"/>
+    <post href="../../models/1024/initial.xmi#111669369181"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="111669679424" timestamp="2012-05-23T03:51:47.000+0100" content="ok">
+    <submitter href="../../models/1024/initial.xmi#4555"/>
+    <post href="../../models/1024/initial.xmi#111669679074"/>
+  </objectsToAttach>
+</change:ChangeDescription>

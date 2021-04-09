@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360663118"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="34360663300"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="34360663300" timestamp="2010-11-05T16:41:55.000+0000" content="About Weird Al Yankovic, set to polka musi. About Donna Summer, posthumously describe.">
+    <submitter href="../../models/128/initial.xmi#2199023256610"/>
+    <post href="../../models/128/initial.xmi#34360663118"/>
+  </objectsToAttach>
+</change:ChangeDescription>

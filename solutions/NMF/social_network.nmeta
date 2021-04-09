@@ -11,7 +11,6 @@
   <Types xsi:type="nmeta:Class" BaseTypes="#//Submission" Name="Comment">
     <References Opposite="#//Submission/comments" ReferenceType="nmeta:Class #//Submission" LowerBound="1" Name="commented" />
     <References Opposite="#//User/likes" ReferenceType="nmeta:Class #//User" IsUnique="True" UpperBound="-1" Name="likedBy" />
-    <References ReferenceType="nmeta:Class #//Post" LowerBound="1" Name="post" />
   </Types>
   <Types xsi:type="nmeta:Class" IdentifierScope="Global" Identifier="#//User/id" Name="User">
     <References Opposite="#//Submission/submitter" ReferenceType="nmeta:Class #//Submission" IsUnique="True" UpperBound="-1" Name="submissions" />

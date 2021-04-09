@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/256/initial.xmi#51540417838"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="51540417843"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/256/initial.xmi#51539829319"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="51539829330"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/256/initial.xmi#51540908981"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="51540909748"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/256/initial.xmi#4398046515301"/>
+    <value featureName="friends">
+      <listChanges index="14">
+        <referenceValues href="../../models/256/initial.xmi#6597069769363"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/256/initial.xmi#6597069769363"/>
+    <value featureName="friends">
+      <listChanges index="16">
+        <referenceValues href="../../models/256/initial.xmi#4398046515301"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="51540417843" timestamp="2011-03-07T13:36:51.000+0000" content="right">
+    <submitter href="../../models/256/initial.xmi#3587"/>
+    <post href="../../models/256/initial.xmi#51540417814"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="51539829330" timestamp="2011-03-07T13:37:05.000+0000" content="About Jean Chr. About Ennio Mo. About B.B. Kin. About Taylor S. About The Chro. About Hen.">
+    <submitter href="../../models/256/initial.xmi#6597069770969"/>
+    <post href="../../models/256/initial.xmi#51539828816"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="51540909748" timestamp="2011-03-07T13:38:11.000+0000" content="About Oliver Cromwell, a key military leader. Nicknamed Old Ironsides, he w.">
+    <submitter href="../../models/256/initial.xmi#6597069766783"/>
+    <post href="../../models/256/initial.xmi#51540908981"/>
+  </objectsToAttach>
+</change:ChangeDescription>

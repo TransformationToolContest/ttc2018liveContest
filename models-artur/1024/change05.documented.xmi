@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#111669405214"/>
+    <value featureName="likedBy">
+      <listChanges index="5">
+        <referenceValues href="../../models/1024/initial.xmi#555"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#555"/>
+    <value featureName="likes">
+      <listChanges index="113">
+        <referenceValues href="../../models/1024/initial.xmi#111669405214"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#111669369230"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="111669369231"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#8591074941"/>
+    <value featureName="likedBy">
+      <listChanges index="106">
+        <referenceValues href="../../models/1024/initial.xmi#14293651164063"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#14293651164063"/>
+    <value featureName="likes">
+      <listChanges index="73">
+        <referenceValues href="../../models/1024/initial.xmi#8591074941"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#111670276234"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="111670276237"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="111669369231" timestamp="2012-05-23T03:53:58.000+0100" content="About Rod Stewar. About Lyndon B. . About Jennifer L. About Rudy Giuli. About Walt Whitm. About G.">
+    <submitter href="../../models/1024/initial.xmi#6597069771330"/>
+    <post href="../../models/1024/initial.xmi#111669369181"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="111670276237" timestamp="2012-05-23T03:54:21.000+0100" content="maybe">
+    <submitter href="../../models/1024/initial.xmi#13194139536758"/>
+    <post href="../../models/1024/initial.xmi#111670276151"/>
+  </objectsToAttach>
+</change:ChangeDescription>

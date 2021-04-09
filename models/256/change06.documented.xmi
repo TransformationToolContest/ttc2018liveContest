@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/256/initial.xmi#51540661024"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="51540661034"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="51540661034" timestamp="2011-03-07T13:24:13.000+0000" content="About Franz Kafka, Empire. The house . About Willie Nelson, Jennings, Jessi . About Bette Davis, period of ill heal. About D-I-V-O-R-C-E, famous by T.">
+    <submitter href="../../models/256/initial.xmi#3298534887558"/>
+    <post href="../../models/256/initial.xmi#51540660887"/>
+  </objectsToAttach>
+</change:ChangeDescription>

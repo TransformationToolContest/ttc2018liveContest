@@ -11,8 +11,8 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.5/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#1099511630967" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" index="6" affectedElement="social:Post initial.xmi#8590657711" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#8590657711" id="8590659253" timestamp="2010-05-13T07:45:06" content="About Wolfgang Amadeus Mozart, as a co. About Brilliant Corners, track requi." submitter="initial.xmi#1099511630967">
-        <comments post="initial.xmi#8590657711" id="8590659261" timestamp="2010-05-13T07:46:38" content="thanks" submitter="initial.xmi#4281" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="8590659253" timestamp="2010-05-13T07:45:06" content="About Wolfgang Amadeus Mozart, as a co. About Brilliant Corners, track requi." submitter="initial.xmi#1099511630967">
+        <comments id="8590659261" timestamp="2010-05-13T07:46:38" content="thanks" submitter="initial.xmi#4281" />
       </addedElement>
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Post initial.xmi#8590657711" affectedElement="social:Comment #//@changes.5/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
@@ -20,21 +20,21 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment 8590659261" affectedElement="social:User initial.xmi#4281" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" affectedElement="social:Comment #//@changes.5/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#8590657711" id="8590659261" timestamp="2010-05-13T07:46:38" content="thanks" submitter="initial.xmi#4281" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="8590659261" timestamp="2010-05-13T07:46:38" content="thanks" submitter="initial.xmi#4281" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment #//@changes.5/@sourceChange/@addedElement" affectedElement="social:Comment 8590659261" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.9/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#1099511630189" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" index="7" affectedElement="social:Post initial.xmi#8590657711" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#8590657711" id="8590659257" timestamp="2010-05-13T07:51:21" content="great" submitter="initial.xmi#1099511630189" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="8590659257" timestamp="2010-05-13T07:51:21" content="great" submitter="initial.xmi#1099511630189" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Post initial.xmi#8590657711" affectedElement="social:Comment #//@changes.9/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.11/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#1099511630189" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" index="8" affectedElement="social:Post initial.xmi#8590657711" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#8590657711" id="8590659259" timestamp="2010-05-13T07:52:28" content="About Wolfgang Amadeus Mozart, 1791), was a. About Pandyan Dynasty, Antioch knew of th." submitter="initial.xmi#1099511630189" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="8590659259" timestamp="2010-05-13T07:52:28" content="About Wolfgang Amadeus Mozart, 1791), was a. About Pandyan Dynasty, Antioch knew of th." submitter="initial.xmi#1099511630189" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Post initial.xmi#8590657711" affectedElement="social:Comment #//@changes.11/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>

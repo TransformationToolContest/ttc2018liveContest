@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#404178"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="406165"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#1077498"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="1077511"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#167197"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="999991"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="406165" timestamp="2010-03-03T09:50:59.000+0000" content="LOL">
+    <submitter href="../../models/1/initial.xmi#974"/>
+    <post href="../../models/1/initial.xmi#404178"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="1077511" timestamp="2010-03-03T09:58:52.000+0000" content="About Nicolaus. About Jarmila . About H. G. We. About Woody Al. About 50 Cent,. About Weird Al. About Spike Le. A.">
+    <submitter href="../../models/1/initial.xmi#1564"/>
+    <post href="../../models/1/initial.xmi#1076833"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="999991" timestamp="2018-06-27T09:59:00.000+0100" content="Added for TTC Live contest">
+    <submitter href="../../models/1/initial.xmi#1564"/>
+    <post href="../../models/1/initial.xmi#167197"/>
+  </objectsToAttach>
+</change:ChangeDescription>

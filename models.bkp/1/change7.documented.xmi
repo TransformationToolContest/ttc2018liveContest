@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#1077358"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="1077359"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#406243"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="406255"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#406456"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="406473"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="1077359" timestamp="2010-03-03T10:39:37.000+0000" content="no">
+    <submitter href="../../models/1/initial.xmi#1564"/>
+    <post href="../../models/1/initial.xmi#1076820"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="406255" timestamp="2010-03-03T10:41:46.000+0000" content="no way!">
+    <submitter href="../../models/1/initial.xmi#1259"/>
+    <post href="../../models/1/initial.xmi#404190"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="406473" timestamp="2010-03-03T10:41:46.000+0000" content="About Martin Heidegge. About Morrissey, the . About Frank Zappa, fi. About Merle Haggard, . About Donald Trump, T. About James A. Garfie. About Trinidad and To. About Ch.">
+    <submitter href="../../models/1/initial.xmi#974"/>
+    <post href="../../models/1/initial.xmi#404210"/>
+  </objectsToAttach>
+</change:ChangeDescription>

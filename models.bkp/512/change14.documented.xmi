@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77310883683"/>
+    <value featureName="likedBy">
+      <listChanges index="16">
+        <referenceValues href="../../models/512/initial.xmi#6597069770969"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#6597069770969"/>
+    <value featureName="likes">
+      <listChanges index="62">
+        <referenceValues href="../../models/512/initial.xmi#77310883683"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#60130950920"/>
+    <value featureName="likedBy">
+      <listChanges index="61">
+        <referenceValues href="../../models/512/initial.xmi#9895604652629"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604652629"/>
+    <value featureName="likes">
+      <listChanges index="49">
+        <referenceValues href="../../models/512/initial.xmi#60130950920"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77310154658"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="85900089253"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77309943282"/>
+    <value featureName="comments">
+      <listChanges index="3" referenceValues="85899878444"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77310540070"/>
+    <value featureName="likedBy">
+      <listChanges index="12">
+        <referenceValues href="../../models/512/initial.xmi#8796093024925"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#8796093024925"/>
+    <value featureName="likes">
+      <listChanges index="43">
+        <referenceValues href="../../models/512/initial.xmi#77310540070"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="85900089253" timestamp="2011-10-09T01:48:06.000+0100" content="About Weasels Ripped My Flesh, compositions, Weasels Ripped My Flesh largely consists o.">
+    <submitter href="../../models/512/initial.xmi#3192"/>
+    <post href="../../models/512/initial.xmi#77310154423"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="85899878444" timestamp="2011-10-09T01:48:47.000+0100" content="no">
+    <submitter href="../../models/512/initial.xmi#1099511629940"/>
+    <post href="../../models/512/initial.xmi#77309943282"/>
+  </objectsToAttach>
+</change:ChangeDescription>

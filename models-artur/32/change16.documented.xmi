@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17181009040"/>
+    <value featureName="likedBy">
+      <listChanges index="9">
+        <referenceValues href="../../models/32/initial.xmi#1099511630454"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#1099511630454"/>
+    <value featureName="likes">
+      <listChanges index="6">
+        <referenceValues href="../../models/32/initial.xmi#17181009040"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="10948" referenceValues="17180837985"/>
+      <listChanges index="10948" referenceValues="17180837984"/>
+      <listChanges index="10948" referenceValues="17180837983"/>
+      <listChanges index="10948" referenceValues="17180837982"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Post" id="17180837982" timestamp="2010-06-27T23:01:11.000+0100" content="photo17180837982.jpg">
+    <submitter href="../../models/32/initial.xmi#2199023256160"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="17180837983" timestamp="2010-06-27T23:01:12.000+0100" content="photo17180837983.jpg">
+    <submitter href="../../models/32/initial.xmi#2199023256160"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="17180837984" timestamp="2010-06-27T23:01:13.000+0100" content="photo17180837984.jpg">
+    <submitter href="../../models/32/initial.xmi#2199023256160"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="17180837985" timestamp="2010-06-27T23:01:14.000+0100" content="photo17180837985.jpg">
+    <submitter href="../../models/32/initial.xmi#2199023256160"/>
+  </objectsToAttach>
+</change:ChangeDescription>

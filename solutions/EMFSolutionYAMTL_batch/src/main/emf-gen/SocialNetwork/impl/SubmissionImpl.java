@@ -146,6 +146,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -155,6 +156,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(String newId) {
 		String oldId = id;
 		id = newId;
@@ -167,6 +169,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getTimestamp() {
 		return timestamp;
 	}
@@ -176,6 +179,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTimestamp(Date newTimestamp) {
 		Date oldTimestamp = timestamp;
 		timestamp = newTimestamp;
@@ -188,6 +192,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getContent() {
 		return content;
 	}
@@ -197,6 +202,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setContent(String newContent) {
 		String oldContent = content;
 		content = newContent;
@@ -209,6 +215,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public User getSubmitter() {
 		if (submitter != null && submitter.eIsProxy()) {
 			InternalEObject oldSubmitter = (InternalEObject)submitter;
@@ -250,6 +257,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSubmitter(User newSubmitter) {
 		if (newSubmitter != submitter) {
 			NotificationChain msgs = null;
@@ -269,6 +277,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Comment> getComments() {
 		if (comments == null) {
 			comments = new EObjectContainmentWithInverseEList<Comment>(Comment.class, this, SocialNetworkPackage.SUBMISSION__COMMENTS, SocialNetworkPackage.COMMENT__COMMENTED);
@@ -421,7 +430,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (id: ");
 		result.append(id);
 		result.append(", timestamp: ");

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#111669653946"/>
+    <value featureName="comments">
+      <listChanges index="5" referenceValues="111669654038"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#111669773673"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="111669773682 111669773679"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="111669654038" timestamp="2012-05-23T03:59:34.000+0100" content="no">
+    <submitter href="../../models/1024/initial.xmi#6597069769363"/>
+    <post href="../../models/1024/initial.xmi#111669653946"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="111669773682" timestamp="2012-05-23T04:00:06.000+0100" content="About Jorge Lu. About Charles . About Tom Crui. About Angelina. About Pharrell. About.">
+    <submitter href="../../models/1024/initial.xmi#10995116279137"/>
+    <post href="../../models/1024/initial.xmi#111669773629"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="111669773679" timestamp="2012-05-23T04:00:32.000+0100" content="About Bob Hop. About James B. About Tom Cru. About Kenny R. About The Not. About.">
+    <submitter href="../../models/1024/initial.xmi#8796093023200"/>
+    <post href="../../models/1024/initial.xmi#111669773629"/>
+  </objectsToAttach>
+</change:ChangeDescription>

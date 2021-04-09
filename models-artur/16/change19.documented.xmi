@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#4688"/>
+    <value featureName="friends">
+      <listChanges index="14">
+        <referenceValues href="../../models/16/initial.xmi#1099511629479"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#1099511629479"/>
+    <value featureName="friends">
+      <listChanges index="14">
+        <referenceValues href="../../models/16/initial.xmi#4688"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8590289238"/>
+    <value featureName="likedBy">
+      <listChanges index="4">
+        <referenceValues href="../../models/16/initial.xmi#4178"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#4178"/>
+    <value featureName="likes">
+      <listChanges index="2">
+        <referenceValues href="../../models/16/initial.xmi#8590289238"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#167625"/>
+    <value featureName="likedBy">
+      <listChanges index="4">
+        <referenceValues href="../../models/16/initial.xmi#1099511628627"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#1099511628627"/>
+    <value featureName="likes">
+      <listChanges index="0">
+        <referenceValues href="../../models/16/initial.xmi#167625"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8590529251"/>
+    <value featureName="comments">
+      <listChanges index="3" referenceValues="8590529664"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8590428139"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="8590428153"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#8590102704"/>
+    <value featureName="likedBy">
+      <listChanges index="0">
+        <referenceValues href="../../models/16/initial.xmi#985"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/16/initial.xmi#985"/>
+    <value featureName="likes">
+      <listChanges index="1">
+        <referenceValues href="../../models/16/initial.xmi#8590102704"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="8590529664" timestamp="2010-05-13T17:06:12.000+0100" content="About Busta Rhymes, Steve H. About Zachary Taylor, the f. About Guatemala, It is a.">
+    <submitter href="../../models/16/initial.xmi#1644"/>
+    <post href="../../models/16/initial.xmi#8590529251"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="8590428153" timestamp="2010-05-13T17:16:21.000+0100" content="yes">
+    <submitter href="../../models/16/initial.xmi#4018"/>
+    <post href="../../models/16/initial.xmi#8590427940"/>
+  </objectsToAttach>
+</change:ChangeDescription>

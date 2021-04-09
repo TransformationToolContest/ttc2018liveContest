@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360058024"/>
+    <value featureName="comments">
+      <listChanges index="5" referenceValues="34360059511"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360603183"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="999993"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#1099511629463"/>
+    <value featureName="friends">
+      <listChanges index="15">
+        <referenceValues href="../../models/128/initial.xmi#238"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#238"/>
+    <value featureName="friends">
+      <listChanges index="15">
+        <referenceValues href="../../models/128/initial.xmi#1099511629463"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="34360059511" timestamp="2010-11-05T16:48:16.000+0000" content="roflol">
+    <submitter href="../../models/128/initial.xmi#3949"/>
+    <post href="../../models/128/initial.xmi#34360058024"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="999993" timestamp="2018-06-27T21:59:00.000+0100" content="Added for TTC Live contest">
+    <submitter href="../../models/128/initial.xmi#1564"/>
+    <post href="../../models/128/initial.xmi#34360603183"/>
+  </objectsToAttach>
+</change:ChangeDescription>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#406243"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="406248"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#407475"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="407482"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#215400"/>
+    <value featureName="comments">
+      <listChanges index="3" referenceValues="215469"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#150"/>
+    <value featureName="friends">
+      <listChanges index="0">
+        <referenceValues href="../../models/1/initial.xmi#3962"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1/initial.xmi#3962"/>
+    <value featureName="friends">
+      <listChanges index="1">
+        <referenceValues href="../../models/1/initial.xmi#150"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="406248" timestamp="2010-03-03T10:15:17.000+0000" content="About Jonathan Swift, The Bat. About Alice Cooper, rock, art. About Independent State of.">
+    <submitter href="../../models/1/initial.xmi#2608"/>
+    <post href="../../models/1/initial.xmi#404190"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="407482" timestamp="2010-03-03T10:17:10.000+0000" content="great">
+    <submitter href="../../models/1/initial.xmi#1259"/>
+    <post href="../../models/1/initial.xmi#404307"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="215469" timestamp="2010-03-03T10:20:05.000+0000" content="great">
+    <submitter href="../../models/1/initial.xmi#407"/>
+    <post href="../../models/1/initial.xmi#215400"/>
+  </objectsToAttach>
+</change:ChangeDescription>

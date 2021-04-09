@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="1870" referenceValues="404163"/>
+      <listChanges index="1870" referenceValues="330467"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#404285"/>
+    <value featureName="comments">
+      <listChanges index="5" referenceValues="407229"/>
+    </value>
+  </objectChanges>
+  <objectChanges key="330467">
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="330574"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#458964"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="459274"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#728672"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="728677"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#431656"/>
+    <value featureName="comments">
+      <listChanges index="2" referenceValues="432093"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#458956"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="459181"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Post" id="330467" timestamp="2010-03-28T17:32:21.000+0100" content="">
+    <submitter href="../../models/4/initial.xmi#1984"/>
+    <comments id="330574" timestamp="2010-03-28T17:33:29.000+0100" content="About Thomas Hardy, poems display elements . About Weird Al Yankovic, December 1983, t." post="330467">
+      <submitter href="../../models/4/initial.xmi#4139"/>
+    </comments>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="404163" timestamp="2010-03-28T17:33:06.000+0100" content="">
+    <submitter href="../../models/4/initial.xmi#3705"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="407229" timestamp="2010-03-28T17:32:33.000+0100" content="LOL">
+    <submitter href="../../models/4/initial.xmi#4273"/>
+    <post href="../../models/4/initial.xmi#404285"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="330574" timestamp="2010-03-28T17:33:29.000+0100" content="About Thomas Hardy, poems display elements . About Weird Al Yankovic, December 1983, t." post="330467">
+    <submitter href="../../models/4/initial.xmi#4139"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="459274" timestamp="2010-03-28T17:34:17.000+0100" content="thanks">
+    <submitter href="../../models/4/initial.xmi#4139"/>
+    <post href="../../models/4/initial.xmi#458964"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="728677" timestamp="2010-03-28T17:34:23.000+0100" content="About Aung San S. About Queen Eliz. About Weird Al Y. About Chet Atkin. About A..">
+    <submitter href="../../models/4/initial.xmi#3331"/>
+    <post href="../../models/4/initial.xmi#723508"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="432093" timestamp="2010-03-28T17:34:26.000+0100" content="I see">
+    <submitter href="../../models/4/initial.xmi#2783"/>
+    <post href="../../models/4/initial.xmi#431656"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="459181" timestamp="2010-03-28T17:34:30.000+0100" content="no">
+    <submitter href="../../models/4/initial.xmi#4139"/>
+    <post href="../../models/4/initial.xmi#458956"/>
+  </objectsToAttach>
+</change:ChangeDescription>

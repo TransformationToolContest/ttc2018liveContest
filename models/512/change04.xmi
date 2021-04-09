@@ -12,7 +12,7 @@
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.5/@addedElement" affectedElement="social:User initial.xmi#3298534887819" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:CompositionListInsertion" index="1" affectedElement="social:Post initial.xmi#85900326838" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#85900326838" id="85900327403" timestamp="2011-10-09T00:56:16" content="About Plato, is that it consists of a ser. About Martin Scorsese, and in 2007 he f." submitter="initial.xmi#3298534887819" />
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="85900327403" timestamp="2011-10-09T00:56:16" content="About Plato, is that it consists of a ser. About Martin Scorsese, and in 2007 he f." submitter="initial.xmi#3298534887819" />
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#2194" affectedElement="social:User initial.xmi#6597069769794" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#6597069769794" affectedElement="social:User initial.xmi#2194" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />

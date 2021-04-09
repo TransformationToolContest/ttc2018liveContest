@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="1855" referenceValues="1314640"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#365342"/>
+    <value featureName="comments">
+      <listChanges index="6" referenceValues="365455"/>
+    </value>
+  </objectChanges>
+  <objectChanges key="1314640">
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="1315480"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/4/initial.xmi#256696"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="256700"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Post" id="1314640" timestamp="2010-03-28T16:49:36.000+0100" content="">
+    <submitter href="../../models/4/initial.xmi#3780"/>
+    <comments id="1315480" timestamp="2010-03-28T16:52:33.000+0100" content="cool" post="1314640">
+      <submitter href="../../models/4/initial.xmi#2194"/>
+    </comments>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="365455" timestamp="2010-03-28T16:51:34.000+0100" content="I see">
+    <submitter href="../../models/4/initial.xmi#318"/>
+    <post href="../../models/4/initial.xmi#365342"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="1315480" timestamp="2010-03-28T16:52:33.000+0100" content="cool" post="1314640">
+    <submitter href="../../models/4/initial.xmi#2194"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="256700" timestamp="2010-03-28T16:52:58.000+0100" content="About Marcus Aurelius, as a literary monument to a philosophy of service and duty, descr. About Achaean League, a Hellenistic era confederation of Greek city states on the north.">
+    <submitter href="../../models/4/initial.xmi#2194"/>
+    <comments id="256701" timestamp="2010-03-28T16:53:09.000+0100" content="no way!">
+      <submitter href="../../models/4/initial.xmi#2194"/>
+      <post href="../../models/4/initial.xmi#256538"/>
+    </comments>
+    <post href="../../models/4/initial.xmi#256538"/>
+  </objectsToAttach>
+</change:ChangeDescription>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77310262201"/>
+    <value featureName="comments">
+      <listChanges index="5" referenceValues="85900197080"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77309662725"/>
+    <value featureName="likedBy">
+      <listChanges index="35">
+        <referenceValues href="../../models/512/initial.xmi#4398046514565"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#4398046514565"/>
+    <value featureName="likes">
+      <listChanges index="25">
+        <referenceValues href="../../models/512/initial.xmi#77309662725"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#60130474210"/>
+    <value featureName="likedBy">
+      <listChanges index="132">
+        <referenceValues href="../../models/512/initial.xmi#9895604650163"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604650163"/>
+    <value featureName="likes">
+      <listChanges index="3">
+        <referenceValues href="../../models/512/initial.xmi#60130474210"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#6597069766849"/>
+    <value featureName="friends">
+      <listChanges index="49">
+        <referenceValues href="../../models/512/initial.xmi#9895604654138"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604654138"/>
+    <value featureName="friends">
+      <listChanges index="20">
+        <referenceValues href="../../models/512/initial.xmi#6597069766849"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77310279249"/>
+    <value featureName="likedBy">
+      <listChanges index="333">
+        <referenceValues href="../../models/512/initial.xmi#9895604653913"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604653913"/>
+    <value featureName="likes">
+      <listChanges index="22">
+        <referenceValues href="../../models/512/initial.xmi#77310279249"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="85900197080" timestamp="2011-10-09T01:32:41.000+0100" content="About Andrew Lloyd Webber, a song cycle, a set of variations, two film scores, and a.">
+    <submitter href="../../models/512/initial.xmi#4398046513403"/>
+    <post href="../../models/512/initial.xmi#77310262201"/>
+  </objectsToAttach>
+</change:ChangeDescription>

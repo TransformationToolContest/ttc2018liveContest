@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#111670562267"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="111670562268"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#111669596471"/>
+    <value featureName="likedBy">
+      <listChanges index="29">
+        <referenceValues href="../../models/1024/initial.xmi#3298534884883"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#3298534884883"/>
+    <value featureName="likes">
+      <listChanges index="153">
+        <referenceValues href="../../models/1024/initial.xmi#111669596471"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#111670094073"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="111670094074"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="111670562268" timestamp="2012-05-23T03:50:08.000+0100" content="fine">
+    <submitter href="../../models/1024/initial.xmi#7696581395857"/>
+    <post href="../../models/1024/initial.xmi#111670561219"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="111670094074" timestamp="2012-05-23T03:51:06.000+0100" content="About Philip IV . About Horatio Ne. About Alice Coop. About Quincy Jon. About Will.">
+    <submitter href="../../models/1024/initial.xmi#2199023258642"/>
+    <post href="../../models/1024/initial.xmi#111670093002"/>
+  </objectsToAttach>
+</change:ChangeDescription>

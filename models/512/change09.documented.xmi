@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77310625225"/>
+    <value featureName="likedBy">
+      <listChanges index="78">
+        <referenceValues href="../../models/512/initial.xmi#2199023257721"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#2199023257721"/>
+    <value featureName="likes">
+      <listChanges index="25">
+        <referenceValues href="../../models/512/initial.xmi#77310625225"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#85900796216"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="85900796217"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#85900566321"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="85900566326"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77310024448"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="85899959041"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#77309702825"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="85899637421"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#8796093022839"/>
+    <value featureName="friends">
+      <listChanges index="38">
+        <referenceValues href="../../models/512/initial.xmi#9895604651997"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/512/initial.xmi#9895604651997"/>
+    <value featureName="friends">
+      <listChanges index="10">
+        <referenceValues href="../../models/512/initial.xmi#8796093022839"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="85900796217" timestamp="2011-10-09T01:18:36.000+0100" content="yes">
+    <submitter href="../../models/512/initial.xmi#4398046513970"/>
+    <post href="../../models/512/initial.xmi#77310861595"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="85900566326" timestamp="2011-10-09T01:18:58.000+0100" content="no way!">
+    <submitter href="../../models/512/initial.xmi#6597069770816"/>
+    <post href="../../models/512/initial.xmi#77310630909"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="85899959041" timestamp="2011-10-09T01:19:42.000+0100" content="About Blue Moon of Kentucky, recorded by many artists, including Elvis Presley..">
+    <submitter href="../../models/512/initial.xmi#2199023256352"/>
+    <post href="../../models/512/initial.xmi#77310024305"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="85899637421" timestamp="2011-10-09T01:21:55.000+0100" content="no">
+    <submitter href="../../models/512/initial.xmi#8796093024668"/>
+    <post href="../../models/512/initial.xmi#77309702759"/>
+  </objectsToAttach>
+</change:ChangeDescription>

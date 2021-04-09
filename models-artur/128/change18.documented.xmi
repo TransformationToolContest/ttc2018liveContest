@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360343481"/>
+    <value featureName="likedBy">
+      <listChanges index="0">
+        <referenceValues href="../../models/128/initial.xmi#2199023259033"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#2199023259033"/>
+    <value featureName="likes">
+      <listChanges index="12">
+        <referenceValues href="../../models/128/initial.xmi#34360343481"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360758750"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="34360758762"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#555"/>
+    <value featureName="friends">
+      <listChanges index="31">
+        <referenceValues href="../../models/128/initial.xmi#1925"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#1925"/>
+    <value featureName="friends">
+      <listChanges index="9">
+        <referenceValues href="../../models/128/initial.xmi#555"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#1148"/>
+    <value featureName="friends">
+      <listChanges index="2">
+        <referenceValues href="../../models/128/initial.xmi#238"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#238"/>
+    <value featureName="friends">
+      <listChanges index="18">
+        <referenceValues href="../../models/128/initial.xmi#1148"/>
+      </listChanges>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="34360758762" timestamp="2010-11-05T17:13:48.000+0000" content="roflol">
+    <submitter href="../../models/128/initial.xmi#3298534885464"/>
+    <post href="../../models/128/initial.xmi#34360758211"/>
+  </objectsToAttach>
+</change:ChangeDescription>

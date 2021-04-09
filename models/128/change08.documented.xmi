@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360057997"/>
+    <value featureName="comments">
+      <listChanges index="6" referenceValues="34360059249"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360059536"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="34360059540"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360059335"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="34360059344"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/128/initial.xmi#34360060108"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="34360060112"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="34360059249" timestamp="2010-11-05T16:56:43.000+0000" content="About Keith Richards, St. About Diana Ross, Entert. About Fresh Fruit for .">
+    <submitter href="../../models/128/initial.xmi#2004"/>
+    <post href="../../models/128/initial.xmi#34360057997"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34360059540" timestamp="2010-11-05T16:56:44.000+0000" content="I see">
+    <submitter href="../../models/128/initial.xmi#987"/>
+    <post href="../../models/128/initial.xmi#34360058028"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34360059344" timestamp="2010-11-05T16:58:30.000+0000" content="ok">
+    <submitter href="../../models/128/initial.xmi#941"/>
+    <post href="../../models/128/initial.xmi#34360058007"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="34360060112" timestamp="2010-11-05T16:58:56.000+0000" content="About T. S. Eliot, (1935). He was awarded t. About Matt Damon, Departed (2006). He garn.">
+    <submitter href="../../models/128/initial.xmi#941"/>
+    <post href="../../models/128/initial.xmi#34360058094"/>
+  </objectsToAttach>
+</change:ChangeDescription>

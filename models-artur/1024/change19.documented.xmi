@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#/"/>
+    <value featureName="posts">
+      <listChanges index="314536" referenceValues="111669838857"/>
+      <listChanges index="314536" referenceValues="111669838856"/>
+      <listChanges index="314536" referenceValues="111669838855"/>
+      <listChanges index="314536" referenceValues="111669838854"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#111669251660"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="111669251667"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/1024/initial.xmi#111670163752"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="111670163787"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Post" id="111669838854" timestamp="2012-05-23T04:06:00.000+0100" content="photo111669838854.jpg">
+    <submitter href="../../models/1024/initial.xmi#13194139534984"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="111669838855" timestamp="2012-05-23T04:06:01.000+0100" content="photo111669838855.jpg">
+    <submitter href="../../models/1024/initial.xmi#13194139534984"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="111669838856" timestamp="2012-05-23T04:06:02.000+0100" content="photo111669838856.jpg">
+    <submitter href="../../models/1024/initial.xmi#13194139534984"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="111669838857" timestamp="2012-05-23T04:06:03.000+0100" content="photo111669838857.jpg">
+    <submitter href="../../models/1024/initial.xmi#13194139534984"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="111669251667" timestamp="2012-05-23T04:06:24.000+0100" content="About Martina Navratilova,. About Jackson Browne, incl. About Kenny Rogers, St.">
+    <submitter href="../../models/1024/initial.xmi#6597069768065"/>
+    <post href="../../models/1024/initial.xmi#111669251387"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="111670163787" timestamp="2012-05-23T04:06:48.000+0100" content="About Philip II of Spain, rule, Spain reac. About Weird Al Yankovic, two minor US hits. About John Rhys-Davies, and Tobias in t.">
+    <submitter href="../../models/1024/initial.xmi#10995116281230"/>
+    <post href="../../models/1024/initial.xmi#111670163752"/>
+  </objectsToAttach>
+</change:ChangeDescription>

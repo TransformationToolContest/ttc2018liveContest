@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#1286958"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="1286959"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#/"/>
+    <value featureName="users">
+      <listChanges index="205" referenceValues="985"/>
+    </value>
+    <value featureName="posts">
+      <listChanges index="2277" referenceValues="30027"/>
+      <listChanges index="2277" referenceValues="30026"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/8/initial.xmi#555"/>
+    <value featureName="friends">
+      <listChanges index="18" referenceValues="985"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="1286959" timestamp="2010-04-02T01:55:36.000+0100" content="About Gemini Dream, of their previous album Octave for personal reasons. Moraz was hired.">
+    <submitter href="../../models/8/initial.xmi#4831"/>
+    <post href="../../models/8/initial.xmi#1286839"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:User" id="985">
+    <friends href="../../models/8/initial.xmi#555"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="30026" timestamp="2010-04-02T02:03:22.000+0100" content="photo30026.jpg">
+    <submitter href="../../models/8/initial.xmi#4693"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Post" id="30027" timestamp="2010-04-02T02:03:23.000+0100" content="photo30027.jpg">
+    <submitter href="../../models/8/initial.xmi#4693"/>
+  </objectsToAttach>
+</change:ChangeDescription>

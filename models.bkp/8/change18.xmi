@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<changes:ModelChangeSet xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xmi="http://www.omg.org/XMI" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <changes xsi:type="changes:ChangeTransaction">
+    <sourceChange xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment initial.xmi#258470" affectedElement="social:User initial.xmi#345" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/likes" />
+    <nestedChanges xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#345" affectedElement="social:Comment initial.xmi#258470" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/likedBy" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="206" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/users">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:User" id="2343" name="Babar Qureshi" submissions="#//@changes.2/@addedElement #//@changes.3/@addedElement #//@changes.4/@addedElement #//@changes.5/@addedElement #//@changes.6/@addedElement #//@changes.7/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="2303" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="619849" timestamp="2010-04-02T14:08:46" content="photo619849.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="2304" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="619850" timestamp="2010-04-02T14:08:47" content="photo619850.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="2305" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="619851" timestamp="2010-04-02T14:08:48" content="photo619851.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="2306" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="619852" timestamp="2010-04-02T14:08:49" content="photo619852.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="2307" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="619853" timestamp="2010-04-02T14:08:50" content="photo619853.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+  <changes xsi:type="changes:CompositionListInsertion" index="2308" affectedElement="social:SocialNetworkRoot initial.xmi#/" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//SocialNetworkRoot/posts">
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="619854" timestamp="2010-04-02T14:08:51" content="photo619854.jpg" submitter="#//@changes.1/@addedElement" />
+  </changes>
+</changes:ModelChangeSet>

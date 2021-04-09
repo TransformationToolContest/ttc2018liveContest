@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<change:ChangeDescription xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:change="http://www.eclipse.org/emf/2003/Change" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17181157136"/>
+    <value featureName="comments">
+      <listChanges index="0" referenceValues="17181157448"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180706363"/>
+    <value featureName="comments">
+      <listChanges index="1" referenceValues="17180706372"/>
+    </value>
+  </objectChanges>
+  <objectChanges>
+    <key href="../../models/32/initial.xmi#17180796048"/>
+    <value featureName="comments">
+      <listChanges index="4" referenceValues="17180796055"/>
+    </value>
+  </objectChanges>
+  <objectsToAttach xsi:type="social:Comment" id="17181157448" timestamp="2010-06-27T22:42:00.000+0100" content="About Mohandas Karamch. About Bo Diddley, Bo D. About Éamon de Valera,. About Nikita Khrus.">
+    <submitter href="../../models/32/initial.xmi#4139"/>
+    <post href="../../models/32/initial.xmi#17181157136"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17180706372" timestamp="2010-06-27T22:44:13.000+0100" content="Abou. Abou. Abou. Abou. Abou. Abou. Abou. Abou. Abou. Abou. Abou. Abou. Ab.">
+    <submitter href="../../models/32/initial.xmi#3055"/>
+    <post href="../../models/32/initial.xmi#17180706279"/>
+  </objectsToAttach>
+  <objectsToAttach xsi:type="social:Comment" id="17180796055" timestamp="2010-06-27T22:44:38.000+0100" content="no">
+    <submitter href="../../models/32/initial.xmi#3587"/>
+    <post href="../../models/32/initial.xmi#17180795801"/>
+  </objectsToAttach>
+</change:ChangeDescription>
