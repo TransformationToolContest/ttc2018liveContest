@@ -73,7 +73,6 @@ public class ModelMergeFkConverter {
 			,	c.getContent()
 			,	c.getSubmitter().getId()
 			,	c.getCommented().getId()
-			,	c.getPost().getId()
 			)
 		);
 		posts.forEach(p ->

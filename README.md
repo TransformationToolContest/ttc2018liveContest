@@ -27,7 +27,6 @@ cd ..
 * AOF, ATL: Requires Java 8 for build (can run with Java 11).
 * Hawk: Requires Java (both 8 and 11 have tested and work).
 * JastAdd: Requires Java 8 for running (already built).
-* Naiad: Requires .NET Framework 4.5.1 (only works on Windows).
 * NMF: You need to install [.NET Core 3.1](https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-ubuntu-1804)
 * SQL: Requires PostgreSQL 11 or later.
 * YAMTL: Requires Java 11 for running (already built).
