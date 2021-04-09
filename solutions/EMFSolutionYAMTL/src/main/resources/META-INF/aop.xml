@@ -1,10 +1,11 @@
 <aspectj>
     <aspects>
         <!-- aspect name="eu.ibacz.pbns.util.aspect.TimingAspect"/--> <!--  fails if not found -->
-        <aspect name="yamtl.InitLocations"/>
-        <aspect name="yamtl.FeatureCallAspect"/>
+        <aspect name="ttc2018.yamtl.InitLocations"/>
+        <aspect name="ttc2018.yamtl.FeatureCallAspect"/>
     </aspects>
-    <weaver options="-verbose -showWeaveInfo"> <!-- add -debug to print every class [not] woven  -->
+    <!-- weaver options="-verbose -showWeaveInfo" --> <!-- add -debug to print every class [not] woven  -->
+    <weaver options="-nowarn">
         <include within="SocialNetwork..*"/> <!-- Notice the 2 dots to include also subpackages -->
         <include within="yamtl..*"/> <!-- Notice the 2 dots to include also subpackages -->
         <include within="org.eclipse.emf.ecore..*"/> <!-- Notice the 2 dots to include also subpackages -->

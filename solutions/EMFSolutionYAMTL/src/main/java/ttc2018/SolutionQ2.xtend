@@ -1,9 +1,9 @@
 package ttc2018;
 
+import ttc2018.yamtl.Q2_yamtl
 import yamtl.core.YAMTLModule.ExecutionMode
 import yamtl.core.YAMTLModule.ExecutionPhase
 import yamtl.core.YAMTLModule.ExtentTypeModifier
-import yamtl.Q2_yamtl
 
 class SolutionQ2 extends Solution {
 
@@ -15,10 +15,6 @@ class SolutionQ2 extends Solution {
 		xform.fromRoots = false
 		xform.executionMode = ExecutionMode.INCREMENTAL
 		xform.initLocationsWhenLoading = true
-		
-//		xform.debug = true
-//		xform.warning_on = true
-		
 	}
 
 	override String Initial() {

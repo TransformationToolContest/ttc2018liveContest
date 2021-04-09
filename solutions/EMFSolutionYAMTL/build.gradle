@@ -7,7 +7,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 
 group = 'yamtl'
-version = '0.0.10-SNAPSHOT'
+version = '0.0.11-SNAPSHOT'
 
 eclipse {
 	project {
@@ -34,14 +34,13 @@ repositories {
 	maven {
 		url "https://github.com/yamtl/yamtl.github.io/raw/mvn-repo/mvn-repo/snapshot-repo"
 	}
-//	mavenLocal()
 	mavenCentral()
     jcenter()
 }
 
 
 ext {
-	yamtlVersion = '0.0.10-SNAPSHOT'
+	yamtlVersion = '0.0.11-SNAPSHOT'
 	xtendVersion = '2.20.0'
 	aspectJVersion = '1.9.6'
 }
@@ -60,6 +59,7 @@ sourceSets {
 		java {
 			srcDirs = [
 				'src/main/java',
+				'src/main/emf-gen',
 				'src/main/xtend-gen'
 			]
 		}
@@ -80,7 +80,7 @@ configurations {
 
 
 compileJava {
-  sourceCompatibility = 1.8 // 11
+  sourceCompatibility = 11 // 1.8
   doLast{
 	  ant.taskdef( resource:"org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties", classpath: configurations.ajc.asPath )
 	  ant.iajc(
@@ -104,12 +104,13 @@ compileJava {
 
 dependencies {
 	compile 'org.eclipse.emf:org.eclipse.emf.ecore.xmi:2.15.0'
-	compile 'org.eclipse.emf:org.eclipse.emf.ecore.change:2.11.0'
+	compile 'org.eclipse.emf:org.eclipse.emf.ecore.change:2.11+'
 	
 	compile "yamtl:yamtl:${yamtlVersion}"
+	compile "org.eclipse.xtend:org.eclipse.xtend.core:$xtendVersion"
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$xtendVersion"
-	compile 'org.eclipse.emf:org.eclipse.emf.ecore.change:2.11+'
-	// AspectJ
+
+		// AspectJ
 	ajc "org.aspectj:aspectjtools:${aspectJVersion}"
 	compile("org.aspectj:aspectjrt:${aspectJVersion}")
 	compile("org.aspectj:aspectjweaver:${aspectJVersion}")
