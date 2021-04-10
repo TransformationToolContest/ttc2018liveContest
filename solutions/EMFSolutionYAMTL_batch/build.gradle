@@ -84,7 +84,6 @@ compileJava {
 	  ant.taskdef( resource:"org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties", classpath: configurations.ajc.asPath )
 	  ant.iajc(
 		  source: sourceCompatibility,
-//		  destDir: sourceSets.main.output.classesDirs[0].absolutePath,
 		  destDir: sourceSets.main.output.classesDirs.singleFile.absolutePath,
 		  inpath: configurations.ajInpath.asPath,
 		  maxmem: "512m",

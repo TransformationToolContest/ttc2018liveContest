@@ -21,6 +21,8 @@
         unique="false" lowerBound="1" eType="#//Submission" changeable="false" eOpposite="#//Submission/comments"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="likedBy" ordered="false"
         upperBound="-1" eType="#//User" eOpposite="#//User/likes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="post" ordered="false" unique="false"
+        lowerBound="1" eType="#//Post"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="User">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" ordered="false" unique="false"
