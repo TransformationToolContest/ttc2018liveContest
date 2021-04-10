@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<changes:ModelChangeSet xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xmi="http://www.omg.org/XMI" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
-  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@addedElement" affectedElement="social:User initial.xmi#2199023256610" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
-  <changes xsi:type="changes:CompositionListInsertion" index="2" affectedElement="social:Post initial.xmi#34360663118" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#34360663118" id="34360663300" timestamp="2010-11-05T16:41:55" content="About Weird Al Yankovic, set to polka musi. About Donna Summer, posthumously describe." submitter="initial.xmi#2199023256610" />
-  </changes>
-</changes:ModelChangeSet>

@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<changes:ModelChangeSet xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xmi="http://www.omg.org/XMI" xmlns:changes="http://nmf.codeplex.com/changes" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media">
-  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#2199023257338" affectedElement="social:User initial.xmi#1099511630454" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
-  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#1099511630454" affectedElement="social:User initial.xmi#2199023257338" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
-  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#1099511628545" affectedElement="social:User initial.xmi#2706" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
-  <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User initial.xmi#2706" affectedElement="social:User initial.xmi#1099511628545" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
-</changes:ModelChangeSet>
