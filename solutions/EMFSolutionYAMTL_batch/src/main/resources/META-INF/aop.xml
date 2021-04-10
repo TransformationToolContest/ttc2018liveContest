@@ -1,7 +1,7 @@
 <aspectj>
     <aspects>
         <!-- aspect name="eu.ibacz.pbns.util.aspect.TimingAspect"/--> <!--  fails if not found -->
-        <aspect name="yamtl.core.InitLocations"/>
+        <aspect name="yamtl.InitLocations"/>
     </aspects>
     <weaver options="-verbose -showWeaveInfo"> <!-- add -debug to print every class [not] woven  -->
         <include within="yamtl..*"/> <!-- Notice the 2 dots to include also subpackages -->

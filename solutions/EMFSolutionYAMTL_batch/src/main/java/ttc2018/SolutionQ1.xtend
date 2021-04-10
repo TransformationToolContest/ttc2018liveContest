@@ -1,6 +1,6 @@
 package ttc2018;
 
-import yamtl.Q1_yamtl
+import ttc2018.yamtl.Q1_yamtl
 import yamtl.core.YAMTLModule.ExecutionPhase
 import yamtl.core.YAMTLModule.ExtentTypeModifier
 
@@ -12,8 +12,7 @@ class SolutionQ1 extends Solution {
 		xform.extentTypeModifier = ExtentTypeModifier.LIST
 		xform.selectedExecutionPhases = ExecutionPhase.MATCH_ONLY
 		xform.fromRoots = false
-//		xform.executionMode = ExecutionMode.INCREMENTAL
-		
+		xform.initLocationsWhenLoading = true
 	}
 	
 	override String Initial() {
@@ -31,5 +30,6 @@ class SolutionQ1 extends Solution {
 		xform.execute()
 		(xform as Q1_yamtl).bestThree.map[id].join('|')
 	}
+
 }
 
