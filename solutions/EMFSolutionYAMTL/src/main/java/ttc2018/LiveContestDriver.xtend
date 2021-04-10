@@ -9,7 +9,8 @@ import org.eclipse.emf.common.util.EList
 
 class LiveContestDriver {
 
-	def static void main(String[] args) {
+	def static void main(String[] args) 
+	{
 		try {
 	        Initialize();
 	        Load();
@@ -34,14 +35,17 @@ class LiveContestDriver {
 
     static Solution solution;
 
-    def private static Object loadFile(String path) {
+    def private static Object loadFile(String path) 
+    {
 		val modelPath = '''«ChangePath»/«path»'''
 		solution.xform.loadInputModels(#{'sn' -> modelPath})
 		val mRes = solution.xform.getModelResource('sn')
 		
     	return mRes.getContents().get(0);
     }
-    def private static Object loadDeltaFile(String path) {
+    
+    def private static Object loadDeltaFile(String path) 
+    {
 		val modelPath = '''«ChangePath»/«path»'''
 		val res = solution.xform.loadModel(modelPath, true)
 		res.contents.head

@@ -7,11 +7,11 @@
         <listEntry value="1"/>
     </listAttribute>
     <mapAttribute key="org.eclipse.debug.core.environmentVariables">
-        <mapEntry key="ChangePath" value="../../models/8"/>  <!-- must be the same as changeSet -->
-        <mapEntry key="ChangeSet" value="8"/>
+        <mapEntry key="ChangePath" value="../../models/1"/>  <!-- must be the same as changeSet -->
+        <mapEntry key="ChangeSet" value="1"/>
         <mapEntry key="Query" value="Q1"/>
         <mapEntry key="RunIndex" value="Debug"/>
-        <mapEntry key="Sequences" value="12"/>
+        <mapEntry key="Sequences" value="1"/>
         <mapEntry key="Tool" value="EMFSolutionYAMTL"/>
     </mapAttribute>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_CLASSPATH_ONLY_JAR" value="false"/>
