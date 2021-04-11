@@ -122,7 +122,7 @@ def visualize():
     """
     clean_dir("diagrams")
     set_working_directory("reporting2")
-    subprocess.call(["Rscript", "-e", "rmarkdown::render('report.Rmd', output_format=rmarkdown::pdf_document())"])
+    subprocess.check_call(["Rscript", "-e", "rmarkdown::render('report.Rmd', output_format=rmarkdown::pdf_document())"])
 
 
 def check_results():
@@ -131,7 +131,7 @@ def check_results():
     """
     clean_dir("results")
     set_working_directory("reporting")
-    subprocess.call(["Rscript", "check_results.R"])
+    subprocess.check_call(["Rscript", "check_results.R"])
 
 
 if __name__ == "__main__":
