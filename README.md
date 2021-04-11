@@ -22,6 +22,10 @@ unzip 1024.zip
 cd ..
 ```
 
+## Regenerating CSV change sets
+
+CSV change sets are generated based on the XMI (EMF) models. The instructions for regenerating the CSVs are detailed in the [SQL solution's README](solutions/SQLSolution/README.md).
+
 ## Solution Prerequisites
 
 * AOF, ATL: Requires Java 8 for build (can run with Java 11).
