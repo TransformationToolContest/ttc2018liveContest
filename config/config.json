@@ -3,7 +3,7 @@
     "Q1",
     "Q2"
   ],
-  "Tools": ["EMFSolutionYAMTL_batch"],
+  "Tools": ["ExampleTool"],
   "ChangeSets": [
     "1", "2"
   ],
