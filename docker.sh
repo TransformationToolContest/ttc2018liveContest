@@ -129,7 +129,6 @@ if [[ $run ]]; then
       -v "$HOST_OUTPUT_PATH":/ttc/output/output.csv \
       -v "$TOOL_DOCKER_CONFIG_PATH":/ttc/config/config.json \
       "${DOCKER_PARAMS[@]}" \
-      -it \
       $DOCKER_REPO:$TOOL
   done
 fi
