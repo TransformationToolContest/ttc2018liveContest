@@ -1,6 +1,6 @@
 # The TTC 2018 Social Media Case
 
-[![Build Status](https://travis-ci.org/TransformationToolContest/ttc2018liveContest.svg?branch=master)](https://travis-ci.org/TransformationToolContest/ttc2018liveContest)
+[![Build status](https://github.com/TransformationToolContest/ttc2018liveContest/workflows/build/badge.svg)](https://github.com/TransformationToolContest/ttc2018liveContest/actions)
  
 ## Case description
 
