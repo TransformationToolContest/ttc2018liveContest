@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 public class ModelToGraphConverter {
 	public static void main(String[] args) throws IOException {
@@ -27,8 +28,8 @@ public class ModelToGraphConverter {
 
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 'Z' should be added (with quotes) is needed
 		// input is parsed as local date, we do so with on the output side
-		//TimeZone tz = TimeZone.getTimeZone("UTC");
-		//df.setTimeZone(tz);
+		TimeZone tz = TimeZone.getTimeZone("UTC");
+		df.setTimeZone(tz);
 		PrintWriter usersFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-users-initial", ResourceType.CSV));
 		PrintWriter postsFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-posts-initial", ResourceType.CSV));
 		PrintWriter commentsFile = new PrintWriter(ModelUtils.getResourcePath(size, "graph-comments-initial", ResourceType.CSV));
