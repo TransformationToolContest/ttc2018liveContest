@@ -10,6 +10,10 @@ jobs:
           persist-credentials: false
       - name: Build
         run: |
+          # TODO: enable when ready
+          rm docker/Dockerfile-differential
+          rm docker/Dockerfile-graphblas
+          rm docker/Dockerfile-neo4j
           # do not use slow release mode for Rust build
           sed -i s/--release// solutions/differential*/solution.ini
           sed -i "s|/release/|/debug/|" solutions/differential*/solution.ini
