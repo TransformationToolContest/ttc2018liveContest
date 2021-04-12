@@ -7,6 +7,7 @@ extern "C" {
 
 #include <vector>
 #include <map>
+#include <cassert>
 #include "utils.h"
 #include "gb_utils.h"
 
@@ -50,12 +51,15 @@ struct Q1_Input {
 
     std::map<uint64_t, GrB_Index> comment_id_to_column;
 
-    GBxx_Object<GrB_Matrix> root_post_tran;
+    GBxx_Object<GrB_Matrix> root_post_tran, root_post_tran_NEW;
     GBxx_Object<GrB_Vector> likes_count_vec;
 
     GrB_Index root_post_num, likes_count_num;
 
+    GrB_Index root_post_num_NEW;
+
     auto posts_size() const {
+        assert(posts.size() == post_id_to_column.size());
         return posts.size();
     }
 
