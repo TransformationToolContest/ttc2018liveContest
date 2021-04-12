@@ -35,3 +35,7 @@ changes/1024/
 *.swp
 .Rproj.user
 **/*.class
+
+# IntelliJ
+.idea/
+*.iml
