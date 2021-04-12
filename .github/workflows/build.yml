@@ -14,6 +14,7 @@ jobs:
           sed -i s/--release// solutions/differential*/solution.ini
           sed -i "s|/release/|/debug/|" solutions/differential*/solution.ini
           ./docker.sh --pull                  # pull available images
+          ./docker.sh --build --tags common   # overwrite common base image for newly built images TODO: remove after the dataset is stable
           ./docker.sh --build-if-not-fresh    # (re)build image if different than current commit
           docker/set-configs.sh               # copy generic settings from config.json to config-docker-*.json files
           ./docker.sh -r --java-heap-size 6G  # run measurements
