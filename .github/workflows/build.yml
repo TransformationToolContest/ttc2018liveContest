@@ -14,6 +14,10 @@ jobs:
           rm docker/Dockerfile-differential
           rm docker/Dockerfile-graphblas
           rm docker/Dockerfile-neo4j
+          # check that all Dockerfiles contain the same run command
+          test $(docker/ls-images.sh --runnable | wc -l) -eq $(grep -F "RUN scripts/run.py -b --skip-tests" docker/Dockerfile-* | wc -l)
+          # run tests in CI
+          sed -i "s|RUN scripts/run.py -b --skip-tests|RUN scripts/run.py -b|" docker/Dockerfile-*
           # do not use slow release mode for Rust build
           sed -i s/--release// solutions/differential*/solution.ini
           sed -i "s|/release/|/debug/|" solutions/differential*/solution.ini
