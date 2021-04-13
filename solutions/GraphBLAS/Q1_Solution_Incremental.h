@@ -24,7 +24,7 @@ protected:
             // to get the root post for each new like we use the updated root_post_tran
             GBxx_Object<GrB_Vector> partial_score_vec = Q1_Solution_Batch::get_score_vec(
                     input.posts_size(),
-                    updates.new_root_post_tran_NEW.get(), input.root_post_tran_NEW.get(),
+                    updates.new_root_post_tran.get(), input.root_post_tran.get(),
                     updates.new_likes_count_vec.get());
 
             // update score vector by adding the additional score

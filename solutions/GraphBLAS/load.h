@@ -51,10 +51,10 @@ struct Q1_Input {
 
     std::map<uint64_t, GrB_Index> comment_id_to_column;
 
-    GBxx_Object<GrB_Matrix> root_post_tran_NEW;
+    GBxx_Object<GrB_Matrix> root_post_tran;
     GBxx_Object<GrB_Vector> likes_count_vec;
 
-    GrB_Index root_post_num_NEW, likes_count_num;
+    GrB_Index root_post_num, likes_count_num;
 
     auto posts_size() const {
         assert(posts.size() == post_id_to_column.size());
@@ -68,7 +68,7 @@ struct Q1_Input {
     static Q1_Input load_initial(const BenchmarkParameters &parameters);
 
     struct Update_Type {
-        GBxx_Object<GrB_Matrix> new_root_post_tran_NEW;
+        GBxx_Object<GrB_Matrix> new_root_post_tran;
         GBxx_Object<GrB_Vector> new_likes_count_vec;
     };
 

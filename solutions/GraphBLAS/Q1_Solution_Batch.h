@@ -60,7 +60,7 @@ protected:
 
     virtual GBxx_Object<GrB_Vector> get_score_vec() const {
         return get_score_vec(input.posts_size(),
-                             input.root_post_tran_NEW.get(), input.root_post_tran_NEW.get(),
+                             input.root_post_tran.get(), input.root_post_tran.get(),
                              input.likes_count_vec.get());
     }
 
