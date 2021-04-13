@@ -3,8 +3,9 @@
 #include <memory>
 #include <iostream>
 #include <iomanip>
-#include "load.h"
 #include <cassert>
+#include <algorithm>
+#include "load.h"
 #include "utils.h"
 
 template<char Delimiter>
@@ -77,6 +78,7 @@ bool read_comment_line_root_post(GrB_Index &comment_col, GrB_Index &post_col,   
 
     post_col = input.post_id_to_column.find(post_id)->second;
 
+    // assumes that if the previous Submission is a Post (the root Post) then it has been inserted before
     auto root_post_iterator = input.post_id_to_column.find(previous_id);
     if (root_post_iterator == input.post_id_to_column.end())
         // previous Submission is a Comment, insert if seen first time
@@ -288,6 +290,8 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
     auto old_posts_size = posts_size(),
             old_comments_size = comments_size();
 
+    std::vector<GrB_Index> new_commented_src_comment_columns, new_commented_trg_comment_columns;
+
     std::array<char, 8 + 1> change_type;  // NOLINT(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
     while (change_file >> std::ws, change_file.getline(change_type.data(), change_type.size(), '|')) {
         if (strcmp(change_type.data(), "Posts") == 0) {
@@ -297,11 +301,23 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
             updates.new_posts.emplace_back(post_col);
         } else if (strcmp(change_type.data(), "Comments") == 0) {
             GrB_Index comment_col, post_col;
-            std::pair<SubmissionType, GrB_Index> previous_col; // TODO: use
+            std::pair<SubmissionType, GrB_Index> previous_col;
+            // assumes that if the previous Submission is a Post (the root Post) then it has been already inserted
             read_comment_line_root_post(comment_col, post_col, previous_col, change_file, *this);
 
             updates.new_root_post_src_comment_columns.push_back(comment_col);
             updates.new_root_post_trg_post_columns.push_back(post_col);
+
+            switch (previous_col.first) {
+                case Post:
+                    updates.new_root_post_src_comment_columns_NEW.push_back(comment_col);
+                    updates.new_root_post_trg_post_columns_NEW.push_back(previous_col.second);
+                    break;
+                case Comment:
+                    new_commented_src_comment_columns.emplace_back(comment_col);
+                    new_commented_trg_comment_columns.emplace_back(previous_col.second);
+                    break;
+            }
         } else if (strcmp(change_type.data(), "Likes") == 0) {
             GrB_Index comment_column;
             read_likes_line(comment_column, change_file, *this);
@@ -318,6 +334,7 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
     if (posts_size() > old_posts_size
         || comments_size() > old_comments_size) {
         ok(GxB_Matrix_resize(root_post_tran.get(), posts_size(), comments_size()));
+        ok(GxB_Matrix_resize(root_post_tran_NEW.get(), posts_size(), comments_size()));
     }
     if (apply_likes_updates
         && comments_size() > old_comments_size) {
@@ -325,8 +342,10 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
     }
 
     updates.new_root_post_tran = GB(GrB_Matrix_new, GrB_BOOL, posts_size(), comments_size());
+    updates.new_root_post_tran_NEW = GB(GrB_Matrix_new, GrB_BOOL, posts_size(), comments_size());
     updates.new_likes_count_vec = GB(GrB_Vector_new, GrB_UINT64, comments_size());
 
+    // TODO: remove
     if (!updates.new_root_post_src_comment_columns.empty()) {
         GrB_Index new_root_post_nvals = updates.new_root_post_src_comment_columns.size();
         ok(GrB_Matrix_build_BOOL(updates.new_root_post_tran.get(),
@@ -339,6 +358,47 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
         ok(GrB_Matrix_eWiseAdd_BinaryOp(root_post_tran.get(), GrB_NULL, GrB_NULL,
                                         GrB_LOR, root_post_tran.get(), updates.new_root_post_tran.get(), GrB_NULL));
     }
+
+    if (!updates.new_root_post_src_comment_columns_NEW.empty()) {
+        GrB_Index new_root_post_nvals_NEW = updates.new_root_post_src_comment_columns_NEW.size();
+        ok(GrB_Matrix_build_BOOL(updates.new_root_post_tran_NEW.get(),
+                                 updates.new_root_post_trg_post_columns_NEW.data(),
+                                 updates.new_root_post_src_comment_columns_NEW.data(),
+                                 array_of_true(new_root_post_nvals_NEW).get(),
+                                 new_root_post_nvals_NEW, GrB_LOR));
+        root_post_num_NEW += new_root_post_nvals_NEW;
+
+        ok(GrB_Matrix_eWiseAdd_BinaryOp(root_post_tran_NEW.get(), GrB_NULL, GrB_NULL,
+                                        GrB_LOR, root_post_tran_NEW.get(), updates.new_root_post_tran_NEW.get(), GrB_NULL));
+    }
+    if (!new_commented_src_comment_columns.empty()) {
+        GrB_Index new_commented_num = new_commented_src_comment_columns.size();
+        // handle if a new Comment is connected to also a new one, find its topmost ancestor among new Comments
+        // nested loop is enough since the changeset is small
+        for (size_t i = 0; i < new_commented_num; ++i) {
+            GrB_Index &parent = new_commented_trg_comment_columns[i];
+
+            std::vector<GrB_Index>::iterator new_parent_iter;
+            while ((new_parent_iter = std::find(
+                    new_commented_src_comment_columns.begin(),
+                    new_commented_src_comment_columns.end(), parent)) != new_commented_src_comment_columns.end()) {
+                parent = *(new_commented_trg_comment_columns.begin() +
+                           (new_parent_iter - new_commented_src_comment_columns.begin()));
+            }
+        }
+
+        auto new_commented_tran = GB(GrB_Matrix_new, GrB_BOOL, comments_size(), comments_size());
+        ok(GrB_Matrix_build_BOOL(new_commented_tran.get(),
+                                 new_commented_trg_comment_columns.data(), new_commented_src_comment_columns.data(),
+                                 array_of_true(new_commented_num).get(),
+                                 new_commented_num, GrB_LOR));
+
+        ok(GrB_mxm(root_post_tran_NEW.get(), GrB_NULL, GxB_PAIR_BOOL,
+                   GxB_ANY_PAIR_BOOL, root_post_tran_NEW.get(), new_commented_tran.get(), GrB_NULL));
+    }
+
+    bool equals;
+    assert((ok(LAGraph_IsEqual(&equals, root_post_tran.get(), root_post_tran_NEW.get(), nullptr, nullptr)), equals));
 
     if (!updates.new_likes_to_comments.empty()) {
         std::vector<uint64_t> new_likes_count_vec_vals(updates.new_likes_to_comments.size(), 1);
