@@ -290,7 +290,11 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
     auto old_posts_size = posts_size(),
             old_comments_size = comments_size();
 
+    std::vector<GrB_Index> new_root_post_src_comment_columns, new_root_post_trg_post_columns;   // TODO: remove
+    std::vector<GrB_Index> new_root_post_src_comment_columns_NEW, new_root_post_trg_post_columns_NEW;
     std::vector<GrB_Index> new_commented_src_comment_columns, new_commented_trg_comment_columns;
+    std::vector<GrB_Index> new_likes_to_comments;
+    std::vector<GrB_Index> new_posts;
 
     std::array<char, 8 + 1> change_type;  // NOLINT(cppcoreguidelines-pro-type-member-init,hicpp-member-init)
     while (change_file >> std::ws, change_file.getline(change_type.data(), change_type.size(), '|')) {
@@ -298,20 +302,20 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
             GrB_Index post_col;
             read_post_line(change_file, *this, post_col);
 
-            updates.new_posts.emplace_back(post_col);
+            new_posts.emplace_back(post_col);
         } else if (strcmp(change_type.data(), "Comments") == 0) {
             GrB_Index comment_col, post_col;
             std::pair<SubmissionType, GrB_Index> previous_col;
             // assumes that if the previous Submission is a Post (the root Post) then it has been already inserted
             read_comment_line_root_post(comment_col, post_col, previous_col, change_file, *this);
 
-            updates.new_root_post_src_comment_columns.push_back(comment_col);
-            updates.new_root_post_trg_post_columns.push_back(post_col);
+            new_root_post_src_comment_columns.push_back(comment_col);
+            new_root_post_trg_post_columns.push_back(post_col);
 
             switch (previous_col.first) {
                 case Post:
-                    updates.new_root_post_src_comment_columns_NEW.push_back(comment_col);
-                    updates.new_root_post_trg_post_columns_NEW.push_back(previous_col.second);
+                    new_root_post_src_comment_columns_NEW.push_back(comment_col);
+                    new_root_post_trg_post_columns_NEW.push_back(previous_col.second);
                     break;
                 case Comment:
                     new_commented_src_comment_columns.emplace_back(comment_col);
@@ -322,7 +326,7 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
             GrB_Index comment_column;
             read_likes_line(comment_column, change_file, *this);
 
-            updates.new_likes_to_comments.emplace_back(comment_column);
+            new_likes_to_comments.emplace_back(comment_column);
         } else if (strcmp(change_type.data(), "Friends") == 0
                    || strcmp(change_type.data(), "Users") == 0)
             // noop
@@ -346,11 +350,11 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
     updates.new_likes_count_vec = GB(GrB_Vector_new, GrB_UINT64, comments_size());
 
     // TODO: remove
-    if (!updates.new_root_post_src_comment_columns.empty()) {
-        GrB_Index new_root_post_nvals = updates.new_root_post_src_comment_columns.size();
+    if (!new_root_post_src_comment_columns.empty()) {
+        GrB_Index new_root_post_nvals = new_root_post_src_comment_columns.size();
         ok(GrB_Matrix_build_BOOL(updates.new_root_post_tran.get(),
-                                 updates.new_root_post_trg_post_columns.data(),
-                                 updates.new_root_post_src_comment_columns.data(),
+                                 new_root_post_trg_post_columns.data(),
+                                 new_root_post_src_comment_columns.data(),
                                  array_of_true(new_root_post_nvals).get(),
                                  new_root_post_nvals, GrB_LOR));
         root_post_num += new_root_post_nvals;
@@ -359,11 +363,11 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
                                         GrB_LOR, root_post_tran.get(), updates.new_root_post_tran.get(), GrB_NULL));
     }
 
-    if (!updates.new_root_post_src_comment_columns_NEW.empty()) {
-        GrB_Index new_root_post_nvals_NEW = updates.new_root_post_src_comment_columns_NEW.size();
+    if (!new_root_post_src_comment_columns_NEW.empty()) {
+        GrB_Index new_root_post_nvals_NEW = new_root_post_src_comment_columns_NEW.size();
         ok(GrB_Matrix_build_BOOL(updates.new_root_post_tran_NEW.get(),
-                                 updates.new_root_post_trg_post_columns_NEW.data(),
-                                 updates.new_root_post_src_comment_columns_NEW.data(),
+                                 new_root_post_trg_post_columns_NEW.data(),
+                                 new_root_post_src_comment_columns_NEW.data(),
                                  array_of_true(new_root_post_nvals_NEW).get(),
                                  new_root_post_nvals_NEW, GrB_LOR));
         root_post_num_NEW += new_root_post_nvals_NEW;
@@ -400,11 +404,11 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
     bool equals;
     assert((ok(LAGraph_IsEqual(&equals, root_post_tran.get(), root_post_tran_NEW.get(), nullptr, nullptr)), equals));
 
-    if (!updates.new_likes_to_comments.empty()) {
-        std::vector<uint64_t> new_likes_count_vec_vals(updates.new_likes_to_comments.size(), 1);
+    if (!new_likes_to_comments.empty()) {
+        std::vector<uint64_t> new_likes_count_vec_vals(new_likes_to_comments.size(), 1);
         ok(GrB_Vector_build_UINT64(updates.new_likes_count_vec.get(),
-                                   updates.new_likes_to_comments.data(), new_likes_count_vec_vals.data(),
-                                   updates.new_likes_to_comments.size(), GrB_PLUS_UINT64));
+                                   new_likes_to_comments.data(), new_likes_count_vec_vals.data(),
+                                   new_likes_to_comments.size(), GrB_PLUS_UINT64));
 
         if (apply_likes_updates) {
             ok(GrB_Vector_eWiseAdd_BinaryOp(likes_count_vec.get(), GrB_NULL, GrB_NULL,
