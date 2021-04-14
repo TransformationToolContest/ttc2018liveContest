@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link SocialNetwork.Comment#getCommented <em>Commented</em>}</li>
  *   <li>{@link SocialNetwork.Comment#getLikedBy <em>Liked By</em>}</li>
- *   <li>{@link SocialNetwork.Comment#getPost <em>Post</em>}</li>
  * </ul>
  *
  * @see SocialNetwork.SocialNetworkPackage#getComment()
@@ -57,31 +56,5 @@ public interface Comment extends Submission {
 	 * @generated
 	 */
 	EList<User> getLikedBy();
-
-	/**
-	 * Returns the value of the '<em><b>Post</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Post</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Post</em>' reference.
-	 * @see #setPost(Post)
-	 * @see SocialNetwork.SocialNetworkPackage#getComment_Post()
-	 * @model required="true" ordered="false"
-	 * @generated
-	 */
-	Post getPost();
-
-	/**
-	 * Sets the value of the '{@link SocialNetwork.Comment#getPost <em>Post</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Post</em>' reference.
-	 * @see #getPost()
-	 * @generated
-	 */
-	void setPost(Post value);
 
 } // Comment

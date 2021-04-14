@@ -46,6 +46,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// <summary>
         /// The backing field for the Id property
         /// </summary>
+        [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private string _id;
         
         private static Lazy<ITypedElement> _idAttribute = new Lazy<ITypedElement>(RetrieveIdAttribute);
@@ -53,6 +54,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// <summary>
         /// The backing field for the Name property
         /// </summary>
+        [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private string _name;
         
         private static Lazy<ITypedElement> _nameAttribute = new Lazy<ITypedElement>(RetrieveNameAttribute);
@@ -62,6 +64,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// <summary>
         /// The backing field for the Submissions property
         /// </summary>
+        [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private UserSubmissionsCollection _submissions;
         
         private static Lazy<ITypedElement> _likesReference = new Lazy<ITypedElement>(RetrieveLikesReference);
@@ -69,6 +72,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// <summary>
         /// The backing field for the Likes property
         /// </summary>
+        [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private UserLikesCollection _likes;
         
         private static Lazy<ITypedElement> _friendsReference = new Lazy<ITypedElement>(RetrieveFriendsReference);
@@ -76,6 +80,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// <summary>
         /// The backing field for the Friends property
         /// </summary>
+        [DebuggerBrowsableAttribute(DebuggerBrowsableState.Never)]
         private ObservableAssociationSet<IUser> _friends;
         
         private static IClass _classInstance;
@@ -262,7 +267,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         
         private static ITypedElement RetrieveIdAttribute()
         {
-            return ((ITypedElement)(((ModelElement)(User.ClassInstance)).Resolve("id")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.User.ClassInstance)).Resolve("id")));
         }
         
         /// <summary>
@@ -293,7 +298,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         
         private static ITypedElement RetrieveNameAttribute()
         {
-            return ((ITypedElement)(((ModelElement)(User.ClassInstance)).Resolve("name")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.User.ClassInstance)).Resolve("name")));
         }
         
         /// <summary>
@@ -324,7 +329,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         
         private static ITypedElement RetrieveSubmissionsReference()
         {
-            return ((ITypedElement)(((ModelElement)(User.ClassInstance)).Resolve("submissions")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.User.ClassInstance)).Resolve("submissions")));
         }
         
         /// <summary>
@@ -349,7 +354,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         
         private static ITypedElement RetrieveLikesReference()
         {
-            return ((ITypedElement)(((ModelElement)(User.ClassInstance)).Resolve("likes")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.User.ClassInstance)).Resolve("likes")));
         }
         
         /// <summary>
@@ -374,7 +379,7 @@ namespace TTC2018.LiveContest.SocialNetwork
         
         private static ITypedElement RetrieveFriendsReference()
         {
-            return ((ITypedElement)(((ModelElement)(User.ClassInstance)).Resolve("friends")));
+            return ((ITypedElement)(((ModelElement)(TTC2018.LiveContest.SocialNetwork.User.ClassInstance)).Resolve("friends")));
         }
         
         /// <summary>

@@ -17,7 +17,6 @@
     <genClasses ecoreClass="social_network.ecore#//Comment">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference social_network.ecore#//Comment/commented"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference social_network.ecore#//Comment/likedBy"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference social_network.ecore#//Comment/post"/>
     </genClasses>
     <genClasses ecoreClass="social_network.ecore#//User">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute social_network.ecore#//User/id"/>

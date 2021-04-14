@@ -38,6 +38,6 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:User #//@changes.16/@addedElement" affectedElement="social:User initial.xmi#3962" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/friends" />
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.19/@addedElement" affectedElement="social:User initial.xmi#1949" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:CompositionListInsertion" index="3" affectedElement="social:Post initial.xmi#298566" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#298566" id="298812" timestamp="2010-03-10T15:58:36" content="maybe" submitter="initial.xmi#1949" />
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="298812" timestamp="2010-03-10T15:58:36" content="maybe" submitter="initial.xmi#1949" />
   </changes>
 </changes:ModelChangeSet>

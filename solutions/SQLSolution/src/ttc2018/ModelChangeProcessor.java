@@ -78,7 +78,7 @@ public class ModelChangeProcessor {
                 String[] line = s.split(Pattern.quote(SqlCollectionBase.SEPARATOR));
                 switch (line[0]) {
                     case "Comments":
-                        comments.addComment(line[1], line[2], line[3], line[4], line[5], line[6]);
+                        comments.addComment(line[1], line[2], line[3], line[4], line[5]);
                         break;
                     case "Friends":
                         friends.addFriend(line[1], line[2]);
@@ -227,8 +227,7 @@ public class ModelChangeProcessor {
                 comment.getTimestamp(),
                 comment.getContent(),
                 comment.getSubmitter().getId(),
-                original.getId(),
-                comment.getPost().getId());
+                original.getId());
         // add child comment tree
         for(Comment child: comment.getComments()) {
             addCommentTree(comment, child);

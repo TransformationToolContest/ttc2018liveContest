@@ -32,10 +32,6 @@ public interface Submission extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
@@ -58,10 +54,6 @@ public interface Submission extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Timestamp</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Timestamp</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Timestamp</em>' attribute.
 	 * @see #setTimestamp(Date)
@@ -84,10 +76,6 @@ public interface Submission extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Content</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Content</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Content</em>' attribute.
 	 * @see #setContent(String)
@@ -111,10 +99,6 @@ public interface Submission extends EObject {
 	 * Returns the value of the '<em><b>Submitter</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link SocialNetwork.User#getSubmissions <em>Submissions</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Submitter</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Submitter</em>' reference.
 	 * @see #setSubmitter(User)
@@ -140,10 +124,6 @@ public interface Submission extends EObject {
 	 * The list contents are of type {@link SocialNetwork.Comment}.
 	 * It is bidirectional and its opposite is '{@link SocialNetwork.Comment#getCommented <em>Commented</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Comments</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Comments</em>' containment reference list.
 	 * @see SocialNetwork.SocialNetworkPackage#getSubmission_Comments()

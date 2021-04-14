@@ -1,0 +1,1062 @@
+15:22:59.281 INFO  de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Got 14738 submissions
+15:22:59.283 INFO  de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Resolving submissions of 362 users
+15:22:59.328 INFO  de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Resolving friends for 340 users
+15:22:59.330 INFO  de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Resolving likes for 224 users
+15:22:59.332 INFO  de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Done translating
+15:23:00.204 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 6 changes
+15:23:00.204 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@22a8e87b
+15:23:00.204 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4555
+15:23:00.206 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:00.209 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4555
+15:23:00.209 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@5e1bfe66
+15:23:00.209 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590659254
+15:23:00.211 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590659254
+15:23:00.211 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:00.212 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590659254
+15:23:00.213 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:00.214 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@53945f9c
+15:23:00.214 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2874
+15:23:00.214 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:00.214 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2874
+15:23:00.214 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@28ffa527
+15:23:00.214 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428139
+15:23:00.214 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428139
+15:23:00.215 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:00.215 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428139
+15:23:00.215 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:00.215 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@54d9b23a
+15:23:00.215 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2845
+15:23:00.215 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631168
+15:23:00.215 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2845
+15:23:00.215 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@15ae31b
+15:23:00.215 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631168
+15:23:00.216 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2845
+15:23:00.216 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631168
+15:23:00.216 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@428e9be2
+15:23:00.218 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@6de2344a
+15:23:00.218 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@577dac16
+15:23:00.219 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@192b76a4
+15:23:00.219 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:00.219 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@6d96a895
+15:23:00.219 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@309b8144
+15:23:00.219 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@70c99e13
+15:23:00.219 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@321558f8
+15:23:00.220 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:00.220 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@6a9f8c2f
+15:23:00.221 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@222dc36c
+15:23:00.828 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 8 changes
+15:23:00.828 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@56fc2cea
+15:23:00.828 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631917
+15:23:00.829 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.1/@addedElement
+15:23:00.829 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631917
+15:23:00.829 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@2ffaa711
+15:23:00.829 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:00.829 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:00.829 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@3abb6aa
+15:23:00.829 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631917
+15:23:00.829 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.3/@addedElement
+15:23:00.829 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631917
+15:23:00.830 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@3f7bf0f6
+15:23:00.830 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:00.830 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:00.830 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@45430a27
+15:23:00.830 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631917
+15:23:00.830 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.5/@addedElement
+15:23:00.830 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631917
+15:23:00.830 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@1500edf3
+15:23:00.830 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:00.830 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:00.830 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 6 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@759c53e5
+15:23:00.831 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4534
+15:23:00.831 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.7/@addedElement
+15:23:00.831 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4534
+15:23:00.831 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 7 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@2c02cf78
+15:23:00.831 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8591014871
+15:23:00.831 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8591014871
+15:23:00.831 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@3e7fc07e
+15:23:00.831 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@29ebaf2f
+15:23:00.834 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@1a61f634
+15:23:00.834 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@20a2930f
+15:23:00.836 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@609edb55
+15:23:00.836 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@147892be
+15:23:00.839 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@13d1653
+15:23:00.839 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@3533d790
+15:23:01.331 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 10 changes
+15:23:01.331 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@d8751de
+15:23:01.331 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:01.331 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631018
+15:23:01.331 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:01.331 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@6e21c6ed
+15:23:01.331 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631018
+15:23:01.331 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:01.331 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631018
+15:23:01.332 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@75c30a4f
+15:23:01.332 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629479
+15:23:01.332 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629845
+15:23:01.332 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629479
+15:23:01.332 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@360e4235
+15:23:01.332 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629845
+15:23:01.332 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629479
+15:23:01.332 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629845
+15:23:01.332 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@1b0fc8b
+15:23:01.332 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.332 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.332 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@cbaabfb
+15:23:01.333 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.333 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.333 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 6 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@4eb3b690
+15:23:01.333 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.333 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.333 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 7 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@44bd7f24
+15:23:01.333 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.333 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.333 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 8 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@55b78dad
+15:23:01.334 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.334 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.334 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 9 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@689fcf08
+15:23:01.334 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.334 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.334 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@1a3272e0
+15:23:01.334 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@7bc3c59f
+15:23:01.334 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@6db2a260
+15:23:01.337 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@1454339d
+15:23:01.337 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@1df8e685
+15:23:01.337 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@78723798
+15:23:01.339 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@ab3b54
+15:23:01.340 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@35d62807
+15:23:01.342 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@6fc03cf6
+15:23:01.343 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@6e70861
+15:23:01.859 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 14 changes
+15:23:01.859 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@4d20cbb5
+15:23:01.860 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629851
+15:23:01.860 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.1/@addedElement
+15:23:01.860 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629851
+15:23:01.860 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@3c3357c7
+15:23:01.860 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.860 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.860 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@506d7fed
+15:23:01.860 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629851
+15:23:01.861 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.3/@addedElement
+15:23:01.861 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629851
+15:23:01.861 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@381d7c4c
+15:23:01.861 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.861 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.861 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@1e3689e7
+15:23:01.861 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630967
+15:23:01.861 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:01.861 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630967
+15:23:01.861 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@36f1bd7e
+15:23:01.861 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590657711
+15:23:01.862 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590657711
+15:23:01.862 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:01.862 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590657711
+15:23:01.862 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:01.862 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 6 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@4e58eda2
+15:23:01.862 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4281
+15:23:01.862 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8590659261
+15:23:01.862 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4281
+15:23:01.862 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 7 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@75f9a35a
+15:23:01.862 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:01.862 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:01.863 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8590659261
+15:23:01.863 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:01.863 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8590659261
+15:23:01.863 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 8 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@78b29e00
+15:23:01.863 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630189
+15:23:01.863 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.9/@sourceChange/@addedElement
+15:23:01.863 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630189
+15:23:01.863 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 9 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@3b4b2c03
+15:23:01.863 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590657711
+15:23:01.863 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590657711
+15:23:01.863 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.9/@sourceChange/@addedElement
+15:23:01.864 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590657711
+15:23:01.864 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.9/@sourceChange/@addedElement
+15:23:01.864 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 10 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@1f8ac459
+15:23:01.864 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630189
+15:23:01.864 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.11/@sourceChange/@addedElement
+15:23:01.864 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630189
+15:23:01.864 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 11 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@149ef64a
+15:23:01.864 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590657711
+15:23:01.864 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590657711
+15:23:01.864 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.11/@sourceChange/@addedElement
+15:23:01.864 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590657711
+15:23:01.864 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.11/@sourceChange/@addedElement
+15:23:01.865 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 12 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@4d25943d
+15:23:01.865 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3219
+15:23:01.865 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.13/@addedElement
+15:23:01.865 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3219
+15:23:01.865 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 13 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@495a9305
+15:23:01.865 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.865 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:01.865 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@6a0a0f12
+15:23:01.865 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@b6fea12
+15:23:01.867 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@75c095a5
+15:23:01.867 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@689fe2a3
+15:23:01.868 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@5257123d
+15:23:01.868 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@261c5d1f
+15:23:01.868 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@570089c4
+15:23:01.868 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@409df37d
+15:23:01.868 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:01.868 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@2ab1c7a9
+15:23:01.868 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@6e818345
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@3d9c69f8
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@1235732d
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@369d624d
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@54644470
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@a6924ad
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@33fc92d6
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@6e2e11ee
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@189f9f9f
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@5b908c6d
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@c2ddfeb
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:01.869 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@12921ee1
+15:23:01.870 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@7695184b
+15:23:02.412 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 13 changes
+15:23:02.412 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@47a68e3f
+15:23:02.412 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#987
+15:23:02.412 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:02.413 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#987
+15:23:02.413 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@33ef393a
+15:23:02.413 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590122485
+15:23:02.413 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590122485
+15:23:02.413 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:02.413 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590122485
+15:23:02.413 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:02.413 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@8e100e7
+15:23:02.413 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2783
+15:23:02.413 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:02.413 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2783
+15:23:02.413 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@6d3a56ea
+15:23:02.413 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8591156529
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8591156529
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8591156529
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@38aed8ad
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.5/@addedElement
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@50f5ce5b
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 6 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@31aee6d9
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4273
+15:23:02.414 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.7/@addedElement
+15:23:02.415 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4273
+15:23:02.415 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 7 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@485a5c9
+15:23:02.415 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:02.415 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:02.415 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 8 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@1d397e87
+15:23:02.415 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:02.415 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8590640653
+15:23:02.415 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:02.415 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 9 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@36def543
+15:23:02.415 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.7/@addedElement
+15:23:02.415 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.7/@addedElement
+15:23:02.415 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8590640653
+15:23:02.416 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.7/@addedElement
+15:23:02.416 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8590640653
+15:23:02.416 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 10 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@2b0d6bf2
+15:23:02.416 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#870
+15:23:02.416 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8590640655
+15:23:02.416 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#870
+15:23:02.416 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 11 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@a15e3c1
+15:23:02.416 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8590640653
+15:23:02.416 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8590640653
+15:23:02.416 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8590640655
+15:23:02.416 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8590640653
+15:23:02.416 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8590640655
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 12 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@4e797a39
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#96
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8590640656
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#96
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@41d6d6c4
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@4349389d
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@147203c2
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@11df0bc7
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@66c88fce
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@6ccfce5a
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@68a7bc12
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@14f03f2
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:02.417 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@235b4aea
+15:23:02.418 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@31f4fdc5
+15:23:02.419 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@64e680c5
+15:23:02.419 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@1dcf5f38
+15:23:02.420 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@64ba5a71
+15:23:02.420 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@72b689f6
+15:23:02.420 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@2286dfcd
+15:23:02.420 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@4557723a
+15:23:02.420 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:02.420 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@7308d133
+15:23:02.420 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@35b70f9d
+15:23:02.420 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@21dbd651
+15:23:02.420 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@5f63a6f2
+15:23:02.420 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:02.420 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@6a577564
+15:23:02.937 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 8 changes
+15:23:02.938 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@4f96e484
+15:23:02.938 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#459
+15:23:02.938 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:02.938 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#459
+15:23:02.938 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@22db12f6
+15:23:02.938 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590640653
+15:23:02.938 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590640653
+15:23:02.938 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:02.938 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590640653
+15:23:02.938 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:02.938 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@22bbbe6
+15:23:02.938 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1274
+15:23:02.938 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1274
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@240c626d
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590122485
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590122485
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590122485
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@1ead6e20
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2874
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2874
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@389fad5b
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428144
+15:23:02.939 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428144
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428144
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 6 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@5a983f8a
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1573
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8589996503
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1573
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8589996503
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1573
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8589996503
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 7 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@27f6e2c3
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511632283
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#1378523
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511632283
+15:23:02.940 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#1378523
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511632283
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#1378523
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@3e79473d
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@2e895acb
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@5d1d05ff
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@5889e697
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@2c3d1214
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@48064a5a
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@7d018c58
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@6a2b6031
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@2e4262d2
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@546ca9da
+15:23:02.941 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@257e8c43
+15:23:02.942 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@14e54a35
+15:23:02.942 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:02.942 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@298cfe89
+15:23:02.942 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@189fb01b
+15:23:02.943 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@39eea4f6
+15:23:02.943 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationCollectionInsertion for likedBy will be handled by attributes.
+15:23:02.943 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@5c94d4b8
+15:23:02.943 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@4400026
+15:23:02.945 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@308d8de8
+15:23:02.945 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationCollectionInsertion for likedBy will be handled by attributes.
+15:23:03.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 4 changes
+15:23:03.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAttributionPropertyChange@598f6c93
+15:23:03.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631947
+15:23:03.549 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631947
+15:23:03.549 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@23657729
+15:23:03.549 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631947
+15:23:03.549 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.2/@addedElement
+15:23:03.549 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631947
+15:23:03.549 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@68c05c5b
+15:23:03.549 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590659259
+15:23:03.549 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590659259
+15:23:03.550 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@1b5e6983
+15:23:03.550 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2886
+15:23:03.550 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#968658
+15:23:03.550 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2886
+15:23:03.550 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#968658
+15:23:03.550 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2886
+15:23:03.550 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#968658
+15:23:03.550 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AttributionPropertyChange@5bbf8daa
+15:23:03.550 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@33c5e52f
+15:23:03.550 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@74474fc0
+15:23:03.550 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@7cd239f6
+15:23:03.551 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@5ba7391b
+15:23:03.559 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@475753dd
+15:23:03.559 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationCollectionInsertion for likedBy will be handled by attributes.
+15:23:04.033 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 4 changes
+15:23:04.034 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@2d5cb059
+15:23:04.034 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#987
+15:23:04.034 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:04.034 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#987
+15:23:04.034 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@431782fe
+15:23:04.034 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590122485
+15:23:04.034 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590122485
+15:23:04.034 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:04.034 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590122485
+15:23:04.035 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:04.035 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@4de3a1ca
+15:23:04.035 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#96
+15:23:04.035 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@addedElement
+15:23:04.035 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#96
+15:23:04.035 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@6b36ab82
+15:23:04.035 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590640653
+15:23:04.035 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590640653
+15:23:04.035 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@4f283b8f
+15:23:04.036 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@1f953e51
+15:23:04.036 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@4b0a6c53
+15:23:04.036 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@15beb40b
+15:23:04.036 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:04.036 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@1bc41170
+15:23:04.036 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@2d95c3ef
+15:23:04.450 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 3 changes
+15:23:04.450 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@35007b7a
+15:23:04.450 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8591277452
+15:23:04.450 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8591277452
+15:23:04.450 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@74eebb25
+15:23:04.450 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8591277452
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8591277452
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@3af30ab8
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2862
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#968658
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2862
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#968658
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2862
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#968658
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@1a5b8f77
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@385ff04e
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@42ff5c92
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@c9cd06e
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@4afad6bd
+15:23:04.451 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationCollectionInsertion for likedBy will be handled by attributes.
+15:23:05.011 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 1 changes
+15:23:05.011 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@287d9e0c
+15:23:05.011 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1355
+15:23:05.012 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#968658
+15:23:05.012 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1355
+15:23:05.012 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#968658
+15:23:05.012 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1355
+15:23:05.012 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#968658
+15:23:05.012 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@46135aba
+15:23:05.012 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@25a218a
+15:23:05.017 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@411e5672
+15:23:05.017 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationCollectionInsertion for likedBy will be handled by attributes.
+15:23:05.545 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 12 changes
+15:23:05.545 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@3a0f6b1a
+15:23:05.545 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#96
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#96
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@418b3215
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590639721
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590639721
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590639721
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@2dfde704
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4755
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511632098
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4755
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@357e6334
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511632098
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4755
+15:23:05.546 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511632098
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@31809f2b
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#772
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629105
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#772
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@43a34f02
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629105
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#772
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629105
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 6 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@1a445b5
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.7/@addedElement
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 7 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@72c9576a
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 8 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@2b4bcd6e
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.9/@addedElement
+15:23:05.547 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 9 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@6087f264
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 10 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@584d9b19
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.11/@addedElement
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 11 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@281edf6b
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@77d50cde
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@4374c46e
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@2eef2fd6
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@705448e7
+15:23:05.548 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:05.549 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@2f3809cf
+15:23:05.552 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@4a8afff2
+15:23:05.552 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@1d4cf8ea
+15:23:05.552 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@4f8d98d4
+15:23:05.552 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@2094869b
+15:23:05.552 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@3dfc8814
+15:23:05.553 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@470dbce9
+15:23:05.553 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@64e5d7e4
+15:23:05.554 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@604125bd
+15:23:05.555 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@39a4bd89
+15:23:06.227 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 19 changes
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@2053e50a
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.1/@addedElement
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@c038839
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@6bfe4dd1
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.3/@addedElement
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@5bdf8295
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.228 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@4b8d9b97
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.5/@addedElement
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@52ce11b5
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 6 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@7522ea53
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.7/@addedElement
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 7 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@269bf0ac
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 8 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@47a0e73
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.9/@addedElement
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 9 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@10f868dd
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.229 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 10 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@691ff4fe
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.11/@addedElement
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 11 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@1b6a9bb9
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 12 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@4887a689
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.13/@addedElement
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 13 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@70f4dd28
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 14 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@3f0c27dc
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.15/@addedElement
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 15 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@5c6e4d6b
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.230 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 16 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@a25c653
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.17/@addedElement
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3897
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 17 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@4df03572
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 18 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@63db2cb2
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#143
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590273875
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#143
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590273875
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#143
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590273875
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@16bb8ff5
+15:23:06.231 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@2cbf8f2c
+15:23:06.232 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@281d7536
+15:23:06.232 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@11db4d00
+15:23:06.233 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@5bd5ace9
+15:23:06.233 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@b439e50
+15:23:06.233 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@48b4fecb
+15:23:06.233 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@3cc1990
+15:23:06.234 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@75084fe4
+15:23:06.234 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@622eee0b
+15:23:06.234 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@d031623
+15:23:06.234 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@6e609e8a
+15:23:06.235 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@59209bcd
+15:23:06.235 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@4ceb6854
+15:23:06.235 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@59ccdde4
+15:23:06.236 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@33b29c99
+15:23:06.236 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@6e9197d1
+15:23:06.236 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@792feb9f
+15:23:06.237 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@46b32aa3
+15:23:06.237 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@614220b8
+15:23:06.241 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@30f0c5e
+15:23:06.241 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationCollectionInsertion for likedBy will be handled by attributes.
+15:23:06.904 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 10 changes
+15:23:06.904 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@1f4e8af1
+15:23:06.904 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2874
+15:23:06.904 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:06.904 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2874
+15:23:06.904 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@4061455
+15:23:06.904 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428144
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428144
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428144
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@223cd181
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630967
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#295951
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630967
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#295951
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630967
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#295951
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@6d418ba9
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@59000ae5
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2783
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User #//@changes.3/@addedElement
+15:23:06.905 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2783
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@45fb177b
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4018
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.6/@sourceChange/@addedElement
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4018
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 6 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@22cf2c40
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428150
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428150
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.6/@sourceChange/@addedElement
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428150
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.6/@sourceChange/@addedElement
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 7 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@748d72cf
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4528
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8591221792
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4528
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8591221792
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4528
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8591221792
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 8 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@5e5148b5
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628211
+15:23:06.906 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631424
+15:23:06.907 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628211
+15:23:06.907 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 9 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@415542ba
+15:23:06.907 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631424
+15:23:06.907 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628211
+15:23:06.907 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631424
+15:23:06.907 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@3137a5cf
+15:23:06.907 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@4036d9cd
+15:23:06.907 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@1476359e
+15:23:06.907 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@7f5df538
+15:23:06.907 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:06.907 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@73c82ec1
+15:23:06.907 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@54669c4
+15:23:06.910 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@20b97637
+15:23:06.910 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationCollectionInsertion for likedBy will be handled by attributes.
+15:23:06.911 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@305db32d
+15:23:06.911 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@2d12dc1
+15:23:06.911 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@34ef6c16
+15:23:06.911 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@5f0cac72
+15:23:06.911 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@215a865
+15:23:06.911 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@92132c3
+15:23:06.911 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:06.911 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@46e1702d
+15:23:06.911 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@7c343bbf
+15:23:06.913 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@53cde2dc
+15:23:06.913 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationCollectionInsertion for likedBy will be handled by attributes.
+15:23:06.913 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@53fa654c
+15:23:06.914 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@1e571706
+15:23:07.632 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 16 changes
+15:23:07.632 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@159eb5f4
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631424
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.1/@addedElement
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631424
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@97e310
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@1b00613a
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3539
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.3/@addedElement
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3539
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@76cad044
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@49fa32ee
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4005
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8591156817
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4005
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@51eb935a
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.1/@addedElement
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.1/@addedElement
+15:23:07.633 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8591156817
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.1/@addedElement
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8591156817
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 6 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@6e706a1a
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629519
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629672
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629519
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 7 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@3b0f224c
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629672
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629519
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629672
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 8 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@be305f0
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3962
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.9/@sourceChange/@addedElement
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3962
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 9 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@678074c3
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590122695
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590122695
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.9/@sourceChange/@addedElement
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590122695
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.9/@sourceChange/@addedElement
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 10 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@53517736
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630682
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511632421
+15:23:07.634 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630682
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 11 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@379327f3
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511632421
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630682
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511632421
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 12 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@6ba998e3
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629117
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8591156809
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629117
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 13 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@5e4bb097
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.1/@addedElement
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.1/@addedElement
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8591156809
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.1/@addedElement
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment 8591156809
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 14 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@c7caa29
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630682
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631132
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630682
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 15 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@56f809e5
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631132
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630682
+15:23:07.635 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511631132
+15:23:07.636 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@325ca461
+15:23:07.636 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@3e028c16
+15:23:07.637 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@5746441d
+15:23:07.637 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@4167d831
+15:23:07.637 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@16cf13d0
+15:23:07.637 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@3c874f23
+15:23:07.637 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@59848202
+15:23:07.637 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@26dd7f53
+15:23:07.637 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:07.637 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@48e2a9cb
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@4e1a19a3
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@33f306f0
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@7e99d03a
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@23e892d3
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@3d21400c
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@16ce05de
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@26e61f3d
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@41ff6f38
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@76e9662b
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@106f7ddd
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@666971a
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@3c5abe41
+15:23:07.639 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@1bf4fdf
+15:23:08.365 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 12 changes
+15:23:08.365 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@49accbb4
+15:23:08.365 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630415
+15:23:08.366 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:08.366 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511630415
+15:23:08.366 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@6a78b0f3
+15:23:08.366 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8591206849
+15:23:08.366 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8591206849
+15:23:08.366 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:08.366 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8591206849
+15:23:08.366 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:08.366 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@71dfcc99
+15:23:08.366 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2874
+15:23:08.366 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:08.366 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2874
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@3b4e21d5
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428144
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428144
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428144
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@2c567743
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@62bc8312
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590640653
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590640653
+15:23:08.367 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:08.368 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590640653
+15:23:08.368 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:08.368 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 6 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@504b52db
+15:23:08.368 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629672
+15:23:08.368 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.7/@sourceChange/@addedElement
+15:23:08.368 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629672
+15:23:08.368 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 7 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@40487b38
+15:23:08.368 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8591206849
+15:23:08.368 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8591206849
+15:23:08.368 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.7/@sourceChange/@addedElement
+15:23:08.368 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8591206849
+15:23:08.368 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.7/@sourceChange/@addedElement
+15:23:08.368 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 8 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@46152f41
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2874
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.9/@sourceChange/@addedElement
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2874
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 9 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@70b16f37
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428146
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428146
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.9/@sourceChange/@addedElement
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428146
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.9/@sourceChange/@addedElement
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 10 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@671d19c8
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1490
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.11/@addedElement
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1490
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 11 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@145b522b
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@7175d37c
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@7ea947c3
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@123de29f
+15:23:08.369 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@5c3930f9
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@388e631
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@37ab2edc
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@4aff0bac
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@5fd454f2
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@1b298857
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@751a9820
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@478a4f44
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@3a04e083
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@6d38bca4
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@4cc2f2bb
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@59a76408
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@44ba8747
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@6ccfdee8
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@37c3aee0
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@55a60b34
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@45362e78
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@571c90a8
+15:23:08.370 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@7d829005
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 4 changes
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@1937bcc6
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1644
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1644
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@10646cfd
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590529251
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590529251
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590529251
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@1b28658c
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4555
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@addedElement
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4555
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@22e9f4f3
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590529251
+15:23:09.031 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590529251
+15:23:09.032 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@26be3303
+15:23:09.032 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@7e62265d
+15:23:09.032 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@1199cc70
+15:23:09.032 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@7c3aecdc
+15:23:09.032 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:09.032 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@2b4bfe73
+15:23:09.032 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@44747589
+15:23:09.621 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 3 changes
+15:23:09.621 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@7486fa3f
+15:23:09.621 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1925
+15:23:09.621 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@addedElement
+15:23:09.621 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1925
+15:23:09.621 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@2f900d97
+15:23:09.621 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590529251
+15:23:09.621 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590529251
+15:23:09.621 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@17e8e8d6
+15:23:09.621 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#864565
+15:23:09.621 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#864565
+15:23:09.621 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@ac7b35f
+15:23:09.621 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@2514fb25
+15:23:09.622 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@75ea0909
+15:23:10.122 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 6 changes
+15:23:10.122 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@2106fb7d
+15:23:10.122 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4555
+15:23:10.122 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628754
+15:23:10.122 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4555
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@38a5eb35
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628754
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4555
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628754
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@9336bc5
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628661
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@1227ef86
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628661
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628661
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@4ec23ac
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@addedElement
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#2194
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@178a0b1
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590639721
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590639721
+15:23:10.123 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@2c0e24c7
+15:23:10.128 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@499a93a9
+15:23:10.128 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@66505b79
+15:23:10.128 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@22e9122a
+15:23:10.128 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@7f9c22ac
+15:23:10.128 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@6206f12d
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 9 changes
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@f3a3d22
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4688
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629479
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4688
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@14df06df
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629479
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4688
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511629479
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@526d278
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4178
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590289238
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4178
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590289238
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4178
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590289238
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@2189ac45
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628627
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#167625
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628627
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#167625
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628627
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#167625
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@23d06658
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1644
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1644
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@254a0ce8
+15:23:10.655 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590529251
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590529251
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590529251
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.5/@sourceChange/@addedElement
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 6 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@6a060305
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4018
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.7/@sourceChange/@addedElement
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#4018
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 7 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@7d4741d9
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428139
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428139
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.7/@sourceChange/@addedElement
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590428139
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.7/@sourceChange/@addedElement
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 8 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@1b3d68b6
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#985
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590102704
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#985
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590102704
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#985
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590102704
+15:23:10.656 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@27080a5e
+15:23:10.658 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@5780bed1
+15:23:10.658 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@162e7803
+15:23:10.658 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@2225eb09
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@45985fe9
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationCollectionInsertion for likedBy will be handled by attributes.
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@17bc17bd
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@72b79b29
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@7f475bd5
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationCollectionInsertion for likedBy will be handled by attributes.
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@78a724c3
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@f51c595
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@41717985
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@4ad1b8d
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@45eda6e7
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@4411aea2
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@e664af4
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@627b59c6
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:10.659 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@4a0901f0
+15:23:10.660 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@3a4d2ad
+15:23:10.663 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@3f2919c7
+15:23:10.663 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationCollectionInsertion for likedBy will be handled by attributes.
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - Found 8 changes
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 0 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@c8c78a3
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3412
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#3412
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 1 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@3a4f4ec9
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590640653
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590640653
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#8590640653
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.1/@sourceChange/@addedElement
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 2 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@556389bb
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1644
+15:23:11.325 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1644
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 3 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@6f22c8e0
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590529251
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590529251
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post initial.xmi#8590529251
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment #//@changes.3/@sourceChange/@addedElement
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 4 de.tudresden.inf.st.ttc18live.parser.change.ParsedAssociationCollectionInsertion@42b764b3
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1242
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Post #//@changes.5/@addedElement
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1242
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 5 de.tudresden.inf.st.ttc18live.parser.change.ParsedCompositionListInsertion@14fe3663
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:SocialNetworkRoot initial.xmi#/
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 6 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@498ad9fe
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628858
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#725662
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628858
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#725662
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511628858
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#725662
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - change 7 de.tudresden.inf.st.ttc18live.parser.change.ParsedChangeTransaction@30094d11
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511627984
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#1338696
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511627984
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#1338696
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:User initial.xmi#1099511627984
+15:23:11.326 DEBUG de.tudresden.inf.st.ttc18live.translator.XmlToJastaddTranslator - elementSpec: social:Comment initial.xmi#1338696
+15:23:11.327 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@4ea17950
+15:23:11.327 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@34bac450
+15:23:11.327 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@261a01f
+15:23:11.327 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@4c9c0251
+15:23:11.327 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:11.327 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@932996b
+15:23:11.327 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@6bc85459
+15:23:11.327 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@64a67067
+15:23:11.327 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationPropertyChange@48846828
+15:23:11.327 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationPropertyChange for commented already handled by parser.
+15:23:11.327 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@55605992
+15:23:11.327 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.CompositionListInsertion@7ca3a5fb
+15:23:11.328 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@2b51d740
+15:23:11.328 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@40ff3f2a
+15:23:11.328 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@1704526e
+15:23:11.328 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationCollectionInsertion for likedBy will be handled by attributes.
+15:23:11.328 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.ChangeTransaction@7669a108
+15:23:11.328 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@53278352
+15:23:11.328 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - Applying de.tudresden.inf.st.ttc18live.jastadd.model.AssociationCollectionInsertion@6a98e073
+15:23:11.328 DEBUG de.tudresden.inf.st.ttc18live.jastadd.model.ASTNode - AssociationCollectionInsertion for likedBy will be handled by attributes.

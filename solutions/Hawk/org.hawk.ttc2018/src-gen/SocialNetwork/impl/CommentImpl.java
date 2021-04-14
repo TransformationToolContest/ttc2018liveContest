@@ -3,22 +3,18 @@
 package SocialNetwork.impl;
 
 import SocialNetwork.Comment;
-import SocialNetwork.Post;
 import SocialNetwork.SocialNetworkPackage;
 import SocialNetwork.Submission;
 import SocialNetwork.User;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -33,7 +29,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link SocialNetwork.impl.CommentImpl#getCommented <em>Commented</em>}</li>
  *   <li>{@link SocialNetwork.impl.CommentImpl#getLikedBy <em>Liked By</em>}</li>
- *   <li>{@link SocialNetwork.impl.CommentImpl#getPost <em>Post</em>}</li>
  * </ul>
  *
  * @generated
@@ -48,16 +43,6 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 	 * @ordered
 	 */
 	protected EList<User> likedBy;
-
-	/**
-	 * The cached value of the '{@link #getPost() <em>Post</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPost()
-	 * @generated
-	 * @ordered
-	 */
-	protected Post post;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,6 +68,7 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Submission getCommented() {
 		if (eContainerFeatureID() != SocialNetworkPackage.COMMENT__COMMENTED) return null;
 		return (Submission)eInternalContainer();
@@ -93,49 +79,12 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<User> getLikedBy() {
 		if (likedBy == null) {
 			likedBy = new EObjectWithInverseResolvingEList.ManyInverse<User>(User.class, this, SocialNetworkPackage.COMMENT__LIKED_BY, SocialNetworkPackage.USER__LIKES);
 		}
 		return likedBy;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Post getPost() {
-		if (post != null && post.eIsProxy()) {
-			InternalEObject oldPost = (InternalEObject)post;
-			post = (Post)eResolveProxy(oldPost);
-			if (post != oldPost) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SocialNetworkPackage.COMMENT__POST, oldPost, post));
-			}
-		}
-		return post;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Post basicGetPost() {
-		return post;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPost(Post newPost) {
-		Post oldPost = post;
-		post = newPost;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SocialNetworkPackage.COMMENT__POST, oldPost, post));
 	}
 
 	/**
@@ -199,9 +148,6 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 				return getCommented();
 			case SocialNetworkPackage.COMMENT__LIKED_BY:
 				return getLikedBy();
-			case SocialNetworkPackage.COMMENT__POST:
-				if (resolve) return getPost();
-				return basicGetPost();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -219,9 +165,6 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 				getLikedBy().clear();
 				getLikedBy().addAll((Collection<? extends User>)newValue);
 				return;
-			case SocialNetworkPackage.COMMENT__POST:
-				setPost((Post)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -236,9 +179,6 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 		switch (featureID) {
 			case SocialNetworkPackage.COMMENT__LIKED_BY:
 				getLikedBy().clear();
-				return;
-			case SocialNetworkPackage.COMMENT__POST:
-				setPost((Post)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -256,8 +196,6 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 				return getCommented() != null;
 			case SocialNetworkPackage.COMMENT__LIKED_BY:
 				return likedBy != null && !likedBy.isEmpty();
-			case SocialNetworkPackage.COMMENT__POST:
-				return post != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -6,15 +6,21 @@
 
 PostgreSQL 12 is required. On Ubuntu 20.04, it can be installed by running `apt-get install postgresql-12`. On older systems please refer to [[1](https://computingforgeeks.com/install-postgresql-12-on-ubuntu/), [2](https://pgdash.io/blog/postgres-11-getting-started.html)].
 
-## Generate CSV models
+## Generate CSV models and changes
 
-Use the `modelToGraphConverter` Gradle-task to generate the CSV models. Pass desired model size in the `modelSize` project property.
+Use the `modelToGraphConverter` Gradle task to generate the CSV models. Pass desired model size in the `modelSize` project property.
 
 Merge FK models will be output as `models/$modelSize/csv-*-initial.csv`, graph models will be output as `models/$modelSize/graph-*-initial.csv`.
 
-```console
+```bash
 ./gradlew modelMergeFkConverter -PmodelSize=4
 ./gradlew modelToGraphConverter -PmodelSize=4
+```
+
+CSV change sets (`changes-*.csv` files) can be generated with the `modelChangeProcessor` Gradle task:
+
+```bash
+./gradlew modelChangeProcessor -PmodelSize=4 -Psequences=20
 ```
 
 ## Configuring the database

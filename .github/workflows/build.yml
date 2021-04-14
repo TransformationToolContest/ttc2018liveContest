@@ -1,0 +1,29 @@
+name: build
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        with:
+          persist-credentials: false
+      - name: Build
+        run: |
+          # TODO: enable when ready
+          rm docker/Dockerfile-differential
+          rm docker/Dockerfile-graphblas
+          rm docker/Dockerfile-neo4j
+          # check that all Dockerfiles contain the same run command
+          test $(docker/ls-images.sh --runnable | wc -l) -eq $(grep -F "RUN scripts/run.py -b --skip-tests" docker/Dockerfile-* | wc -l)
+          # run tests in CI
+          sed -i "s|RUN scripts/run.py -b --skip-tests|RUN scripts/run.py -b|" docker/Dockerfile-*
+          # do not use slow release mode for Rust build
+          sed -i s/--release// solutions/differential*/solution.ini
+          sed -i "s|/release/|/debug/|" solutions/differential*/solution.ini
+          ./docker.sh --pull                  # pull available images
+          ./docker.sh --build --tags common   # overwrite common base image for newly built images TODO: remove after the dataset is stable
+          ./docker.sh --build-if-not-fresh    # (re)build image if different than current commit
+          docker/set-configs.sh               # copy generic settings from config.json to config-docker-*.json files
+          ./docker.sh -r --java-heap-size 6G  # run measurements
+                                              # limit the CPU cores if needed: --cpus 0-7

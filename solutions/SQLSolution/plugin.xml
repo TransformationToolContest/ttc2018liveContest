@@ -4,10 +4,13 @@
     <!-- @generated NMetaChanges -->
     <package class="Changes.ChangesPackage" genModel="NMetaChanges.genmodel" uri="http://nmf.codeplex.com/changes"/>
   </extension>
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <!-- @generated social_network -->
-    <package class="SocialNetwork.SocialNetworkPackage" genModel="social_network.genmodel" uri="https://www.transformation-tool-contest.eu/2018/social_media"/>
-  </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated social_network -->
+      <package
+            uri="https://www.transformation-tool-contest.eu/2018/social_media"
+            class="SocialNetwork.SocialNetworkPackage"
+            genModel="social_network.genmodel"/>
+   </extension>
   <extension id="queries.Ttc" point="org.eclipse.viatra.query.runtime.queryspecification">
     <group group="org.eclipse.viatra.query.runtime.extensibility.SingletonExtensionFactory:queries.Ttc" id="queries.Ttc">
       <query-specification fqn="queries.task1"/>

@@ -276,22 +276,13 @@ public interface SocialNetworkPackage extends EPackage {
 	int COMMENT__LIKED_BY = SUBMISSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Post</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMMENT__POST = SUBMISSION_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Comment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMMENT_FEATURE_COUNT = SUBMISSION_FEATURE_COUNT + 3;
+	int COMMENT_FEATURE_COUNT = SUBMISSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Comment</em>' class.
@@ -530,17 +521,6 @@ public interface SocialNetworkPackage extends EPackage {
 	EReference getComment_LikedBy();
 
 	/**
-	 * Returns the meta object for the reference '{@link SocialNetwork.Comment#getPost <em>Post</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Post</em>'.
-	 * @see SocialNetwork.Comment#getPost()
-	 * @see #getComment()
-	 * @generated
-	 */
-	EReference getComment_Post();
-
-	/**
 	 * Returns the meta object for class '{@link SocialNetwork.User <em>User</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -745,14 +725,6 @@ public interface SocialNetworkPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMMENT__LIKED_BY = eINSTANCE.getComment_LikedBy();
-
-		/**
-		 * The meta object literal for the '<em><b>Post</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMMENT__POST = eINSTANCE.getComment_Post();
 
 		/**
 		 * The meta object literal for the '{@link SocialNetwork.impl.UserImpl <em>User</em>}' class.
