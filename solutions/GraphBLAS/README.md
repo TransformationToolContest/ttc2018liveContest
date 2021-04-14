@@ -13,13 +13,13 @@ sudo apt install -y cmake
 ```bash
 export JOBS=$(nproc)
 
-git clone --branch v4.0.1 https://github.com/DrTimothyAldenDavis/GraphBLAS/
+git clone --branch v4.0.3 https://github.com/DrTimothyAldenDavis/GraphBLAS/
 cd GraphBLAS
 make && sudo make install && sudo ldconfig
 cd ..
 
-git clone --branch 4Jan2021 https://github.com/GraphBLAS/LAGraph
-cd LAGraph
+curl -L https://github.com/GraphBLAS/LAGraph/archive/99ad4114cd6b3116195e9599fb9709780e06fc9d.tar.gz | tar zxv
+cd LAGraph-*
 make && sudo make install && sudo ldconfig
 cd ..
 ```
