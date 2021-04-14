@@ -10,9 +10,8 @@ jobs:
           persist-credentials: false
       - name: Build
         run: |
-          # TODO: enable when ready
+          # TODO: enable when ready (issue: #87)
           rm docker/Dockerfile-differential
-          rm docker/Dockerfile-graphblas
           rm docker/Dockerfile-neo4j
           # check that all Dockerfiles contain the same run command
           test $(docker/ls-images.sh --runnable | wc -l) -eq $(grep -F "RUN scripts/run.py -b --skip-tests" docker/Dockerfile-* | wc -l)
