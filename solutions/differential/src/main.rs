@@ -6,11 +6,12 @@ use differential_dataflow::Collection;
 
 use differential_dataflow::operators::arrange::TraceAgent;
 use differential_dataflow::trace::implementations::ord::OrdKeySpine;
+use differential_dataflow::operators::Iterate;
 
 type Date = i64;
 type Person = usize;
 type Submission = usize;
-type Comment = (Submission,Date,String,Person,Submission,Submission);
+type Comment = (Submission,Date,String,Person,Submission);
 type Know = (Person, Person);
 type Like = (Person, Submission);
 type Post = (Submission,Date,String,Person);
@@ -298,8 +299,7 @@ fn strings_to_comm(comm: Vec<String>) -> Comment {
     let content = iter.next().unwrap();
     let creator = iter.next().unwrap().parse::<Person>().unwrap();
     let parent = iter.next().unwrap().parse::<Submission>().unwrap();
-    let post = iter.next().unwrap().parse::<Submission>().unwrap();
-    (id, ts, content, creator, parent, post)
+    (id, ts, content, creator, parent)
 }
 
 fn strings_to_know(know: Vec<String>) -> Know {
@@ -339,7 +339,7 @@ fn strings_to_user(user: Vec<String>) -> User {
 
 /// Implement the logic for query 1, return trace of the results.
 fn query_1<G, Submission, Person, Date>(
-    comms: &Collection<G, (Submission,Date,String,Person,Submission,Submission)>,
+    comms: &Collection<G, (Submission,Date,String,Person,Submission)>,
     posts: &Collection<G, (Submission,Date,String,Person)>,
     likes: &Collection<G, (Person, Submission)>,
     probe: &mut ProbeHandle<G::Timestamp>,
@@ -356,15 +356,42 @@ where
     use differential_dataflow::operators::arrange::arrangement::ArrangeBySelf;
     use timely::dataflow::operators::probe::Probe;
 
+    let comms_parents = comms.map(|(id, _, _, _, parent)| (parent, id));
+
+    let direct_replies = posts
+        .map(|(pid, _, _, _)| (pid.clone(), ()))  // extract post ids
+        .join_map(&comms_parents,
+                  |post_id, _dummy, comm_id| (post_id.clone(), comm_id.clone())
+        )  // -> (post_id, comment_id)
+        ;
+
+    let all_replies = direct_replies
+        .iterate(|transitive| {
+            let comms_parents = comms_parents.enter(&transitive.scope());
+            let direct_replies = direct_replies.enter(&transitive.scope());
+
+            return transitive
+                .map(|(post_id, comment_id)| (comment_id.clone(), post_id.clone()))
+                .join_map(&comms_parents,
+                         |_parent_comment, post_id, child_comment| (post_id.clone(), child_comment.clone())
+                )
+                .concat(&direct_replies)
+                .distinct()
+                ;
+        }) // -> (post_id, reply_id)
+       ;
+
     let liked_comments =
     likes
         .distinct() // Remove duplicate likes (maybe not necessary?)
         .map(|(_user,comm)| (comm, ()))
-        .join(&comms.map(|(id,_,_,_,_,post)| (id, post)))
-        .map(|(_,(_,post))| post)
+        .join_map(
+            &all_replies.map(|(post_id, comment_id)| (comment_id, post_id)),
+            |_comment_id, _dummy, post_id| post_id.clone()
+        )
         ;
 
-    let comms_theyselves = comms.explode(|comm| Some((comm.5, 10)));
+    let comms_theyselves = all_replies.explode(|(post_id, _comment_id)| Some((post_id, 10)));
 
     use differential_dataflow::trace::implementations::ord::OrdValSpine;
     use differential_dataflow::operators::reduce::ReduceCore;
@@ -391,7 +418,7 @@ where
 }
 
 fn query_2<G, Submission, Person, Date>(
-    comms: &Collection<G, (Submission,Date,String,Person,Submission,Submission)>,
+    comms: &Collection<G, (Submission,Date,String,Person,Submission)>,
     knows: &Collection<G, (Person, Person)>,
     likes: &Collection<G, (Person, Submission)>,
     probe: &mut ProbeHandle<G::Timestamp>,
@@ -404,7 +431,6 @@ where
     Date: ExchangeData+std::hash::Hash,
 {
     use timely::dataflow::operators::probe::Probe;
-    use differential_dataflow::operators::iterate::Iterate;
     use differential_dataflow::operators::reduce::Count;
     use differential_dataflow::operators::join::Join;
     use differential_dataflow::operators::reduce::Reduce;
