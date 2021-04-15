@@ -9,7 +9,7 @@ public enum SqlTable {
     POSTS("posts"
             , new String[] {"id", "ts", "content", "submitterid"}),
     COMMENTS("comments"
-            , new String[] {"id", "ts", "content", "submitterid", "parentid", "postid"}),
+            , new String[] {"id", "ts", "content", "submitterid", "parentid"}),
     USERS("users"
             , new String[] {"id", "name"}),
     FRIENDS("friends"
