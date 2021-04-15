@@ -5,7 +5,11 @@
   ],
   "Tools": [
       "EMFSolutionYAMTL",
-      "EMFSolutionYAMTL_batch"
+      "EMFSolutionYAMTL_batch",
+      "jastadd-ttc18-relast-xml-flush",
+      "jastadd-ttc18-relast-xml-inc",
+      "jastadd-ttc18-xml-flush",
+      "jastadd-ttc18-xml-inc"
   ],
   "ChangeSets": [
     "1", "2"

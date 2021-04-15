@@ -13,11 +13,7 @@
       "HawkIncUpdateQuery",
       "HawkNeo4J",
       "HawkNeo4JIncUpdate",
-      "HawkNeo4JIncUpdateQuery",
-      "jastadd-ttc18-relast-xml-flush",
-      "jastadd-ttc18-relast-xml-inc",
-      "jastadd-ttc18-xml-flush",
-      "jastadd-ttc18-xml-inc"
+      "HawkNeo4JIncUpdateQuery"
   ],
   "ChangeSets": [
     "1", "2"
