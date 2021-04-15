@@ -28,7 +28,7 @@ protected:
                     updates.new_likes_count_vec.get());
 
             // update score vector by adding the additional score
-            ok(GrB_eWiseAdd_Vector_BinaryOp(last_score_vec.get(), GrB_NULL, GrB_NULL,
+            ok(GrB_Vector_eWiseAdd_BinaryOp(last_score_vec.get(), GrB_NULL, GrB_NULL,
                                             GrB_PLUS_UINT64, last_score_vec.get(), partial_score_vec.get(), GrB_NULL));
             // get updated scores for each post where changed, otherwise omit score
             // overwrite scores in partial score vector using partial score vector as mask
