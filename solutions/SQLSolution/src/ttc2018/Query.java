@@ -10,7 +10,9 @@ import java.sql.SQLException;
 
 public enum Query {
     Q1_BATCH(Paths.get("q1.sql")),
+    Q1_ROOTPOST_INIT(Paths.get("q1-rootpost-init.sql")),
     Q1_INIT(Paths.get("q1-init.sql")),
+    Q1_ROOTPOST_MAINTAIN(Paths.get("q1-rootpost-maintain.sql")),
     Q1_MAINTAIN(Paths.get("q1-maintain.sql")),
     Q1_RETRIEVE(Paths.get("q1-retrieve.sql")),
     Q2_BATCH(Paths.get("q2.sql")),

@@ -27,6 +27,8 @@ create table posts_d partition of posts for values in ('D');
 create table comments (
   like posts including all
 , parentid bigint not null
+-- postid refers to the root post of the comment and is populated and used only in the incremental solution
+, postid bigint
 ) partition by list (status);
 
 create table comments_i partition of comments for values in ('I');
