@@ -1,0 +1,86 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+
+mainClassName = "ttc2018.LiveContestDriver"
+
+repositories {
+	jcenter()
+}
+
+ext {
+    emfVersion = '2.10.0-v20140514-1158'    
+}
+
+dependencies {
+	compile group: 'log4j', name: 'log4j', version: '1.2.17'
+	compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.common', version: emfVersion
+	compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore.xmi', version: emfVersion
+	compile group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore', version: emfVersion
+	compile group: 'org.duckdb', name: 'duckdb_jdbc', version: '0.2.5'
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src', 'src-gen']
+		}
+	}
+}
+
+task modelMergeFkConverter(type:JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    environment("DO_PRINT", "true")
+
+    if (project.hasProperty("modelSize")) {
+        args modelSize
+    }
+
+    main = "ttc2018.ModelMergeFkConverter"
+}
+
+task modelToGraphConverter(type:JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+
+    if (project.hasProperty("modelSize")) {
+        args modelSize
+    }
+
+    main = "ttc2018.ModelToGraphConverter"
+}
+
+task modelChangeProcessor(type:JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    environment("DO_PRINT", "true")
+
+    if (project.hasProperty("modelSize") && project.hasProperty("sequences")) {
+        args(modelSize, sequences)
+    } else if (project.hasProperty("modelSize")) {
+        args(modelSize)
+    }
+
+    main = "ttc2018.ModelChangeProcessor"
+}
+
+task runContestDriver(type: JavaExec) {
+	classpath = sourceSets.main.runtimeClasspath
+	main = "ttc2018.LiveContestDriver"
+
+	if (project.hasProperty("ChangePath") && project.hasProperty("Query")) {
+		environment("ChangePath", ChangePath)
+		environment("RunIndex", "1")
+		environment("Tool", "SQLSolution")
+		environment("ChangeSet", "default")
+		environment("Query", Query)
+	}
+	if (project.hasProperty("Sequences")) {
+		environment("Sequences", Sequences)
+	} else {
+		environment("Sequences", "20")
+	}
+	doFirst {
+		if (project.hasProperty("RedirectOutput")) {
+			standardOutput new FileOutputStream("${buildDir}/${RedirectOutput}", true)
+		}
+	}
+}
