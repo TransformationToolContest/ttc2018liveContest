@@ -12,7 +12,7 @@ COPY $GRADLE_WRAPPER_TOOL_PATH/gradlew $GRADLE_WRAPPER_TOOL_PATH/gradlew
 RUN $GRADLE_WRAPPER_TOOL_PATH/gradlew --version
 
 # install Neo4j
-ENV NEO4J_NAME=neo4j-community-3.5.20
+ENV NEO4J_NAME=neo4j-community-4.2.4
 ENV NEO4J_HOME=/opt/$NEO4J_NAME
 WORKDIR /opt
 RUN wget -qO- "https://neo4j.com/artifact.php?name=${NEO4J_NAME}-unix.tar.gz" | tar -xzv
