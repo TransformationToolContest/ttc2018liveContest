@@ -3,12 +3,12 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#1103" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" affectedElement="social:Post initial.xmi#723297" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#723297" id="726641" timestamp="2010-03-03T12:27:02" content="no way!" submitter="initial.xmi#1103" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="726641" timestamp="2010-03-03T12:27:02" content="no way!" submitter="initial.xmi#1103" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Post initial.xmi#723297" affectedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.3/@addedElement" affectedElement="social:User initial.xmi#2608" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:CompositionListInsertion" affectedElement="social:Comment initial.xmi#406917" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#404255" id="406919" timestamp="2010-03-03T12:30:33" content="About Charles Darwin, as a mo. About John Coltrane, and rema. About Dionne Warwick, is an A. About Carnival Ride, to debut. About I Walk the Line, with m. About It Might as Wel." submitter="initial.xmi#2608" />
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="406919" timestamp="2010-03-03T12:30:33" content="About Charles Darwin, as a mo. About John Coltrane, and rema. About Dionne Warwick, is an A. About Carnival Ride, to debut. About I Walk the Line, with m. About It Might as Wel." submitter="initial.xmi#2608" />
   </changes>
 </changes:ModelChangeSet>

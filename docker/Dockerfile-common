@@ -1,27 +1,4 @@
-ARG BASE_CONTAINER=ubuntu:20.04
-
-# do not use `COPY . .` as it invalidates the cache somehow...
-# avoid creating more layers by using multi-staged build
-FROM scratch AS models
-WORKDIR /ttc/models
-COPY 1 1
-COPY 2 2
-COPY 4 4
-COPY 8 8
-COPY 16 16
-COPY 32 32
-COPY 64 64
-COPY 128 128
-COPY 256 256
-COPY 512 512
-COPY 1024 1024
-COPY 1024.zip 1024.zip
-
-# final image
-FROM ${BASE_CONTAINER}
-
-# big files, not expected to change
-COPY --from=models / /
+FROM ubuntu:20.04 AS base_packages
 
 # to prevent tzdata installer from requiring user input
 # https://askubuntu.com/a/1013396/415610
@@ -32,7 +9,29 @@ RUN apt-get update && \
     apt-get install -yq --no-install-recommends python3 r-base unzip ca-certificates apt-transport-https wget git silversearcher-ag \
     && rm -rf /var/lib/apt/lists/*
 
+# avoid creating more layers by using multi-staged build
+FROM base_packages AS models
+
 WORKDIR /ttc/models
-RUN unzip 1024.zip
+# do not use `COPY . .` as it invalidates the cache somehow...
+COPY 1 1
+COPY 2 2
+COPY 4 4
+COPY 8 8
+COPY 16 16
+COPY 32 32
+COPY 64 64
+COPY 128 128
+COPY 256 256
+COPY 512 512
+
+COPY 1024.zip 1024.zip
+
+RUN unzip 1024.zip && rm 1024.zip
+
+# final image
+FROM base_packages
+
+COPY --from=models /ttc/models /ttc/models
 
 WORKDIR /ttc

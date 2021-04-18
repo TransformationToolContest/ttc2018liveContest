@@ -3,24 +3,24 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#1099511631424" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" index="1" affectedElement="social:Comment initial.xmi#25770003354" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#25770002793" id="25770003358" timestamp="2010-08-07T15:31:01" content="About Prince Philip. About Rory Gallaghe. About Ella Fitzgera. About You Rea." submitter="initial.xmi#1099511631424" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="25770003358" timestamp="2010-08-07T15:31:01" content="About Prince Philip. About Rory Gallaghe. About Ella Fitzgera. About You Rea." submitter="initial.xmi#1099511631424" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment initial.xmi#25770003354" affectedElement="social:Comment #//@changes.1/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.3/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#1099511628378" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" affectedElement="social:Post initial.xmi#25771104798" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#25771104798" id="25771104992" timestamp="2010-08-07T15:32:23" content="About Charl. About Augus. About Rory . About Maril. About Al Gr. About Whitn. A." submitter="initial.xmi#1099511628378" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="25771104992" timestamp="2010-08-07T15:32:23" content="About Charl. About Augus. About Rory . About Maril. About Al Gr. About Whitn. A." submitter="initial.xmi#1099511628378" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Post initial.xmi#25771104798" affectedElement="social:Comment #//@changes.3/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment #//@changes.5/@sourceChange/@addedElement" affectedElement="social:User initial.xmi#4534" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" affectedElement="social:Post initial.xmi#25771077574" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#25771077574" id="25771078021" timestamp="2010-08-07T15:33:41" content="About William Howard Taft, scholars, Taft is usually ranked in the second or t." submitter="initial.xmi#4534">
-        <comments post="initial.xmi#25771077574" id="25771078024" timestamp="2010-08-07T15:33:59" content="no way!" submitter="initial.xmi#4534" />
-        <comments post="initial.xmi#25771077574" id="25771078023" timestamp="2010-08-07T15:35:12" content="About Napoleon, rose quickly as Napoleon's armies conquered much of Europe but collapsed rapidly after France's d." submitter="initial.xmi#1099511628305" />
-        <comments post="initial.xmi#25771077574" id="25771078022" timestamp="2010-08-07T15:35:16" content="LOL" submitter="initial.xmi#4534" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="25771078021" timestamp="2010-08-07T15:33:41" content="About William Howard Taft, scholars, Taft is usually ranked in the second or t." submitter="initial.xmi#4534">
+        <comments id="25771078024" timestamp="2010-08-07T15:33:59" content="no way!" submitter="initial.xmi#4534" />
+        <comments id="25771078023" timestamp="2010-08-07T15:35:12" content="About Napoleon, rose quickly as Napoleon's armies conquered much of Europe but collapsed rapidly after France's d." submitter="initial.xmi#1099511628305" />
+        <comments id="25771078022" timestamp="2010-08-07T15:35:16" content="LOL" submitter="initial.xmi#4534" />
       </addedElement>
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Post initial.xmi#25771077574" affectedElement="social:Comment #//@changes.5/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
@@ -28,14 +28,14 @@
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment 25771078024" affectedElement="social:User initial.xmi#4534" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" affectedElement="social:Comment #//@changes.5/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#25771077574" id="25771078024" timestamp="2010-08-07T15:33:59" content="no way!" submitter="initial.xmi#4534" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="25771078024" timestamp="2010-08-07T15:33:59" content="no way!" submitter="initial.xmi#4534" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment #//@changes.5/@sourceChange/@addedElement" affectedElement="social:Comment 25771078024" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>
   <changes xsi:type="changes:AssociationCollectionInsertion" addedElement="social:Comment 25771078023" affectedElement="social:User initial.xmi#1099511628305" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//User/submissions" />
   <changes xsi:type="changes:ChangeTransaction">
     <sourceChange xsi:type="changes:CompositionListInsertion" index="1" affectedElement="social:Comment #//@changes.5/@sourceChange/@addedElement" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#25771077574" id="25771078023" timestamp="2010-08-07T15:35:12" content="About Napoleon, rose quickly as Napoleon's armies conquered much of Europe but collapsed rapidly after France's d." submitter="initial.xmi#1099511628305" />
+      <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="25771078023" timestamp="2010-08-07T15:35:12" content="About Napoleon, rose quickly as Napoleon's armies conquered much of Europe but collapsed rapidly after France's d." submitter="initial.xmi#1099511628305" />
     </sourceChange>
     <nestedChanges xsi:type="changes:AssociationPropertyChange" newValue="social:Comment #//@changes.5/@sourceChange/@addedElement" affectedElement="social:Comment 25771078023" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Comment/commented" />
   </changes>

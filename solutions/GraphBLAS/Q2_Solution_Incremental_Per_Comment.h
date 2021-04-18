@@ -137,7 +137,8 @@ public:
                     add_score_to_toplist(top_scores, std::make_tuple(score, timestamp, comment_col));
             }
 
-            int nthreads = LAGraph_get_nthreads();
+            int nthreads;
+            ok(LAGraph_GetNumThreads(&nthreads, nullptr));
 #pragma omp parallel num_threads(nthreads)
             {
                 std::vector<score_type> top_scores_local;

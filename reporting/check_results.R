@@ -2,6 +2,7 @@ expected = read.csv2("../expected-results/results.csv")
 actual = subset(read.csv2("../output/output.csv"), MetricName=="Elements")
 
 tools = unique(actual$Tool)
+results_ok = TRUE
 
 for (tool in tools) {
   tool_data = subset(actual, Tool==tool)
@@ -16,10 +17,16 @@ for (tool in tools) {
       if (length(as.character(expected.row$MetricValue)) > 0) {
         if (as.character(query.row$MetricValue) != as.character(expected.row$MetricValue)) {
           print(paste(tool, "is wrong. Was ", query.row$MetricValue, "but expected", expected.row$MetricValue, "for change set", query.row$ChangeSet, "query", query, "iteration", query.row$Iteration))
+          results_ok = FALSE
         }
       } else {
         print(paste("Warning:", tool, "produced the result", query.row$MetricValue, "but expected result is unavailable for change set", query.row$ChangeSet, "query", query, "iteration", query.row$Iteration))
+        results_ok = FALSE
       }
     }
   }
+}
+
+if (!results_ok) {
+  quit(status=1)
 }

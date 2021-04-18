@@ -71,19 +71,6 @@ namespace TTC2018.LiveContest.SocialNetwork
         }
         
         /// <summary>
-        /// The post property
-        /// </summary>
-        [DisplayNameAttribute("post")]
-        [CategoryAttribute("Comment")]
-        [XmlElementNameAttribute("post")]
-        [XmlAttributeAttribute(true)]
-        IPost Post
-        {
-            get;
-            set;
-        }
-        
-        /// <summary>
         /// Gets fired before the Commented property changes its value
         /// </summary>
         event System.EventHandler<ValueChangedEventArgs> CommentedChanging;
@@ -92,16 +79,6 @@ namespace TTC2018.LiveContest.SocialNetwork
         /// Gets fired when the Commented property changed its value
         /// </summary>
         event System.EventHandler<ValueChangedEventArgs> CommentedChanged;
-        
-        /// <summary>
-        /// Gets fired before the Post property changes its value
-        /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> PostChanging;
-        
-        /// <summary>
-        /// Gets fired when the Post property changed its value
-        /// </summary>
-        event System.EventHandler<ValueChangedEventArgs> PostChanged;
     }
 }
 

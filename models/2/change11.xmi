@@ -17,6 +17,6 @@
     <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Post" id="722958" timestamp="2010-03-11T01:05:01" content="photo722958.jpg" submitter="#//@changes.5/@addedElement" />
   </changes>
   <changes xsi:type="changes:CompositionListInsertion" index="0" affectedElement="social:Post initial.xmi#167197" feature="ecore:EReference https://www.transformation-tool-contest.eu/2018/social_media#//Submission/comments">
-    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" post="initial.xmi#167197" id="999991" timestamp="2018-06-27T09:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
+    <addedElement xmlns:social="https://www.transformation-tool-contest.eu/2018/social_media" xsi:type="social:Comment" id="999991" timestamp="2018-06-27T09:59:00" content="Added for TTC Live contest" submitter="initial.xmi#1564" />
   </changes>
 </changes:ModelChangeSet>

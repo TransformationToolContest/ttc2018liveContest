@@ -6,11 +6,11 @@ import Changes.ModelChangeSet
 import SocialNetwork.SocialNetworkPackage
 import SocialNetwork.SocialNetworkRoot
 import org.eclipse.emf.common.util.EList
-import org.eclipse.emf.ecore.change.ChangeDescription
 
 class LiveContestDriver {
 
-	def static void main(String[] args) {
+	def static void main(String[] args) 
+	{
 		try {
 	        Initialize();
 	        Load();
@@ -35,16 +35,19 @@ class LiveContestDriver {
 
     static Solution solution;
 
-    def private static Object loadFile(String path) {
+    def private static Object loadFile(String path) 
+    {
 		val modelPath = '''«ChangePath»/«path»'''
 		solution.xform.loadInputModels(#{'sn' -> modelPath})
 		val mRes = solution.xform.getModelResource('sn')
 		
     	return mRes.getContents().get(0);
     }
-    def private static Object loadDeltaFile(String path) {
+    
+    def private static Object loadDeltaFile(String path) 
+    {
 		val modelPath = '''«ChangePath»/«path»'''
-		val res = solution.xform.engine.registry.registry.loadModel(modelPath, true)
+		val res = solution.xform.loadModel(modelPath, true)
 		res.contents.head
     }
 
@@ -52,31 +55,6 @@ class LiveContestDriver {
     {
     	stopwatch = System.nanoTime();
         solution.setSocialNetwork(loadFile("initial.xmi") as SocialNetworkRoot);
-        
-        for (var iteration = 1; iteration <= Sequences; iteration++)
-        {
-	        val ModelChangeSet changes = loadDeltaFile(String.format("change%02d.xmi", iteration)) as ModelChangeSet
-	        val EList<ModelChange> coll = changes.getChanges();
-	        val deltaName = '''change«iteration»'''
-			
-			//
-			solution.xform.recordSourceDelta('sn', deltaName, [
-				for (ModelChange change : coll) {
-					change.apply();
-				}
-				newHashMap
-			])
-			
-			val delta = solution.xform.engine.registry.getDelta('sn', deltaName)
-			(delta.deltaRes.contents.head as ChangeDescription).applyAndReverse()
-        }
-        
-        for (var iteration = Sequences; iteration > 0; iteration--) {
-        	val deltaName = '''change«iteration»'''
-        	val delta = solution.xform.engine.registry.getDelta('sn', deltaName)
-			(delta.deltaRes.contents.head as ChangeDescription).applyAndReverse()
-        }
-        
         stopwatch = System.nanoTime() - stopwatch;
         Report(BenchmarkPhase.Load, -1, null);
     }
@@ -121,7 +99,16 @@ class LiveContestDriver {
 
     def static void Update(int iteration)
     {
-        val deltaName = '''change«iteration»'''
+        val deltaName = String.format("change%02d", iteration);
+    	val ModelChangeSet changes = loadDeltaFile(deltaName + '.xmi') as ModelChangeSet
+        val EList<ModelChange> coll = changes.getChanges();
+        // the change is recorded, undone and stored as a forward change
+		solution.xform.recordDelta('sn', deltaName, [
+			for (ModelChange change : coll) {
+				change.apply();
+			}
+			newHashMap
+		])
         stopwatch = System.nanoTime();
         val String result = solution.Update(deltaName);
         stopwatch = System.nanoTime() - stopwatch;

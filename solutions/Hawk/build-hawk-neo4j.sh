@@ -1,12 +1,13 @@
 #!/bin/bash
 
-REPO=git://git.eclipse.org/gitroot/hawk/hawk.git
-SHA1=32975427e4
+REPO=https://gitlab.eclipse.org/eclipse/hawk/hawk.git
+SHA=575d2aaad351a0dffb3de41f60db62662b92d14c
 
-if ! test -d hawk; then
+if ! test -d hawk || ! test "$(cd hawk && git rev-parse --sq HEAD)" != "$SHA" ; then
+  rm -rf hawk
   git clone "$REPO" hawk
   pushd hawk
-  git reset --hard "$SHA1"
+  git reset --hard "$SHA"
   popd
 fi
 

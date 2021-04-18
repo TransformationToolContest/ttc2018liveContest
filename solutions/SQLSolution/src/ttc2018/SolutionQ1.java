@@ -15,7 +15,9 @@ public class SolutionQ1 extends Solution {
 	@Override
 	void prepareStatements() {
 		Connection conn = getDbConnection();
+		Query.Q1_ROOTPOST_INIT.prepareStatement(conn);
 		Query.Q1_INIT.prepareStatement(conn);
+		Query.Q1_ROOTPOST_MAINTAIN.prepareStatement(conn);
 		Query.Q1_MAINTAIN.prepareStatement(conn);
 		Query.Q1_RETRIEVE.prepareStatement(conn);
 
@@ -24,6 +26,7 @@ public class SolutionQ1 extends Solution {
 
 	@Override
 	public String Initial() {
+		runVoidQuery(Query.Q1_ROOTPOST_INIT);
 		runVoidQuery(Query.Q1_INIT);
 		String result = runReadQuery(Query.Q1_RETRIEVE);
 
@@ -34,6 +37,7 @@ public class SolutionQ1 extends Solution {
 	public String Update(ModelChangeSet changes) {
 		beforeUpdate(changes);
 
+		runVoidQuery(Query.Q1_ROOTPOST_MAINTAIN);
 		runVoidQuery(Query.Q1_MAINTAIN);
 		String result = runReadQuery(Query.Q1_RETRIEVE);
 
@@ -46,6 +50,7 @@ public class SolutionQ1 extends Solution {
 	public String Update(File changes) {
 		beforeUpdate(changes);
 
+		runVoidQuery(Query.Q1_ROOTPOST_MAINTAIN);
 		runVoidQuery(Query.Q1_MAINTAIN);
 		String result = runReadQuery(Query.Q1_RETRIEVE);
 

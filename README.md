@@ -1,6 +1,6 @@
 # The TTC 2018 Social Media Case
 
-[![Build Status](https://travis-ci.org/TransformationToolContest/ttc2018liveContest.svg?branch=master)](https://travis-ci.org/TransformationToolContest/ttc2018liveContest)
+[![Build status](https://github.com/TransformationToolContest/ttc2018liveContest/workflows/build/badge.svg)](https://github.com/TransformationToolContest/ttc2018liveContest/actions)
  
 ## Case description
 
@@ -22,12 +22,15 @@ unzip 1024.zip
 cd ..
 ```
 
+## Regenerating CSV change sets
+
+CSV change sets are generated based on the XMI (EMF) models. The instructions for regenerating the CSVs are detailed in the [SQL solution's README](solutions/SQLSolution/README.md).
+
 ## Solution Prerequisites
 
 * AOF, ATL: Requires Java 8 for build (can run with Java 11).
 * Hawk: Requires Java (both 8 and 11 have tested and work).
 * JastAdd: Requires Java 8 for running (already built).
-* Naiad: Requires .NET Framework 4.5.1 (only works on Windows).
 * NMF: You need to install [.NET Core 3.1](https://docs.microsoft.com/en-us/dotnet/core/install/linux-package-manager-ubuntu-1804)
 * SQL: Requires PostgreSQL 11 or later.
 * YAMTL: Requires Java 11 for running (already built).
@@ -50,7 +53,8 @@ One might fine tune the script for the following purposes:
 
 The `config` directory contains the configuration for the scripts:
 * `config.json` -- configuration for the model generation and the benchmark
-  * *Note:* the timeout as set in the benchmark configuration (default: 6000 seconds) applies to the gross cumulative runtime of the tool for a given changeset and update sequences. This also includes e.g. Initialization time which is not required by the benchmark framework to be measured.
+  * `run.py` reads configuration from this file. During the Docker-based execution, this file contains the generic settings that are copied to the separate image-specific files. The default values in this file is used in CI.
+  * *Note:* the timeout as set in the benchmark configuration (default: 60 seconds) applies to the gross cumulative runtime of the tool for a given changeset and update sequences. This also includes e.g. Initialization time which is not required by the benchmark framework to be measured.
     Timeout is only applied to the solutions' run phase (see `-m` for `run.py`), so it is not applied to e.g. the build phase (see `-b` for `run.py`).
 * `reporting.json` -- configuration for the visualization
 
@@ -142,7 +146,7 @@ The tools supported by each image are defined in the `config` directory in the `
 - Build outdated images or not uploaded (without running the tests):\
 `./docker.sh --build-if-not-fresh`
 - Set the desired configuration in `config/config.json` (with the exception of "Tools")\
-E.g. `Timeout`: `600`, `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"`
+E.g. `Timeout`: `600` s, `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"`
 - Copy generic settings from `config.json` to `config-docker-*.json` files:\
 `docker/set-configs.sh`
 - Run measurements with the desired Java heap size: (limit the CPU cores if needed: `--cpus 0-7`)\
