@@ -51,7 +51,7 @@ public class SolutionQ2Batch extends Solution {
     }
 
     @Override
-    public String Initial() {
+    public String InitialInTX() {
 
         if (tool == Tool.Neo4jSolutionBatch_rebuild_overlay) {
             runVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
@@ -62,7 +62,7 @@ public class SolutionQ2Batch extends Solution {
     }
 
     @Override
-    public String Update(File changes) {
+    public String UpdateInTx(File changes) {
         beforeUpdate(changes);
 
         if (tool == Tool.Neo4jSolutionBatch_rebuild_overlay) {

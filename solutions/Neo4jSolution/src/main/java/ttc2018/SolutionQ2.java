@@ -11,7 +11,6 @@ import org.neo4j.graphalgo.wcc.Wcc;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.Transaction;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,17 +72,15 @@ public class SolutionQ2 extends Solution {
     protected void addConstraintsAndIndicesInTx(GraphDatabaseService dbConnection) {
         super.addConstraintsAndIndicesInTx(dbConnection);
 
-        try ( Transaction tx = graphDb.beginTx() ) {
-            tx.schema()
-                    .indexFor(Comment)
-                    .on(SUBMISSION_SCORE_PROPERTY)
-                    .create();
-        }
+        tx.schema()
+                .indexFor(Comment)
+                .on(SUBMISSION_SCORE_PROPERTY)
+                .create();
         // note: cannot create index on commentId property of FRIEND_WHO_LIKES_COMMENT edge
     }
 
     @Override
-    public String Initial() {
+    public String InitialInTX() {
         switch (tool) {
             case Neo4jSolution_overlay_graph:
                 runVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
@@ -103,14 +100,12 @@ public class SolutionQ2 extends Solution {
             case Neo4jSolution:
                 runVoidQuery(Query.Q2_INITIAL_DYNAMIC_LIKES_LABELS);
 
-                try (Transaction tx = graphDb.beginTx()) {
-                    Map batchErrors = (Map) Query.Q2_INITIAL_COMPONENTS_PERIODIC.execute(tx, Collections.emptyMap())
-                            .columnAs("batchErrors")
-                            .stream().collect(Collectors.toList())
-                            .get(0);
-                    if (!batchErrors.isEmpty())
-                        throw new RuntimeException(batchErrors.toString(), new Exception());
-                }
+                Map batchErrors = (Map) Query.Q2_INITIAL_COMPONENTS_PERIODIC.execute(tx, Collections.emptyMap())
+                        .columnAs("batchErrors")
+                        .stream().collect(Collectors.toList())
+                        .get(0);
+                if (!batchErrors.isEmpty())
+                    throw new RuntimeException(batchErrors.toString(), new Exception());
 
                 runVoidQuery(Query.Q2_INITIAL_SCORE_FROM_EXPLICIT_COMPONENTS);
                 break;
@@ -157,7 +152,7 @@ public class SolutionQ2 extends Solution {
     private ArrayList<Relationship> newLikesEdges;
 
     @Override
-    public String Update(File changes) {
+    public String UpdateInTx(File changes) {
         newFriendEdges = new ArrayList<>();
         newLikesEdges = new ArrayList<>();
 

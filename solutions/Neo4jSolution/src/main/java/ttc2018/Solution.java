@@ -14,7 +14,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -29,13 +32,38 @@ public abstract class Solution implements AutoCloseable {
 
     DatabaseManagementService managementService;
     GraphDatabaseService graphDb;
+    Transaction tx;
 
-    public abstract String Initial();
+    public String Initial() {
+        tx = graphDb.beginTx();
+        try {
+            String result = InitialInTX();
+            tx.commit();
+
+            return result;
+        } finally {
+            tx.close();
+        }
+    }
+
+    public abstract String InitialInTX();
 
     /**
      * Update reading changes from CSV file
      */
-    public abstract String Update(File changes);
+    public String Update(File changes) {
+        tx = graphDb.beginTx();
+        try {
+            String result = UpdateInTx(changes);
+            tx.commit();
+
+            return result;
+        } finally {
+            tx.close();
+        }
+    }
+
+    public abstract String UpdateInTx(File changes);
 
     private final static String NEO4J_HOME = System.getenv("NEO4J_HOME");
     private final static Path DB_DIR = new File(NEO4J_HOME + "/data").toPath();
@@ -65,6 +93,9 @@ public abstract class Solution implements AutoCloseable {
 
     @Override
     public void close() {
+        if (tx != null) {
+            tx.close();
+        }
         if (managementService != null) {
             managementService.shutdown();
             managementService = null;
@@ -90,7 +121,7 @@ public abstract class Solution implements AutoCloseable {
     String runReadQuery(Query q, Map<String, Object> parameters) {
         List<String> result = new ArrayList<>();
 
-        try (Transaction tx = graphDb.beginTx(); Result rs = q.execute(tx, parameters)) {
+        try (Result rs = q.execute(tx, parameters)) {
             int rowCount = 0;
             while (rs.hasNext()) {
                 Map<String, Object> row = rs.next();
@@ -116,7 +147,7 @@ public abstract class Solution implements AutoCloseable {
     }
 
     void runVoidQuery(Query q, Map<String, Object> parameters) {
-        try (Transaction tx = graphDb.beginTx(); Result rs = q.execute(tx, parameters)) {
+        try (Result rs = q.execute(tx, parameters)) {
             rs.accept(row -> true);
         }
     }
@@ -142,26 +173,27 @@ public abstract class Solution implements AutoCloseable {
         GraphDatabaseService dbConnection = getDbConnection();
 
         // add uniqueness constraints and indices
-        try (Transaction tx = dbConnection.beginTx()) {
+        tx = graphDb.beginTx();
+        try {
             addConstraintsAndIndicesInTx(dbConnection);
 
             tx.commit();
+        } finally {
+            tx.close();
         }
 
-        try (Transaction tx = dbConnection.beginTx()) {
+        try (Transaction txLocal = dbConnection.beginTx()) {
             // TODO: meaningful timeout
-            tx.schema().awaitIndexesOnline(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            txLocal.schema().awaitIndexesOnline(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
         }
     }
 
     protected void addConstraintsAndIndicesInTx(GraphDatabaseService dbConnection) {
         for (Labels label : Labels.values()) {
-            try ( Transaction tx = dbConnection.beginTx() ) {
-                tx.schema()
-                        .constraintFor(label)
-                        .assertPropertyIsUnique(NODE_ID_PROPERTY)
-                        .create();
-            }
+            tx.schema()
+                    .constraintFor(label)
+                    .assertPropertyIsUnique(NODE_ID_PROPERTY)
+                    .create();
         }
     }
 
@@ -180,8 +212,7 @@ public abstract class Solution implements AutoCloseable {
     public static final String FRIEND_OVERLAY_EDGE_COMMENT_ID_PROPERTY = "commentId";
 
     public void processChangeSet(File changeSet) {
-        try (Stream<String> stream = Files.lines(changeSet.toPath());
-             Transaction tx = graphDb.beginTx()) {
+        try (Stream<String> stream = Files.lines(changeSet.toPath())) {
 
             stream.forEachOrdered(s -> {
                 String[] line = s.split(Pattern.quote(SEPARATOR));
@@ -212,8 +243,6 @@ public abstract class Solution implements AutoCloseable {
                         throw new RuntimeException("Invalid record type received from CSV input: " + line[0]);
                 }
             });
-
-            tx.commit();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -225,36 +254,33 @@ public abstract class Solution implements AutoCloseable {
         String content = line[3];
         long submitterId = Long.parseLong(line[4]);
 
-        try (Transaction tx = graphDb.beginTx()) {
-            Node submitter = findSingleNodeByIdProperty(tx, User, submitterId);
+        Node submitter = findSingleNodeByIdProperty(tx, User, submitterId);
 
-            Label[] labels = line[0].equals(COMMENTS_CHANGE_TYPE) ? CommentLabelSet : PostLabelSet;
+        Label[] labels = line[0].equals(COMMENTS_CHANGE_TYPE) ? CommentLabelSet : PostLabelSet;
 
-            Node submission = tx.createNode(labels);
-            submission.setProperty(NODE_ID_PROPERTY, id);
-            submission.setProperty(SUBMISSION_TIMESTAMP_PROPERTY, timestamp);
-            submission.setProperty(SUBMISSION_CONTENT_PROPERTY, content);
+        Node submission = tx.createNode(labels);
+        submission.setProperty(NODE_ID_PROPERTY, id);
+        submission.setProperty(SUBMISSION_TIMESTAMP_PROPERTY, timestamp);
+        submission.setProperty(SUBMISSION_CONTENT_PROPERTY, content);
 
-            submission.createRelationshipTo(submitter, SUBMITTER);
+        submission.createRelationshipTo(submitter, SUBMITTER);
 
-            if (line[0].equals(COMMENTS_CHANGE_TYPE)) {
-                long previousSubmissionId = Long.parseLong(line[5]);
-                long rootPostId = Long.parseLong(line[6]);
+        if (line[0].equals(COMMENTS_CHANGE_TYPE)) {
+            long previousSubmissionId = Long.parseLong(line[5]);
+            long rootPostId = Long.parseLong(line[6]);
 
-                Node previousSubmission = findSingleNodeByIdProperty(tx, Submission, previousSubmissionId);
-                Node rootPost = findSingleNodeByIdProperty(tx, Post, rootPostId);
+            Node previousSubmission = findSingleNodeByIdProperty(tx, Submission, previousSubmissionId);
+            Node rootPost = findSingleNodeByIdProperty(tx, Post, rootPostId);
 
-                submission.createRelationshipTo(previousSubmission, COMMENT_TO);
-                submission.createRelationshipTo(rootPost, ROOT_POST);
+            submission.createRelationshipTo(previousSubmission, COMMENT_TO);
+            submission.createRelationshipTo(rootPost, ROOT_POST);
 
-                afterNewComment(submission, submitter, previousSubmission, rootPost);
-            } else {
-                afterNewPost(submission, submitter);
-            }
-
-            tx.commit();
-            return submission;
+            afterNewComment(submission, submitter, previousSubmission, rootPost);
+        } else {
+            afterNewPost(submission, submitter);
         }
+
+        return submission;
     }
 
     protected void afterNewComment(Node comment, Node submitter, Node previousSubmission, Node rootPost) {
@@ -277,13 +303,10 @@ public abstract class Solution implements AutoCloseable {
         long id = Long.parseLong(line[1]);
         String name = line[2];
 
-        try (Transaction tx = graphDb.beginTx()) {
-            Node user = tx.createNode(User);
-            user.setProperty(NODE_ID_PROPERTY, id);
-            user.setProperty(USER_NAME_PROPERTY, name);
-            tx.commit();
-            return user;
-        }
+        Node user = tx.createNode(User);
+        user.setProperty(NODE_ID_PROPERTY, id);
+        user.setProperty(USER_NAME_PROPERTY, name);
+        return user;
     }
 
     private Node findSingleNodeByIdProperty(Transaction tx, Labels label, long id) {
@@ -293,17 +316,14 @@ public abstract class Solution implements AutoCloseable {
     }
 
     private Relationship insertEdge(String[] line, RelationshipTypes relationshipType, Labels sourceLabel, Labels targetLabel) {
-        try (Transaction tx = graphDb.beginTx()) {
-            long sourceId = Long.parseLong(line[1]);
-            long targetId = Long.parseLong(line[2]);
+        long sourceId = Long.parseLong(line[1]);
+        long targetId = Long.parseLong(line[2]);
 
-            Node source = findSingleNodeByIdProperty(tx, sourceLabel, sourceId);
-            Node target = findSingleNodeByIdProperty(tx, targetLabel, targetId);
+        Node source = findSingleNodeByIdProperty(tx, sourceLabel, sourceId);
+        Node target = findSingleNodeByIdProperty(tx, targetLabel, targetId);
 
-            Relationship relationship = source.createRelationshipTo(target, relationshipType);
-            tx.commit();
-            return relationship;
-        }
+        Relationship relationship = source.createRelationshipTo(target, relationshipType);
+        return relationship;
     }
 
     void afterUpdate() {

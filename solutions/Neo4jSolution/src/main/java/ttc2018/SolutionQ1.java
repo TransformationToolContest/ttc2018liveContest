@@ -4,7 +4,6 @@ import org.neo4j.exceptions.KernelException;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
-import org.neo4j.graphdb.Transaction;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,17 +21,14 @@ public class SolutionQ1 extends Solution {
     @Override
     protected void addConstraintsAndIndicesInTx(GraphDatabaseService dbConnection) {
         super.addConstraintsAndIndicesInTx(dbConnection);
-        try ( Transaction tx = graphDb.beginTx() ) {
-            tx.schema()
+        tx.schema()
                 .indexFor(Post)
                 .on(SUBMISSION_SCORE_PROPERTY)
                 .create();
-            tx.commit();
-        }
     }
 
     @Override
-    public String Initial() {
+    public String InitialInTX() {
         runVoidQuery(Query.Q1_INITIAL);
         String result = runReadQuery(Query.Q1_RETRIEVE);
 
@@ -40,7 +36,7 @@ public class SolutionQ1 extends Solution {
     }
 
     @Override
-    public String Update(File changes) {
+    public String UpdateInTx(File changes) {
         beforeUpdate(changes);
 
         String result = runReadQuery(Query.Q1_RETRIEVE);
