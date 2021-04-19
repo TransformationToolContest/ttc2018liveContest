@@ -28,8 +28,6 @@ import static ttc2018.Query.SCORE_COLUMN_NAME;
 import static ttc2018.RelationshipTypes.*;
 
 public abstract class Solution implements AutoCloseable {
-    // see: getDbConnection()
-
     DatabaseManagementService managementService;
     GraphDatabaseService graphDb;
     Transaction tx;
