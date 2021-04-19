@@ -7,7 +7,7 @@ import apoc.refactor.GraphRefactoring;
 import com.google.common.collect.ImmutableMap;
 import org.neo4j.exceptions.KernelException;
 import org.neo4j.graphalgo.functions.AsNodeFunc;
-import org.neo4j.graphalgo.wcc.Wcc;
+import org.neo4j.graphalgo.wcc.WccStreamProc;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
@@ -57,7 +57,7 @@ public class SolutionQ2 extends Solution {
 
             switch (tool) {
                 case Neo4jSolution_explicit_component_algo:
-                    registerProcedure(graphDb, Wcc.class, AsNodeFunc.class);
+                    registerProcedure(graphDb, WccStreamProc.class, AsNodeFunc.class);
                     break;
                 case Neo4jSolution:
                     registerProcedure(graphDb, Create.class, Periodic.class, PathExplorer.class);
