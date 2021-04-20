@@ -10,20 +10,16 @@ public class SolutionQ1Batch extends Solution {
     }
 
     @Override
-    public String InitialInTX() {
+    public String Initial() {
         String result = runReadQuery(Query.Q1_BATCH);
 
         return result;
     }
 
     @Override
-    public String UpdateInTx(File changes) {
+    public String Update(File changes) {
         beforeUpdate(changes);
 
-        String result = runReadQuery(Query.Q1_BATCH);
-
-        afterUpdate();
-
-        return result;
+        return runReadQuery(Query.Q1_BATCH);
     }
 }

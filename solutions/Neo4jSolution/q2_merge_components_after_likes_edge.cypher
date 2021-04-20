@@ -1,5 +1,6 @@
-WITH $likesEdge AS likesEdge
+WITH $likesEdgeId AS likesEdgeId
 MATCH (c:Comment)<-[likesEdge]-(u:User)
+WHERE id(likesEdge) = likesEdgeId
 CREATE (c)-[:COMPONENT]->(uComp:Component {size: 1})-[:USER]->(u)
 WITH c, uComp, u
 OPTIONAL MATCH (c)-[:COMPONENT]->(comp2:Component) // OPTIONAL: to go forth if there is no such component

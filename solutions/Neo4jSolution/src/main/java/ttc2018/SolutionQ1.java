@@ -1,9 +1,8 @@
 package ttc2018;
 
-import org.neo4j.exceptions.KernelException;
-import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.Transaction;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,8 +18,8 @@ public class SolutionQ1 extends Solution {
     }
 
     @Override
-    protected void addConstraintsAndIndicesInTx(GraphDatabaseService dbConnection) {
-        super.addConstraintsAndIndicesInTx(dbConnection);
+    protected void addConstraintsAndIndicesInTx(Transaction tx) {
+        super.addConstraintsAndIndicesInTx(tx);
         tx.schema()
                 .indexFor(Post)
                 .on(SUBMISSION_SCORE_PROPERTY)
@@ -28,41 +27,37 @@ public class SolutionQ1 extends Solution {
     }
 
     @Override
-    public String InitialInTX() {
-        runVoidQuery(Query.Q1_INITIAL);
+    public String Initial() {
+        runAndCommitVoidQuery(Query.Q1_INITIAL);
         String result = runReadQuery(Query.Q1_RETRIEVE);
 
         return result;
     }
 
     @Override
-    public String UpdateInTx(File changes) {
+    public String Update(File changes) {
         beforeUpdate(changes);
 
-        String result = runReadQuery(Query.Q1_RETRIEVE);
-
-        afterUpdate();
-
-        return result;
+        return runReadQuery(Query.Q1_RETRIEVE);
     }
 
     @Override
-    protected void afterNewPost(Node post, Node submitter) {
-        super.afterNewPost(post, submitter);
+    protected void afterNewPost(Transaction tx, Node post, Node submitter) {
+        super.afterNewPost(tx, post, submitter);
 
         post.setProperty(SUBMISSION_SCORE_PROPERTY, SUBMISSION_SCORE_DEFAULT);
     }
 
     @Override
-    protected void afterNewComment(Node comment, Node submitter, Node previousSubmission, Node rootPost) {
-        super.afterNewComment(comment, submitter, previousSubmission, rootPost);
+    protected void afterNewComment(Transaction tx, Node comment, Node submitter, Node previousSubmission, Node rootPost) {
+        super.afterNewComment(tx, comment, submitter, previousSubmission, rootPost);
 
         rootPost.setProperty(SUBMISSION_SCORE_PROPERTY, (Long) rootPost.getProperty(SUBMISSION_SCORE_PROPERTY) + 10);
     }
 
     @Override
-    protected Relationship addLikesEdge(String[] line) {
-        Relationship likesEdge = super.addLikesEdge(line);
+    protected Relationship addLikesEdge(Transaction tx, String[] line) {
+        Relationship likesEdge = super.addLikesEdge(tx, line);
 
         Node comment = likesEdge.getEndNode();
         Node rootPost = comment.getSingleRelationship(ROOT_POST, OUTGOING).getEndNode();

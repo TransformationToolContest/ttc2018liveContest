@@ -51,10 +51,10 @@ public class SolutionQ2Batch extends Solution {
     }
 
     @Override
-    public String InitialInTX() {
+    public String Initial() {
 
         if (tool == Tool.Neo4jSolutionBatch_rebuild_overlay) {
-            runVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
+            runAndCommitVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
         }
         String result = runReadQuery(q2Batch);
 
@@ -62,17 +62,14 @@ public class SolutionQ2Batch extends Solution {
     }
 
     @Override
-    public String UpdateInTx(File changes) {
+    public String Update(File changes) {
         beforeUpdate(changes);
 
         if (tool == Tool.Neo4jSolutionBatch_rebuild_overlay) {
-            runVoidQuery(Query.Q2_DELETE_OVERLAY_GRAPH);
-            runVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
+            runAndCommitVoidQuery(Query.Q2_DELETE_OVERLAY_GRAPH);
+            runAndCommitVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
         }
-        String result = runReadQuery(q2Batch);
 
-        afterUpdate();
-
-        return result;
+        return runReadQuery(q2Batch);
     }
 }
