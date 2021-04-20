@@ -249,15 +249,12 @@ public abstract class Solution implements AutoCloseable {
 
         if (line[0].equals(COMMENTS_CHANGE_TYPE)) {
             long previousSubmissionId = Long.parseLong(line[5]);
-            long rootPostId = Long.parseLong(line[6]);
 
             Node previousSubmission = findSingleNodeByIdProperty(tx, Submission, previousSubmissionId);
-            Node rootPost = findSingleNodeByIdProperty(tx, Post, rootPostId);
 
             submission.createRelationshipTo(previousSubmission, COMMENT_TO);
-            submission.createRelationshipTo(rootPost, ROOT_POST);
 
-            afterNewComment(tx, submission, submitter, previousSubmission, rootPost);
+            afterNewComment(tx, submission, submitter, previousSubmission);
         } else {
             afterNewPost(tx, submission, submitter);
         }
@@ -265,7 +262,7 @@ public abstract class Solution implements AutoCloseable {
         return submission;
     }
 
-    protected void afterNewComment(Transaction tx, Node comment, Node submitter, Node previousSubmission, Node rootPost) {
+    protected void afterNewComment(Transaction tx, Node comment, Node submitter, Node previousSubmission) {
 
     }
 

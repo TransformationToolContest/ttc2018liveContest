@@ -1,4 +1,4 @@
-FROM ftsrg/ttc2018:common-v2020-11-30
+FROM ftsrg/ttc2018:common
 
 # dependencies (separated to share layers with other images)
 RUN apt-get update && \

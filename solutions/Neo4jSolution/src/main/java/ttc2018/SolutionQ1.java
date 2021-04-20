@@ -47,8 +47,8 @@ public class SolutionQ1 extends Solution {
     }
 
     @Override
-    protected void afterNewComment(Transaction tx, Node comment, Node submitter, Node previousSubmission, Node rootPost) {
-        super.afterNewComment(tx, comment, submitter, previousSubmission, rootPost);
+    protected void afterNewComment(Transaction tx, Node comment, Node submitter, Node previousSubmission) {
+        super.afterNewComment(tx, comment, submitter, previousSubmission);
 
         runVoidQuery(tx, Query.Q1_AFTER_NEW_COMMENT, ImmutableMap.of("commentVertex", comment));
     }

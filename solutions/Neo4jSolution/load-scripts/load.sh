@@ -12,5 +12,4 @@ $NEO4J_HOME/bin/neo4j-admin import \
   --relationships=FRIEND="${PREFIX}friends${POSTFIX}" \
   --relationships=LIKES="${PREFIX}likes${POSTFIX}" \
   --relationships=COMMENT_TO="${PREFIX}comment-to${POSTFIX}" \
-  --relationships=ROOT_POST="${PREFIX}root-post${POSTFIX}" \
   --relationships=SUBMITTER="${PREFIX}submitter${POSTFIX}"
