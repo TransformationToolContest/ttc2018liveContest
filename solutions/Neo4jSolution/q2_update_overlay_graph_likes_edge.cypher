@@ -1,5 +1,6 @@
-UNWIND $likesEdges AS likesEdge
+UNWIND $likesEdgeIds AS likesEdgeId
 MATCH (u1:User)-[likesEdge]->(c:Comment)
+WHERE id(likesEdge) = likesEdgeId
 SET c:Dirty
 WITH u1, c
 MATCH (u1)<-[friendEdge:FRIEND]->(u2:User)

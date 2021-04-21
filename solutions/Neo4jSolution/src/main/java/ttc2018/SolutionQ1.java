@@ -1,27 +1,50 @@
 package ttc2018;
 
-import org.neo4j.graphdb.GraphDatabaseService;
+import com.google.common.collect.ImmutableMap;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.Transaction;
 
 import java.io.File;
 import java.io.IOException;
 
-import static org.neo4j.graphdb.Direction.OUTGOING;
 import static ttc2018.Labels.Post;
-import static ttc2018.RelationshipTypes.ROOT_POST;
 
 public class SolutionQ1 extends Solution {
+    private final Query initialQuery;
+    private final Query afterNewCommentQuery;
+    private final Query afterNewLikesQuery;
 
-    public SolutionQ1(String DataPath) throws IOException, InterruptedException {
+    public SolutionQ1(String DataPath, String toolName) throws IOException, InterruptedException {
         super(DataPath);
+
+        Tool tool = Tool.valueOf(toolName);
+
+        switch (tool) {
+            case Neo4jSolution:
+                initialQuery = Query.Q1_INITIAL;
+                afterNewCommentQuery = Query.Q1_AFTER_NEW_COMMENT;
+                afterNewLikesQuery = Query.Q1_AFTER_NEW_LIKES;
+                break;
+            case Neo4jSolution_materialized_root_post:
+                initialQuery = Query.Q1_INITIAL_WITH_ROOT_POST;
+                afterNewCommentQuery = Query.Q1_AFTER_NEW_COMMENT_WITH_ROOT_POST;
+                afterNewLikesQuery = Query.Q1_AFTER_NEW_LIKES_WITH_ROOT_POST;
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+    }
+
+    public enum Tool {
+        Neo4jSolution,
+        Neo4jSolution_materialized_root_post
     }
 
     @Override
-    protected void addConstraintsAndIndicesInTx(GraphDatabaseService dbConnection) {
-        super.addConstraintsAndIndicesInTx(dbConnection);
-
-        dbConnection.schema()
+    protected void addConstraintsAndIndicesInTx(Transaction tx) {
+        super.addConstraintsAndIndicesInTx(tx);
+        tx.schema()
                 .indexFor(Post)
                 .on(SUBMISSION_SCORE_PROPERTY)
                 .create();
@@ -29,45 +52,37 @@ public class SolutionQ1 extends Solution {
 
     @Override
     public String Initial() {
-        runVoidQuery(Query.Q1_INITIAL);
-        String result = runReadQuery(Query.Q1_RETRIEVE);
+        runAndCommitVoidQuery(initialQuery);
 
-        return result;
+        return runReadQuery(Query.Q1_RETRIEVE);
     }
 
     @Override
     public String Update(File changes) {
         beforeUpdate(changes);
 
-        String result = runReadQuery(Query.Q1_RETRIEVE);
-
-        afterUpdate();
-
-        return result;
+        return runReadQuery(Query.Q1_RETRIEVE);
     }
 
     @Override
-    protected void afterNewPost(Node post, Node submitter) {
-        super.afterNewPost(post, submitter);
+    protected void afterNewPost(Transaction tx, Node post, Node submitter) {
+        super.afterNewPost(tx, post, submitter);
 
         post.setProperty(SUBMISSION_SCORE_PROPERTY, SUBMISSION_SCORE_DEFAULT);
     }
 
     @Override
-    protected void afterNewComment(Node comment, Node submitter, Node previousSubmission, Node rootPost) {
-        super.afterNewComment(comment, submitter, previousSubmission, rootPost);
+    protected void afterNewComment(Transaction tx, Node comment, Node submitter, Node previousSubmission) {
+        super.afterNewComment(tx, comment, submitter, previousSubmission);
 
-        rootPost.setProperty(SUBMISSION_SCORE_PROPERTY, (Long) rootPost.getProperty(SUBMISSION_SCORE_PROPERTY) + 10);
+        runVoidQuery(tx, afterNewCommentQuery, ImmutableMap.of("commentVertex", comment));
     }
 
     @Override
-    protected Relationship addLikesEdge(String[] line) {
-        Relationship likesEdge = super.addLikesEdge(line);
+    protected Relationship addLikesEdge(Transaction tx, String[] line) {
+        Relationship likesEdge = super.addLikesEdge(tx, line);
 
-        Node comment = likesEdge.getEndNode();
-        Node rootPost = comment.getSingleRelationship(ROOT_POST, OUTGOING).getEndNode();
-
-        rootPost.setProperty(SUBMISSION_SCORE_PROPERTY, (Long) rootPost.getProperty(SUBMISSION_SCORE_PROPERTY) + 1);
+        runVoidQuery(tx, afterNewLikesQuery, ImmutableMap.of("likesEdge", likesEdge));
 
         return likesEdge;
     }

@@ -1,6 +1,7 @@
 package ttc2018;
 
 import org.neo4j.graphdb.Result;
+import org.neo4j.graphdb.Transaction;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,6 +12,11 @@ import java.util.Map;
 public enum Query {
     Q1_BATCH(Paths.get("q1_batch.cypher")),
     Q1_INITIAL(Paths.get("q1_initial.cypher")),
+    Q1_INITIAL_WITH_ROOT_POST(Paths.get("q1_initial_with_root_post.cypher")),
+    Q1_AFTER_NEW_COMMENT(Paths.get("q1_after_new_comment.cypher")),
+    Q1_AFTER_NEW_COMMENT_WITH_ROOT_POST(Paths.get("q1_after_new_comment_with_root_post.cypher")),
+    Q1_AFTER_NEW_LIKES(Paths.get("q1_after_new_likes.cypher")),
+    Q1_AFTER_NEW_LIKES_WITH_ROOT_POST(Paths.get("q1_after_new_likes_with_root_post.cypher")),
     Q1_RETRIEVE(Paths.get("q1_retrieve.cypher")),
 
     Q2_BATCH_ALGO(Paths.get("q2_batch_algo.cypher")),
@@ -50,7 +56,7 @@ public enum Query {
         queryText = s;
     }
 
-    public Result execute(Solution solution, Map<String, Object> parameters) {
-        return solution.getDbConnection().execute(queryText, parameters);
+    public Result execute(Transaction tx, Map<String, Object> parameters) {
+        return tx.execute(queryText, parameters);
     }
 }

@@ -5,13 +5,12 @@ import apoc.path.PathExplorer;
 import apoc.periodic.Periodic;
 import apoc.refactor.GraphRefactoring;
 import com.google.common.collect.ImmutableMap;
-import org.neo4j.cypher.CypherExecutionException;
-import org.neo4j.graphalgo.GetNodeFunc;
-import org.neo4j.graphalgo.UnionFindProc;
-import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.exceptions.KernelException;
+import org.neo4j.graphalgo.functions.AsNodeFunc;
+import org.neo4j.graphalgo.wcc.WccStreamProc;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
-import org.neo4j.internal.kernel.api.exceptions.KernelException;
+import org.neo4j.graphdb.Transaction;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,7 +56,7 @@ public class SolutionQ2 extends Solution {
 
         switch (tool) {
             case Neo4jSolution_explicit_component_algo:
-                registerProcedure(graphDb, UnionFindProc.class, GetNodeFunc.class);
+                registerProcedure(graphDb, WccStreamProc.class, AsNodeFunc.class);
                 break;
             case Neo4jSolution:
                 registerProcedure(graphDb, Create.class, Periodic.class, PathExplorer.class);
@@ -66,14 +65,13 @@ public class SolutionQ2 extends Solution {
     }
 
     @Override
-    protected void addConstraintsAndIndicesInTx(GraphDatabaseService dbConnection) {
-        super.addConstraintsAndIndicesInTx(dbConnection);
+    protected void addConstraintsAndIndicesInTx(Transaction tx) {
+        super.addConstraintsAndIndicesInTx(tx);
 
-        dbConnection.schema()
+        tx.schema()
                 .indexFor(Comment)
                 .on(SUBMISSION_SCORE_PROPERTY)
                 .create();
-
         // note: cannot create index on commentId property of FRIEND_WHO_LIKES_COMMENT edge
     }
 
@@ -81,93 +79,92 @@ public class SolutionQ2 extends Solution {
     public String Initial() {
         switch (tool) {
             case Neo4jSolution_overlay_graph:
-                runVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
+                runAndCommitVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
 
-                runVoidQuery(Query.Q2_INITIAL_SCORE);
+                runAndCommitVoidQuery(Query.Q2_INITIAL_SCORE);
                 break;
             case Neo4jSolution_explicit_component:
-                runVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
+                runAndCommitVoidQuery(Query.Q2_INITIAL_OVERLAY_GRAPH);
 
-                runVoidQuery(Query.Q2_INITIAL_COMPONENTS_AND_SCORE);
-                runVoidQuery(Query.Q2_INITIAL_ZERO_SCORE);
+                runAndCommitVoidQuery(Query.Q2_INITIAL_COMPONENTS_AND_SCORE);
+                runAndCommitVoidQuery(Query.Q2_INITIAL_ZERO_SCORE);
                 break;
             case Neo4jSolution_explicit_component_algo:
-                runVoidQuery(Query.Q2_INITIAL_COMPONENTS_AND_SCORE_ALGO);
-                runVoidQuery(Query.Q2_INITIAL_ZERO_SCORE);
+                runAndCommitVoidQuery(Query.Q2_INITIAL_COMPONENTS_AND_SCORE_ALGO);
+                runAndCommitVoidQuery(Query.Q2_INITIAL_ZERO_SCORE);
                 break;
             case Neo4jSolution:
-                runVoidQuery(Query.Q2_INITIAL_DYNAMIC_LIKES_LABELS);
+                runAndCommitVoidQuery(Query.Q2_INITIAL_DYNAMIC_LIKES_LABELS);
 
-                Map batchErrors = (Map) Query.Q2_INITIAL_COMPONENTS_PERIODIC.execute(this, Collections.emptyMap())
-                        .columnAs("batchErrors")
-                        .stream().collect(Collectors.toList())
-                        .get(0);
-                if (!batchErrors.isEmpty())
-                    throw new CypherExecutionException(batchErrors.toString(), new Exception());
+                try (Transaction tx = getDbConnection().beginTx()) {
+                    Map batchErrors = (Map) Query.Q2_INITIAL_COMPONENTS_PERIODIC.execute(tx, Collections.emptyMap())
+                            .columnAs("batchErrors")
+                            .stream().collect(Collectors.toList())
+                            .get(0);
+                    if (!batchErrors.isEmpty())
+                        throw new RuntimeException(batchErrors.toString(), new Exception());
+                    tx.commit();
+                }
 
-                runVoidQuery(Query.Q2_INITIAL_SCORE_FROM_EXPLICIT_COMPONENTS);
+                runAndCommitVoidQuery(Query.Q2_INITIAL_SCORE_FROM_EXPLICIT_COMPONENTS);
                 break;
             default:
                 throw new IllegalArgumentException();
         }
-        String result = runReadQuery(Query.Q2_RETRIEVE);
 
-        return result;
+        return runReadQuery(Query.Q2_RETRIEVE);
     }
 
     @Override
-    protected void afterNewComment(Node comment, Node submitter, Node previousSubmission, Node rootPost) {
-        super.afterNewComment(comment, submitter, previousSubmission, rootPost);
+    protected void afterNewComment(Transaction tx, Node comment, Node submitter, Node previousSubmission) {
+        super.afterNewComment(tx, comment, submitter, previousSubmission);
 
         comment.setProperty(SUBMISSION_SCORE_PROPERTY, SUBMISSION_SCORE_DEFAULT);
     }
 
     @Override
-    protected Relationship addFriendEdge(String[] line) {
-        Relationship friendEdge = super.addFriendEdge(line);
-        newFriendEdges.add(friendEdge);
+    protected Relationship addFriendEdge(Transaction tx, String[] line) {
+        Relationship friendEdge = super.addFriendEdge(tx, line);
+        newFriendEdgeIds.add(friendEdge.getId());
 
         if (tool.maintainExplicitComponent) {
-            runVoidQuery(Query.Q2_MERGE_COMPONENTS_AFTER_FRIEND_EDGE, ImmutableMap.of("friendEdge", friendEdge));
+            runVoidQuery(tx, Query.Q2_MERGE_COMPONENTS_AFTER_FRIEND_EDGE, ImmutableMap.of("friendEdgeId", friendEdge.getId()));
         }
 
         return friendEdge;
     }
 
     @Override
-    protected Relationship addLikesEdge(String[] line) {
-        Relationship likesEdge = super.addLikesEdge(line);
-        newLikesEdges.add(likesEdge);
+    protected Relationship addLikesEdge(Transaction tx, String[] line) {
+        Relationship likesEdge = super.addLikesEdge(tx, line);
+        newLikesEdgeIds.add(likesEdge.getId());
 
         if (tool.maintainExplicitComponent) {
-            runVoidQuery(Query.Q2_MERGE_COMPONENTS_AFTER_LIKES_EDGE, ImmutableMap.of("likesEdge", likesEdge));
+            runVoidQuery(tx, Query.Q2_MERGE_COMPONENTS_AFTER_LIKES_EDGE, ImmutableMap.of("likesEdgeId", likesEdge.getId()));
         }
 
         return likesEdge;
     }
 
-    private ArrayList<Relationship> newFriendEdges;
-    private ArrayList<Relationship> newLikesEdges;
+    private ArrayList<Long> newFriendEdgeIds;
+    private ArrayList<Long> newLikesEdgeIds;
 
     @Override
     public String Update(File changes) {
-        newFriendEdges = new ArrayList<>();
-        newLikesEdges = new ArrayList<>();
+        newFriendEdgeIds = new ArrayList<>();
+        newLikesEdgeIds = new ArrayList<>();
 
         beforeUpdate(changes);
 
         if (tool.maintainOverlayGraph) {
-            if (!newFriendEdges.isEmpty())
-                runVoidQuery(Query.Q2_UPDATE_OVERLAY_GRAPH_FRIEND_EDGE, ImmutableMap.of("friendEdges", newFriendEdges));
-            if (!newLikesEdges.isEmpty())
-                runVoidQuery(Query.Q2_UPDATE_OVERLAY_GRAPH_LIKES_EDGE, ImmutableMap.of("likesEdges", newLikesEdges));
+            if (!newFriendEdgeIds.isEmpty())
+                runAndCommitVoidQuery(Query.Q2_UPDATE_OVERLAY_GRAPH_FRIEND_EDGE, ImmutableMap.of("friendEdgeIds", newFriendEdgeIds));
+            if (!newLikesEdgeIds.isEmpty())
+                runAndCommitVoidQuery(Query.Q2_UPDATE_OVERLAY_GRAPH_LIKES_EDGE, ImmutableMap.of("likesEdgeIds", newLikesEdgeIds));
 
-            runVoidQuery(Query.Q2_RECALCULATE_SCORE);
+            runAndCommitVoidQuery(Query.Q2_RECALCULATE_SCORE);
         }
-        String result = runReadQuery(Query.Q2_RETRIEVE);
 
-        afterUpdate();
-
-        return result;
+        return runReadQuery(Query.Q2_RETRIEVE);
     }
 }

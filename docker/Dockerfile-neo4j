@@ -12,7 +12,7 @@ COPY $GRADLE_WRAPPER_TOOL_PATH/gradlew $GRADLE_WRAPPER_TOOL_PATH/gradlew
 RUN $GRADLE_WRAPPER_TOOL_PATH/gradlew --version
 
 # install Neo4j
-ENV NEO4J_NAME=neo4j-community-3.5.20
+ENV NEO4J_NAME=neo4j-community-4.2.4
 ENV NEO4J_HOME=/opt/$NEO4J_NAME
 WORKDIR /opt
 RUN wget -qO- "https://neo4j.com/artifact.php?name=${NEO4J_NAME}-unix.tar.gz" | tar -xzv
@@ -32,6 +32,7 @@ COPY solutions/Neo4jSolutionBatch_algo_with_filtered_edges solutions/Neo4jSoluti
 COPY solutions/Neo4jSolutionBatch_rebuild_overlay solutions/Neo4jSolutionBatch_rebuild_overlay
 COPY solutions/Neo4jSolution_explicit_component solutions/Neo4jSolution_explicit_component
 COPY solutions/Neo4jSolution_explicit_component_algo solutions/Neo4jSolution_explicit_component_algo
+COPY solutions/Neo4jSolution_materialized_root_post solutions/Neo4jSolution_materialized_root_post
 COPY solutions/Neo4jSolution_overlay_graph solutions/Neo4jSolution_overlay_graph
 COPY config/config-docker-neo4j.json config/config.json
 

@@ -10,6 +10,7 @@
     "Neo4jSolutionBatch_rebuild_overlay",
     "Neo4jSolution_explicit_component",
     "Neo4jSolution_explicit_component_algo",
+    "Neo4jSolution_materialized_root_post",
     "Neo4jSolution_overlay_graph"
   ],
   "ChangeSets": [
