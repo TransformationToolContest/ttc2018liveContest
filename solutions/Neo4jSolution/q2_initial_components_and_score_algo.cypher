@@ -6,9 +6,9 @@ CALL gds.wcc.stream({
         WHERE id(c)=' + id(c) + '
         RETURN id(u) as id',
     relationshipQuery:
-        'MATCH (c:Comment)<-[:LIKES]-(u1:User)-[:FRIEND]->(u2:User)-[:LIKES]->(c)
-        WHERE id(c)=' + id(c) + '
-        RETURN id(u1) as source, id(u2) as target'
+        'MATCH (u1:User)-[:FRIEND]->(u2:User)
+        RETURN id(u1) as source, id(u2) as target',
+    validateRelationships: false
   })
 YIELD nodeId AS userId, componentId
 WITH c, componentId, collect(gds.util.asNode(userId)) AS friends, count(userId) AS componentSize
