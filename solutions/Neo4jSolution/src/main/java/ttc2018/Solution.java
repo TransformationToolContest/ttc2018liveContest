@@ -50,13 +50,17 @@ public abstract class Solution implements AutoCloseable {
 
     public GraphDatabaseService getDbConnection() {
         if (graphDb == null) {
-            initializeDb();
+            try {
+                initializeDb();
+            } catch (KernelException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         return graphDb;
     }
 
-    protected void initializeDb() {
+    protected void initializeDb() throws KernelException {
         managementService = new DatabaseManagementServiceBuilder(new File(NEO4J_HOME).toPath())
                 .setConfig(GraphDatabaseSettings.procedure_unrestricted, List.of("apoc.*", "gds.*"))
                 .build();

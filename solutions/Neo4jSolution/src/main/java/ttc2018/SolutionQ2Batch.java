@@ -38,16 +38,11 @@ public class SolutionQ2Batch extends Solution {
     }
 
     @Override
-    protected void initializeDb() {
+    protected void initializeDb() throws KernelException {
         super.initializeDb();
 
-        if (tool == Tool.Neo4jSolutionBatch || tool == Tool.Neo4jSolutionBatch_algo_with_filtered_edges) {
-            try {
-                registerProcedure(graphDb, WccStreamProc.class);
-            } catch (KernelException e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
+        if (tool == Tool.Neo4jSolutionBatch || tool == Tool.Neo4jSolutionBatch_algo_with_filtered_edges)
+            registerProcedure(graphDb, WccStreamProc.class);
     }
 
     @Override

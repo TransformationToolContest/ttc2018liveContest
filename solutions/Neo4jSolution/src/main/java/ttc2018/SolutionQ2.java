@@ -48,23 +48,19 @@ public class SolutionQ2 extends Solution {
     }
 
     @Override
-    protected void initializeDb() {
+    protected void initializeDb() throws KernelException {
         super.initializeDb();
 
-        try {
-            if (tool.maintainExplicitComponent)
-                registerProcedure(graphDb, GraphRefactoring.class);
+        if (tool.maintainExplicitComponent)
+            registerProcedure(graphDb, GraphRefactoring.class);
 
-            switch (tool) {
-                case Neo4jSolution_explicit_component_algo:
-                    registerProcedure(graphDb, WccStreamProc.class, AsNodeFunc.class);
-                    break;
-                case Neo4jSolution:
-                    registerProcedure(graphDb, Create.class, Periodic.class, PathExplorer.class);
-                    break;
-            }
-        } catch (KernelException e) {
-            throw new RuntimeException(e);
+        switch (tool) {
+            case Neo4jSolution_explicit_component_algo:
+                registerProcedure(graphDb, WccStreamProc.class, AsNodeFunc.class);
+                break;
+            case Neo4jSolution:
+                registerProcedure(graphDb, Create.class, Periodic.class, PathExplorer.class);
+                break;
         }
     }
 
