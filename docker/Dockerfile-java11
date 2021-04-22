@@ -24,10 +24,10 @@ COPY output output
 # most frequently changing folders
 COPY solutions/EMFSolutionYAMTL solutions/EMFSolutionYAMTL
 COPY solutions/EMFSolutionYAMTL_batch solutions/EMFSolutionYAMTL_batch
-COPY solutions/jastadd-ttc18-relast-xml-flush solutions/jastadd-ttc18-relast-xml-flush
-COPY solutions/jastadd-ttc18-relast-xml-inc solutions/jastadd-ttc18-relast-xml-inc
-COPY solutions/jastadd-ttc18-xml-flush solutions/jastadd-ttc18-xml-flush
-COPY solutions/jastadd-ttc18-xml-inc solutions/jastadd-ttc18-xml-inc
+COPY solutions/jastadd-relast-reusable-flush solutions/jastadd-relast-reusable-flush
+COPY solutions/jastadd-relast-reusable-inc solutions/jastadd-relast-reusable-inc
+COPY solutions/jastadd-relast-xml-flush solutions/jastadd-relast-xml-flush
+COPY solutions/jastadd-relast-xml-inc solutions/jastadd-relast-xml-inc
 
 # config
 COPY config/config-docker-java11.json config/config.json
