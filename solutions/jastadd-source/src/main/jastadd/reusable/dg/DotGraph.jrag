@@ -1,0 +1,58 @@
+aspect DotGraphToPlantUML {
+
+  inh String DotNode.name();
+  eq DotGraph.getDotNode(int i).name() = "v" + i;
+
+  syn String DotNode.label() = name();
+
+  syn String DotGraph.toDot() {
+    StringBuilder b = new StringBuilder();
+    b.append("strict digraph cycles {\n");
+
+    for (DotNode from: getDotNodeList()) {
+      b.append("  ").append(from.name()).append("[label=\"").append(from.label()).append("\"];\n");
+
+      for (DotNode to: from.getRefList()) {
+        b.append("  ").append(from.name()).append(" -> ").append(to.name()).append(";\n");
+      }
+      for (DotNode to: from.getRelList()) {
+        b.append("  ").append(from.name()).append(" -> ").append(to.name()).append("[dir=\"both\"];\n");
+      }
+    }
+
+    b.append("}\n");
+    return b.toString();
+  }
+
+  syn String DotGraph.toPlant(String shape, String relation) {
+    StringBuilder b = new StringBuilder();
+    b.append("@startuml\n")
+      .append("hide circle\n")
+      .append("skinparam shadowing false\n")
+      .append("skinparam monochrome true\n")
+      .append("skinparam classAttributeIconSize 0\n")
+      .append("/'Remove automatic namespace generation'/\n")
+      .append("set namespaceSeparator none\n");
+
+    for (DotNode from: getDotNodeList()) {
+      b.append(shape).append(" ")
+        .append(from.label()).append("\n");
+    }
+
+    for (DotNode from: getDotNodeList()) {
+      for (DotNode to: from.getRefList()) {
+          b.append(from.label())
+            .append(" ").append(relation).append("> ")
+            .append(to.label()).append("\n");
+      }
+      for (DotNode to: from.getRelList()) {
+        b.append(from.label())
+          .append(" <").append(relation).append("> ")
+          .append(to.label()).append("\n");
+      }
+    }
+
+    b.append("@enduml\n");
+    return b.toString();
+  }
+}

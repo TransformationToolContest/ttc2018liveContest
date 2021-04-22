@@ -1,0 +1,10 @@
+module("solve") {
+    jastadd {
+        basedir "src/"
+        include "main/jastadd/base/**/*.ast"
+        include "main/jastadd/base/**/*.jadd"
+        include "main/jastadd/base/**/*.jrag"
+        include "gen/jastadd/**/*.ast"
+        include "gen/jastadd/**/*.jadd"
+    }
+}

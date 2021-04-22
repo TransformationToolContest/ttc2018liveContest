@@ -1,0 +1,21 @@
+aspect Tracing {
+
+  private java.util.List<String> SocialNetwork.events = new java.util.ArrayList<>();
+
+  public void SocialNetwork.enableTracing() {
+    this.trace().setReceiver((event, node, attribute, params, value) -> {
+      String eventString = System.currentTimeMillis() + "," + event + "," + attribute;
+      events.add(eventString);
+    });
+  }
+
+  public void SocialNetwork.insertCustomEvent(String event, String text) {
+    String eventString = System.currentTimeMillis() + "," + event.replace(",", "_") + "," + text.replace(",", "_");
+    events.add(eventString);
+  }
+
+  public void SocialNetwork.writeTracingEvents(java.nio.file.Path destination) throws java.io.IOException {
+    java.nio.file.Files.write(destination, events);
+  }
+
+}

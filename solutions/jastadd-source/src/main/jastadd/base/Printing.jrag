@@ -1,0 +1,37 @@
+aspect Printing {
+  syn String ModelChange.print();
+
+//  eq ChangeTransaction.print() {
+//    String result = "ChangeTransaction (source = " + getSourceChange().print() + ", nested = [";
+//    for (ModelChange nested : getNestedChanges()) {
+//      result += nested.print() + ",";
+//    }
+//    return result + "])";
+//  }
+  eq ChangeTransaction.print() = toString();
+
+  eq AssociationCollectionInsertion.print() {
+    return "AssociationCollectionInsertion (affected = " + (getAffectedElement() == null ? "null" : getAffectedElement().getId()) + ", feature = " + getFeature() + ", addedElement = " + getAddedElement() + ")";
+  }
+
+  eq AssociationPropertyChange.print() {
+    return "AssociationPropertyChange (affected = " + (getAffectedElement() == null ? "null" : getAffectedElement().getId()) + ", feature = " + getFeature() + ", newValue = " + getNewValue().toString() + ")";
+  }
+
+  eq AttributionPropertyChange.print() {
+    return "AttributionPropertyChange (affected = " + (getAffectedElement() == null ? "null" : getAffectedElement().getId()) + ", feature = " + getFeature() + ", newValue = " + getNewValue().toString() + ")";
+  }
+
+  eq CompositionListInsertion.print() {
+    return "CompositionListInsertion (affected = " + (getAffectedElement() == null ? "null" : getAffectedElement().getId()) + ", feature = " + getFeature() + ", index = " + getIndex() + ", addedElement = " + getAddedElement() + ")";
+  }
+
+//  syn String ModelChange.toString() = print();
+//  eq ChangeTransaction.toString() = "ChangeTransaction@" + Integer.toHexString(hashCode());
+
+//  syn String ModelElement.toString();
+//  eq SocialNetwork.toString() = "SocialNetwork" + getId();
+//  eq User.toString() = "User-" + getId();
+//  eq Post.toString() = "Post-" + getId();
+//  eq Comment.toString() = "Comment-" + getId();
+}

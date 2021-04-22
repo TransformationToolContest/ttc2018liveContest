@@ -1,0 +1,59 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+aspect Naviagation {
+  inh DependencyGraph Component.dg();
+  eq DependencyGraph.getComponent().dg() = this;
+}
+
+aspect Reachability {
+
+// old, dependency-based algorithm for SCC
+
+//  coll Set<Component> Component.successors() circular [new HashSet<>()] with add root DependencyGraph;
+//  Component contributes this to Component.successors() for each getToList();
+//  Component contributes each this.successors() to Component.successors() for each getToList();
+
+//  coll Set<Component> Component.predecessors() [new HashSet<>()] with add root DependencyGraph;
+//  Component contributes this to Component.predecessors() for each successors();
+
+//  coll HashSet<Component> Component.SCC() with add root DependencyGraph;
+//  Component contributes each predecessors() when (successors().contains(this)) to Component.SCC() for this;
+
+//  coll HashSet<Set<Component>> DependencyGraph.SCC() with add root DependencyGraph;
+//  Component contributes SCC() when SCC().size() > 0 to DependencyGraph.SCC();
+
+  /**
+   * Kosaraju's algorithm
+   */
+  syn Set<Set<Component>> DependencyGraph.SCC() {
+    Map<Component, Set> visited = new HashMap<>();
+    LinkedList<Component> locked = new LinkedList<>();
+
+    for (Component c : getComponentList())
+      if (!visited.containsKey(c))
+        c.visit(visited, locked);              // forward search
+
+    for (Component c : locked)
+      if (visited.get(c) == null)
+        c.assign(visited, new HashSet());      // backward search
+
+    return new HashSet(visited.values());
+  }
+
+  void Component.visit(Map<Component, Set> visited, LinkedList<Component> locked) {
+    visited.put(this, null);
+    for (Component c : getFromList())
+      if (!visited.containsKey(c))
+        c.visit(visited, locked);
+    locked.addFirst(this);
+  }
+
+  void Component.assign(Map<Component, Set> visited, Set scc) {
+    scc.add(this);
+    visited.put(this, scc);
+    for (Component c : getToList())
+      if (visited.get(c) == null)
+        c.assign(visited, scc);
+  }
+}

@@ -1,0 +1,71 @@
+aspect NameLookup {
+
+  // accessor replica getFriends
+  syn java.util.List<User> User.getFriends() {
+    java.util.List<User> result = new java.util.ArrayList<>();
+    for (UserRef userRef : getFriendRefList()) {
+      result.add(userRef.getUser());
+    }
+    return result;
+  }
+
+  // accessor replica getLikes
+  syn java.util.List<Comment> User.getLikes() {
+    java.util.List<Comment> result = new java.util.ArrayList<>();
+    for (CommentRef commentRef : getLikeRefList()) {
+      result.add(commentRef.getComment());
+    }
+    return result;
+  }
+
+  // accessor replica getSubmissions
+  syn java.util.List<Submission> User.getSubmissions() {
+    java.util.List<Submission> result = new java.util.ArrayList<>();
+    for (SubmissionRef submissionRef : getSubmissionRefList()) {
+      result.add(submissionRef.getSubmission());
+    }
+    return result;
+  }
+
+  // ===================================================================================================================
+  // root access
+  // ===================================================================================================================
+
+  inh SocialNetwork ModelElement.socialNetwork();
+  eq SocialNetwork.getUser().socialNetwork() = this;
+  eq SocialNetwork.getPost().socialNetwork() = this;
+  eq Post.getComment().socialNetwork() = socialNetwork();
+
+  inh SocialNetwork ModelChange.socialNetwork();
+  eq ModelChangeSet.getModelChange().socialNetwork() = getSocialNetwork();
+  eq ModelChangeSet.getPendingNewElement().socialNetwork() = getSocialNetwork();
+
+  syn java.util.List<User> Comment.getLikedByList() = socialNetwork().getLikedByMap().get(this);
+
+  syn Map<Comment, java.util.List<User>> SocialNetwork.getLikedByMap() {
+    Map<Comment, java.util.List<User>> result = new HashMap();
+    for (Comment comment : comments()) {
+      result.put(comment, new java.util.ArrayList<>());
+    }
+    for (User user : getUserList()) {
+      for (Comment comment : user.getLikes()) {
+        result.get(comment).add(user);
+      }
+    }
+    return result;
+  }
+
+  public void User.addSubmission(Submission s) {
+    this.addSubmissionRef(new SubmissionRef(s));
+  }
+
+  public void User.addFriend(User s) {
+    this.addFriendRef(new UserRef(s));
+    s.addFriendRef(new UserRef(this));
+  }
+
+  public void User.addLike(Comment s) {
+    this.addLikeRef(new CommentRef(s));
+  }
+
+}
