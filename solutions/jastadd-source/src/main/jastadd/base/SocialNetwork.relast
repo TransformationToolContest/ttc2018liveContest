@@ -1,0 +1,12 @@
+abstract ModelElement ::= <Id:Long> ;
+SocialNetwork : ModelElement ::= User* Post* ;
+
+User:ModelElement ::= <Name:String> ;
+
+abstract Submission : ModelElement ::= <Timestamp:Long> <Content:String> Comment* ;
+Comment : Submission ::= ;
+Post : Submission ::= ;
+
+rel User.Friend* -> User ;
+rel User.Submission* -> Submission ;
+rel User.Like* <-> Comment.LikedBy* ;

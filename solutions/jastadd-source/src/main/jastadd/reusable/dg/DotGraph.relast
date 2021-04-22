@@ -1,0 +1,4 @@
+DotGraph ::= DotNode*;
+DotNode;
+rel DotNode.Ref* -> DotNode;
+rel DotNode.Rel* -> DotNode;

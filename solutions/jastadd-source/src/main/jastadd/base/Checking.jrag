@@ -1,0 +1,55 @@
+aspect Checking {
+
+  boolean ModelElement.checkGeneralListValid(java.util.List<? extends ASTNode> listToCheck, String nonterminalName) {
+    boolean valid = true;
+    for (ASTNode node : listToCheck) {
+      if (node == null) {
+        System.err.println("Found null " + nonterminalName + " in " + this);
+        valid = false;
+      }
+    }
+    return valid;
+  }
+
+  boolean ModelElement.checkListValid(List<? extends ModelElement> listToCheck, String nonterminalName) {
+    boolean valid = true;
+    for (ModelElement modelElement : listToCheck) {
+      if (modelElement == null) {
+        System.err.println("Found null " + nonterminalName + " in " + this);
+        valid = false;
+      } else {
+        valid &= modelElement.isValid();
+      }
+    }
+    return valid;
+  }
+
+  boolean ModelElement.checkThat(boolean condition, String message) {
+    if (!condition) {
+      System.err.println(message);
+    }
+    return condition;
+  }
+
+  syn boolean ModelElement.isValid();
+  eq SocialNetwork.isValid() {
+    boolean valid = true;
+    valid &= checkListValid(getUserList(), "user");
+    valid &= checkListValid(getPostList(), "post");
+    return valid;
+  }
+
+  eq User.isValid() {
+    return checkGeneralListValid(getFriends(), "Friend") &&
+           checkGeneralListValid(getSubmissions(), "Submission") &&
+           checkGeneralListValid(getLikes(), "Like") && checkThat(getName() != null, "User" + getId() + ".Name == null");
+  }
+
+  eq Submission.isValid() {
+    return checkThat(getTimestamp() != null, "Submission" + getId() + ".Timestamp == null") && checkListValid(getCommentList(), "Comment");
+  }
+
+  eq Comment.isValid() {
+    return super.isValid() && checkThat(getPost() != null, "Comment" + getId() + ".Post == null");
+  }
+}

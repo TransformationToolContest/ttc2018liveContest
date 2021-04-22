@@ -1,0 +1,17 @@
+ModelChangeSet ::= ModelChange* PendingNewElement:ModelElement* <SocialNetwork:SocialNetwork> ;
+
+abstract ModelChange ::= ;
+
+ChangeTransaction:ModelChange ::= SourceChange:ModelChange NestedChange:ModelChange* ;
+
+abstract ElementaryChange : ModelChange ::= <AffectedElement:ModelElement> <Feature:String> ;
+
+abstract AssociationChange : ElementaryChange ::= ;
+AssociationCollectionInsertion : AssociationChange ::= <AddedElement:ModelElement> ;
+AssociationPropertyChange : AssociationChange ::= <NewValue:ASTNode> ;
+
+abstract AttributeChange : ElementaryChange ::= ;
+AttributionPropertyChange : AttributeChange ::= <NewValue:String> ;
+
+abstract CompositionChange : ElementaryChange ::= ;
+CompositionListInsertion:CompositionChange ::= <Index:int> <AddedElement:ModelElement> ;

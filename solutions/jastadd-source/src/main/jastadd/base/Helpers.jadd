@@ -1,0 +1,21 @@
+aspect Helpers {
+  public boolean ASTNode.removeSelf() {
+    if (getParent() == null) {
+      return false;
+    }
+    for (int i=0; i<getParent().numChildren();i++) {
+      if (getParent().getChild(i) == this) {
+        getParent().removeChild(i);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public static SocialNetwork SocialNetwork.createSocialNetwork() {
+    SocialNetwork result = new SocialNetwork();
+    result.setId(-42L);
+    return result;
+  }
+
+}

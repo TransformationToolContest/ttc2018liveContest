@@ -5,7 +5,11 @@
   ],
   "Tools": [
       "EMFSolutionYAMTL",
-      "EMFSolutionYAMTL_batch"
+      "EMFSolutionYAMTL_batch",
+      "jastadd-relast-reusable-flush",
+      "jastadd-relast-reusable-inc",
+      "jastadd-relast-xml-flush",
+      "jastadd-relast-xml-inc"
   ],
   "ChangeSets": [
     "1", "2"

@@ -1,0 +1,110 @@
+aspect ApplyChanges {
+  public void ModelChangeSet.apply() {
+    for (ModelChange change : getModelChangeList()) {
+      change.apply();
+    }
+  }
+
+  public abstract void ModelChange.apply();
+
+  public void ChangeTransaction.apply() {
+    getSourceChange().apply();
+    for (ModelChange nestedChange : getNestedChanges()) {
+      nestedChange.apply();
+    }
+  }
+
+  public void AssociationCollectionInsertion.apply() {
+    if (getAffectedElement().isUser()) {
+      User user = java.util.Objects.requireNonNull(getAffectedElement().asUser(),
+        () -> "Was no user, instead " + getAffectedElement());
+      switch (getFeature()) {
+        case "submissions":
+          java.util.Objects.requireNonNull(getAddedElement(), () -> "Added Element was null in " + this);
+          Submission submission = java.util.Objects.requireNonNull(getAddedElement().asSubmission(),
+            () -> "Was no submission, instead " + getAddedElement());
+          user.addSubmission(submission);
+          return;
+        case "friends":
+          java.util.Objects.requireNonNull(getAddedElement(), () -> "Added Element was null in " + this);
+          User friend = java.util.Objects.requireNonNull(getAddedElement().asUser(),
+            () -> "Was no user, instead " + getAddedElement());
+          user.addFriend(friend);
+          return;
+        case "likes":
+          java.util.Objects.requireNonNull(getAddedElement(), () -> "Added Element was null in " + this);
+          Comment like = java.util.Objects.requireNonNull(getAddedElement().asComment(),
+            () -> "Was no comment, instead " + getAddedElement());
+          user.addLike(like);
+          return;
+      }
+    }
+    if (getFeature().equals("likedBy")) {
+//      System.err.println("AssociationCollectionInsertion for likedBy will be handled by attributes.");
+      return;
+    }
+    System.err.println("Unhandled change " + this);
+  }
+
+  public void AssociationPropertyChange.apply() {
+    if (getAffectedElement().isComment()) {
+      switch (getFeature()) {
+        case "commented": // inverse to Submission.comments -> Comments*
+          // AssociationPropertyChange for commented already handled by parser
+          // newValue is a Submission
+//          Submission submission = (Submission) getNewValue();
+//          submission.addComment((Comment) getAffectedElement());
+          return;
+      }
+    } else if (getAffectedElement().isPost()) {
+
+    }
+    System.err.println("Unhandled change " + this);
+  }
+
+  public void AttributionPropertyChange.apply() {
+    if (getAffectedElement().isUser()) {
+      switch (getFeature()) {
+        case "name":
+          User user = getAffectedElement().asUser();
+          user.setName((String) getNewValue());
+          return;
+      }
+    }
+    System.err.println("Unhandled change " + this);
+  }
+
+  public void CompositionListInsertion.apply() {
+    if (getAffectedElement().isSubmission()) {
+      Submission affected = java.util.Objects.requireNonNull(getAffectedElement().asSubmission(),
+        () -> "Was no submission, instead " + getAffectedElement());
+      switch (getFeature()) {
+        case "comments":
+          Comment comment = java.util.Objects.requireNonNull(getAddedElement().asComment(),
+            () -> "Was no comment, instead  " + getAddedElement());
+          // remove from pending model elements first
+          ASTNode parent = comment.getParent();
+          comment.removeSelf();
+          affected.getComments().insertChild(comment, getIndex());
+          return;
+      }
+    } else if (getAffectedElement().isSocialNetwork()) {
+      SocialNetwork socialNetwork = getAffectedElement().asSocialNetwork();
+      switch (getFeature()) {
+        case "posts":
+          Post post = getAddedElement().asPost();
+          // remove from pending model elements first
+          post.removeSelf();
+          socialNetwork.getPosts().insertChild(post, getIndex());
+          return;
+        case "users":
+          User user = getAddedElement().asUser();
+          // remove from pending model elements first
+          user.removeSelf();
+          socialNetwork.getUsers().insertChild(user, getIndex());
+          return;
+      }
+    }
+    System.err.println("Unhandled change " + this);
+  }
+}

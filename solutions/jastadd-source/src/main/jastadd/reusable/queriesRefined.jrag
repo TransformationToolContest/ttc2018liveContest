@@ -1,0 +1,12 @@
+aspect QueriesRefined {
+  refine Queries eq Comment.score() {
+    int score = 0;
+    Set<Set<Component>> sccs = this.toDependencyGraph().SCC();
+    for (Set<Component> userSet : sccs) {
+      int usize = userSet.size();
+      score += usize * usize;
+    }
+    return score;
+  }
+
+}

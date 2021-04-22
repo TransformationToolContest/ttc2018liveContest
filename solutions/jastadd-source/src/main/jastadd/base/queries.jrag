@@ -1,0 +1,89 @@
+aspect Queries {
+
+  public boolean SocialNetwork.debug = false;
+
+  syn int ModelElement.score() = 0;
+
+  syn java.util.Set<User> User.getCommentLikerFriends(Comment comment) circular [new java.util.HashSet<User>()];
+  eq User.getCommentLikerFriends(Comment comment) {
+//    java.util.Set<User> s = this.getCommentLikerFriends(comment);
+    java.util.Set<User> s = new java.util.HashSet<>();
+    s.add(this);
+    for (User f : getFriends()) {
+      for (Comment otherComment : f.getLikes()) {
+        if (otherComment == comment) {
+          s.add(f);
+          s.addAll(f.getCommentLikerFriends(comment));
+        }
+      }
+    }
+    return s;
+  }
+
+  eq Comment.score() {
+    int score = 0;
+    java.util.Set<java.util.Set<User>> commentLikerGroups = new java.util.HashSet();
+    for (User user : getLikedByList()) {
+      commentLikerGroups.add(user.getCommentLikerFriends(this));
+    }
+    for (java.util.Set<User> userSet : commentLikerGroups) {
+      int usize = userSet.size();
+      score += usize * usize;
+    }
+    return score;
+  }
+
+  eq Post.score() {
+    int result = 0;
+    for (Comment comment : commentsForPost()) {
+      result += 10 + comment.getLikedByList().size();
+    }
+    return result;
+  }
+
+  syn java.util.List<Comment> Post.commentsForPost() {
+    java.util.List<Comment> result = new java.util.ArrayList<>();
+    addToComments(result);
+    return result;
+  }
+
+  syn String SocialNetwork.query(int queryId) {
+    Iterable<? extends Submission> l;
+    switch (queryId) {
+      case 1: l = getPostList(); break;
+      case 2: l = comments(); break;
+      default: return null;
+    }
+    Submission[] elements = new Submission[3];
+    for (Submission elem : l) {
+      if (elem.hasBetterScoreThan(elements[2])) {
+        // at least better than #3
+        if (elem.hasBetterScoreThan(elements[1])) {
+          elements[2] = elements[1];
+          if (elem.hasBetterScoreThan(elements[0])) {
+            // new highscore
+            elements[1] = elements[0];
+            elements[0] = elem;
+          } else {
+            // better than second
+            elements[1] = elem;
+          }
+        } else {
+          elements[2] = elem;
+        }
+      }
+    }
+    if (debug) {
+      return elements[0].getId() + "--" + elements[0].score() +
+        "|" + elements[1].getId() + "--" + elements[1].score() +
+        "|" + elements[2].getId() + "--" + elements[2].score();
+    } else {
+      return elements[0].getId() + "|" + elements[1].getId() + "|" + elements[2].getId();
+    }
+  }
+
+  syn boolean Submission.hasBetterScoreThan(Submission other) {
+    return other == null || this.score() > other.score() ||
+      (this.score() == other.score() && this.getTimestamp() > other.getTimestamp());
+  }
+}

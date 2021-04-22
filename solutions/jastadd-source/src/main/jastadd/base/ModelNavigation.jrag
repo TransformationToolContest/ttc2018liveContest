@@ -1,0 +1,70 @@
+import java.util.Map;
+import java.util.HashMap;
+
+aspect ModelNavigation {
+
+  syn java.util.List<Comment> SocialNetwork.comments() {
+    java.util.List<Comment> result = new java.util.ArrayList<>();
+    for (Post post : getPostList()) {
+      post.addToComments(result);
+    }
+    return result;
+  }
+
+  void Submission.addToComments(java.util.List<Comment> result) {
+    for (Comment comment : this.getCommentList()) {
+      result.add(comment);
+      if (comment == null) {
+        System.err.println("Comment to add was null in " + this + ". Skipping.");
+        continue;
+      }
+      comment.addToComments(result);
+    }
+  }
+
+  // ===================================================================================================================
+  // casting
+  // ===================================================================================================================
+
+  syn boolean ModelElement.isSocialNetwork() = false;
+  eq SocialNetwork.isSocialNetwork() = true;
+
+  syn boolean ModelElement.isPost() = false;
+  eq Post.isPost() = true;
+
+  syn boolean ModelElement.isSubmission() = false;
+  eq Submission.isSubmission() = true;
+
+  syn boolean ModelElement.isUser() = false;
+  eq User.isUser() = true;
+
+  syn boolean ModelElement.isComment() = false;
+  eq Comment.isComment() = true;
+
+  syn SocialNetwork ModelElement.asSocialNetwork() = null;
+  eq SocialNetwork.asSocialNetwork() = this;
+
+  syn Post ModelElement.asPost() = null;
+  eq Post.asPost() = this;
+
+  syn Submission ModelElement.asSubmission() = null;
+  eq Submission.asSubmission() = this;
+
+  syn User ModelElement.asUser() = null;
+  eq User.asUser() = this;
+
+  syn Comment ModelElement.asComment() = null;
+  eq Comment.asComment() = this;
+
+  // (un)cache instructions
+  uncache ModelElement.isSocialNetwork();
+  uncache ModelElement.isPost();
+  uncache ModelElement.isSubmission();
+  uncache ModelElement.isUser();
+  uncache ModelElement.isComment();
+  uncache ModelElement.asSocialNetwork();
+  uncache ModelElement.asPost();
+  uncache ModelElement.asSubmission();
+  uncache ModelElement.asUser();
+  uncache ModelElement.asComment();
+}

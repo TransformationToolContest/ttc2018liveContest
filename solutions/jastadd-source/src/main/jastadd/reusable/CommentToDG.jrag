@@ -1,0 +1,20 @@
+aspect CommentToDG {
+  syn nta DependencyGraph Comment.toDependencyGraph() {
+    java.util.Map<User, Component> users = new java.util.HashMap<>();
+    DependencyGraph result = new DependencyGraph();
+    for (User commentLiker : this.getLikedByList()) {
+      Component userComponent = new Component();
+      users.put(commentLiker, userComponent);
+      result.addComponent(userComponent);
+    }
+    for (User commentLiker : this.getLikedByList()) {
+      for (User friend : commentLiker.getFriendList()) {
+        if (users.containsKey(friend)) {
+          // we ignore users up until now, because they do not like the comment anyway
+          users.get(commentLiker).addTo(users.get(friend));
+        }
+      }
+    }
+    return result;
+  }
+}
