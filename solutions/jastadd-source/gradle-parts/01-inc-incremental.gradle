@@ -2,6 +2,6 @@ project.ext.extraJastAddOptions = [
         '--lineColumnNumbers',
         '--cache=all',
         "--flush=api",
-        "--incremental=param,debug",
+        "--incremental=param",
         "--tracing=api",
 ]

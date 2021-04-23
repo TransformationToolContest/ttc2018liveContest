@@ -55,8 +55,8 @@ task preprocess(type: JavaExec) {
             "--file",
     ] + project.ext.relastFiles
 
-    inputs.files file("./src/main/jastadd/base/SocialNetwork.relast")
-    outputs.files file("./src/main/jastadd/SocialNetworkGen.ast"), file("./src/main/jastadd/SocialNetworkGen.jadd")
+    // inputs.files files(project.ext.relastFiles)
+    // outputs.files file("./src/gen/jastadd/SocialNetworkGen.ast"), file("./src/gen/jastadd/SocialNetworkGen.jadd")
 }
 
 jastadd {
@@ -77,8 +77,8 @@ jastadd {
     extraJastAddOptions = project.ext.extraJastAddOptions
 }
 
-cleanGen.doFirst {
-    delete "src/gen/jastadd"
+preprocess.doFirst {
+    delete fileTree(dir: "src/gen/jastadd", exclude: '.gitkeep')
 }
 
 File genSrc = file("src/gen/java")
@@ -87,6 +87,8 @@ idea.module.generatedSourceDirs += genSrc
 
 // always run tests
 test.outputs.upToDateWhen {false}
+preprocess.outputs.upToDateWhen {false}
+generateAst.outputs.upToDateWhen {false}
 
 // disable distribution
 distTar.enabled = false
