@@ -10,13 +10,17 @@ jobs:
           persist-credentials: false
       - name: Build
         run: |
+          sed -i "/REMOVE LINE IN GITHUB ACTIONS/d" docker.sh
+
           # check that all Dockerfiles contain the same run command
           test $(docker/ls-images.sh --runnable | wc -l) -eq $(grep -F "RUN scripts/run.py -b --skip-tests" docker/Dockerfile-* | wc -l)
           # run tests in CI
           sed -i "s|RUN scripts/run.py -b --skip-tests|RUN scripts/run.py -b|" docker/Dockerfile-*
+
           # do not use slow release mode for Rust build
           sed -i s/--release// solutions/differential*/solution.ini
           sed -i "s|/release/|/debug/|" solutions/differential*/solution.ini
+
           ./docker.sh --pull                  # pull available images
           ./docker.sh --build-if-not-fresh    # (re)build image if different than current commit
           docker/set-configs.sh               # copy generic settings from config.json to config-docker-*.json files

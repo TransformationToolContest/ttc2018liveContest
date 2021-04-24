@@ -134,6 +134,8 @@ if [[ $run ]]; then
       -v "$HOST_OUTPUT_PATH":/ttc/output/output.csv \
       -v "$TOOL_DOCKER_CONFIG_PATH":/ttc/config/config.json \
       "${DOCKER_PARAMS[@]}" \
+      -i ${IFS# REMOVE LINE IN GITHUB ACTIONS} \
+      -t \
       $DOCKER_REPO:$TOOL \
     || { EXIT_CODE=$?; echo "::error::Error: $TOOL image failed."; }
     echo "^^^^^^^^^^^^^^^^^^^^ End: Run $TOOL ^^^^^^^^^^^^^^^^^^^^"
