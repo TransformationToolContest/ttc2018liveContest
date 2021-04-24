@@ -1,3 +1,3 @@
 #!/bin/bash
 # run the benchmark
-scripts/run.py -mc
+/usr/bin/time -v scripts/run.py -mc

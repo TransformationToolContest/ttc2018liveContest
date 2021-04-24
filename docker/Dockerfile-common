@@ -6,7 +6,16 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # most common dependencies
 RUN apt-get update && \
-    apt-get install -yq --no-install-recommends python3 r-base unzip ca-certificates apt-transport-https wget git silversearcher-ag \
+    apt-get install -yq --no-install-recommends \
+        python3 \
+        r-base \
+        unzip \
+        ca-certificates \
+        apt-transport-https \
+        wget \
+        git \
+        silversearcher-ag \
+        time \
     && rm -rf /var/lib/apt/lists/*
 
 # avoid creating more layers by using multi-staged build
