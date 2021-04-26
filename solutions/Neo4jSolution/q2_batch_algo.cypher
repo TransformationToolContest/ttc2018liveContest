@@ -6,7 +6,7 @@ CALL gds.wcc.stream({
         WHERE id(c)=' + id(c) + '
         RETURN id(u) as id',
     relationshipQuery:
-        'MATCH (u1:User)-[:FRIEND]->(u2:User)
+        'MATCH (u1:User)<-[:FRIEND]->(u2:User)
         RETURN id(u1) as source, id(u2) as target',
     validateRelationships: false
   })
