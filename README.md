@@ -154,11 +154,14 @@ E.g. `Timeout`: `600` s, `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "1
 
 Run `./docker.sh` to list other available options.
 
-### Java version
+### Software versions
 
-To get the exact OpenJDK version installed in the Docker images, use:
+To get the exact versions of software, use:
 
 ```bash
+lsb_release -d
+docker --version
 docker run --rm -it ftsrg/ttc2018:java8 java -version
 docker run --rm -it ftsrg/ttc2018:java11 java -version
+docker run --rm -it ftsrg/ttc2018:net31 dotnet --info
 ```
