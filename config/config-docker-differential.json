@@ -5,7 +5,8 @@
   ],
   "Tools": [
     "differential",
-    "differential-08"
+    "differential-08",
+    "differential-datalog"
   ],
   "ChangeSets": [
     "1", "2", "4"
