@@ -1,0 +1,75 @@
+import graph as graph
+
+// `id` must be u64 because some ids use very big numbers.
+input relation User(id: u64, name: string)
+// input relation Comments(id: u64, timestamp: string, content: string, creator: u64, parent: u64, post: u64)
+// Post Id is removed from `Comments` for the latest benchmark dataset because post Id is redundant and can
+// be inferred from parent Id, which is either comment id (if commenting on another comment) or post id as root.
+input relation Comments(id: u64, timestamp: string, content: string, creator: u64, parent: u64)
+input relation Posts(id: u64, timestamp: string, content: string, submitter: u64)
+
+input relation Submitter(postid: u64, userid: u64)
+input relation Submissions(userid: u64, postid: u64)
+input relation Friend(src: u64, dst: u64)
+
+input relation LikedBy(srcComment: string, dstUser: u64)
+input relation Likes(srcUser: u64, dstComment: u64)
+
+// Output relation for Q1.
+
+// A relation for comment id and its root, which is a post. 
+output relation CommentFromPost(cid: u64, pid: u64)
+// A relation to represent comment and its ancestors.
+output relation CommentAncestor(cid: u64, pid: u64)
+// The score of a post based on 10x the number of comments it contains including nested comments.
+output relation PostCommentScore(id: u64, value: u64)
+// The score of a comment based on the number of likes it has
+output relation CommentLikeScore(commentId: u64, value: u64)
+// The score of a post based on the number of likes its comments have
+output relation PostLikeScore(id: u64, value: u64)
+// The total score of a post based on 10x number of its comments + the total number of likes those comments have
+output relation PostTotalScore(score: u64, postId: u64)
+output relation PostTotalScoreTimestamp(score: u64, timestamp: string, postId: u64)
+output relation Top3PostScore(first: u64, second: u64, third: u64)
+
+extern function top_three(g: Group<'K, 'V>): ('V, 'V, 'V)
+
+// Q1: The top 3 posts with the highest score based the number of comments and likes and must be sorted by timestamp.
+// TODO: Think about it. We basically cache all intermediate results just for finding the root of a comment. 
+// Do we have other options to do it in logic programming? Maybe use some imperative code snippet in ddlog?
+CommentAncestor(commentid, parentid) :- Comments(commentid,_,_,_,parentid).
+CommentAncestor(commentid, grandparentid) :- CommentAncestor(commentid, parentid), 
+                                             CommentAncestor(parentid, grandparentid).
+
+// Find the root post id for each comment since the direct parent of a comment could be a comment. 
+CommentFromPost(commentid, ancestorid) :- CommentAncestor(commentid, ancestorid), Posts(ancestorid,_,_,_).
+
+// Each comment gives its post 10 points. What if a post doesn't have comments? Almost impossible and it's ok to skip this post.
+PostCommentScore(pid, score) :- CommentFromPost(cid, pid), 
+                                       var c = Aggregate((pid), group_count(pid)), 
+                                       var score = c * 10.
+
+// Each like on the comment adds one point.
+// Remove pid from relation `CommentLikeScore` because otherwise we have to define a customized aggregate function that not only return
+// the score but also the associated pid. The default aggregation function `group_count` put other variables out of scope.
+// CommentLikeScore(cid, pid, score) :- Comments(cid,_,_,_,_,pid), Likes(user, cid), var score = Aggregate((cid), group_count(cid)).
+CommentLikeScore(cid, score) :- Likes(_, cid), var score = Aggregate((cid), group_count(cid)).
+// How many likes a post receives on all of its comments including the comments on comments.
+PostLikeScore(pid, score) :- CommentFromPost(cid, pid), CommentLikeScore(cid, val), 
+                             var score = Aggregate((pid), group_sum(val)).
+
+// Combine two scores together based on the post id. 
+// TODO: But what if the post has no comments? 
+PostTotalScore(pid, score) :- PostCommentScore(pid, s1), PostLikeScore(pid, s2), var score = s1 + s2. 
+// For situation when a post has no likes, then just return the comment score.
+PostTotalScore(pid, score) :- PostCommentScore(pid, score), not PostLikeScore(pid, _). 
+
+// Sort by score and then by timestamp in the order of its arguments.
+PostTotalScoreTimestamp(score, timestamp, post) :- PostTotalScore(post, score), Posts(post, timestamp, _, _).
+
+// TODO: Optimize this function like in native differential solution.
+Top3PostScore(first, second, third) :- PostTotalScoreTimestamp(score, timestamp, post),
+    Posts(post, timestamp, _, _),
+    var aggregation = Aggregate((), top_three(post)),
+    (var first, var second, var third) = aggregation
+    .
