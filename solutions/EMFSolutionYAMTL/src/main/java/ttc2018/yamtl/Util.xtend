@@ -2,6 +2,7 @@ package ttc2018.yamtl
 
 import SocialNetwork.Submission
 import java.util.ArrayList
+import java.util.Iterator
 import java.util.List
 
 class Util {
@@ -64,7 +65,10 @@ class Util {
 		}
 	}
 
+	def static sum(Iterator<Integer> list) {
+		list.reduce[v1, v2 | v1+v2] ?: 0
+	}
 	def static sum(Iterable<Integer> list) {
-		list.reduce[v1, v2 | v1+v2]
+		list.reduce[v1, v2 | v1+v2] ?: 0
 	}
 }

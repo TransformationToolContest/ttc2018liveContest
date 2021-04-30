@@ -3,14 +3,11 @@ package ttc2018;
 import ttc2018.yamtl.Q2_yamtl
 import yamtl.core.YAMTLModule.ExecutionMode
 import yamtl.core.YAMTLModule.ExecutionPhase
-import yamtl.core.YAMTLModule.ExtentTypeModifier
 
 class SolutionQ2 extends Solution {
 
 	new() {
 		xform = new Q2_yamtl
-		xform.stageUpperBound = 1
-		xform.extentTypeModifier = ExtentTypeModifier.LIST
 		xform.selectedExecutionPhases = ExecutionPhase.MATCH_ONLY
 		xform.fromRoots = false
 		xform.executionMode = ExecutionMode.INCREMENTAL

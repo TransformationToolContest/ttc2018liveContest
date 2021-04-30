@@ -7,7 +7,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 
 group = 'yamtl'
-version = '0.0.11-SNAPSHOT'
+version = '0.1.0'
 
 eclipse {
 	project {
@@ -36,7 +36,7 @@ repositories {
 
 
 ext {
-	yamtlVersion = '0.0.11-SNAPSHOT'
+	yamtlVersion = '0.1.0'
 	xtendVersion = '2.20.0'
 	aspectJVersion = '1.9.6'
 }

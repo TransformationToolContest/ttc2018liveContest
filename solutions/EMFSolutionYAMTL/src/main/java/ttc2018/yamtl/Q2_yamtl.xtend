@@ -6,7 +6,7 @@ import SocialNetwork.Submission
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import yamtl.core.YAMTLModule
-import yamtl.dsl.Rule
+import static yamtl.dsl.Rule.*
 
 
 import static extension ttc2018.yamtl.Util.getBestThree
@@ -26,7 +26,7 @@ class Q2_yamtl extends YAMTLModule {
 	new () {
 		header().in('sn', SN).out('out', SN)
 		ruleStore( newArrayList(
-			new Rule('UserComponentsByComment')
+			rule('UserComponentsByComment')
 				.in('comment', SN.comment)
 					.filter[
 						val comment = 'comment'.fetch as Comment
@@ -43,9 +43,7 @@ class Q2_yamtl extends YAMTLModule {
 						}
 						matches
 					]
-					.build()
-				.out('commentAux', SN.comment, []).build()
-				.build()
+				.query
 		))
 	}
 	
