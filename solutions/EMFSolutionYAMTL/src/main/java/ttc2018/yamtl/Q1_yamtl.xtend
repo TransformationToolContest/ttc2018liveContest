@@ -28,14 +28,16 @@ class Q1_yamtl extends YAMTLModule {
 				.in('post', SN.post)
 					.filter[
 						val post = 'post'.fetch as Post
-						var matches = false
-						
-						val score = post.score
-						if (score > 0) {
+						var score = 0
+						if (post.comments?.size>0) {
+							val allComments = post.eAllContents
+							while (allComments.hasNext) {
+								score += 10 + (allComments.next as Comment).likedBy.size
+							}
 							threeBestCandidates.addIfIsThreeBest(post, score)
-							matches = true
-						} 
-						matches
+							return true
+						}
+						false
 					]
 				.query
 		])
@@ -44,15 +46,5 @@ class Q1_yamtl extends YAMTLModule {
 	// HELPERS
 	def getBestThree() {
 		threeBestCandidates.getBestThree(#[])
-	}
-		
-	def static Integer getScore(Submission submission) {
-		var score = 0
-		val allComments = submission.eAllContents
-		while (allComments.hasNext) {
-			score += 10 + (allComments.next as Comment).likedBy.size
-		}
-		score
-	}
-	
+	}	
 }
