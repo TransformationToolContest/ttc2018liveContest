@@ -2,7 +2,7 @@
     <aspects>
         <!-- aspect name="eu.ibacz.pbns.util.aspect.TimingAspect"/--> <!--  fails if not found -->
         <aspect name="ttc2018.yamtl.InitLocations"/>
-        <aspect name="ttc2018.yamtl.FeatureCallAspect"/>
+        <aspect name="ttc2018.yamtl.FeatureCallAspectSocial"/>
     </aspects>
     <weaver options="-verbose -showWeaveInfo"> <!-- add -debug to print every class [not] woven  -->
     <!-- weaver options="-nowarn"-->

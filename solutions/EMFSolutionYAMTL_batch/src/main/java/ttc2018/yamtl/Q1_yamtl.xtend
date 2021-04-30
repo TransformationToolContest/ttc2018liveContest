@@ -7,12 +7,12 @@ import SocialNetwork.Submission
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import yamtl.core.YAMTLModule
-import yamtl.dsl.Rule
+import static yamtl.dsl.Rule.*
 
 import static extension ttc2018.yamtl.Util.getBestThree
 import static extension ttc2018.yamtl.Util.addIfIsThreeBest
-import static extension ttc2018.yamtl.Util.sum
 
+/* score uses eAllContents */
 class Q1_yamtl extends YAMTLModule {
 	
 	val SN = SocialNetworkPackage.eINSTANCE  
@@ -20,48 +20,31 @@ class Q1_yamtl extends YAMTLModule {
 	@Accessors
 	val List<Pair<Submission,Integer>> threeBestCandidates = newArrayList
 	
-	@Accessors
-	val List<Submission> candidatesWithNilScore = newArrayList
-	
 	new () {
 		header().in('sn', SN).out('out', SN)
 		
-		ruleStore( newArrayList(
-			new Rule('CountPosts')
+		ruleStore( #[
+			rule('CountPosts')
 				.in('post', SN.post)
 					.filter[
 						val post = 'post'.fetch as Post
-						var matches = false
-						
-						val score = post.score
-						if (score > 0) {
+						var score = 0
+						if (post.comments?.size>0) {
+							val allComments = post.eAllContents
+							while (allComments.hasNext) {
+								score += 10 + (allComments.next as Comment).likedBy.size
+							}
 							threeBestCandidates.addIfIsThreeBest(post, score)
-							matches = true
-						} else {
-							candidatesWithNilScore.add(post)
+							return true
 						}
-						matches
+						false
 					]
-					.build()
-				.out('postAux', SN.post, []).build()
-				.build()
-		))
+				.query
+		])
 	}
 	
 	// HELPERS
 	def getBestThree() {
-		threeBestCandidates.getBestThree(candidatesWithNilScore)
-	}
-		
-	def static Integer getScore(Submission submission) {
-		var score = 0
-		if (submission.comments?.size>0) {
-			score = submission.comments.map[c | 10 + (c as Comment).likedBy.size].sum
-			for (comment: submission.comments) {
-				score += comment.score
-			}
-		}
-		score
-	}
-	
+		threeBestCandidates.getBestThree(#[])
+	}	
 }

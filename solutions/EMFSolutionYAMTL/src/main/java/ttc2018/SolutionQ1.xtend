@@ -9,8 +9,6 @@ class SolutionQ1 extends Solution {
 	
 	new() {
 		xform = new Q1_yamtl
-		xform.stageUpperBound = 1
-		xform.extentTypeModifier = ExtentTypeModifier.LIST
 		xform.selectedExecutionPhases = ExecutionPhase.MATCH_ONLY
 		xform.fromRoots = false
 		xform.executionMode = ExecutionMode.INCREMENTAL
