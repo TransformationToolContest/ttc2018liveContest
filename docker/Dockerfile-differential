@@ -14,7 +14,7 @@ COPY output output
 # most frequently changing folders
 COPY solutions/differential/ solutions/differential/
 COPY solutions/differential-08/ solutions/differential-08/
-COPY solutions/differential-datalog/ solutions/differential-datalogt/
+COPY solutions/differential-datalog/ solutions/differential-datalog/
 COPY config/config-docker-differential.json config/config.json
 
 # build solutions in config.json
