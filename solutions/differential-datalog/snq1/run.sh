@@ -17,7 +17,6 @@ echo The location of ddlog binary is $(which $DDLOG_HOME/bin/ddlog)
 # Create runtime for socialnetwork domain
 $DDLOG_HOME/bin/ddlog -i snq1.dl && 
 # Open the folder and build the runtime in Rust
-(cd snq1_ddlog && cargo build --release) #&& 
-
-# Run the program that depends on the runtime as a library with model as its parameter. 
-#(cd snq1_lib && cargo test --release -- it_works $HOME/ttc2018liveContest/models/512/ --nocapture)
+(cd snq1_ddlog && cargo build --release) && 
+# Open the folder and build the project that depends on the runtime 
+(cd snq1_lib && cargo build --release) 
