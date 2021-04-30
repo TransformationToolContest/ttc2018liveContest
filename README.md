@@ -141,6 +141,7 @@ The tools supported by each image are defined in the `config` directory in the `
 - Save measurement results (`output/*`) if necessary
 - Clean all files to have a clean build:\
 `git clean -ixd` then `c` for clean if asked.
+- Make sure there are no changes: `git status`
 - If the online images are fresh, pull the images:\
 `./docker.sh --pull`
 - Build outdated images or not uploaded (without running the tests):\
