@@ -1,0 +1,12 @@
+abstract ModelElement ::= <Id:Long> ;
+SocialNetwork : ModelElement ::= User* Post* ;
+
+User:ModelElement ::= <Name:String> FriendRef:UserRef* SubmissionRef:SubmissionRef* LikeRef:CommentRef* ;
+
+abstract Submission : ModelElement ::= <Timestamp:Long> <Content:String> Comment* ;
+Comment : Submission ::= ;
+Post : Submission ::= ;
+
+UserRef ::= <User:User> ;
+CommentRef ::= <Comment:Comment> ;
+SubmissionRef ::= <Submission:Submission> ;

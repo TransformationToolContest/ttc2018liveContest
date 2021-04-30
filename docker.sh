@@ -31,6 +31,7 @@ README_TXT_ARG=""
 # log current version into the image
 if git rev-parse --is-inside-work-tree >/dev/null 2>/dev/null; then
   GIT_SHA=$(git rev-parse HEAD)
+  README_TXT_ARG="${README_TXT_ARG}Current HEAD commit: ${GIT_SHA}"$'\n\n'
 
   if ! git diff-index --quiet HEAD --; then
     README_TXT_ARG="${README_TXT_ARG}WARNING! There are uncommitted changes:"$'\n'
@@ -118,6 +119,7 @@ if [[ $push ]]; then
   done
 fi
 
+EXIT_CODE=0
 if [[ $run ]]; then
   echo ==================== Run: $TOOLS_TO_RUN ====================
   for TOOL in $TOOLS_TO_RUN; do
@@ -125,11 +127,19 @@ if [[ $run ]]; then
     HOST_OUTPUT_PATH=$(realpath output/output-docker-$DATE-$TOOL.csv)
     TOOL_DOCKER_CONFIG_PATH=$(realpath config/config-docker-$TOOL.json)
     touch "$HOST_OUTPUT_PATH"
+    echo vvv Config vvv
+    cat "$TOOL_DOCKER_CONFIG_PATH"
+    echo ^^^ End: Config ^^^
     docker run --rm \
       -v "$HOST_OUTPUT_PATH":/ttc/output/output.csv \
       -v "$TOOL_DOCKER_CONFIG_PATH":/ttc/config/config.json \
       "${DOCKER_PARAMS[@]}" \
-      -it \
-      $DOCKER_REPO:$TOOL
+      -i ${IFS# REMOVE LINE IN GITHUB ACTIONS} \
+      -t \
+      $DOCKER_REPO:$TOOL \
+    || { EXIT_CODE=$?; echo "::error::Error: $TOOL image failed."; }
+    echo "^^^^^^^^^^^^^^^^^^^^ End: Run $TOOL ^^^^^^^^^^^^^^^^^^^^"
   done
 fi
+
+exit $EXIT_CODE

@@ -3,7 +3,7 @@
     "Q1",
     "Q2"
   ],
-  "Tools": ["EMFSolutionYAMTL", "EMFSolutionAOF", "EMFSolutionTemplate", "EMFSolutionViatra", "EMFSolutionXtend", "Hawk"],
+  "Tools": ["ExampleTool"],
   "ChangeSets": [
     "1", "2"
   ],

@@ -1,6 +1,6 @@
 # The TTC 2018 Social Media Case
 
-[![Build Status](https://travis-ci.org/TransformationToolContest/ttc2018liveContest.svg?branch=master)](https://travis-ci.org/TransformationToolContest/ttc2018liveContest)
+[![Build status](https://github.com/TransformationToolContest/ttc2018liveContest/workflows/build/badge.svg)](https://github.com/TransformationToolContest/ttc2018liveContest/actions)
  
 ## Case description
 
@@ -21,6 +21,10 @@ cd models
 unzip 1024.zip
 cd ..
 ```
+
+## Regenerating CSV change sets
+
+CSV change sets are generated based on the XMI (EMF) models. The instructions for regenerating the CSVs are detailed in the [SQL solution's README](solutions/SQLSolution/README.md).
 
 ## Solution Prerequisites
 
@@ -49,7 +53,8 @@ One might fine tune the script for the following purposes:
 
 The `config` directory contains the configuration for the scripts:
 * `config.json` -- configuration for the model generation and the benchmark
-  * *Note:* the timeout as set in the benchmark configuration (default: 6000 seconds) applies to the gross cumulative runtime of the tool for a given changeset and update sequences. This also includes e.g. Initialization time which is not required by the benchmark framework to be measured.
+  * `run.py` reads configuration from this file. During the Docker-based execution, this file contains the generic settings that are copied to the separate image-specific files. The default values in this file is used in CI.
+  * *Note:* the timeout as set in the benchmark configuration (default: 60 seconds) applies to the gross cumulative runtime of the tool for a given changeset and update sequences. This also includes e.g. Initialization time which is not required by the benchmark framework to be measured.
     Timeout is only applied to the solutions' run phase (see `-m` for `run.py`), so it is not applied to e.g. the build phase (see `-b` for `run.py`).
 * `reporting.json` -- configuration for the visualization
 
@@ -141,19 +146,22 @@ The tools supported by each image are defined in the `config` directory in the `
 - Build outdated images or not uploaded (without running the tests):\
 `./docker.sh --build-if-not-fresh`
 - Set the desired configuration in `config/config.json` (with the exception of "Tools")\
-E.g. `Timeout`: `600`, `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"`
+E.g. `Timeout`: `600` s, `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"`
 - Copy generic settings from `config.json` to `config-docker-*.json` files:\
 `docker/set-configs.sh`
 - Run measurements with the desired Java heap size: (limit the CPU cores if needed: `--cpus 0-7`)\
-`./docker.sh -r --java-heap-size 60G |& tee -a output/log-$(date "+%Y-%m-%dT%H.%M.%S").log`
+`/usr/bin/time -v ./docker.sh -r --java-heap-size 60G |& tee -a output/log-$(date "+%Y-%m-%dT%H.%M.%S").log`
 
 Run `./docker.sh` to list other available options.
 
-### Java version
+### Software versions
 
-To get the exact OpenJDK version installed in the Docker images, use:
+To get the exact versions of software, use:
 
 ```bash
+lsb_release -d
+docker --version
 docker run --rm -it ftsrg/ttc2018:java8 java -version
 docker run --rm -it ftsrg/ttc2018:java11 java -version
+docker run --rm -it ftsrg/ttc2018:net31 dotnet --info
 ```

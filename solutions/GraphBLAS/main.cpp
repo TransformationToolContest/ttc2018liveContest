@@ -8,11 +8,6 @@
 #include <chrono>
 #include <set>
 
-extern "C" {
-#include <GraphBLAS.h>
-#include <LAGraph.h>
-}
-
 #include "gb_utils.h"
 #include "Q1_Solution_Batch.h"
 #include "Q1_Solution_Incremental.h"
@@ -39,7 +34,7 @@ std::unique_ptr<BaseSolution> init_solution(BenchmarkParameters &parameters) {
 int main(int argc, char **argv) {
     BenchmarkParameters parameters = parse_benchmark_params();
 
-    ok(LAGraph_init());
+    ok(LAGraph_Init(nullptr));
     if (parameters.ThreadsNum > 0)
         ok(GxB_Global_Option_set(GxB_GLOBAL_NTHREADS, parameters.ThreadsNum));
     int nthreads_max = 0;
@@ -56,5 +51,5 @@ int main(int argc, char **argv) {
     }
 
     // Cleanup
-    ok(GrB_finalize());
+    ok(LAGraph_Finalize(nullptr));
 }

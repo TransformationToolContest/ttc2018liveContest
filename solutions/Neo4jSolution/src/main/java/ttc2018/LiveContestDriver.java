@@ -57,7 +57,7 @@ public class LiveContestDriver {
                     solution = new SolutionQ1Batch(ChangePath);
                     break;
                 case Incremental:
-                    solution = new SolutionQ1(ChangePath);
+                    solution = new SolutionQ1(ChangePath, Tool);
                     break;
             }
         } else if (Query.contentEquals("Q2")) {

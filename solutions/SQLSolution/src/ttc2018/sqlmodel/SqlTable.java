@@ -9,7 +9,8 @@ public enum SqlTable {
     POSTS("posts"
             , new String[] {"id", "ts", "content", "submitterid"}),
     COMMENTS("comments"
-            , new String[] {"id", "ts", "content", "submitterid", "parentid", "postid"}),
+            // postid is omitted here as it is used and populated on the fly by the incremental Q1 query
+            , new String[] {"id", "ts", "content", "submitterid", "parentid"}),
     USERS("users"
             , new String[] {"id", "name"}),
     FRIENDS("friends"

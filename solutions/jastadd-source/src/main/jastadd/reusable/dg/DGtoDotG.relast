@@ -1,0 +1,2 @@
+rel DotGraph.DependencyGraph -> DependencyGraph;
+rel DotNode.Component -> Component;

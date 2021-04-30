@@ -1,0 +1,5 @@
+aspect NTA {
+  inh Post Comment.getPost();
+  eq Post.getComment().getPost() = this;
+  eq ModelChangeSet.getPendingNewElement().getPost() = null;
+}

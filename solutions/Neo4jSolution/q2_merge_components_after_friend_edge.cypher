@@ -1,7 +1,8 @@
-WITH $friendEdge AS friendEdge
+WITH $friendEdgeId AS friendEdgeId
 MATCH (comp1:Component)-[:USER]->(u1:User)-[friendEdge]->(u2:User)<-[:USER]-(comp2:Component),
 // comp1 <> comp2, because COMPONENT edges are different
       (comp1)<-[:COMPONENT]-(c:Comment)-[:COMPONENT]->(comp2)
+WHERE id(friendEdge) = friendEdgeId
 WITH c, comp1, comp2,
      comp1.size AS comp1Size,
      comp2.size AS comp2Size,

@@ -1,31 +1,34 @@
 package ttc2018;
 
 import com.google.common.collect.Iterators;
+import org.neo4j.configuration.GraphDatabaseSettings;
+import org.neo4j.dbms.api.DatabaseManagementService;
+import org.neo4j.dbms.api.DatabaseManagementServiceBuilder;
+import org.neo4j.exceptions.KernelException;
 import org.neo4j.graphdb.*;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import org.neo4j.graphdb.factory.GraphDatabaseSettings;
-import org.neo4j.internal.kernel.api.exceptions.KernelException;
 import org.neo4j.io.fs.FileUtils;
-import org.neo4j.kernel.impl.proc.Procedures;
+import org.neo4j.kernel.api.procedure.GlobalProcedures;
 import org.neo4j.kernel.internal.GraphDatabaseAPI;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import static apoc.Pools.*;
 import static ttc2018.Labels.*;
 import static ttc2018.Query.ID_COLUMN_NAME;
 import static ttc2018.Query.SCORE_COLUMN_NAME;
 import static ttc2018.RelationshipTypes.*;
 
 public abstract class Solution implements AutoCloseable {
-    // see: getDbConnection()
+    DatabaseManagementService managementService;
     GraphDatabaseService graphDb;
 
     public abstract String Initial();
@@ -35,7 +38,8 @@ public abstract class Solution implements AutoCloseable {
      */
     public abstract String Update(File changes);
 
-    private final static File DB_DIR = new File("db-dir/graph.db");
+    private final static String NEO4J_HOME = System.getenv("NEO4J_HOME");
+    private final static Path DB_DIR = new File(NEO4J_HOME + "/data").toPath();
     private final static String LOAD_SCRIPT = "load-scripts/load.sh";
 
     private String DataPath;
@@ -57,32 +61,24 @@ public abstract class Solution implements AutoCloseable {
     }
 
     protected void initializeDb() throws KernelException {
-        graphDb = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(DB_DIR)
-                .setConfig(GraphDatabaseSettings.procedure_unrestricted, "apoc.*,algo.*")
-                .newGraphDatabase();
+        managementService = new DatabaseManagementServiceBuilder(new File(NEO4J_HOME).toPath())
+                .setConfig(GraphDatabaseSettings.procedure_unrestricted, List.of("apoc.*", "gds.*"))
+                .build();
+        graphDb = managementService.database(GraphDatabaseSettings.DEFAULT_DATABASE_NAME);
         Runtime.getRuntime().addShutdownHook(new Thread(this::close));
     }
 
     @Override
     public void close() {
-        if (graphDb != null) {
-            // bypass APOC bug
-            // based on https://github.com/neo4j-contrib/neo4j-apoc-procedures/commit/d6fd3c07dc62e67453305d4b6d5df72a3eceea12
-            for (ExecutorService service : Arrays.asList(SINGLE, DEFAULT, SCHEDULED)) {
-                try {
-                    service.shutdownNow();
-                    service.awaitTermination(10, TimeUnit.SECONDS);
-                } catch (Exception ignore) {
-                }
-            }
-            graphDb.shutdown();
-            graphDb = null;
+        if (managementService != null) {
+            managementService.shutdown();
+            managementService = null;
         }
     }
 
     // https://github.com/neo4j-contrib/neo4j-apoc-procedures/blob/3.5/src/test/java/apoc/util/TestUtil.java#L95
-    public static void registerProcedure(GraphDatabaseService db, Class<?>... procedures) throws KernelException {
-        Procedures proceduresService = ((GraphDatabaseAPI) db).getDependencyResolver().resolveDependency(Procedures.class);
+    public static void registerProcedure(GraphDatabaseService db, Class<?>... procedures) throws KernelException, KernelException {
+        GlobalProcedures proceduresService = ((GraphDatabaseAPI) db).getDependencyResolver().resolveDependency(GlobalProcedures.class);
         for (Class<?> procedure : procedures) {
             proceduresService.registerProcedure(procedure, true);
             proceduresService.registerFunction(procedure, true);
@@ -94,15 +90,21 @@ public abstract class Solution implements AutoCloseable {
         return runReadQuery(q, Collections.emptyMap());
     }
 
+    String runReadQuery(Query q, Map<String, Object> parameters) {
+        try (Transaction tx = graphDb.beginTx()) {
+            return runReadQuery(tx, q, parameters);
+        }
+    }
+
     protected static final int resultLimit = 3;
 
-    String runReadQuery(Query q, Map<String, Object> parameters) {
-        List<String> result = new ArrayList<>();
-
-        try (Result rs = q.execute(this, parameters)) {
+    String runReadQuery(Transaction tx, Query q, Map<String, Object> parameters) {
+        try (Result rs = q.execute(tx, parameters)) {
+            List<String> result = new ArrayList<>();
 
             int rowCount = 0;
-            for (Map<String, Object> row : org.neo4j.helpers.collection.Iterators.asIterable(rs)) {
+            while (rs.hasNext()) {
+                Map<String, Object> row = rs.next();
                 String id = row.get(ID_COLUMN_NAME).toString();
 
                 if (LiveContestDriver.ShowScoresForValidation) {
@@ -120,12 +122,19 @@ public abstract class Solution implements AutoCloseable {
         }
     }
 
-    void runVoidQuery(Query q) {
-        runVoidQuery(q, Collections.emptyMap());
+    void runAndCommitVoidQuery(Query q) {
+        runAndCommitVoidQuery(q, Collections.emptyMap());
     }
 
-    void runVoidQuery(Query q, Map<String, Object> parameters) {
-        try (Result rs = q.execute(this, parameters)) {
+    void runAndCommitVoidQuery(Query q, Map<String, Object> parameters) {
+        try (Transaction tx = graphDb.beginTx()) {
+            runVoidQuery(tx, q, parameters);
+            tx.commit();
+        }
+    }
+
+    void runVoidQuery(Transaction tx, Query q, Map<String, Object> parameters) {
+        try (Result rs = q.execute(tx, parameters)) {
             rs.accept(row -> true);
         }
     }
@@ -135,12 +144,11 @@ public abstract class Solution implements AutoCloseable {
             throw new RuntimeException("$NEO4J_HOME is not defined.");
 
         // delete previous DB
-        FileUtils.deleteRecursively(DB_DIR);
+        FileUtils.deleteDirectory(DB_DIR);
 
         ProcessBuilder pb = new ProcessBuilder(LOAD_SCRIPT);
         Map<String, String> env = pb.environment();
         env.put("NEO4J_DATA_DIR", DataPath);
-        env.put("NEO4J_DB_DIR", DB_DIR.getCanonicalPath());
 
         File log = new File("log.txt");
         pb.redirectErrorStream(true);
@@ -153,20 +161,19 @@ public abstract class Solution implements AutoCloseable {
 
         // add uniqueness constraints and indices
         try (Transaction tx = dbConnection.beginTx()) {
-            addConstraintsAndIndicesInTx(dbConnection);
-
-            tx.success();
+            addConstraintsAndIndicesInTx(tx);
+            tx.commit();
         }
 
         try (Transaction tx = dbConnection.beginTx()) {
-            // TODO: meaningful timeout
-            dbConnection.schema().awaitIndexesOnline(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            tx.schema().awaitIndexesOnline(Long.MAX_VALUE, TimeUnit.NANOSECONDS);   // TODO: meaningful timeout
+            tx.commit();
         }
     }
 
-    protected void addConstraintsAndIndicesInTx(GraphDatabaseService dbConnection) {
+    protected void addConstraintsAndIndicesInTx(Transaction tx) {
         for (Labels label : Labels.values()) {
-            dbConnection.schema()
+            tx.schema()
                     .constraintFor(label)
                     .assertPropertyIsUnique(NODE_ID_PROPERTY)
                     .create();
@@ -174,7 +181,10 @@ public abstract class Solution implements AutoCloseable {
     }
 
     void beforeUpdate(File changes) {
-        processChangeSet(changes);
+        try (Transaction tx = getDbConnection().beginTx()) {
+            processChangeSet(tx, changes);
+            tx.commit();
+        }
     }
 
     public static final String SEPARATOR = "|";
@@ -187,9 +197,8 @@ public abstract class Solution implements AutoCloseable {
     public static final long SUBMISSION_SCORE_DEFAULT = 0L;
     public static final String FRIEND_OVERLAY_EDGE_COMMENT_ID_PROPERTY = "commentId";
 
-    public void processChangeSet(File changeSet) {
-        try (Stream<String> stream = Files.lines(changeSet.toPath());
-             Transaction tx = graphDb.beginTx()) {
+    private void processChangeSet(Transaction tx, File changeSet) {
+        try (Stream<String> stream = Files.lines(changeSet.toPath())) {
 
             stream.forEachOrdered(s -> {
                 String[] line = s.split(Pattern.quote(SEPARATOR));
@@ -198,46 +207,44 @@ public abstract class Solution implements AutoCloseable {
                     case COMMENTS_CHANGE_TYPE: {
                         long id = Long.parseLong(line[1]);
 
-                        addSubmissionVertex(line);
+                        addSubmissionVertex(tx, line);
                         break;
                     }
                     case "Friends": {
                         // add edges only once
                         if (Long.parseLong(line[1]) <= Long.parseLong(line[2])) {
-                            addFriendEdge(line);
+                            addFriendEdge(tx, line);
                         }
                         break;
                     }
                     case "Likes": {
-                        addLikesEdge(line);
+                        addLikesEdge(tx, line);
                         break;
                     }
                     case "Users": {
-                        addUserVertex(line);
+                        addUserVertex(tx, line);
                         break;
                     }
                     default:
                         throw new RuntimeException("Invalid record type received from CSV input: " + line[0]);
                 }
             });
-
-            tx.success();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    protected Node addSubmissionVertex(String[] line) {
+    protected Node addSubmissionVertex(Transaction tx, String[] line) {
         long id = Long.parseLong(line[1]);
         String timestamp = line[2];
         String content = line[3];
         long submitterId = Long.parseLong(line[4]);
 
-        Node submitter = findSingleNodeByIdProperty(User, submitterId);
+        Node submitter = findSingleNodeByIdProperty(tx, User, submitterId);
 
         Label[] labels = line[0].equals(COMMENTS_CHANGE_TYPE) ? CommentLabelSet : PostLabelSet;
 
-        Node submission = graphDb.createNode(labels);
+        Node submission = tx.createNode(labels);
         submission.setProperty(NODE_ID_PROPERTY, id);
         submission.setProperty(SUBMISSION_TIMESTAMP_PROPERTY, timestamp);
         submission.setProperty(SUBMISSION_CONTENT_PROPERTY, content);
@@ -246,71 +253,58 @@ public abstract class Solution implements AutoCloseable {
 
         if (line[0].equals(COMMENTS_CHANGE_TYPE)) {
             long previousSubmissionId = Long.parseLong(line[5]);
-            long rootPostId = Long.parseLong(line[6]);
 
-            Node previousSubmission = findSingleNodeByIdProperty(Submission, previousSubmissionId);
-            Node rootPost = findSingleNodeByIdProperty(Post, rootPostId);
+            Node previousSubmission = findSingleNodeByIdProperty(tx, Submission, previousSubmissionId);
 
             submission.createRelationshipTo(previousSubmission, COMMENT_TO);
-            submission.createRelationshipTo(rootPost, ROOT_POST);
 
-            afterNewComment(submission, submitter, previousSubmission, rootPost);
+            afterNewComment(tx, submission, submitter, previousSubmission);
         } else {
-            afterNewPost(submission, submitter);
+            afterNewPost(tx, submission, submitter);
         }
 
         return submission;
     }
 
-    protected void afterNewComment(Node comment, Node submitter, Node previousSubmission, Node rootPost) {
+    protected void afterNewComment(Transaction tx, Node comment, Node submitter, Node previousSubmission) {
 
     }
 
-    protected void afterNewPost(Node post, Node submitter) {
+    protected void afterNewPost(Transaction tx, Node post, Node submitter) {
 
     }
 
-    protected Relationship addFriendEdge(String[] line) {
-        return insertEdge(line, FRIEND, User, User);
+    protected Relationship addFriendEdge(Transaction tx, String[] line) {
+        return insertEdge(tx, line, FRIEND, User, User);
     }
 
-    protected Relationship addLikesEdge(String[] line) {
-        return insertEdge(line, LIKES, User, Comment);
+    protected Relationship addLikesEdge(Transaction tx, String[] line) {
+        return insertEdge(tx, line, LIKES, User, Comment);
     }
 
-    protected Node addUserVertex(String[] line) {
+    protected Node addUserVertex(Transaction tx, String[] line) {
         long id = Long.parseLong(line[1]);
         String name = line[2];
 
-        Node user = graphDb.createNode(User);
+        Node user = tx.createNode(User);
         user.setProperty(NODE_ID_PROPERTY, id);
         user.setProperty(USER_NAME_PROPERTY, name);
-
         return user;
     }
 
-    private Node findSingleNodeByIdProperty(Labels label, long id) {
-        try (ResourceIterator<Node> nodes = graphDb.findNodes(label, NODE_ID_PROPERTY, id)) {
+    private Node findSingleNodeByIdProperty(Transaction tx, Labels label, long id) {
+        try (ResourceIterator<Node> nodes = tx.findNodes(label, NODE_ID_PROPERTY, id)) {
             return Iterators.getOnlyElement(nodes);
         }
     }
 
-    private boolean nodeByIdPropertyExists(Labels label, long id) {
-        try (ResourceIterator<Node> nodes = graphDb.findNodes(label, NODE_ID_PROPERTY, id)) {
-            return nodes.hasNext();
-        }
-    }
-
-    private Relationship insertEdge(String[] line, RelationshipTypes relationshipType, Labels sourceLabel, Labels targetLabel) {
+    private Relationship insertEdge(Transaction tx, String[] line, RelationshipTypes relationshipType, Labels sourceLabel, Labels targetLabel) {
         long sourceId = Long.parseLong(line[1]);
         long targetId = Long.parseLong(line[2]);
 
-        Node source = findSingleNodeByIdProperty(sourceLabel, sourceId);
-        Node target = findSingleNodeByIdProperty(targetLabel, targetId);
+        Node source = findSingleNodeByIdProperty(tx, sourceLabel, sourceId);
+        Node target = findSingleNodeByIdProperty(tx, targetLabel, targetId);
 
         return source.createRelationshipTo(target, relationshipType);
-    }
-
-    void afterUpdate() {
     }
 }

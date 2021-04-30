@@ -7,6 +7,7 @@ extern "C" {
 
 #include <vector>
 #include <map>
+#include <cassert>
 #include "utils.h"
 #include "gb_utils.h"
 
@@ -56,6 +57,7 @@ struct Q1_Input {
     GrB_Index root_post_num, likes_count_num;
 
     auto posts_size() const {
+        assert(posts.size() == post_id_to_column.size());
         return posts.size();
     }
 
@@ -66,10 +68,6 @@ struct Q1_Input {
     static Q1_Input load_initial(const BenchmarkParameters &parameters);
 
     struct Update_Type {
-        std::vector<GrB_Index> new_root_post_src_comment_columns, new_root_post_trg_post_columns;
-        std::vector<GrB_Index> new_likes_to_comments;
-        std::vector<GrB_Index> new_posts;
-
         GBxx_Object<GrB_Matrix> new_root_post_tran;
         GBxx_Object<GrB_Vector> new_likes_count_vec;
     };

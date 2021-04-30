@@ -1,0 +1,65 @@
+aspect DGtoDotG {
+
+  syn DotGraph DependencyGraph.dotGraph() {
+    DotGraph dg = new DotGraph();
+    //create DotGraph
+    dg.setDependencyGraph(this);
+    Map<Component,DotNode> componentMap = new HashMap<>();
+    for (Component component: getComponentList()) {
+      DotNode n = new DotNode();
+      n.setComponent(component);
+      dg.addDotNode(n);
+      componentMap.put(component, n);
+    }
+
+    for (Component from: getComponentList()) {
+      for (Component to: from.getToList()) {
+        if (to.getToList().contains(from)) {
+          if (to.hashCode() < from.hashCode()) {
+            componentMap.get(from).addRel(componentMap.get(to));
+          }
+        } else {
+          componentMap.get(from).addRef(componentMap.get(to));
+        }
+      }
+    }
+
+    return dg;
+  }
+
+  syn DotGraph DependencyGraph.dotGraph(Set<Component> components) {
+    DotGraph dg = new DotGraph();
+    //Ensure that components are part of DependencyGraph
+    Set<Component> subset=new HashSet();
+    for (Component c:getComponentList())
+      subset.add(c);
+    subset.retainAll(components);
+
+    //create DotGraph
+    dg.setDependencyGraph(this);
+    Map<Component,DotNode> componentMap = new HashMap<>();
+    for (Component component: subset) {
+      DotNode n = new DotNode();
+      n.setComponent(component);
+      dg.addDotNode(n);
+      componentMap.put(component, n);
+    }
+
+    for (Component from: subset) {
+      for (Component to: from.getToList()) {
+        if (subset.contains(to)) {
+          if (to.getToList().contains(from)) {
+            if (to.hashCode() < from.hashCode()) {
+              componentMap.get(from).addRel(componentMap.get(to));
+            }
+          } else {
+            componentMap.get(from).addRef(componentMap.get(to));
+          }
+        }
+      }
+    }
+
+    return dg;
+  }
+
+}

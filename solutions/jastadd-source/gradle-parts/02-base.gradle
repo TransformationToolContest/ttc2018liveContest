@@ -1,0 +1,96 @@
+//project.ext.relastFiles = project.ext.has("relastFiles") ? project.ext.get("relastFiles") : []
+
+group 'de.tudresden.inf.st'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'jastadd'
+
+dependencies {
+    jastadd2 "org.jastadd:jastadd:2.3.5"
+
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
+    runtime 'com.sun.xml.bind:jaxb-impl:3.0.0'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.0'
+    implementation group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore', version: '2.23.0'
+    implementation group: 'org.eclipse.emf', name: 'org.eclipse.emf.ecore.xmi', version: '2.16.0'
+    implementation group: 'org.eclipse.emf', name: 'org.eclipse.emf.common', version: '2.22.0'
+    implementation group: 'org.eclipse.emf', name: 'org.eclipse.emf.mwe.core', version: '1.6.1'
+
+    testImplementation group: 'junit', name: 'junit', version: junitVersion
+    testImplementation group: 'org.hamcrest', name: 'hamcrest-junit', version: '1.0.0.0'
+    testImplementation 'com.opencsv:opencsv:3.8'
+    testImplementation 'com.github.stefanbirkner:system-lambda:1.2.0'
+}
+
+mainClassName = 'de.tudresden.inf.st.ttc18live.LiveContestDriverXml'
+
+jar {
+    manifest {
+        attributes "Main-Class": 'de.tudresden.inf.st.ttc18live.LiveContestDriverXml'
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    exclude('META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA')
+
+    archiveBaseName = 'solve'
+}
+task preprocess(type: JavaExec) {
+    group = 'Build'
+    main = "-jar"
+    args = [
+            "libs/relast-compiler.jar",
+            "--grammarName=src/gen/jastadd/SocialNetworkGen",
+            "--listClass=java.util.ArrayList",
+            "--useJastAddNames",
+            "--file",
+    ] + project.ext.relastFiles
+
+    // inputs.files files(project.ext.relastFiles)
+    // outputs.files file("./src/gen/jastadd/SocialNetworkGen.ast"), file("./src/gen/jastadd/SocialNetworkGen.jadd")
+}
+
+jastadd {
+    configureModuleBuild()
+    modules "jastadd_modules"
+
+    cleanGen.doFirst {
+        delete "src/gen/java/de"
+        delete "src/gen-res/BuildInfo.properties"
+    }
+
+    module = "solve"
+    astPackage = 'de.tudresden.inf.st.ttc18live.jastadd.model'
+    genDir = 'src/gen/java'
+    buildInfoDir = 'src/gen-res'
+
+    // default options are: '--rewrite=cnta', '--safeLazy', '--visitCheck=false', '--cacheCycle=false'
+    extraJastAddOptions = project.ext.extraJastAddOptions
+}
+
+preprocess.doFirst {
+    delete fileTree(dir: "src/gen/jastadd", exclude: '.gitkeep')
+}
+
+File genSrc = file("src/gen/java")
+sourceSets.main.java.srcDir genSrc
+idea.module.generatedSourceDirs += genSrc
+
+// always run tests
+test.outputs.upToDateWhen {false}
+preprocess.outputs.upToDateWhen {false}
+generateAst.outputs.upToDateWhen {false}
+
+// disable distribution
+distTar.enabled = false
+distZip.enabled=false // always disabled
+packageSources.enabled=false // always disabled

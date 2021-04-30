@@ -1,0 +1,2 @@
+rel DependencyGraph.Comment -> Comment ;
+rel Component.User -> User ;

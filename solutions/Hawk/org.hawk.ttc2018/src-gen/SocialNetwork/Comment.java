@@ -26,10 +26,6 @@ public interface Comment extends Submission {
 	 * Returns the value of the '<em><b>Commented</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link SocialNetwork.Submission#getComments <em>Comments</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Commented</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Commented</em>' container reference.
 	 * @see SocialNetwork.SocialNetworkPackage#getComment_Commented()
@@ -44,10 +40,6 @@ public interface Comment extends Submission {
 	 * The list contents are of type {@link SocialNetwork.User}.
 	 * It is bidirectional and its opposite is '{@link SocialNetwork.User#getLikes <em>Likes</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Liked By</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Liked By</em>' reference list.
 	 * @see SocialNetwork.SocialNetworkPackage#getComment_LikedBy()

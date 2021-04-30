@@ -1,0 +1,21 @@
+buildscript {
+    repositories.mavenCentral()
+    dependencies {
+        classpath group: 'org.jastadd', name: 'jastaddgradle', version: '1.13.3'
+    }
+}
+
+plugins {
+    id 'application'
+    id 'maven'
+    id 'java'
+    id 'idea'
+}
+
+ext.relastFiles = ["src/main/jastadd/base/SocialNetwork.relast"]
+
+apply from: 'gradle-parts/01-inc-incremental.gradle'
+
+apply from: 'gradle-parts/02-base.gradle'
+
+apply from: 'gradle-parts/03-rel-relast.gradle'
