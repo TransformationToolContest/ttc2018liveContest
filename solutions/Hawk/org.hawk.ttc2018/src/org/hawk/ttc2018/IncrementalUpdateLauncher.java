@@ -46,12 +46,6 @@ public class IncrementalUpdateLauncher extends AbstractIncrementalUpdateLauncher
 		return (List<List<Object>>) hawk.eol(opts.getQuery().getDerivedQuery());
 	}
 
-	@Override
-	protected void initialization(StandaloneHawk hawk) throws Exception {
-		super.initialization(hawk);
-		registerDerivedAttribute(hawk);
-	}
-
 	public static void main(String[] args) {
 		Map<String, String> env = System.getenv();
 		try {
