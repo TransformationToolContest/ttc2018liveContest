@@ -176,6 +176,7 @@ public abstract class AbstractLauncher {
 	protected void initialView(final StandaloneHawk hawk)
 			throws IOException, InvalidQueryException, QueryExecutionException {
 
+		registerDerivedAttribute(hawk);
 		final List<List<Object>> results = runQuery(hawk);
 		final String elementsString = formatResults(results);
 
