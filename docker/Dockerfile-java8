@@ -29,6 +29,9 @@ COPY solutions/HawkIncUpdateQuery solutions/HawkIncUpdateQuery
 COPY solutions/HawkNeo4J solutions/HawkNeo4J
 COPY solutions/HawkNeo4JIncUpdate solutions/HawkNeo4JIncUpdate
 COPY solutions/HawkNeo4JIncUpdateQuery solutions/HawkNeo4JIncUpdateQuery
+COPY solutions/HawkSQLite solutions/HawkSQLite
+COPY solutions/HawkSQLiteIncUpdate solutions/HawkSQLiteIncUpdate
+COPY solutions/HawkSQLiteIncUpdateQuery solutions/HawkSQLiteIncUpdateQuery
 
 # config
 COPY config/config-docker-java8.json config/config.json
