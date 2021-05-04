@@ -1,0 +1,17 @@
+{
+  "Queries": [
+    "Q1",
+    "Q2"
+  ],
+  "Tools": [
+      "Hawk",
+      "HawkNeo4J",
+      "HawkSQLite"
+  ],
+  "ChangeSets": [
+    "1"
+  ],
+  "Sequences": 20,
+  "Runs": 1,
+  "Timeout": 60
+}
