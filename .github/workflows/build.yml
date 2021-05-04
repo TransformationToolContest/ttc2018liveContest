@@ -24,5 +24,7 @@ jobs:
           ./docker.sh --pull                  # pull available images
           ./docker.sh --build-if-not-fresh    # (re)build image if different than current commit
           docker/set-configs.sh               # copy generic settings from config.json to config-docker-*.json files
-          ./docker.sh -r --java-heap-size 6G  # run measurements
-                                              # limit the CPU cores if needed: --cpus 0-7
+          # run measurements
+          # limit the CPU cores if needed, e.g. : --cpus 0-7
+          ./docker.sh -r --java-heap-size 6G \
+                         --run-params "-mc --error-on-timeout"
