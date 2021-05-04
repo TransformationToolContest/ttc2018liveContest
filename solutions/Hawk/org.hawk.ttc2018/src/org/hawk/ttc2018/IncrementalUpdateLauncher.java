@@ -46,13 +46,9 @@ public class IncrementalUpdateLauncher extends AbstractIncrementalUpdateLauncher
 		return (List<List<Object>>) hawk.eol(opts.getQuery().getDerivedQuery());
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Throwable {
 		Map<String, String> env = System.getenv();
-		try {
-			new IncrementalUpdateLauncher(new LauncherOptions(env)).run();
-		} catch (Throwable e) {
-			LOGGER.error(e.getMessage(), e);
-		}
+		new IncrementalUpdateLauncher(new LauncherOptions(env)).run();
 	}
 
 

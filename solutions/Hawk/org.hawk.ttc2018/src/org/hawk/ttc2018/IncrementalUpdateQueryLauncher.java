@@ -224,13 +224,9 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 		/* no derived attribute for IUQ */
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Throwable {
 		Map<String, String> env = System.getenv();
-		try {
-			new IncrementalUpdateQueryLauncher(new LauncherOptions(env)).run();
-		} catch (Throwable e) {
-			LOGGER.error(e.getMessage(), e);
-		}
+		new IncrementalUpdateQueryLauncher(new LauncherOptions(env)).run();
 	}
 
 	@Override

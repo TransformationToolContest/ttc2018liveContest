@@ -101,13 +101,9 @@ public class BatchLauncher extends AbstractLauncher {
 		return (List<List<Object>>) hawk.eol(opts.getQuery().getDerivedQuery());
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Throwable {
 		Map<String, String> env = System.getenv();
-		try {
-			new BatchLauncher(new LauncherOptions(env)).run();
-		} catch (Throwable e) {
-			LOGGER.error(e.getMessage(), e);
-		}
+		new BatchLauncher(new LauncherOptions(env)).run();
 	}
 
 	@Override
