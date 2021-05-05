@@ -11,15 +11,14 @@ use snq1_ddlog::typedefs::*;
 // Returned by `DDlog::transaction_commit_dump_changes()`.
 use differential_datalog::{
     DDlog, 
-    DDlogDynamic, 
-    DDlogInventory
+    DDlogDynamic
 }; 
 use differential_datalog::DeltaMap; // A trait representing the changes resulting from a given update.
 use differential_datalog::ddval::DDValue; // A generic DLog value type
 use differential_datalog::ddval::DDValConvert; //Another helper trair
 use differential_datalog::program::RelId; // Numeric relations id
 use differential_datalog::program::Update; // A type representing updates to the database
-use differential_datalog::record::{FromRecord, IntoRecord, Record}; // A type representing individual facts
+use differential_datalog::record::{FromRecord, IntoRecord}; // A type representing individual facts
 
 pub struct DDLogSNQ1{
     hddlog: HDDlog,
