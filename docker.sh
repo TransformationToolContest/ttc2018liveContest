@@ -11,14 +11,15 @@ echo "Command: $0 $@"
 if [[ "$#" -eq 0 ]]; then
   echo Parameters:
   echo "  --pull"
-  echo "  -b|--build                # runs 'scripts/run.py -b --skip-tests' inside"
-  echo "  --build-if-not-fresh      # rebuild runnable image if it is based on different commit"
+  echo "  -b|--build                        # runs 'scripts/run.py -b --skip-tests' inside"
+  echo "  --build-if-not-fresh              # rebuild runnable image if it is based on different commit"
   echo "  -p|--push"
   echo "  -r|--run"
   echo
-  echo "  -t|--tags \"TAG1 TAG2 ...\" # list the tags using \`docker/ls-images.sh\`"
-  echo "  -h|--java-heap-size 6G    # run Java solutions with 6 GB of heap (default)"
-  echo "  -c|--cpus 0-7,15          # limit container to use the first 8 CPU cores and the 16th one"
+  echo "  -t|--tags \"TAG1 TAG2 ...\"         # list the tags using \`docker/ls-images.sh\`"
+  echo "  -h|--java-heap-size 6G            # run Java solutions with 6 GB of heap (default)"
+  echo "  -c|--cpus 0-7,15                  # limit container to use the first 8 CPU cores and the 16th one"
+  echo "  --run-params \"--measure --check\"  # parameters passed to scripts/run.py"
   exit
 fi
 
@@ -45,6 +46,7 @@ else
 fi
 
 DOCKER_PARAMS=()
+RUN_PARAMS="--measure --check"
 
 # process parameters
 # https://stackoverflow.com/a/33826763
@@ -59,6 +61,7 @@ while [[ "$#" -gt 0 ]]; do
         -t|--tags) TAGS="$2"; shift ;;
         -h|--java-heap-size) DOCKER_PARAMS+=("-e" "JAVA_HEAP_SIZE=$2"); shift ;;
         -c|--cpus) DOCKER_PARAMS+=("--cpuset-cpus=$2"); shift ;;
+        --run-params) RUN_PARAMS="$2"; shift ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
     shift
@@ -133,6 +136,7 @@ if [[ $run ]]; then
     docker run --rm \
       -v "$HOST_OUTPUT_PATH":/ttc/output/output.csv \
       -v "$TOOL_DOCKER_CONFIG_PATH":/ttc/config/config.json \
+      -e "RUN_PARAMS=${RUN_PARAMS}" \
       "${DOCKER_PARAMS[@]}" \
       -i ${IFS# REMOVE LINE IN GITHUB ACTIONS} \
       -t \

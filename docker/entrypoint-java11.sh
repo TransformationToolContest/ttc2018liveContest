@@ -7,4 +7,4 @@ set -e
 ag 'Xm(s|x)[0-9]+G' -l0 | xargs -0 sed -i -r 's/Xm(s|x)[0-9]+G/Xm\1'$JAVA_HEAP_SIZE'/g'
 
 # run the benchmark
-/usr/bin/time -v scripts/run.py -mc
+/usr/bin/time -v bash -c 'eval scripts/run.py "${RUN_PARAMS}"'

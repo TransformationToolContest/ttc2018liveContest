@@ -39,10 +39,11 @@ def build(conf, skip_tests=False):
             subprocess.check_call(config.get('build', 'default'), shell=True)
 
 
-def benchmark(conf):
+def benchmark(conf, error_on_timeout):
     """
     Runs measurements
     """
+    success = True
     header = os.path.join(BASE_DIRECTORY, "output", "header.csv")
     result_file = os.path.join(BASE_DIRECTORY, "output", "output.csv")
     # overwrite with the header
@@ -101,7 +102,15 @@ def benchmark(conf):
                     os.unlink(initial_xmi_backup)
 
             except subprocess.TimeoutExpired as e:
-                print("Program reached the timeout set ({0} seconds). The command we executed was '{1}'".format(e.timeout, e.cmd))
+                msg = "Program reached the timeout set ({0} s). Tool={2}, ChangeSet={3}, Query={4}. Command: '{1}'"\
+                    .format(e.timeout, e.cmd, tool, change_set, query)
+                if error_on_timeout:
+                    success = False
+                    msg = "::error::" + msg
+
+                print(msg)
+
+    return success
 
 
 def clean_dir(*path):
@@ -151,6 +160,9 @@ if __name__ == "__main__":
     parser.add_argument("-c", "--check",
                         help="check results",
                         action="store_true")
+    parser.add_argument("--error-on-timeout",
+                        help="return non-zero exit code if timeout reached during measurement",
+                        action="store_true")
     parser.add_argument("-t", "--test",
                         help="run test",
                         action="store_true")
@@ -168,13 +180,19 @@ if __name__ == "__main__":
     # with the test and the visualization/reporting
     no_args = all(not val for val in vars(args).values())
 
+    success = True
+
     if args.debug:
         os.environ['Debug'] = 'true'
     if args.build or args.test or no_args:
         build(config, args.skip_tests and not args.test)
     if args.measure or no_args:
-        benchmark(config)
+        if not benchmark(config, args.error_on_timeout):
+            success = False
     if args.visualize or no_args:
         visualize()
     if args.check or no_args:
         check_results()
+
+    if not success:
+        sys.exit(os.EX_SOFTWARE)

@@ -3,11 +3,15 @@
     "Q1",
     "Q2"
   ],
-  "Tools": ["ExampleTool"],
+  "Tools": [
+      "Hawk",
+      "HawkNeo4J",
+      "HawkSQLite"
+  ],
   "ChangeSets": [
-    "1", "2"
+    "1"
   ],
   "Sequences": 20,
   "Runs": 1,
-  "Timeout": 180
+  "Timeout": 60
 }
