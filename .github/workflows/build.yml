@@ -14,7 +14,7 @@ jobs:
 
           # check that all Dockerfiles contain the same run command
           test $(docker/ls-images.sh --runnable | wc -l) -eq $(grep -F "RUN scripts/run.py -b --skip-tests" docker/Dockerfile-* | wc -l)
-          # run tests in CI
+          # do not skip tests in CI
           sed -i "s|RUN scripts/run.py -b --skip-tests|RUN scripts/run.py -b|" docker/Dockerfile-*
 
           # do not use slow release mode for Rust build
