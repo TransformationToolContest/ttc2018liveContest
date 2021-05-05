@@ -49,6 +49,7 @@ One might fine tune the script for the following purposes:
 * `run.py -m --error-on-timeout` -- run the benchmark and return non-zero exit code if timeout reached
 * `run.py -v` -- visualizes the results of the latest benchmark
 * `run.py -c` -- check results by comparing them to the reference output. The benchmark shall already been executed using `-m`.
+  If run together, missing results are also checked.
 * `run.py -t` -- build the project and run tests (usually unit tests as defined for the given solution)
 * `run.py -d` -- runs the process in debug mode, i.e. with the `Debug` environment variable set to `true`
 
