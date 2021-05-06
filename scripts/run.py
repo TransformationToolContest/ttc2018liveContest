@@ -58,6 +58,11 @@ def benchmark(conf, error_on_timeout):
         set_working_directory("solutions", tool)
         os.environ['Tool'] = tool
         for query in conf.Queries:
+            cmd = config.get('run', query)
+            if not cmd:
+                print(f"Skipping: tool = {tool}, query = {query}")
+                continue
+
             os.environ['Query'] = query
             change_set = -1
             try:
@@ -75,15 +80,14 @@ def benchmark(conf, error_on_timeout):
                     for r in range(0, conf.Runs):
                         os.environ['RunIndex'] = str(r)
 
-                        print("Running benchmark: tool = " + tool + ", change set = " + change_set +
-                              ", query = " + query)
+                        print(f"Running benchmark: tool = {tool}, change set = {change_set}, query = {query}")
 
                         # instead of subprocess.check_output()
                         # to enforce timeout before Python 3.7.5
                         # and kill sub-processes to avoid interference
                         # https://stackoverflow.com/a/36955420
                         # https://www.saltycrane.com/blog/2011/04/how-use-bash-shell-python-subprocess-instead-binsh/
-                        with subprocess.Popen(config.get('run', query), shell=True, executable='/bin/bash',
+                        with subprocess.Popen(cmd, shell=True, executable='/bin/bash',
                                               stdout=subprocess.PIPE, start_new_session=True) as process:
                             try:
                                 stdout, stderr = process.communicate(timeout=conf.Timeout)
