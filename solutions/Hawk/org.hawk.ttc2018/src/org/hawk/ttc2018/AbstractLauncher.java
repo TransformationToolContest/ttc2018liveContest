@@ -220,8 +220,7 @@ public abstract class AbstractLauncher {
 		final File fInitial = new File(changePath, INITIAL_MODEL_FILENAME);
 		applyChanges(fInitial, iChangeSequence, fChange);
 	
-		hawk.getIndexer().requestImmediateSync();
-		hawk.waitForSync();
+		hawk.performAndWaitForSync(() -> { hawk.getIndexer().requestImmediateSync(); return null; });
 	
 		final List<List<Object>> results = runQuery(hawk);
 		final String elementsString = formatResults(results);

@@ -44,8 +44,10 @@ public abstract class AbstractIncrementalUpdateLauncher extends AbstractLauncher
 
 	@Override
 	protected void modelLoading(final StandaloneHawk hawk) throws Throwable {
-		localFolder = hawk.requestFolderIndex(opts.getChangePath(), filterByChangeSequenceLimit(0));
-		hawk.waitForSync();
+		hawk.performAndWaitForSync(() -> {
+			localFolder = hawk.requestFolderIndex(opts.getChangePath(), filterByChangeSequenceLimit(0));
+			return null;
+		});
 
 		// Need these for quickly finding by ID
 		final IModelIndexer indexer = hawk.getIndexer();

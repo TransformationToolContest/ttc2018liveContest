@@ -90,8 +90,7 @@ public class BatchLauncher extends AbstractLauncher {
 
 	@Override
 	protected void modelLoading(final StandaloneHawk hawk) throws Throwable {
-		hawk.requestFileIndex(new File(opts.getChangePath(), INITIAL_MODEL_FILENAME));
-		hawk.waitForSync();
+		hawk.performAndWaitForSync(() -> hawk.requestFileIndex(new File(opts.getChangePath(), INITIAL_MODEL_FILENAME)));
 	}
 
 	@SuppressWarnings("unchecked")

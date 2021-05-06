@@ -137,22 +137,24 @@ public class StandaloneHawk {
 		return queryEngine.query(indexer, eolQuery, context);
 	}
 
-	public void waitForSync(final Callable<?> r) throws Throwable {
+	public void performAndWaitForSync(final Callable<?> requestSync, final Callable<?> runAfterSync) throws Throwable {
 		final Semaphore sem = new Semaphore(0);
-		final SyncEndListener changeListener = new SyncEndListener(r, sem);
+		final SyncEndListener changeListener = new SyncEndListener(runAfterSync, sem);
 		indexer.addGraphChangeListener(changeListener);
-		if (!sem.tryAcquire(600, TimeUnit.SECONDS)) {
-			throw new TimeoutException("Synchronization timed out");
-		} else {
-			indexer.removeGraphChangeListener(changeListener);
-			if (changeListener.getThrowable() != null) {
+		requestSync.call();
+		try {
+			if (!sem.tryAcquire(600, TimeUnit.SECONDS)) {
+				throw new TimeoutException("Synchronization timed out");
+			} else if (changeListener.getThrowable() != null) {
 				throw changeListener.getThrowable();
 			}
+		} finally {
+			indexer.removeGraphChangeListener(changeListener);
 		}
 	}
 
-	public void waitForSync() throws Throwable {
-		waitForSync(() -> { return null; });
+	public void performAndWaitForSync(final Callable<?> requestSync) throws Throwable {
+		performAndWaitForSync(requestSync, () -> { return null; });
 	}
 
 	public Object eol(InputStream is) throws IOException, InvalidQueryException, QueryExecutionException {
