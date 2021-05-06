@@ -97,7 +97,7 @@ public abstract class AbstractLauncher {
 			this.phase = phase;
 		}
 
-		public void close() throws IOException {
+		public void close() {
 			final long elapsedTime = System.nanoTime() - startNanos;
 			final long availableBytes = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
