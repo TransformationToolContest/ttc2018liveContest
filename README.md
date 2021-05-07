@@ -149,9 +149,9 @@ The tools supported by each image are defined in the `config` directory in the `
 - Build outdated images or not uploaded (without running the tests):\
 `./docker.sh --build-if-not-fresh`
 - Set the desired configuration in `config/config.json` (with the exception of "Tools") E.g.:
-  - `Timeout`: `600` s
   - `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"`
   - `Runs`: `5`
+  - `Timeout`: `600` s
 - Copy generic settings from `config.json` to `config-docker-*.json` files:\
 `docker/set-configs.sh`
 - Run measurements with the desired Java heap size: (limit the CPU cores if needed: `--cpus 0-7`)\
