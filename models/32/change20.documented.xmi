@@ -26,18 +26,14 @@
   </objectChanges>
   <objectsToAttach xsi:type="social:Comment" id="17181010390" timestamp="2010-06-27T23:14:24.000+0100" content="thanks">
     <submitter href="../../models/32/initial.xmi#2199023256115"/>
-    <post href="../../models/32/initial.xmi#17181009257"/>
   </objectsToAttach>
   <objectsToAttach xsi:type="social:Comment" id="17180670601" timestamp="2010-06-27T23:17:59.000+0100" content="fine">
     <submitter href="../../models/32/initial.xmi#1099511628754"/>
-    <post href="../../models/32/initial.xmi#17180670416"/>
   </objectsToAttach>
   <objectsToAttach xsi:type="social:Comment" id="17180277572" timestamp="2010-06-27T23:18:29.000+0100" content="About Weird Al Yankovic, to simply as In 3-D. About Francoist Spain, to ally with the Uni.">
     <submitter href="../../models/32/initial.xmi#1099511632600"/>
-    <post href="../../models/32/initial.xmi#17180276917"/>
   </objectsToAttach>
   <objectsToAttach xsi:type="social:Comment" id="999993" timestamp="2018-06-27T21:59:00.000+0100" content="Added for TTC Live contest">
     <submitter href="../../models/32/initial.xmi#1564"/>
-    <post href="../../models/32/initial.xmi#864565"/>
   </objectsToAttach>
 </change:ChangeDescription>

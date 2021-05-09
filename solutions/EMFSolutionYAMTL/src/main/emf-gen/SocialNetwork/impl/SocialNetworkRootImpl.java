@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.BasicInternalEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -83,7 +83,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public EList<Post> getPosts() {
 		if (posts == null) {
-			posts = new EObjectContainmentEList<Post>(Post.class, this, SocialNetworkPackage.SOCIAL_NETWORK_ROOT__POSTS);
+			posts = new BasicInternalEList<Post>(Post.class);
 		}
 		return posts;
 	}
@@ -96,7 +96,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public EList<User> getUsers() {
 		if (users == null) {
-			users = new EObjectContainmentEList<User>(User.class, this, SocialNetworkPackage.SOCIAL_NETWORK_ROOT__USERS);
+			users = new BasicInternalEList<User>(User.class);
 		}
 		return users;
 	}
@@ -114,7 +114,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 			case SocialNetworkPackage.SOCIAL_NETWORK_ROOT__USERS:
 				return ((InternalEList<?>)getUsers()).basicRemove(otherEnd, msgs);
 		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 			case SocialNetworkPackage.SOCIAL_NETWORK_ROOT__USERS:
 				return getUsers();
 		}
-		return super.eGet(featureID, resolve, coreType);
+		return eDynamicGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 				getUsers().addAll((Collection<? extends User>)newValue);
 				return;
 		}
-		super.eSet(featureID, newValue);
+		eDynamicSet(featureID, newValue);
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 				getUsers().clear();
 				return;
 		}
-		super.eUnset(featureID);
+		eDynamicUnset(featureID);
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 			case SocialNetworkPackage.SOCIAL_NETWORK_ROOT__USERS:
 				return users != null && !users.isEmpty();
 		}
-		return super.eIsSet(featureID);
+		return eDynamicIsSet(featureID);
 	}
 
 } //SocialNetworkRootImpl

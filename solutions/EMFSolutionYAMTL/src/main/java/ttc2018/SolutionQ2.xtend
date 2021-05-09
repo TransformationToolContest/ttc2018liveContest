@@ -15,6 +15,7 @@ class SolutionQ2 extends Solution {
 	}
 
 	override String Initial() {
+		xform.enableUpfrontResizingWithOverflow()
 		xform.execute()
 		(xform as Q2_yamtl).bestThree.map[id].join('|')
 	}

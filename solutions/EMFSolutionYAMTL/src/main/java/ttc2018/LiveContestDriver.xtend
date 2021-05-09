@@ -109,6 +109,11 @@ class LiveContestDriver {
 			}
 			newHashMap
 		])
+//		// load delta
+//		val paddedIteration = String.format("%02d", iteration)
+//		val deltaName = '''change«paddedIteration».documented.xmi'''
+//		val deltaPath = '''«ChangePath»/«deltaName»'''
+//		solution.xform.loadDelta('sn', deltaName, deltaPath)
         stopwatch = System.nanoTime();
         val String result = solution.Update(deltaName);
         stopwatch = System.nanoTime() - stopwatch;

@@ -13,6 +13,7 @@ class SolutionQ2 extends Solution {
 	}
 
 	override String Initial() {
+		xform.enableUpfrontResizingWithOverflow()
 		xform.execute()
 		(xform as Q2_yamtl).bestThree.map[id].join('|')
 	}
@@ -20,7 +21,7 @@ class SolutionQ2 extends Solution {
 	override String Update(String deltaName) {
 		(xform as Q2_yamtl).threeBestCandidates.clear()
 		(xform as Q2_yamtl).candidatesWithNilScore.clear()
-		xform.resetCache()
+		xform.reset()
 		
 		xform.applyDelta('sn', deltaName)
 

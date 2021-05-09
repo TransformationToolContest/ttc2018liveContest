@@ -21,7 +21,7 @@ class Q2_yamtl extends YAMTLModule {
 	val List<Pair<Submission,Integer>> threeBestCandidates = newArrayList
 
 	@Accessors
-	val List<Submission> candidatesWithNilScore = newArrayList
+	var List<Submission> candidatesWithNilScore = newArrayList
 	
 	new () {
 		header().in('sn', SN).out('out', SN)

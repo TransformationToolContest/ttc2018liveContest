@@ -10,7 +10,6 @@ import SocialNetwork.User;
 import java.util.Collection;
 import java.util.Date;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -18,10 +17,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.BasicInternalEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -158,10 +156,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	 */
 	@Override
 	public void setId(String newId) {
-		String oldId = id;
 		id = newId;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SocialNetworkPackage.SUBMISSION__ID, oldId, id));
 	}
 
 	/**
@@ -181,10 +176,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	 */
 	@Override
 	public void setTimestamp(Date newTimestamp) {
-		Date oldTimestamp = timestamp;
 		timestamp = newTimestamp;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SocialNetworkPackage.SUBMISSION__TIMESTAMP, oldTimestamp, timestamp));
 	}
 
 	/**
@@ -204,10 +196,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	 */
 	@Override
 	public void setContent(String newContent) {
-		String oldContent = content;
 		content = newContent;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SocialNetworkPackage.SUBMISSION__CONTENT, oldContent, content));
 	}
 
 	/**
@@ -221,8 +210,6 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 			InternalEObject oldSubmitter = (InternalEObject)submitter;
 			submitter = (User)eResolveProxy(oldSubmitter);
 			if (submitter != oldSubmitter) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SocialNetworkPackage.SUBMISSION__SUBMITTER, oldSubmitter, submitter));
 			}
 		}
 		return submitter;
@@ -245,10 +232,6 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	public NotificationChain basicSetSubmitter(User newSubmitter, NotificationChain msgs) {
 		User oldSubmitter = submitter;
 		submitter = newSubmitter;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SocialNetworkPackage.SUBMISSION__SUBMITTER, oldSubmitter, newSubmitter);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
 		return msgs;
 	}
 
@@ -268,8 +251,6 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 			msgs = basicSetSubmitter(newSubmitter, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SocialNetworkPackage.SUBMISSION__SUBMITTER, newSubmitter, newSubmitter));
 	}
 
 	/**
@@ -280,7 +261,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public EList<Comment> getComments() {
 		if (comments == null) {
-			comments = new EObjectContainmentWithInverseEList<Comment>(Comment.class, this, SocialNetworkPackage.SUBMISSION__COMMENTS, SocialNetworkPackage.COMMENT__COMMENTED);
+			comments = new BasicInternalEList<Comment>(Comment.class);
 		}
 		return comments;
 	}
@@ -301,7 +282,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 			case SocialNetworkPackage.SUBMISSION__COMMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getComments()).basicAdd(otherEnd, msgs);
 		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
+		return eDynamicInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -317,7 +298,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 			case SocialNetworkPackage.SUBMISSION__COMMENTS:
 				return ((InternalEList<?>)getComments()).basicRemove(otherEnd, msgs);
 		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -340,7 +321,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 			case SocialNetworkPackage.SUBMISSION__COMMENTS:
 				return getComments();
 		}
-		return super.eGet(featureID, resolve, coreType);
+		return eDynamicGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -369,7 +350,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 				getComments().addAll((Collection<? extends Comment>)newValue);
 				return;
 		}
-		super.eSet(featureID, newValue);
+		eDynamicSet(featureID, newValue);
 	}
 
 	/**
@@ -396,7 +377,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 				getComments().clear();
 				return;
 		}
-		super.eUnset(featureID);
+		eDynamicUnset(featureID);
 	}
 
 	/**
@@ -418,7 +399,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 			case SocialNetworkPackage.SUBMISSION__COMMENTS:
 				return comments != null && !comments.isEmpty();
 		}
-		return super.eIsSet(featureID);
+		return eDynamicIsSet(featureID);
 	}
 
 	/**

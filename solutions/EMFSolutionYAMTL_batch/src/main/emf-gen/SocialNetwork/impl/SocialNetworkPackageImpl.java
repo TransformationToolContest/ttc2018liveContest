@@ -395,7 +395,7 @@ public class SocialNetworkPackageImpl extends EPackageImpl implements SocialNetw
 		postEClass.getESuperTypes().add(this.getSubmission());
 		commentEClass.getESuperTypes().add(this.getSubmission());
 
-		// Initialize classes, features, and operations; add parameters
+		// Initialize classes and features; add operations and parameters
 		initEClass(submissionEClass, Submission.class, "Submission", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSubmission_Id(), ecorePackage.getEString(), "id", null, 1, 1, Submission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getSubmission_Timestamp(), ecorePackage.getEDate(), "timestamp", null, 1, 1, Submission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

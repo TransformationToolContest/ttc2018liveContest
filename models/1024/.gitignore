@@ -1,7 +1,0 @@
-# https://stackoverflow.com/a/8025106
-# Ignore everything
-*
-# Don't ignore directories, so we can recurse into them
-!*/
-# Don't ignore .gitignore
-!.gitignore

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/EMFSolutionTemplate/src" modelPluginID="EMFSolutionTemplate"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="EMFSolutionYAMTL_batch/src/main/emf-gen" editDirectory="/EMFSolutionYAMTL_indexed.edit/src"
+    editorDirectory="/EMFSolutionYAMTL_indexed.editor/src" modelPluginID="EMFSolutionTemplate"
     modelName="Social_network" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
-    operationReflection="true" importOrganizing="true">
+    importerID="org.eclipse.emf.importer.ecore" minimalReflectiveMethods="false" suppressNotification="true"
+    complianceLevel="8.0" copyrightFields="false" importOrganizing="true">
   <foreignModel>social_network.ecore</foreignModel>
   <genPackages prefix="SocialNetwork" disposableProviderFactory="true" ecorePackage="social_network.ecore#/">
     <genClasses image="false" ecoreClass="social_network.ecore#//Submission">
@@ -17,7 +18,6 @@
     <genClasses ecoreClass="social_network.ecore#//Comment">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference social_network.ecore#//Comment/commented"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference social_network.ecore#//Comment/likedBy"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference social_network.ecore#//Comment/post"/>
     </genClasses>
     <genClasses ecoreClass="social_network.ecore#//User">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute social_network.ecore#//User/id"/>
