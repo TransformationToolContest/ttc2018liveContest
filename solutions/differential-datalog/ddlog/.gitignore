@@ -1,0 +1,4 @@
+*
+!.gitignore
+!checksum.sha256
+!download.sh
