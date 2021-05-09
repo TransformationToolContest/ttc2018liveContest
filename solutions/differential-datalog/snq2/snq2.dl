@@ -1,0 +1,92 @@
+import graph as graph
+
+// `id` must be u64 because some ids use very big numbers.
+input relation User(id: u64, name: string)
+input relation Comments(id: u64, timestamp: string, content: string, creator: u64, parent: u64)
+input relation Posts(id: u64, timestamp: string, content: string, submitter: u64)
+
+input relation Submitter(postid: u64, userid: u64)
+input relation Submissions(userid: u64, postid: u64)
+input relation Friend(src: u64, dst: u64)
+
+input relation LikedBy(srcComment: string, dstUser: u64)
+input relation Likes(srcUser: u64, dstComment: u64)
+
+// Two persons like the same comment and they are friends.
+output relation LikesSameComment(comment: u64, p1: u64, p2: u64)
+// The lowest person in the strongly connected components.
+output relation LowestFriend(lowestPerson: u64, other: u64, comment: u64)
+
+// Output relations for Q2.
+// Likes(user, comment) is the node in the graph and edges are drawn between nodes. 
+output relation UserLikesNode(user: u64, comment: u64)
+output relation UserLikesEdge(src: UserLikesNode, dst: UserLikesNode)
+// Calculate the size of each component that has the same anchor as a node `Likes` which contains the comment Id and user Id.
+output relation SCC(anchor: UserLikesNode, size: u64)
+// One comment may have several groups of people who like the comment and form a strongly connected component.
+// e.g. A, B, C like comment one and D, E like the comment one too but are not connected to the previous group of people,
+// then comment one has two strongly connected components and the score = 2*2 + 3*3 = 13.
+// Also need to include the timestamp together with score for sorting in case multiple comments have the same score.
+output relation SCCScore(score: u64, comment: u64)
+output relation SCCScoreTimestamp(score: u64, timestamp: string, comment: u64)
+output relation Top3CommentScore(first: u64, second: u64, third: u64)
+
+// Q2: The top 3 most influential comments sorted by timestamp. 
+// LikesSameComment(comment, u1, u1) :- Likes(u1, comment). // This rule is not necessary.
+// LikesSameComment(comment, u1, u2), LikesSameComment(comment, u2, u1) :- Likes(u1, comment), Likes(u2, comment), Friend(u1, u2).
+// LikesSameComment(comment, u1, u3) :- LikesSameComment(comment, u1, u2), LikesSameComment(comment, u2, u3).
+
+// 1. Use DDLog syntax to express SCC.
+// The score for each comment is the square of the size of the strongly connected components. 
+// SCCScore(cid, score) :- LikesSameComment(cid, u1, u2), 
+    // var people = Aggregate((cid), group_count(u1)), var score = people * people.
+
+// 2. Use transformer to express SCC with native differential-dataflow implementation directly applied on some relations.
+// What if only two comments are liked but we need three top scores? If you comment then I assume you like your own comment.
+UserLikesNode(u, cid) :- Comments(cid,_,_,u,_). //, not Likes(u, cid). 
+UserLikesNode(u, cid) :- Likes(u, cid).
+
+// Add self-loop to every node in the graph.
+UserLikesEdge(l, l) :- l in UserLikesNode(u, comment). 
+UserLikesEdge(l1, l2) :- l1 in UserLikesNode(u1, comment), l2 in UserLikesNode(u2, comment), Friend(u1, u2).
+
+function convert_like1(ule: UserLikesEdge): UserLikesNode { ule.src }
+function convert_like2(ule: UserLikesEdge): UserLikesNode { ule.dst }
+
+// The result is a tuple of node Id and the lowest node Id in the group as an anchor.
+output relation SCCLabel[(UserLikesNode, UserLikesNode)]
+apply graph::SCC(UserLikesEdge, convert_like1, convert_like2) -> (SCCLabel)
+
+// Need an aggregate function to return both key and the size of each group.
+function group_count_with_key(g: Group<'K, 'V>): ('K, usize) {
+    // Return both key and the count for aggregation.
+    (group_key(g), group_count(g))
+}
+
+// Each component is represented by an anchor followed by the size of component.
+SCC(anchor, size) :- SCCLabel[(likes, likes_lowest)], 
+    var aggregation = Aggregate((likes_lowest), group_count_with_key(likes)),
+    (var anchor: UserLikesNode, var size) = aggregation
+    .
+
+// An extern function that returns the sum of each group with key.
+extern function group_sum_with_key(g: Group<'K, 'V>): ('K, 'V)
+
+// What if there are less than three comments that have a score? 
+SCCScore(sum, unique_comment) :- SCC(likes_anchor, size),
+    var comment = likes_anchor.comment,
+    var squared_size = size * size,
+    var aggregation = Aggregate((comment), group_sum_with_key(squared_size)),
+    (var unique_comment, var sum) = aggregation
+    .
+
+SCCScoreTimestamp(score, timestamp, comment) :- SCCScore(score, comment), Comments(comment, timestamp,_,_,_).
+
+// An extern function that returns the top three items as option in the group.
+extern function top_three(g: Group<'K, 'V>): ('V, 'V, 'V)
+
+Top3CommentScore(first, second, third) :- SCCScoreTimestamp(score, timestamp, comment),
+    Comments(comment, timestamp, _, _, _),
+    var aggregation = Aggregate((), top_three(comment)),
+    (var first, var second, var third) = aggregation
+    .
