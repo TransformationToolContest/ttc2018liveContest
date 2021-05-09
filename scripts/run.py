@@ -4,6 +4,7 @@
 
 """
 import argparse
+import csv
 import os
 import shutil
 import subprocess
@@ -17,6 +18,7 @@ except ImportError:
 import json
 
 BASE_DIRECTORY = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTPUT_FILE = os.path.join(BASE_DIRECTORY, "output", "output.csv")
 print("Running benchmark with root directory " + BASE_DIRECTORY)
 
 class JSONObject(object):
@@ -39,14 +41,15 @@ def build(conf, skip_tests=False):
             subprocess.check_call(config.get('build', 'default'), shell=True)
 
 
-def benchmark(conf):
+def benchmark(conf, error_on_timeout):
     """
     Runs measurements
     """
+    success = True
+    tool_combinations_run = []
     header = os.path.join(BASE_DIRECTORY, "output", "header.csv")
-    result_file = os.path.join(BASE_DIRECTORY, "output", "output.csv")
     # overwrite with the header
-    shutil.copy(header, result_file)
+    shutil.copy(header, OUTPUT_FILE)
     os.environ['Sequences'] = str(conf.Sequences)
     os.environ['Runs'] = str(conf.Runs)
     for tool in conf.Tools:
@@ -55,7 +58,13 @@ def benchmark(conf):
         set_working_directory("solutions", tool)
         os.environ['Tool'] = tool
         for query in conf.Queries:
+            cmd = config.get('run', query)
+            if not cmd:
+                print(f"Skipping: tool = {tool}, query = {query}")
+                continue
+
             os.environ['Query'] = query
+            change_set = -1
             try:
                 for change_set in conf.ChangeSets:
                     full_change_path = os.path.abspath(os.path.join(BASE_DIRECTORY, "models", change_set))
@@ -71,15 +80,14 @@ def benchmark(conf):
                     for r in range(0, conf.Runs):
                         os.environ['RunIndex'] = str(r)
 
-                        print("Running benchmark: tool = " + tool + ", change set = " + change_set +
-                              ", query = " + query)
+                        print(f"Running benchmark: tool = {tool}, change set = {change_set}, query = {query}")
 
                         # instead of subprocess.check_output()
                         # to enforce timeout before Python 3.7.5
                         # and kill sub-processes to avoid interference
                         # https://stackoverflow.com/a/36955420
                         # https://www.saltycrane.com/blog/2011/04/how-use-bash-shell-python-subprocess-instead-binsh/
-                        with subprocess.Popen(config.get('run', query), shell=True, executable='/bin/bash',
+                        with subprocess.Popen(cmd, shell=True, executable='/bin/bash',
                                               stdout=subprocess.PIPE, start_new_session=True) as process:
                             try:
                                 stdout, stderr = process.communicate(timeout=conf.Timeout)
@@ -94,14 +102,25 @@ def benchmark(conf):
                                 # Restore the backup no matter what
                                 shutil.copy(initial_xmi_backup, initial_xmi)
 
-                        with open(result_file, "ab") as file:
+                        with open(OUTPUT_FILE, "ab") as file:
                             file.write(stdout)
+
+                        # collect lines to be expected in results file
+                        tool_combinations_run.append((tool, query, change_set, str(r)))
 
                     # after the runs, delete the backup
                     os.unlink(initial_xmi_backup)
 
             except subprocess.TimeoutExpired as e:
-                print("Program reached the timeout set ({0} seconds). The command we executed was '{1}'".format(e.timeout, e.cmd))
+                msg = f"Program reached the timeout set ({e.timeout} s): " \
+                      f"tool = {tool}, change set = {change_set}, query = {query}, command: '{e.cmd}'"
+                if error_on_timeout:
+                    success = False
+                    msg = "::error::" + msg
+
+                print(msg)
+
+    return success, tool_combinations_run
 
 
 def clean_dir(*path):
@@ -125,13 +144,29 @@ def visualize():
     subprocess.check_call(["Rscript", "-e", "rmarkdown::render('report.Rmd', output_format=rmarkdown::pdf_document())"])
 
 
-def check_results():
+def check_results(conf, expected_lines):
     """
     Checks the benchmark results
     """
     clean_dir("results")
     set_working_directory("reporting")
     subprocess.check_call(["Rscript", "check_results.R"])
+
+    if expected_lines:
+        last_measurement_filter = [str(conf.Sequences),
+                                   'Initial' if conf.Sequences == 0 else 'Update',
+                                   'Time']
+        with open(OUTPUT_FILE) as output_csv:
+            csv_reader = csv.reader(output_csv, delimiter=';')
+            last_measurements = set(tuple(row[:4]) for row in csv_reader if row[4:7] == last_measurement_filter)
+            missing_lines = [line for line in expected_lines if line not in last_measurements]
+            if missing_lines:
+                for line in missing_lines:
+                    print("::error::Last measurement is missing: "
+                          "tool = {0}, change set = {2}, query = {1}, run index = {3}".format(*line))
+                return False
+
+    return True
 
 
 if __name__ == "__main__":
@@ -151,6 +186,9 @@ if __name__ == "__main__":
     parser.add_argument("-c", "--check",
                         help="check results",
                         action="store_true")
+    parser.add_argument("--error-on-timeout",
+                        help="return non-zero exit code if timeout reached during measurement",
+                        action="store_true")
     parser.add_argument("-t", "--test",
                         help="run test",
                         action="store_true")
@@ -168,13 +206,22 @@ if __name__ == "__main__":
     # with the test and the visualization/reporting
     no_args = all(not val for val in vars(args).values())
 
+    success = True
+    expected_result_lines = set()
+
     if args.debug:
         os.environ['Debug'] = 'true'
     if args.build or args.test or no_args:
         build(config, args.skip_tests and not args.test)
     if args.measure or no_args:
-        benchmark(config)
+        benchmark_success, expected_result_lines = benchmark(config, args.error_on_timeout)
+        if not benchmark_success:
+            success = False
     if args.visualize or no_args:
         visualize()
     if args.check or no_args:
-        check_results()
+        if not check_results(config, expected_result_lines):
+            success = False
+
+    if not success:
+        sys.exit(os.EX_SOFTWARE)

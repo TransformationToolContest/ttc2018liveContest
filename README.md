@@ -46,8 +46,10 @@ One might fine tune the script for the following purposes:
 * `run.py -b` -- builds the projects
 * `run.py -b -s` -- builds the projects without testing
 * `run.py -m` -- run the benchmark without building
+* `run.py -m --error-on-timeout` -- run the benchmark and return non-zero exit code if timeout reached
 * `run.py -v` -- visualizes the results of the latest benchmark
 * `run.py -c` -- check results by comparing them to the reference output. The benchmark shall already been executed using `-m`.
+  If run together, missing results are also checked.
 * `run.py -t` -- build the project and run tests (usually unit tests as defined for the given solution)
 * `run.py -d` -- runs the process in debug mode, i.e. with the `Debug` environment variable set to `true`
 
@@ -141,12 +143,15 @@ The tools supported by each image are defined in the `config` directory in the `
 - Save measurement results (`output/*`) if necessary
 - Clean all files to have a clean build:\
 `git clean -ixd` then `c` for clean if asked.
+- Make sure there are no changes: `git status`
 - If the online images are fresh, pull the images:\
 `./docker.sh --pull`
 - Build outdated images or not uploaded (without running the tests):\
 `./docker.sh --build-if-not-fresh`
-- Set the desired configuration in `config/config.json` (with the exception of "Tools")\
-E.g. `Timeout`: `600` s, `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"`
+- Set the desired configuration in `config/config.json` (with the exception of "Tools") E.g.:
+  - `ChangeSets`: `"1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"`
+  - `Runs`: `5`
+  - `Timeout`: `600` s
 - Copy generic settings from `config.json` to `config-docker-*.json` files:\
 `docker/set-configs.sh`
 - Run measurements with the desired Java heap size: (limit the CPU cores if needed: `--cpus 0-7`)\

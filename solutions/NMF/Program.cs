@@ -74,6 +74,9 @@ namespace TTC2018.LiveContest
                     case "INCREMENTAL":
                         solution = new IncrementalSolutionQ1();
                         break;
+                    case "OPTIMIZED":
+                        solution = new OptimizedIncrementalSolutionQ1();
+                        break;
                     case "TRANSACTIONS":
                         solution = new TransactionalSolutionQ1();
                         break;
@@ -93,6 +96,9 @@ namespace TTC2018.LiveContest
                         break;
                     case "INCREMENTAL":
                         solution = new IncrementalSolutionQ2();
+                        break;
+                    case "OPTIMIZED":
+                        solution = new OptimizedIncrementalSolutionQ2();
                         break;
                     case "TRANSACTIONS":
                         solution = new TransactionalSolutionQ2();

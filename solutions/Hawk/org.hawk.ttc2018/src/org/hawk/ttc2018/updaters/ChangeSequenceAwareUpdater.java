@@ -255,7 +255,7 @@ public class ChangeSequenceAwareUpdater extends GraphModelUpdater {
 
 		// Do a defensive copy - we are going to delete things
 		final List<IGraphEdge> edges = new ArrayList<>();
-		for (IGraphEdge edge : sourceNode.getEdgesWithType(name)) {
+		for (IGraphEdge edge : sourceNode.getOutgoingWithType(name)) {
 			edges.add(edge);
 		}
 		for (IGraphEdge edge : edges) {

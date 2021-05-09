@@ -24,6 +24,32 @@ namespace TTC2018.LiveContest
             query = Observable.Expression(() =>
                 SocialNetwork.Posts.TopX(3, post => ValueTuple.Create(post.Descendants().OfType<Comment>().Sum(c => 10 + c.LikedBy.Count), post.Timestamp))
             );
+
+            return QueryResult();
+        }
+
+        public override string Update(ModelChangeSet changes)
+        {
+            changes.Apply();
+            return QueryResult();
+        }
+    }
+
+    public class OptimizedIncrementalSolutionQ1 : Solution
+    {
+        private INotifyValue<KeyValuePair<IPost, (int, DateTime)>[]> query;
+
+        protected string QueryResult()
+        {
+            return string.Join("|", query.Value.Select(tuple => tuple.Key.Id));
+        }
+
+        public override string Initial()
+        {
+            query = Observable.Expression(() =>
+                SocialNetwork.Posts.MonotoneTopX(3, post => ValueTuple.Create(post.Descendants().OfType<Comment>().Sum(c => 10 + c.LikedBy.Count), post.Timestamp))
+            );
+
             return QueryResult();
         }
 
@@ -68,6 +94,40 @@ namespace TTC2018.LiveContest
             Func<IComment, Func<IUser, IEnumerableExpression<IUser>>> friendsBuilder = c => (u => u.Friends.Intersect(c.LikedBy));
             query = Observable.Expression(() =>
                 SocialNetwork.Descendants().OfType<IComment>().TopX(3, comment => ValueTuple.Create(
+                    ConnectedComponents<IUser>.Create(comment.LikedBy, friendsBuilder(comment))
+                                              .Sum(group => Squared(group.Count())),
+                    comment.Timestamp
+                ))
+            );
+            return QueryResult();
+        }
+
+        private static int Squared(int arg)
+        {
+            return arg * arg;
+        }
+
+        public override string Update(ModelChangeSet changes)
+        {
+            changes.Apply();
+            return QueryResult();
+        }
+    }
+
+    public class OptimizedIncrementalSolutionQ2 : Solution
+    {
+        private INotifyValue<KeyValuePair<IComment, (int, DateTime)>[]> query;
+
+        protected string QueryResult()
+        {
+            return string.Join("|", query.Value.Select(tuple => tuple.Key.Id));
+        }
+
+        public override string Initial()
+        {
+            Func<IComment, Func<IUser, IEnumerableExpression<IUser>>> friendsBuilder = c => (u => u.Friends.Intersect(c.LikedBy));
+            query = Observable.Expression(() =>
+                SocialNetwork.Descendants().OfType<IComment>().MonotoneTopX(3, comment => ValueTuple.Create(
                     ConnectedComponents<IUser>.Create(comment.LikedBy, friendsBuilder(comment))
                                               .Sum(group => Squared(group.Count())),
                     comment.Timestamp

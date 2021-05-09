@@ -89,15 +89,8 @@ public class BatchLauncher extends AbstractLauncher {
 	}
 
 	@Override
-	protected void initialization(StandaloneHawk hawk) throws Exception {
-		super.initialization(hawk);
-		registerDerivedAttribute(hawk);
-	}
-
-	@Override
 	protected void modelLoading(final StandaloneHawk hawk) throws Throwable {
-		hawk.requestFileIndex(new File(opts.getChangePath(), INITIAL_MODEL_FILENAME));
-		hawk.waitForSync();
+		hawk.performAndWaitForSync(() -> hawk.requestFileIndex(new File(opts.getChangePath(), INITIAL_MODEL_FILENAME)));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -107,13 +100,9 @@ public class BatchLauncher extends AbstractLauncher {
 		return (List<List<Object>>) hawk.eol(opts.getQuery().getDerivedQuery());
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Throwable {
 		Map<String, String> env = System.getenv();
-		try {
-			new BatchLauncher(new LauncherOptions(env)).run();
-		} catch (Throwable e) {
-			LOGGER.error(e.getMessage(), e);
-		}
+		new BatchLauncher(new LauncherOptions(env)).run();
 	}
 
 	@Override

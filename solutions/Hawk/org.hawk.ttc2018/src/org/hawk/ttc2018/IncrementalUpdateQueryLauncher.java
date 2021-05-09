@@ -219,13 +219,14 @@ public class IncrementalUpdateQueryLauncher extends AbstractIncrementalUpdateLau
 		listener = new QueryUpdateListener();
 	}
 
-	public static void main(String[] args) {
+	@Override
+	protected void registerDerivedAttribute(StandaloneHawk hawk) throws IOException {
+		/* no derived attribute for IUQ */
+	}
+
+	public static void main(String[] args) throws Throwable {
 		Map<String, String> env = System.getenv();
-		try {
-			new IncrementalUpdateQueryLauncher(new LauncherOptions(env)).run();
-		} catch (Throwable e) {
-			LOGGER.error(e.getMessage(), e);
-		}
+		new IncrementalUpdateQueryLauncher(new LauncherOptions(env)).run();
 	}
 
 	@Override

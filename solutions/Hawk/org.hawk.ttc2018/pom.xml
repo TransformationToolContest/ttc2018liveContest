@@ -13,6 +13,7 @@
   <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <logback.version>1.2.3</logback.version>
     <hawk.version>2.2.0-SNAPSHOT</hawk.version>
     <epsilon.version>2.0.0</epsilon.version>
@@ -140,6 +141,10 @@
       <id>ossrh-snapshots</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
+    <repository>
+      <id>gitlab-maven-sqlite</id>
+      <url>https://gitlab.com/api/v4/projects/26325704/packages/maven</url>
+    </repository>
   </repositories>
 
   <profiles>
@@ -150,8 +155,7 @@
       <id>greycat</id>
       <activation>
         <property>
-          <name>backend</name>
-          <value>!neo4j</value>
+          <name>!backend</name>
         </property>
       </activation>
       <properties>
@@ -187,6 +191,26 @@
     </profile>
 
     <profile>
+      <id>sqlite</id>
+      <activation>
+        <property>
+          <name>backend</name>
+          <value>sqlite</value>
+        </property>
+      </activation>
+      <properties>
+        <hawk.dbClass>org.hawklabs.sqlite.SQLiteDatabase</hawk.dbClass>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>org.hawklabs</groupId>
+          <artifactId>sqlite</artifactId>
+          <version>2.2.0-SNAPSHOT</version>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <profile>
       <id>batch</id>
       <build>
         <plugins>
@@ -201,6 +225,8 @@
               <arguments>
                 <argument>-Xmx6G</argument>
                 <argument>-Xms6G</argument>
+                <argument>-XX:+UseG1GC</argument>
+                <argument>-XX:+UseStringDeduplication</argument>
                 <argument>-classpath</argument>
                 <!-- automatically creates the classpath using all project dependencies,
                      also adding the project build directory -->

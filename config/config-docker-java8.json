@@ -13,7 +13,10 @@
       "HawkIncUpdateQuery",
       "HawkNeo4J",
       "HawkNeo4JIncUpdate",
-      "HawkNeo4JIncUpdateQuery"
+      "HawkNeo4JIncUpdateQuery",
+      "HawkSQLite",
+      "HawkSQLiteIncUpdate",
+      "HawkSQLiteIncUpdateQuery"
   ],
   "ChangeSets": [
     "1", "2"
