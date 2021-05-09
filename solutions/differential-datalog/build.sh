@@ -16,6 +16,12 @@ echo The location of ddlog binary is $(which $DDLOG_HOME/bin/ddlog)
 cd "$TARGET"
 # Create runtime for socialnetwork domain
 "$DDLOG_HOME/bin/ddlog" -i "$TARGET.dl"
+
+# https://stackoverflow.com/a/35412000
+if declare -p DIFFERENTIAL_DATALOG_DISABLE_DEBUG &>/dev/null ; then
+    echo -e "\n[profile.dev]\ndebug = false" | tee -a ${TARGET}_*/Cargo.toml
+fi
+
 # Open the folder and build the runtime in Rust
 pushd "${TARGET}_ddlog"
 cargo build --release
