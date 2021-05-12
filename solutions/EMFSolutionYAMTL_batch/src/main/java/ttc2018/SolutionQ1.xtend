@@ -1,5 +1,8 @@
 package ttc2018;
 
+import Changes.ModelChange
+import Changes.ModelChangeSet
+import org.eclipse.emf.common.util.EList
 import ttc2018.yamtl.Q1_yamtl
 import yamtl.core.YAMTLModule.ExecutionPhase
 
@@ -13,17 +16,23 @@ class SolutionQ1 extends Solution {
 	}
 	
 	override String Initial() {
-		xform.enableUpfrontResizingWithOverflow()
 		xform.execute()
 		(xform as Q1_yamtl).bestThree.map[id].join('|')
 	}
 
-	override String Update(String deltaName) {
+	override String Update(String deltaName, ModelChangeSet changes) {
 		(xform as Q1_yamtl).threeBestCandidates.clear()
 		xform.reset()
 		
-		xform.applyDelta('sn', deltaName)
-		
+		val nmfChange = [|
+	        val EList<ModelChange> coll = changes.getChanges();
+			for (ModelChange change : coll) {
+				change.apply();
+			}
+			void
+		]
+		xform.applyDelta('sn', deltaName, nmfChange)
+	
 		xform.execute()
 		(xform as Q1_yamtl).bestThree.map[id].join('|')
 	}

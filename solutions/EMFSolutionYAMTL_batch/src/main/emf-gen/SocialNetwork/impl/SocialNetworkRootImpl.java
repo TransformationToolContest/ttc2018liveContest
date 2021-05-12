@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.BasicInternalEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -83,7 +83,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public EList<Post> getPosts() {
 		if (posts == null) {
-			posts = new BasicInternalEList<Post>(Post.class);
+			posts = new EObjectContainmentEList<Post>(Post.class, this, SocialNetworkPackage.SOCIAL_NETWORK_ROOT__POSTS);
 		}
 		return posts;
 	}
@@ -96,7 +96,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public EList<User> getUsers() {
 		if (users == null) {
-			users = new BasicInternalEList<User>(User.class);
+			users = new EObjectContainmentEList<User>(User.class, this, SocialNetworkPackage.SOCIAL_NETWORK_ROOT__USERS);
 		}
 		return users;
 	}

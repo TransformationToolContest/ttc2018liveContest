@@ -1,11 +1,10 @@
 package ttc2018;
 
 import Changes.ChangesPackage
-import Changes.ModelChange
 import Changes.ModelChangeSet
 import SocialNetwork.SocialNetworkPackage
 import SocialNetwork.SocialNetworkRoot
-import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 class LiveContestDriver {
 
@@ -39,6 +38,7 @@ class LiveContestDriver {
     {
 		val modelPath = '''«ChangePath»/«path»'''
 		solution.xform.loadInputModels(#{'sn' -> modelPath})
+		solution.xform.adaptInputModel('sn')
 		val mRes = solution.xform.getModelResource('sn')
 		
     	return mRes.getContents().get(0);
@@ -46,9 +46,9 @@ class LiveContestDriver {
     
     def private static Object loadDeltaFile(String path) 
     {
-//		val modelPath = '''«ChangePath»/«path»'''
-//		val res = solution.xform.loadModel(modelPath, true)
-//		res.contents.head
+		val modelPath = '''«ChangePath»/«path»'''
+		val res = solution.xform.loadModel(modelPath, true)
+		res.contents.head
     }
 
     def static void Load()
@@ -99,22 +99,11 @@ class LiveContestDriver {
 
     def static void Update(int iteration)
     {
-//        val deltaName = String.format("change%02d", iteration);
-//    	val ModelChangeSet changes = loadDeltaFile(deltaName + '.xmi') as ModelChangeSet
-//        val EList<ModelChange> coll = changes.getChanges();
-//        // the change is recorded, undone and stored as a forward change
-//		solution.xform.recordDelta('sn', deltaName, [
-//			for (ModelChange change : coll) {
-//				change.apply();
-//			}
-//			newHashMap
-//		])
-		val paddedIteration = String.format("%02d", iteration)
-		val deltaName = '''change«paddedIteration».documented.xmi'''
-		val deltaPath = '''«ChangePath»/«deltaName»'''
-		solution.xform.loadDelta('sn', deltaName, deltaPath)
+        val deltaName = String.format("change%02d", iteration);
+    	val ModelChangeSet changes = loadDeltaFile(deltaName + '.xmi') as ModelChangeSet
+    	EcoreUtil.resolveAll(changes)
         stopwatch = System.nanoTime();
-        val String result = solution.Update(deltaName);
+        val String result = solution.Update(deltaName, changes);
         stopwatch = System.nanoTime() - stopwatch;
         Report(BenchmarkPhase.Update, iteration, result);
     }
@@ -128,11 +117,11 @@ class LiveContestDriver {
     		iterationStr = Integer.toString(iteration);
     	}
         System.out.println(String.format("%s;%s;%s;%s;%s;%s;Time;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(stopwatch)));
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
+//        Runtime.getRuntime().gc();
+//        Runtime.getRuntime().gc();
+//        Runtime.getRuntime().gc();
+//        Runtime.getRuntime().gc();
+//        Runtime.getRuntime().gc();
         val long memoryUsed = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         System.out.println(String.format("%s;%s;%s;%s;%s;%s;Memory;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(memoryUsed)));
         if (result !== null)

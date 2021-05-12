@@ -1,5 +1,6 @@
 package ttc2018;
 
+import Changes.ModelChangeSet
 import SocialNetwork.SocialNetworkRoot
 import yamtl.core.YAMTLModule
 
@@ -18,6 +19,6 @@ abstract class Solution {
 
     def abstract String Initial();
 
-    def abstract String Update(String deltaName);
+    def abstract String Update(String deltaName, ModelChangeSet changes);
 	
 }
