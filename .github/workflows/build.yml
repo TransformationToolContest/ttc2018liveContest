@@ -17,9 +17,9 @@ jobs:
           # do not skip tests in CI
           sed -i "s|RUN scripts/run.py -b --skip-tests|RUN scripts/run.py -b|" docker/Dockerfile-*
 
-          # do not use slow release mode for Rust build
-          sed -i s/--release// solutions/differential*/solution.ini
-          sed -i "s|/release/|/debug/|" solutions/differential*/solution.ini
+          # do not use slow release mode for Rust builds
+          sed -i "s/--release//;s|/release/|/debug/|;s|\./build\.sh|DIFFERENTIAL_DATALOG_DISABLE_DEBUG= \0|g" \
+            solutions/differential*/{solution.ini,build.sh}
 
           ./docker.sh --pull                  # pull available images
           ./docker.sh --build-if-not-fresh    # (re)build image if different than current commit
