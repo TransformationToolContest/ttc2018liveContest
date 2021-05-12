@@ -173,11 +173,8 @@ fn load_data(filename: &str) -> Vec<Vec<String>> {
 }
 
 fn main() {
+    let mut timer = std::time::Instant::now();
     let mut bse = DDLogSNQ1::new().unwrap();
-    // let mut delta = bse.add_edges(edges).unwrap();
-    // DDLogSocialNetwork::dump_delta(&delta);
-    // assert!(false);
-
     // We hardcode some parameters here as default options.
     let change_path = std::env::var("ChangePath").unwrap_or("None".to_string());
     // Run how many times for the same query? Only once by default.
@@ -194,9 +191,7 @@ fn main() {
         path = format!("{}/", change_path);
     }
 
-    let mut timer = std::time::Instant::now();
-
-    println!("{:?};{:?};{};{};0;\"Initialization\";\"Time\";{}", tool, query, change_set, run_index, timer.elapsed().as_millis());
+    println!("{:?};{:?};{};{};0;\"Initialization\";\"Time\";{}", tool, query, change_set, run_index, timer.elapsed().as_nanos());
     timer = std::time::Instant::now();
 
     // Return lists of lists of strings.
@@ -205,9 +200,6 @@ fn main() {
     let likes = load_data(&format!("{}csv-likes-initial.csv", path));
     let posts = load_data(&format!("{}csv-posts-initial.csv", path));
     let users = load_data(&format!("{}csv-users-initial.csv", path));
-
-    println!("{:?};{:?};{};{};0;\"Load\";\"Time\";{}", tool, query, change_set, run_index, timer.elapsed().as_millis());
-    timer = std::time::Instant::now();
 
     // Merge all updates here from different relations.
     let mut updates = vec![];
@@ -222,6 +214,9 @@ fn main() {
     updates.extend(know_updates);
     updates.extend(comment_updates);
     updates.extend(post_updates);
+
+    println!("{:?};{:?};{};{};0;\"Load\";\"Time\";{}", tool, query, change_set, run_index, timer.elapsed().as_nanos());
+    timer = std::time::Instant::now();
 
     let mut delta = bse.flush_updates(updates).unwrap();
 
