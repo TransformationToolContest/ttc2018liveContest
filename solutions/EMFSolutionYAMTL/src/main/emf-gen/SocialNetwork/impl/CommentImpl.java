@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.BasicInternalEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -83,7 +83,7 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 	@Override
 	public EList<User> getLikedBy() {
 		if (likedBy == null) {
-			likedBy = new BasicInternalEList<User>(User.class);
+			likedBy = new EObjectWithInverseResolvingEList.ManyInverse<User>(User.class, this, SocialNetworkPackage.COMMENT__LIKED_BY, SocialNetworkPackage.USER__LIKES);
 		}
 		return likedBy;
 	}

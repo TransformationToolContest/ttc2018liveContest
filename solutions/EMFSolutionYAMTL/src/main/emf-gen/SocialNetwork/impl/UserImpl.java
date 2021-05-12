@@ -9,6 +9,7 @@ import SocialNetwork.User;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -16,9 +17,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.BasicInternalEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -145,7 +148,10 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	 */
 	@Override
 	public void setId(String newId) {
+		String oldId = id;
 		id = newId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SocialNetworkPackage.USER__ID, oldId, id));
 	}
 
 	/**
@@ -165,7 +171,10 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	 */
 	@Override
 	public void setName(String newName) {
+		String oldName = name;
 		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SocialNetworkPackage.USER__NAME, oldName, name));
 	}
 
 	/**
@@ -176,7 +185,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	@Override
 	public EList<Submission> getSubmissions() {
 		if (submissions == null) {
-			submissions = new BasicInternalEList<Submission>(Submission.class);
+			submissions = new EObjectWithInverseResolvingEList<Submission>(Submission.class, this, SocialNetworkPackage.USER__SUBMISSIONS, SocialNetworkPackage.SUBMISSION__SUBMITTER);
 		}
 		return submissions;
 	}
@@ -189,7 +198,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	@Override
 	public EList<Comment> getLikes() {
 		if (likes == null) {
-			likes = new BasicInternalEList<Comment>(Comment.class);
+			likes = new EObjectWithInverseResolvingEList.ManyInverse<Comment>(Comment.class, this, SocialNetworkPackage.USER__LIKES, SocialNetworkPackage.COMMENT__LIKED_BY);
 		}
 		return likes;
 	}
@@ -202,7 +211,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 	@Override
 	public EList<User> getFriends() {
 		if (friends == null) {
-			friends = new BasicInternalEList<User>(User.class);
+			friends = new EObjectResolvingEList<User>(User.class, this, SocialNetworkPackage.USER__FRIENDS);
 		}
 		return friends;
 	}
