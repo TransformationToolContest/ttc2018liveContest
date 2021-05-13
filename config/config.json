@@ -3,11 +3,11 @@
     "Q1",
     "Q2"
   ],
-  "Tools": ["EMFSolutionYAMTL", "EMFSolutionYAMTL_expl", "EMFSolutionYAMTL_batch"],
+  "Tools": ["ExampleTool"],
   "ChangeSets": [
-    "1", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"
+    "1", "2"
   ],
   "Sequences": 20,
   "Runs": 1,
-  "Timeout": 360
+  "Timeout": 180
 }
