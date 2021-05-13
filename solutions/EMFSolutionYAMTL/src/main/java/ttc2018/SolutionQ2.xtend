@@ -2,10 +2,7 @@ package ttc2018;
 
 import Changes.ModelChange
 import Changes.ModelChangeSet
-import SocialNetwork.Comment
-import java.util.HashMap
 import org.eclipse.emf.common.util.EList
-import ttc2018.yamtl.FriendComponentUtil_UF
 import ttc2018.yamtl.Q2_yamtl
 import yamtl.core.YAMTLModule.ExecutionMode
 import yamtl.core.YAMTLModule.ExecutionPhase
@@ -21,7 +18,6 @@ class SolutionQ2 extends Solution {
 	}
 
 	override String Initial() {
-		(xform as Q2_yamtl).componentList = new HashMap<Comment,FriendComponentUtil_UF>(xform.initialSizeFactor)
 		xform.execute()
 		(xform as Q2_yamtl).bestThree.map[id].join('|')
 	}

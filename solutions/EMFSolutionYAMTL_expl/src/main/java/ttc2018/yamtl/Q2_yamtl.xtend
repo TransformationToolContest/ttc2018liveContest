@@ -26,7 +26,7 @@ class Q2_yamtl extends YAMTLModule {
 	val List<Submission> candidatesWithNilScore = newArrayList
 
 	@Accessors
-	var Map<Comment,FriendComponentUtil_UF> componentList
+	var Map<Comment,FriendComponentUtil_UF> componentMap
 	
 	new () {
 		header().in('sn', SN).out('out', SN)
@@ -38,14 +38,11 @@ class Q2_yamtl extends YAMTLModule {
 						var score = 0
 						var matches = false
 						
-						if (comment.likedBy !== null && comment.likedBy.size > 0) {
-							var fc = componentList.get(comment)
+						if (comment.likedBy.size > 0) {
+							var fc = componentMap.get(comment)
 							if (fc===null) {
 								fc = new FriendComponentUtil_UF(comment.likedBy)
-								score = fc.score
-								threeBestCandidates.addIfIsThreeBest(comment, score)
-								componentList.put(comment, fc)
-								matches = true
+								componentMap.put(comment, fc)
 							} else {
 								val map = this.fetch('dirtyFeatures') as Map<EObject,List<YAMTLFeatureValueChange>>
 								for (e: map.entrySet) {
@@ -56,9 +53,10 @@ class Q2_yamtl extends YAMTLModule {
 										}
 									}
 								}
-								score = fc.score
-								threeBestCandidates.addIfIsThreeBest(comment, score)
 							}
+							score = fc.score
+							threeBestCandidates.addIfIsThreeBest(comment, score)
+							matches = true
 						} else {
 							if (threeBestCandidates.size <= 3)
 								candidatesWithNilScore.add(comment)
