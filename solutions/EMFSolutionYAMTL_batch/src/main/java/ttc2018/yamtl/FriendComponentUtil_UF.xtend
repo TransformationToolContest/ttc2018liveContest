@@ -7,12 +7,12 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 class FriendComponentUtil_UF {
 	@Accessors
-	var WeightedQuickUnionUF uf;
+	var WeightedQuickUnionPathCompressionUF uf;
 	val Map<User,Integer> userIndex = newHashMap
 	
 	// computes connected components
 	new(List<User> userList) {
-		uf = new WeightedQuickUnionUF(userList.size)
+		uf = new WeightedQuickUnionPathCompressionUF(userList.size)
 		var i = 0
 		for (u: userList) {
 			userIndex.put(u,i++)
