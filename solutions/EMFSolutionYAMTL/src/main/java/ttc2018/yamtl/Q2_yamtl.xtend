@@ -4,7 +4,6 @@ import SocialNetwork.Comment
 import SocialNetwork.SocialNetworkPackage
 import SocialNetwork.Submission
 import java.util.List
-import java.util.Map
 import org.eclipse.xtend.lib.annotations.Accessors
 import yamtl.core.YAMTLModule
 
@@ -22,9 +21,6 @@ class Q2_yamtl extends YAMTLModule {
 	@Accessors
 	val List<Submission> candidatesWithNilScore = newArrayList
 
-	@Accessors
-	var Map<Comment,FriendComponentUtil_UF> componentList
-	
 	new () {
 		header().in('sn', SN).out('out', SN)
 		ruleStore( newArrayList(
@@ -35,12 +31,10 @@ class Q2_yamtl extends YAMTLModule {
 						var score = 0
 						var matches = false
 						
-						if (comment.likedBy !== null && comment.likedBy.size > 0) {
-							var fc = componentList.get(comment)
-							fc = new FriendComponentUtil_UF(comment.likedBy)
+						if (comment.likedBy.size > 0) {
+							val fc = new FriendComponentUtil_UF(comment.likedBy)
 							score = fc.score
 							threeBestCandidates.addIfIsThreeBest(comment, score)
-							componentList.put(comment, fc)
 							matches = true
 						} else {
 							if (threeBestCandidates.size <= 3)
@@ -57,3 +51,5 @@ class Q2_yamtl extends YAMTLModule {
 		threeBestCandidates.getBestThree(candidatesWithNilScore)
 	}
 }
+
+

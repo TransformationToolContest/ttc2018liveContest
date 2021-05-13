@@ -38,7 +38,7 @@ class Q2_yamtl extends YAMTLModule {
 						var score = 0
 						var matches = false
 						
-						if (comment.likedBy !== null && comment.likedBy.size > 0) {
+						if (comment.likedBy.size > 0) {
 							var fc = componentList.get(comment)
 							if (fc===null) {
 								fc = new FriendComponentUtil_UF(comment.likedBy)
