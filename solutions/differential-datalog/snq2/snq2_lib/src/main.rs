@@ -166,11 +166,8 @@ fn load_data(filename: &str) -> Vec<Vec<String>> {
 }
 
 fn main() {
+    let mut timer = std::time::Instant::now();
     let mut bse = DDLogSNQ2::new().unwrap();
-    // let mut delta = bse.add_edges(edges).unwrap();
-    // DDLogSocialNetwork::dump_delta(&delta);
-    // assert!(false);
-
     // We hardcode some parameters here as default options.
     let change_path = std::env::var("ChangePath").unwrap_or("None".to_string());
     // Run how many times for the same query? Only once by default.
@@ -187,9 +184,7 @@ fn main() {
         path = format!("{}/", change_path);
     }
 
-    let mut timer = std::time::Instant::now();
-
-    println!("{:?};{:?};{};{};0;\"Initialization\";\"Time\";{}", tool, query, change_set, run_index, timer.elapsed().as_millis());
+    println!("{:?};{:?};{};{};0;\"Initialization\";\"Time\";{}", tool, query, change_set, run_index, timer.elapsed().as_nanos());
     timer = std::time::Instant::now();
 
     // Return lists of lists of strings.
@@ -198,9 +193,6 @@ fn main() {
     let likes = load_data(&format!("{}csv-likes-initial.csv", path));
     let posts = load_data(&format!("{}csv-posts-initial.csv", path));
     let users = load_data(&format!("{}csv-users-initial.csv", path));
-
-    println!("{:?};{:?};{};{};0;\"Load\";\"Time\";{}", tool, query, change_set, run_index, timer.elapsed().as_millis());
-    timer = std::time::Instant::now();
 
     // Merge all updates here from different relations.
     let mut updates = vec![];
@@ -216,16 +208,15 @@ fn main() {
     updates.extend(comment_updates);
     updates.extend(post_updates);
 
-    let mut delta = bse.flush_updates(updates).unwrap();
+    println!("{:?};{:?};{};{};0;\"Load\";\"Time\";{}", tool, query, change_set, run_index, timer.elapsed().as_nanos());
+    timer = std::time::Instant::now();
 
-    println!("{:?};{:?};{};{};0;\"Initial\";\"Time\";{}", tool, query, change_set, run_index, timer.elapsed().as_nanos());
-    // timer = std::time::Instant::now();
+    let mut delta = bse.flush_updates(updates).unwrap();
 
     // Print out the delta after the changes to relations.
     // DDLogSNQ2::dump_delta(&delta);
 
     let mut three_score_str = "WRONG".to_string();
-
     let top3_changes = delta.get_rel(Relations::Top3CommentScore as RelId);
     for (val, _weight) in top3_changes.clone() {
         let three_score: Top3CommentScore = Top3CommentScore::from_record(&val.into_record()).unwrap();

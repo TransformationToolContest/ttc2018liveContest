@@ -18,8 +18,9 @@ cd "$TARGET"
 "$DDLOG_HOME/bin/ddlog" -i "$TARGET.dl"
 
 # https://stackoverflow.com/a/35412000
+# https://github.com/indaq-cloud/folly/commit/438ad098718c339b7ab29a30c8d281d2f4c082ec
 if declare -p DIFFERENTIAL_DATALOG_DISABLE_DEBUG &>/dev/null ; then
-    echo -e "\n[profile.dev]\ndebug = false" | tee -a ${TARGET}_*/Cargo.toml
+    echo -e "\n[profile.dev]\ndebug = false\nincremental = false" | tee -a ${TARGET}_*/Cargo.toml
 fi
 
 # Open the folder and build the runtime in Rust
