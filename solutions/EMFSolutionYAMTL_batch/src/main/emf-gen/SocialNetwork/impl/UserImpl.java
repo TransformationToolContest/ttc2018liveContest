@@ -230,7 +230,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 			case SocialNetworkPackage.USER__LIKES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLikes()).basicAdd(otherEnd, msgs);
 		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
+		return eDynamicInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -246,7 +246,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 			case SocialNetworkPackage.USER__LIKES:
 				return ((InternalEList<?>)getLikes()).basicRemove(otherEnd, msgs);
 		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -268,7 +268,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 			case SocialNetworkPackage.USER__FRIENDS:
 				return getFriends();
 		}
-		return super.eGet(featureID, resolve, coreType);
+		return eDynamicGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -299,7 +299,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 				getFriends().addAll((Collection<? extends User>)newValue);
 				return;
 		}
-		super.eSet(featureID, newValue);
+		eDynamicSet(featureID, newValue);
 	}
 
 	/**
@@ -326,7 +326,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 				getFriends().clear();
 				return;
 		}
-		super.eUnset(featureID);
+		eDynamicUnset(featureID);
 	}
 
 	/**
@@ -348,7 +348,7 @@ public class UserImpl extends MinimalEObjectImpl.Container implements User {
 			case SocialNetworkPackage.USER__FRIENDS:
 				return friends != null && !friends.isEmpty();
 		}
-		return super.eIsSet(featureID);
+		return eDynamicIsSet(featureID);
 	}
 
 	/**

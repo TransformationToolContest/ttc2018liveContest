@@ -1,0 +1,1 @@
+EMF 2.14 Release (Built: 2018-05-31 at 07:18): http://download.eclipse.org/modeling/emf/emf/builds/release/2.14/index.html

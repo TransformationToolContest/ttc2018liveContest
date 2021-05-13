@@ -1,15 +1,15 @@
 package ttc2018;
 
 import Changes.ChangesPackage
-import Changes.ModelChange
 import Changes.ModelChangeSet
 import SocialNetwork.SocialNetworkPackage
 import SocialNetwork.SocialNetworkRoot
-import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.ecore.util.EcoreUtil
 
 class LiveContestDriver {
 
-	def static void main(String[] args) {
+	def static void main(String[] args) 
+	{
 		try {
 	        Initialize();
 	        Load();
@@ -34,14 +34,18 @@ class LiveContestDriver {
 
     static Solution solution;
 
-    def private static Object loadFile(String path) {
+    def private static Object loadFile(String path) 
+    {
 		val modelPath = '''«ChangePath»/«path»'''
 		solution.xform.loadInputModels(#{'sn' -> modelPath})
+		solution.xform.adaptInputModel('sn')
 		val mRes = solution.xform.getModelResource('sn')
 		
     	return mRes.getContents().get(0);
     }
-    def private static Object loadDeltaFile(String path) {
+    
+    def private static Object loadDeltaFile(String path) 
+    {
 		val modelPath = '''«ChangePath»/«path»'''
 		val res = solution.xform.loadModel(modelPath, true)
 		res.contents.head
@@ -97,16 +101,9 @@ class LiveContestDriver {
     {
         val deltaName = String.format("change%02d", iteration);
     	val ModelChangeSet changes = loadDeltaFile(deltaName + '.xmi') as ModelChangeSet
-        val EList<ModelChange> coll = changes.getChanges();
-		// the change is recorded, undone and stored as a forward change in the source model
-		solution.xform.recordDelta('sn', deltaName, [
-			for (ModelChange change : coll) {
-				change.apply();
-			}
-			newHashMap
-		])
+    	EcoreUtil.resolveAll(changes)
         stopwatch = System.nanoTime();
-        val String result = solution.Update(deltaName);
+        val String result = solution.Update(deltaName, changes);
         stopwatch = System.nanoTime() - stopwatch;
         Report(BenchmarkPhase.Update, iteration, result);
     }
@@ -120,13 +117,13 @@ class LiveContestDriver {
     		iterationStr = Integer.toString(iteration);
     	}
         System.out.println(String.format("%s;%s;%s;%s;%s;%s;Time;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(stopwatch)));
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().gc();
-        val long memoryUsed = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-        System.out.println(String.format("%s;%s;%s;%s;%s;%s;Memory;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(memoryUsed)));
+//        Runtime.getRuntime().gc();
+//        Runtime.getRuntime().gc();
+//        Runtime.getRuntime().gc();
+//        Runtime.getRuntime().gc();
+//        Runtime.getRuntime().gc();
+//        val long memoryUsed = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+//        System.out.println(String.format("%s;%s;%s;%s;%s;%s;Memory;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), Long.toString(memoryUsed)));
         if (result !== null)
         {
             System.out.println(String.format("%s;%s;%s;%s;%s;%s;Elements;%s", Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), result));

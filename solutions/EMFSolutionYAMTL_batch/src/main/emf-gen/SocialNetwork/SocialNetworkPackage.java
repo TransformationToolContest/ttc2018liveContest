@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EReference;
  * <ul>
  *   <li>each class,</li>
  *   <li>each feature of each class,</li>
- *   <li>each operation of each class,</li>
  *   <li>each enum,</li>
  *   <li>and each data type</li>
  * </ul>
@@ -121,15 +120,6 @@ public interface SocialNetworkPackage extends EPackage {
 	int SUBMISSION_FEATURE_COUNT = 5;
 
 	/**
-	 * The number of operations of the '<em>Submission</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUBMISSION_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link SocialNetwork.impl.PostImpl <em>Post</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -192,15 +182,6 @@ public interface SocialNetworkPackage extends EPackage {
 	 * @ordered
 	 */
 	int POST_FEATURE_COUNT = SUBMISSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Post</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POST_OPERATION_COUNT = SUBMISSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link SocialNetwork.impl.CommentImpl <em>Comment</em>}' class.
@@ -285,15 +266,6 @@ public interface SocialNetworkPackage extends EPackage {
 	int COMMENT_FEATURE_COUNT = SUBMISSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of operations of the '<em>Comment</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMMENT_OPERATION_COUNT = SUBMISSION_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link SocialNetwork.impl.UserImpl <em>User</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -358,15 +330,6 @@ public interface SocialNetworkPackage extends EPackage {
 	int USER_FEATURE_COUNT = 5;
 
 	/**
-	 * The number of operations of the '<em>User</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USER_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link SocialNetwork.impl.SocialNetworkRootImpl <em>Root</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -402,15 +365,6 @@ public interface SocialNetworkPackage extends EPackage {
 	 * @ordered
 	 */
 	int SOCIAL_NETWORK_ROOT_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>Root</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SOCIAL_NETWORK_ROOT_OPERATION_COUNT = 0;
 
 
 	/**
@@ -632,7 +586,6 @@ public interface SocialNetworkPackage extends EPackage {
 	 * <ul>
 	 *   <li>each class,</li>
 	 *   <li>each feature of each class,</li>
-	 *   <li>each operation of each class,</li>
 	 *   <li>each enum,</li>
 	 *   <li>and each data type</li>
 	 * </ul>

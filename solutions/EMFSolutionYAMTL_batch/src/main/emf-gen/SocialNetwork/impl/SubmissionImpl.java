@@ -301,7 +301,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 			case SocialNetworkPackage.SUBMISSION__COMMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getComments()).basicAdd(otherEnd, msgs);
 		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
+		return eDynamicInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -317,7 +317,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 			case SocialNetworkPackage.SUBMISSION__COMMENTS:
 				return ((InternalEList<?>)getComments()).basicRemove(otherEnd, msgs);
 		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -340,7 +340,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 			case SocialNetworkPackage.SUBMISSION__COMMENTS:
 				return getComments();
 		}
-		return super.eGet(featureID, resolve, coreType);
+		return eDynamicGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -369,7 +369,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 				getComments().addAll((Collection<? extends Comment>)newValue);
 				return;
 		}
-		super.eSet(featureID, newValue);
+		eDynamicSet(featureID, newValue);
 	}
 
 	/**
@@ -396,7 +396,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 				getComments().clear();
 				return;
 		}
-		super.eUnset(featureID);
+		eDynamicUnset(featureID);
 	}
 
 	/**
@@ -418,7 +418,7 @@ public abstract class SubmissionImpl extends MinimalEObjectImpl.Container implem
 			case SocialNetworkPackage.SUBMISSION__COMMENTS:
 				return comments != null && !comments.isEmpty();
 		}
-		return super.eIsSet(featureID);
+		return eDynamicIsSet(featureID);
 	}
 
 	/**

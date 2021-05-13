@@ -39,3 +39,9 @@ changes/1024/
 # IntelliJ
 .idea/
 *.iml
+models-yamtl/
+solutions/EMFSolutionYAMTL_element/
+solutions/EMFSolutionYAMTL_helpersOnly_v1/
+solutions/EMFSolutionYAMTL_indexed
+solutions/EMFSolutionYAMTL_uf
+**/*.documented.xmi

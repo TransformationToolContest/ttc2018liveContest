@@ -114,7 +114,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 			case SocialNetworkPackage.SOCIAL_NETWORK_ROOT__USERS:
 				return ((InternalEList<?>)getUsers()).basicRemove(otherEnd, msgs);
 		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 			case SocialNetworkPackage.SOCIAL_NETWORK_ROOT__USERS:
 				return getUsers();
 		}
-		return super.eGet(featureID, resolve, coreType);
+		return eDynamicGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 				getUsers().addAll((Collection<? extends User>)newValue);
 				return;
 		}
-		super.eSet(featureID, newValue);
+		eDynamicSet(featureID, newValue);
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 				getUsers().clear();
 				return;
 		}
-		super.eUnset(featureID);
+		eDynamicUnset(featureID);
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class SocialNetworkRootImpl extends MinimalEObjectImpl.Container implemen
 			case SocialNetworkPackage.SOCIAL_NETWORK_ROOT__USERS:
 				return users != null && !users.isEmpty();
 		}
-		return super.eIsSet(featureID);
+		return eDynamicIsSet(featureID);
 	}
 
 } //SocialNetworkRootImpl

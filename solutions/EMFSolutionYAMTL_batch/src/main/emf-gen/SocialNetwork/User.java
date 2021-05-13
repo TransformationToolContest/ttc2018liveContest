@@ -30,10 +30,6 @@ public interface User extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
@@ -56,10 +52,6 @@ public interface User extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
@@ -84,10 +76,6 @@ public interface User extends EObject {
 	 * The list contents are of type {@link SocialNetwork.Submission}.
 	 * It is bidirectional and its opposite is '{@link SocialNetwork.Submission#getSubmitter <em>Submitter</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Submissions</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Submissions</em>' reference list.
 	 * @see SocialNetwork.SocialNetworkPackage#getUser_Submissions()
@@ -102,10 +90,6 @@ public interface User extends EObject {
 	 * The list contents are of type {@link SocialNetwork.Comment}.
 	 * It is bidirectional and its opposite is '{@link SocialNetwork.Comment#getLikedBy <em>Liked By</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Likes</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Likes</em>' reference list.
 	 * @see SocialNetwork.SocialNetworkPackage#getUser_Likes()
@@ -119,10 +103,6 @@ public interface User extends EObject {
 	 * Returns the value of the '<em><b>Friends</b></em>' reference list.
 	 * The list contents are of type {@link SocialNetwork.User}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Friends</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Friends</em>' reference list.
 	 * @see SocialNetwork.SocialNetworkPackage#getUser_Friends()

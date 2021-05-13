@@ -8,12 +8,15 @@ import SocialNetwork.Submission;
 import SocialNetwork.User;
 
 import java.util.Collection;
+import java.util.Date;
+
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -94,6 +97,12 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case SocialNetworkPackage.COMMENT__SUBMITTER:
+				if (submitter != null)
+					msgs = ((InternalEObject)submitter).eInverseRemove(this, SocialNetworkPackage.USER__SUBMISSIONS, User.class, msgs);
+				return basicSetSubmitter((User)otherEnd, msgs);
+			case SocialNetworkPackage.COMMENT__COMMENTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getComments()).basicAdd(otherEnd, msgs);
 			case SocialNetworkPackage.COMMENT__COMMENTED:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -101,7 +110,7 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 			case SocialNetworkPackage.COMMENT__LIKED_BY:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLikedBy()).basicAdd(otherEnd, msgs);
 		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
+		return eDynamicInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -112,12 +121,16 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case SocialNetworkPackage.COMMENT__SUBMITTER:
+				return basicSetSubmitter(null, msgs);
+			case SocialNetworkPackage.COMMENT__COMMENTS:
+				return ((InternalEList<?>)getComments()).basicRemove(otherEnd, msgs);
 			case SocialNetworkPackage.COMMENT__COMMENTED:
 				return eBasicSetContainer(null, SocialNetworkPackage.COMMENT__COMMENTED, msgs);
 			case SocialNetworkPackage.COMMENT__LIKED_BY:
 				return ((InternalEList<?>)getLikedBy()).basicRemove(otherEnd, msgs);
 		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		return eDynamicInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -131,7 +144,7 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 			case SocialNetworkPackage.COMMENT__COMMENTED:
 				return eInternalContainer().eInverseRemove(this, SocialNetworkPackage.SUBMISSION__COMMENTS, Submission.class, msgs);
 		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
+		return eDynamicBasicRemoveFromContainer(msgs);
 	}
 
 	/**
@@ -142,12 +155,23 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case SocialNetworkPackage.COMMENT__ID:
+				return getId();
+			case SocialNetworkPackage.COMMENT__TIMESTAMP:
+				return getTimestamp();
+			case SocialNetworkPackage.COMMENT__CONTENT:
+				return getContent();
+			case SocialNetworkPackage.COMMENT__SUBMITTER:
+				if (resolve) return getSubmitter();
+				return basicGetSubmitter();
+			case SocialNetworkPackage.COMMENT__COMMENTS:
+				return getComments();
 			case SocialNetworkPackage.COMMENT__COMMENTED:
 				return getCommented();
 			case SocialNetworkPackage.COMMENT__LIKED_BY:
 				return getLikedBy();
 		}
-		return super.eGet(featureID, resolve, coreType);
+		return eDynamicGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -159,12 +183,28 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case SocialNetworkPackage.COMMENT__ID:
+				setId((String)newValue);
+				return;
+			case SocialNetworkPackage.COMMENT__TIMESTAMP:
+				setTimestamp((Date)newValue);
+				return;
+			case SocialNetworkPackage.COMMENT__CONTENT:
+				setContent((String)newValue);
+				return;
+			case SocialNetworkPackage.COMMENT__SUBMITTER:
+				setSubmitter((User)newValue);
+				return;
+			case SocialNetworkPackage.COMMENT__COMMENTS:
+				getComments().clear();
+				getComments().addAll((Collection<? extends Comment>)newValue);
+				return;
 			case SocialNetworkPackage.COMMENT__LIKED_BY:
 				getLikedBy().clear();
 				getLikedBy().addAll((Collection<? extends User>)newValue);
 				return;
 		}
-		super.eSet(featureID, newValue);
+		eDynamicSet(featureID, newValue);
 	}
 
 	/**
@@ -175,11 +215,26 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case SocialNetworkPackage.COMMENT__ID:
+				setId(ID_EDEFAULT);
+				return;
+			case SocialNetworkPackage.COMMENT__TIMESTAMP:
+				setTimestamp(TIMESTAMP_EDEFAULT);
+				return;
+			case SocialNetworkPackage.COMMENT__CONTENT:
+				setContent(CONTENT_EDEFAULT);
+				return;
+			case SocialNetworkPackage.COMMENT__SUBMITTER:
+				setSubmitter((User)null);
+				return;
+			case SocialNetworkPackage.COMMENT__COMMENTS:
+				getComments().clear();
+				return;
 			case SocialNetworkPackage.COMMENT__LIKED_BY:
 				getLikedBy().clear();
 				return;
 		}
-		super.eUnset(featureID);
+		eDynamicUnset(featureID);
 	}
 
 	/**
@@ -190,12 +245,22 @@ public class CommentImpl extends SubmissionImpl implements Comment {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case SocialNetworkPackage.COMMENT__ID:
+				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+			case SocialNetworkPackage.COMMENT__TIMESTAMP:
+				return TIMESTAMP_EDEFAULT == null ? timestamp != null : !TIMESTAMP_EDEFAULT.equals(timestamp);
+			case SocialNetworkPackage.COMMENT__CONTENT:
+				return CONTENT_EDEFAULT == null ? content != null : !CONTENT_EDEFAULT.equals(content);
+			case SocialNetworkPackage.COMMENT__SUBMITTER:
+				return submitter != null;
+			case SocialNetworkPackage.COMMENT__COMMENTS:
+				return comments != null && !comments.isEmpty();
 			case SocialNetworkPackage.COMMENT__COMMENTED:
 				return getCommented() != null;
 			case SocialNetworkPackage.COMMENT__LIKED_BY:
 				return likedBy != null && !likedBy.isEmpty();
 		}
-		return super.eIsSet(featureID);
+		return eDynamicIsSet(featureID);
 	}
 
 } //CommentImpl
