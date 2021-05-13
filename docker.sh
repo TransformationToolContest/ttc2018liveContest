@@ -13,7 +13,8 @@ if [[ "$#" -eq 0 ]]; then
   echo "  --pull"
   echo "  -b|--build                        # runs 'scripts/run.py -b --skip-tests' inside"
   echo "  --build-if-not-fresh              # rebuild runnable image if it is based on different commit"
-  echo "  -p|--push"
+  echo "  -p|--push                         # parallel alternative:"
+  echo "                                    #   docker/ls-images.sh | xargs -n1 -I{} -P8 docker push $DOCKER_REPO:{}"
   echo "  -r|--run"
   echo
   echo "  -t|--tags \"TAG1 TAG2 ...\"         # list the tags using \`docker/ls-images.sh\`"

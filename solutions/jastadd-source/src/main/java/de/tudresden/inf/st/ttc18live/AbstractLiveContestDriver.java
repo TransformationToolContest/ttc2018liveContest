@@ -159,14 +159,14 @@ public abstract class AbstractLiveContestDriver {
     }
     System.out.printf("%s;%s;%s;%s;%s;%s;Time;%s%n",
         Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), stopwatch);
-    Runtime.getRuntime().gc();
-    Runtime.getRuntime().gc();
-    Runtime.getRuntime().gc();
-    Runtime.getRuntime().gc();
-    Runtime.getRuntime().gc();
-    long memoryUsed = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-    System.out.printf("%s;%s;%s;%s;%s;%s;Memory;%s%n",
-        Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), memoryUsed);
+//    Runtime.getRuntime().gc();
+//    Runtime.getRuntime().gc();
+//    Runtime.getRuntime().gc();
+//    Runtime.getRuntime().gc();
+//    Runtime.getRuntime().gc();
+//    long memoryUsed = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+//    System.out.printf("%s;%s;%s;%s;%s;%s;Memory;%s%n",
+//        Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), memoryUsed);
     if (result != null) {
       System.out.printf("%s;%s;%s;%s;%s;%s;Elements;%s%n",
           Tool, Query, ChangeSet, RunIndex, iterationStr, phase.toString(), result);
