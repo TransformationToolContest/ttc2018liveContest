@@ -23,7 +23,7 @@ class SolutionQ2 extends Solution {
 	}
 
 	override String Initial() {
-		(xform as Q2_yamtl).componentList = new HashMap<Comment,FriendComponentUtil_UF>(xform.initialSizeFactor)
+		(xform as Q2_yamtl).componentMap = new HashMap<Comment,FriendComponentUtil_UF>(xform.initialSizeFactor)
 		xform.execute()
 		(xform as Q2_yamtl).bestThree.map[id].join('|')
 	}
