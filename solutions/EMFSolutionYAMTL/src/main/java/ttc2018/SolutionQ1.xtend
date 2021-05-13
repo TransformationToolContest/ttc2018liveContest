@@ -10,7 +10,7 @@ import yamtl.core.YAMTLModule.ExecutionPhase
 class SolutionQ1 extends Solution {
 	
 	new() {
-		xform = new Q1_yamtl
+		xform = new Q1_yamtl()
 		xform.selectedExecutionPhases = ExecutionPhase.MATCH_ONLY
 		xform.fromRoots = false
 		xform.executionMode = ExecutionMode.INCREMENTAL

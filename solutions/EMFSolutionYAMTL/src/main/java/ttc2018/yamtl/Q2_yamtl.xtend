@@ -4,15 +4,14 @@ import SocialNetwork.Comment
 import SocialNetwork.SocialNetworkPackage
 import SocialNetwork.Submission
 import java.util.List
+import java.util.Map
 import org.eclipse.xtend.lib.annotations.Accessors
 import yamtl.core.YAMTLModule
+
 import static yamtl.dsl.Rule.*
 
-
-import static extension ttc2018.yamtl.Util.getBestThree
 import static extension ttc2018.yamtl.Util.addIfIsThreeBest
-import static extension ttc2018.yamtl.Util.sum
-
+import static extension ttc2018.yamtl.Util.getBestThree
 
 class Q2_yamtl extends YAMTLModule {
 	val SN = SocialNetworkPackage.eINSTANCE  
@@ -21,7 +20,10 @@ class Q2_yamtl extends YAMTLModule {
 	val List<Pair<Submission,Integer>> threeBestCandidates = newArrayList
 
 	@Accessors
-	var List<Submission> candidatesWithNilScore = newArrayList
+	val List<Submission> candidatesWithNilScore = newArrayList
+
+	@Accessors
+	var Map<Comment,FriendComponentUtil_UF> componentList
 	
 	new () {
 		header().in('sn', SN).out('out', SN)
@@ -33,13 +35,16 @@ class Q2_yamtl extends YAMTLModule {
 						var score = 0
 						var matches = false
 						
-						if (comment.likedBy.size > 0) {
-							val fc = new FriendComponentUtil(comment.likedBy)
-							score = fc.components.map[size * size].sum
+						if (comment.likedBy !== null && comment.likedBy.size > 0) {
+							var fc = componentList.get(comment)
+							fc = new FriendComponentUtil_UF(comment.likedBy)
+							score = fc.score
 							threeBestCandidates.addIfIsThreeBest(comment, score)
+							componentList.put(comment, fc)
 							matches = true
 						} else {
-							candidatesWithNilScore.add(comment)
+							if (threeBestCandidates.size <= 3)
+								candidatesWithNilScore.add(comment)
 						}
 						matches
 					]

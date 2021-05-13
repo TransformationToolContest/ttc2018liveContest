@@ -2,20 +2,25 @@ package ttc2018;
 
 import Changes.ModelChange
 import Changes.ModelChangeSet
+import SocialNetwork.Comment
+import java.util.HashMap
 import org.eclipse.emf.common.util.EList
+import ttc2018.yamtl.FriendComponentUtil_UF
 import ttc2018.yamtl.Q2_yamtl
+import yamtl.core.YAMTLModule.ExecutionMode
 import yamtl.core.YAMTLModule.ExecutionPhase
 
 class SolutionQ2 extends Solution {
 
 	new() {
-		xform = new Q2_yamtl
+		xform = new Q2_yamtl()
 		xform.selectedExecutionPhases = ExecutionPhase.MATCH_ONLY
 		xform.fromRoots = false
 		xform.initLocationsWhenLoading = true
 	}
 
 	override String Initial() {
+		(xform as Q2_yamtl).componentList = new HashMap<Comment,FriendComponentUtil_UF>(xform.initialSizeFactor)
 		xform.execute()
 		(xform as Q2_yamtl).bestThree.map[id].join('|')
 	}
@@ -24,7 +29,7 @@ class SolutionQ2 extends Solution {
 		(xform as Q2_yamtl).threeBestCandidates.clear()
 		(xform as Q2_yamtl).candidatesWithNilScore.clear()
 		xform.reset()
-		
+
 		val nmfChange = [|
 	        val EList<ModelChange> coll = changes.getChanges();
 			for (ModelChange change : coll) {
@@ -35,7 +40,7 @@ class SolutionQ2 extends Solution {
 		xform.applyDelta('sn', deltaName, nmfChange)
 
 		xform.execute()
-		(xform as Q2_yamtl).getBestThree().map[id].join('|')
+		(xform as Q2_yamtl).bestThree.map[id].join('|')
 	}
 
 }

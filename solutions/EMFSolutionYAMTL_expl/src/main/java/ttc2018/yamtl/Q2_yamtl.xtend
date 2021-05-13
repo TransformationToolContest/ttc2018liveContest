@@ -17,7 +17,7 @@ import static extension ttc2018.yamtl.Util.addIfIsThreeBest
 import static extension ttc2018.yamtl.Util.getBestThree
 
 class Q2_yamtl extends YAMTLModule {
-val SN = SocialNetworkPackage.eINSTANCE  
+	val SN = SocialNetworkPackage.eINSTANCE  
 	
 	@Accessors
 	val List<Pair<Submission,Integer>> threeBestCandidates = newArrayList
