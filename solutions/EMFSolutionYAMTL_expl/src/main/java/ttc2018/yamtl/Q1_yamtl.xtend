@@ -43,9 +43,7 @@ class Q1_yamtl extends YAMTLModule {
 							}
 							else {
 								for (comment: map.keySet) {
-									switch (comment) {
-										Comment: { score += 10 + comment.likedBy.size }
-									}
+									score += 10 + (comment as Comment).likedBy.size
 								}									
 							}
 							threeBestCandidates.addIfIsThreeBest(post, score)
