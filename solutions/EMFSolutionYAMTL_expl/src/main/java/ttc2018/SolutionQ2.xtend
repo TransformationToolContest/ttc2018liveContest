@@ -3,13 +3,14 @@ package ttc2018;
 import Changes.ModelChange
 import Changes.ModelChangeSet
 import SocialNetwork.Comment
+import SocialNetwork.SocialNetworkPackage
 import java.util.HashMap
 import org.eclipse.emf.common.util.EList
 import ttc2018.yamtl.FriendComponentUtil_UF
 import ttc2018.yamtl.Q2_yamtl
 import yamtl.core.YAMTLModule.ExecutionMode
 import yamtl.core.YAMTLModule.ExecutionPhase
-import yamtl.core.YAMTLModule.IncrementalGranularity
+import yamtl.incremental.ChangeDescriptionAnalysisUtil.YAMTLChangeType
 
 class SolutionQ2 extends Solution {
 
@@ -24,6 +25,18 @@ class SolutionQ2 extends Solution {
 
 	override String Initial() {
 		(xform as Q2_yamtl).componentMap = new HashMap<Comment,FriendComponentUtil_UF>(xform.initialSizeFactor)
+		xform.changeSpecification = #{
+			SocialNetworkPackage.eINSTANCE.user -> #{ 
+				'friends' -> YAMTLChangeType.ADD 
+			},
+			SocialNetworkPackage.eINSTANCE.post -> #{
+				'comments' ->  YAMTLChangeType.ADD
+			},
+			SocialNetworkPackage.eINSTANCE.comment -> #{
+				'comments' ->  YAMTLChangeType.ADD,
+				'likedBy' -> YAMTLChangeType.ADD 
+			}
+		}		
 		xform.execute()
 		(xform as Q2_yamtl).bestThree.map[id].join('|')
 	}

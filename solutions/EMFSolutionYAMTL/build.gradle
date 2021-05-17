@@ -40,7 +40,7 @@ repositories {
 
 
 ext {
-	yamtlVersion = '0.1.5'
+	yamtlVersion = '0.1.6'
 	xtendVersion = '2.20.0'
 	aspectJVersion = '1.9.6'
 }
