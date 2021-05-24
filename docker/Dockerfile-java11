@@ -25,6 +25,7 @@ COPY output output
 COPY solutions/EMFSolutionYAMTL solutions/EMFSolutionYAMTL
 COPY solutions/EMFSolutionYAMTL_batch solutions/EMFSolutionYAMTL_batch
 COPY solutions/EMFSolutionYAMTL_expl solutions/EMFSolutionYAMTL_expl
+COPY solutions/EMFSolutionYAMTL_expl_parallel solutions/EMFSolutionYAMTL_expl_parallel
 COPY solutions/jastadd-relast-reusable-flush solutions/jastadd-relast-reusable-flush
 COPY solutions/jastadd-relast-reusable-inc solutions/jastadd-relast-reusable-inc
 COPY solutions/jastadd-relast-xml-flush solutions/jastadd-relast-xml-flush

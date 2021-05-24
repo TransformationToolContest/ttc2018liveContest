@@ -1,0 +1,139 @@
+plugins {
+	id "org.xtext.xtend" version "2.0.8" 
+}
+
+apply plugin: 'application'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+group = 'yamtl'
+version = '0.1.0'
+
+eclipse {
+	project {
+	  name = 'EMFSolutionYAMTL_expl_parallel'
+	  buildCommand 'org.eclipse.jdt.core.javabuilder'
+	  buildCommand 'org.eclipse.ajdt.core.ajbuilder'
+	  buildCommand 'org.eclipse.buildship.core.gradleprojectbuilder'
+	  buildCommand 'org.eclipse.wst.common.project.facet.core.builder'
+
+	  natures 'org.eclipse.jdt.core.javanature',
+	  	'org.eclipse.ajdt.ui.ajnature',
+		'org.eclipse.buildship.core.gradleprojectnature',
+		'org.eclipse.wst.common.project.facet.core.nature',
+		'org.eclipse.xtext.ui.shared.xtextNature',
+		'org.eclipse.pde.PluginNature'
+	}
+}
+
+
+mainClassName="ttc2018.LiveContestDriver"
+
+
+repositories {
+	maven {
+		url "https://github.com/yamtl/yamtl.github.io/raw/mvn-repo/mvn-repo/snapshot-repo"
+	}
+	mavenCentral()
+    jcenter()
+}
+
+
+ext {
+	yamtlVersion = '0.2.0'
+	xtendVersion = '2.20.0'
+	aspectJVersion = '1.9.6'
+}
+
+
+// XTEND: configures output directories for generated java
+xtend {
+	sourceSets {
+		main.xtendOutputDir = 'src/main/xtend-gen'
+		test.xtendOutputDir = 'src/test/xtend-gen'
+	}
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = [
+				'src/main/java',
+				'src/main/emf-gen',
+				'src/main/xtend-gen'
+			]
+		}
+	}
+}
+
+
+// ASPECTJ
+configurations {
+	ajc
+	aspects
+	aspectCompile
+	ajInpath
+	compile {
+		extendsFrom aspects
+	}
+}
+
+
+compileJava {
+  sourceCompatibility = 11 // 1.8
+  doLast{
+	  ant.taskdef( resource:"org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties", classpath: configurations.ajc.asPath )
+	  ant.iajc(
+		  source: sourceCompatibility,
+		  destDir: sourceSets.main.output.classesDirs.singleFile.absolutePath,
+		  inpath: configurations.ajInpath.asPath,
+		  maxmem: "512m",
+		  fork: "true",
+		  aspectPath: configurations.aspects.asPath,
+		  sourceRootCopyFilter:"**/.git/*,**/*.java",
+		  classpath:"${configurations.compile.asPath};${configurations.aspectCompile.asPath}"){
+		  sourceroots{
+			  sourceSets.main.java.srcDirs.each{
+				  pathelement(location:it.absolutePath)
+			  }
+		  }
+	  }
+  }
+}
+
+
+dependencies {
+	compile 'org.eclipse.emf:org.eclipse.emf.ecore.xmi:2.15.0'
+	compile 'org.eclipse.emf:org.eclipse.emf.ecore.change:2.11+'
+	
+	compile "yamtl:yamtl:${yamtlVersion}"
+	compile "org.eclipse.xtend:org.eclipse.xtend.core:$xtendVersion"
+	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$xtendVersion"
+
+		// AspectJ
+	ajc "org.aspectj:aspectjtools:${aspectJVersion}"
+	compile("org.aspectj:aspectjrt:${aspectJVersion}")
+	compile("org.aspectj:aspectjweaver:${aspectJVersion}")
+	ajInpath "yamtl:yamtl:${yamtlVersion}"
+	ajInpath  "org.eclipse.emf:org.eclipse.emf.ecore:2.11+"
+}
+
+
+// create a single Jar with all dependencies
+// source: https://www.mkyong.com/gradle/gradle-create-a-jar-file-with-dependencies/
+task fatJar(type: Jar) {
+	manifest {
+		attributes 'LiveContestDriver': 'YAMTL solution',
+			'Implementation-Version': version,
+			'Main-Class': 'ttc2018.LiveContestDriver'
+	}
+	// remove signatures as we are not signing this jar to avoid security warnings
+	exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+	baseName = project.name + '-all'
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	with jar
+}
+
+
+
+// ./gradlew clean run -DChangePath=../../models/8 -DChangeSet=2 -DQuery=Q2 -DRunIndex=Debug -DSequences=1 -DTool=EMFSolutionYAMTL
