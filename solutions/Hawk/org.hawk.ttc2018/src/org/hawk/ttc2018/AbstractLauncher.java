@@ -32,6 +32,7 @@ public abstract class AbstractLauncher {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractLauncher.class);
 	public static final String INITIAL_MODEL_FILENAME = "initial.xmi";
+	public static final String BACKUP_MODEL_FILENAME = "initial.xmi.backup";
 
 	protected final LauncherOptions opts;
 	private final List<Snapshot> results = new ArrayList<>();
@@ -119,8 +120,14 @@ public abstract class AbstractLauncher {
 
 		// Create a backup copy of the initial XMI
 		final File fInitial = new File(opts.getChangePath(), INITIAL_MODEL_FILENAME);
-		final File tmpBackup = File.createTempFile("backupInitial", ".xmi");
-		Files.copy(fInitial, tmpBackup);
+		final File fBackup = new File(opts.getChangePath(), BACKUP_MODEL_FILENAME);
+		if (!fBackup.exists()) {
+			// First run with this initial.xmi: back it up before working on it
+			Files.copy(fInitial, fBackup);
+		} else {
+			// Later run with this initial.xmi: restore the backup
+			Files.copy(fBackup, fInitial);
+		}
 
 		hawk = createHawk();
 		try {
@@ -140,20 +147,6 @@ public abstract class AbstractLauncher {
 
 		} finally {
 			hawk.shutdown();
-
-			/*
-			 * Reset the input model after we are done (originally at the beginning,
-			 * change requested by Georg to avoid interfering with other solutions.
-			 *
-			 * Use a plain copy instead of depending on 'git checkout', since the Docker
-			 * images do not use a git clone.
-			 */
-			try {
-				Files.copy(tmpBackup, fInitial);
-				tmpBackup.delete();
-			} catch (IOException e) {
-				LOGGER.error(e.getMessage(), e);
-			}
 		}
 	}
 
