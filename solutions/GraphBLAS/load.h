@@ -54,8 +54,6 @@ struct Q1_Input {
     GBxx_Object<GrB_Matrix> root_post_tran;
     GBxx_Object<GrB_Vector> likes_count_vec;
 
-    GrB_Index root_post_num, likes_count_num;
-
     auto posts_size() const {
         assert(posts.size() == post_id_to_column.size());
         return posts.size();

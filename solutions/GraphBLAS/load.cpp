@@ -214,12 +214,12 @@ Q1_Input Q1_Input::load_initial(const BenchmarkParameters &parameters) {
         }
     }
 
-    input.root_post_num = root_post_src_comment_columns.size();
+    GrB_Index root_post_num = root_post_src_comment_columns.size();
     input.root_post_tran = GB(GrB_Matrix_new, GrB_BOOL, input.posts_size(), input.comments_size());
     ok(GrB_Matrix_build_BOOL(input.root_post_tran.get(),
                              root_post_trg_post_columns.data(), root_post_src_comment_columns.data(),
-                             array_of_true(input.root_post_num).get(),
-                             input.root_post_num, GrB_LOR));
+                             array_of_true(root_post_num).get(),
+                             root_post_num, GrB_LOR));
 
     GrB_Index commented_num = commented_src_comment_columns.size();
     auto commented_tran = GB(GrB_Matrix_new, GrB_BOOL, input.comments_size(), input.comments_size());
@@ -248,11 +248,11 @@ Q1_Input Q1_Input::load_initial(const BenchmarkParameters &parameters) {
                                         GrB_NULL));
     }
 
-    input.likes_count_num = likes_count_columns.size();
+    GrB_Index likes_count_num = likes_count_columns.size();
     input.likes_count_vec = GB(GrB_Vector_new, GrB_UINT64, input.comments_size());
     ok(GrB_Vector_build_UINT64(input.likes_count_vec.get(),
                                likes_count_columns.data(), likes_count_values.data(),
-                               input.likes_count_num, GrB_PLUS_UINT64));
+                               likes_count_num, GrB_PLUS_UINT64));
 
     // make sure tuples are in row-major order (SuiteSparse extension)
     GxB_Format_Value format;
@@ -331,7 +331,6 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
                                  new_root_post_src_comment_columns.data(),
                                  array_of_true(new_root_post_nvals).get(),
                                  new_root_post_nvals, GrB_LOR));
-        root_post_num += new_root_post_nvals;
 
         ok(GrB_Matrix_eWiseAdd_BinaryOp(root_post_tran.get(), GrB_NULL, GrB_NULL,
                                         GrB_LOR, root_post_tran.get(), updates.new_root_post_tran.get(), GrB_NULL));
@@ -372,10 +371,6 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
             ok(GrB_Vector_eWiseAdd_BinaryOp(likes_count_vec.get(), GrB_NULL, GrB_NULL,
                                             GrB_PLUS_UINT64, likes_count_vec.get(), updates.new_likes_count_vec.get(),
                                             GrB_NULL));
-
-            GrB_Index nvals;
-            ok(GrB_Vector_nvals(&nvals, likes_count_vec.get()));
-            likes_count_num = nvals;
         }
     }
 }
