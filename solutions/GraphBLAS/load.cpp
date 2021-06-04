@@ -233,8 +233,9 @@ Q1_Input Q1_Input::load_initial(const BenchmarkParameters &parameters) {
     GrB_Matrix next_mx_input = input.root_post_tran.get();
 
     while (true) {
-        ok(GrB_mxm(next_root_post_tran.get(), input.root_post_tran.get(), GrB_NULL,
-                   GxB_ANY_PAIR_BOOL, next_mx_input, commented_tran.get(), GrB_DESC_RSC));
+        // no need for mask as the comments form a tree, cannot reach a node multiple times
+        ok(GrB_mxm(next_root_post_tran.get(), GrB_NULL, GrB_NULL,
+                   GxB_ANY_PAIR_BOOL, next_mx_input, commented_tran.get(), GrB_NULL));
         // continue later iterations from newly reached vertices
         next_mx_input = next_root_post_tran.get();
 
