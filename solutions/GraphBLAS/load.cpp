@@ -332,8 +332,9 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
                                  array_of_true(new_root_post_nvals).get(),
                                  new_root_post_nvals, GrB_LOR));
 
+        // update root_post_tran
         ok(GrB_Matrix_eWiseAdd_BinaryOp(root_post_tran.get(), GrB_NULL, GrB_NULL,
-                                        GrB_LOR, root_post_tran.get(), updates.new_root_post_tran.get(), GrB_NULL));
+                                        GxB_PAIR_BOOL, root_post_tran.get(), updates.new_root_post_tran.get(), GrB_NULL));
     }
     if (!new_commented_src_comment_columns.empty()) {
         GrB_Index new_commented_num = new_commented_src_comment_columns.size();
@@ -357,8 +358,11 @@ void Q1_Input::load_and_apply_updates(int iteration, Update_Type &updates, const
                                  array_of_true(new_commented_num).get(),
                                  new_commented_num, GrB_LOR));
 
-        ok(GrB_mxm(root_post_tran.get(), GrB_NULL, GxB_PAIR_BOOL,
+        ok(GrB_mxm(updates.new_root_post_tran.get(), GrB_NULL, GxB_PAIR_BOOL,
                    GxB_ANY_PAIR_BOOL, root_post_tran.get(), new_commented_tran.get(), GrB_NULL));
+        // update root_post_tran (again)
+        ok(GrB_Matrix_eWiseAdd_BinaryOp(root_post_tran.get(), GrB_NULL, GrB_NULL,
+                                        GxB_PAIR_BOOL, root_post_tran.get(), updates.new_root_post_tran.get(), GrB_NULL));
     }
 
     if (!new_likes_to_comments.empty()) {
