@@ -16,7 +16,7 @@
 **/Thumbs.db
 **/.Rhistory
 **/.RData
-output/output.csv
+output/output*.csv
 output/log*.log
 .pydevproject
 deps/
