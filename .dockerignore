@@ -1,5 +1,6 @@
 .git
 models
+cache
 
 # from solutions/Hawk/.gitignore
 solutions/Hawk/hawk/
