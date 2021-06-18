@@ -4,19 +4,7 @@
     "Q2"
   ],
   "Tools": [
-      "EMFSolutionAOF",
-      "EMFSolutionATL",
-      "EMFSolutionATL-Incremental",
-      "EMFSolutionXtend",
-      "Hawk",
-      "HawkIncUpdate",
-      "HawkIncUpdateQuery",
-      "HawkNeo4J",
-      "HawkNeo4JIncUpdate",
-      "HawkNeo4JIncUpdateQuery",
-      "HawkSQLite",
-      "HawkSQLiteIncUpdate",
-      "HawkSQLiteIncUpdateQuery"
+      "EMFSolutionAOF"
   ],
   "ChangeSets": [
     "1", "2"
