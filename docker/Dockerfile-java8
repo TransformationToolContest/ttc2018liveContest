@@ -19,7 +19,19 @@ COPY output output
 
 # solution folders
 COPY solutions/EMFSolutionAOF solutions/EMFSolutionAOF
+COPY solutions/EMFSolutionATL solutions/EMFSolutionATL
+COPY solutions/EMFSolutionATL-Incremental solutions/EMFSolutionATL-Incremental
 COPY solutions/EMFSolutionTemplate solutions/EMFSolutionTemplate
+COPY solutions/EMFSolutionXtend solutions/EMFSolutionXtend
+COPY solutions/Hawk solutions/Hawk
+COPY solutions/HawkIncUpdate solutions/HawkIncUpdate
+COPY solutions/HawkIncUpdateQuery solutions/HawkIncUpdateQuery
+COPY solutions/HawkNeo4J solutions/HawkNeo4J
+COPY solutions/HawkNeo4JIncUpdate solutions/HawkNeo4JIncUpdate
+COPY solutions/HawkNeo4JIncUpdateQuery solutions/HawkNeo4JIncUpdateQuery
+COPY solutions/HawkSQLite solutions/HawkSQLite
+COPY solutions/HawkSQLiteIncUpdate solutions/HawkSQLiteIncUpdate
+COPY solutions/HawkSQLiteIncUpdateQuery solutions/HawkSQLiteIncUpdateQuery
 
 # config
 COPY config/config-docker-java8.json config/config.json
