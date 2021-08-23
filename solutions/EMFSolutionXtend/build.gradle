@@ -46,3 +46,16 @@ sourceSets {
 	}
 }
 
+// Temporary workaround for Xtext Java 8 dependency error
+// TODO: remove when possible
+// https://github.com/eclipse/xtext/issues/1976#issuecomment-864946993
+// https://stackoverflow.com/questions/68041148/java-lang-unsupportedclassversionerror-in-gradle-build#comment120309128_68041868
+configurations.all {
+	resolutionStrategy {
+		eachDependency { DependencyResolveDetails details ->
+			if (details.requested.group == 'org.eclipse.platform' && details.requested.name == 'org.eclipse.equinox.common') {
+				details.useVersion "3.13.0"
+			}
+		}
+	}
+}
