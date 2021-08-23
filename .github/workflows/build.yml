@@ -1,5 +1,5 @@
-name: build
-on: [push, pull_request]
+name: Build and test tools
+on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,9 +20,7 @@ jobs:
           echo -----
           df -h
       - name: Set up Git repository
-        uses: actions/checkout@v2.3.1 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
-        with:
-          persist-credentials: false
+        uses: actions/checkout@v2.3.1
       - name: Load cache
         uses: actions/cache@v2
         with:
