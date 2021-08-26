@@ -22,9 +22,9 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-if [ $publishable ]; then
-  TAGS=$(echo "$TAGS" | c1grep -v neo4j)
-fi
+# if [ $publishable ]; then
+#   TAGS=$(echo "$TAGS" | c1grep -v NOT_PUBLISHABLE)
+# fi
 
 if [ $runnable ]; then
   TAGS=$(echo "$TAGS" | c1grep -v common)
