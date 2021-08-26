@@ -1,5 +1,7 @@
 name: Check image availability
 on:
+  push:
+  pull_request:
   workflow_dispatch:
   schedule:
     # monthly trigger
@@ -15,5 +17,5 @@ jobs:
           DOCKER_REPO=ftsrg/ttc2018
           # evalute brace expansion: https://stackoverflow.com/a/55661486
           TAGS={$(echo -n "$(docker/ls-images.sh --publishable)" | tr '\n' ',')}
-          TAG_VERSIONS={,-v2021-05-24,-v2020-11-30}
+          TAG_VERSIONS={,-v2021-05-24}
           eval docker/check-docker-hub-tags.sh $DOCKER_REPO $TAGS$TAG_VERSIONS
