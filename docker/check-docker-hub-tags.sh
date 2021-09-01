@@ -18,6 +18,6 @@ while [[ "$#" -gt 0 ]]; do
     TAG="$1"
     MANIFEST_URL="https://index.docker.io/v2/$DOCKER_REPO/manifests/$TAG"
     { curl --fail --silent --show-error --header "Authorization: Bearer $TOKEN" "$MANIFEST_URL" | jq "{name:.name, tag:.tag}" ; } \
-        || { EXIT_CODE=$? ; echo "Error: $MANIFEST_URL" ; exit $EXIT_CODE ; }
+        || { EXIT_CODE=$? ; echo "::error::Error accessing image: $MANIFEST_URL" ; exit $EXIT_CODE ; }
     shift
 done
