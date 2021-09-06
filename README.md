@@ -166,7 +166,9 @@ To get the exact versions of software, use:
 ```bash
 lsb_release -d
 docker --version
-docker run --rm -it ftsrg/ttc2018:java8 java -version
-docker run --rm -it ftsrg/ttc2018:java11 java -version
-docker run --rm -it ftsrg/ttc2018:net31 dotnet --info
+# show commit used for building the images
+docker/ls-images.sh --runnable | xargs -n1 -I{} docker run --rm ftsrg/ttc2018:{} cat README.md
+docker run --rm ftsrg/ttc2018:java8 java -version
+docker run --rm ftsrg/ttc2018:java11 java -version
+docker run --rm ftsrg/ttc2018:net31 dotnet --info
 ```
