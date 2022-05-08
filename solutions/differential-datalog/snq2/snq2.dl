@@ -1,4 +1,6 @@
 import graph as graph
+import group
+import print
 
 // `id` must be u64 because some ids use very big numbers.
 input relation User(id: u64, name: string)
@@ -43,12 +45,14 @@ output relation Top3CommentScore(first: u64, second: u64, third: u64)
 
 // 2. Use transformer to express SCC with native differential-dataflow implementation directly applied on some relations.
 // What if only two comments are liked but we need three top scores? If you comment then I assume you like your own comment.
-UserLikesNode(u, cid) :- Comments(cid,_,_,u,_). //, not Likes(u, cid). 
+
 UserLikesNode(u, cid) :- Likes(u, cid).
 
 // Add self-loop to every node in the graph.
-UserLikesEdge(l, l) :- l in UserLikesNode(u, comment). 
-UserLikesEdge(l1, l2) :- l1 in UserLikesNode(u1, comment), l2 in UserLikesNode(u2, comment), Friend(u1, u2).
+UserLikesEdge(n, n) :- n in UserLikesNode(u, comment). 
+UserLikesEdge(n1, n2) :- n1 in UserLikesNode(u1, comment), n2 in UserLikesNode(u2, comment), Friend(u1, u2),
+    // Inspect print("UserLikesEdge - Comment id is ${comment} with user1 ${u1} and user2 ${u2}"),
+    .
 
 function convert_like1(ule: UserLikesEdge): UserLikesNode { ule.src }
 function convert_like2(ule: UserLikesEdge): UserLikesNode { ule.dst }
@@ -57,36 +61,37 @@ function convert_like2(ule: UserLikesEdge): UserLikesNode { ule.dst }
 output relation SCCLabel[(UserLikesNode, UserLikesNode)]
 apply graph::SCC(UserLikesEdge, convert_like1, convert_like2) -> (SCCLabel)
 
-// Need an aggregate function to return both key and the size of each group.
-function group_count_with_key(g: Group<'K, 'V>): ('K, usize) {
-    // Return both key and the count for aggregation.
-    (group_key(g), group_count(g))
-}
-
 // Each component is represented by an anchor followed by the size of component.
 SCC(anchor, size) :- SCCLabel[(likes, likes_lowest)], 
-    var aggregation = Aggregate((likes_lowest), group_count_with_key(likes)),
-    (var anchor: UserLikesNode, var size) = aggregation
+    var group = (likes).group_by(likes_lowest),
+    var anchor = group.group_key(),
+    var size = group.group_count_distinct(),
+    // Inspect print("SCC - Anchor is comment: ${anchor.comment} and user: ${anchor.user} with scc size ${size}")
     .
-
-// An extern function that returns the sum of each group with key.
-extern function group_sum_with_key(g: Group<'K, 'V>): ('K, 'V)
 
 // What if there are less than three comments that have a score? 
-SCCScore(sum, unique_comment) :- SCC(likes_anchor, size),
-    var comment = likes_anchor.comment,
-    var squared_size = size * size,
-    var aggregation = Aggregate((comment), group_sum_with_key(squared_size)),
-    (var unique_comment, var sum) = aggregation
+SCCScore(sum, comment_key) :- SCC(anchor, size),
+    var comment = anchor.comment,
+    var user = anchor.user,
+    // Inspect print("SCC - Anchor is comment: ${comment} and user: ${user} with scc size ${size}"),
+    var group = (user, size).group_by(comment),
+    var comment_key = group.group_key(),
+    var sum = group.sum_of(|tuple| tuple.1 * tuple.1),
+    // var group_size = group.group_count_distinct(),
+    // Inspect print("SCCScore - Comment id is ${comment} with group size ${group_size} and scc score sum ${sum}"),
     .
 
-SCCScoreTimestamp(score, timestamp, comment) :- SCCScore(score, comment), Comments(comment, timestamp,_,_,_).
+// For comments that do not have likes, we give it a score of 0.
+SCCScore(0, cid) :- Comments(cid,_,_,_,_), not Likes(_, cid).
+
+SCCScoreTimestamp(score, timestamp, comment) :- SCCScore(score, comment), Comments(comment, timestamp,_,_,_),
+    	// Inspect print("Comment id is ${comment} with score ${score} at time ${timestamp}")
+        .
 
 // An extern function that returns the top three items as option in the group.
 extern function top_three(g: Group<'K, 'V>): ('V, 'V, 'V)
 
-Top3CommentScore(first, second, third) :- SCCScoreTimestamp(score, timestamp, comment),
-    Comments(comment, timestamp, _, _, _),
-    var aggregation = Aggregate((), top_three(comment)),
-    (var first, var second, var third) = aggregation
+Top3CommentScore(first.comment, second.comment, third.comment) :- st in SCCScoreTimestamp(score, timestamp, comment),
+    var group = (st).group_by(()),
+    (var first, var second, var third) = group.top_three()
     .
