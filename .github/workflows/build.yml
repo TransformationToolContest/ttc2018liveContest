@@ -9,10 +9,10 @@ jobs:
         run: |
           df -h
           echo -----
-          sudo apt-get remove -y '^dotnet-.*'
-          sudo apt-get remove -y '^llvm-.*'
-          sudo apt-get remove -y 'php.*'
-          sudo apt-get remove -y azure-cli google-cloud-sdk hhvm google-chrome-stable firefox powershell mono-devel
+          sudo apt-get purge -y '^dotnet-.*'
+          sudo apt-get purge -y '^llvm-.*'
+          sudo apt-get purge -y 'php.*'
+          sudo apt-get purge -y azure-cli google-cloud-sdk hhvm google-chrome-stable firefox powershell mono-devel
           sudo apt-get autoremove -y
           sudo apt-get clean
           rm -rf /usr/share/dotnet/
