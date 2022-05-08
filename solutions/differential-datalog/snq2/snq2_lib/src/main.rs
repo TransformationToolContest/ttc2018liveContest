@@ -1,4 +1,4 @@
-use snq2_ddlog::api::HDDlog; //The DDLog Database engine itself
+use differential_datalog::api::HDDlog; //The DDLog Database engine itself
 use snq2_ddlog::Relations;
 use snq2_ddlog::relid2name;
 
@@ -15,6 +15,7 @@ use differential_datalog::{
 use differential_datalog::DeltaMap; // A trait representing the changes resulting from a given update.
 use differential_datalog::ddval::DDValue; // A generic DLog value type
 use differential_datalog::ddval::DDValConvert; //Another helper trair
+use differential_datalog::program::config::{Config, ProfilingConfig};
 use differential_datalog::program::RelId; // Numeric relations id
 use differential_datalog::program::Update; // A type representing updates to the database
 use differential_datalog::record::{FromRecord, IntoRecord}; // A type representing individual facts
@@ -26,8 +27,20 @@ pub struct DDLogSNQ2{
 impl DDLogSNQ2 {
     pub fn new()  -> Result<DDLogSNQ2, String> {
         let number_threads = 1;
-        let track_complet_snapshot = false;
-        let (hddlog, _init_state) = HDDlog::run(number_threads, track_complet_snapshot)?;
+        let config = Config::new()
+            .with_timely_workers(number_threads)
+            .with_profiling_config(ProfilingConfig::SelfProfiling {
+                // Directory to store profiles under or `None` for current directory.
+                profile_directory: None
+            });
+
+        // Instantiate the DDlog program with this configuration.
+        // The second argument of `run_with_config` is a Boolean flag that indicates
+        // whether DDlog will track the complete snapshot of output relations.  It
+        // should only be set for debugging in order to dump the contents of output
+        // tables using `HDDlog::dump_table()`.  Otherwise, indexes are the preferred
+        // way to achieve this.
+        let (hddlog, _init_state) = snq2_ddlog::run_with_config(config, false)?;
 
         return Ok(Self{hddlog});
     }

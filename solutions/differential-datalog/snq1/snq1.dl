@@ -1,4 +1,5 @@
-import graph as graph
+import group
+import print
 
 // `id` must be u64 because some ids use very big numbers.
 input relation User(id: u64, name: string)
@@ -38,25 +39,23 @@ extern function top_three(g: Group<'K, 'V>): ('V, 'V, 'V)
 // TODO: Think about it. We basically cache all intermediate results just for finding the root of a comment. 
 // Do we have other options to do it in logic programming? Maybe use some imperative code snippet in ddlog?
 CommentAncestor(commentid, parentid) :- Comments(commentid,_,_,_,parentid).
-CommentAncestor(commentid, grandparentid) :- CommentAncestor(commentid, parentid), 
-                                             CommentAncestor(parentid, grandparentid).
+CommentAncestor(commentid, grandparentid) :- CommentAncestor(commentid, parentid), CommentAncestor(parentid, grandparentid).
 
 // Find the root post id for each comment since the direct parent of a comment could be a comment. 
 CommentFromPost(commentid, ancestorid) :- CommentAncestor(commentid, ancestorid), Posts(ancestorid,_,_,_).
 
 // Each comment gives its post 10 points. What if a post doesn't have comments? Almost impossible and it's ok to skip this post.
-PostCommentScore(pid, score) :- CommentFromPost(cid, pid), 
-                                       var c = Aggregate((pid), group_count(pid)), 
-                                       var score = c * 10.
+PostCommentScore(pid, score) :- CommentFromPost(cid, pid), var score = (cid).group_by((pid)).group_count_distinct() * 10.
 
 // Each like on the comment adds one point.
 // Remove pid from relation `CommentLikeScore` because otherwise we have to define a customized aggregate function that not only return
 // the score but also the associated pid. The default aggregation function `group_count` put other variables out of scope.
 // CommentLikeScore(cid, pid, score) :- Comments(cid,_,_,_,_,pid), Likes(user, cid), var score = Aggregate((cid), group_count(cid)).
-CommentLikeScore(cid, score) :- Likes(_, cid), var score = Aggregate((cid), group_count(cid)).
+CommentLikeScore(cid, score) :- Likes(user, cid), 
+    var score = (user).group_by(cid).group_count_distinct(). 
+
 // How many likes a post receives on all of its comments including the comments on comments.
-PostLikeScore(pid, score) :- CommentFromPost(cid, pid), CommentLikeScore(cid, val), 
-                             var score = Aggregate((pid), group_sum(val)).
+PostLikeScore(pid, score) :- CommentFromPost(cid, pid), CommentLikeScore(cid, val), var score = (val).group_by((pid)).sum_of(|val| val).
 
 // Combine two scores together based on the post id. 
 // TODO: But what if the post has no comments? 
@@ -65,11 +64,14 @@ PostTotalScore(pid, score) :- PostCommentScore(pid, s1), PostLikeScore(pid, s2),
 PostTotalScore(pid, score) :- PostCommentScore(pid, score), not PostLikeScore(pid, _). 
 
 // Sort by score and then by timestamp in the order of its arguments.
-PostTotalScoreTimestamp(score, timestamp, post) :- PostTotalScore(post, score), Posts(post, timestamp, _, _).
+PostTotalScoreTimestamp(score, timestamp, post) :- PostTotalScore(post, score), Posts(post, timestamp, _, _),
+    	// Inspect print("Post id is ${post} with score ${score} at time ${timestamp}")
+        .
 
 // TODO: Optimize this function like in native differential solution.
-Top3PostScore(first, second, third) :- PostTotalScoreTimestamp(score, timestamp, post),
-    Posts(post, timestamp, _, _),
-    var aggregation = Aggregate((), top_three(post)),
-    (var first, var second, var third) = aggregation
+// Find the top 3 posts with highest scores first by score and then by timestamp.
+// The most recent timestamp takes precedence if the scores are the same.
+Top3PostScore(first.postId, second.postId, third.postId) :- pt in PostTotalScoreTimestamp(score, timestamp, post),
+    var group = (pt).group_by(()),
+    (var first, var second, var third) = group.top_three()
     .
