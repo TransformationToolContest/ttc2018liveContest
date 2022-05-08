@@ -140,8 +140,8 @@ def visualize():
     Visualizes the benchmark results
     """
     clean_dir("diagrams")
-    set_working_directory("reporting2")
-    subprocess.check_call(["Rscript", "-e", "rmarkdown::render('report.Rmd', output_format=rmarkdown::pdf_document())"])
+    set_working_directory("reporting")
+    subprocess.check_call(["Rscript", "visualize.R", "../config/reporting.json"])
 
 
 def check_results(conf, expected_lines):
