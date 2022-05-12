@@ -14,7 +14,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <logback.version>1.2.3</logback.version>
+    <logback.version>1.2.9</logback.version>
     <hawk.version>2.2.0-SNAPSHOT</hawk.version>
     <epsilon.version>2.0.0</epsilon.version>
   </properties>
