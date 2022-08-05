@@ -1,7 +1,7 @@
 
 # Differential Datalog implementation
 
-This implementation is based on a dialect of Datalog langauge [Differential-datalog](https://github.com/vmware/differential-datalog) with incremental computation.
+This implementation is based on a dialect of Datalog language [Differential-datalog](https://github.com/vmware/differential-datalog) with incremental computation.
 
 ## User's Guide
 
